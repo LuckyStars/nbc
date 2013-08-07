@@ -1,102 +1,287 @@
 package com.nbcedu.function.cardmanage.core.dao.impl;
 
+
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.AliasToBeanResultTransformer;
-import org.hibernate.transform.Transformers;
+import org.hibernate.metadata.ClassMetadata;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import com.nbcedu.function.cardmanage.core.dao.BaseDao;
+import com.nbcedu.function.cardmanage.core.dao.BaseDAO;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
-import com.nbcedu.function.cardmanage.core.util.PagerModel;
 
 
 
-/**
- * HQL实现
- * 
- * @version 1.0
- */
-@SuppressWarnings("unchecked")
-public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDao<T> {
-	protected final Logger logger = Logger.getLogger(this.getClass());
-
-	// 当前泛型实际实体类的CLASS对象
-	private Class<T> persistentClass;
-
-	public BaseDaoImpl() {
-		this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-	}
+@Repository
+public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDAO<T> {
 
 	/**
-	 * 获取clazz
-	 * 
-	 * @return
+	 * LOG4J日志
 	 */
+	protected final Logger logger = Logger.getLogger(this.getClass());
+
+	/**
+	 * 当前泛型实际实体类的CLASS对象
+	 */
+	private Class<T> persistentClass;
+
+	@SuppressWarnings("unchecked")
+	public BaseDAOImpl() {
+		this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+				.getActualTypeArguments()[0];
+	}
+
 	public Class<T> getPersistentClass() {
 		return persistentClass;
 	}
 
 	/**
-	 * 保存
-	 * 
-	 * @param entity
-	 * @return
+	 * 根据ID获取对象. 实际调用Hibernate的session.load()方法返回实体或其proxy对象. 如果对象不存在，抛出异常.
 	 */
-	public T save(T entity) {
-		getHibernateTemplate().save(entity);
-		return entity;
+	@SuppressWarnings( {"unchecked", "unused"})
+	private T get(Class<T> entityClass, Serializable id) {
+		Assert.notNull(id);
+		return (T) getHibernateTemplate().load(entityClass, id);
 	}
 
 	/**
-	 * 修改
+	 * 根据ID获取当前实体类
+	 */
+	@SuppressWarnings("unchecked")
+	public T get(Serializable id) {
+		Assert.notNull(id);
+		return (T) this.getHibernateTemplate().get(this.persistentClass, id);
+	}
+
+	/**
+	 * 修改实体，更新数据值到数据库
 	 * 
 	 * @param entity
 	 * @return
 	 */
-	public T update(T entity) {
+	public Object update(T entity) {
+		Assert.notNull(entity);
 		getHibernateTemplate().update(entity);
 		return entity;
 	}
 
 	/**
-	 * 修改或者保存
+	 * 修改或者保存当前对象
 	 * 
 	 * @param entity
 	 * @return
 	 */
-	public T saveOrUpdate(T entity) {
+	public Object saveOrUpdate(T entity) {
+		Assert.notNull(entity);
 		getHibernateTemplate().saveOrUpdate(entity);
 		return entity;
 	}
 
-	 /** 
+	public Object save(T entity) {
+		Assert.notNull(entity);
+		getHibernateTemplate().save(entity);
+		return entity;
+	}
+
+	/**
 	 * @param entity
 	 * @return
 	 */
-	public T merger(T entity){
-		getHibernateTemplate().merge(entity);
+	public Object merge(T entity) {
+		Assert.notNull(entity);
+		return getHibernateTemplate().merge(entity);
+	}
+
+	/**
+	 * 删除实体对象
+	 * 
+	 * @param entity
+	 */
+	public void remove(T entity) {
+		Assert.notNull(entity);
+		getHibernateTemplate().delete(entity);
+	}
+
+	/**
+	 * 根据实体主键，删除实体对象
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public T removeById(Serializable id) {
+		Assert.notNull(id);
+		T entity = load(id);
+		getHibernateTemplate().delete(entity);
 		return entity;
 	}
-	
-	
+
+	/**
+	 * 根据实体主键，删除实体对象
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public T removeById(String id) {
+		Assert.notNull(id);
+		T entity = load(id);
+		getHibernateTemplate().delete(entity);
+		return entity;
+	}
+
+	/**
+	 * 通过缓存的形式获取对象。 区别GET方式
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public T load(Serializable id) {
+		Assert.notNull(id);
+		return load(id, false);
+	}
+
+	@SuppressWarnings("unchecked")
+	public T load(Serializable id, boolean lock) {
+		Assert.notNull(id);
+		T entity = null;
+		if (lock) {
+			entity = (T) getHibernateTemplate().load(getPersistentClass(), id, LockMode.UPGRADE);
+		} else {
+			entity = (T) getHibernateTemplate().load(getPersistentClass(), id);
+		}
+		return entity;
+	}
+
+	/**
+	 * 获取全部对象.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(Class<T> entityClass) {
+		return getHibernateTemplate().loadAll(entityClass);
+	}
+
+	/**
+	 * 缺省值情况下获取全部对象
+	 */
+	public List<T> getAll() {
+		return this.getAll(this.persistentClass);
+	}
+
+	/**
+	 * 获取默认的全部实体
+	 * 
+	 * @param <T>
+	 * @param orderBy 排序的字段
+	 * @param isAsc
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(String orderBy, boolean isAsc) {
+		Assert.hasText(orderBy);
+		if (isAsc)
+			return getHibernateTemplate().findByCriteria(
+					DetachedCriteria.forClass(this.persistentClass).addOrder(Order.asc(orderBy)));
+		else
+			return getHibernateTemplate().findByCriteria(
+					DetachedCriteria.forClass(this.persistentClass).addOrder(Order.desc(orderBy)));
+	}
+
+	/**
+	 * 获取全部对象,带排序字段与升降序参数.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> getAll(Class<T> entityClass, String orderBy, boolean isAsc) {
+		Assert.hasText(orderBy);
+		if (isAsc)
+			return getHibernateTemplate().findByCriteria(
+					DetachedCriteria.forClass(entityClass).addOrder(Order.asc(orderBy)));
+		else
+			return getHibernateTemplate().findByCriteria(
+					DetachedCriteria.forClass(entityClass).addOrder(Order.desc(orderBy)));
+	}
+
+	/**
+	 * 输出SESSION所有对象，保存数据到数据库中
+	 */
+	public void flush() {
+		getHibernateTemplate().flush();
+	}
+
+	/**
+	 * 清空SESSION中的所有缓存
+	 */
+	public void clear() {
+		getHibernateTemplate().clear();
+	}
+
+	/**
+	 * 更新SESSION缓存对象
+	 * 
+	 * @param entity
+	 */
+	public void refresh(T entity) {
+		getSession().refresh(entity);
+	}
+
+	/**
+	 * 创建Query对象. 对于需要first,max,fetchsize,cache,cacheRegion等诸多设置的函数,可以在返回Query后自行设置. 留意可以连续设置,如下：
+	 * 
+	 * <pre>
+	 * dao.getQuery(hql).setMaxResult(100).setCacheable(true).list();
+	 * </pre>
+	 * 
+	 * 调用方式如下：
+	 * 
+	 * <pre>
+	 *        dao.createQuery(hql)
+	 *        dao.createQuery(hql,arg0);
+	 *        dao.createQuery(hql,arg0,arg1);
+	 *        dao.createQuery(hql,new Object[arg0,arg1,arg2])
+	 * </pre>
+	 * 
+	 * <strong> 参数hql可以带上占位符：UPDATE User set sort=? where userId=?; </strong>
+	 * 
+	 * @param values 可变参数.JDK1.5的新特性
+	 */
+	public Query createQuery(String hql, Object... values) {
+		Assert.hasText(hql);
+		Query query = getSession().createQuery(hql);
+		for (int i = 0; i < values.length; i++) {
+			query.setParameter(i, values[i]);
+		}
+		return query;
+	}
+
+	/*
+	 * @see core.dao.BaseDao#createSqlQuery(java.lang.String, java.lang.Object[])
+	 */
+	@Override
+	public Query createSqlQuery(String sql, Object... values) {
+		Assert.hasText(sql);
+		Query query = getSession().createSQLQuery(sql);
+		for (int i = 0; i < values.length; i++) {
+			query.setParameter(i, values[i]);
+		}
+		return query;
+	}
+
 	/**
 	 * 创建Criteria对象.
 	 * 
@@ -109,440 +294,486 @@ public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSu
 		}
 		return criteria;
 	}
-	
+
+	/**
+	 * 创建Criteria对象，带排序字段与升降序字段.
+	 * 
+	 * @see #createCriteria(Class,Criterion[])
+	 */
+	public Criteria createCriteria(String orderBy, boolean isAsc, Criterion... criterions) {
+		Assert.hasText(orderBy);
+
+		Criteria criteria = createCriteria(criterions);
+
+		if (isAsc)
+			criteria.addOrder(Order.asc(orderBy));
+		else
+			criteria.addOrder(Order.desc(orderBy));
+
+		return criteria;
+	}
+
+	/**
+	 * 根据hql查询,直接使用HibernateTemplate的find函数.
+	 * 
+	 * @param values 可变参数,见{@link #createQuery(String,Object...)}
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> find(String hql, Object... values) {
+		Assert.notNull(hql);
+		return getHibernateTemplate().find(hql, values);
+	}
+
+	/**
+	 * 按照hql经行分页查询
+	 * 
+	 * @param hql
+	 * @param begin
+	 * @param maxSiz
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> find(final String hql, final int begin, final int maxSiz) {
+		Assert.notNull(hql);
+		return (List<T>) this.getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session) throws HibernateException {
+				return session.createQuery(hql).setFirstResult(begin).setMaxResults(maxSiz).list();
+			}
+		});
+	}
+
+	/**
+	 * 根据属性名和属性值查询对象.
+	 * 
+	 * @return 符合条件的对象列表
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> findBy(String propertyName, Object value) {
+		Assert.hasText(propertyName);
+		return createCriteria(Restrictions.eq(propertyName, value)).list();
+	}
+
+	/**
+	 * 根据属性名和属性值查询对象,带排序参数.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> findBy(String propertyName, Object value, String orderBy, boolean isAsc) {
+		Assert.hasText(propertyName);
+		Assert.hasText(orderBy);
+		return createCriteria(orderBy, isAsc, Restrictions.eq(propertyName, value)).list();
+	}
+
 	/**
 	 * 根据属性名和属性值查询唯一对象.
 	 * 
 	 * @return 符合条件的唯一对象 or null if not found.
 	 */
+	@SuppressWarnings("unchecked")
 	public T findUniqueBy(String propertyName, Object value) {
 		Assert.hasText(propertyName);
 		return (T) createCriteria(Restrictions.eq(propertyName, value)).uniqueResult();
 	}
-	
-	/**
 
 	/**
-	 * 根据ID查询。没有返回null
+	 * 判断对象某些属性的值在数据库中是否唯一.
 	 * 
-	 * @param id
+	 * @param uniquePropertyNames 在POJO里不能重复的属性列表,以逗号分割 如"name,loginid,password"
+	 */
+	/*
+	 * public boolean isUnique(Object entity, String uniquePropertyNames) {
+	 * Assert.hasText(uniquePropertyNames); Criteria criteria =
+	 * createCriteria().setProjection(Projections.rowCount()); String[] nameList =
+	 * uniquePropertyNames.split(","); try { // 循环加入唯一列 for (String name : nameList) {
+	 * criteria.add(Restrictions.eq(name, PropertyUtils.getProperty(entity, name))); } //
+	 * 以下代码为了如果是update的情况,排除entity自身. String idName = getIdName(); // 取得entity的主键值 Serializable id =
+	 * getId(entity); // 如果id!=null,说明对象已存在,该操作为update,加入排除自身的判断 if (id != null)
+	 * criteria.add(Restrictions.not(Restrictions.eq(idName, id))); } catch (Exception e) {
+	 * ReflectionUtils.handleReflectionException(e); } return (Integer) criteria.uniqueResult() == 0; }
+	 *//**
+	 * 取得对象的主键值,辅助函数.
+	 */
+	/*
+	 * public Serializable getId(Object entity) throws NoSuchMethodException, IllegalAccessException,
+	 * InvocationTargetException { Assert.notNull(entity); return (Serializable)
+	 * PropertyUtils.getProperty(entity, getIdName()); }
+	 */
+
+	/**
+	 * 取得对象的主键名,辅助函数.
+	 */
+	public String getIdName() {
+		ClassMetadata meta = getSessionFactory().getClassMetadata(this.persistentClass);
+		Assert.notNull(meta, "Class " + persistentClass + " not define in hibernate session factory.");
+		String idName = meta.getIdentifierPropertyName();
+		Assert.hasText(idName, persistentClass.getSimpleName() + " has no identifier property define.");
+		return idName;
+	}
+
+	/**
+	 * 去除hql的select 子句，未考虑union的情况,用于pagedQuery.
+	 * 
+	 * @see #pagedQuery(String,int,int,Object[])
+	 */
+	@SuppressWarnings("unused")
+	private static String removeSelect(String hql) {
+		Assert.hasText(hql);
+		int beginPos = hql.toLowerCase().indexOf("from");
+		Assert.isTrue(beginPos != -1, " hql : " + hql + " must has a keyword 'from'");
+		return hql.substring(beginPos);
+	}
+
+	/**
+	 * 去除hql的orderby 子句，用于pagedQuery.
+	 * 
+	 * @see #pagedQuery(String,int,int,Object[])
+	 */
+	@SuppressWarnings("unused")
+	private static String removeOrders(String hql) {
+		Assert.hasText(hql);
+		Pattern p = Pattern.compile("order\\s*by[\\w|\\W|\\s|\\S]*", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(hql);
+		StringBuffer sb = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(sb, "");
+		}
+		m.appendTail(sb);
+		return sb.toString();
+	}
+
+	/**
+	 * 根据属性查询条件获取记录行数
+	 * 
+	 * @param property
+	 * @param value
 	 * @return
 	 */
-	public T get(Serializable id) {
-		return (T) this.getHibernateTemplate().get(this.persistentClass, id);
+	public int countByProperty(String property, Object value) {
+		Assert.hasText(property);
+		Assert.notNull(value);
+		return ((Number) (createCriteria(Restrictions.eq(property, value)).setProjection(
+				Projections.rowCount()).uniqueResult())).intValue();
 	}
 
 	/**
-	 * 根据ID查询。没有抛异常
+	 * 获取数据行数的默认方法
 	 * 
-	 * @param id
 	 * @return
 	 */
-	public T load(Serializable id) {
-		return (T) getHibernateTemplate().load(this.persistentClass, id);
+	public long countAll() {
+		return countAll(this.persistentClass);
 	}
 
 	/**
-	 * 删除
-	 * 
-	 * @param entity
-	 */
-	public void remove(T entity) {
-		getHibernateTemplate().delete(entity);
-	}
-
-	/**
-	 * 根据ID删除
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public void removeById(Serializable id) {
-		T entity = load(id);
-		getHibernateTemplate().delete(entity);
-	}
-
-	/**
-	 * HQL更新：insert | update | delete
-	 * 
-	 * @param hql
-	 * @param params
-	 * @return 返回影响的记录条数
-	 */
-	public int update(final String hql, final List<Object> params) {
-		return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				Query query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				return query.executeUpdate();
-			}
-		});
-	}
-
-	/**
-	 * 批量插入、更新
-	 * 
-	 * @param objList
-	 */
-	public void batchUpdate(final List objList) {
-		getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException, SQLException {
-				for (int i = 0; i < objList.size(); i++) {
-					session.saveOrUpdate(objList.get(i));
-					if (i % 20 == 0) {
-						session.flush();
-						session.clear();
-					}
-				}
-				return null;
-			}
-		});
-	}
-
-	/**
-	 * 批量删除
-	 * 
-	 * @param entities
-	 */
-	public void batchDelete(Collection entities) {
-		getHibernateTemplate().deleteAll(entities);
-	}
-	
-	/**
-	 * 获取全部对象
+	 * 获取实体的数据行数
 	 * 
 	 * @param entityClass
-	 */
-	public <V> List<V> findAll(Class<V> entityClass) {
-		return getHibernateTemplate().loadAll(entityClass);
-	}
-	
-	/**
-	 * 获取全部对象
-	 */
-	public List<T> findAll() {
-		return findAll(getPersistentClass());
-	}
-	
-	/**
-	 * 获取总记录数
-	 * 
 	 * @return
 	 */
-	public int getTotalRecords() {
-		return (Integer) this.getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery("select count(*) from " + getPersistentClass());
-				return ((Number) query.uniqueResult()).intValue();
-			}
-		});
+	public long countAll(Class<T> entityClass) {
+		Criteria criteria = getSession().createCriteria(entityClass);
+		return (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 	}
 
 	/**
-	 * HQL查询
+	 * 分页查询函数，使用已设好查询条件与排序的<code>Criteria</code>.
 	 * 
-	 * @return
+	 * @param pageNo 页号,从1开始.
+	 * @return 含总记录数和当前页数据的Page对象.
 	 */
-	public List find(String hql, Object[] params) {
-		return getHibernateTemplate().find(hql, params);
-	}
-	
+	/*
+	 * @SuppressWarnings("unchecked") public PaginatedListImpl pagedQuery(Criteria criteria, PaginatedListImpl
+	 * page) { Assert.notNull(criteria); CriteriaImpl impl = (CriteriaImpl) criteria; //
+	 * 先把Projection和OrderBy条件取出来,清空两者来执行Count操作 Projection projection = impl.getProjection();
+	 * List<CriteriaImpl.OrderEntry> orderEntries; try { orderEntries = (List)
+	 * BeanUtils.forceGetProperty(impl, "orderEntries"); BeanUtils.forceSetProperty(impl, "orderEntries", new
+	 * ArrayList()); } catch (Exception e) { throw new
+	 * InternalError(" Runtime Exception impossibility throw "); } // 执行查询 Integer totalCount = (Integer)
+	 * criteria.setProjection(Projections.rowCount()).uniqueResult(); // 将之前的Projection和OrderBy条件重新设回去
+	 * criteria.setProjection(projection); if (projection == null) {
+	 * criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY); } try {
+	 * BeanUtils.forceSetProperty(impl, "orderEntries", orderEntries); } catch (Exception e) { throw new
+	 * InternalError(" Runtime Exception impossibility throw "); } // 返回分页对象 if (totalCount < 1){ return page;
+	 * } int startIndex = page.getFirstRecordIndex(); List list =
+	 * criteria.setFirstResult(startIndex).setMaxResults(page.getPageSize()).list(); page.setList(list);
+	 * page.setTotalNumberOfRows(totalCount.intValue()); return page; }
+	 */
 	/**
-	 * HQL查询
-	 * @return
+	 * 创建新的实体对象
 	 */
-	public List find(String hql, Object params) {
-		return find(hql, new Object[]{params});
-	}
-	/**
-	 * HQL查询
-	 * @return
-	 */
-	public List find(String hql) {
-		return find(hql, null);
-	}
-
-	/**
-	 * HQL，注意HQL中须写as，返回指定clazz集合
-	 * 
-	 * @param clazz 指定返回的类型
-	 * @return
-	 */
-	public <V> List<V> find(final Class<V> clazz, final String hql, final List<Object> params) {
-		return getHibernateTemplate().executeFind(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-
-				return query.setResultTransformer(new AliasToBeanResultTransformer(clazz)).list();
-			}
-		});
-	}
-
-	/**
-	 * HQL，注意HQL中须写as，返回指定clazz单个对象
-	 * 
-	 * @param clazz 指定返回的类型
-	 * @return
-	 */
-	public <V> V getSingle(Class<V> clazz, String hql, List<Object> params) {
-		List list = find(clazz, hql, params);
-		if (list != null && list.size() > 0) {
-			return (V) list.get(0);
+	public T createNewEntiey() {
+		try {
+			return getPersistentClass().newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException("不能创建实体对象：" + getPersistentClass().getName());
 		}
-		return null;
 	}
 
-	/**
-	 * HQL，返回指定map集合
-	 * 
-	 * @return
-	 */
-	public List<Map> findMapList(final String hql, final List<Object> params) {
-		return getHibernateTemplate().executeFind(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				Query query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-
-				return query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
-			}
-		});
+	@SuppressWarnings("unchecked")
+	private ClassMetadata getCmd(Class clazz) {
+		return (ClassMetadata) this.getCmd(clazz);
 	}
 
+	/**********************************************************************************************************
+	 * 以下接口以SQLQuery为核心经行业务扩展组合 xiedy
+	 **********************************************************************************************************/
+
 	/**
-	 * HQL，返回单个map
-	 * 
-	 * @return
+	 * 使用SQL更新数据：insert or update op
 	 */
-	public Map getSingleMap(String hql, List<Object> params) {
-		List list = findMapList(hql, params);
-		if (list != null && list.size() > 0) {
-			return (Map) list.get(0);
+	public void updateBySql(String sql) throws DBException {
+		Assert.notNull(sql);
+		Session session = null;
+		try {
+			session = this.getSession();
+			SQLQuery query = session.createSQLQuery(sql);
+			query.executeUpdate();
+		} catch (Exception e) {
+			logger.error("通过SQL更新数据异常！出错位置updateBySql(String)中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
 		}
-		return null;
 	}
-	
+
 	/**
-	 * 分页 HQL
-	 * 
-	 * @param hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @return
+	 * 使用hql更新数据：insert or update op
 	 */
-	public List searchPaginated(final String hql, final PagerModel page) {
-		return searchPaginated(hql,null,page,null);
-	}
-	
-	/**
-	 * 分页 HQL
-	 * 
-	 * @param hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @param object
-	 * @return
-	 */
-	public List searchPaginated(final String hql, final PagerModel page, final Object object) {
-		List<Object> objects = new ArrayList<Object>();
-		objects.add(object);
-		return searchPaginated(hql,null,page, objects);
-	}
-	
-	/**
-	 * 分页 HQL
-	 * 
-	 * @param hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @param params
-	 * @return
-	 */
-	public List searchPaginated(final String hql, final PagerModel page, final List<Object> params) {
-		return searchPaginated(hql,null,page,params);
-	}
-	/**
-	 * 分页 HQL
-	 * 
-	 * @param hql
-	 * @param countHql 获取总记录数hql,可不填写，若不写，则解析hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @param params
-	 * @return
-	 */
-	public List searchPaginated(final String hql, final String countHql, final PagerModel page, final List<Object> params) {
-		return (List) getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				// 获取记录总数
-				String hqlStr = countHql;
-				if (hqlStr == null) {
-					hqlStr = parseCountSql(hql);
-				}
-				logger.debug("--- page recordCount ---: " + hqlStr);
-				Query query = session.createQuery(hqlStr);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int recordCount = ((Number) query.uniqueResult()).intValue();
-				page.setRecordCount(recordCount);
-
-				// 获取结果集
-				logger.debug("--- page recordList ---: " + hql);
-				query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int begin = PagerModel.getFirstResult(page.getCurrentPage(), page.getPageSize());
-				query.setFirstResult(begin);
-				query.setMaxResults(page.getPageSize());
-				List recordList = query.list();
-				page.setRecordList(recordList);
-
-				return recordList;
-			}
-		});
+	public void updateByHql(String hql) throws DBException {
+		Assert.notNull(hql);
+		Session session = null;
+		try {
+			session = this.getSession();
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (Exception e) {
+			logger.error("通过HQL更新数据异常！出错位置updateByHql(String)中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
+		}
 	}
 
 	/**
-	 * 分页 HQL, HQL中须用as别名, 返回指定clazz类型的列表
-	 * 
-	 * @param clazz 指定返回的类型
-	 * @param hql
-	 * @param countHql 获取总记录数hql,可不填写，若不写，则解析hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @param params
-	 * @return
-	 */
-	public <V> List<V> searchPaginated(final Class<V> clazz, final String hql, final String countHql, final PagerModel page,
-			final List<Object> params) {
-		return (List<V>) getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				// 获取记录总数
-				String hqlStr = countHql;
-				if (hqlStr == null) {
-					hqlStr = parseCountSql(hql);
-				}
-				logger.debug("--- page recordCount ---: " + hqlStr);
-				Query query = session.createQuery(hqlStr);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int recordCount = ((Number) query.uniqueResult()).intValue();
-				page.setRecordCount(recordCount);
-
-				// 获取结果集
-				logger.debug("--- page recordList ---: " + hql);
-				query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int begin = PagerModel.getFirstResult(page.getCurrentPage(), page.getPageSize());
-				query.setFirstResult(begin) //
-						.setMaxResults(page.getPageSize()) //
-						.setResultTransformer(new AliasToBeanResultTransformer(clazz)) //
-						.list();
-				List recordList = query.list();
-				page.setRecordList(recordList);
-
-				return recordList;
-			}
-		});
-	}
-
-	/**
-	 * 分页 HQL, HQL中须用as别名, 返回map类型的列表
-	 * 
-	 * @param hql
-	 * @param countHql 获取总记录数hql,可不填写，若不写，则解析hql
-	 * @param page 分页实体，其如下2属性须有值：pageNum 当前页码,pageSize 页面大小
-	 * @param params
-	 * @return
-	 */
-	public List<Map> searchPaginatedMap(final String hql, final String countsql, final PagerModel page, final List<Object> params) {
-		return (List<Map>) getHibernateTemplate().execute(new HibernateCallback() {
-			@Override
-			public Object doInHibernate(Session session) throws HibernateException {
-				// 获取记录总数
-				String hqlStr = countsql;
-				if (hqlStr == null) {
-					hqlStr = parseCountSql(hql);
-				}
-				logger.debug("--- page recordCount ---: " + hqlStr);
-				Query query = session.createQuery(hqlStr);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int recordCount = ((Number) query.uniqueResult()).intValue();
-				page.setRecordCount(recordCount);
-
-				// 获取结果集
-				logger.debug("--- page recordList ---: " + hql);
-				query = session.createQuery(hql);
-				if (params != null && params.size() > 0) {
-					for (int i = 0; i < params.size(); i++) {
-						query.setParameter(i, params.get(i));
-					}
-				}
-				int begin = PagerModel.getFirstResult(page.getCurrentPage(), page.getPageSize());
-				query.setFirstResult(begin) //
-						.setMaxResults(page.getPageSize()) //
-						.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP) //
-						.list();
-				List recordList = query.list();
-				page.setRecordList(recordList);
-
-				return recordList;
-			}
-		});
-	}
-
-	/**
-	 * 解析查询总数sql <br/>
-	 * 如果语句中已包含count函数，则不作任务解析，否则，按一般规则解析统计语句
+	 * 使用SQL带上占位符的查询语句 如：UPDATE user_dept set sort=? where user_id=? and dept_id=?; 所以params数据的值就是对应着3个占位符的值
 	 * 
 	 * @param sql
+	 * @param params
+	 * @throws DBException
+	 */
+	public void updateBySql(String sql, Object... params) throws DBException {
+		Assert.notNull(sql);
+		Session session = null;
+		try {
+			session = this.getSession();
+			logger.debug("sql = " + sql);
+			SQLQuery query = session.createSQLQuery(sql);
+			if (params != null) {
+				int i = 0;
+				for (Object obj : params) {
+					query.setParameter(i, obj);
+					i++;
+				}
+				i = 0;
+			}
+			query.executeUpdate();
+		} catch (Exception e) {
+			logger.error("通过SQL更新数据异常！出错位置updateBySql(String,Object[])中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
+		}
+	}
+
+	/**
+	 * 使用SQL带上占位符的查询语句 如：UPDATE user_dept set sort=? where user_id=? and dept_id=?; 所以params数据的值就是对应着3个占位符的值
+	 * 
+	 * @param sql
+	 * @param params
+	 * @throws DBException
+	 */
+	public void updateByHql(String hql, Object... params) throws DBException {
+		Assert.notNull(hql);
+		Session session = null;
+		try {
+			session = this.getSession();
+			logger.debug("sql = " + hql);
+			Query query = session.createQuery(hql);
+			if (params != null) {
+				int i = 0;
+				for (Object obj : params) {
+					query.setParameter(i, obj);
+					i++;
+				}
+				i = 0;
+			}
+			query.executeUpdate();
+		} catch (Exception e) {
+			logger.error("通过Hql更新数据异常！出错位置updateByHql(String,Object[])中。");
+			// e.printStackTrace();
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
+		}
+	}
+
+	/**
+	 * 使用SQL查询结果，无分页信息
+	 * 
+	 * @param SQL
+	 * @return
+	 * @throws DBException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> findBySQL(String sql) throws DBException {
+		Assert.notNull(sql);
+		Session session = null;
+		List<Object[]> result = null;
+		try {
+			session = super.getSession();
+			logger.debug("sql = " + sql);
+			result = session.createSQLQuery(sql).list();
+		} catch (Exception e) {
+			logger.error(e.getCause());
+			logger.error("通过SQL查询数据异常！findBySQL(String)中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
+		}
+		return result;
+	}
+
+	/**
+	 * 使用SQL查询结果，有分页信息
+	 * 
+	 * @param SQL
+	 * @return
+	 * @throws DBException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Object[]> findBySQL(String sql, int beginIndex, int size) throws DBException {
+		Assert.notNull(sql);
+		Session session = null;
+		List<Object[]> result = null;
+		try {
+			session = super.getSession();
+			logger.debug("sql = " + sql);
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setFirstResult(beginIndex);
+			query.setMaxResults(size);
+			result = query.list();
+		} catch (Exception e) {
+			logger.error("通过SQL查询数据异常！findBySQL(String,int,int)中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			this.releaseSession(session);
+		}
+		return result;
+	}
+
+	/**
+	 * 通过HQL获取唯一的实体对象
+	 * 
+	 * @param hql
+	 * @return
+	 * @throws DBException
+	 */
+	public Object uniqueResultByHQL(String hql) throws DBException {
+		Assert.notNull(hql);
+		Session session = null;
+		Object result = null;
+		try {
+			session = super.getSession();
+			logger.debug("hql = " + hql);
+			Query qry = session.createQuery(hql);
+			result = qry.uniqueResult();
+		} catch (Exception e) {
+			logger.error("通过HQL查询数据异常！uniqueResultByHQL(String)中。");
+			throw new DBException(e.getMessage());
+		} finally {
+			super.releaseSession(session);
+		}
+		return result;
+	}
+
+	/**
+	 * 通过SQL获取单一数据
+	 * 
+	 * @param sql
+	 * @return
+	 * @throws DBException
+	 */
+	public Object uniqueResultBySQL(String sql) throws DBException {
+		Session session = null;
+		Object result = null;
+		try {
+			session = super.getSession();
+			logger.debug("sql = " + sql);
+			Query qry = session.createSQLQuery(sql);
+			result = qry.uniqueResult();
+		} catch (Exception e) {
+			throw new DBException(e);
+		} finally {
+			super.releaseSession(session);
+		}
+		return result;
+	}
+
+	/**
+	 * 解析查询总数sql语句
+	 * 
+	 * @param sql
+	 * @return
 	 */
 	protected String parseCountSql(String sql) {
-		Pattern p = Pattern.compile("^.+count.+from.+$", Pattern.CASE_INSENSITIVE); 
-		Matcher m = p.matcher(sql);
-		if(!m.matches()){
-			sql = sql.replaceAll("\\s+", " ");
-			int startIndex = sql.toUpperCase().indexOf("FROM ");
-			if (startIndex == -1){
-				String info = "不合法的分页查询总数SQL/HQL： " + sql;
-				logger.debug(info);
-				throw new DBException(info);
+		if (!sql.matches(".* (count|COUNT)\\(.+\\) .+"))// 如果语句中已包含count函数，则不作任务解析(当一条统计语句比较复杂时，可自定义统计语句)，否则，按一般规则解析统计语句
+		{
+			sql = sql.replaceAll("(\\s|　)+", " ");
+			int startIndex = sql.indexOf("from ");
+			if (startIndex == -1)
+				startIndex = sql.indexOf("FROM ");
+			int endIndex = sql.lastIndexOf(" group by ");
+			if (endIndex == -1) {
+				endIndex = sql.lastIndexOf(" GROUP BY ");
 			}
-			
-			sql = "SELECT COUNT(*) " + sql.substring(startIndex);
+			if (endIndex == -1) {
+				endIndex = sql.lastIndexOf(" order by ");
+			}
+			if (endIndex == -1) {
+				endIndex = sql.lastIndexOf(" ORDER BY ");
+			}
+			if (endIndex == -1)
+				sql = sql.substring(startIndex);
+			else
+				sql = sql.substring(startIndex, endIndex);
+
+			sql = "select count(*) " + sql;
 		}
-		
 		return sql;
 	}
+
+	/**
+	 * 获取数据的总行数
+	 * 
+	 * @param sql
+	 * @return
+	 * @throws DBException
+	 */
+	public int getRecordCountBySQL(String sql) throws DBException {
+		Session session = null;
+		sql = parseCountSql(sql);
+		int result = 0;
+		try {
+			session = super.getSession();
+			logger.debug("sql = " + sql);
+			Query qry = session.createSQLQuery(sql);
+			result = ((Number) qry.uniqueResult()).intValue();
+		} catch (Exception e) {
+			logger.error("获取SQL查询行数异常！getRecordCountBySQL(String)中。");
+			throw new DBException(e);
+		} finally {
+			super.releaseSession(session);
+		}
+		return result;
+	}
+
 }

@@ -1,9 +1,10 @@
 package com.nbcedu.function.cardmanage.core.exception;
 
+
 /**
- * 业务异常基类
+ * 业务异常基类.
  *
- * @version 1.0
+ * @author bird
  */
 @SuppressWarnings("serial")
 public class BusinessException extends RuntimeException {
