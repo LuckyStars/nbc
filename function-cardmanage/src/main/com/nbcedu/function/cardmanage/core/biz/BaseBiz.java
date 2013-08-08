@@ -14,24 +14,25 @@ public interface BaseBiz<T extends Serializable> {
 
 	public List<T> findAll() ;
 
-	public T save(T entity) ;
+	public T add(T entity) ;
 
-	public T saveAndRefresh(T entity);
+	public T addAndRefresh(T entity);
 
-	public Object saveOrUpdate(T o);
+	public Object addOrUpdate(T o);
 
-	public void delete(T o) ;
+	public void remove(T o) ;
 
-	public Object update(T o) ;
+	public Object modify(T o) ;
 
-	public Object merge(T o) ;
+	public Object modifyMerge(T o) ;
 
-	public T deleteById(Serializable id);
+	public T removeById(Serializable id);
 	
-	public T deleteById(String id);
+	public T removeById(String id);
 
-	public List<T> deleteById(Serializable[] ids) ;
+	public List<T> removeById(Serializable[] ids) ;
 	
 	public String getIdName() ;
+	
 		
 }

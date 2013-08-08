@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class CMUserPrivilege implements Serializable{
 	private String id;
 	private String userName;
-	private String uid;
+	private String userUid;
 	public String getId() {
 		return id;
 	}
@@ -19,11 +19,11 @@ public class CMUserPrivilege implements Serializable{
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getUid() {
-		return uid;
+	public String getUserUid() {
+		return userUid;
 	}
-	public void setUid(String uid) {
-		this.uid = uid;
+	public void setUserUid(String userUid) {
+		this.userUid = userUid;
 	}
 	
 }

@@ -18,16 +18,16 @@ import org.hibernate.transform.ResultTransformer;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.Assert;
 
-import com.nbcedu.function.cardmanage.core.comment.BasicTransformerAdapter;
 import com.nbcedu.function.cardmanage.core.comment.Constants;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
 import com.nbcedu.function.cardmanage.core.pager.PagerModel;
 import com.nbcedu.function.cardmanage.core.pager.SystemContext;
+import com.nbcedu.function.cardmanage.core.util.BasicTransformerAdapter;
 
 
 
 @SuppressWarnings("unchecked")
-public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
+public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDaoImpl<T> {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
@@ -246,5 +246,9 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 
 		return pagerModel;
 	}
-
+	
+	@Override
+	public void removeAll() {
+		this.getSession().createQuery("delete FROM " + this.getPersistentClass().getSimpleName()).executeUpdate();
+	}
 }

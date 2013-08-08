@@ -31,7 +31,7 @@ import com.nbcedu.function.cardmanage.core.exception.DBException;
 
 
 @Repository
-public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDAO<T> {
+public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDAO<T> {
 
 	/**
 	 * LOG4J日志
@@ -44,7 +44,7 @@ public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSu
 	private Class<T> persistentClass;
 
 	@SuppressWarnings("unchecked")
-	public BaseDAOImpl() {
+	public BaseDaoImpl() {
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
 				.getActualTypeArguments()[0];
 	}

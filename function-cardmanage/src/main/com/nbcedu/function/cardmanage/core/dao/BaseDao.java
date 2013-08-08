@@ -130,6 +130,7 @@ public interface BaseDAO<T extends Serializable> {
 	public List<Map> getListBySql(String sql,int begin,int end) throws DBException;
 	
 	public Map getOneBySql(final String sql) throws DBException;
+	public void removeAll();
 	
 	public List<Map> getListBySql(String sql) throws DBException;
 }

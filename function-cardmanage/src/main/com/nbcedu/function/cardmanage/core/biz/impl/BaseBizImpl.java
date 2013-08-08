@@ -1,6 +1,5 @@
 package com.nbcedu.function.cardmanage.core.biz.impl;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nbcedu.function.cardmanage.core.biz.BaseBiz;
 import com.nbcedu.function.cardmanage.core.dao.BaseDAO;
-
-
 
 @SuppressWarnings("unchecked")
 public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
@@ -55,58 +52,59 @@ public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
 				return false;
 			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
 	}
 	
 	 
-	public T save(T entity) {
+	public T add(T entity) {
 		return (T)dao.save(entity);
 	}
 
-	public T saveAndRefresh(T entity) {
-		this.save(entity);
+	public T addAndRefresh(T entity) {
+		this.add(entity);
 		getDao().refresh(entity);
 		return entity;
 	}
 
-	public Object saveOrUpdate(T o) {
+	public Object addOrUpdate(T o) {
 		return dao.saveOrUpdate(o);
 	}
 
-	public void delete(T o) {
+	public void remove(T o) {
 		dao.remove(o);
 	}
 
-	public Object update(T o) {
+	public Object modify(T o) {
 		return dao.update(o);
 	}
 
-	public Object merge(T o) {
+	public Object modifyMerge(T o) {
 		return dao.merge(o);
 	}
 
-	public T deleteById(Serializable id) {
+	public T removeById(Serializable id) {
 		if (id == null) {
 			return null;
 		}
 		return dao.removeById(id);
 	}
 
-	public T deleteById(String id) {
+	public T removeById(String id) {
 		if (id == null) {
 			return null;
 		}
 		return dao.removeById(id);
 	}
 
-	public List<T> deleteById(Serializable[] ids) {
+	public List<T> removeById(Serializable[] ids) {
 		List<T> dts = new ArrayList<T>();
 		T del = null;
 		if (ids != null && ids.length > 0) {
 			for (Serializable id : ids) {
-				del = deleteById(id);
+				del = removeById(id);
 				if (del != null) {
 					dts.add(del);
 				}
@@ -118,5 +116,6 @@ public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
 	public String getIdName(){
 		return dao.getIdName();
 	}
+
 
 }
