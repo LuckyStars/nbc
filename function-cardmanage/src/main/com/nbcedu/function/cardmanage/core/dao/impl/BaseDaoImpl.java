@@ -508,7 +508,7 @@ public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSu
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unused", "rawtypes" })
 	private ClassMetadata getCmd(Class clazz) {
 		return (ClassMetadata) this.getCmd(clazz);
 	}

@@ -2,7 +2,6 @@ package com.nbcedu.function.cardmanage.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import com.nbcedu.function.cardmanage.constants.CardStatus;
 
 /**
