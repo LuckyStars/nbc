@@ -13,6 +13,7 @@ import com.nbcedu.function.cardmanage.biz.CMUserPrivilegeBiz;
 import com.nbcedu.function.cardmanage.core.action.BaseAction;
 import com.nbcedu.function.cardmanage.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.cardmanage.model.CMUserPrivilege;
+import com.nbcedu.function.cardmanage.util.UcService;
 
 @SuppressWarnings("serial")
 public class CMUserPrivilegeAction extends BaseAction{

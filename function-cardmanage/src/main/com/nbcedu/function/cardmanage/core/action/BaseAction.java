@@ -31,7 +31,7 @@ public class BaseAction extends ActionSupport {
 	protected String id;
 	
 	protected List<String> idList = new ArrayList<String>();
-	protected FunctionSupportUtil functionSupportUtil = SupportManager.getFunctionSupportUtil();
+//	protected FunctionSupportUtil functionSupportUtil = SupportManager.getFunctionSupportUtil();
 	/**
 	 * 进行增删改操作后,以redirect方式重新打开action默认页的result名
 	 */
