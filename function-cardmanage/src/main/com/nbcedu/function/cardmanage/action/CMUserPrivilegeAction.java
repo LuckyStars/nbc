@@ -57,7 +57,7 @@ public class CMUserPrivilegeAction extends BaseAction{
 	///////////////////////////
 	////////getters&setters////
 	///////////////////////////
-	public void setPriBiz(TSUserPrivilegeBiz priBiz) {
+	public void setPriBiz(CMUserPrivilegeBiz priBiz) {
 		this.priBiz = priBiz;
 	}
 	public String getUserUids() {

@@ -12,7 +12,8 @@
 	<bean id="cardTypeBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMCardTypeBizImpl" scope="prototype">
 	</bean>
 	
-	<bean id="cardPrivilegeBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMUserPrivilegeBizImpl" scope="prototype">
+	<bean id="cmPriBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMUserPrivilegeBizImpl" scope="prototype">
+		<property name="cmUserPrivilegeDao" ref="cmUserPriDao"></property>
 	</bean>
 	
 </beans>

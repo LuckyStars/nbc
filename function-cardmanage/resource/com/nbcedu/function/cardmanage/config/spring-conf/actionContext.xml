@@ -10,8 +10,8 @@
 		<property name="cardTypeBiz" ref="cardTypeBiz"/>
 	</bean>
 	
-	<bean id="cardPrivilegeAction" class="com.nbcedu.function.cardmanage.action.CMPrivilegeAction" scope="prototype">
-		<property name="cardPrivilegeBiz" ref="cardPrivilegeBiz"/>
+	<bean id="cardPrivilegeAction" class="com.nbcedu.function.cardmanage.action.CMUserPrivilegeAction" scope="prototype">
+		<property name="priBiz" ref="cmPriBiz"/>
 	</bean>
 	
 </beans>

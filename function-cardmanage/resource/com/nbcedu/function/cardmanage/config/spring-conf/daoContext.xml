@@ -3,8 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	
-<!--	<bean id="hibernateDao" class="com.nbcedu.function.documentflow.dao.impl.HibernateDAOImpl">-->
-<!--		<property name="sessionFactory" ref="sessionFactory"/>-->
-<!--	</bean>-->
-	
+	<bean id="cmUserPriDao" class="com.nbcedu.function.cardmanage.dao.impl.CMUserPrivilegeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>
