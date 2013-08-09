@@ -3,12 +3,15 @@ package com.nbcedu.function.cardmanage.core.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
+import com.nbcedu.function.cardmanage.constants.Constants;
 import com.nbcedu.function.cardmanage.core.pager.Pager;
 import com.nbcedu.function.cardmanage.core.pager.PagerModel;
-import com.nbcedu.function.functionsupport.core.FunctionSupportUtil;
-import com.nbcedu.function.functionsupport.core.SupportManager;
+import com.nbcedu.function.cardmanage.vo.CMUser;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -21,6 +24,22 @@ public class BaseAction extends ActionSupport {
 
 	public static Logger logger = Logger.getLogger(BaseAction.class);
 
+	/**
+	 * 当前用户UID
+	 * @return
+	 * @author xuechong
+	 */
+	protected String getCurUserUid(){
+		return (String) ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY);
+	}
+	
+	protected Map<String,Object> getSession(){
+		return ActionContext.getContext().getSession();
+	}
+	
+	protected CMUser getCurUser(){
+		return (CMUser) getSession().get(Constants.SESSION_USER_KEY);
+	}
 	/**
 	 * 默认的分页对象
 	 */
