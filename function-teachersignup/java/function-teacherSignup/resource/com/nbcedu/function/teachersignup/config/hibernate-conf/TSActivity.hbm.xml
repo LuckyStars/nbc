@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.teachersignup.model.TSActivity"
+		table="t_teachersignup_activity">
+		<id name="id" type="java.lang.String">
+			<column name="id" length="32" />
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="filePath" type="java.lang.String">
+			<column name="file_path" length="512" />
+		</property>
+		<property name="fileName" type="java.lang.String">
+			<column name="file_name" length="255" />
+		</property>
+		<property name="comment" type="java.lang.String">
+			<column name="comment" length="255" />
+		</property>
+		<property name="openDate" type="java.util.Date">
+			<column name="open_date" />
+		</property>
+		<property name="endDate" type="java.util.Date">
+			<column name="end_date" />
+		</property>
+		<property name="createDate" type="java.util.Date">
+			<column name="create_date" />
+		</property>
+		<property name="status" type="java.lang.Integer">
+			<column name="status" />
+		</property>
+	</class>
+</hibernate-mapping>

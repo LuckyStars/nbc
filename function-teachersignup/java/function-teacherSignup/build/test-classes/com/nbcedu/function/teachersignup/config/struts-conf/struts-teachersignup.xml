@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+	<package name="teachersignup" namespace="/teachersignup" extends="struts-default">
+		<action name="*_userPri" class="tsUserPriAction" method="{1}">
+			<result name="list">/function/function-teachersignup/pages/privilege/list.jsp</result>
+			<result name="reload" type="redirectAction">/teachersignup/list_userPri</result>
+		</action>
+		<action name="*_act" class="tsActivityAction" method="{1}">
+		
+		</action>
+	</package>
+</struts>

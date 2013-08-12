@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="teachersignupLoader" class="com.nbcedu.function.teachersignup.interceptor.TSLoader"></bean>
+	
+	<bean id="tsRoleInterceptor" class = "com.nbcedu.function.teachersignup.interceptor.RoleInterceptor">
+		<property name="userPrivilegeBiz" ref="tsUserPriBiz"></property>
+	</bean>
+	
+	<bean id="tsUserPriAction" class="com.nbcedu.function.teachersignup.action.TSUserPrivilegeAction" scope="prototype">
+		<property name="priBiz" ref="tsUserPriBiz"></property>
+	</bean>
+	
+	<bean id="tsActivityAction" class="com.nbcedu.function.teachersignup.action.TSActivityAction" >
+		<property name="actBiz" ref="tsActBiz"></property>
+	</bean>
+	
+</beans>

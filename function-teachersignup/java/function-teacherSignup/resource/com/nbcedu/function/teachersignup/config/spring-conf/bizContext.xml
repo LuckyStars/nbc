@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="tsUserPriBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSUserPrivilegeBizImpl">
+		<property name="userPriDao" ref="tsUserPriDao"></property>
+	</bean>
+	
+	<bean id="tsActBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSActivityBizImpl">
+		<property name="actDao" ref="tsActDao"></property>
+	</bean>
+	
+	<bean id="tsRewardBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSRewardBizImpl">
+		<property name="rewardDao" ref="tsRewardDao"></property>
+	</bean>
+	
+	<bean id="tsSignBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSSignBizImpl">
+		<property name="signDao" ref="tsSignDao"></property>
+	</bean>
+	
+	<bean id="tsSubBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSSubjectBizImpl">
+		<property name="subjectDao" ref="tsSubDao"></property>
+	</bean>
+</beans>
