@@ -16,6 +16,7 @@
 			<span class="title">权限管理</span>
 			<span class="back"><a href="#">返回上一页</a></span>
 		 </h1>
+		 
 	        <div class="table_box fixed">
 	            <div class="box">
 	            <p class="join">管理员列表</p>
@@ -36,10 +37,12 @@
 					</c:forEach>
 					</c:if>
 				</table>
+				
 				<a href="#" id="popAdd" class="return" style="margin-left:124px;">新增</a>
 				<a href="#" class="return">返回</a>
 				</div>
 			</div>
+			
 	</div>
     <!--弹出层-->
     <div id="pop" style="display: none;">
