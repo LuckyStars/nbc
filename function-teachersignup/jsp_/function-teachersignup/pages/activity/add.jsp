@@ -39,64 +39,111 @@
 	    	
 	        <div style="clear:both;"></div>
 	        <%-- 报名类型 --%>
-	       	<div class="type-1"><span class="tit3">报名类型：</span>
-	           	<div class="select1">
-	           		<table title="报名类型" id="dg" class="easyui-datagrid" style="width:300px;height:100px"
-				            toolbar="#toolbar" pagination="false"
-				            rownumbers="false" fitColumns="true" singleSelect="true">
-				        <thead>
-				        </thead>
-				        
-				        <tbody>
-				        	<tr><td><input name="subjectName" type="hidden" />类型啊</td></tr>
-				        </tbody>
-				    </table>
-				    
-				    <div id="dlg" class="easyui-dialog" style="width:240px;height:160px;padding:10px 20px"
-				            closed="true" buttons="#dlg-buttons">
-				            <div class="fitem">
-				                <label>类型名称:</label>
-				                <input name="subjectName" class="easyui-validatebox" required="true">
-				            </div>
-				    </div>
-				    
-				    <div id="toolbar">
-				        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUser()">新增</a>
-				        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">编辑</a>
-				        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser()">删除</a>
-				    </div>
-				    <div id="dlg-buttons">
-				        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">确定</a>
-				        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
-				    </div>
-	              	<p>
-		              	<span class="best">小学高级职称</span>
-		              	<span class="dele">修改</span>
-		              	<span class="dele">删除</span>
-	              	</p>
-	               	<p>
-	               		<span class="best">小学高级职称</span>
-	               		<span class="dele">修改</span>
-	               		<span class="dele">删除</span>
-	               	</p>
-	               	<p>
-	               		<span class="best">小学高级职称</span>
-	               		<span class="dele">修改</span>
-	               		<span class="dele">删除</span>
-	               	</p>
-	               	<p>
-	               		<span class="best">
-	               			<input type="text" />
-	               		</span>
-	               		<span class="dele">修改</span>
-	               		<span class="dele">删除</span>
-	               	</p>
-	               	
-	           	</div>
-	        	<a class="cx4" href="#">增加报名信息</a>
-	       	</div>
+	        
+	        <div class="type-1"><span class="tit3">报名类型：</span>
+	           	<div style="width:280px;overflow: hidden;">
+	       	<table id="subjectDL" class="easyui-datagrid" style="width:280px;height:auto"
+				data-options="
+					singleSelect: true,
+					toolbar: '#tbSubject',
+					onClickRow: onClickRowSubject
+				">
+				<thead>
+					<tr>
+						<th data-options="field:'subjectName',width:240,
+							editor:{
+								type:'validatebox',
+								options:{required:true}
+							}">报名类型
+						</th>
+					</tr>
+				</thead>
+			</table>
+		
+			<div id="tbSubject" style="height:auto">
+				<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-add',plain:true" onclick="appendSubject()">新增</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-remove',plain:true" onclick="removeSubjectRow()">删除</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-save',plain:true" onclick="acceptSubject()">确定</a>
+			</div>
+			</div>
+			</div>
+			<script type="text/javascript">
+				var editIndexSubject = undefined;
+				
+				function endEditingSubject(){
+					if (editIndexSubject == undefined){return true;}
+					if ($('#subjectDL').datagrid('validateRow', editIndexSubject)){
+						
+						$('#subjectDL').datagrid('endEdit', editIndexSubject);
+						var curValue = $('#subjectDL').datagrid('getRows')[editIndexSubject]['subjectName'];
+						
+						if($.trim(curValue)==''){
+							$('#subjectDL').datagrid('beginEdit',editIndexSubject);
+							return false;
+						}
+						
+						var allRows = $('#subjectDL').datagrid('getRows');
+						for(var i =0;i<allRows.length;i++){
+							if (i!=editIndexSubject && curValue== allRows[i]['subjectName']){
+								$.messager.alert('名称重复','报名类型不能重复');
+								$('#subjectDL').datagrid('beginEdit',editIndexSubject);
+								return  false;
+							}
+						}
+						return true;
+					} else {
+						return false;
+					}
+				}
+				
+				function onClickRowSubject(index){
+					if (editIndexSubject != index){
+						if (endEditingSubject()){
+							$('#subjectDL').datagrid('selectRow', index)
+									.datagrid('beginEdit', index);
+							editIndexSubject = index;
+						} else {
+							$('#subjectDL').datagrid('selectRow', editIndexSubject);
+						}
+					}
+				}
+				
+				function appendSubject(){
+					if (endEditingSubject()){
+						$('#subjectDL').datagrid('appendRow',{status:'P'});
+						editIndexSubject = $('#subjectDL').datagrid('getRows').length-1;
+						$('#subjectDL').datagrid('selectRow', editIndexSubject)
+								.datagrid('beginEdit', editIndexSubject);
+					}
+				}
+				
+				function removeSubjectRow(){
+					if (editIndexSubject == undefined){return;}
+					$('#subjectDL').datagrid('cancelEdit', editIndexSubject)
+							.datagrid('deleteRow', editIndexSubject);
+					editIndexSubject = undefined;
+				}
+				
+				function acceptSubject(){
+					if (endEditingSubject()){
+						$('#subjectDL').datagrid('acceptChanges');
+					}
+				}
+				
+				function subjectValues(){
+					var allRows = $('#subjectDL').datagrid('getRows');
+					var result = '';
+					for(var i =0;i<allRows.length;i++){
+						result = result + "," + allRows[i]['subjecName'];
+					}
+					return result;
+				}
+				
+			</script>
 		    
-	       	
 	       	<%-- 报名类型 --%>
 	       	
 	        <p class="awards">是否追加获奖情况：
@@ -154,14 +201,22 @@
 	        $(".yes").click(function () {
 	            $(".type-2").show();
 	        });
+	        
 	        $(".no").click(function () {
 	            $(".type-2").hide();
 	        });
 	    });
 
-	    function newUser(){
-            $('#dlg').dialog('open').dialog('setTitle','New User');
+	    function newType(){
+            $('#dlgType').dialog('open').dialog('setTitle','报名类型');
             $('#fm').form('clear');
+        }
+
+        function saveType(){
+			if($.trim($("#subjectName").val()=='')){
+				$("#subjectName").focus();
+				return;
+			}
         }
 	</script>
 	
