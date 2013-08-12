@@ -6,7 +6,7 @@ import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 /**
- * 报名事件ACTION
+ * 报名事件ACTIONaaaaaa
  * @author xuechong
  */
 @SuppressWarnings("serial")
