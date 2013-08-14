@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.teachersignup.core.pager.PagerModel;
 import com.nbcedu.function.teachersignup.dao.TSActivityDao;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
@@ -68,5 +69,10 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	
 	public List<TSActivity> findAll(){
 		return actDao.getAll();
+	}
+	
+	@Override
+	public PagerModel findAllByPage() {
+		return this.actDao.searchPaginated("FROM TSActivity a ORDER BY a.createDate DESC");
 	}
 }

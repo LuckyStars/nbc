@@ -67,6 +67,10 @@ public class TSActivityAction extends BaseAction{
 		return LIST;
 	}
 	
+	public String adminList(){
+		this.pm = this.actBiz.findAllByPage();
+		return "adminList";
+	}
 	
 	////////////////////////
 	////getters&setters/////
