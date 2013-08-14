@@ -2,9 +2,22 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="cardManage" namespace="/cardManage" extends="struts-default">
+	<!-- ============= 首页 =================== -->
+		<action name="home" class="com.nbcedu.function.cardmanage.action.CMCardHomeAction" method="home">
+			<result name="home">/function/function-cardManage/pages/home.jsp</result>
+		</action>
+	
 		<action name="*_userPri" class="cardPrivilegeAction" method="{1}">
 			<result name="list">/function/function-cardManage/pages/privilege/list.jsp</result>
 			<result name="reload" type="redirectAction">/teachersignup/list_userPri</result>
+		</action>
+		<action name="*_apply" class="cardApplyAction" method="{1}">
+			<result name="apply">/function/function-cardManage/pages/apply.jsp</result>
+			<result name="list">/function/function-cardManage/pages/applyList.jsp</result>
+			<result name="applyManager">/function/function-cardManage/pages/applyManager.jsp</result>
+			<result name="reload" type="redirectAction">list_apply</result>
+		</action>
+		<action name="*_tree" class="cardTreeAction" method="{1}">
 		</action>
 	</package>
 </struts>

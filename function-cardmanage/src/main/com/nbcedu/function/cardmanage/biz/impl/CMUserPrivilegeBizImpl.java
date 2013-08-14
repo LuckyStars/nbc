@@ -6,8 +6,7 @@ import com.nbcedu.function.cardmanage.biz.CMUserPrivilegeBiz;
 import com.nbcedu.function.cardmanage.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.cardmanage.dao.CMUserPrivilegeDao;
 import com.nbcedu.function.cardmanage.model.CMUserPrivilege;
-import com.nbcedu.function.teachersignup.model.TSUserPrivilege;
-import com.nbcedu.function.teachersignup.util.UcService;
+import com.nbcedu.function.cardmanage.util.UcService;
 
 public class CMUserPrivilegeBizImpl extends BaseBizImpl<CMUserPrivilege> implements CMUserPrivilegeBiz{
 	private CMUserPrivilegeDao cmUserPrivilegeDao;

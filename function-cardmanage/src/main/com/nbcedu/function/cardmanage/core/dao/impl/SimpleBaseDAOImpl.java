@@ -27,7 +27,7 @@ import com.nbcedu.function.cardmanage.core.util.BasicTransformerAdapter;
 
 
 @SuppressWarnings("unchecked")
-public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDaoImpl<T> {
+public class SimpleBaseDaoImpl<T extends Serializable> extends BaseDaoImpl<T> {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 

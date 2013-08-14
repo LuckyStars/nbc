@@ -27,11 +27,19 @@ public class CMCardApply implements Serializable{
 	private CMCardType cardType;
 	/**补卡说明*/
 	private String comment;
+	private String cardTypeId;
 	//////////////////////////
 	//////getters&setters/////
 	//////////////////////////
+	
 	public String getId() {
 		return id;
+	}
+	public String getCardTypeId() {
+		return cardTypeId;
+	}
+	public void setCardTypeId(String cardTypeId) {
+		this.cardTypeId = cardTypeId;
 	}
 	public void setId(String id) {
 		this.id = id;

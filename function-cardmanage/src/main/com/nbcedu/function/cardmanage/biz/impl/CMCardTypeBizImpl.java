@@ -13,5 +13,9 @@ public class CMCardTypeBizImpl extends BaseBizImpl<CMCardType> implements CMCard
 		super.setDao(cardTypeDao);
 		this.cardTypeDao = cardTypeDao;
 	}
+
+	public CMCardTypeDao getCardTypeDao() {
+		return cardTypeDao;
+	}
 	
 }

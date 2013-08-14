@@ -6,4 +6,10 @@
 	<bean id="cmUserPriDao" class="com.nbcedu.function.cardmanage.dao.impl.CMUserPrivilegeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="cardApplyDao" class="com.nbcedu.function.cardmanage.dao.impl.CMCardApplyDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+		<bean id="cardTypeDao" class="com.nbcedu.function.cardmanage.dao.impl.CMCardTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>

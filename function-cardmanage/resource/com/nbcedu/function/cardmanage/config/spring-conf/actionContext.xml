@@ -5,6 +5,7 @@
 	
 	<bean id="cardApplyAction" class="com.nbcedu.function.cardmanage.action.CMCardApplyAction" scope="prototype" >
 		<property name="cardApplyBiz" ref="cardApplyBiz"/>
+		<property name="cardTypeBiz" ref="cardTypeBiz"/>
 	</bean>
 	<bean id="cardTypeAction" class="com.nbcedu.function.cardmanage.action.CMCardTypeAction" scope="prototype">
 		<property name="cardTypeBiz" ref="cardTypeBiz"/>
@@ -13,5 +14,6 @@
 	<bean id="cardPrivilegeAction" class="com.nbcedu.function.cardmanage.action.CMUserPrivilegeAction" scope="prototype">
 		<property name="priBiz" ref="cmPriBiz"/>
 	</bean>
-	
+	<bean id="cardTreeAction" class="com.nbcedu.function.cardmanage.action.CMCardTreeAction" scope="prototype">
+	</bean>
 </beans>

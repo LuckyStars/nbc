@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
 import com.nbcedu.function.cardmanage.constants.Constants;
 import com.nbcedu.function.cardmanage.core.pager.Pager;
@@ -21,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @SuppressWarnings("serial")
 public class BaseAction extends ActionSupport {
-
+	HttpServletResponse response = ServletActionContext.getResponse();     
 	public static Logger logger = Logger.getLogger(BaseAction.class);
 
 	/**
@@ -36,7 +40,9 @@ public class BaseAction extends ActionSupport {
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
 	}
-	
+	protected HttpServletRequest getRequest(){
+		return ServletActionContext.getRequest();
+	}
 	protected CMUser getCurUser(){
 		return (CMUser) getSession().get(Constants.SESSION_USER_KEY);
 	}
@@ -50,6 +56,7 @@ public class BaseAction extends ActionSupport {
 	protected String id;
 	
 	protected List<String> idList = new ArrayList<String>();
+	
 //	protected FunctionSupportUtil functionSupportUtil = SupportManager.getFunctionSupportUtil();
 	/**
 	 * 进行增删改操作后,以redirect方式重新打开action默认页的result名
