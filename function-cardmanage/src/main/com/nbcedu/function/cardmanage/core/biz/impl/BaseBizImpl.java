@@ -8,20 +8,20 @@ import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nbcedu.function.cardmanage.core.biz.BaseBiz;
-import com.nbcedu.function.cardmanage.core.dao.BaseDAO;
+import com.nbcedu.function.cardmanage.core.dao.BaseDao;
 
 @SuppressWarnings("unchecked")
 public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 	
-	private BaseDAO<T> dao;
+	private BaseDao<T> dao;
 
-	public void setDao(BaseDAO<T> dao) {
+	public void setDao(BaseDao<T> dao) {
 		this.dao = dao;
 	}
 
-	protected BaseDAO<T> getDao() {
+	protected BaseDao<T> getDao() {
 		return this.dao;
 	}
 

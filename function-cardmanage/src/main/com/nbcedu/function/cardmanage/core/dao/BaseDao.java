@@ -14,7 +14,7 @@ import com.nbcedu.function.cardmanage.core.pager.PagerModel;
 
 
 @SuppressWarnings("unchecked")
-public interface BaseDAO<T extends Serializable> {
+public interface BaseDao<T extends Serializable> {
 
 	public T load(Serializable id, boolean lock);
 

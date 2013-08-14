@@ -23,20 +23,14 @@ import com.nbcedu.function.cardmanage.core.action.BaseAction;
  * @author wanglei Create at:2013-8-8 上午09:33:55
  */
 public class CMCardHomeAction extends BaseAction{
+	private static final long serialVersionUID = -8971998934157047317L;
+
 	/**
 	 * 预加载信息并显示首页
 	 * v2
 	 * @return 跳转至首页
 	 */
 	public String home() {
-
-//		List<String> roleList = new ArrayList<String>();
-//		User user = (User) ActionContext.getContext().getSession().get("documentFlow_init");
-//
-//		for (Role role : user.getRoles()) {
-//			roleList.add(role.getName());
-//		}
-//		ActionContext.getContext().getSession().put("roleList", roleList);
 		return "home";
 	}
 

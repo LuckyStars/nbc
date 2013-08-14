@@ -25,13 +25,13 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import com.nbcedu.function.cardmanage.core.dao.BaseDAO;
+import com.nbcedu.function.cardmanage.core.dao.BaseDao;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
 
 
 
 @Repository
-public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDAO<T> {
+public abstract class BaseDaoImpl<T extends Serializable> extends HibernateDaoSupport implements BaseDao<T> {
 
 	/**
 	 * LOG4J日志

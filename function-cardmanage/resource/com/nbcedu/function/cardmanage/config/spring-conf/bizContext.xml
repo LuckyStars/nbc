@@ -3,17 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	
-<!--	<bean id="documentFlowBaseBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentFlowBaseBizImpl">-->
-<!--		<property name="hibernateDao" ref="hibernateDao" />-->
-<!--	</bean>-->
 	
 	<bean id="cardApplyBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMCardApplyBizImpl" scope="prototype" >
+		<property name="cardApplyDao" ref="cardApplyDao"></property>
 	</bean>
 	<bean id="cardTypeBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMCardTypeBizImpl" scope="prototype">
+		<property name="cardTypeDao" ref="cardTypeDao"></property>
 	</bean>
 	
 	<bean id="cmPriBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMUserPrivilegeBizImpl" scope="prototype">
 		<property name="cmUserPrivilegeDao" ref="cmUserPriDao"></property>
 	</bean>
-	
 </beans>

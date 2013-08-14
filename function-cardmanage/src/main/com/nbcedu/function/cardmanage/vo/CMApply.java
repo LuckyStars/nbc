@@ -1,15 +1,16 @@
-package com.nbcedu.function.cardmanage.model;
+package com.nbcedu.function.cardmanage.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 import com.nbcedu.function.cardmanage.constants.CardStatus;
+import com.nbcedu.function.cardmanage.model.CMCardType;
 
 /**
  * 补卡申请
  * @author xuechong
  */
 @SuppressWarnings("serial")
-public class CMCardApply implements Serializable{
+public class CMApply implements Serializable{
 	private String id;
 	/**补卡人姓名**/
 	private String cardUserName;
@@ -24,9 +25,10 @@ public class CMCardApply implements Serializable{
 	/**申请状态{@link CardStatus}*/
 	private Integer status;
 	/**补卡类型**/
-	private CMCardType cardType;
+	private CMCardType cardType = new CMCardType();
 	/**补卡说明*/
 	private String comment;
+	
 	private String cardTypeId;
 	//////////////////////////
 	//////getters&setters/////
