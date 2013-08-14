@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>新建报名事件</title>
-		<link href="${prc }/function/function-teachersignup/easyui/themes/metro/easyui.css" rel="stylesheet" type="text/css" />
+		<link href="${prc }/function/function-teachersignup/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="${prc }/function/function-teachersignup/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="${prc }/function/function-teachersignup/easyui/jquery.easyui.min.js"></script>
 		<script type="text/javascript" src="${prc}/function/function-teachersignup/datePicker/WdatePicker.js"></script>
@@ -26,10 +26,10 @@
 		window.onload = function() {
 			var settings = {
 				flash_url : "${prc}/function/function-teachersignup/swfupload/js/swfupload.swf",
-				upload_url: "${prc}/uploadDirectory.action?pid=${pid}",	
-				file_post_name: "file",   
-				file_size_limit : "1024 MB",
-				file_types : "${extensionNames}",
+				upload_url: "${prc }/teachersignup/add_act.action",	
+				file_post_name: "atta",   
+				file_size_limit : "10 MB",
+				file_types : "*.*",
 				file_types_description : "支持文件格式",
 				file_upload_limit : 1,
 				file_queue_limit : 0,
@@ -58,6 +58,16 @@
 			};
 			swfu = new SWFUpload(settings);
 		};
+
+		function upSuc(){
+			$.messager.alert('上传成功','上传成功!');
+			location.href = "";
+		}
+
+		function upSuc(){
+			$.messager.alert('上传失败','上传失败!');
+			location.href = "";
+		}
 		
 		function submitForm(){//提交表单
 			if($.trim($("#actName").val())==''){
@@ -92,12 +102,26 @@
 				$.messager.alert('报名简介','报名简介不能超过200个字!');
 				return false;
 			}
-			swfu.addPostParam("actName", encodeURI($("#actName").val()));
+			alert(swfu.getFile(0)==null);
+			if(swfu.getFile(0)==null){
+				var postForm = $("<form action='${prc}/teachersignup/add_act.action' method='post'></form>");
+				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.openDate' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.endDate' value='" + encodeURI($("input[name='act.endDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='subjectName' value='" + encodeURI($("input[name='subjectName']").val()) + "' />");
+				postForm.append("<input type='hidden' name='rewardName' value='" + encodeURI($("input[name='rewardName']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("input[name='act.comment']").val()) + "' />");
+				postForm.appendTo(document.body).submit();
+				
+				return false;
+			}
+			swfu.addPostParam("act.name", encodeURI($("#actName").val()));
 			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.openDate']").val()));
 			swfu.addPostParam("act.endDate", encodeURI($("input[name='act.endDate']").val()));
 			swfu.addPostParam("subjectName", encodeURI($("input[name='subjectName']").val()));
 			swfu.addPostParam("rewardName", encodeURI($("input[name='rewardName']").val()));
 			swfu.addPostParam("act.comment", encodeURI($("textarea[name='act.comment']").val()));
+			swfu.startUpload();
 			return false;
 		}
 		
@@ -110,7 +134,6 @@
 			<span class="back">返回上一页</span>
 		</h1>
 	    <div class="table_box fixed">
-	    	<form name="mainFrom" action="${prc }/teachersignup/add_act.action" onsubmit="return submitForm()" method="post" enctype="multipart/form-data" >
 			<p class="apply">
 				报名名称：
 				<span>
@@ -393,7 +416,7 @@
 	        <input type="hidden" name="subjectName"/>
 	       	<input type="hidden" name="rewardName"/>
 	       	
-	        <a href="#" onclick="submitForm()" class="return1" style="margin-left:170px;">确定</a>
+	        <a href="javascript:submitForm();" onclick="" class="return1" style="margin-left:170px;">确定</a>
 	       	<a href="#" class="return1">取消</a>
 	       	
 	       	</form>
