@@ -1,5 +1,7 @@
 package com.nbcedu.function.teachersignup.biz.impl;
 
+import java.util.List;
+
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.teachersignup.dao.TSActivityDao;
@@ -22,5 +24,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 			String[] rewards) {
 		// TODO Auto-generated method stub
 		
+	}
+	public List<TSActivity> findAll(){
+		
+		return actDao.getAll();
 	}
 }

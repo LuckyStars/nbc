@@ -11,7 +11,6 @@ import com.nbcedu.function.teachersignup.model.TSActivity;
  */
 @SuppressWarnings("serial")
 public class TSActivityAction extends BaseAction{
-
 	private TSActivityBiz actBiz;
 	
 	private File atta;
@@ -24,7 +23,10 @@ public class TSActivityAction extends BaseAction{
 		return RELOAD;
 	}
 	
-	
+	public String list(){
+		this.actBiz.findAll();
+		return LIST;
+	}
 	////////////////////////
 	////getters&setters/////
 	////////////////////////
