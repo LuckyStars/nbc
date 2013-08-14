@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.HashSet;
 
 import org.apache.commons.lang.xwork.StringUtils;
+import java.util.List;
 
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
@@ -65,4 +66,7 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		this.actDao.saveOrUpdate(act);
 	}
 	
+	public List<TSActivity> findAll(){
+		return actDao.getAll();
+	}
 }

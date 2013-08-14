@@ -21,7 +21,6 @@ import com.nbcedu.function.teachersignup.model.TSActivity;
  */
 @SuppressWarnings("serial")
 public class TSActivityAction extends BaseAction{
-
 	private TSActivityBiz actBiz;
 	
 	private File atta;
@@ -51,7 +50,7 @@ public class TSActivityAction extends BaseAction{
 		StringBuilder result = new StringBuilder(
 				ServletActionContext.getServletContext().
 				getRealPath("/function/function-teachersignup/upload"));
-		
+			
 		result.append(File.separator);
 		result.append(
 				new SimpleDateFormat("yyyyMM").format(new Date())
@@ -61,6 +60,13 @@ public class TSActivityAction extends BaseAction{
 		result.append(file.getName());
 		return result.toString();
 	}
+	
+	
+	public String list(){
+		this.actBiz.findAll();
+		return LIST;
+	}
+	
 	
 	////////////////////////
 	////getters&setters/////
