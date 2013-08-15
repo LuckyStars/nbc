@@ -27,7 +27,10 @@ public class TSActivityAction extends BaseAction{
 	private String attaFileName;
 	private String subjectName;
 	private String rewardName;
-	private TSActivity act; 
+	private TSActivity act;
+	
+	private Integer month;//search month
+	private Integer actStatu;//search status
 	                             
 	public String add() throws IOException{
 		if(atta!=null){
@@ -43,7 +46,7 @@ public class TSActivityAction extends BaseAction{
 		this.act.setStatus(ActStatus.EDITING.getId());
 		this.act.setCreateDate(new Date());
 		this.actBiz.addOrUpdate(act, sub, rew);
-		return RELOAD;
+		return "reloadAdmin";
 	}
 	
 	private String savePath(File file){
@@ -61,16 +64,34 @@ public class TSActivityAction extends BaseAction{
 		return result.toString();
 	}
 	
-	
-	public String list(){
-		this.actBiz.findAll();
-		return LIST;
-	}
-	
 	public String adminList(){
-		this.pm = this.actBiz.findAllByPage();
+		this.pm = this.actBiz.findByMonthStatus(month, actStatu);
 		return "adminList";
 	}
+	
+	public String remove(){
+		this.actBiz.removeById(this.id);
+		return this.adminList();
+	}
+	
+	public String manCancel(){
+		this.act = this.actBiz.findById(this.id);
+		if(act!=null&&act.getOpenDate().after(new Date())){
+			this.actBiz.modifyStatus(this.id,ActStatus.EDITING);
+		}
+		return this.adminList();
+	}
+	
+	public String pause(){
+		this.actBiz.modifyStatus(this.id, ActStatus.PAUSED);
+		return this.adminList();
+	}
+
+	public String commonList(){
+		this.pm = this.actBiz.findByMonthStatus(null, ActStatus.PUBLISHED.getId());
+		return "commonList";
+	}
+	
 	
 	////////////////////////
 	////getters&setters/////
@@ -107,6 +128,18 @@ public class TSActivityAction extends BaseAction{
 	}
 	public void setAttaFileName(String attaFileName) {
 		this.attaFileName = attaFileName;
+	}
+	public Integer getMonth() {
+		return month;
+	}
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+	public Integer getActStatu() {
+		return actStatu;
+	}
+	public void setActStatu(Integer actStatu) {
+		this.actStatu = actStatu;
 	}
 	
 }

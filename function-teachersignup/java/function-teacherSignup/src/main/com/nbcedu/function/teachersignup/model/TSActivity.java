@@ -9,6 +9,7 @@ import java.util.Set;
  * 报名事件
  * @author xuechong
  */
+@SuppressWarnings("serial")
 public class TSActivity implements Serializable{
 	private String id;
 	private String name;

@@ -9,6 +9,8 @@
 		</action>
 		<action name="*_act" class="tsActivityAction" method="{1}">
 			<result name="list">/function/function-teachersignup/pages/tssign/tssignIndex.jsp</result>
+			<result name="reloadAdmin" type="redirectAction">/teachersignup/adminList_act</result>
+			<result name="adminList">/function/function-teachersignup/pages/activity/admin_list.jsp</result>
 		</action>
 	</package>
 </struts>
