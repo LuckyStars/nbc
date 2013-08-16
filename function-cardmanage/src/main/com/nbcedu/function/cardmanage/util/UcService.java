@@ -129,12 +129,12 @@ public class UcService implements Serializable{
 		return gradeClasseList;
 	}
 	public static String findClassByID(String classID){
-//		Map<String , String> param = new HashMap<String , String>();
-//		param.put("classId", classID);
-//		NbcUcClass  nbcUcClass = client.queryClass(1,param);
-//		StringBuffer s = new StringBuffer();
-//		s.append(nbcUcClass.getGradeNum()).append("年级").append(nbcUcClass.getClassName());
-		return "sssss";//s.toString();
+		Map<String , String> param = new HashMap<String , String>();
+		param.put("classId", classID);
+		NbcUcClass  nbcUcClass = client.queryClass(1,param);
+		StringBuffer s = new StringBuffer();
+		s.append(nbcUcClass.getGradeNum()).append("年级").append(nbcUcClass.getClassName());
+		return s.toString();//s.toString();
 	}
 	public static List<ClassStudent> findAllClassStudent(String classID){
 		List<ClassStudent> classeStudentList = new ArrayList<ClassStudent>();

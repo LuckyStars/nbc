@@ -17,6 +17,7 @@
 			<result name="manageList">/function/function-cardManage/pages/applyManageList.jsp</result>
 			<result name="applyManager">/function/function-cardManage/pages/applyManager.jsp</result>
 			<result name="reload" type="redirectAction">list_apply</result>
+			<result name="toEdit" >/function/function-cardManage/pages/apply.jsp</result>
 		</action>
 		<action name="*_tree" class="cardTreeAction" method="{1}">
 		</action>

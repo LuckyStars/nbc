@@ -8,7 +8,9 @@ import com.nbcedu.function.cardmanage.constants.CardStatus;
 import com.nbcedu.function.cardmanage.core.action.BaseAction;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
 import com.nbcedu.function.cardmanage.core.util.Struts2Util;
+import com.nbcedu.function.cardmanage.model.CMCardApply;
 import com.nbcedu.function.cardmanage.model.CMCardType;
+import com.nbcedu.function.cardmanage.util.UcService;
 import com.nbcedu.function.cardmanage.vo.CMApply;
 
 
@@ -22,6 +24,7 @@ public class CMCardApplyAction extends BaseAction{
 	private CMCardApplyBiz cardApplyBiz;
 	private CMCardTypeBiz cardTypeBiz ;
 	private CMApply cmApply = new CMApply();
+	private CMCardApply app = new CMCardApply();
 	
 	public String toApply(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
@@ -30,29 +33,31 @@ public class CMCardApplyAction extends BaseAction{
 	}
 	
 	public String add(){
+		this.cmApply.setApplyUserUid(getCurUserUid());
 		this.cmApply.setStatus(CardStatus.APPLIED.getId());
-		this.getCardApplyBiz().add(cmApply);
+		this.cardApplyBiz.add(cmApply);
 		return RELOAD;
 	}
 	
 	public String save(){
+		this.cmApply.setApplyUserUid(getCurUserUid());
 		this.cmApply.setStatus(CardStatus.WAITING.getId());
+		this.cardApplyBiz.add(cmApply);
 		return RELOAD;
 	}
-	public String toUpdate(){
-		
-		
-		return "apply";
-	}
 	
-	public void update(){
-		
+	public String toUpdate(){
+		this.app = this.cardApplyBiz.findById(this.id);
+		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
+		this.getRequest().setAttribute("cardTypelist", cardTypelist);
+		this.getRequest().setAttribute("claName", UcService.findClassByID(app.getCardClassId()));
+		return "toEdit";
 	}
 	
 	public void updateStatus(){
 		try {
 			String status = Struts2Util.getRequest().getParameter("status");
-			this.getCardApplyBiz().modifyBySql("update t_cardmanage_cardapply set status=?",status);
+			this.cardApplyBiz.modifyBySql("update t_cardmanage_cardapply set status=?",status);
 			Struts2Util.renderText("success", "utf-8");
 		} catch (DBException e) {
 			Struts2Util.renderText("fales", "utf-8");
@@ -62,29 +67,26 @@ public class CMCardApplyAction extends BaseAction{
 	
 	public String delete(){
 		String id = Struts2Util.getRequest().getParameter("applyId");
-		this.getCardApplyBiz().removeById(id);
+		this.cardApplyBiz.removeById(id);
 		return RELOAD;
 	}
 	
 	public String list(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
-		setPm(this.getCardApplyBiz().findAllBy(cmApply));
+		setPm(this.cardApplyBiz.findAllBy(cmApply));
 		return LIST;
 	}
 	
 	public String manageList(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
-		setPm(this.getCardApplyBiz().findAllManageBy(cmApply));
+		setPm(this.cardApplyBiz.findAllManageBy(cmApply));
 		return "manageList";
 	}
 	////////////////////
 	/////getters&setters////
 	/////////////////////////
-	public CMCardApplyBiz getCardApplyBiz() {
-		return cardApplyBiz;
-	}
 	public void setCardApplyBiz(CMCardApplyBiz cardApplyBiz) {
 		this.cardApplyBiz = cardApplyBiz;
 	}
@@ -94,11 +96,15 @@ public class CMCardApplyAction extends BaseAction{
 	public void setCmApply(CMApply cmApply) {
 		this.cmApply = cmApply;
 	}
-	public CMCardTypeBiz getCardTypeBiz() {
-		return cardTypeBiz;
-	}
 	public void setCardTypeBiz(CMCardTypeBiz cardTypeBiz) {
 		this.cardTypeBiz = cardTypeBiz;
 	}
+	public CMCardApply getApp() {
+		return app;
+	}
+	public void setApp(CMCardApply app) {
+		this.app = app;
+	}
+	
 	
 }

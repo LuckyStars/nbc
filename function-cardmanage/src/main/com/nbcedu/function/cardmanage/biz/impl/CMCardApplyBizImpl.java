@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.springframework.beans.BeanUtils;
 
 import com.nbcedu.function.cardmanage.biz.CMCardApplyBiz;
@@ -27,15 +28,22 @@ public class CMCardApplyBizImpl extends BaseBizImpl<CMCardApply> implements CMCa
 	@Override
 	public boolean add(CMApply cmApply) {
 		CMCardApply app = new CMCardApply();
+		if(StringUtils.isNotBlank(cmApply.getId())){
+			app = this.findById(cmApply.getId());
+		}
 		BeanUtils.copyProperties(cmApply,app);
-		String applyUserName=UcService.findUserNameByUid(cmApply.getApplyUserUid());
-		cmApply.setApplyUserName(applyUserName);
+		String curUserName=UcService.findUserNameByUid(cmApply.getApplyUserUid());
+		if(StringUtils.isBlank(app.getCardUserName())){
+			app.setCardUserName(curUserName);
+		}
+		app.setApplyUserName(curUserName);
 		app.setCreateDate(new Date());
 		app.setStatus(CardStatus.WAITING.getId());
 		app.setCardClassId(app.getCardClassId().replaceAll("cc\\|", ""));
-		super.add(app);
+		super.addOrUpdate(app);
 		return true;
 	}
+	
 	@Override
 	public boolean updateApply(CMApply cmApply) {
 		CMCardApply c = new CMCardApply();
