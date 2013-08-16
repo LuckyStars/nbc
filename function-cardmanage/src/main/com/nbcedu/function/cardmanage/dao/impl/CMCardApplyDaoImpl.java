@@ -1,7 +1,5 @@
 package com.nbcedu.function.cardmanage.dao.impl;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +15,25 @@ public class CMCardApplyDaoImpl extends SimpleBaseDaoImpl<CMCardApply> implement
 	@Override
 	public PagerModel findAllBy(CMApply cmApply) {
 				List<Object> paramsList = new ArrayList<Object>();
-				
 				StringBuffer hqlBuffer = new StringBuffer();
 				hqlBuffer.append(" FROM CMCardApply c where 1=1 ");
-				if (!StringUtil.isEmpty(cmApply.getCardType().getId()) ) {
-					hqlBuffer.append(" and c.cardType.id = ? ");
-					paramsList.add(cmApply.getCardType().getId());
+				if (!StringUtil.isEmpty(cmApply.getCardTypeId()) ) {
+					hqlBuffer.append(" and c.cardTypeId = ? ");
+					paramsList.add(cmApply.getCardTypeId());
 				}
-				
+				if(!StringUtil.isEmpty(cmApply.getMonth())&&StringUtil.isNumeric(cmApply.getMonth())){
+					hqlBuffer.append(" and c.createDate between ? and ?");
+					paramsList.add(cmApply.getBeginDate());
+					paramsList.add(cmApply.getEndDate());
+				}
+				if (!StringUtil.isEmpty(cmApply.getCardUserName()) ) {
+					hqlBuffer.append(" and c.cardUserName like ? ");
+					paramsList.add("%"+cmApply.getCardUserName()+"%");
+				}
+				if (!StringUtil.isEmpty(cmApply.getApplyUserName()) ) {
+					hqlBuffer.append(" and c.cardUserName like ? ");
+					paramsList.add("%"+cmApply.getApplyUserName()+"%");
+				}
 				hqlBuffer.append(" ORDER BY c.createDate DESC");
 				
 				Object[] params = new Object[paramsList.size()];

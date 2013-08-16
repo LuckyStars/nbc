@@ -3,6 +3,8 @@ package com.nbcedu.function.cardmanage.vo;
 import java.io.Serializable;
 import java.util.Date;
 import com.nbcedu.function.cardmanage.constants.CardStatus;
+import com.nbcedu.function.cardmanage.core.util.DateUtil;
+import com.nbcedu.function.cardmanage.core.util.strings.StringUtil;
 import com.nbcedu.function.cardmanage.model.CMCardType;
 
 /**
@@ -16,6 +18,7 @@ public class CMApply implements Serializable{
 	private String cardUserName;
 	/**补卡学生班级**/
 	private String cardClassId;
+	private String cardClassName;
 	/**申请人姓名*/
 	private String applyUserName;
 	/***申请人uid*/
@@ -28,14 +31,27 @@ public class CMApply implements Serializable{
 	private CMCardType cardType = new CMCardType();
 	/**补卡说明*/
 	private String comment;
-	
+	/**补卡类型id**/
 	private String cardTypeId;
+	/**补卡类型申请日期**/
+	private String month;  
+	private Date beginDate;
+	private Date endDate;
+	/**状太**/
+	private  CardStatus cardStatus;
+	
 	//////////////////////////
 	//////getters&setters/////
 	//////////////////////////
 	
 	public String getId() {
 		return id;
+	}
+	public CardStatus getCardStatus() {
+		return cardStatus;
+	}
+	public void setCardStatus(CardStatus cardStatus) {
+		this.cardStatus = cardStatus;
 	}
 	public String getCardTypeId() {
 		return cardTypeId;
@@ -107,6 +123,43 @@ public class CMApply implements Serializable{
 	}
 	public void setCardType(CMCardType cardType) {
 		this.cardType = cardType;
+		
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+		if(!StringUtil.isEmpty(month)&&StringUtil.isNumeric(month)){
+			this.setEndDate(new Date());
+			this.setBeginDate(DateUtil.monthOffset(this.getEndDate(),-Integer.parseInt(month)));
+		
+		}
+	}
+	public Date getBeginDate() {
+		return beginDate;
+	}
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 	
+    public String getCardClassName() {
+		return cardClassName;
+	}
+	public void setCardClassName(String cardClassName) {
+		this.cardClassName = cardClassName;
+	}
+	public static void main(String[] args) {
+    	CMApply cm = new CMApply();
+    	for(CardStatus c:cm.getCardStatus().values()){
+    		System.out.println(c.getName());
+    	}
+    }
+    
 }

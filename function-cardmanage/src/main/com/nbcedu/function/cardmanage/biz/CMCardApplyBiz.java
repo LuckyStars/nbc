@@ -14,4 +14,6 @@ public interface CMCardApplyBiz extends BaseBiz<CMCardApply>{
 	 * @return
 	 */
 	public boolean add(CMApply cmApply);
+	boolean updateApply(CMApply cmApply);
+	PagerModel findAllManageBy(CMApply cmApply);
 }

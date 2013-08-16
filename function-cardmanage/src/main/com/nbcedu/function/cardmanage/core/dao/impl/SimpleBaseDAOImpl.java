@@ -181,6 +181,7 @@ public class SimpleBaseDaoImpl<T extends Serializable> extends BaseDaoImpl<T> {
 		pm.setDatas(datas);
 		pm.setTotal(total);
 		pm.setTotalPageNo(total % pagesize == 0 ? total / pagesize : total/pagesize+1);
+		pm.setPageSize(pagesize);
 		return pm;
 	}
 

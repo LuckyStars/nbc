@@ -4,6 +4,8 @@ package com.nbcedu.function.cardmanage.core.biz;
 import java.io.Serializable;
 import java.util.List;
 
+import com.nbcedu.function.cardmanage.core.exception.DBException;
+
 public interface BaseBiz<T extends Serializable> {
 	
 	public boolean getEquesName(Class<T> c,String name);
@@ -23,6 +25,8 @@ public interface BaseBiz<T extends Serializable> {
 	public void remove(T o) ;
 
 	public Object modify(T o) ;
+	
+	public void modifyBySql(String sql,Object ... params) throws DBException ;
 
 	public Object modifyMerge(T o) ;
 

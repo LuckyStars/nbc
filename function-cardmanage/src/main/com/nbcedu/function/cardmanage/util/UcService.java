@@ -10,7 +10,6 @@ import com.nbcedu.function.cardmanage.vo.ClassStudent;
 import com.nbcedu.function.cardmanage.vo.GradeClass;
 import com.nbcedu.integration.uc.client.facade.BaseClient;
 import com.nbcedu.integration.uc.client.vo.NbcUcClass;
-import com.nbcedu.integration.uc.client.vo.NbcUcPerson;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
 
 /**
@@ -94,7 +93,7 @@ public class UcService {
 	
 	
 	public static String findUserNameByUid(String uid){
-		return client.queryPerson(1, uid).getName();
+		return "ss";//client.queryPerson(1, uid).getName();
 	}
 	/**
 	 * 所有班级年级
@@ -126,6 +125,14 @@ public class UcService {
 			}
 		}
 		return gradeClasseList;
+	}
+	public static String findClassByID(String classID){
+//		Map<String , String> param = new HashMap<String , String>();
+//		param.put("classId", classID);
+//		NbcUcClass  nbcUcClass = client.queryClass(1,param);
+//		StringBuffer s = new StringBuffer();
+//		s.append(nbcUcClass.getGradeNum()).append("年级").append(nbcUcClass.getClassName());
+		return "sssss";//s.toString();
 	}
 	public static List<ClassStudent> findAllClassStudent(String classID){
 		List<ClassStudent> classeStudentList = new ArrayList<ClassStudent>();
