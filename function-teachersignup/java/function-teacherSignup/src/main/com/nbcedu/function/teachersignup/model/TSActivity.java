@@ -2,11 +2,14 @@ package com.nbcedu.function.teachersignup.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 报名事件
  * @author xuechong
  */
+@SuppressWarnings("serial")
 public class TSActivity implements Serializable{
 	private String id;
 	private String name;
@@ -24,6 +27,9 @@ public class TSActivity implements Serializable{
 	private Date createDate;
 	/***当前状态**/
 	private Integer status;
+	
+	private Set<TSReward> rewards = new HashSet<TSReward>();
+	private Set<TSSubject> subjects = new HashSet<TSSubject>();
 	/////////////////////////
 	////getters&setters////
 	///////////////////////
@@ -80,6 +86,18 @@ public class TSActivity implements Serializable{
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public Set<TSReward> getRewards() {
+		return rewards;
+	}
+	public void setRewards(Set<TSReward> rewards) {
+		this.rewards = rewards;
+	}
+	public Set<TSSubject> getSubjects() {
+		return subjects;
+	}
+	public void setSubjects(Set<TSSubject> subjects) {
+		this.subjects = subjects;
 	}
 	
 }

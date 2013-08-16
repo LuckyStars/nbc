@@ -1,40 +1,97 @@
 package com.nbcedu.function.teachersignup.action;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.struts2.ServletActionContext;
 
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
+import com.nbcedu.function.teachersignup.constants.ActStatus;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
 import com.nbcedu.function.teachersignup.model.TSActivity;
+
 /**
- * 报名事件ACTIONaaaaaa
+ * 报名事件ACTION
  * @author xuechong
  */
 @SuppressWarnings("serial")
 public class TSActivityAction extends BaseAction{
-
 	private TSActivityBiz actBiz;
 	
 	private File atta;
+	private String attaFileName;
 	private String subjectName;
 	private String rewardName;
-	private TSActivity act; 
+	private TSActivity act;
+	
+	private Integer month;//search month
+	private Integer actStatu;//search status
 	                             
-	public String add(){
-		
-		
+	public String add() throws IOException{
+		if(atta!=null){
+			String savePath = this.savePath(atta);
+			FileUtils.copyFile(atta, new File(savePath));
+			this.act.setFileName(this.attaFileName);
+			this.act.setFilePath(savePath);
+		}
+		this.act.setComment(URLDecoder.decode(this.act.getComment(), "utf-8"));
+		this.act.setName(URLDecoder.decode(this.act.getName(), "utf-8"));
 		String[] sub = StringUtils.isNotBlank(subjectName)?subjectName.split(","):null;
 		String[] rew = StringUtils.isNotBlank(rewardName)?rewardName.split(","):null;
+		this.act.setStatus(ActStatus.EDITING.getId());
+		this.act.setCreateDate(new Date());
 		this.actBiz.addOrUpdate(act, sub, rew);
-		return RELOAD;
+		return "reloadAdmin";
 	}
 	
-	private String savePath(){
+	private String savePath(File file){
+		StringBuilder result = new StringBuilder(
+				ServletActionContext.getServletContext().
+				getRealPath("/function/function-teachersignup/upload"));
+			
+		result.append(File.separator);
+		result.append(
+				new SimpleDateFormat("yyyyMM").format(new Date())
+		);
 		
-		
-		return "";
+		result.append(new Date().getTime());
+		result.append(file.getName());
+		return result.toString();
 	}
+	
+	public String adminList(){
+		this.pm = this.actBiz.findByMonthStatus(month, actStatu);
+		return "adminList";
+	}
+	
+	public String remove(){
+		this.actBiz.removeById(this.id);
+		return this.adminList();
+	}
+	
+	public String manCancel(){
+		this.act = this.actBiz.findById(this.id);
+		if(act!=null&&act.getOpenDate().after(new Date())){
+			this.actBiz.modifyStatus(this.id,ActStatus.EDITING);
+		}
+		return this.adminList();
+	}
+	
+	public String pause(){
+		this.actBiz.modifyStatus(this.id, ActStatus.PAUSED);
+		return this.adminList();
+	}
+
+	public String commonList(){
+		this.pm = this.actBiz.findByMonthStatus(null, ActStatus.PUBLISHED.getId());
+		return "commonList";
+	}
+	
 	
 	////////////////////////
 	////getters&setters/////
@@ -65,6 +122,24 @@ public class TSActivityAction extends BaseAction{
 	}
 	public void setAtta(File atta) {
 		this.atta = atta;
+	}
+	public String getAttaFileName() {
+		return attaFileName;
+	}
+	public void setAttaFileName(String attaFileName) {
+		this.attaFileName = attaFileName;
+	}
+	public Integer getMonth() {
+		return month;
+	}
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+	public Integer getActStatu() {
+		return actStatu;
+	}
+	public void setActStatu(Integer actStatu) {
+		this.actStatu = actStatu;
 	}
 	
 }

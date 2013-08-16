@@ -6,4 +6,5 @@ import com.nbcedu.function.teachersignup.dao.TSActivityDao;
 
 public class TSActivityDaoImpl extends SimpleBaseDAOImpl<TSActivity> implements TSActivityDao{
 
+
 }

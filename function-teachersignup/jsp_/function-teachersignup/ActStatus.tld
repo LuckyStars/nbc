@@ -5,10 +5,10 @@
  <tlib-version>1.0</tlib-version>
  <jsp-version>1.2</jsp-version>
  <short-name>as</short-name>
- <uri>/cardStatus</uri>
+ <uri>/showStatus</uri>
  <tag>
  	<name>showStatus</name>
- 	<tag-class>com.nbcedu.function.cardmanage.util.StatusTag</tag-class>
+ 	<tag-class>com.nbcedu.function.teachersignup.util.ActStatustag</tag-class>
  	<body-content>empty</body-content>
     <attribute>
         <name>statusId</name>

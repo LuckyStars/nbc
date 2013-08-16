@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.nbcedu.function.teachersignup.model.TSActivity"
 		table="t_teachersignup_activity">
@@ -8,6 +7,9 @@
 			<column name="id" length="32" />
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
 		</id>
+		<property name="name" type="java.lang.String">
+			<column name="name" length="30" />
+		</property>
 		<property name="filePath" type="java.lang.String">
 			<column name="file_path" length="512" />
 		</property>
@@ -29,5 +31,13 @@
 		<property name="status" type="java.lang.Integer">
 			<column name="status" />
 		</property>
+		<set name="rewards" cascade="all" inverse="false">  
+        	<key column="activity_id"></key>   
+        	<one-to-many class="com.nbcedu.function.teachersignup.model.TSReward"/>   
+        </set>
+        <set name="subjects" cascade="all" inverse="false">  
+        	<key column="activity_id"></key>   
+        	<one-to-many class="com.nbcedu.function.teachersignup.model.TSSubject"/>   
+        </set>
 	</class>
 </hibernate-mapping>
