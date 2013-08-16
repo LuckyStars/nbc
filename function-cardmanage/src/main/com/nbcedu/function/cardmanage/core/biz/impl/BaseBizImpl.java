@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.nbcedu.function.cardmanage.core.biz.BaseBiz;
 import com.nbcedu.function.cardmanage.core.dao.BaseDao;
+import com.nbcedu.function.cardmanage.core.exception.DBException;
 
 @SuppressWarnings("unchecked")
 public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
@@ -115,6 +116,11 @@ public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
 	
 	public String getIdName(){
 		return dao.getIdName();
+	}
+
+	@Override
+	public void modifyBySql(String sql, Object... params) throws DBException {
+		dao.updateBySql(sql, params);
 	}
 
 
