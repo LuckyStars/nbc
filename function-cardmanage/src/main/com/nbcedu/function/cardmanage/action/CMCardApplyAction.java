@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.nbcedu.function.cardmanage.biz.CMCardApplyBiz;
 import com.nbcedu.function.cardmanage.biz.CMCardTypeBiz;
+import com.nbcedu.function.cardmanage.constants.CardStatus;
 import com.nbcedu.function.cardmanage.core.action.BaseAction;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
 import com.nbcedu.function.cardmanage.core.util.Struts2Util;
@@ -17,17 +18,25 @@ import com.nbcedu.function.cardmanage.vo.CMApply;
  */
 @SuppressWarnings("serial")
 public class CMCardApplyAction extends BaseAction{
+	
 	private CMCardApplyBiz cardApplyBiz;
 	private CMCardTypeBiz cardTypeBiz ;
 	private CMApply cmApply = new CMApply();
+	
 	public String toApply(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
 		return "apply";
 	}
-	public String apply(){
-		cmApply.setApplyUserUid("252b6864cd3411e0a92500e04c16ddaa");//getCurUserUid());
+	
+	public String add(){
+		this.cmApply.setStatus(CardStatus.APPLIED.getId());
 		this.getCardApplyBiz().add(cmApply);
+		return RELOAD;
+	}
+	
+	public String save(){
+		this.cmApply.setStatus(CardStatus.WAITING.getId());
 		return RELOAD;
 	}
 	public String toUpdate(){
@@ -35,9 +44,11 @@ public class CMCardApplyAction extends BaseAction{
 		
 		return "apply";
 	}
+	
 	public void update(){
 		
 	}
+	
 	public void updateStatus(){
 		try {
 			String status = Struts2Util.getRequest().getParameter("status");
@@ -68,7 +79,9 @@ public class CMCardApplyAction extends BaseAction{
 		setPm(this.getCardApplyBiz().findAllManageBy(cmApply));
 		return "manageList";
 	}
-	
+	////////////////////
+	/////getters&setters////
+	/////////////////////////
 	public CMCardApplyBiz getCardApplyBiz() {
 		return cardApplyBiz;
 	}

@@ -7,11 +7,15 @@ import com.nbcedu.function.cardmanage.util.StatusEnum;
  * @author xuechong
  */
 public enum CardStatus implements StatusEnum{
-	
+	/**待申请*/
 	WAITING(0x0,"待申请"),
+	/**已申请*/
 	APPLIED(0x1,"已申请"),
+	/**办理中**/
 	PROGRESSING(0x2,"办理中"),
+	/**未领取**/
 	UNCOLLECTED(0x3,"未领取"),
+	/**已领取**/
 	RECEIVED(0x4,"已领取");
 	
 	private CardStatus(int id,String name){
