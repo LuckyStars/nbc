@@ -1,5 +1,6 @@
 package com.nbcedu.function.cardmanage.util;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,7 +17,8 @@ import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
  * 用户中心的查询
  * @author xuechong
  */
-public class UcService {
+@SuppressWarnings("serial")
+public class UcService implements Serializable{
 	private static final BaseClient client = new BaseClient();
 
 

@@ -48,23 +48,27 @@ public class CMCardApplyAction extends BaseAction{
 			e.printStackTrace();
 		}
 	}
+	
 	public String delete(){
 		String id = Struts2Util.getRequest().getParameter("applyId");
 		this.getCardApplyBiz().removeById(id);
 		return RELOAD;
 	}
+	
 	public String list(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
 		setPm(this.getCardApplyBiz().findAllBy(cmApply));
 		return LIST;
 	}
+	
 	public String manageList(){
 		List<CMCardType> cardTypelist = cardTypeBiz.findAll();
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
 		setPm(this.getCardApplyBiz().findAllManageBy(cmApply));
 		return "manageList";
 	}
+	
 	public CMCardApplyBiz getCardApplyBiz() {
 		return cardApplyBiz;
 	}
