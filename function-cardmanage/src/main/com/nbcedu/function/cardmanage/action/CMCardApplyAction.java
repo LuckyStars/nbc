@@ -8,6 +8,7 @@ import com.nbcedu.function.cardmanage.constants.CardStatus;
 import com.nbcedu.function.cardmanage.core.action.BaseAction;
 import com.nbcedu.function.cardmanage.core.exception.DBException;
 import com.nbcedu.function.cardmanage.core.util.Struts2Util;
+import com.nbcedu.function.cardmanage.core.util.exl.ExlAnnotationUtil;
 import com.nbcedu.function.cardmanage.model.CMCardApply;
 import com.nbcedu.function.cardmanage.model.CMCardType;
 import com.nbcedu.function.cardmanage.util.UcService;
@@ -83,6 +84,11 @@ public class CMCardApplyAction extends BaseAction{
 		this.getRequest().setAttribute("cardTypelist", cardTypelist);
 		setPm(this.cardApplyBiz.findAllManageBy(cmApply));
 		return "manageList";
+	}
+	
+	public void exportExl(){
+		List<CMApply> exlData = this.cardApplyBiz.findAllManageBy(this.cmApply).getDatas();
+		ExlAnnotationUtil.export("",exlData);
 	}
 	////////////////////
 	/////getters&setters////

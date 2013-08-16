@@ -2,8 +2,12 @@ package com.nbcedu.function.cardmanage.vo;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.ibm.icu.text.SimpleDateFormat;
 import com.nbcedu.function.cardmanage.constants.CardStatus;
 import com.nbcedu.function.cardmanage.core.util.DateUtil;
+import com.nbcedu.function.cardmanage.core.util.exl.annotations.ExlData;
+import com.nbcedu.function.cardmanage.core.util.exl.annotations.ExlModel;
 import com.nbcedu.function.cardmanage.core.util.strings.StringUtil;
 import com.nbcedu.function.cardmanage.model.CMCardType;
 
@@ -12,19 +16,24 @@ import com.nbcedu.function.cardmanage.model.CMCardType;
  * @author xuechong
  */
 @SuppressWarnings("serial")
+@ExlModel
 public class CMApply implements Serializable{
 	private String id;
 	/**补卡人姓名**/
+	@ExlData(sortId=1,title="姓名")
 	private String cardUserName;
 	/**补卡学生班级**/
 	private String cardClassId;
+	@ExlData(sortId=2,title="班级")
 	private String cardClassName;
 	/**申请人姓名*/
+	@ExlData(sortId=3,title="申请人")
 	private String applyUserName;
 	/***申请人uid*/
 	private String applyUserUid;
 	/**申请时间*/
 	private Date createDate;
+	private String createDateStr;
 	/**申请状态{@link CardStatus}*/
 	private Integer status;
 	/**补卡类型**/
@@ -40,10 +49,14 @@ public class CMApply implements Serializable{
 	/**状太**/
 	private  CardStatus cardStatus;
 	
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	//////////////////////////
 	//////getters&setters/////
 	//////////////////////////
-	
+	@ExlData(sortId=4,title="申请时间")
+	public String getCreateDateStr(){
+		return sdf.format(this.createDate);
+	}
 	public String getId() {
 		return id;
 	}
@@ -155,6 +168,7 @@ public class CMApply implements Serializable{
 	public void setCardClassName(String cardClassName) {
 		this.cardClassName = cardClassName;
 	}
+	
 	public static void main(String[] args) {
     	CMApply cm = new CMApply();
     	for(CardStatus c:cm.getCardStatus().values()){
