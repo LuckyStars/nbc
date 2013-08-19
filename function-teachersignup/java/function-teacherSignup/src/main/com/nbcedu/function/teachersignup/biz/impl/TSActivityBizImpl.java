@@ -25,6 +25,7 @@ import com.nbcedu.function.teachersignup.dao.TSActivityDao;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
 import com.nbcedu.function.teachersignup.model.TSSubject;
+import com.nbcedu.function.teachersignup.util.Utils;
 
 
 public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActivityBiz{
@@ -90,10 +91,11 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		Criteria cri = this.actDao.createCriteria();
 		
 		if(month!=null && month >0){
+			Date beforeDate = new Date(
+					new Date().getTime() - 1000L*60L*60L*24L*30L*month.longValue()
+			);
 			cri.add(
-				Restrictions.lt("createDate", new Date(
-					new Date().getTime() - 1000L*60L*60L*24L*month.longValue()
-				))		
+				Restrictions.gt("createDate", beforeDate)		
 			);
 		}
 		
@@ -107,6 +109,13 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	
 	@Override
 	public void modifyStatus(String id, ActStatus status) {
-		this.actDao.createQuery("UPDATE TSActivity a set a.status=? WHERE a.id=?", status.getId(),id).executeUpdate();
+		this.actDao.createQuery("UPDATE TSActivity a SET a.status=? WHERE a.id=?", status.getId(),id).executeUpdate();
 	}
+	
+	@Override
+	public void modifyFinActs() {
+		this.actDao.createQuery("UPDATE TSActivity a SET a.status = ? WHERE a.endDate < ?",
+					ActStatus.FINISHED.getId(),new Date() ).executeUpdate();
+	}
+	
 }

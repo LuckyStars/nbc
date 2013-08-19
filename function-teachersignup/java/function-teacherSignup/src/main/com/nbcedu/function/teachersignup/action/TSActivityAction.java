@@ -82,16 +82,27 @@ public class TSActivityAction extends BaseAction{
 		return this.adminList();
 	}
 	
+	/**
+	 * 发布
+	 * @return
+	 * @author xuechong
+	 */
+	public String pub(){
+		this.act = this.actBiz.findById(this.id);
+		if(act!=null){
+			this.actBiz.modifyStatus(this.id, ActStatus.PUBLISHED);
+		}
+		return this.adminList();
+	}
+	
 	public String pause(){
 		this.actBiz.modifyStatus(this.id, ActStatus.PAUSED);
 		return this.adminList();
 	}
-
 	public String commonList(){
 		this.pm = this.actBiz.findByMonthStatus(null, ActStatus.PUBLISHED.getId());
 		return "commonList";
 	}
-	
 	
 	////////////////////////
 	////getters&setters/////
@@ -129,17 +140,17 @@ public class TSActivityAction extends BaseAction{
 	public void setAttaFileName(String attaFileName) {
 		this.attaFileName = attaFileName;
 	}
-	public Integer getMonth() {
-		return month;
-	}
-	public void setMonth(Integer month) {
-		this.month = month;
-	}
 	public Integer getActStatu() {
 		return actStatu;
 	}
 	public void setActStatu(Integer actStatu) {
 		this.actStatu = actStatu;
+	}
+	public Integer getMonth() {
+		return month;
+	}
+	public void setMonth(Integer month) {
+		this.month = month;
 	}
 	
 }

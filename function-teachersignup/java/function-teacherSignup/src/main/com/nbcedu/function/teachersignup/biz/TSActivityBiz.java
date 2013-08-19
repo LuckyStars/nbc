@@ -20,4 +20,6 @@ public interface TSActivityBiz extends BaseBiz<TSActivity>{
 	public PagerModel findByMonthStatus(Integer month,Integer Status);
 	
 	public void modifyStatus(String id,ActStatus status);
+	
+	public void modifyFinActs();
 }
