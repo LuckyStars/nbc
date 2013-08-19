@@ -22,4 +22,6 @@ public interface TSActivityBiz extends BaseBiz<TSActivity>{
 	public void modifyStatus(String id,ActStatus status);
 	
 	public void modifyFinActs();
+	
+	public void removeActById(String id);
 }

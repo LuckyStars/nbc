@@ -21,6 +21,7 @@ import com.nbcedu.function.teachersignup.model.TSActivity;
  */
 @SuppressWarnings("serial")
 public class TSActivityAction extends BaseAction{
+	
 	private TSActivityBiz actBiz;
 	
 	private File atta;
@@ -31,7 +32,13 @@ public class TSActivityAction extends BaseAction{
 	
 	private Integer month;//search month
 	private Integer actStatu;//search status
-	                             
+	
+	/**
+	 * 新增
+	 * @return
+	 * @throws IOException
+	 * @author xuechong
+	 */
 	public String add() throws IOException{
 		if(atta!=null){
 			String savePath = this.savePath(atta);
@@ -39,6 +46,7 @@ public class TSActivityAction extends BaseAction{
 			this.act.setFileName(this.attaFileName);
 			this.act.setFilePath(savePath);
 		}
+		
 		this.act.setComment(URLDecoder.decode(this.act.getComment(), "utf-8"));
 		this.act.setName(URLDecoder.decode(this.act.getName(), "utf-8"));
 		String[] sub = StringUtils.isNotBlank(subjectName)?subjectName.split(","):null;
@@ -46,7 +54,7 @@ public class TSActivityAction extends BaseAction{
 		this.act.setStatus(ActStatus.EDITING.getId());
 		this.act.setCreateDate(new Date());
 		this.actBiz.addOrUpdate(act, sub, rew);
-		return "reloadAdmin";
+		return RELOAD_ADMIN;
 	}
 	
 	private String savePath(File file){
@@ -64,22 +72,37 @@ public class TSActivityAction extends BaseAction{
 		return result.toString();
 	}
 	
+	/**
+	 * 鹳狸猿列表
+	 * @return
+	 * @author xuechong
+	 */
 	public String adminList(){
 		this.pm = this.actBiz.findByMonthStatus(month, actStatu);
 		return "adminList";
 	}
 	
+	/**
+	 * (鹳狸猿)删除
+	 * @return
+	 * @author xuechong
+	 */
 	public String remove(){
 		this.actBiz.removeById(this.id);
 		return this.adminList();
 	}
 	
+	/**
+	 * 手动取消
+	 * @return
+	 * @author xuechong
+	 */
 	public String manCancel(){
 		this.act = this.actBiz.findById(this.id);
 		if(act!=null&&act.getOpenDate().after(new Date())){
 			this.actBiz.modifyStatus(this.id,ActStatus.EDITING);
 		}
-		return this.adminList();
+		return RELOAD_ADMIN;
 	}
 	
 	/**
@@ -92,18 +115,34 @@ public class TSActivityAction extends BaseAction{
 		if(act!=null){
 			this.actBiz.modifyStatus(this.id, ActStatus.PUBLISHED);
 		}
-		return this.adminList();
+		return RELOAD_ADMIN;
 	}
 	
+	/**
+	 * 暂停发布
+	 * @return
+	 * @author xuechong
+	 */
 	public String pause(){
 		this.actBiz.modifyStatus(this.id, ActStatus.PAUSED);
-		return this.adminList();
+		return RELOAD_ADMIN;
 	}
+	/**
+	 * 普通列表
+	 * @return
+	 * @author xuechong
+	 */
 	public String commonList(){
 		this.pm = this.actBiz.findByMonthStatus(null, ActStatus.PUBLISHED.getId());
 		return "commonList";
 	}
 	
+	public String del(){
+		this.actBiz.removeById(this.id);
+		return RELOAD_ADMIN;
+	}
+	
+	private static final String RELOAD_ADMIN = "reloadAdmin";
 	////////////////////////
 	////getters&setters/////
 	////////////////////////

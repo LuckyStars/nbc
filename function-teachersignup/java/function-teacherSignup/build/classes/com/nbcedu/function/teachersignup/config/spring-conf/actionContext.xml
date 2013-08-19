@@ -9,6 +9,10 @@
 		<property name="userPrivilegeBiz" ref="tsUserPriBiz"></property>
 	</bean>
 	
+	<bean id="tsEndPubInterceptor" class="com.nbcedu.function.teachersignup.interceptor.EndPubInterceptor">
+		<property name="actBiz" ref="tsActBiz"></property>
+	</bean>
+	
 	<bean id="tsUserPriAction" class="com.nbcedu.function.teachersignup.action.TSUserPrivilegeAction" scope="prototype">
 		<property name="priBiz" ref="tsUserPriBiz"></property>
 	</bean>

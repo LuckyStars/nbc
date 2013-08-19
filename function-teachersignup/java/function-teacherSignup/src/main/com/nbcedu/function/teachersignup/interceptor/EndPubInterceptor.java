@@ -4,6 +4,7 @@ import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
+@SuppressWarnings("serial")
 public class EndPubInterceptor extends MethodFilterInterceptor{
 
 	private TSActivityBiz actBiz;
