@@ -21,4 +21,8 @@
 		<property name="actBiz" ref="tsActBiz"></property>
 	</bean>
 	
+	<bean id="tsSignAction" class="com.nbcedu.function.teachersignup.action.TSSignAction">
+		<property name="signBiz" ref="tsSignBiz"></property>
+	</bean>
+	
 </beans>

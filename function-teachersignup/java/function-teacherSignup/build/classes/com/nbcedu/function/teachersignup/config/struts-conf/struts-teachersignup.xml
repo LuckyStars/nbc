@@ -35,6 +35,9 @@
 			<result name="adminList">/function/function-teachersignup/pages/activity/admin_list.jsp</result>
 		</action>
 		
+		<action name="*_sign" class="tsSignAction" method="{1}">
+			<result name="adminList">/function/function-teachersignup/pages/sign/admin_list.jsp</result>
+		</action>
 		
 	</package>
 </struts>
