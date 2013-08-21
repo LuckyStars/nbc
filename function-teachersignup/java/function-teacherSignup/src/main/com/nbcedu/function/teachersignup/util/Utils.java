@@ -6,7 +6,7 @@ import com.ibm.icu.text.SimpleDateFormat;
 
 public class Utils {
 	public static final class Dates{
-		private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+		private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		public static String fullDateStr(Date date){
 			return sdf.format(date);

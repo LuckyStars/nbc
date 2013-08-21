@@ -50,25 +50,25 @@ public class TSActivityVO {
 					StringBuilder result = new StringBuilder();
 					Date now = new Date();
 					Date deadLine = openDate.after(now)?openDate:endDate;
-					long diff = Math.abs(deadLine.getTime() - now.getTime());
-					
+					long diff = Math.abs(now.getTime() - deadLine.getTime());
+					long dayDiff = diff/day;
 					result.append(
-							diff/day	
+							dayDiff==0L?"00":dayDiff>9L?dayDiff:"0" + dayDiff
 					).append("日");
 					
 					long hourDiff = (diff%day)/hour;
 					result.append(
-							hourDiff>9?hourDiff:"0"+hourDiff
+							hourDiff>9L?hourDiff:"0"+hourDiff
 					).append("时");
 					
 					long minDiff = (diff%hour)/min;
 					result.append(
-							minDiff>9?minDiff:"0"+minDiff
+							minDiff>9L?minDiff:"0"+minDiff
 					).append("分");
 					
 					long secDiff = (diff%min)/sec;
 					result.append(
-							secDiff>9?secDiff:"0"+secDiff
+							secDiff>9L?secDiff:"0"+secDiff
 					).append("秒");
 					
 					return result.toString();

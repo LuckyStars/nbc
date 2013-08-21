@@ -233,16 +233,16 @@ public class TSActivityAction extends BaseAction{
 	public void setMonth(Integer month) {
 		this.month = month;
 	}
-	public List<TSActivity> getOpenList() {
+	public List<TSActivityVO> getOpenList() {
 		return openList;
 	}
-	public void setOpenList(List<TSActivity> openList) {
+	public void setOpenList(List<TSActivityVO> openList) {
 		this.openList = openList;
 	}
-	public List<TSActivity> getWaitList() {
+	public List<TSActivityVO> getWaitList() {
 		return waitList;
 	}
-	public void setWaitList(List<TSActivity> waitList) {
+	public void setWaitList(List<TSActivityVO> waitList) {
 		this.waitList = waitList;
 	}
 }
