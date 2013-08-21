@@ -147,4 +147,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		
 		this.removeById(id);
 	}
+	
+	@Override
+	public List<TSActivity> findByStatus(ActStatus status) {
+		return this.actDao.findBy("status", status.getId());
+	}
 }

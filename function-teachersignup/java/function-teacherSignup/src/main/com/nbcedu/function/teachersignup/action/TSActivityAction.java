@@ -1,10 +1,14 @@
 package com.nbcedu.function.teachersignup.action;
 
+import static org.springframework.util.CollectionUtils.isEmpty;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.xwork.StringUtils;
@@ -14,6 +18,9 @@ import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.constants.ActStatus;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
 import com.nbcedu.function.teachersignup.model.TSActivity;
+import com.nbcedu.function.teachersignup.vo.TSActivityVO;
+
+
 
 /**
  * 报名事件ACTION
@@ -32,7 +39,11 @@ public class TSActivityAction extends BaseAction{
 	
 	private Integer month;//search month
 	private Integer actStatu;//search status
-	
+
+	/***普通教师活动列表 已开放*/
+	List<TSActivityVO> openList = new LinkedList<TSActivityVO>();
+	/***普通教师活动列表 未开放*/
+	List<TSActivityVO> waitList = new LinkedList<TSActivityVO>();
 	/**
 	 * 新增
 	 * @return
@@ -127,6 +138,7 @@ public class TSActivityAction extends BaseAction{
 		this.actBiz.modifyStatus(this.id, ActStatus.PAUSED);
 		return RELOAD_ADMIN;
 	}
+	
 	/**
 	 * 普通列表
 	 * @return
@@ -137,9 +149,39 @@ public class TSActivityAction extends BaseAction{
 		return "commonList";
 	}
 	
+	/**
+	 * 删除
+	 * @return
+	 * @author xuechong
+	 */
 	public String del(){
 		this.actBiz.removeById(this.id);
 		return RELOAD_ADMIN;
+	}
+	
+	/**
+	 * 显示所有正在进行的
+	 * @return
+	 * @author xuechong
+	 */
+	public String comListPubed(){
+		List<TSActivity> actList = this.actBiz.findByStatus(ActStatus.PUBLISHED);
+		if (!isEmpty(actList)) {
+			List<TSActivity> opList = new LinkedList<TSActivity>();
+			List<TSActivity> wtList = new LinkedList<TSActivity>();
+			Date now = new Date();
+			for (TSActivity act : actList) {
+				if (act.getOpenDate().before(now)) {
+					opList.add(act);
+				} else {
+					wtList.add(act);
+				}
+			}
+			this.waitList = TSActivityVO.Factory.build(wtList);
+			this.openList = TSActivityVO.Factory.build(opList);
+		}
+		
+		return "comListPub";
 	}
 	
 	private static final String RELOAD_ADMIN = "reloadAdmin";
@@ -191,5 +233,16 @@ public class TSActivityAction extends BaseAction{
 	public void setMonth(Integer month) {
 		this.month = month;
 	}
-	
+	public List<TSActivity> getOpenList() {
+		return openList;
+	}
+	public void setOpenList(List<TSActivity> openList) {
+		this.openList = openList;
+	}
+	public List<TSActivity> getWaitList() {
+		return waitList;
+	}
+	public void setWaitList(List<TSActivity> waitList) {
+		this.waitList = waitList;
+	}
 }
