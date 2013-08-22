@@ -29,8 +29,8 @@ public class TSSignAction extends BaseAction{
 	private String rewId;
 	private TSActivitiSignVo asvo;
 	
-	private Set<TSReward> rewSet = new HashSet<TSReward>();
-	private Set<TSSubject> subSet = new HashSet<TSSubject>();
+	private Set<TSReward> rewdSet = new HashSet<TSReward>();
+	private Set<TSSubject> subjSet = new HashSet<TSSubject>();
 	
 	public String addSign(){
 		this.signBiz.addNewSign(this.getCurUser(),new String[]{this.subId});
@@ -42,6 +42,9 @@ public class TSSignAction extends BaseAction{
 		return "reloadCom";
 	}
 	public String adminList(){
+		TSActivity act = this.actBiz.findById(actId);
+		this.rewdSet = act.getRewards();
+		this.subjSet = act.getSubjects();
 		this.pm = this.signBiz.pageByAct(actId, subId, rewId, userName);
 		return "adminList";
 	}
@@ -94,18 +97,6 @@ public class TSSignAction extends BaseAction{
 	public void setRewId(String rewId) {
 		this.rewId = rewId;
 	}
-	public Set<TSReward> getRewSet() {
-		return rewSet;
-	}
-	public void setRewSet(Set<TSReward> rewSet) {
-		this.rewSet = rewSet;
-	}
-	public Set<TSSubject> getSubSet() {
-		return subSet;
-	}
-	public void setSubSet(Set<TSSubject> subSet) {
-		this.subSet = subSet;
-	}
 	public void setActBiz(TSActivityBiz actBiz) {
 		this.actBiz = actBiz;
 	}
@@ -117,6 +108,18 @@ public class TSSignAction extends BaseAction{
 	}
 	public void setAsvo(TSActivitiSignVo asvo) {
 		this.asvo = asvo;
+	}
+	public Set<TSReward> getRewdSet() {
+		return rewdSet;
+	}
+	public void setRewdSet(Set<TSReward> rewdSet) {
+		this.rewdSet = rewdSet;
+	}
+	public Set<TSSubject> getSubjSet() {
+		return subjSet;
+	}
+	public void setSubjSet(Set<TSSubject> subjSet) {
+		this.subjSet = subjSet;
 	}
 	
 }

@@ -55,15 +55,12 @@ public class TSSignBizImpl extends BaseBizImpl<TSSign> implements TSSignBiz{
 		ArrayList<Criterion> cris = new ArrayList<Criterion>(4);
 
 		if(act!=null){
-			Set subSet = act.getSubjects();
-			CollectionUtils.transform(subSet, new Transformer() {
-				@Override
-				public Object transform(Object obj) {
-					TSSubject sub = (TSSubject)obj;
-					return sub.getId();
-				}
-			});
-			cris.add(Restrictions.in("subjectId", subSet));
+			Set<TSSubject> subSet = act.getSubjects();
+			List<String> subIdList = new ArrayList<String>();
+			for (TSSubject sub : subSet) {
+				subIdList.add(sub.getId());
+			}
+			cris.add(Restrictions.in("subjectId", subIdList));
 		}
 		
 		if(StringUtils.isNotBlank(subjectId)){
