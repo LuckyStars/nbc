@@ -14,7 +14,9 @@
 	<div class="con_conent fixed">
 	     <h1 class="title">
 			<span class="title">权限管理</span>
-			<span class="back"><a href="#">返回上一页</a></span>
+			<span class="back">
+				<a href="${prc}/function/function-teachersignup/pages/index.jsp">返回上一页</a>
+			</span>
 		 </h1>
 		 
 	        <div class="table_box fixed">
@@ -49,7 +51,7 @@
 	<div class="bg"  ></div>
     <div class="add1" style="height:140px;" >
        	<div class="add-top1" >
-           	<p>补卡类型维护</p>
+           	<p>管理员</p>
            	<img src="${prc }/function/function-teachersignup/image/erro.jpg"  class="close" style="cursor:pointer;"/>
        	</div>
        	<div class="add-down">

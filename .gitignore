@@ -1,8 +1,9 @@
 *.class
-*/build/
+build/
 # Package Files #
 *.jar
 *.war
 *.ear
 .classpath
 .settings/
+.svn/

@@ -5,3 +5,4 @@
 <%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
 <c:set var="prc" value="${pageContext.request.contextPath}"/>
 <%@ taglib prefix="as" uri="/function/function-teachersignup/ActStatus.tld" %>
+<%@ taglib prefix="time" uri="/function/function-teachersignup/TimeTag.tld" %>

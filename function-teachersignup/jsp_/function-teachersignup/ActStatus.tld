@@ -13,6 +13,7 @@
     <attribute>
         <name>statusId</name>
         <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
     </attribute>
  </tag>
 </taglib>

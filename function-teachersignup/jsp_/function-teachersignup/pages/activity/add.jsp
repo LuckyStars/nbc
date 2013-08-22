@@ -105,22 +105,24 @@
 			alert(swfu.getFile(0)==null);
 			if(swfu.getFile(0)==null){
 				var postForm = $("<form action='${prc}/teachersignup/add_act.action' method='post'></form>");
-				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.name']").val()) + "' />");
 				postForm.append("<input type='hidden' name='act.openDate' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
 				postForm.append("<input type='hidden' name='act.endDate' value='" + encodeURI($("input[name='act.endDate']").val()) + "' />");
 				postForm.append("<input type='hidden' name='subjectName' value='" + encodeURI($("input[name='subjectName']").val()) + "' />");
 				postForm.append("<input type='hidden' name='rewardName' value='" + encodeURI($("input[name='rewardName']").val()) + "' />");
-				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("input[name='act.comment']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("textarea[name='act.comment']").val()) + "' />");
+				postForm.append("<input type='hidden' name='act.id' value='${act.id}' />");
 				postForm.appendTo(document.body).submit();
 				
 				return false;
 			}
 			swfu.addPostParam("act.name", encodeURI($("#actName").val()));
-			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.openDate']").val()));
+			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.name']").val()));
 			swfu.addPostParam("act.endDate", encodeURI($("input[name='act.endDate']").val()));
 			swfu.addPostParam("subjectName", encodeURI($("input[name='subjectName']").val()));
 			swfu.addPostParam("rewardName", encodeURI($("input[name='rewardName']").val()));
 			swfu.addPostParam("act.comment", encodeURI($("textarea[name='act.comment']").val()));
+			swfu.addPostParam("act.id", '${act.id}');
 			swfu.startUpload();
 			return false;
 		}
@@ -131,13 +133,13 @@
 	<div class="con_conent fixed">
 		<h1 class="title">
 			<span class="title">教师报名>新增报名</span>
-			<span class="back">返回上一页</span>
+			<span class="back"><a href="${prc }/teachersignup/adminList_act.action">返回上一页</a></span>
 		</h1>
 	    <div class="table_box fixed">
 			<p class="apply">
 				报名名称：
 				<span>
-					<input id="actName" class="easyui-validatebox" data-options="required:true" type="text" />
+					<input id="actName" name="act.name" class="easyui-validatebox" data-options="required:true" type="text" />
 				</span>
 			</p>
 	       	<div class="data">
@@ -264,7 +266,7 @@
 					var allRows = $('#subjectDL').datagrid('getRows');
 					var result = '';
 					for(var i =0;i<allRows.length;i++){
-						result = result + "," + allRows[i]['subjecName'];
+						result = result + "," + allRows[i]['subjectName'];
 					}
 					return result;
 				}
@@ -272,7 +274,7 @@
 				
 			</script>
 		    
-	       	<%-- 报名类型 --%>
+	       	<%-- 报名类型 END --%>
 	        
 	        <%-- 奖项类型 --%>
 	        <div class="type-1 type-2"><span class="tit3">奖项类型：</span>
@@ -386,8 +388,6 @@
 	       	<%-- 奖项类型 --%>
 	       	
 	       	<%-- 附件 --%>
-	       	
-	       	
 		
 		        <div class="upload">
 		   			<div class="plug_in borders fl" style="position:absolue;z-index:0;" >
@@ -401,9 +401,7 @@
 						<p class="gray f12 mt5" style="margin-top:10px;color: #336699;" id="divStatus">支持的文件最大容量： 10MB(只可上传一个文件) </p>
 					</div>
 	           	</div>
-	   			
 	        </div>
-	       	
 	       	
 	        <%-- 附件 --%>
 			<div style="clear:both;"></div>
@@ -419,8 +417,6 @@
 	        <a href="javascript:submitForm();" onclick="" class="return1" style="margin-left:170px;">确定</a>
 	       	<a href="#" class="return1">取消</a>
 	       	
-	       	</form>
-		</div>
 	</div>
 	</body>
 </html>
