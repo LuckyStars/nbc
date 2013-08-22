@@ -16,7 +16,7 @@
 			<interceptor-stack name="endPubStack">
 				<interceptor-ref name="tsRoleStack"></interceptor-ref>
 				<interceptor-ref name="tsEndPubInterceptor">
-					<param name="excludeMethods"></param>
+					<param name="excludeMethods">subjectsByAct,downAtta</param>
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
@@ -38,6 +38,11 @@
 		
 		<action name="*_sign" class="tsSignAction" method="{1}">
 			<result name="adminList">/function/function-teachersignup/pages/sign/admin_list.jsp</result>
+			<result name="comSignList">/function/function-teachersignup/pages/subject/com_list.jsp</result>
+			<result name="reloadCom" type="redirectAction">
+				<param name="actionName">subList_sign</param>  
+        		<param name="actId">${actId}</param>  
+			</result>
 		</action>
 		
 	</package>

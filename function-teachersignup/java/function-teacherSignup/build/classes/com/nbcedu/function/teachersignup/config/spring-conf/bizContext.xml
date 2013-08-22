@@ -17,6 +17,7 @@
 	
 	<bean id="tsSignBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSSignBizImpl">
 		<property name="signDao" ref="tsSignDao"></property>
+		<property name="actDao" ref="tsActDao"></property>
 	</bean>
 	
 	<bean id="tsSubBiz" class="com.nbcedu.function.teachersignup.biz.impl.TSSubjectBizImpl">

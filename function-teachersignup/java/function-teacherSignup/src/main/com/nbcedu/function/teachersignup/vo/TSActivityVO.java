@@ -53,22 +53,22 @@ public class TSActivityVO {
 					long diff = Math.abs(now.getTime() - deadLine.getTime());
 					long dayDiff = diff/day;
 					result.append(
-							dayDiff==0L?"00":dayDiff>9L?dayDiff:"0" + dayDiff
+						dayDiff>9L?dayDiff:"0" + dayDiff
 					).append("日");
 					
 					long hourDiff = (diff%day)/hour;
 					result.append(
-							hourDiff>9L?hourDiff:"0"+hourDiff
+						hourDiff>9L?hourDiff:"0"+hourDiff
 					).append("时");
 					
 					long minDiff = (diff%hour)/min;
 					result.append(
-							minDiff>9L?minDiff:"0"+minDiff
+						minDiff>9L?minDiff:"0"+minDiff
 					).append("分");
 					
 					long secDiff = (diff%min)/sec;
 					result.append(
-							secDiff>9L?secDiff:"0"+secDiff
+						secDiff>9L?secDiff:"0"+secDiff
 					).append("秒");
 					
 					return result.toString();
@@ -77,6 +77,10 @@ public class TSActivityVO {
 			});
 			List result = actList;
 			return result;
+		}
+		
+		public static void main(String[] args) {
+			
 		}
 		
 	}

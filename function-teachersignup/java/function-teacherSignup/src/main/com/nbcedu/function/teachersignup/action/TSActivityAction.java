@@ -3,9 +3,13 @@ package com.nbcedu.function.teachersignup.action;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,11 +17,16 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.constants.ActStatus;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
+import com.nbcedu.function.teachersignup.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.teachersignup.model.TSActivity;
+import com.nbcedu.function.teachersignup.model.TSSubject;
+import com.nbcedu.function.teachersignup.util.Utils;
 import com.nbcedu.function.teachersignup.vo.TSActivityVO;
 
 
@@ -165,7 +174,10 @@ public class TSActivityAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public String comListPubed(){
+		this.waitList = new ArrayList<TSActivityVO>();
+		this.openList = new ArrayList<TSActivityVO>();
 		List<TSActivity> actList = this.actBiz.findByStatus(ActStatus.PUBLISHED);
+		
 		if (!isEmpty(actList)) {
 			List<TSActivity> opList = new LinkedList<TSActivity>();
 			List<TSActivity> wtList = new LinkedList<TSActivity>();
@@ -182,6 +194,57 @@ public class TSActivityAction extends BaseAction{
 		}
 		
 		return "comListPub";
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void subjectsByAct(){
+		this.act = this.actBiz.findById(this.id);
+		JSONObject result = new JSONObject();
+		JSONArray subjects = new JSONArray();
+		if(act!=null){
+			for (TSSubject sub : act.getSubjects()) {
+				subjects.add(sub.getName());
+			}
+		}
+		result.put("subs", subjects);
+		Struts2Utils.renderText(result.toJSONString());
+	}
+	
+	/**
+	 * 下载附件啊
+	 * @author xuechong
+	 * @throws Exception 
+	 */
+	public void downAtta() throws Exception{
+		this.act = this.actBiz.findById(this.id);
+		String fileName = act.getFileName();
+		String agent = (String) ServletActionContext.getRequest()
+		.getHeader("USER-AGENT");
+		if (agent != null && agent.indexOf("MSIE") == -1) {
+			ServletActionContext.getResponse().setHeader(
+					"Content-Disposition",
+					"attachment; filename=" +  
+					new String(fileName.getBytes("utf-8"),"ISO8859_1"));
+		} else {// IE
+			ServletActionContext.getResponse().setHeader( 
+					"Content-Disposition", 
+					"attachment; filename=" +
+					URLEncoder.encode(fileName, "UTF8"));
+		}
+		ServletActionContext.getResponse().
+		setContentType("application/vnd.ms-excel;charset=uft-8");
+		OutputStream out=null;
+		FileInputStream in=null;
+		try {
+			out = ServletActionContext.getResponse().getOutputStream();
+			in = new FileInputStream(new File(act.getFilePath()));
+			Utils.StreamUtil.copy(in, out);
+			out.flush();
+		} catch (Exception e) {
+			logger.error(e);
+		}finally{
+			if(out!=null){out.close();}
+		}
 	}
 	
 	private static final String RELOAD_ADMIN = "reloadAdmin";

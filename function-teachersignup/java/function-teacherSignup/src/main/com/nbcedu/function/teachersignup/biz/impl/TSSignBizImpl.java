@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.xwork.StringUtils;
@@ -95,6 +96,20 @@ public class TSSignBizImpl extends BaseBizImpl<TSSign> implements TSSignBiz{
 			);
 			return pm;
 		}
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TSSign> findAllByUidActId(String uid, String actId) {
+		StringBuilder hql = new StringBuilder("FROM TSSign si ")
+								.append("WHERE si.userUid=? ")
+								.append("AND si.subjectId in ")
+								.append("(SELECT sub.id FROM TSSubject sub ")
+								.append("WHERE sub.activityId=?)");
+		return this.signDao.createQuery(hql.toString(),uid,actId).list();
+	}
+	public void setActDao(TSActivityDao actDao) {
+		this.actDao = actDao;
 	}
 	
 	

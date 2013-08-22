@@ -1,5 +1,7 @@
 package com.nbcedu.function.teachersignup.biz;
 
+import java.util.List;
+
 import com.nbcedu.function.teachersignup.core.biz.BaseBiz;
 import com.nbcedu.function.teachersignup.core.pager.PagerModel;
 import com.nbcedu.function.teachersignup.model.TSSign;
@@ -17,4 +19,5 @@ public interface TSSignBiz extends BaseBiz<TSSign>{
 	 */
 	PagerModel pageByAct(String actId,String subId,String rewId,String userName);
 
+	List<TSSign> findAllByUidActId(String uid,String actId);
 }
