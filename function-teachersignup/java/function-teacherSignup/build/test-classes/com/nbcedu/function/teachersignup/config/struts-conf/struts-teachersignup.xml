@@ -35,10 +35,13 @@
 			<result name="adminList">/function/function-teachersignup/pages/activity/admin_list.jsp</result>
 			<result name="comListPub">/function/function-teachersignup/pages/activity/com_pubList.jsp</result>
 			<result name="comfinList">/function/function-teachersignup/pages/activity/com_finList.jsp</result>
+			<result name="masterList">/function/function-teachersignup/pages/activity/master_view.jsp</result>
+			<result name="edit">/function/function-teachersignup/pages/activity/edit.jsp</result>
 		</action>
 		
 		<action name="*_sign" class="tsSignAction" method="{1}">
 			<result name="adminList">/function/function-teachersignup/pages/sign/admin_list.jsp</result>
+			<result name="masterList">/function/function-teachersignup/pages/sign/master_list.jsp</result>
 			<result name="comSignList">/function/function-teachersignup/pages/subject/com_list.jsp</result>
 			<result name="reloadCom" type="redirectAction">
 				<param name="actionName">subList_sign</param>  

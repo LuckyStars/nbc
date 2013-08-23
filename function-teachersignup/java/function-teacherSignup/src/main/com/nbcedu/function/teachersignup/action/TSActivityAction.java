@@ -94,6 +94,10 @@ public class TSActivityAction extends BaseAction{
 		return result.toString();
 	}
 	
+	public String gotoEdit(){
+		this.act = this.actBiz.findById(this.id);
+		return "edit";
+	}
 	/**
 	 * 鹳狸猿列表
 	 * @return
@@ -102,6 +106,16 @@ public class TSActivityAction extends BaseAction{
 	public String adminList(){
 		this.pm = this.actBiz.findByMonthStatus(month, actStatu);
 		return "adminList";
+	}
+	
+	/**
+	 * 统计查看列表
+	 * @return
+	 * @author xuechong
+	 */
+	public String masterList(){
+		this.adminList();
+		return "masterList";
 	}
 	
 	/**

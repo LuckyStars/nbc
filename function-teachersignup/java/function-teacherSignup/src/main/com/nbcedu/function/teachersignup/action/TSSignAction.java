@@ -101,6 +101,11 @@ public class TSSignAction extends BaseAction{
 		return "adminList";
 	}
 	
+	public String masterList(){
+		this.adminList();
+		return "masterList";
+	}
+	
 	/**
 	 * 管理员追加获奖情况
 	 * @return

@@ -26,7 +26,7 @@ public class TSUser {
 	public String getUserUid() {
 		return userUid;
 	}
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 	
