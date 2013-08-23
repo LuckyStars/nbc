@@ -76,28 +76,32 @@
 					    <td><c:out value="${sign.teaName }" escapeXml="true"></c:out></td>
 					    <td><c:out value="${sign.signSubject }" escapeXml="true"></c:out></td>
 					    <td>
-					    	<select>
+					    	<select  class="rewSelect" id="rew${sign.signId }" disabled="disabled">
 					         	<option>暂无获奖情况</option>
+							    <c:if test="${not empty rewdSet}">
+				                	<c:forEach items="${rewdSet}" var="rew">
+				                		<option value="${rew.id }"
+				                			<c:if test="${sign.rewId eq rew.id}">selected="selected"</c:if>
+				                		>${rew.name }</option>
+				                	</c:forEach>
+							    </c:if>
 					        	<option>特等奖</option>
 					        	<option>一等奖</option>
 					        </select>
 					    </td>
-					    <td>追加获奖</td>
+					    <td>
+					  	<c:choose>
+					  		<c:when test="${not empty rewdSet}">
+					  			<a href="javascript:changeRew('${sign.signId}');" id="edit${sign.signId }">追加获奖</a>
+					  			<a href="javascript:confirmRew('${sign.signId}');" id="confirm${sign.signId }" style="display: none;">确认</a>
+					  		</c:when>
+					  		<c:otherwise>暂无奖项</c:otherwise>
+					  	</c:choose>  
+					   </td>
 					</tr>
+					
 				</c:forEach>
 			</c:if>
-			<tr>
-			    <td>李于洋</td>
-			    <td>教师演讲比赛</td>
-			    <td>
-			    	<select>
-			         	<option>暂无获奖情况</option>
-			        	<option>特等奖</option>
-			        	<option>一等奖</option>
-			        </select>
-			    </td>
-			    <td>1</td>
-			</tr>
             
         </table>
         <div class="page_nav" id="pagingBars">
@@ -115,7 +119,26 @@
 			</pg:pager>
 		</div>
     </div>
+	<script type="text/javascript">
+		var rewEditFin = true;
+		function changeRew(id){
+			if(rewEditFin){
+				var x =$("select[class='rewSelect']");
+				x.each(function(){$(this).attr('disabled','disabled');});
+				$("select[id='rew" + id + "']").removeAttr('disabled');
+				$("#edit" + id).hide();
+				$("#confirm"+id).show();
+				rewEditFin = false;
+			}else{
+				alert('请先确认获奖!');	
+			}
+		}
 
+		function confirmRew(id){
+			var rewId = $("select[id='rew" + id + "']").val();
+			location.href="${prc}/teachersignup/addRew_sign.action?actId=${actId}&rewId=" + rewId + "&signId=" + id;
+		}
+	</script>
 </div>
 </body>
 </html>

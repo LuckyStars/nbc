@@ -43,6 +43,10 @@
 				<param name="actionName">subList_sign</param>  
         		<param name="actId">${actId}</param>  
 			</result>
+			<result name="reloadAdminList" type="redirectAction" >
+				<param name="actionName">adminList_sign</param>  
+        		<param name="actId">${actId}</param>
+			</result>
 		</action>
 		
 	</package>

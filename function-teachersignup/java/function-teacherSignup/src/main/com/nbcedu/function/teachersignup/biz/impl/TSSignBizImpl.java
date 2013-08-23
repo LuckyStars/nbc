@@ -18,6 +18,7 @@ import com.nbcedu.function.teachersignup.biz.TSSignBiz;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.teachersignup.core.pager.PagerModel;
 import com.nbcedu.function.teachersignup.dao.TSActivityDao;
+import com.nbcedu.function.teachersignup.dao.TSRewardDao;
 import com.nbcedu.function.teachersignup.dao.TSSignDao;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
@@ -29,6 +30,7 @@ import com.nbcedu.function.teachersignup.vo.TSUser;
 public class TSSignBizImpl extends BaseBizImpl<TSSign> implements TSSignBiz{
 	private TSSignDao signDao;
 	private TSActivityDao actDao;
+	private TSRewardDao rewDao;
 	
 	public void setSignDao(TSSignDao signDao) {
 		super.setDao(signDao);
@@ -105,9 +107,26 @@ public class TSSignBizImpl extends BaseBizImpl<TSSign> implements TSSignBiz{
 								.append("WHERE sub.activityId=?)");
 		return this.signDao.createQuery(hql.toString(),uid,actId).list();
 	}
+	
+	@Override
+	public void addRew(String signId, String rewId) {
+		TSSign sign = this.findById(signId);
+		if(sign!=null){
+			TSReward rew = this.rewDao.findUniqueBy("id", rewId);
+			sign.setRewardId(rew==null?"":rewId);
+			this.signDao.update(sign);
+		}
+	}
+	//////////////////////
+	///setters////
+	///////////
 	public void setActDao(TSActivityDao actDao) {
 		this.actDao = actDao;
 	}
+	public void setRewDao(TSRewardDao rewDao) {
+		this.rewDao = rewDao;
+	}
+	
 	
 	
 }

@@ -21,6 +21,10 @@ public class TSSignVo {
 	private String signSubject;
 	/*** 获奖类型*/
 	private String rewardName;
+	/**
+	 * 奖项ID 
+	 */
+	private String rewId;
 	
 	public static class Factory{
 		@SuppressWarnings("serial")
@@ -59,6 +63,7 @@ public class TSSignVo {
 					vo.setRewardName(StringUtils.isNotBlank(rewId)?
 							rewMap.get(rewId):rewMap.get("None")
 					);
+					vo.setRewId(tSign.getRewardId());
 					result.add(vo);
 				}
 			}
@@ -94,4 +99,11 @@ public class TSSignVo {
 	public void setRewardName(String rewardName) {
 		this.rewardName = rewardName;
 	}
+	public String getRewId() {
+		return rewId;
+	}
+	public void setRewId(String rewId) {
+		this.rewId = rewId;
+	}
+	
 }

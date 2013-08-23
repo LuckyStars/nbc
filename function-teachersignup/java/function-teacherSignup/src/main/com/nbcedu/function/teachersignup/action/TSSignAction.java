@@ -27,20 +27,55 @@ public class TSSignAction extends BaseAction{
 	private String userName;
 	private String subId;
 	private String rewId;
+	private String signId;
 	private TSActivitiSignVo asvo;
 	
 	private Set<TSReward> rewdSet = new HashSet<TSReward>();
 	private Set<TSSubject> subjSet = new HashSet<TSSubject>();
 	
+	/**
+	 * 增加报名
+	 * @return
+	 * @author xuechong
+	 */
 	public String addSign(){
 		this.signBiz.addNewSign(this.getCurUser(),new String[]{this.subId});
 		return "reloadCom";
 	}
 
+	/**
+	 * 取消报名
+	 * @return
+	 * @author xuechong
+	 */
 	public String cancel(){
 		this.signBiz.removeById(this.id);
 		return "reloadCom";
 	}
+	
+	
+	public void adminExl(){
+		
+	}
+	
+	/**
+	 * 普通老师报名项目列表
+	 * @return
+	 * @author xuechong
+	 */
+	public String subList(){
+		TSActivity act = this.actBiz.findById(this.actId);
+		List<TSSign> signedList = 
+			this.signBiz.findAllByUidActId(getCurUserUid(), actId);
+		this.asvo = TSActivitiSignVo.Factory.build(act, signedList);
+		return "comSignList";
+	}
+	
+	/**
+	 * 管理员获奖情况列表
+	 * @return
+	 * @author xuechong
+	 */
 	public String adminList(){
 		TSActivity act = this.actBiz.findById(actId);
 		this.rewdSet = act.getRewards();
@@ -49,16 +84,15 @@ public class TSSignAction extends BaseAction{
 		return "adminList";
 	}
 	
-	public void adminExl(){
-		
-	}
-	
-	public String subList(){
-		TSActivity act = this.actBiz.findById(this.actId);
-		List<TSSign> signedList = 
-			this.signBiz.findAllByUidActId(getCurUserUid(), actId);
-		this.asvo = TSActivitiSignVo.Factory.build(act, signedList);
-		return "comSignList";
+	/**
+	 * 管理员追加获奖情况
+	 * @return
+	 * @author xuechong
+	 */
+	public String addRew(){
+		this.signBiz.addRew(signId, rewId);
+		this.rewId="";
+		return "reloadAdminList";
 	}
 	
 	//////////////////////////
@@ -120,6 +154,12 @@ public class TSSignAction extends BaseAction{
 	}
 	public void setSubjSet(Set<TSSubject> subjSet) {
 		this.subjSet = subjSet;
+	}
+	public String getSignId() {
+		return signId;
+	}
+	public void setSignId(String signId) {
+		this.signId = signId;
 	}
 	
 }

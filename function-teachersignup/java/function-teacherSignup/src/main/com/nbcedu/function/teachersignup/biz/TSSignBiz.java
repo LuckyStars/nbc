@@ -20,4 +20,6 @@ public interface TSSignBiz extends BaseBiz<TSSign>{
 	PagerModel pageByAct(String actId,String subId,String rewId,String userName);
 
 	List<TSSign> findAllByUidActId(String uid,String actId);
+	
+	public void addRew(String signId,String rewId);
 }
