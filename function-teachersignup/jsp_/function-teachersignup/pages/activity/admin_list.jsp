@@ -184,21 +184,10 @@
 			                		报名情况
 			                		</a>
 			                		</span>
-			                	<c:if test="${act.status==3}">
-			                		<span class="space1">追加获奖情况</span>
-			                	</c:if>
-			                	
 			                </td>
 			            </tr>
 	            	</c:forEach>
 	            </c:if>
-	            
-	            <tr>
-	                <td>XXX报名</td>
-	                <td>已发布</td>
-	                <td>2013-02-17</td>
-	                <td><span class="space1">查看管理</span><span class="space1">取消发布</span><span class="space1">手工结束</span><span class="space1">追加获奖情况</span></td>
-	            </tr>
 	        </table>
 	        <div class="page_nav" id="pagingBars">
 					<pg:pager url="adminList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
@@ -211,7 +200,7 @@
 										</c:choose>	
 									</pg:pages>
 								</ul>
-							<pg:prev> <span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
+							<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 					</pg:pager>
    			 </div>
 	    </div>

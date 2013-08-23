@@ -26,4 +26,10 @@ public interface TSActivityBiz extends BaseBiz<TSActivity>{
 	public void removeActById(String id);
 	
 	public List<TSActivity> findByStatus(ActStatus status);
+	/**
+	 * 查询所有已暂停和结束的活动
+	 * @return
+	 * @author xuechong
+	 */
+	public PagerModel findFinished();
 }

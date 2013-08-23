@@ -32,4 +32,15 @@ public class ExlBuilderUtil {
 			sheet.setColumnWidth(columnIndex,expectLength>255*256?255*256:expectLength);
 		}
 	}
+	
+	static String replaceIllegalFileName(String fileName) {
+		fileName = fileName.replace('/', ' ');
+		fileName = fileName.replace('\\', ' ');
+		fileName = fileName.replace('?', ' ');
+		fileName = fileName.replace('*', ' ');
+		fileName = fileName.replace(']', ' ');
+		fileName = fileName.replace('[', ' ');
+		fileName = fileName.replace(':', ' ');
+		return fileName;
+	}
 }

@@ -107,7 +107,8 @@ public class ExlBuilder {
 	public static Workbook buildHead(String head,Workbook book){
 		int curRow = 0;
 		String headTrim = StringUtils.trimToNull(head);
-		Sheet sheet = book.createSheet(headTrim == null ? "Workbook" : headTrim);
+		Sheet sheet = book.createSheet(headTrim == null ? 
+				"Workbook" : ExlBuilderUtil.replaceIllegalFileName(headTrim));
 		if(headTrim!=null){
 			// put headcontent
 			Cell headCell = sheet.createRow(curRow).createCell(0);

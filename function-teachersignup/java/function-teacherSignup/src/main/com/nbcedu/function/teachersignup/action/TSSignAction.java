@@ -1,6 +1,7 @@
 package com.nbcedu.function.teachersignup.action;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,11 +10,13 @@ import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.biz.TSSignBiz;
 import com.nbcedu.function.teachersignup.biz.TSSubjectBiz;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
+import com.nbcedu.function.teachersignup.core.util.exl.ExlAnnotationUtil;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
 import com.nbcedu.function.teachersignup.model.TSSign;
 import com.nbcedu.function.teachersignup.model.TSSubject;
 import com.nbcedu.function.teachersignup.vo.TSActivitiSignVo;
+import com.nbcedu.function.teachersignup.vo.TSSignVo;
 
 @SuppressWarnings("serial")
 public class TSSignAction extends BaseAction{
@@ -32,6 +35,7 @@ public class TSSignAction extends BaseAction{
 	
 	private Set<TSReward> rewdSet = new HashSet<TSReward>();
 	private Set<TSSubject> subjSet = new HashSet<TSSubject>();
+	private List<TSSignVo> signList = new ArrayList<TSSignVo>();
 	
 	/**
 	 * 增加报名
@@ -53,9 +57,22 @@ public class TSSignAction extends BaseAction{
 		return "reloadCom";
 	}
 	
-	
+	/**
+	 * 导出报名情况exl
+	 * 
+	 * @author xuechong
+	 */
 	public void adminExl(){
-		
+		TSActivity act = this.actBiz.findById(this.actId);
+		List<TSSignVo> datas = new ArrayList<TSSignVo>();
+		String head = "报名情况列表s";
+		if(act!=null){
+			datas = TSSignVo.Factory.build(this.signBiz.findByActId(actId), 
+					new ArrayList<TSSubject>(act.getSubjects()), 
+					new ArrayList<TSReward>(act.getRewards()));
+			head = act.getName() + "报名情况";
+		}
+		ExlAnnotationUtil.export(head, datas);
 	}
 	
 	/**
@@ -93,6 +110,24 @@ public class TSSignAction extends BaseAction{
 		this.signBiz.addRew(signId, rewId);
 		this.rewId="";
 		return "reloadAdminList";
+	}
+	/**
+	 * 普通教师已报名项目列表
+	 * @return
+	 * @author xuechong
+	 */
+	public String comFinSubList(){
+		TSActivity act = this.actBiz.findById(this.actId);
+		if(act!=null){
+			List<TSSign> signedList = 
+				this.signBiz.findAllByUidActId(getCurUserUid(), actId);
+			this.asvo = TSActivitiSignVo.Factory.build(act, signedList);
+			this.signList = TSSignVo.Factory.build(signedList, 
+					new ArrayList<TSSubject>(act.getSubjects()), 
+					new ArrayList<TSReward>(act.getRewards()));
+		}
+		
+		return "comFinSubList";
 	}
 	
 	//////////////////////////
@@ -160,6 +195,12 @@ public class TSSignAction extends BaseAction{
 	}
 	public void setSignId(String signId) {
 		this.signId = signId;
+	}
+	public List<TSSignVo> getSignList() {
+		return signList;
+	}
+	public void setSignList(List<TSSignVo> signList) {
+		this.signList = signList;
 	}
 	
 }

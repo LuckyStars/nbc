@@ -34,6 +34,7 @@
 			<result name="reloadAdmin" type="redirectAction">/teachersignup/adminList_act</result>
 			<result name="adminList">/function/function-teachersignup/pages/activity/admin_list.jsp</result>
 			<result name="comListPub">/function/function-teachersignup/pages/activity/com_pubList.jsp</result>
+			<result name="comfinList">/function/function-teachersignup/pages/activity/com_finList.jsp</result>
 		</action>
 		
 		<action name="*_sign" class="tsSignAction" method="{1}">
@@ -47,6 +48,7 @@
 				<param name="actionName">adminList_sign</param>  
         		<param name="actId">${actId}</param>
 			</result>
+			<result name="comFinSubList">/function/function-teachersignup/pages/subject/com_finSubList.jsp</result>
 		</action>
 		
 	</package>

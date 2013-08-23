@@ -27,7 +27,12 @@
 </head>
 <body>
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">教师报名</span><span class="back">返回上一页</span></h1>
+     <h1 class="title">
+     	<span class="title">教师报名</span>
+     	<span class="back">
+     		<a href="${prc}/teachersignup/adminList_act.action">返回上一页</a>
+     	</span>
+     </h1>
         <div class="table_box fixed">
         	<form action="${prc}/teachersignup/adminList_sign.action" method="post">
 	            <div class="nav">
@@ -60,7 +65,7 @@
 	                </select>
 	                
 	                <input type="submit" class="cx"  value="查询"/>
-	                <a class="cx" href="${prc}/teacherSignup/adminExl_sign.action">下载/导出</a>
+	                <a class="cx" href="${prc}/teachersignup/adminExl_sign.action?actid=${actId}">下载/导出</a>
 	            </div>
             </form>
 		<table width="100%" border="0">

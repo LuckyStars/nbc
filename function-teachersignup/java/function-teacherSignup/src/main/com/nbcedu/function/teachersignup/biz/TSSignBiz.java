@@ -22,4 +22,7 @@ public interface TSSignBiz extends BaseBiz<TSSign>{
 	List<TSSign> findAllByUidActId(String uid,String actId);
 	
 	public void addRew(String signId,String rewId);
+	
+	public List<TSSign> findByActId(String actId);
+	
 }

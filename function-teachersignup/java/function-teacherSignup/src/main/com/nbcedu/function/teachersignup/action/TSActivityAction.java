@@ -53,6 +53,8 @@ public class TSActivityAction extends BaseAction{
 	List<TSActivityVO> openList = new LinkedList<TSActivityVO>();
 	/***普通教师活动列表 未开放*/
 	List<TSActivityVO> waitList = new LinkedList<TSActivityVO>();
+	/**普通教师活动列表(已结束)**/
+	List<TSActivity> finList  = new ArrayList<TSActivity>();
 	/**
 	 * 新增
 	 * @return
@@ -211,6 +213,15 @@ public class TSActivityAction extends BaseAction{
 	}
 	
 	/**
+	 * 普通教师查看已结束的报名
+	 * @author xuechong
+	 */
+	public String commonFinList(){
+		this.pm = this.actBiz.findFinished();
+		return "comfinList";
+	}
+	
+	/**
 	 * 下载附件啊
 	 * @author xuechong
 	 * @throws Exception 
@@ -307,5 +318,11 @@ public class TSActivityAction extends BaseAction{
 	}
 	public void setWaitList(List<TSActivityVO> waitList) {
 		this.waitList = waitList;
+	}
+	public List<TSActivity> getFinList() {
+		return finList;
+	}
+	public void setFinList(List<TSActivity> finList) {
+		this.finList = finList;
 	}
 }

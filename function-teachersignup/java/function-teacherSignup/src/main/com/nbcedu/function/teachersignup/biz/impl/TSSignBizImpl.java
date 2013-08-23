@@ -117,6 +117,17 @@ public class TSSignBizImpl extends BaseBizImpl<TSSign> implements TSSignBiz{
 			this.signDao.update(sign);
 		}
 	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TSSign> findByActId(String actId) {
+		StringBuilder hql = new StringBuilder("FROM TSSign si ")
+		.append("WHERE si.subjectId in ")
+		.append("(SELECT sub.id FROM TSSubject sub ")
+		.append("WHERE sub.activityId=?)");
+		return this.signDao.createQuery(hql.toString(),actId).list();
+	}
+	
 	//////////////////////
 	///setters////
 	///////////

@@ -11,7 +11,7 @@
 <body>
 <div class="con_conent fixed">
 
-	<h1 class="title"><span class="title">教师报名</span><span class="back">返回上一页</span></h1>
+	<h1 class="title"><span class="title">教师报名</span></h1>
 
 	<div class="table_box fixed">
 	
@@ -22,7 +22,13 @@
         	</dt>
     		<dd><a href="${prc}/teachersignup/comListPubed_act.action">我要报名</a></dd>
 		</dl>
-		
+		<dl class="warp">
+        	<dt>
+        		<img src="${prc}/function/function-teachersignup/image/tu3.jpg" 
+        			onclick="location.href='${prc}/teachersignup/commonFinList_act.action'" style="cursor:pointer"/>
+        	</dt>
+    		<dd><a href="${prc}/teachersignup/commonFinList_act.action">已经结束的报名</a></dd>
+		</dl>
 		<dl class="warp">
 			<dt><img src="${prc}/function/function-teachersignup/image/tu4.jpg" 
 				onclick="location.href='${prc}/teachersignup/adminList_act.action';" style="cursor:pointer"/>

@@ -27,6 +27,7 @@ import com.nbcedu.function.teachersignup.model.TSSubject;
 
 
 public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActivityBiz{
+	
 	private static final Logger logger = Logger.getLogger(TSActivityBizImpl.class);
 	private TSActivityDao actDao;
 	private TSRewardDao rewardDao;
@@ -151,5 +152,14 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	@Override
 	public List<TSActivity> findByStatus(ActStatus status) {
 		return this.actDao.findBy("status", status.getId());
+	}
+
+	@Override
+	public PagerModel findFinished() {
+		Criteria cri = this.actDao.createCriteria(
+				Restrictions.in("status", 
+				new Integer[]{ActStatus.FINISHED.getId(),ActStatus.PAUSED.getId()}));
+		cri.addOrder(Order.desc("endDate"));
+		return this.actDao.searchPaginated(cri);
 	}
 }

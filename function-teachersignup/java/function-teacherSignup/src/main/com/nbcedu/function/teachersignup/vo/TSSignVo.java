@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.xwork.StringUtils;
 
+import com.nbcedu.function.teachersignup.core.util.exl.annotations.ExlData;
 import com.nbcedu.function.teachersignup.core.util.exl.annotations.ExlModel;
 import com.nbcedu.function.teachersignup.model.TSReward;
 import com.nbcedu.function.teachersignup.model.TSSign;
@@ -16,10 +17,13 @@ public class TSSignVo {
 	/*** 报名ID*/
 	private String signId;
 	/*** 教师姓名*/
+	@ExlData(sortId=1,title="教师姓名")
 	private String teaName;
 	/*** 报名类型(中文)*/
+	@ExlData(sortId=2,title="报名类型")
 	private String signSubject;
 	/*** 获奖类型*/
+	@ExlData(sortId=3,title="获奖情况")
 	private String rewardName;
 	/**
 	 * 奖项ID 
