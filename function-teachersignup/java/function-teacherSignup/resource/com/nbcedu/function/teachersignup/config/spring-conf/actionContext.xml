@@ -5,6 +5,8 @@
 	
 	<bean id="teachersignupLoader" class="com.nbcedu.function.teachersignup.interceptor.TSLoader"></bean>
 	
+	<bean id="indexAction" class="com.nbcedu.function.teachersignup.action.IndexAction"></bean>
+	
 	<bean id="tsRoleInterceptor" class = "com.nbcedu.function.teachersignup.interceptor.RoleInterceptor">
 		<property name="userPrivilegeBiz" ref="tsUserPriBiz"></property>
 	</bean>

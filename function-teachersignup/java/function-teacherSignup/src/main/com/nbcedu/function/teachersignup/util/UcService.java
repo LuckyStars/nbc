@@ -75,7 +75,6 @@ public class UcService {
 		
 	}
 	
-	
 	/**
 	 * 教师组织机构树
 	 * @return
@@ -87,6 +86,6 @@ public class UcService {
 	
 	
 	public static String findUserNameByUid(String uid){
-		return client.queryPerson(1, uid).getName();
+		return uid.equals("1") ? "admin" : client.queryPerson(1, uid).getName();
 	}
 }

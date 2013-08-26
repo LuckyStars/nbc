@@ -16,6 +16,7 @@ import java.util.List;
 
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.constants.ActStatus;
+import com.nbcedu.function.teachersignup.constants.Constants;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.teachersignup.core.pager.PagerModel;
 import com.nbcedu.function.teachersignup.dao.TSActivityDao;
@@ -24,6 +25,8 @@ import com.nbcedu.function.teachersignup.dao.TSSubjectDao;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
 import com.nbcedu.function.teachersignup.model.TSSubject;
+import com.nbcedu.function.teachersignup.util.Utils;
+import com.opensymphony.xwork2.ActionContext;
 
 
 public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActivityBiz{
@@ -79,7 +82,7 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 				}
 			}
 		}
-		
+		addHSIPost(act);
 		this.actDao.saveOrUpdate(act);
 	}
 	
@@ -162,4 +165,13 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		cri.addOrder(Order.desc("endDate"));
 		return this.actDao.searchPaginated(cri);
 	}
+	
+	private void addHSIPost (TSActivity act){
+		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
+			return;
+		}
+		String sql = Utils.Message.getInsertSQL(act, (String) ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY));
+		this.actDao.createSqlQuery(sql).executeUpdate();
+	}
+	
 }
