@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>功能列表</title>
+	<script type="text/javascript" src="${prc}/common/agent.js"></script>
 	<link href="${prc }/function/function-teachersignup/css/index.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -29,21 +30,37 @@
         	</dt>
     		<dd><a href="${prc}/teachersignup/commonFinList_act.action">已经结束的报名</a></dd>
 		</dl>
+        <c:if test="${sessionScope.tsCurUser.isAdmin}">
 		<dl class="warp">
 			<dt><img src="${prc}/function/function-teachersignup/image/tu4.jpg" 
 				onclick="location.href='${prc}/teachersignup/adminList_act.action';" style="cursor:pointer"/>
 			</dt>
 		<dd><a href = "${prc}/teachersignup/adminList_act.action">报名管理</a></dd>
 		</dl>
-		
+		</c:if>
+		 
+        <c:if test="${sessionScope.tsCurUser.isAdmin}">
 		<dl class="warp">
 			<dt>
 				<img src="${prc}/function/function-teachersignup/image/tu5.jpg" 
-				onclick="location.href=''"
+				onclick="location.href='${prc}/teachersignup/masterList_act.action'"
 				style="cursor:pointer" />
 			</dt>
-			<dd>报名查看及统计</dd>
+			<dd><a href = "${prc}/teachersignup/masterList_act.action">报名查看及统计</a></dd>
         </dl>
+        </c:if>
+        
+        <c:if test="${sessionScope.tsCurUser.isAdmin}">
+        <dl class="warp">
+			<dt>
+				<img src="${prc}/function/function-teachersignup/image/tu5.jpg" 
+				onclick="location.href='${prc}/teachersignup/list_userPri.action'"
+				style="cursor:pointer" />
+			</dt>
+			<dd><a href = "${prc}/teachersignup/list_userPri.action">权限管理</a></dd>
+        </dl>
+        
+        </c:if>
         
 	</div>
 

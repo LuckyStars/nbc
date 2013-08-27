@@ -8,7 +8,7 @@
 	<link href="${prc }/function/function-teachersignup/css/index.css" rel="stylesheet" type="text/css" />
 	<link href="${prc }/function/function-teachersignup/css/pagination.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc }/function/function-teachersignup/js/jquery-1.7.1.min.js"></script>
-		
+	<script type="text/javascript" src="${prc}/common/agent.js"></script>
     <script type="text/javascript">
         $(function () {
             $("table tr:odd").css("background", "#f0f8fc");

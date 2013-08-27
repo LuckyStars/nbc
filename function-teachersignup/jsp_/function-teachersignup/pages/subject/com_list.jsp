@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>报名一览</title>
 	<link href="${prc }/function/function-teachersignup/css/index.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${prc}/common/agent.js"></script>
 	<script type="text/javascript" src="${prc }/function/function-teachersignup/js/jquery-1.7.1.min.js"></script>
 </head>
 <body>

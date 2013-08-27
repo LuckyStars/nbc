@@ -26,6 +26,7 @@ import com.nbcedu.function.teachersignup.model.TSActivity;
 import com.nbcedu.function.teachersignup.model.TSReward;
 import com.nbcedu.function.teachersignup.model.TSSubject;
 import com.nbcedu.function.teachersignup.util.Utils;
+import com.nbcedu.function.teachersignup.vo.TSUser;
 import com.opensymphony.xwork2.ActionContext;
 
 
@@ -118,7 +119,16 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	
 	@Override
 	public void modifyStatus(String id, ActStatus status) {
-		this.actDao.createQuery("UPDATE TSActivity a SET a.status=? WHERE a.id=?", status.getId(),id).executeUpdate();
+		
+		this.actDao.createQuery("UPDATE TSActivity a SET a.status=? WHERE a.id=?",
+				status.getId(),id).executeUpdate();
+
+		if (status.getId() == ActStatus.PUBLISHED.getId()) {
+			TSActivity act = this.findById(id);
+			if (act != null) {
+				this.addHSIPost(act);
+			}
+		}
 	}
 	
 	@Override
@@ -170,8 +180,13 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
 			return;
 		}
-		String sql = Utils.Message.getInsertSQL(act, (String) ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY));
+		TSUser curUser = (TSUser)ActionContext.getContext().getSession().get(Constants.SESSION_USER_KEY);
+		String sql = Utils.Message.getInsertSQL(act, curUser.getUserUid(),curUser.getUserName());
+		this.removeHSOPost(act.getId());
 		this.actDao.createSqlQuery(sql).executeUpdate();
 	}
 	
+	private void removeHSOPost(String id){
+		this.actDao.createSqlQuery("DELETE FROM T_HSI_POST WHERE PK_T_HSI_POST_POSTID = ?", id).executeUpdate();
+	}
 }

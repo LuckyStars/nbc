@@ -19,6 +19,13 @@ public interface TSActivityBiz extends BaseBiz<TSActivity>{
 	
 	public PagerModel findByMonthStatus(Integer month,Integer Status);
 	
+	/**
+	 * 修改状态<br>
+	 * 如果将状态修改为 已发布 时会发送公告
+	 * @param id
+	 * @param status
+	 * @author xuechong
+	 */
 	public void modifyStatus(String id,ActStatus status);
 	
 	public void modifyFinActs();

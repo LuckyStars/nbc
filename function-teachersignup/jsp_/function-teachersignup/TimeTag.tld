@@ -26,4 +26,13 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
+	<tag>
+		<name>curTime</name>
+		<tag-class>com.nbcedu.function.teachersignup.util.timetags.CurrentTime</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>format</name>
+			<required>true</required>
+		</attribute>
+	</tag>
 </taglib>

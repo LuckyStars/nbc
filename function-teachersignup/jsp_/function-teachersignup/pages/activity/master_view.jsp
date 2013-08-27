@@ -26,29 +26,6 @@
             $(".shade").css({ "width": $(document).width(), "height": $(document).height() });
         });
 
-        function pauseAct(actId){
-			if(confirm('确定结束吗?')){
-				location.href="${prc }/teachersignup/pause_act.action?month=${month}&actStatu=${actStatu}&id=" + actId;
-			}
-        }
-
-        function cancelPub(actId){
-			if(confirm('确定取消发布吗?')){
-				location.href="${prc }/teachersignup/manCancel_act.action?month=${month}&actStatu=${actStatu}&id=" + actId;
-			}
-        }
-
-        function publish(actId){
-			if(confirm('确定发布吗?')){
-				location.href="${prc }/teachersignup/pub_act.action?month=${month}&actStatu=${actStatu}&id=" + actId;
-			}
-        }
-
-        function delAct(actId){
-			if(confirm('确定删除吗?')){
-				location.href="${prc }/teachersignup/del_act.action?month=${month}&actStatu=${actStatu}&id=" + actId;
-			}
-        }
 </script>
 </head>
 <body>
@@ -61,7 +38,7 @@
      	</h1>
 	        <div class="table_box fixed">
 	            <div class="nav">
-	            	<form action="${prc }/teachersignup/adminList_act.action">
+	            	<form action="${prc }/teachersignup/masterList_act.action">
 	                <span>增加日期</span>
 	                <select name="month">
 	                
@@ -100,15 +77,14 @@
 	                	
 	                </select>
 	                <input type="submit" value="查询" class="cx"/>
-	                <a class="cx1" href="${prc }/function/function-teachersignup/pages/activity/add.jsp">增加报名信息</a>
 	            	</form>
 	            </div>
 	        <table width="100%" border="0">
 	            <tr>
-	                <th width="26%" scope="col">名称</th>
-	                <th width="14%" scope="col">状态</th>
-	                <th width="18%" scope="col">增加日期</th>
-	                <th width="42%" scope="col">操作</th>
+	                <th width="25%" scope="col">名称</th>
+	                <th width="25%" scope="col">状态</th>
+	                <th width="25%" scope="col">增加日期</th>
+	                <th width="25%" scope="col">操作</th>
 	            </tr>
 	            
 	            <c:if test="${not empty pm.datas}">
@@ -132,65 +108,23 @@
 								/**结束*/
 								FINISHED(0x3,"结束");
 			                	 --%>
-			                	 
-			                	<span class="space1">
-			                		<a href="${prc}/teachersignup/gotoEdit_act.action?id=${act.id}">
-			                		查看管理
-			                		</a>
-			                	</span>
-			                	<c:if test="${act.status==0}">
-		                			<span class="space1">
-		                			<a href="javascript:publish('${act.id }');">
-		                			发布
-		                			</a>
-		                			</span>
-			                	</c:if>
-			                	<c:if test="${act.status==1}">
-			                		<%--已发布后手动结束--%>
-			                		<time:afterNow date="${act.endDate}">
-				                		<span class="space1">
-					                		<a href="javascript:pauseAct('${act.id}');">
-					                		手工结束
-					                		</a>
-					                	</span>
-				                	</time:afterNow>
-				                	<time:afterNow date="${act.openDate}">
-			                			<span class="space1">
-			                			<a href="javascript:cancelPub('${act.id }');">
-			                			取消发布
-			                			</a>
-			                			</span>
-		                			</time:afterNow>
-			                	</c:if>
-			                	
-			                	<c:if test="${act.status==2}">
-			                		<time:afterNow date="${act.endDate}">
-			                			<span class="space1">
-			                			<a href="javascript:publish('${act.id }');">
-			                			发布
-			                			</a>
-			                			</span>
-			                		</time:afterNow>
-			                	</c:if>
-			                	<c:if test="${act.status!=1}">
-			                		<span class="space1">
-			                			<a href="javascript:delAct('${act.id }');">
-			                			删除
-			                			</a>
-		                			</span>
-			                	</c:if>
-			                		<span class="space1">
-			                		<a href="${prc}/teachersignup/adminList_sign.action?actId=${act.id}">
+		                		<span class="space1">
+			                		<a href="${prc}/teachersignup/masterList_sign.action?actId=${act.id}">
 			                		报名情况
 			                		</a>
-			                		</span>
+		                		</span>
+		                		<span class="space1">
+			                		<a href="${prc}/teachersignup/adminExl_sign.action?actid=${act.id}">
+			                		下载报名结果
+			                		</a>
+		                		</span>
 			                </td>
 			            </tr>
 	            	</c:forEach>
 	            </c:if>
 	        </table>
 	        <div class="page_nav" id="pagingBars">
-					<pg:pager url="adminList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
+					<pg:pager url="masterList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 						  <pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
 								<ul>
 									<pg:pages>	

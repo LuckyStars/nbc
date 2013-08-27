@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>新建报名事件</title>
+		<title>编辑报名事件</title>
 		<link href="${prc }/function/function-teachersignup/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="${prc }/function/function-teachersignup/js/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="${prc }/function/function-teachersignup/easyui/jquery.easyui.min.js"></script>
@@ -69,37 +69,37 @@
 		function submitForm(){//提交表单
 			if($.trim($("#actName").val())==''){
 				$("#actName").focus();
-				return ;
+				return false;
 			}
 			if($.trim($("#actName").val()).length>20){
 				$.messager.alert('报名名称','报名名称不能超过20个字符!');
-				return ;
 			}
 
 			if($("input[name='act.openDate']").val()==''||$("input[name='act.endDate']").val()==''){
 				$.messager.alert('报名时间','请选择报名时间!');
 				$("input[name='act.openDate']").focus();
-				return ;
+				return false;
 			}
 			if(endEditingSubject()){
 				$("input[name='subjectName']").val(subjectValues());
 			}else{
-				return ;
+				return false;
 			}
 			if($("input[name='subjectName']").val()==''){
 				$.messager.alert('报名类型','请至少填写一种报名类型!');
-				return ;
+				return false;
 			}
 			if(endEditingReward()){
 				$("input[name='rewardName']").val(rewardValues());
 			}else{
-				return;
+				return false;
 			}
 
 			if($("textarea[name='act.comment']").val().length>200){
 				$.messager.alert('报名简介','报名简介不能超过200个字!');
-				return ;
+				return false;
 			}
+			alert(swfu.getFile(0)==null);
 			if(swfu.getFile(0)==null){
 				var postForm = $("<form action='${prc}/teachersignup/add_act.action' method='post'></form>");
 				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.name']").val()) + "' />");
@@ -110,7 +110,8 @@
 				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("textarea[name='act.comment']").val()) + "' />");
 				postForm.append("<input type='hidden' name='act.id' value='${act.id}' />");
 				postForm.appendTo(document.body).submit();
-				return;
+				
+				return false;
 			}
 			swfu.addPostParam("act.name", encodeURI($("#actName").val()));
 			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.name']").val()));
@@ -120,6 +121,7 @@
 			swfu.addPostParam("act.comment", encodeURI($("textarea[name='act.comment']").val()));
 			swfu.addPostParam("act.id", '${act.id}');
 			swfu.startUpload();
+			return false;
 		}
 		
 		</script>
@@ -127,22 +129,23 @@
 	<body>
 	<div class="con_conent fixed">
 		<h1 class="title">
-			<span class="title">教师报名>新增报名</span>
+			<span class="title">教师报名</span>
 			<span class="back"><a href="${prc }/teachersignup/adminList_act.action">返回上一页</a></span>
 		</h1>
 	    <div class="table_box fixed">
 			<p class="apply">
 				报名名称：
 				<span>
-					<input id="actName" name="act.name" class="easyui-validatebox" data-options="required:true" type="text" />
+					<input id="actName" name="act.name" value="${act.name}"
+					 class="easyui-validatebox" data-options="required:true" type="text" />
 				</span>
 			</p>
 	       	<div class="data">
 	       		<p class="begin">报名起始日期：
 	       		<span>
-	       		
 	       			<input name="act.openDate" class="Wdate" type="text" id="openDate"
-					onfocus="WdatePicker({onpicked:function(){endDate.focus();},dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'<time:curTime format="yyyy-MM-dd HH:mm:ss"/>',maxDate:'#F{$dp.$D(\'endDate\');}',isShowClear:false})"
+	       			value="<fmt:formatDate value="${act.openDate }" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onfocus="WdatePicker({onpicked:function(){endDate.focus();},dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDate\');}',isShowClear:false})"
 					readonly="readonly"
 					 />
 	       		</span>
@@ -150,6 +153,7 @@
 	       		<p class="end">报名结束日期：
 	       			<span>
 	       				<input name="act.endDate" class="Wdate" type="text" id="endDate"
+	       				value="<fmt:formatDate value="${act.endDate }" pattern="yyyy-MM-dd HH:mm:ss"/>"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'openDate\');}',isShowClear:false})"
 						readonly="readonly"
 						 />
@@ -167,7 +171,14 @@
 					singleSelect: true,
 					toolbar: '#tbSubject',
 					onClickRow: onClickRowSubject
-				">
+					<c:if test="${not empty act.subjects}">
+					,data:[
+						<c:forEach items="${act.subjects}" var="sub" varStatus="i">
+							{'subjectName':'${sub.name}'},
+						</c:forEach>
+						]
+					</c:if>"
+				>
 				<thead>
 					<tr>
 						<th data-options="field:'subjectName',width:240,
@@ -177,6 +188,7 @@
 							}">报名类型
 						</th>
 					</tr>
+					
 				</thead>
 			</table>
 		
@@ -187,6 +199,8 @@
 					data-options="iconCls:'icon-remove',plain:true" onclick="removeSubjectRow()">删除</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" 
 					data-options="iconCls:'icon-save',plain:true" onclick="acceptSubject()">确定</a>
+					<a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-save',plain:true" onclick="subjectValues()">show</a>
 			</div>
 			</div>
 			</div>
@@ -278,6 +292,13 @@
 							singleSelect: true,
 							toolbar: '#tbReward',
 							onClickRow: onClickRowReward
+							<c:if test="${not empty act.rewards}">
+							,data:[
+								<c:forEach items="${act.rewards}" var="rew" varStatus="i">
+									{'rewardName':'${rew.name}'},
+								</c:forEach>
+								]
+							</c:if>"
 						">
 						<thead>
 							<tr>
@@ -298,6 +319,8 @@
 							data-options="iconCls:'icon-remove',plain:true" onclick="removeRewardRow()">删除</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" 
 							data-options="iconCls:'icon-save',plain:true" onclick="acceptReward()">确定</a>
+							<a href="javascript:void(0)" class="easyui-linkbutton" 
+							data-options="iconCls:'icon-save',plain:true" onclick="rewardValues()">show</a>
 					</div>
 	           	</div>
 	       	</div>
@@ -400,14 +423,14 @@
 			
 	      	<div class="type-1 type-2" ><span class="tit3"> 报名简介：<br/>(200字以内)</span>
 	            <span class="rel">
-	            <textarea  name="act.comment" class="rel" cols="60" rows="8"></textarea></span> 
+	            <textarea  name="act.comment" class="rel" cols="60" rows="8">${act.comment}</textarea></span> 
 	        </div>
 	        
 	        <input type="hidden" name="subjectName"/>
 	       	<input type="hidden" name="rewardName"/>
 	       	
 	        <a href="javascript:submitForm();" onclick="" class="return1" style="margin-left:170px;">确定</a>
-	       	<a href="${prc }/teachersignup/adminList_act.action" class="return1">取消</a>
+	       	<a href="#" class="return1">取消</a>
 	       	
 	</div>
 	</body>

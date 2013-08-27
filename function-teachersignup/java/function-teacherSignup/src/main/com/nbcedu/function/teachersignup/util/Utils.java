@@ -3,13 +3,15 @@ package com.nbcedu.function.teachersignup.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
 
 import com.ibm.icu.text.SimpleDateFormat;
-import com.nbcedu.common.uuid.UUID;
-import com.nbcedu.function.teachersignup.constants.ActStatus;
+import com.nbcedu.function.functionsupport.core.PortalMessageUtil;
+import com.nbcedu.function.functionsupport.core.SupportManager;
+import com.nbcedu.function.functionsupport.mapping.PortalMessage;
 import com.nbcedu.function.teachersignup.model.TSActivity;
 
 public class Utils {
@@ -36,10 +38,43 @@ public class Utils {
 	}
 	
 	public static final class Message{
-		public static final String getInsertSQL(TSActivity act,String createUid){
+		
+		private static final PortalMessageUtil msgUtil = SupportManager.getPortalMessageUtil();
+		
+		/**
+		 * 发布时发送门户消息
+		 * @param act
+		 * @author xuechong
+		 */
+		public static final void sendAddMsg(final TSActivity act){
+			class PostMsg implements Runnable{
+				@Override
+				public void run() {
+					PortalMessage msg = new PortalMessage();
+					msg.setFunctionName("teachersignup");
+					msg.setContent(StringUtils.trimToEmpty(act.getComment()));
+					msg.setTitle(StringUtils.trimToEmpty(act.getName()));
+					msg.setMessageType("type_01");
+					msg.setIdentityCodes(Arrays.asList("3022100"));//教师
+					msg.setMessageId(act.getId());
+					msg.setModuleName("教师报名");
+					msgUtil.sendPortalMsg(msg,null);
+				}
+			}
+			
+			new Thread(new PostMsg()).start();
+		}
+		
+		/**
+		 * 获取新增公告SQL
+		 * @param act
+		 * @param createUid
+		 * @return
+		 * @author xuechong
+		 */
+		public static final String getInsertSQL(TSActivity act,String createUid,String curUserName){
 			
 			String uuid = act.getId();
-			String name= "新的教师报名";
 			String imgPath = "";
 			String createDate = sdf.format(new Date());
 			
@@ -72,7 +107,7 @@ public class Utils {
 			
 			fastReplace(result, "${id}", uuid);
 			fastReplace(result, "${title}", act.getName());
-			fastReplace(result, "${name}", name);
+			fastReplace(result, "${name}", curUserName);
 			fastReplace(result, "${userId}", createUid);
 			fastReplace(result, "${img}", imgPath);
 			fastReplace(result, "${postTime}", createDate);
