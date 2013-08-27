@@ -32,4 +32,10 @@ public interface TSActivityBiz extends BaseBiz<TSActivity>{
 	 * @author xuechong
 	 */
 	public PagerModel findFinished();
+	/**
+	 * 发布公告!
+	 * @param act
+	 * @author xuechong
+	 */
+	public void addHSIPost (TSActivity act);
 }

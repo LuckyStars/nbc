@@ -150,6 +150,8 @@ public class TSActivityAction extends BaseAction{
 		this.act = this.actBiz.findById(this.id);
 		if(act!=null){
 			this.actBiz.modifyStatus(this.id, ActStatus.PUBLISHED);
+			act.setStatus(ActStatus.PUBLISHED.getId());
+			this.actBiz.addHSIPost(act);
 		}
 		return RELOAD_ADMIN;
 	}

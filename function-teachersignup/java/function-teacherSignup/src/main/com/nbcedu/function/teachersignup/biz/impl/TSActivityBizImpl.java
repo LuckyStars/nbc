@@ -166,7 +166,7 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		return this.actDao.searchPaginated(cri);
 	}
 	
-	private void addHSIPost (TSActivity act){
+	public void addHSIPost (TSActivity act){
 		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
 			return;
 		}

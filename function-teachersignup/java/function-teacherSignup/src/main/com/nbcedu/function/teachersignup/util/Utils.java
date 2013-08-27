@@ -38,7 +38,7 @@ public class Utils {
 	public static final class Message{
 		public static final String getInsertSQL(TSActivity act,String createUid){
 			
-			String uuid = new UUID().toString();
+			String uuid = act.getId();
 			String name= "新的教师报名";
 			String imgPath = "";
 			String createDate = sdf.format(new Date());
@@ -61,15 +61,14 @@ public class Utils {
 			result.append("THP_ZDFLAG,");//int
 			result.append("THP_POSTSTATE,");//int
 			result.append("THP_ZDTIME,");//
-			result.append("THP_SOURCE,");
-			result.append("THP_ATTACHFLAG)");
+			result.append("THP_SOURCE)");
 			
 			result.append(" values(");
 			result.append("'${id}','${title}','${name}','${userId}',");
 			result.append("'${img}','${postTime}','${text}','${createTime}',");
 			result.append("${enable},'${timeStart}','${timeEnd}',");
 			result.append("${postFlag},${zdFlag},'${postState}','${zdTime}',");
-			result.append("'${source}',${attaFlag});");
+			result.append("'${source}');");
 			
 			fastReplace(result, "${id}", uuid);
 			fastReplace(result, "${title}", act.getName());
@@ -83,11 +82,10 @@ public class Utils {
 			fastReplace(result, "${timeStart}", createDate);
 			fastReplace(result, "${timeEnd}", sdf.format(act.getEndDate()));
 			fastReplace(result, "${postFlag}", "1");
-			fastReplace(result, "${zdfFlag}", "0");
+			fastReplace(result, "${zdFlag}", "0");
 			fastReplace(result, "${zdTime}", sdf.format(act.getEndDate()));
 			fastReplace(result, "${postState}", "1");
 			fastReplace(result, "${source}", "");
-			
 			return result.toString();
 		}
 	}
