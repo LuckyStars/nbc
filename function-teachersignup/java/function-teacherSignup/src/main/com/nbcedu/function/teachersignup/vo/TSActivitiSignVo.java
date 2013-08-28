@@ -3,6 +3,8 @@ package com.nbcedu.function.teachersignup.vo;
 import static org.springframework.util.CollectionUtils.isEmpty;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +72,14 @@ public class TSActivitiSignVo {
 					sign.setSignId(signedIds.get(sub.getId()));
 					result.add(sign);
 				}
+				
+				Collections.sort(result, new Comparator<SignVO>() {
+					@Override
+					public int compare(SignVO o1, SignVO o2) {
+						return o1.getSubId().equals(o2.getSubId())?0
+								:o1.getSubId().hashCode()>o2.getSubId().hashCode() ?1:-1;
+					}
+				});
 				
 			}
 			return result;

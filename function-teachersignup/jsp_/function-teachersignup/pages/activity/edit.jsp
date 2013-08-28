@@ -137,24 +137,34 @@
 				报名名称：
 				<span>
 					<input id="actName" name="act.name" value="${act.name}"
-					 class="easyui-validatebox" data-options="required:true" type="text" />
+					 class="easyui-validatebox" data-options="required:true" type="text" 
+					<c:if test="${act.status!=0}">
+					 readonly="readonly"
+					</c:if>
+					 />
 				</span>
 			</p>
 	       	<div class="data">
 	       		<p class="begin">报名起始日期：
 	       		<span>
-	       			<input name="act.openDate" class="Wdate" type="text" id="openDate"
+	       			<input name="act.openDate"  type="text" id="openDate"
 	       			value="<fmt:formatDate value="${act.openDate }" pattern="yyyy-MM-dd HH:mm:ss"/>"
+	       			<c:if test="${act.status==0}">
+					class="Wdate"
 					onfocus="WdatePicker({onpicked:function(){endDate.focus();},dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDate\');}',isShowClear:false})"
+					</c:if>
 					readonly="readonly"
 					 />
 	       		</span>
 	       		</p>
 	       		<p class="end">报名结束日期：
 	       			<span>
-	       				<input name="act.endDate" class="Wdate" type="text" id="endDate"
+	       				<input name="act.endDate"  type="text" id="endDate"
 	       				value="<fmt:formatDate value="${act.endDate }" pattern="yyyy-MM-dd HH:mm:ss"/>"
+						<c:if test="${act.status==2 or act.status==0}">
+						class="Wdate"
 						onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'openDate\');}',isShowClear:false})"
+						</c:if>
 						readonly="readonly"
 						 />
 	    			</span>
@@ -169,8 +179,11 @@
 	       	<table id="subjectDL" class="easyui-datagrid" style="width:280px;height:auto"
 				data-options="
 					singleSelect: true,
-					toolbar: '#tbSubject',
+					toolbar: '#tbSubject'
+					<c:if test="${act.status==0}">
+					,
 					onClickRow: onClickRowSubject
+	        		</c:if>
 					<c:if test="${not empty act.subjects}">
 					,data:[
 						<c:forEach items="${act.subjects}" var="sub" varStatus="i">
@@ -193,14 +206,14 @@
 			</table>
 		
 			<div id="tbSubject" style="height:auto">
+			<c:if test="${act.status==0}">
 				<a href="javascript:void(0)" class="easyui-linkbutton" 
 					data-options="iconCls:'icon-add',plain:true" onclick="appendSubject()">新增</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" 
 					data-options="iconCls:'icon-remove',plain:true" onclick="removeSubjectRow()">删除</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" 
 					data-options="iconCls:'icon-save',plain:true" onclick="acceptSubject()">确定</a>
-					<a href="javascript:void(0)" class="easyui-linkbutton" 
-					data-options="iconCls:'icon-save',plain:true" onclick="subjectValues()">show</a>
+			</c:if>
 			</div>
 			</div>
 			</div>
@@ -279,19 +292,22 @@
 					return result;
 				}
 				
-				
 			</script>
 		    
 	       	<%-- 报名类型 END --%>
 	        
 	        <%-- 奖项类型 --%>
+	        
 	        <div class="type-1 type-2"><span class="tit3">奖项类型：</span>
 	           	<div style="width:280px;overflow: hidden;">
 			       	<table id="rewardDL" class="easyui-datagrid" style="width:280px;height:auto"
 						data-options="
 							singleSelect: true,
-							toolbar: '#tbReward',
+							toolbar: '#tbReward'
+							<c:if test="${act.status==0}">
+							,
 							onClickRow: onClickRowReward
+	        				</c:if>
 							<c:if test="${not empty act.rewards}">
 							,data:[
 								<c:forEach items="${act.rewards}" var="rew" varStatus="i">
@@ -299,7 +315,7 @@
 								</c:forEach>
 								]
 							</c:if>"
-						">
+						>
 						<thead>
 							<tr>
 								<th data-options="field:'rewardName',width:240,
@@ -313,14 +329,14 @@
 					</table>
 				
 					<div id="tbReward" style="height:auto">
+					<c:if test="${act.status==0}">
 						<a href="javascript:void(0)" class="easyui-linkbutton" 
 							data-options="iconCls:'icon-add',plain:true" onclick="appendReward()">新增</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" 
 							data-options="iconCls:'icon-remove',plain:true" onclick="removeRewardRow()">删除</a>
 						<a href="javascript:void(0)" class="easyui-linkbutton" 
 							data-options="iconCls:'icon-save',plain:true" onclick="acceptReward()">确定</a>
-							<a href="javascript:void(0)" class="easyui-linkbutton" 
-							data-options="iconCls:'icon-save',plain:true" onclick="rewardValues()">show</a>
+					</c:if>
 					</div>
 	           	</div>
 	       	</div>
@@ -403,8 +419,14 @@
 	       	<%-- 奖项类型 --%>
 	       	
 	       	<%-- 附件 --%>
-		
-		        <div class="upload">
+				<c:if test="${not empty act.fileName}">
+				附件<a href="${prc}/teachersignup/downAtta_act.action?id=${act.id}">${act.fileName }</a>
+				</c:if>
+		        <div class="upload" 
+		        <c:if test="${act.status!=0 }">
+		        style="display: none;"
+		        </c:if>
+		        >
 		   			<div class="plug_in borders fl" style="position:absolue;z-index:0;" >
 	                    <div >
 	                    	<div style="margin:0 auto;overflow-y:auto;overflow-x:hidden;">
@@ -423,14 +445,19 @@
 			
 	      	<div class="type-1 type-2" ><span class="tit3"> 报名简介：<br/>(200字以内)</span>
 	            <span class="rel">
-	            <textarea  name="act.comment" class="rel" cols="60" rows="8">${act.comment}</textarea></span> 
+	            <textarea  name="act.comment" class="rel" cols="60" rows="8"
+	            <c:if test="${act.status!=0}">
+	            readonly="readonly"
+	            </c:if>
+	            >${act.comment}</textarea></span> 
 	        </div>
 	        
 	        <input type="hidden" name="subjectName"/>
 	       	<input type="hidden" name="rewardName"/>
-	       	
+	       	<c:if test="${act.status==0 or act.status==2}">
 	        <a href="javascript:submitForm();" onclick="" class="return1" style="margin-left:170px;">确定</a>
-	       	<a href="#" class="return1">取消</a>
+	        </c:if>
+	       	<a href="${prc }/teachersignup/adminList_act.action" class="return1">返回</a>
 	       	
 	</div>
 	</body>

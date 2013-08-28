@@ -97,6 +97,7 @@
 			</c:if>
             
         </table>
+        <c:if test="${pm.total > 10}">
         <div class="page_nav" id="pagingBars">
 			<pg:pager url="masterList_sign.action?actId=${actId}&userName=${userName}&subId=${subId}&rewId=${rewId}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 				  	<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
@@ -111,6 +112,7 @@
 					<pg:prev> <span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 			</pg:pager>
 		</div>
+		</c:if>
     </div>
 </div>
 </body>

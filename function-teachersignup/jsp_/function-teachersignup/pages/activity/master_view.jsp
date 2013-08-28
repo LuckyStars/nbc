@@ -41,8 +41,10 @@
 	            	<form action="${prc }/teachersignup/masterList_act.action">
 	                <span>增加日期</span>
 	                <select name="month">
-	                
 	                	<option value="0" >全部</option>
+	                	<option value="1" 
+	                		<c:if test="${month==3}">selected="selected"</c:if>
+	                	>近一个月</option>
 	                	<option value="3" 
 	                		<c:if test="${month==3}">selected="selected"</c:if>
 	                	>近一季度</option>
@@ -123,6 +125,7 @@
 	            	</c:forEach>
 	            </c:if>
 	        </table>
+	        <c:if test="${pm.total > 10}">
 	        <div class="page_nav" id="pagingBars">
 					<pg:pager url="masterList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 						  <pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
@@ -137,6 +140,7 @@
 							<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 					</pg:pager>
    			 </div>
+   			 </c:if>
 	    </div>
 	</div>
 </body>

@@ -61,44 +61,11 @@
 				            </tr>
 		            	</c:forEach>
 		            </c:if>
-		            <tr>
-		                <td>小学高级职称</td>
-		                <td>报名 取消</td>
-		            </tr>
 	        	</table>
 	            <a href="${prc}/teachersignup/comListPubed_act.action" class="btn btnright">返回</a>
        		</div>	
     	</div>
 	</div>
-    <%--弹出层--%>
-    <div id="popDiv" style="display: none;">
-	<div class="bg"></div>
-		<div class="add1">
-		<div class="add-top1">
-			<p>补卡类型维护</p>
-			<img src="${prc}/function/function-teachersignup/image/erro.jpg" onclick="closePop();" class="close" style="cursor:pointer;"/>
-		</div>
-		<div class="add-down">
-			<div class="under">
-				<p class="type">请选择您想要报名的类型：</p>
-				<p><input type="checkbox" /><span>全选</span></p>
-				<div class="check">
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				<p><input type="checkbox" /><span>小学高级职称</span></p>
-				</div>
-				<a href="#" class="return" style="margin-left:30px;">确定</a>
-				<a href="#" class="return">取消</a>
-			</div>
-		</div>
-	</div>
-	</div>
-	<%--弹出层--%>
 <script>
 	function closePop(){
 		$("#popDiv").fadeOut(200);

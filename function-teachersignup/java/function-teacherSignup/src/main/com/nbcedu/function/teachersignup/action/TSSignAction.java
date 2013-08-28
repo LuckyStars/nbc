@@ -32,10 +32,12 @@ public class TSSignAction extends BaseAction{
 	private String rewId;
 	private String signId;
 	private TSActivitiSignVo asvo;
+	private TSActivity act ;
 	
 	private Set<TSReward> rewdSet = new HashSet<TSReward>();
 	private Set<TSSubject> subjSet = new HashSet<TSSubject>();
 	private List<TSSignVo> signList = new ArrayList<TSSignVo>();
+	
 	
 	/**
 	 * 增加报名
@@ -94,7 +96,7 @@ public class TSSignAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public String adminList(){
-		TSActivity act = this.actBiz.findById(actId);
+		this.act = this.actBiz.findById(actId);
 		this.rewdSet = act.getRewards();
 		this.subjSet = act.getSubjects();
 		this.pm = this.signBiz.pageByAct(actId, subId, rewId, userName);
@@ -206,6 +208,12 @@ public class TSSignAction extends BaseAction{
 	}
 	public void setSignList(List<TSSignVo> signList) {
 		this.signList = signList;
+	}
+	public TSActivity getAct() {
+		return act;
+	}
+	public void setAct(TSActivity act) {
+		this.act = act;
 	}
 	
 }

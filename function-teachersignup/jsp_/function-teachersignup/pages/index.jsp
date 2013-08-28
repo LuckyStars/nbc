@@ -23,6 +23,7 @@
         	</dt>
     		<dd><a href="${prc}/teachersignup/comListPubed_act.action">我要报名</a></dd>
 		</dl>
+		
 		<dl class="warp">
         	<dt>
         		<img src="${prc}/function/function-teachersignup/image/tu3.jpg" 
@@ -30,6 +31,7 @@
         	</dt>
     		<dd><a href="${prc}/teachersignup/commonFinList_act.action">已经结束的报名</a></dd>
 		</dl>
+		
         <c:if test="${sessionScope.tsCurUser.isAdmin}">
 		<dl class="warp">
 			<dt><img src="${prc}/function/function-teachersignup/image/tu4.jpg" 
@@ -46,7 +48,7 @@
 				onclick="location.href='${prc}/teachersignup/masterList_act.action'"
 				style="cursor:pointer" />
 			</dt>
-			<dd><a href = "${prc}/teachersignup/masterList_act.action">报名查看及统计</a></dd>
+			<dd><a href = "${prc}/teachersignup/masterList_act.action?month=1">报名查看及统计</a></dd>
         </dl>
         </c:if>
         
@@ -59,7 +61,6 @@
 			</dt>
 			<dd><a href = "${prc}/teachersignup/list_userPri.action">权限管理</a></dd>
         </dl>
-        
         </c:if>
         
 	</div>

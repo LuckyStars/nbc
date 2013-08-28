@@ -3,15 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	
-	<bean id="teachersignupLoader" class="com.nbcedu.function.teachersignup.interceptor.TSLoader"></bean>
+	<bean id="teachersignupLoader" class="com.nbcedu.function.teachersignup.interceptor.TSLoader" scope="prototype" ></bean>
 	
-	<bean id="indexAction" class="com.nbcedu.function.teachersignup.action.IndexAction"></bean>
+	<bean id="indexAction" class="com.nbcedu.function.teachersignup.action.IndexAction" scope="prototype"></bean>
 	
-	<bean id="tsRoleInterceptor" class = "com.nbcedu.function.teachersignup.interceptor.RoleInterceptor">
+	<bean id="tsRoleInterceptor" class = "com.nbcedu.function.teachersignup.interceptor.RoleInterceptor" scope="prototype">
 		<property name="userPrivilegeBiz" ref="tsUserPriBiz"></property>
 	</bean>
 	
-	<bean id="tsEndPubInterceptor" class="com.nbcedu.function.teachersignup.interceptor.EndPubInterceptor">
+	<bean id="tsEndPubInterceptor" class="com.nbcedu.function.teachersignup.interceptor.EndPubInterceptor" scope="prototype">
 		<property name="actBiz" ref="tsActBiz"></property>
 	</bean>
 	
@@ -19,11 +19,11 @@
 		<property name="priBiz" ref="tsUserPriBiz"></property>
 	</bean>
 	
-	<bean id="tsActivityAction" class="com.nbcedu.function.teachersignup.action.TSActivityAction" >
+	<bean id="tsActivityAction" class="com.nbcedu.function.teachersignup.action.TSActivityAction" scope="prototype" >
 		<property name="actBiz" ref="tsActBiz"></property>
 	</bean>
 	
-	<bean id="tsSignAction" class="com.nbcedu.function.teachersignup.action.TSSignAction">
+	<bean id="tsSignAction" class="com.nbcedu.function.teachersignup.action.TSSignAction" scope="prototype">
 		<property name="signBiz" ref="tsSignBiz"></property>
 		<property name="actBiz" ref="tsActBiz"></property>
 		<property name="subBiz" ref="tsSubBiz"></property>

@@ -119,7 +119,7 @@
 				<h1 class="actTitle">正在进行的报名</h1>
 					<c:forEach items="${openList}" var = "act">
 						<script type="text/javascript">
-						window.onload = function(){
+						$(function(){
 							$('#count${act.id}').countdown({
 								startTime: "${act.countDownTime}",
 								stepTime: 1,
@@ -129,7 +129,7 @@
 								timerEnd: function(){ location.href='${prc}/teachersignup/comListPubed_act.action'; },
 								image: "${prc}/function/function-teachersignup/image/digits2_blue.png"
 							});
-						};
+						});
 						</script>
 						<div class="prompt opened" >
 			                <p class="tit1"><c:out value="${act.name}" escapeXml="true"></c:out></p>

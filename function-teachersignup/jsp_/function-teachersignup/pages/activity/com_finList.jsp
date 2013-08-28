@@ -65,6 +65,7 @@
 	            </c:if>
 	            
 	        </table>
+	        <c:if test="${pm.total > 10}">
 	        <div class="page_nav" id="pagingBars">
 					<pg:pager url="commonFinList_act.action?" items="${pm.total}" maxPageItems="10" 
 						export="currentPageNumber=pageNumber">
@@ -84,6 +85,7 @@
 							<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 					</pg:pager>
    			 </div>
+   			 </c:if>
 	    </div>
 	</div>
 </body>

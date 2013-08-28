@@ -42,7 +42,7 @@
 				</table>
 				
 				<a href="#" id="popAdd" class="return" style="margin-left:124px;">新增</a>
-				<a href="#" class="return">返回</a>
+				<a href="${prc}/function/function-teachersignup/pages/index.jsp" class="return">返回</a>
 				</div>
 			</div>
 			

@@ -179,16 +179,19 @@
 			                			</a>
 		                			</span>
 			                	</c:if>
+			                	<c:if test="${act.status!=0}">
 			                		<span class="space1">
-			                		<a href="${prc}/teachersignup/adminList_sign.action?actId=${act.id}">
+			                		<a href="${prc}/teachersignup/adminList_sign.action?actId=${act.id}&subId=&rewId=">
 			                		报名情况
 			                		</a>
 			                		</span>
+			                	</c:if>
 			                </td>
 			            </tr>
 	            	</c:forEach>
 	            </c:if>
 	        </table>
+	        <c:if test="${pm.total > 10}">
 	        <div class="page_nav" id="pagingBars">
 					<pg:pager url="adminList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 						  <pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
@@ -203,6 +206,7 @@
 							<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 					</pg:pager>
    			 </div>
+   			 </c:if>
 	    </div>
 	</div>
 </body>

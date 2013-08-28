@@ -73,7 +73,9 @@
 				<th width="20%" scope="col">教师姓名</th>
 				<th width="30%" scope="col">报名类型</th>
 				<th width="30%" scope="col">获奖情况</th>
+				<c:if test="${act.status==3}">
 				<th width="20%" scope="col">追加奖项</th>
+				</c:if>
 			</tr>
 			<c:if test="${not empty pm.datas}">
 				<c:forEach items="${pm.datas}" var="sign">
@@ -92,6 +94,7 @@
 							    </c:if>
 					        </select>
 					    </td>
+					    <c:if test="${act.status==3}">
 					    <td>
 					  	<c:choose>
 					  		<c:when test="${not empty rewdSet}">
@@ -101,12 +104,12 @@
 					  		<c:otherwise>暂无奖项</c:otherwise>
 					  	</c:choose>  
 					   </td>
+					   </c:if>
 					</tr>
-					
 				</c:forEach>
-			</c:if>
-            
+            </c:if>
         </table>
+        <c:if test="${pm.total > 10}">
         <div class="page_nav" id="pagingBars">
 			<pg:pager url="adminList_sign.action?actId=${actId}&userName=${userName}&subId=${subId}&rewId=${rewId}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 				  	<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
@@ -121,6 +124,7 @@
 					<pg:prev> <span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 			</pg:pager>
 		</div>
+		</c:if>
     </div>
 	<script type="text/javascript">
 		var rewEditFin = true;
