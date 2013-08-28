@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +49,8 @@ public class TSActivityAction extends BaseAction{
 	
 	private Integer month;//search month
 	private Integer actStatu;//search status
+	private String openDate;
+	private String endDate;
 
 	/***普通教师活动列表 已开放*/
 	List<TSActivityVO> openList = new LinkedList<TSActivityVO>();
@@ -60,8 +63,10 @@ public class TSActivityAction extends BaseAction{
 	 * @return
 	 * @throws IOException
 	 * @author xuechong
+	 * @throws ParseException 
 	 */
-	public String add() throws IOException{
+	public String add() throws IOException, ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(atta!=null){
 			String savePath = this.savePath(atta);
 			FileUtils.copyFile(atta, new File(savePath));
@@ -69,6 +74,8 @@ public class TSActivityAction extends BaseAction{
 			this.act.setFilePath(savePath);
 		}
 		
+		this.act.setOpenDate(sdf.parse(URLDecoder.decode(this.openDate, "utf-8")));
+		this.act.setEndDate(sdf.parse(URLDecoder.decode(this.endDate, "utf-8")));
 		this.act.setComment(URLDecoder.decode(this.act.getComment(), "utf-8"));
 		this.act.setName(URLDecoder.decode(this.act.getName(), "utf-8"));
 		String[] sub = StringUtils.isNotBlank(subjectName)?subjectName.split(","):null;
@@ -340,4 +347,17 @@ public class TSActivityAction extends BaseAction{
 	public void setFinList(List<TSActivity> finList) {
 		this.finList = finList;
 	}
+	public String getOpenDate() {
+		return openDate;
+	}
+	public void setOpenDate(String openDate) {
+		this.openDate = openDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
 }
