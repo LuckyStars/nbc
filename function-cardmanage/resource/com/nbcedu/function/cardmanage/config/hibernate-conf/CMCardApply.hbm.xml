@@ -7,16 +7,20 @@
 		<id name="id" column="PK_CARDAPPLY_ID" type="string" length="32">
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
 		</id>
-		<property name="cardUserName" column="CARD_USERNAME" type="string" length="100" not-null="true" />
+		<property name="cardUserName" column="CARD_USERNAME" type="string" length="500" not-null="true" />
 		<property name="cardClassId" column="CARD_CLASSID" type="string" length="32" not-null="true" />
 		<property name="applyUserName" column="APPLY_USERNAME" type="string" length="100" not-null="true" />
 		<property name="applyUserUid" column="APPLY_USERID" type="string" length="32" not-null="true" />
-		<property name="createDate" column="CREATEDATE" type="date" />
+		<property name="createDate" column="CREATEDATE" type="datetime" />
 		<property name="comment" column="COMMENT"  type="text" not-null="false" />
 		<property name="cardTypeId" column="FK_CARDAPPLY_CARDTYPEID" length="32" type="string" not-null="true"  />
 		<property name="status" column="STATUS"  type="integer" length="2" not-null="true"  />
 	    <many-to-one name="cardType" class="com.nbcedu.function.cardmanage.model.CMCardType" fetch="select" insert="false" update="false">
            <column name="FK_CARDAPPLY_CARDTYPEID" length="32" />
         </many-to-one>
+<!--         <set name="cardUser" cascade="all" outer-join="true">-->
+<!--		 	<key column="PK_CARDAPPLY_ID"/>-->
+<!--		 <one-to-many class="com.nbcedu.function.cardmanage.model.CMCardUser"/>-->
+<!--		 </set>-->
 	</class>
 </hibernate-mapping>

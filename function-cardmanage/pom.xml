@@ -137,12 +137,6 @@
 			<groupId>com.nbcedu.bizplatform</groupId>
 			<artifactId>bizplatform-common</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>date4j</artifactId>
-					<groupId>date4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -175,7 +169,7 @@
 		<dependency> 
  			<groupId>com.nbcedu.bizplatform</groupId> 
  			<artifactId>bizplatform-integration-uc-client</artifactId> 
- 			<version>2.0.0-SNAPSHOT</version> 
+ 			<version>2.0.0</version> 
  		</dependency> 
  		<dependency> 
  			<groupId>com.nbcedu.bizplatform</groupId> 
@@ -186,6 +180,11 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.7</version>
+		</dependency>
+		<dependency>
+		 <groupId>log4j</groupId>
+  		<artifactId>log4j</artifactId>
+  		 <version>1.2.13</version>
 		</dependency>
 	</dependencies>
 </project>

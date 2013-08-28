@@ -7,13 +7,13 @@ import com.nbcedu.function.cardmanage.vo.CMApply;
 
 public interface CMCardApplyBiz extends BaseBiz<CMCardApply>{
 	
-	public PagerModel findAllBy(CMApply cmApply);
+	public PagerModel findAllBy(CMApply cmApply,String userUid);
 	/**
 	 * 增加申请
 	 * @param cmApply
 	 * @return
 	 */
 	public boolean add(CMApply cmApply);
-	boolean updateApply(CMApply cmApply);
+	boolean modifyApply(CMApply cmApply);
 	PagerModel findAllManageBy(CMApply cmApply);
 }

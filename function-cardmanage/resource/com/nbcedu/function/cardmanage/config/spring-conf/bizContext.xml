@@ -6,6 +6,8 @@
 	
 	<bean id="cardApplyBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMCardApplyBizImpl" scope="prototype" >
 		<property name="cardApplyDao" ref="cardApplyDao"></property>
+		<property name="cardTypeDao" ref="cardTypeDao"></property>
+		<property name="cmUserPrivilegeDao" ref="cmUserPriDao"></property>
 	</bean>
 	<bean id="cardTypeBiz" class="com.nbcedu.function.cardmanage.biz.impl.CMCardTypeBizImpl" scope="prototype">
 		<property name="cardTypeDao" ref="cardTypeDao"></property>

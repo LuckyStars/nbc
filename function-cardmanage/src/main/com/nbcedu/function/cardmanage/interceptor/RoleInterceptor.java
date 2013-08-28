@@ -15,14 +15,22 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 @SuppressWarnings("serial")
 public class RoleInterceptor implements Interceptor {
 
-	private CMUserPrivilegeBiz userPrivilegeBiz;
+	private CMUserPrivilegeBiz cmPriBiz;
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		if(getSession(invocation).get(Constants.SESSION_USER_KEY) == null){
 			String uid = (String) getSession(invocation).get(Constants.SESSION_UID_KEY);
-			String userName = UcService.findUserNameByUid(uid);
-			CMUserPrivilege pri = this.userPrivilegeBiz.findByUid(uid);
-			boolean isAdmin = pri!=null&&StringUtils.isNotBlank(pri.getId());
+			String userName = "";
+			boolean isAdmin = false;
+			if(uid=="1"||uid.equals("1")){
+//				CMUserPrivilege pri = new CMUserPrivilege();
+				isAdmin = true;
+				userName = "admin";
+			}else{
+				userName = UcService.findUserNameByUid(uid);
+			CMUserPrivilege pri = this.cmPriBiz.findByUid(uid);
+			 isAdmin = pri!=null&&StringUtils.isNotBlank(pri.getId());
+			}
 			CMUser curUser = new CMUser(userName, uid, isAdmin);
 			getSession(invocation).put(Constants.SESSION_USER_KEY, curUser);
 		}
@@ -33,4 +41,11 @@ public class RoleInterceptor implements Interceptor {
 	}
 	public void destroy() {	}
 	public void init() {}
+	public CMUserPrivilegeBiz getCmPriBiz() {
+		return cmPriBiz;
+	}
+	public void setCmPriBiz(CMUserPrivilegeBiz cmPriBiz) {
+		this.cmPriBiz = cmPriBiz;
+	}
+	
 }

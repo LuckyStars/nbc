@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.cardmanage.biz.CMUserPrivilegeBiz;
@@ -17,7 +16,6 @@ import com.nbcedu.function.cardmanage.util.UcService;
 
 @SuppressWarnings("serial")
 public class CMUserPrivilegeAction extends BaseAction{
-	private static final Logger logger = Logger.getLogger(CMUserPrivilegeAction.class);
 	
 	private CMUserPrivilegeBiz priBiz;
 

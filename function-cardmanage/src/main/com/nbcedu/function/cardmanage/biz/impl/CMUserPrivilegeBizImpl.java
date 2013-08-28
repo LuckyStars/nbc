@@ -1,6 +1,8 @@
 package com.nbcedu.function.cardmanage.biz.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.nbcedu.function.cardmanage.biz.CMUserPrivilegeBiz;
 import com.nbcedu.function.cardmanage.core.biz.impl.BaseBizImpl;
@@ -25,12 +27,14 @@ public class CMUserPrivilegeBizImpl extends BaseBizImpl<CMUserPrivilege> impleme
 
 	@Override
 	public void addByUid(Collection<String> uids) {
-		if(uids!=null&&!uids.isEmpty()){
+		Set  uniqueResult = new  HashSet(uids);
+		Object [] s = uniqueResult.toArray();
+		if(uniqueResult!=null&&!uniqueResult.isEmpty()){
 			this.cmUserPrivilegeDao.removeAll();
-			for (String uid : uids) {
+			for (int i = 0; i<s.length;i++) {
 				CMUserPrivilege pri = new CMUserPrivilege();
-				pri.setUserUid(uid);
-				pri.setUserName(UcService.findUserNameByUid(uid));
+				pri.setUserUid(s[i].toString());
+				pri.setUserName(UcService.findUserNameByUid(s[i].toString()));
 				this.add(pri);
 			}
 		}

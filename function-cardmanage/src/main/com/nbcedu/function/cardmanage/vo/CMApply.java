@@ -1,9 +1,9 @@
 package com.nbcedu.function.cardmanage.vo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.ibm.icu.text.SimpleDateFormat;
 import com.nbcedu.function.cardmanage.constants.CardStatus;
 import com.nbcedu.function.cardmanage.core.util.DateUtil;
 import com.nbcedu.function.cardmanage.core.util.exl.annotations.ExlData;

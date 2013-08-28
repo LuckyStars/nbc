@@ -2,6 +2,9 @@ package com.nbcedu.function.cardmanage.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.nbcedu.function.cardmanage.constants.CardStatus;
 
 /**
@@ -28,6 +31,8 @@ public class CMCardApply implements Serializable{
 	/**补卡说明*/
 	private String comment;
 	private String cardTypeId;
+	
+//	Set cardUser = new HashSet();
 	//////////////////////////
 	//////getters&setters/////
 	//////////////////////////
@@ -106,5 +111,11 @@ public class CMCardApply implements Serializable{
 	public void setCardType(CMCardType cardType) {
 		this.cardType = cardType;
 	}
+//	public Set getCardUser() {
+//		return cardUser;
+//	}
+//	public void setCardUser(Set cardUser) {
+//		this.cardUser = cardUser;
+//	}
 	
 }

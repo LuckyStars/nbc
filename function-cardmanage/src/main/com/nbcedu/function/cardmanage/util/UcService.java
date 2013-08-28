@@ -11,6 +11,7 @@ import com.nbcedu.function.cardmanage.vo.ClassStudent;
 import com.nbcedu.function.cardmanage.vo.GradeClass;
 import com.nbcedu.integration.uc.client.facade.BaseClient;
 import com.nbcedu.integration.uc.client.vo.NbcUcClass;
+import com.nbcedu.integration.uc.client.vo.NbcUcDiction;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
 
 /**
@@ -95,7 +96,7 @@ public class UcService implements Serializable{
 	
 	
 	public static String findUserNameByUid(String uid){
-		return "ss";//client.queryPerson(1, uid).getName();
+		return client.queryPerson(1, uid).getName();
 	}
 	/**
 	 * 所有班级年级
@@ -139,20 +140,20 @@ public class UcService implements Serializable{
 	public static List<ClassStudent> findAllClassStudent(String classID){
 		List<ClassStudent> classeStudentList = new ArrayList<ClassStudent>();
 		Map<String , String> param = new HashMap<String , String>();
-		param.put("classId", classID.replaceAll("cc\\|", ""));
+		param.put("classId", classID);
 		NbcUcClass  nbcUcClass = client.queryClass(1,param);
 			if(nbcUcClass.getId()!=null && !"".equals(nbcUcClass.getId())){
 				ClassStudent classStudent = new ClassStudent();
-				String id=nbcUcClass.getId().replaceAll("gc\\|", "");
+				String id=nbcUcClass.getId();
 				classStudent.setId(id);
 				classStudent.setName(nbcUcClass.getGradeNum()+"年级"+nbcUcClass.getClassName());
 				
-				List<NbcUcTreeNode> subNbcUcTreeNodeList = client.queryTreeGradeClassStudents(classID);
+				List<NbcUcTreeNode> subNbcUcTreeNodeList = client.queryTreeGradeClassStudents("cc|"+classID);
 				List<ClassStudent> subgcList = new ArrayList<ClassStudent>();
 				for (NbcUcTreeNode ntn : subNbcUcTreeNodeList) {	//班级
 					if(ntn.getId()!=null && !"".equals(ntn.getId())){
 						ClassStudent subgc = new ClassStudent();
-						String  subid = ntn.getId().replaceAll("cc\\|", "");
+						String  subid = ntn.getId();
 						subgc.setId(subid);
 						subgc.setName(ntn.getTitle());
 						subgcList.add(subgc);
@@ -162,5 +163,30 @@ public class UcService implements Serializable{
 				classeStudentList.add(classStudent);
 			}
 		return classeStudentList;
+	}
+	public static Boolean isClassMaster(String uid){
+		for (NbcUcDiction diction : client.queryIdentity(uid, 2)) {
+			if(String.valueOf(diction.getId()).equals("3022102")){
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
+	}
+	public static GradeClass findClassByUid(String uid){
+		Map<String , String> param = new HashMap<String , String>();
+		String pid = findPidByUid(uid);
+		param.put("teacherId", pid);
+		param.put("typeCode","3022102");
+		NbcUcClass  nbcUcClass = client.queryClass(2,param);
+		GradeClass c = new GradeClass();
+		c.setId(nbcUcClass.getId());
+		StringBuffer s = new StringBuffer();
+		s.append(nbcUcClass.getGradeNum()).append("年级").append(nbcUcClass.getClassName());
+		c.setName(s.toString());
+	
+		return c;
+	}
+	public static String findPidByUid(String uid) {
+		return client.queryUidPid(1, uid);
 	}
 }

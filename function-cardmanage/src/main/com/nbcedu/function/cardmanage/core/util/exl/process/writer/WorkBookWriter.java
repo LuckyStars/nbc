@@ -14,7 +14,7 @@ import org.apache.struts2.ServletActionContext;
 
 public class WorkBookWriter {
 	///wether the exl file will save in the local file system
-	private static final Boolean LOCAL_FILE = Boolean.TRUE;
+	private static final Boolean LOCAL_FILE = Boolean.FALSE;
 	/**
 	 * 输出
 	 * @param book

@@ -8,5 +8,6 @@ import com.nbcedu.function.cardmanage.vo.CMApply;
 
 public interface CMCardApplyDao extends BaseDao<CMCardApply>{
 	
-	public PagerModel findAllBy(CMApply cmApply);
+	public PagerModel findAllBy(CMApply cmApply ,String userUid);
+	public PagerModel findAllManageBy(CMApply cmApply);
 }
