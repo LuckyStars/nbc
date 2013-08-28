@@ -48,12 +48,12 @@
 				                <td>
 				                <c:choose>
 				                	<c:when test="${sign.signed}">
-				                		<a href="${prc}/teachersignup/cancel_sign.action?id=${sign.signId}&actid=${asvo.actId}">
+				                		<a href="${prc}/teachersignup/cancel_sign.action?id=${sign.signId}&actId=${asvo.actId}">
 				                		取消
 				                		</a>
 				                	</c:when>
 				                	<c:otherwise>
-				                		<a href="${prc}/teachersignup/addSign_sign.action?subId=${sign.subId}&actid=${asvo.actId}">
+				                		<a href="${prc}/teachersignup/addSign_sign.action?subId=${sign.subId}&actId=${asvo.actId}">
 				                		报名</a>
 				                	</c:otherwise>
 				                </c:choose>
