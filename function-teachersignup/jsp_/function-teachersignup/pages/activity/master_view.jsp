@@ -116,7 +116,7 @@
 			                		</a>
 		                		</span>
 		                		<span class="space1">
-			                		<a href="${prc}/teachersignup/adminExl_sign.action?actid=${act.id}">
+			                		<a href="${prc}/teachersignup/adminExl_sign.action?actId=${act.id}">
 			                		下载报名结果
 			                		</a>
 		                		</span>

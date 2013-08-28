@@ -69,37 +69,37 @@
 		function submitForm(){//提交表单
 			if($.trim($("#actName").val())==''){
 				$("#actName").focus();
-				return false;
+				return;
 			}
 			if($.trim($("#actName").val()).length>20){
 				$.messager.alert('报名名称','报名名称不能超过20个字符!');
+				return;
 			}
 
-			if($("input[name='act.openDate']").val()==''||$("input[name='act.endDate']").val()==''){
+			if($("input[name='act.openDate']").val()==''|| $("input[name='act.endDate']").val()==''){
 				$.messager.alert('报名时间','请选择报名时间!');
 				$("input[name='act.openDate']").focus();
-				return false;
+				return ;
 			}
 			if(endEditingSubject()){
 				$("input[name='subjectName']").val(subjectValues());
 			}else{
-				return false;
+				return;
 			}
 			if($("input[name='subjectName']").val()==''){
 				$.messager.alert('报名类型','请至少填写一种报名类型!');
-				return false;
+				return;
 			}
 			if(endEditingReward()){
 				$("input[name='rewardName']").val(rewardValues());
 			}else{
-				return false;
+				return;
 			}
 
 			if($("textarea[name='act.comment']").val().length>200){
 				$.messager.alert('报名简介','报名简介不能超过200个字!');
-				return false;
+				return;
 			}
-			alert(swfu.getFile(0)==null);
 			if(swfu.getFile(0)==null){
 				var postForm = $("<form action='${prc}/teachersignup/add_act.action' method='post'></form>");
 				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.name']").val()) + "' />");
@@ -110,18 +110,17 @@
 				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("textarea[name='act.comment']").val()) + "' />");
 				postForm.append("<input type='hidden' name='act.id' value='${act.id}' />");
 				postForm.appendTo(document.body).submit();
-				
-				return false;
+				return;
 			}
 			swfu.addPostParam("act.name", encodeURI($("#actName").val()));
-			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.name']").val()));
+			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.openDate']").val()));
 			swfu.addPostParam("act.endDate", encodeURI($("input[name='act.endDate']").val()));
 			swfu.addPostParam("subjectName", encodeURI($("input[name='subjectName']").val()));
 			swfu.addPostParam("rewardName", encodeURI($("input[name='rewardName']").val()));
 			swfu.addPostParam("act.comment", encodeURI($("textarea[name='act.comment']").val()));
 			swfu.addPostParam("act.id", '${act.id}');
 			swfu.startUpload();
-			return false;
+			return;
 		}
 		
 		</script>
@@ -252,8 +251,7 @@
 				function onClickRowSubject(index){
 					if (editIndexSubject != index){
 						if (endEditingSubject()){
-							$('#subjectDL').datagrid('selectRow', index)
-									.datagrid('beginEdit', index);
+							$('#subjectDL').datagrid('selectRow', index).datagrid('beginEdit', index);
 							editIndexSubject = index;
 						} else {
 							$('#subjectDL').datagrid('selectRow', editIndexSubject);
