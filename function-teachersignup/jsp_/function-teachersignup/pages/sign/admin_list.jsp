@@ -65,7 +65,7 @@
 	                </select>
 	                
 	                <input type="submit" class="cx"  value="查询"/>
-	                <a class="cx" href="${prc}/teachersignup/adminExl_sign.action?actid=${actId}">下载/导出</a>
+	                <a class="cx" href="${prc}/teachersignup/adminExl_sign.action?actId=${actId}">下载/导出</a>
 	            </div>
             </form>
 		<table width="100%" border="0">
@@ -111,17 +111,21 @@
         </table>
         <c:if test="${pm.total > 10}">
         <div class="page_nav" id="pagingBars">
-			<pg:pager url="adminList_sign.action?actId=${actId}&userName=${userName}&subId=${subId}&rewId=${rewId}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
-				  	<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
-						<ul>
-							<pg:pages>	
-								<c:choose>
-									<c:when test="${currentPageNumber eq pageNumber}"> <li class="page_nav_current">${pageNumber}</li> </c:when>
-									<c:otherwise> <li><a href="${pageUrl}" class="first">${pageNumber}</a></li></c:otherwise>
-								</c:choose>	
-							</pg:pages>
-						</ul>
+			<pg:pager url="adminList_sign.action" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
 					<pg:prev> <span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
+					<pg:param name="actId"  value="${actId}"/>
+					<pg:param name="userName" value="${userName}"/>
+					<pg:param name="subId" value="${subId}"/>
+					<pg:param name="rewId" value="${rewId}"/>
+				  	<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
+					<ul>
+						<pg:pages>	
+							<c:choose>
+								<c:when test="${currentPageNumber eq pageNumber}"> <li class="page_nav_current">${pageNumber}</li> </c:when>
+								<c:otherwise> <li><a href="${pageUrl}" class="first">${pageNumber}</a></li></c:otherwise>
+							</c:choose>	
+						</pg:pages>
+					</ul>
 			</pg:pager>
 		</div>
 		</c:if>

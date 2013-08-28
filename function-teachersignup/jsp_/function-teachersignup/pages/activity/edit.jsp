@@ -186,7 +186,8 @@
 					<c:if test="${not empty act.subjects}">
 					,data:[
 						<c:forEach items="${act.subjects}" var="sub" varStatus="i">
-							{'subjectName':'${sub.name}'},
+							{'subjectName':'${sub.name}'}
+							<c:if test="${!i.last}">,</c:if>
 						</c:forEach>
 						]
 					</c:if>"
@@ -309,11 +310,13 @@
 							<c:if test="${not empty act.rewards}">
 							,data:[
 								<c:forEach items="${act.rewards}" var="rew" varStatus="i">
-									{'rewardName':'${rew.name}'},
+									{'rewardName':'${rew.name}'}
+									<c:if test="${!i.last}">,</c:if>
 								</c:forEach>
 								]
 							</c:if>"
 						>
+						
 						<thead>
 							<tr>
 								<th data-options="field:'rewardName',width:240,

@@ -99,7 +99,11 @@
         </table>
         <c:if test="${pm.total > 10}">
         <div class="page_nav" id="pagingBars">
-			<pg:pager url="masterList_sign.action?actId=${actId}&userName=${userName}&subId=${subId}&rewId=${rewId}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
+			<pg:pager url="masterList_sign.action" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
+					<pg:param name="actId" value="${actId}"/>
+					<pg:param name="userName" value="${userName}"/>
+					<pg:param name="subId" value="${subId}"/>
+					<pg:param name="rewId" value="${rewId}"/>
 				  	<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
 						<ul>
 							<pg:pages>	

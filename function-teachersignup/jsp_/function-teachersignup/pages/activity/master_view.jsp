@@ -127,17 +127,19 @@
 	        </table>
 	        <c:if test="${pm.total > 10}">
 	        <div class="page_nav" id="pagingBars">
-					<pg:pager url="masterList_act.action?month=${month}&actStatu=${actStatu}" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
-						  <pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
-								<ul>
-									<pg:pages>	
-										<c:choose>
-											<c:when test="${currentPageNumber eq pageNumber}"> <li class="page_nav_current">${pageNumber}</li> </c:when>
-											<c:otherwise> <li><a href="${pageUrl}" class="first">${pageNumber}</a></li></c:otherwise>
-										</c:choose>	
-									</pg:pages>
-								</ul>
-							<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
+					<pg:pager url="masterList_act.action" items="${pm.total}" maxPageItems="10" export="currentPageNumber=pageNumber">
+						<pg:param name="month" value="${month}"/>
+						<pg:param name="actStatu" value="${actStatu}"/>
+						<pg:next><span class="page_nav_next"><a href="${pageUrl}">下一页</a></span></pg:next>
+						<ul>
+							<pg:pages>	
+								<c:choose>
+									<c:when test="${currentPageNumber eq pageNumber}"> <li class="page_nav_current">${pageNumber}</li> </c:when>
+									<c:otherwise> <li><a href="${pageUrl}" class="first">${pageNumber}</a></li></c:otherwise>
+								</c:choose>	
+							</pg:pages>
+						</ul>
+						<pg:prev><span class="page_nav_prev"><a href="${pageUrl}">上一页</a></span></pg:prev>
 					</pg:pager>
    			 </div>
    			 </c:if>
