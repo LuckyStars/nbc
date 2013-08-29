@@ -124,7 +124,7 @@
 		
 		</script>
 	</head>
-	<body>
+	<body style="overflow: auto;">
 	<div class="con_conent fixed">
 		<h1 class="title">
 			<span class="title">教师报名>新增报名</span>
@@ -194,6 +194,7 @@
 				var editIndexSubject = undefined;
 				
 				function endEditingSubject(){
+					
 					if (editIndexSubject == undefined){return true;}
 					if ($('#subjectDL').datagrid('validateRow', editIndexSubject)){
 						
@@ -241,6 +242,7 @@
 						$('#subjectDL').datagrid('selectRow', editIndexSubject)
 								.datagrid('beginEdit', editIndexSubject);
 					}
+					sethash();
 				}
 				
 				function removeSubjectRow(){
@@ -248,6 +250,7 @@
 					$('#subjectDL').datagrid('cancelEdit', editIndexSubject)
 							.datagrid('deleteRow', editIndexSubject);
 					editIndexSubject = undefined;
+					sethash();
 				}
 				
 				function acceptSubject(){
@@ -352,6 +355,7 @@
 						$('#rewardDL').datagrid('selectRow', editIndexReward)
 								.datagrid('beginEdit', editIndexReward);
 					}
+					sethash();
 				}
 				
 				function removeRewardRow(){
@@ -359,6 +363,7 @@
 					$('#rewardDL').datagrid('cancelEdit', editIndexReward)
 							.datagrid('deleteRow', editIndexReward);
 					editIndexReward = undefined;
+					sethash();
 				}
 				
 				function acceptReward(){

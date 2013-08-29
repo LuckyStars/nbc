@@ -267,6 +267,7 @@
 						$('#subjectDL').datagrid('selectRow', editIndexSubject)
 								.datagrid('beginEdit', editIndexSubject);
 					}
+					sethash();
 				}
 				
 				function removeSubjectRow(){
@@ -274,6 +275,7 @@
 					$('#subjectDL').datagrid('cancelEdit', editIndexSubject)
 							.datagrid('deleteRow', editIndexSubject);
 					editIndexSubject = undefined;
+					sethash();
 				}
 				
 				function acceptSubject(){
@@ -392,6 +394,7 @@
 						$('#rewardDL').datagrid('selectRow', editIndexReward)
 								.datagrid('beginEdit', editIndexReward);
 					}
+					sethash();
 				}
 				
 				function removeRewardRow(){
@@ -399,6 +402,7 @@
 					$('#rewardDL').datagrid('cancelEdit', editIndexReward)
 							.datagrid('deleteRow', editIndexReward);
 					editIndexReward = undefined;
+					sethash();
 				}
 				
 				function acceptReward(){
