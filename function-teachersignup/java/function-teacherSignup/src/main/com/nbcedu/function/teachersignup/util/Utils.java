@@ -3,12 +3,12 @@ package com.nbcedu.function.teachersignup.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
 
-import com.ibm.icu.text.SimpleDateFormat;
 import com.nbcedu.function.functionsupport.core.PortalMessageUtil;
 import com.nbcedu.function.functionsupport.core.SupportManager;
 import com.nbcedu.function.functionsupport.mapping.PortalMessage;
