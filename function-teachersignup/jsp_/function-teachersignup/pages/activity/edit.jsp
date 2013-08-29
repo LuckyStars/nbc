@@ -103,8 +103,8 @@
 			if(swfu.getFile(0)==null){
 				var postForm = $("<form action='${prc}/teachersignup/add_act.action' method='post'></form>");
 				postForm.append("<input type='hidden' name='act.name' value='" + encodeURI($("input[name='act.name']").val()) + "' />");
-				postForm.append("<input type='hidden' name='act.openDate' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
-				postForm.append("<input type='hidden' name='act.endDate' value='" + encodeURI($("input[name='act.endDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='openDate' value='" + encodeURI($("input[name='act.openDate']").val()) + "' />");
+				postForm.append("<input type='hidden' name='endDate' value='" + encodeURI($("input[name='act.endDate']").val()) + "' />");
 				postForm.append("<input type='hidden' name='subjectName' value='" + encodeURI($("input[name='subjectName']").val()) + "' />");
 				postForm.append("<input type='hidden' name='rewardName' value='" + encodeURI($("input[name='rewardName']").val()) + "' />");
 				postForm.append("<input type='hidden' name='act.comment' value='" + encodeURI($("textarea[name='act.comment']").val()) + "' />");
@@ -113,8 +113,8 @@
 				return;
 			}
 			swfu.addPostParam("act.name", encodeURI($("#actName").val()));
-			swfu.addPostParam("act.openDate", encodeURI($("input[name='act.openDate']").val()));
-			swfu.addPostParam("act.endDate", encodeURI($("input[name='act.endDate']").val()));
+			swfu.addPostParam("openDate", encodeURI($("input[name='act.openDate']").val()));
+			swfu.addPostParam("endDate", encodeURI($("input[name='act.endDate']").val()));
 			swfu.addPostParam("subjectName", encodeURI($("input[name='subjectName']").val()));
 			swfu.addPostParam("rewardName", encodeURI($("input[name='rewardName']").val()));
 			swfu.addPostParam("act.comment", encodeURI($("textarea[name='act.comment']").val()));
@@ -433,6 +433,8 @@
 		        </c:if>
 		        >
 		   			<div class="plug_in borders fl" style="position:absolue;z-index:0;" >
+		   				<p class="gray f12 mt5" style="margin-top:10px;color: #336699;">
+		   				如不想修改附件则不需重新上传</p>
 	                    <div >
 	                    	<div style="margin:0 auto;overflow-y:auto;overflow-x:hidden;">
 					       		<div class="fieldset flash" id="fsUploadProgress"></div>

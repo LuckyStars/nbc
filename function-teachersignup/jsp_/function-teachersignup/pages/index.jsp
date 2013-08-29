@@ -45,7 +45,7 @@
 		<dl class="warp">
 			<dt>
 				<img src="${prc}/function/function-teachersignup/image/tu5.jpg" 
-				onclick="location.href='${prc}/teachersignup/masterList_act.action'"
+				onclick="location.href='${prc}/teachersignup/masterList_act.action?month=1'"
 				style="cursor:pointer" />
 			</dt>
 			<dd><a href = "${prc}/teachersignup/masterList_act.action?month=1">报名查看及统计</a></dd>

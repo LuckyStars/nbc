@@ -8,11 +8,13 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.struts2.ServletActionContext;
 
 import com.nbcedu.function.functionsupport.core.PortalMessageUtil;
 import com.nbcedu.function.functionsupport.core.SupportManager;
 import com.nbcedu.function.functionsupport.mapping.PortalMessage;
 import com.nbcedu.function.teachersignup.model.TSActivity;
+import com.opensymphony.xwork2.ActionContext;
 
 public class Utils {
 	
@@ -54,10 +56,11 @@ public class Utils {
 					msg.setFunctionName("teachersignup");
 					msg.setContent(StringUtils.trimToEmpty(act.getComment()));
 					msg.setTitle(StringUtils.trimToEmpty(act.getName()));
-					msg.setMessageType("type_01");
+					msg.setMessageType("type_02");
 					msg.setIdentityCodes(Arrays.asList("3022100"));//教师
 					msg.setMessageId(act.getId());
 					msg.setModuleName("教师报名");
+					msg.setUrl("announcement/detailed1ToPostAction.action?strIds=" + act.getId());
 					msgUtil.sendPortalMsg(msg,null);
 				}
 			}

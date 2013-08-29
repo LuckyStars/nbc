@@ -44,11 +44,19 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 
 	@Override
 	public void addOrUpdate(TSActivity act, String[] subs,String[] rews) {
-		
 		if(StringUtils.isNotBlank(act.getId())){
+			String fileName = act.getFileName();
+			String filePath = act.getFilePath();
+			
 			this.actDao.createQuery("DELETE FROM TSReward r WHERE r.activityId=?",act.getId()).executeUpdate();
 			this.actDao.createQuery("DELETE FROM TSSubject s WHERE s.activityId=?", act.getId());
 			act = this.findById(act.getId());
+		
+			if(StringUtils.isNotBlank(fileName)){
+				act.setFileName(fileName);
+				act.setFilePath(filePath);
+			}
+			
 		}else{
 			act.setId(null);
 		}
@@ -180,6 +188,7 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
 			return;
 		}
+		Utils.Message.sendAddMsg(act);
 		TSUser curUser = (TSUser)ActionContext.getContext().getSession().get(Constants.SESSION_USER_KEY);
 		String sql = Utils.Message.getInsertSQL(act, curUser.getUserUid(),curUser.getUserName());
 		this.removeHSOPost(act.getId());

@@ -43,7 +43,7 @@
 	                <select name="month">
 	                	<option value="0" >全部</option>
 	                	<option value="1" 
-	                		<c:if test="${month==3}">selected="selected"</c:if>
+	                		<c:if test="${month==1}">selected="selected"</c:if>
 	                	>近一个月</option>
 	                	<option value="3" 
 	                		<c:if test="${month==3}">selected="selected"</c:if>
