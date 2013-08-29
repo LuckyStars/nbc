@@ -53,7 +53,6 @@ public class BaseBizImpl<T extends Serializable> implements BaseBiz<T> {
 				return false;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
