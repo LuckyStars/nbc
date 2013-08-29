@@ -21,6 +21,7 @@ public class WorkBookWriter {
 	 * @author xuechong
 	 */
 	public static void writeBook(Workbook book,String fileName) {
+		fileName = fullName(fileName);
 		OutputStream out = getOutStream(fileName);
 		writeBook(book, fileName, out);
 	}
@@ -31,14 +32,9 @@ public class WorkBookWriter {
 	 * @param out
 	 */
 	public static void writeBook(Workbook book,String fileName,OutputStream out){
-		if(fileName==null){
-			fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-		}
+		fileName = fullName(fileName);
 		if(out==null){
 			throw new NullPointerException("the outputstream is null when try to write workbook");
-		}
-		if(fileName.indexOf(".xls")<=0){
-			fileName+=".xls";
 		}
 		try {
 			book.write(out);
@@ -98,5 +94,15 @@ public class WorkBookWriter {
 			}
 		}
 		return out;
+	}
+	
+	private static String fullName(String fileName){
+		if(fileName==null){
+			fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		}
+		if(fileName.indexOf(".xls")<=0){
+			fileName+=".xls";
+		}
+		return fileName;
 	}
 }
