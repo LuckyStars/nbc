@@ -23,7 +23,7 @@
 		
 		<default-interceptor-ref name="tsRoleStack"></default-interceptor-ref>
 	
-		<action name="index" class = "indexAction" method="index">
+		<action name="index" class = "tsIndexAction" method="index">
 			<result name="index">/function/function-teachersignup/pages/index.jsp</result>
 		</action>
 	

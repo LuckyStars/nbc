@@ -5,5 +5,7 @@ build/
 *.war
 *.ear
 .classpath
+.project
 .settings/
 .svn/
+*.MF

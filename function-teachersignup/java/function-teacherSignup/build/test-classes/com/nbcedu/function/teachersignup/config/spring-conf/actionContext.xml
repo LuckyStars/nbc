@@ -5,7 +5,7 @@
 	
 	<bean id="teachersignupLoader" class="com.nbcedu.function.teachersignup.interceptor.TSLoader" scope="prototype" ></bean>
 	
-	<bean id="indexAction" class="com.nbcedu.function.teachersignup.action.IndexAction" scope="prototype"></bean>
+	<bean id="tsIndexAction" class="com.nbcedu.function.teachersignup.action.IndexAction" scope="prototype"></bean>
 	
 	<bean id="tsRoleInterceptor" class = "com.nbcedu.function.teachersignup.interceptor.RoleInterceptor" scope="prototype">
 		<property name="userPrivilegeBiz" ref="tsUserPriBiz"></property>
