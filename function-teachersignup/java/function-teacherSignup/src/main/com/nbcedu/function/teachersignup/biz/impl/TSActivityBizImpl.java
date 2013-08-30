@@ -91,7 +91,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 				}
 			}
 		}
-		addHSIPost(act);
+		if(StringUtils.isNotBlank(act.getId())){
+			addHSIPost(act);
+		}
 		this.actDao.saveOrUpdate(act);
 	}
 	
@@ -131,12 +133,12 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		this.actDao.createQuery("UPDATE TSActivity a SET a.status=? WHERE a.id=?",
 				status.getId(),id).executeUpdate();
 
-		if (status.getId() == ActStatus.PUBLISHED.getId()) {
+//		if (status.getId() == ActStatus.PUBLISHED.getId()) {
 			TSActivity act = this.findById(id);
 			if (act != null) {
 				this.addHSIPost(act);
 			}
-		}
+//		}
 	}
 	
 	@Override
@@ -185,9 +187,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	}
 	
 	public void addHSIPost (TSActivity act){
-		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
-			return;
-		}
+//		if(act.getStatus() != ActStatus.PUBLISHED.getId()){
+//			return;
+//		}
 		Utils.Message.sendAddMsg(act);
 		TSUser curUser = (TSUser)ActionContext.getContext().getSession().get(Constants.SESSION_USER_KEY);
 		String sql = Utils.Message.getInsertSQL(act, curUser.getUserUid(),curUser.getUserName());

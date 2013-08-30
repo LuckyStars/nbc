@@ -19,6 +19,7 @@ public class TSActivityVO {
 	private String endDate;
 	private String name;
 	private String countDownTime;
+	private String filePath;
 	
 	
 	public static class Factory{
@@ -36,6 +37,7 @@ public class TSActivityVO {
 					result.setEndDate(Utils.Dates.fullDateStr(origin.getEndDate()));
 					result.setId(origin.getId());
 					result.setName(origin.getName());
+					result.setFilePath(origin.getFilePath());
 					result.setCountDownTime(countDownTimeStr(origin.getOpenDate(),origin.getEndDate()));
 					return result;
 				}
@@ -113,6 +115,12 @@ public class TSActivityVO {
 	}
 	public void setCountDownTime(String countDownTime) {
 		this.countDownTime = countDownTime;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 	
 }

@@ -145,6 +145,7 @@ public class TSActivityAction extends BaseAction{
 		if(act!=null&&act.getOpenDate().after(new Date())){
 			this.actBiz.modifyStatus(this.id,ActStatus.EDITING);
 		}
+		
 		return RELOAD_ADMIN;
 	}
 	
