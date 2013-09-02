@@ -56,7 +56,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 				act.setFileName(fileName);
 				act.setFilePath(filePath);
 			}
-			
+			if(StringUtils.isNotBlank(act.getComment())){
+				act.setComment(act.getComment());
+			}
 		}else{
 			act.setId(null);
 		}
