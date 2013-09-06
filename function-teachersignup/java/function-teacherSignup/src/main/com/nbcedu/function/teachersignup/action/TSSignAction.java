@@ -6,7 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.xwork.StringUtils;
+
 import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
+import com.nbcedu.function.teachersignup.biz.TSRewardBiz;
 import com.nbcedu.function.teachersignup.biz.TSSignBiz;
 import com.nbcedu.function.teachersignup.biz.TSSubjectBiz;
 import com.nbcedu.function.teachersignup.core.action.BaseAction;
@@ -24,6 +27,7 @@ public class TSSignAction extends BaseAction{
 	private TSSignBiz signBiz;
 	private TSActivityBiz actBiz;
 	private TSSubjectBiz subBiz;
+	private TSRewardBiz rewardBiz;
 	
 	private String[] subjectIds;
 	private String actId;
@@ -38,7 +42,16 @@ public class TSSignAction extends BaseAction{
 	private Set<TSSubject> subjSet = new HashSet<TSSubject>();
 	private List<TSSignVo> signList = new ArrayList<TSSignVo>();
 	
-	
+	public void deleteSub(){
+		if(StringUtils.isNotBlank(subId)){
+			this.subBiz.removeById(subId);
+		}
+	}
+	public void deleteRew(){
+		if(StringUtils.isNotBlank(rewId)){
+		this.rewardBiz.removeById(rewId);
+		}
+	}
 	/**
 	 * 增加报名
 	 * @return
@@ -67,7 +80,7 @@ public class TSSignAction extends BaseAction{
 	public void adminExl(){
 		TSActivity act = this.actBiz.findById(this.actId);
 		List<TSSignVo> datas = new ArrayList<TSSignVo>();
-		String head = "报名情况列表s";
+		String head = "报名情况列表";
 		if(act!=null){
 			datas = TSSignVo.Factory.build(this.signBiz.findByActId(actId), 
 					new ArrayList<TSSubject>(act.getSubjects()), 
@@ -214,6 +227,9 @@ public class TSSignAction extends BaseAction{
 	}
 	public void setAct(TSActivity act) {
 		this.act = act;
+	}
+	public void setRewardBiz(TSRewardBiz rewardBiz) {
+		this.rewardBiz = rewardBiz;
 	}
 	
 }

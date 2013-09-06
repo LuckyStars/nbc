@@ -38,6 +38,9 @@ public class DateUtil {
 		return dateFormat.parse(source);
 	}
 	
-	
+	public static void main(String args[]){
+		
+		System.out.println(DateUtil.date2Str(new Date(),"yyyy-MM-dd HH:mm:ss"));
+	}
 	
 }

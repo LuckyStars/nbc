@@ -18,7 +18,9 @@ import com.nbcedu.function.teachersignup.biz.TSActivityBiz;
 import com.nbcedu.function.teachersignup.constants.ActStatus;
 import com.nbcedu.function.teachersignup.constants.Constants;
 import com.nbcedu.function.teachersignup.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.teachersignup.core.exception.DBException;
 import com.nbcedu.function.teachersignup.core.pager.PagerModel;
+import com.nbcedu.function.teachersignup.core.util.date.DateUtil;
 import com.nbcedu.function.teachersignup.dao.TSActivityDao;
 import com.nbcedu.function.teachersignup.dao.TSRewardDao;
 import com.nbcedu.function.teachersignup.dao.TSSubjectDao;
@@ -47,17 +49,17 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 		if(StringUtils.isNotBlank(act.getId())){
 			String fileName = act.getFileName();
 			String filePath = act.getFilePath();
-			
+			String  comment = act.getComment();
 			this.actDao.createQuery("DELETE FROM TSReward r WHERE r.activityId=?",act.getId()).executeUpdate();
 			this.actDao.createQuery("DELETE FROM TSSubject s WHERE s.activityId=?", act.getId());
 			act = this.findById(act.getId());
 		
-			if(StringUtils.isNotBlank(fileName)){
+			if(StringUtils.isNotEmpty(fileName)){
 				act.setFileName(fileName);
 				act.setFilePath(filePath);
 			}
-			if(StringUtils.isNotBlank(act.getComment())){
-				act.setComment(act.getComment());
+			if(StringUtils.isNotEmpty(comment)){
+				act.setComment(comment);
 			}
 		}else{
 			act.setId(null);
@@ -93,9 +95,9 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 				}
 			}
 		}
-		if(StringUtils.isNotBlank(act.getId())){
-			addHSIPost(act);
-		}
+//		if(StringUtils.isNotEmpty(act.getId())){
+//			addHSIPost(act);
+//		}
 		this.actDao.saveOrUpdate(act);
 	}
 	
@@ -138,6 +140,7 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 //		if (status.getId() == ActStatus.PUBLISHED.getId()) {
 			TSActivity act = this.findById(id);
 			if (act != null) {
+				act.setStatus(status.getId());
 				this.addHSIPost(act);
 			}
 //		}
@@ -145,8 +148,30 @@ public class TSActivityBizImpl extends BaseBizImpl<TSActivity> implements TSActi
 	
 	@Override
 	public void modifyFinActs() {
-		this.actDao.createQuery("UPDATE TSActivity a SET a.status = ? WHERE a.endDate < ?",
+		List<Object[]> list;
+		try {
+			list = this.actDao.findBySQL("select * from t_teachersignup_activity a  WHERE a.status=1 and a.end_Date < str_to_date('"+DateUtil.date2Str(new Date(),"yyyy-MM-dd HH:mm:ss")+"','%Y-%m-%d %H:%i:%s')");
+			this.actDao.createQuery("UPDATE TSActivity a SET a.status = ? WHERE a.endDate < ?",
 					ActStatus.FINISHED.getId(),new Date() ).executeUpdate();
+			
+			for(Object[] t: list){
+				TSActivity act = new TSActivity();
+				act.setId((String)t[0]);
+				act.setFilePath((String)t[1]);
+				act.setFileName((String)t[2]);
+				act.setComment((String)t[3]);
+				act.setOpenDate((Date)t[4]);
+				act.setEndDate((Date)t[5]);
+				act.setCreateDate((Date)t[6]);
+				act.setStatus(3);
+				act.setName((String)t[8]);
+				Utils.Message.sendAddMsg(act);
+			}
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
+	
+		
 	}
 	
 	@Override

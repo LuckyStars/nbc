@@ -8,13 +8,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
-import org.apache.struts2.ServletActionContext;
 
 import com.nbcedu.function.functionsupport.core.PortalMessageUtil;
 import com.nbcedu.function.functionsupport.core.SupportManager;
 import com.nbcedu.function.functionsupport.mapping.PortalMessage;
+import com.nbcedu.function.teachersignup.constants.ActStatus;
 import com.nbcedu.function.teachersignup.model.TSActivity;
-import com.opensymphony.xwork2.ActionContext;
 
 public class Utils {
 	
@@ -55,7 +54,14 @@ public class Utils {
 					PortalMessage msg = new PortalMessage();
 					msg.setFunctionName("teachersignup");
 					msg.setContent(StringUtils.trimToEmpty(act.getComment()));
-					msg.setTitle(StringUtils.trimToEmpty(act.getName()));
+					if(ActStatus.PUBLISHED.getId()==act.getStatus()){
+						msg.setTitle(StringUtils.trimToEmpty("教师报名：\""+act.getName()+"\"已发布"));
+					}else if(ActStatus.FINISHED.getId()==act.getStatus()){ 
+						msg.setTitle(StringUtils.trimToEmpty("教师报名：\""+act.getName()+"\"结束"));
+					}
+					else{
+						msg.setTitle(StringUtils.trimToEmpty("教师报名：\""+act.getName()+"\"已暂停"));
+					}
 					msg.setMessageType("type_02");
 					msg.setIdentityCodes(Arrays.asList("3022100"));//教师
 					msg.setMessageId(act.getId());
@@ -114,7 +120,7 @@ public class Utils {
 			fastReplace(result, "${userId}", createUid);
 			fastReplace(result, "${img}", imgPath);
 			fastReplace(result, "${postTime}", createDate);
-			fastReplace(result, "${text}", StringUtils.trimToEmpty(act.getComment()));
+			fastReplace(result, "${text}", StringUtils.trimToEmpty(act.getComment()+"</br></br><a style=\"color:blue;\" href=\"/schoolapp/teachersignup/comListPubed_act.action\">点击查看报名</a>"));
 			fastReplace(result, "${createTime}", createDate);
 			fastReplace(result, "${enable}", "1");
 			fastReplace(result, "${timeStart}", createDate);
@@ -122,7 +128,7 @@ public class Utils {
 			fastReplace(result, "${postFlag}", "1");
 			fastReplace(result, "${zdFlag}", "0");
 			fastReplace(result, "${zdTime}", sdf.format(act.getEndDate()));
-			fastReplace(result, "${postState}", "1");
+			fastReplace(result, "${postState}", "0");
 			fastReplace(result, "${source}", "");
 			return result.toString();
 		}
