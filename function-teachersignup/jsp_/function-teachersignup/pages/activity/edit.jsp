@@ -186,7 +186,7 @@
 					<c:if test="${not empty act.subjects}">
 					,data:[
 						<c:forEach items="${act.subjects}" var="sub" varStatus="i">
-							{'id':'${sub.id}','subjectName':'${sub.name}'}
+							{'subjectName':'${sub.name}'}
 							<c:if test="${!i.last}">,</c:if>
 						</c:forEach>
 						]
@@ -194,7 +194,6 @@
 				>
 				<thead>
 					<tr>
-					<th field="id"  hidden="true" >ID</th>
 						<th data-options="field:'subjectName',width:240,
 							editor:{
 								type:'validatebox',
@@ -313,7 +312,7 @@
 							<c:if test="${not empty act.rewards}">
 							,data:[
 								<c:forEach items="${act.rewards}" var="rew" varStatus="i">
-									{'id':'${rew.id}','rewardName':'${rew.name}'}
+									{'rewardName':'${rew.name}'}
 									<c:if test="${!i.last}">,</c:if>
 								</c:forEach>
 								]
@@ -322,7 +321,6 @@
 						
 						<thead>
 							<tr>
-								<th field="id"  hidden="true" >ID</th>
 								<th data-options="field:'rewardName',width:240,
 									editor:{
 										type:'validatebox',
@@ -382,7 +380,7 @@
 						if (endEditingReward()){
 							$('#rewardDL').datagrid('selectRow', index)
 									.datagrid('beginEdit', index);
-							editIndexReward = index;
+							editIndexSubject = index;
 						} else {
 							$('#rewardDL').datagrid('selectRow', editIndexReward);
 						}

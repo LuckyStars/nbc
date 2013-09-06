@@ -27,7 +27,6 @@
 		<property name="signBiz" ref="tsSignBiz"></property>
 		<property name="actBiz" ref="tsActBiz"></property>
 		<property name="subBiz" ref="tsSubBiz"></property>
-		<property name="rewardBiz" ref="tsRewardBiz"></property>
 	</bean>
 	
 </beans>

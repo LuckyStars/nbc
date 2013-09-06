@@ -65,7 +65,7 @@
 	                </select>
 	                
 	                <input type="submit" class="cx"  value="查询"/>
-	                <a class="cx" href="${prc}/teachersignup/adminExl_sign.action?actId=${actId}">下载/导出</a>
+	                <a class="cx" href="${prc}/teachersignup/adminExl_sign.action?actid=${actId}">下载/导出</a>
 	            </div>
             </form>
 		<table width="100%" border="0">
