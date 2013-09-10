@@ -27,10 +27,10 @@
 		<directory>build</directory>
 		<resources>
 			<resource>
-				<directory>resource</directory>
+				<directory>src/resource</directory>
 			</resource>
 			<resource>
-				<directory>overview</directory>
+				<directory>src/overview</directory>
 			</resource>
 		</resources>
 		<testResources>

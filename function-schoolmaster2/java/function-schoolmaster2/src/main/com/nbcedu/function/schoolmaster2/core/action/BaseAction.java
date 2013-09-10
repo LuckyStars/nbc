@@ -29,8 +29,13 @@ public class BaseAction extends ActionSupport {
 	protected String id;
 	
 	protected List<String> idList = new ArrayList<String>();
+	
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
+	}
+	
+	protected Object getFromSession(Object key){
+		return ActionContext.getContext().getSession().get(key);
 	}
 	
 	/**
