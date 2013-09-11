@@ -16,7 +16,6 @@
 <!--		<property name="forwardingBiz" ref="forwardingBiz"/>-->
 <!--	</bean>-->
 	
-	<bean id="masterDocumentTaskAction" class="com.nbcedu.function.schoolmaster2.action.MasterDocumentTaskAction" scope="prototype"></bean>
 	
 <!--	<bean id="statAction" class="com.nbcedu.function.documentflow.action.StatisticsAction" scope="prototype">-->
 <!--		<property name="documentTaskBiz" ref="documentTaskBiz"/>-->
