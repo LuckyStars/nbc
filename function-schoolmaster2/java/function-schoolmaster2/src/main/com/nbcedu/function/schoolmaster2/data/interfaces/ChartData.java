@@ -12,6 +12,7 @@ public abstract class ChartData implements Serializable {
 	protected String title;
 	protected Date startDate;
 	protected Date endDate;
+	protected ChartType chartType;
 	
 	public abstract String getXmlString();
 	public abstract ChartType getChartType();
