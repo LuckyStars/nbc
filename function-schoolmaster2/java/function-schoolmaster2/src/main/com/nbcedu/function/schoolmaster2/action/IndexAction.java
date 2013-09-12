@@ -15,7 +15,7 @@ public class IndexAction extends BaseAction{
 	private static final Logger logger = Logger.getLogger(IndexAction.class);
 	
 	public String index(){
-		logger.info(Utils.curUserUid());
+//		logger.info(Utils.curUserUid());
 		return "index";
 	}
 	public String home(){

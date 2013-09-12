@@ -1,8 +1,21 @@
 package com.nbcedu.function.schoolmaster2.data.vo;
 
+import static org.apache.commons.lang.xwork.StringUtils.trimToEmpty;
+
 import java.util.List;
 
+import org.springframework.util.CollectionUtils;
+
 public class SingleCharts {
+	
+	private static final String chartXml = 
+			"<chart caption='${caption}'" +
+				" xAxisName='${xAxisName}' " +
+				"yAxisName='${yAxisName}' numberPrefix='${numberPrefix}' showValues='0'>"+
+				"${sets}"+
+			"</chart>";
+	
+	private static final String setXml = "<set label='${label}' value='${value}' />";
 	
 	private String caption;
 	private String subcaption;
@@ -17,13 +30,13 @@ public class SingleCharts {
 		private String name;
 		private String value;
 		public String getName() {
-			return name;
+			return trimToEmpty(name);
 		}
 		public void setName(String name) {
 			this.name = name;
 		}
 		public String getValue() {
-			return value;
+			return trimToEmpty(value);
 		}
 		public void setValue(String value) {
 			this.value = value;
@@ -31,37 +44,53 @@ public class SingleCharts {
 	}
 	
 	public String toXmlString(){
-		return "";
+		StringBuilder setStr = new StringBuilder("");
+		
+		if(!CollectionUtils.isEmpty(datas)){
+			for (DataSet data : datas) {
+				setStr.append(
+						(setXml.replace("${label}", data.getName())
+								.replace("${value}",data.getValue()))
+						);
+			}
+		}
+		
+		return (chartXml.replace("${caption}", this.getCaption())
+				.replace("${xAxisName}", getxAxisName())
+				.replace("${yAxisName}", getyAxisName())
+				.replace("${numberPrefix}", getNumberPrefix())
+				.replace("${sets}", setStr.toString()).toString());
+		
 	}
 	////////////////////
 	///////get&set//////
 	////////////////////
 	public String getCaption() {
-		return caption;
+		return trimToEmpty(caption);
 	}
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 	public String getSubcaption() {
-		return subcaption;
+		return trimToEmpty(subcaption);
 	}
 	public void setSubcaption(String subcaption) {
 		this.subcaption = subcaption;
 	}
 	public String getxAxisName() {
-		return xAxisName;
+		return trimToEmpty(xAxisName);
 	}
 	public void setxAxisName(String xAxisName) {
 		this.xAxisName = xAxisName;
 	}
 	public String getyAxisName() {
-		return yAxisName;
+		return trimToEmpty(yAxisName);
 	}
 	public void setyAxisName(String yAxisName) {
 		this.yAxisName = yAxisName;
 	}
 	public String getNumberPrefix() {
-		return numberPrefix;
+		return trimToEmpty(numberPrefix);
 	}
 	public void setNumberPrefix(String numberPrefix) {
 		this.numberPrefix = numberPrefix;

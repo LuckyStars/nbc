@@ -59,10 +59,8 @@ public class BookSiteDataGenerator extends AbstractDataGenerator<BookSiteData>{
 			}
 		}});
 		
-		BookSiteData data = new BookSiteData(xmlData);
 		
-		
-		return data;
+		return null;
 	}
 
 	@Override
