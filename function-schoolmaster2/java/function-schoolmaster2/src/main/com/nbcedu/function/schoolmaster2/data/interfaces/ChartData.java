@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public abstract class ChartData implements Serializable {
+public abstract class ChartData implements Serializable ,ChartXml{
 	
 	protected String id;
 	protected String comment;
@@ -14,7 +14,6 @@ public abstract class ChartData implements Serializable {
 	protected Date endDate;
 	protected ChartType chartType;
 	
-	public abstract String getXmlString();
 	public abstract ChartType getChartType();
 	
 	

@@ -6,8 +6,6 @@ public abstract class AbstractDataGenerator<T extends ChartData> implements Data
 	
 	protected ChartType chartType;
 	
-	protected String matchStr;
-	
 	protected abstract String getMatchStr();
 	
 	@Override

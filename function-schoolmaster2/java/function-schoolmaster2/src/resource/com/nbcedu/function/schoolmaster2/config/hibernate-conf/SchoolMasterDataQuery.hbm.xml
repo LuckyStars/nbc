@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="bookSite_query">
+	
+     <![CDATA[
+     	SELECT 
+     		COUNT(bs.pk_BOOKSITE_ID) as numcount,lv.activityLevel_NAME lvname 
+     	FROM 
+     		t_booksite_booksite bs,t_booksite_activitylevel lv 
+     	WHERE 
+     		bs.FK_ACTIVITYLEVEL_NO=lv.PK_activityLevel_ID and  
+     		(bookSite_uploadDateTime between :start and :end)
+   		GROUP BY 
+   			bs.FK_ACTIVITYLEVEL_NO 
+     ]]>
+    </sql-query>
+
+</hibernate-mapping>
