@@ -15,6 +15,7 @@
    		GROUP BY 
    			bs.FK_ACTIVITYLEVEL_NO 
      ]]>
+     
     </sql-query>
 
 </hibernate-mapping>

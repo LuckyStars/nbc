@@ -1,11 +1,10 @@
 /**
  * 
  */
-package com.nbcedu.function.schoolmaster2.data.model;
+package com.nbcedu.function.schoolmaster2.data.vo;
 
 import com.nbcedu.function.schoolmaster2.data.interfaces.ChartData;
 import com.nbcedu.function.schoolmaster2.data.interfaces.ChartType;
-import com.nbcedu.function.schoolmaster2.data.vo.SingleCharts;
 
 /**
  * @author xuechong

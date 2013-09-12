@@ -1,7 +1,7 @@
 package com.nbcedu.function.schoolmaster2.data.impl;
 
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.nbcedu.function.schoolmaster2.data.interfaces.AbstractDataGenerator;
-import com.nbcedu.function.schoolmaster2.data.model.BookSiteData;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
+import com.nbcedu.function.schoolmaster2.data.vo.BookSiteData;
 import com.nbcedu.function.schoolmaster2.data.vo.SingleCharts;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 
@@ -22,13 +22,13 @@ public class BookSiteDataGenerator extends AbstractDataGenerator<BookSiteData>{
 	private HibernateDao dao;
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "serial" })
 	public BookSiteData getDataByTime(Date start, Date end)  {
 		
 		final Date st = start!=null?start:Utils.Dates.safeParseSimpleDate("2000-01-01");
 		final Date en = end!=null?end:new Date();
 				
-		List<Object[]> resultSet = dao.getHibernateTemplate().executeFind(new HibernateCallback() {
+		final List<Object[]> resultSet = dao.getHibernateTemplate().executeFind(new HibernateCallback() {
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
@@ -36,16 +36,33 @@ public class BookSiteDataGenerator extends AbstractDataGenerator<BookSiteData>{
 					setDate("start",st).setDate("end", en).list();
 			}
 		});
-		Map<String, String> result = new HashMap<String, String>();
+		
+		final Map<String, String> result = new HashMap<String, String>();
 		if(resultSet!=null&& resultSet.size() >0){
 			for (Object[] obj : resultSet) {
 				result.put(obj[1].toString(), obj[0].toString());
 			}
 		}
 		
-		BookSiteData data = new BookSiteData(new SingleCharts());
+		SingleCharts xmlData = new SingleCharts();
+		xmlData.setCaption("场馆预定");
+		xmlData.setNumberPrefix("");
+		xmlData.setSubcaption("活动级别统计");
+		xmlData.setxAxisName("预定次数");
+		xmlData.setyAxisName("活动类型");
+		xmlData.setDatas(new ArrayList<SingleCharts.DataSet>(){{
+			for (Object[] obj : resultSet) {
+				SingleCharts.DataSet dataSet = new SingleCharts.DataSet();
+				dataSet.setName(obj[1].toString());
+				dataSet.setValue(obj[0].toString());
+				add(dataSet);
+			}
+		}});
 		
-		return null;
+		BookSiteData data = new BookSiteData(xmlData);
+		
+		
+		return data;
 	}
 
 	@Override

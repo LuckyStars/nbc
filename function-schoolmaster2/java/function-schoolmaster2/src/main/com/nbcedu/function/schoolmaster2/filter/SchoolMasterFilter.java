@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.nbcedu.core.framework.filter.ServiceInfoLoader;
 
-public class SchoolMasterFilter {
+public class SchoolMasterFilter implements Filter{
 	 
 	private static Logger logger = Logger.getLogger(SchoolMasterFilter.class);
 
