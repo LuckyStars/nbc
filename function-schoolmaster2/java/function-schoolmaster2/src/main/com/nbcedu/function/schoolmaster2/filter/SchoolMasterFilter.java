@@ -60,10 +60,12 @@ public class SchoolMasterFilter implements Filter{
 	private String getServiceName(HttpServletRequest request) {
 		String functionName = null;
 	
-	    if (request.getContextPath().contains("schoolapp"))
+	    if (request.getContextPath().contains("schoolapp")){
 	      functionName = request.getRequestURI().replaceFirst(request.getContextPath() + "/", "");
-	    else {
-	      functionName = "sns";
+	    }else if(request.getRequestURI().contains("masterDocumentFlow")){
+	    	return "documentFlow";
+	    }else {
+	      return "sns";
 	    }
 
 	    if (functionName.contains("/")) {
