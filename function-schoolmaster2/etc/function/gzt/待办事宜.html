@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="css/gzt.css" />
+    <style>
+        table th {
+	background:url(img/table-bg.jpg) repeat-x;
+    height:38px;
+	line-height:38px;
+}
+        table td {
+	height:34px;
+	line-height:34px;
+	text-align:left;
+    padding-left:50px;
+}
+    </style>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("table tr:even").css("background", "#fff")
+            $("table tr:odd").css("background", "#EDEFFE")
+        })
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(".nav-list-inner a").click(function () {
+            $(".current").removeClass("current");
+            $(this).addClass("current");
+        });
+        $(".li-blue").on("click", ".cols", function (e) {
+            $(".nav-list-inner").hide();
+            $(".li-blue .cols-open").attr("class", "cols");
+            $(this).parent().next().show();
+            $(this).attr("class", "cols-open");
+            e.stopPropagation();
+        });
+        $(".li-blue").on("click", ".cols-open", function (e) {
+            $(this).parent().next().hide();
+            $(this).attr("class", "cols");
+            e.stopPropagation();
+        });
+        $(".li-blue").on("click", function () {
+            $(this).find("span").trigger("click");
+        });
+        $(".box-top li").click(function () {
+            $(".conshen").hide().eq($(this).index()).show();
+        });
+        $(".addtabs").click(function () {
+            $("#add-tab").show();
+        });
+        $("#btn-addfujian").click(function () {
+            $("#add-fujian").show();
+        });
+        $("#aaa").click(function () {
+            $("#bbb").css({ "top": $(this).offset().top + 50, "left": $(this).offset().left + 50 }).show();
+        });
+        $(".button").click(function () {
+            $(".bg").show();
+            $(".add2").show();
+        });
+        $(".close").click(function () {
+            $(".bg").hide();
+            $(".add2").hide();
+        });
+        $(".work").click(function () {
+            $(".one").show();
+            $(".two").hide();
+            $(".three").hide();
+        });
+        $(".work1").click(function () {
+            $(".one").hide();
+            $(".two").show();
+            $(".three").hide();
+        });
+        $(".work2").click(function () {
+            $(".one").hide();
+            $(".three").show();
+            $(".two").hide();
+        });
+    });
+</script>
+</head>
+<body>
+<div class="header">
+  <h1 class="logo"><img src="images/logo.png" width="314" height="51" alt="校长工作台" /></h1>
+</div>
+<div class="main">
+  <div class="left">
+    <h1 class="nav-title">应用菜单导航</h1>
+    <ul class="nav-list">
+      <li><a href="#" class="li-blue" id="nav1"><img src="images/nav_01.png" width="16" height="16" />个人办公<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav2"><img src="images/nav_02.png" width="16" height="16" />公文处理<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue li-red" id="nav3"><img src="images/nav_03.png" width="16" height="16" />紧急重要事件处理<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav4"><img src="images/nav_04.png" width="16" height="16" />学校临时事项处理<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav5"><img src="images/nav_05.png" width="16" height="16" />工作计划跟踪<span class="cols-open"></span></a>
+        <ul class="nav-list-inner" style="display:block;">
+          <li><a class="current" href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav6"><img src="images/nav_06.png" width="16" height="16" />请示报批性工作汇总<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav7"><img src="images/nav_07.png" width="16" height="16" />总结·汇报性工作汇总<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav8"><img src="images/nav_08.png" width="16" height="16" />统计分析<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+      <li><a href="#" class="li-blue" id="nav9"><img src="images/nav_09.png" width="16" height="16" />个人信息设置<span class="cols"></span></a>
+        <ul class="nav-list-inner">
+          <li><a href="#">·本学期工作动态</a></li>
+          <li><a href="#">·教育教研工作</a></li>
+          <li><a href="#">·德育工作</a></li>
+          <li><a href="#">·后勤·卫生工作</a></li>
+          <li><a href="#">·信息化工作</a></li>
+          <li><a href="#">·财务工作</a></li>
+          <li><a href="#">·党团工作</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="right">
+    <h1>当前位置：首页 - <span style="color:#0374C2">您的待办事宜</span></h1>
+    <div class="right-input1">
+        <p class="work"><span class="ico">工作追踪</span><span class="ico-1">1</span></p>
+        <p class="work1"><span class="ico1">会议提醒</span><span class="ico-1">21</span></p>
+        <p class="work2"><span class="ico2">预约事项</span></p>
+        <p><label>名称:</label><select></select></p>
+        <p><label>时间:</label><select></select></p>
+        <a href="#">查询</a>
+    </div>
+      <div class="one">
+      <p class="tit1"><span>工作追踪<a href="#">5</a>条</span></p>
+       <table width="100%" border="0">
+      <tr>
+        <td width="25%"><span class="lan1">东兴杯课程比赛</span></td>
+        <td width="25%">张欣欣</td>
+        <td width="15%">已完成<span class="person">86%</span></td>
+        <td width="25%">临时事项</td>
+        <td width="10%"><img src="img/erro1.png" /></td>
+      </tr>
+      <tr>
+        <td><span class="lan1">东兴杯课程比赛</span><img src="img/new.png" /></td>
+        <td>张欣欣</td>
+        <td>已完成<span class="person">86%</span></td>
+        <td>临时事项</td>
+        <td><img src="img/erro1.png" /></td>
+      </tr>
+    </table>
+          </div>
+      <div class="two">
+      <p class="tit2"><span>会议提醒<a href="#">5</a>条</span></p>
+       <table width="100%" border="0">
+      <tr>
+        <td><span class="lan1">东兴杯课程比赛</span></td>
+        <td>2013-7-20<span class="person">17:00</span></td>
+        <td><img src="img/ico3.png"   class="ico3"/><span>距离会议开始还有3个小时</span></td>
+      </tr>
+      <tr>
+        <td><span class="lan1">东兴杯课程比赛</span><img src="img/new.png" /></td>
+        <td>2013-7-20<span class="person">17:00</span></td>
+        <td><img src="img/ico3.png"  class="ico3"/><span>距离会议开始还有3个小时</span></td>
+      </tr>
+    </table>
+          </div>
+      <div class="three">
+       <p class="tit3"><span>预约事项<a href="#">5</a>条</span></p>
+       <table width="100%" border="0">
+      <tr>
+        <td><span class="lan1">东兴杯课程比赛</span></td>
+        <td>2013-7-20<span class="person">17:00</span></td>
+        <td><img src="img/ico3.png"   class="ico3"/><span>距离会议开始还有3个小时</span></td>
+      </tr>
+      <tr>
+        <td><span class="lan1">东兴杯课程比赛</span><img src="img/new.png" /></td>
+        <td>2013-7-20<span class="person">17:00</span></td>
+        <td><img src="img/ico3.png"  class="ico3"/><span>距离会议开始还有3个小时</span></td>
+      </tr>
+    </table>
+          </div>
+  </div>
+</div>
+

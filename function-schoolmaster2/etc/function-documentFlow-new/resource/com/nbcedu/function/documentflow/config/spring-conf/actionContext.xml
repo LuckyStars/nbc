@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="homeAction" class="com.nbcedu.function.documentflow.action.HomeAction" scope="prototype" />
+	
+	<bean id="documentAction" class="com.nbcedu.function.documentflow.action.DocumentAction" scope="prototype">
+		<property name="documentBiz" ref="documentBiz"/>
+		<property name="notifyProfileBiz" ref="notifyProfileBiz"/>
+		<property name="documentSourceBiz" ref="documentSourceBiz"/>
+		<property name="documentTaskBiz" ref="documentTaskBiz"/>
+		<property name="commentBiz" ref="commentBiz"/>
+		<property name="attachmentBiz" ref="attachmentBiz"/>
+		<property name="routeBiz" ref="routeBiz"/>
+		<property name="forwardingBiz" ref="forwardingBiz"/>
+	</bean>
+	
+	<bean id="documentTaskAction" class="com.nbcedu.function.documentflow.action.DocumentTaskAction" scope="prototype">
+		<property name="documentTaskBiz" ref="documentTaskBiz"/>
+		<property name="documentSourceBiz" ref="documentSourceBiz"/>
+	</bean>
+	
+	<bean id="statAction" class="com.nbcedu.function.documentflow.action.StatisticsAction" scope="prototype">
+		<property name="documentTaskBiz" ref="documentTaskBiz"/>
+		<property name="exporterBiz" ref="exporterBiz"/>
+	</bean>
+	
+	<bean id="profileAction" class="com.nbcedu.function.documentflow.action.ProfileAction" scope="prototype">
+		<property name="documentUserRoleBiz" ref="documentUserRoleBiz"/>
+		<property name="documentSourceBiz" ref="documentSourceBiz"/>
+		<property name="notifyProfileBiz" ref="notifyProfileBiz"/>
+		<property name="notifyTimeBiz" ref="notifyTimeBiz"/>
+		<property name="treeNodeBiz" ref="treeNodeBiz"/>
+		<property name="documentFlowPrivilegeBiz" ref="documentFlowPrivilegeBiz"/>
+	</bean>
+	
+	<bean id="attachmentAction" class="com.nbcedu.function.documentflow.action.AttachmentAction" scope="prototype">
+		<property name="attachmentBiz" ref="attachmentBiz"/>
+	</bean>
+	
+	<!--↑=============ACTION==============↑-->
+	<bean name="doucumentFlowURLInterceptor" class="com.nbcedu.function.documentflow.intercept.DoucumentFlowURLInterceptor" scope="prototype" />
+	
+	
+</beans>

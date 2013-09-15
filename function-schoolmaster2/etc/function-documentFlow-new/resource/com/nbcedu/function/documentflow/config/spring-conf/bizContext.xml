@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<bean id="documentFlowBaseBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentFlowBaseBizImpl">
+		<property name="hibernateDao" ref="hibernateDao" />
+	</bean>
+	
+	<bean id="documentSourceBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentSourceBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="notifyProfileBiz" class="com.nbcedu.function.documentflow.biz.impl.NotifyProfileBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="notifyTimeBiz" class="com.nbcedu.function.documentflow.biz.impl.NotifyTimeBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="documentBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentBizImpl" parent="documentFlowBaseBiz">
+		<property name="documentSourceBiz" ref="documentSourceBiz" />
+		<property name="documentTaskBiz" ref="documentTaskBiz" />
+		<property name="commentBiz" ref="commentBiz" />
+		<property name="notifyProfileBiz" ref="notifyProfileBiz" />
+		<property name="schedulerBiz" ref="schedulerBiz" />
+		<!-- <property name="baseClient" ref="documentBaseClient" /> -->
+	</bean>
+	
+	<bean id="documentTaskBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentTaskBizImpl" parent="documentFlowBaseBiz">
+		<property name="documentBiz" ref="documentBiz" />
+		<property name="documentSourceBiz" ref="documentSourceBiz" />
+		<property name="baseClient" ref="documentBaseClient" />
+	</bean>
+	
+	<bean id="forwardingBiz" class="com.nbcedu.function.documentflow.biz.impl.ForwardingBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="commentBiz" class="com.nbcedu.function.documentflow.biz.impl.CommentBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="attachmentBiz" class="com.nbcedu.function.documentflow.biz.impl.AttachmentBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="exporterBiz" class="com.nbcedu.function.documentflow.biz.impl.ExporterBizImpl" />
+	
+	<bean id="routeBiz" class="com.nbcedu.function.documentflow.biz.impl.RouteBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="treeNodeBiz" class="com.nbcedu.function.documentflow.biz.impl.TreeNodeBizImpl" />
+	
+	<bean id="documentUserRoleBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentUserRoleBizImpl" parent="documentFlowBaseBiz" />
+	
+	<bean id="documentFlowLoader" class="com.nbcedu.function.documentflow.biz.impl.DocumentFlowLoaderImpl">
+		<property name="baseClient" ref="documentBaseClient" />
+		<property name="documentUserRoleBiz" ref="documentUserRoleBiz" />
+	</bean>
+	
+	<bean id="schedulerBiz" class="com.nbcedu.function.documentflow.biz.impl.SchedulerBizImpl">
+		<property name="scheduler" ref="scheduler" />
+		<property name="jobDetailMap" ref="jobDetailMap" />
+	</bean>
+	
+	<bean id="documentFlowPrivilegeBiz" class="com.nbcedu.function.documentflow.biz.impl.DocumentFlowPrivilegeBizImpl" parent="documentFlowBaseBiz">
+		<property name="documentUserRoleBiz" ref="documentUserRoleBiz" />
+		<property name="baseClient" ref="documentBaseClient" />
+	</bean>
+	
+	<bean id="documentBaseClient" class="com.nbcedu.integration.uc.client.facade.BaseClient" />
+	
+</beans>

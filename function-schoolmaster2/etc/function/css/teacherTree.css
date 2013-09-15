@@ -1,0 +1,118 @@
+
+
+/*--弹出层样式--*/
+
+.online_friend {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    width: 280px;
+    height: 363px;
+    background: url(../images/chat_bg.png) no-repeat;
+    bottom: 28px;
+    right: 200px;
+}
+
+.friend_box {
+    width: 260px;
+    background: #FFF;
+    margin: 6px;
+    border: #ced7e0 1px solid;
+}
+
+.online_btn {
+    margin-left: 16px;
+}
+
+.online_tit {
+    width: 100%;
+    height: 24px;
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 24px;
+    font-size: 12px;
+    background: #ced7e0;
+    font-weight: bold;
+}
+
+.online_btn a {
+    display: block;
+    float: left;
+    width: 70px;
+    margin-left: 30px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    background: url(../images/btn0.png) no-repeat;
+    color:#000000;
+}
+
+.con_conent .permiss a {
+    float: right;
+    display: block;
+    margin-top: 20px;
+    width: 100px;
+    padding-left: 20px;
+    height: 16px;
+    line-height: 16px;
+    background: url(../images/icon_q.gif) no-repeat left;
+}
+
+.con_conent .condition a.btn_ar1 {
+    display: block;
+    width: 81px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: url(../images/btn_ar.gif) no-repeat;
+}
+.con_conent .condition a.btn_ar88 {
+	background:none;
+	width: 40px; 
+	text-align: left;
+	display: block;
+	float: left;
+}
+	
+.usergroup {
+    width: 220px;
+    float: left;
+    margin-right: 15px;
+}
+.usergroup .usergroup_head{
+	float: left; 
+	width: 200px; 
+	border-bottom: 1px solid #CED7E0; 
+	height: 25px; 
+	line-height: 25px;
+}
+.usergroup .usergroup_head .usergroup_head_text{
+	float: left; 
+	width:150px;
+	font-weight: bold;
+	color:#363636;
+}
+
+.userlist {
+    height: 255px;
+    overflow: auto;
+}
+
+.user {
+    padding: 10px 10px;
+    float: left;
+}
+.user li{
+	line-height: 20px;
+}
+
+.btn2 {
+    display: block;
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    background: url(../images/btn_a.gif) no-repeat;
+}
+
+

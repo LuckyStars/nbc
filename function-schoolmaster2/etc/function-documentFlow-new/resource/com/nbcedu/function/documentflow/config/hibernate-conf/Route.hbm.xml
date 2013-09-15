@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.Route" table="T_DOCUMENTFLOW_ROUTE">
+		<id name="id" column="PK_T_DOCUMENTFLOW_ROUTE_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="routeName" column="ROUTENAME" type="string" length="100" />
+		<property name="creatorId" column="CREATORID" type="string" length="32" not-null="true" />
+		<set name="flow" table="T_DOCUMENTFLOW_ROUTE_FLOW">
+			<key column="FK_T_DOCUMENTFLOW_ROUTE_ID"/>
+			<element type="string" column="FLOWID"/>
+		</set>
+	</class>
+</hibernate-mapping>

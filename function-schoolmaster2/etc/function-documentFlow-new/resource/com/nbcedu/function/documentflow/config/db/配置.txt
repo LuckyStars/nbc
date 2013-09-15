@@ -1,0 +1,15 @@
+1、appconfig.properties文件配置：
+#公文流转运行模式, true:实际环境	dev:开发测试
+function.documentFlow.mode=dev
+#公文流转
+DOCUMENTFLOW.XIETONG.SWICH=true
+DOCUMENTFLOW.PORTAL.SWICH=true
+DOCUMENTFLOW.TYPE=type_07
+DOCUMENTFLOW.CNNAME=公文流转
+
+2、门户注册服务时，
+前、后台地址相同，均为：http://127.0.0.1/schoolapp/documentFlow/home.action
+
+3、struts.xml文件中，添加：
+<!--  引入{公文流转}的配置文件  -->  
+<include file="com/nbcedu/function/documentflow/config/struts-conf/struts-documentFlow.xml" />

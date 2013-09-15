@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.NotifyTime" table="T_DOCUMENTFLOW_NOTIFYTIME">
+		<id name="id" column="PK_T_DOCUMENTFLOW_NOTIFYTIME_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="name" column="NAME" type="string" length="20" not-null="true" />
+		<property name="displayName" column="DISPLAYNAME" type="string" length="20" not-null="true" />
+		<property name="orderId" column="ORDERID" type="integer" not-null="true" />
+	</class>
+</hibernate-mapping>

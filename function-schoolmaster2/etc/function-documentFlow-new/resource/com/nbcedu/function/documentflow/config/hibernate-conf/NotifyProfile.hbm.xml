@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.NotifyProfile" table="T_DOCUMENTFLOW_NOTIFYPROFILE">
+		<id name="id" column="PK_T_DOCUMENTFLOW_NOTIFYPROFILE_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="isDefault" column="ISDEFAULT" type="boolean" not-null="true" />
+		<property name="profileName" column="profileName" type="string" length="50" not-null="true" />
+		<property name="isEdit" column="ISEDIT" type="boolean" />
+		<set name="notifyTimes" table="T_DOCUMENTFLOW_NOTIFYPROFILE_NOTIFYTIME">
+			<key column="FK_T_DOCUMENTFLOW_NOTIFYPROFILE_ID" />
+			<many-to-many class="com.nbcedu.function.documentflow.model.NotifyTime" column="FK_T_DOCUMENTFLOW_NOTIFYPROFILETIME_ID" />
+		</set>
+		<property name="content" column="CONTENT" type="string" length="140" />
+		<property name="status" column="STATUS" type="string" length="1" not-null="true" />
+	</class>
+</hibernate-mapping>

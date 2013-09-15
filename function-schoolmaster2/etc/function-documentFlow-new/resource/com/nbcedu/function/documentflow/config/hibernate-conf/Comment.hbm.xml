@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.Comment" table="T_DOCUMENTFLOW_COMMENT">
+		<id name="id" column="PK_T_DOCUMENTFLOW_COMMENT_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="content" column="CONTENT" type="text" not-null="true" />
+		<property name="orderId" column="ORDERID" type="integer" not-null="true" />
+		<property name="createTime" column="CREATETIME" type="timestamp" not-null="true" />
+		<many-to-one name="document" column="FK_DOCUMENTFLOW_DOCUMENT_ID" />
+		<property name="replierId" column="REPLIERID" type="string" length="32" not-null="true" />
+	</class>
+</hibernate-mapping>

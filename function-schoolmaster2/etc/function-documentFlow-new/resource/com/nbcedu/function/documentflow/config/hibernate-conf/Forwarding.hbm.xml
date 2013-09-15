@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.Forwarding" table="T_DOCUMENTFLOW_FORWARDING">
+		<id name="id" column="PK_T_DOCUMENTFLOW_FORWARDING_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="forwardingUser" column="FORWARDINGUSER" type="string" length="32" not-null="true" />
+		<idbag name="receivers" table="T_DOCUMENTFLOW_FORWARDING_RECEIVER">
+			<collection-id type="string" column="PK_T_DOCUMENTFLOW_FORWARDING_RECEIVER_ID" length="32">
+				<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+			</collection-id>
+			<key column="FK_T_DOCUMENTFLOW_FORWARDING_ID" />
+			<element column="RECEIVERID" type="string" length="32" />
+		</idbag>
+		<many-to-one name="document" column="FK_DOCUMENTFLOW_DOCUMENT_ID" />
+	</class>
+</hibernate-mapping>

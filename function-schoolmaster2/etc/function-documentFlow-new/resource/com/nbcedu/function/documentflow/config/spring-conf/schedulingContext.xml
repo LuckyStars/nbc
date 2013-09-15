@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	<bean name="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+		<property name="configLocation" value="classpath:com/nbcedu/function/documentflow/config/quartz-conf/quartz.properties" />
+		<property name="startupDelay" value="30"/>   
+	</bean>
+	
+	<bean id="springBeanService" class="com.nbcedu.function.documentflow.service.SpringBeanService" />
+	
+	<bean id="expiringDocumentJobBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.nbcedu.function.documentflow.scheduling.ExpiringDocumentJobBean" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="springBeanService">
+					<ref bean="springBeanService"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="notifyingJobBean" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.nbcedu.function.documentflow.scheduling.NotifyingJobBean" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="springBeanService">
+					<ref bean="springBeanService"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
+	<util:map id="jobDetailMap" map-class="java.util.HashMap" key-type="java.lang.String" value-type="org.springframework.scheduling.quartz.JobDetailBean">
+		<entry key="expiringDocumentJobBean" value-ref="expiringDocumentJobBean" />
+		<entry key="notifyingJobBean" value-ref="notifyingJobBean" />
+	</util:map>
+	
+</beans>

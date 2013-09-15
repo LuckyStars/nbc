@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.DocumentTask" table="T_DOCUMENTFLOW_DOCUMENTTASK">
+		<id name="id" column="PK_T_DOCUMENTFLOW_DOCUMENTTASK_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="documentId" column="DOCUMENTID" type="string" length="32" not-null="true" />
+		<property name="handlerId" column="HANDLERID" type="string" length="32" not-null="true" />
+		<property name="isHandled" column="ISHANDLED" type="boolean" not-null="true" />
+		<property name="handlingTime" column="HANDLINGTIME" type="timestamp" />
+		<property name="type" column="TYPE" type="string" length="1" />
+	</class>
+</hibernate-mapping>

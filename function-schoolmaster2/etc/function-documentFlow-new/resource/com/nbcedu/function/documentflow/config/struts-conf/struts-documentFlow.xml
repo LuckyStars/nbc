@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="documentFlow" namespace="/documentFlow" extends="struts-default">
+		<interceptors>
+			<interceptor name="doucumentFlowURLInterceptor" class="doucumentFlowURLInterceptor" />
+			<interceptor-stack name="doucumentFlowURLInterceptorLogin">
+				<interceptor-ref name="doucumentFlowURLInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="doucumentFlowURLInterceptorLogin" />
+		
+		<!-- 全局 -->
+		<global-results>
+<!--			<result name="doucumentFlowError">/function/function-documentFlow/errorPage.jsp</result>-->
+			<result name="doucumentFlowLogin">/function/function-documentFlow/login.jsp</result>
+		</global-results>
+				
+		<!-- 全局捕获异常-->
+<!--		<global-exception-mappings>-->
+<!--		 	<exception-mapping exception="java.lang.Exception" result="doucumentFlowError" />-->
+<!--		</global-exception-mappings>-->
+			
+		<!-- ============= 首页 =================== -->
+		<action name="home" class="homeAction" method="home">
+			<result name="home">/function/function-documentFlow/home.jsp</result>
+		</action>
+		
+		
+		<!-- ============= 公文 =================== -->
+		<action name="*Document" class="documentAction" method="{1}">
+			<result name="newDoc">/function/function-documentFlow/newDoc.jsp</result>
+			<result name="listMy" type="redirectAction">listMyDocument.action</result>
+			<result name="listFlowing">/function/function-documentFlow/listFlowing.jsp</result>
+			<result name="toListFlowing" type="chain">listFlowingDocument</result>
+			<result name="myDocList">/function/function-documentFlow/myDocList.jsp</result>
+			<result name="handlingDoc">/function/function-documentFlow/handlingDoc.jsp</result>
+			<result name="listUnhandled" type="redirectAction">listUnhandledDocumentTask.action</result>
+			<result name="handledDoc">/function/function-documentFlow/handledDoc.jsp</result>
+			<result name="editMyDoc">/function/function-documentFlow/editMyDoc.jsp</result>
+			<result name="viewMyDoc">/function/function-documentFlow/viewMyDoc.jsp</result>
+			<result name="viewMyFlowingDoc">/function/function-documentFlow/viewMyFlowingDoc.jsp</result>
+			<result name="viewHandled" type="chain">viewHandledDocument</result>
+		</action>
+		<action name="saveRoute" class="documentAction" method="saveRoute"></action>
+		<action name="removeRoute" class="documentAction" method="removeRoute"></action>
+		<action name="checkEditable" class="documentAction" method="checkEditable"></action>
+		
+		
+		<!-- ============= 公文任务 =================== -->
+		<action name="*DocumentTask" class="documentTaskAction" method="{1}">
+			<result name="unhandledDocList">/function/function-documentFlow/unhandledDocList.jsp</result>
+			<result name="handledDocList">/function/function-documentFlow/handledDocList.jsp</result>
+			<result name="statistics">/function/function-documentFlow/statistics.jsp</result>
+		</action>
+		
+		
+		<!-- ============= 统计 =================== -->
+		<action name="*Statistics" class="statAction" method="{1}">
+			<result name="statistics">/function/function-documentFlow/statistics.jsp</result>
+			<result name="export" type="stream">
+				<param name="contentType">application/vnd.ms-excel;charset=utf-8</param>  
+                <param name="inputName">downloadFile</param>  
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>  
+                <param name="bufferSize">4096</param>  
+			</result>
+		</action>
+		
+		
+		<!-- ============= 配置 =================== -->
+		<action name="*Profile" class="profileAction" method="{1}">
+			<result name="profile">/function/function-documentFlow/profile.jsp</result>
+			<result name="privilege">/function/function-documentFlow/privilege.jsp</result>
+		</action>
+		<action name="addDocumentSource" class="profileAction" method="addDocumentSource"></action>
+		<action name="removeDocumentSource" class="profileAction" method="removeDocumentSource"></action>
+		<action name="initTimeList" class="profileAction" method="initTimeList"></action>
+		<action name="displayTree" class="profileAction" method="displayTree"></action>
+		<action name="setUpPrivilege" class="profileAction" method="setUpPrivilege"></action>
+		
+		
+		<!-- ============= 附件 =================== -->
+		<action name="*Attachment" class="attachmentAction" method="{1}">
+			<result name="download" type="stream">
+				<param name="contentType">application/octet-stream;charset=utf-8</param>  
+                <param name="inputName">downloadAttachment</param>  
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>  
+                <param name="bufferSize">4096</param>  
+			</result>
+			<result name="downloadswf" type="stream">
+				<param name="contentType">application/x-shockwave-flash;charset=utf-8</param>  
+                <param name="inputName">downloadAttachment</param>  
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>  
+                <param name="bufferSize">1024</param>  
+			</result>
+		</action>
+		
+		
+	</package>
+</struts>

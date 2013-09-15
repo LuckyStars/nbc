@@ -6,6 +6,7 @@
 		<action name="*_index" method="{1}" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
 			<result name="index">/function/index.jsp</result>
 			<result name="home">/function/home.jsp</result>
+			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
 		</action>
 		
 	</package>

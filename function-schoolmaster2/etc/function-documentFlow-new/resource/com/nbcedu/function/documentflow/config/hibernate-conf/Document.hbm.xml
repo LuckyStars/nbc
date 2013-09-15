@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.documentflow.model.Document" table="T_DOCUMENTFLOW_DOCUMENT">
+		<id name="id" column="PK_T_DOCUMENTFLOW_DOCUMENT_ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="authorId" column="AUTHORID" type="string" length="32" not-null="true" />
+		<property name="title" column="TITLE" type="string" length="100" />
+		<property name="notifyProfileId" column="NOTIFYPROFILEID" type="string" length="32" />
+		<property name="documentSourceId" column="DOCUMENTSOURCEID" type="string" length="32" />
+		<property name="period" column="PERIOD" type="string" length="5" />
+		<property name="publishTime" column="PUBLISHTIME" type="timestamp" />
+		<property name="expireTime" column="EXPIRETIME" type="timestamp" />
+		<property name="insertTime" column="INSERTTIME" type="timestamp" />
+		<property name="content" column="CONTENT" type="text" length="2147483647"/>
+		<idbag name="receiverIds" table="T_DOCUMENTFLOW_RECEIVER">
+			<collection-id type="string" column="PK_T_DOCUMENTFLOW_RECEIVER_ID" length="32">
+				<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+			</collection-id>
+			<key column="FK_T_DOCUMENTFLOW_DOCUMENT_ID" />
+			<element column="RECEIVERID" type="string" length="32" />
+		</idbag>
+		<property name="notifyContent" column="NOTIFYCONTENT" type="string" length="100" />
+		<idbag name="notifierIds" table="T_DOCUMENTFLOW_NOTIFIER">
+			<collection-id type="string" column="PK_T_DOCUMENTFLOW_NOTIFIER_ID" length="32">
+				<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+			</collection-id>
+			<key column="FK_T_DOCUMENTFLOW_DOCUMENT_ID" />
+			<element column="NOTIFIERID" type="string" length="32" />
+		</idbag>
+		<property name="status" column="STATUS" type="integer" />
+		<property name="shut" column="SHUT" type="integer" not-null="true"/>
+		<set name="comments">
+			<key column="FK_DOCUMENTFLOW_DOCUMENT_ID" />
+			<one-to-many class="com.nbcedu.function.documentflow.model.Comment" />
+		</set>
+		<idbag name="receivedIds" table="T_DOCUMENTFLOW_RECEIVED">
+			<collection-id type="string" column="PK_T_DOCUMENTFLOW_RECEIVED_ID" length="32">
+				<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+			</collection-id>
+			<key column="FK_T_DOCUMENTFLOW_DOCUMENT_ID" />
+			<element column="RECEIVEDID" type="string" length="32" />
+		</idbag>
+		<set name="forwardings">
+			<key column="FK_DOCUMENTFLOW_DOCUMENT_ID" />
+			<one-to-many class="com.nbcedu.function.documentflow.model.Forwarding" />
+		</set>
+		<set name="attachments">
+			<key column="FK_DOCUMENTFLOW_DOCUMENT_ID" />
+			<one-to-many class="com.nbcedu.function.documentflow.model.Attachment" />
+		</set>
+	</class>
+</hibernate-mapping>
