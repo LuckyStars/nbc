@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2Datas" table="t_sm2_datas">
+		
+		<id name="id" column="ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="title" column="title" type="string" length="50" not-null="true" />
+		<property name="startDate" column="start_date" type="timestamp" not-null="true" />
+		<property name="endDate" column="end_date" type="timestamp" not-null="true" />
+		<property name="lastUpdate" column="last_update" type="timestamp" not-null="true" />
+		<property name="status" column="status" type="integer" not-null="true" />
+		<property name="creatorUid" column="creator_uid" type="string" length="32" not-null="true" />
+		<property name="content" column="content" type="text" not-null="true" />
+		<property name="matcher" column="matcher" type="string" length="32" not-null="true" />
+	
+	</class>
+</hibernate-mapping>
