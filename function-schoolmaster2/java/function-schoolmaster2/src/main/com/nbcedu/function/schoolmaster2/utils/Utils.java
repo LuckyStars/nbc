@@ -3,6 +3,8 @@ package com.nbcedu.function.schoolmaster2.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.web.context.ContextLoader;
+
 import com.nbcedu.function.schoolmaster2.constants.Constants;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -22,6 +24,14 @@ public class Utils {
 			} catch (Exception e) {
 				return new Date();
 			}
+		}
+	}
+	
+	public static class Beans{
+		public static Object getSpringBeanByName(String name){
+			return ContextLoader.
+			getCurrentWebApplicationContext()
+			.getBean(name);
 		}
 	}
 }

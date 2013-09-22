@@ -1,18 +1,17 @@
-//package com.nbcedu.function.schoolmaster2.data.interfaces;
-//
-//import org.apache.commons.lang.xwork.StringUtils;
-//
-//public abstract class AbstractDataGenerator<T extends ChartData> implements DataGenerator<T>{
-//	
-//	protected ChartType chartType;
-//	
-//	protected abstract String getMatchStr();
-//	
-//	@Override
-//	public boolean match(String flag) {
-//		return StringUtils.isNotBlank(flag) 
-//			&& StringUtils.isNotBlank(getMatchStr())
-//			&&getMatchStr().equals(flag);
-//	}
-//	
-//}
+package com.nbcedu.function.schoolmaster2.data.interfaces;
+
+import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
+
+public abstract class AbstractDataGenerator implements DataGenerator{
+	
+	private HibernateDao dao;
+	
+	protected HibernateDao getHibernateDao(){
+		if(this.dao==null){
+			this.dao = (HibernateDao)Utils.Beans.getSpringBeanByName("dataHibernateDao");
+		}
+		return this.dao;
+	}
+	
+}

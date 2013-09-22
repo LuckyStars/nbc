@@ -43,7 +43,7 @@ public class DataContext {
 	
 	private static String getMatcherName(Class<?> clazz){
 		Matcher anno = clazz.getAnnotation(Matcher.class);
-		return anno!=null?anno.matcher():"";
+		return anno!=null?anno.value():"";
 	}
 	
 	/**
