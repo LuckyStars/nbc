@@ -7,4 +7,7 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
+	<bean id="sm2DataDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2DataDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>

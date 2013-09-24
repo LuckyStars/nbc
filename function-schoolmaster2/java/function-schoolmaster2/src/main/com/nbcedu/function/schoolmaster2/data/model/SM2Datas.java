@@ -11,12 +11,15 @@ public class SM2Datas implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private Date lastUpdate;
+	private Date createDate;
 	private Integer status;
 	private String creatorUid;
 	private String content;
 	private String matcher;
 	
-	
+	///////////////////////
+	////getters&setters////
+	///////////////////////
 	public String getId() {
 		return id;
 	}
@@ -70,6 +73,12 @@ public class SM2Datas implements Serializable{
 	}
 	public void setMatcher(String matcher) {
 		this.matcher = matcher;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	
 }
