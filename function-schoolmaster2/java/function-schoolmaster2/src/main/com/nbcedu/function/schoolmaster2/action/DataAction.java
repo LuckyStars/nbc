@@ -29,6 +29,11 @@ public class DataAction extends BaseAction{
 		}
 	}
 
+	public String chart(){
+		
+		
+		return "chart";
+	}
 	
 	public String add(){
 		this.data.setLastUpdate(new Date());

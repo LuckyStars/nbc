@@ -16,7 +16,6 @@ public class IndexAction extends BaseAction{
 	
 	
 	public String index(){
-//		logger.info(Utils.curUserUid());
 		return "index";
 	}
 	
