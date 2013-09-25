@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -19,19 +18,14 @@ public class DataAction extends BaseAction{
 	private Date start;
 	private Date end;
 	private SM2Datas data;
-	
 	private SM2DataBiz dataBiz;
+	private String xmlContent;
 	
-	public void show(){
-		DataGenerator dataGen = DataContext.getContext().getbyMatcher(matcher);
-		if(dataGen!=null){
-			Struts2Util.renderXml(dataGen.getDataByTime(start, end));
-		}
-	}
-
 	public String chart(){
-		
-		
+		DataGenerator dataGen = 
+			DataContext.getContext().getbyMatcher(matcher);
+		this.dataType = dataGen.defaultChartType();
+		this.xmlContent = dataGen.getDataByTime(start, end);
 		return "chart";
 	}
 	
@@ -93,6 +87,12 @@ public class DataAction extends BaseAction{
 	}
 	public void setDataBiz(SM2DataBiz dataBiz) {
 		this.dataBiz = dataBiz;
+	}
+	public String getXmlContent() {
+		return xmlContent;
+	}
+	public void setXmlContent(String xmlContent) {
+		this.xmlContent = xmlContent;
 	}
 }
  

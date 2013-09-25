@@ -8,10 +8,19 @@ public enum ChartClass {
 		this.clazz = clazz;
 	}
 	
-	enum Single implements ChartEnum{
+	public enum Single implements ChartEnum{
+		
 		Area2D(1,"Area2D"),
 		Bar2D(2,"Bar2D"),
-		Candlestick(3,"Candlestick");
+		Candlestick(3,"Candlestick"),
+		Pie2D(4,"Pie2D"),
+		Pie3D(5,"Pie3D"),
+		Column2D(6,"Column2D"),
+		Column3D(7,"Column3D"),
+		Doughnut2D(8,"Doughnut2D"),
+		Funnel(9,"Funnel"),
+		Gantt(10,"Gantt"),
+		Line(11,"Line");
 		
 		private final String name;
 		private final int id;
