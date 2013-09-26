@@ -14,6 +14,8 @@
 				<param name="actionName">listByType_data</param>
 				<param name="matcher">${matcher}</param>
 			</result>
+			<result name="listStatistic">/function/function-statistics/statisticsList.jsp</result>
+			<result name="toChart">/function/function-statistics/statisticsChart.jsp</result>
 			<result name="commonList"></result>
 			<result name="chart" >/function/function-charts/charts.jsp</result>
 		</action>

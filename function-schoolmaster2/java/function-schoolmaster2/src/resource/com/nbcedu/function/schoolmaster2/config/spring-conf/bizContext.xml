@@ -4,6 +4,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	
 	<bean id="sm2DataBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2DataBizImpl">
-		<property name="dataDao" ref="sm2DataDao"></property>
+		<property name="sm2DataDao" ref="sm2DataDao"></property>
 	</bean>
 </beans>
