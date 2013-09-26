@@ -203,6 +203,7 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 		PagerModel pm = new PagerModel();
 		pm.setDatas(datas);
 		pm.setTotal(totalCount.intValue());
+		pm.setTotalPageNo(totalCount % pagesize == 0 ? totalCount / pagesize : totalCount/pagesize+1);
 		return pm;
 	}
 

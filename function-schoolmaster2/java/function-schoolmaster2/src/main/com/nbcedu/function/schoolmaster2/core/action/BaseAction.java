@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 
 import com.nbcedu.function.schoolmaster2.core.pager.Pager;
@@ -30,6 +33,14 @@ public class BaseAction extends ActionSupport {
 	
 	protected List<String> idList = new ArrayList<String>();
 	
+	protected HttpServletResponse response;
+	
+	protected HttpServletRequest request;
+	
+	protected String getUserId() {
+		 
+		return (String)ActionContext.getContext().getSession().get("sns_init");
+	}
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
 	}
@@ -81,6 +92,14 @@ public class BaseAction extends ActionSupport {
 	}
 	public void setIdList(List<String> idList) {
 		this.idList = idList;
+	}
+	
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
 	}
 	
 }

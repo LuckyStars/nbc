@@ -22,11 +22,11 @@ public class DataAction extends BaseAction{
 	private String xmlContent;
 	private SM2DataBiz sm2DataBiz;
 	
-	public String listStatistic(){
+	public String listStatistics(){
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
-		this.sm2DataBiz.findPageByModel(data);
+		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listStatistic";
 	}
 	public String toChart(){
@@ -50,13 +50,15 @@ public class DataAction extends BaseAction{
 	public String add(){
 		this.data.setLastUpdate(new Date());
 		this.data.setCreateDate(new Date());
+		this.data.setStatus(0);
+		this.data.setCreatorUid(this.getUserId());
 		this.sm2DataBiz.add(data);
 		return "refreshTeacherList";
 	}
 	
 	public String listByType(){
 		this.pm = this.sm2DataBiz.findPageByMatcher(matcher);
-		return "commonList";
+		return "listStatistic";
 	}
 	
 	public String remove(){
