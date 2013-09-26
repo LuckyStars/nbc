@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.nbcedu.function.schoolmaster2.data.interfaces.AbstractDataGenerator;
+import com.nbcedu.function.schoolmaster2.data.interfaces.ChartClass;
 import com.nbcedu.function.schoolmaster2.data.interfaces.Matcher;
 import com.nbcedu.function.schoolmaster2.data.vo.SingleCharts;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
@@ -58,6 +59,11 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 		}});
 		
 		return xmlData.toXmlString();
+	}
+
+	@Override
+	public String defaultChartType() {
+		return ChartClass.Single.Area2D.getName();
 	}
 
 }

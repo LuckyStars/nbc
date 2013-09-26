@@ -4,4 +4,5 @@ import java.util.Date;
 
 public interface DataGenerator{
 	String getDataByTime(Date start ,Date end);
+	String defaultChartType();
 }

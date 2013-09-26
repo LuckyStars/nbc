@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -19,7 +18,7 @@ public class DataAction extends BaseAction{
 	private Date start;
 	private Date end;
 	private SM2Datas data = new SM2Datas();
-	
+	private String xmlContent;
 	private SM2DataBiz sm2DataBiz;
 	
 	public String listStatistic(){
@@ -40,8 +39,11 @@ public class DataAction extends BaseAction{
 	}
 
 	public String chart(){
-		
-		return "toChart";
+		DataGenerator dataGen = 
+			DataContext.getContext().getbyMatcher(matcher);
+		this.dataType = dataGen.defaultChartType();
+		this.xmlContent = dataGen.getDataByTime(start, end);
+		return "chart";
 	}
 	
 	public String add(){
@@ -102,6 +104,12 @@ public class DataAction extends BaseAction{
 	}
 	public void setSm2DataBiz(SM2DataBiz sm2DataBiz) {
 		this.sm2DataBiz = sm2DataBiz;
+	}
+	public String getXmlContent() {
+		return xmlContent;
+	}
+	public void setXmlContent(String xmlContent) {
+		this.xmlContent = xmlContent;
 	}
 }
  
