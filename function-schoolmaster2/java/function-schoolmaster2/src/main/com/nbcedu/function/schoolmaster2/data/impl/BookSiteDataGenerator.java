@@ -63,7 +63,7 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 
 	@Override
 	public String defaultChartType() {
-		return ChartClass.Single.Area2D.getName();
+		return ChartClass.Single.Pie2D.getName();
 	}
 
 }

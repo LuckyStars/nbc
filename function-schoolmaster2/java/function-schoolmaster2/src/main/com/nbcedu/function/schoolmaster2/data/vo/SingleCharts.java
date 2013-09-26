@@ -9,13 +9,13 @@ import org.springframework.util.CollectionUtils;
 public class SingleCharts {
 	
 	private static final String chartXml = 
-			"<chart caption='${caption}'" +
+			"<graph caption='${caption}'" +
 				" xAxisName='${xAxisName}' " +
 				"yAxisName='${yAxisName}' numberPrefix='${numberPrefix}' showValues='0'>"+
 				"${sets}"+
-			"</chart>";
+			"</graph>";
 	
-	private static final String setXml = "<set label='${label}' value='${value}' />";
+	private static final String setXml = "<set name='${label}' value='${value}' />";
 	
 	private String caption;
 	private String subcaption;
