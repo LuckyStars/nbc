@@ -5,8 +5,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.nbcedu.core.framework.filter.ServiceInfoLoader;
-import com.nbcedu.function.documentflow.service.SpringBeanService;
-import com.opensymphony.xwork2.ActionContext;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 public class SchoolMaster2Loader implements ServiceInfoLoader{
 
@@ -14,7 +13,7 @@ public class SchoolMaster2Loader implements ServiceInfoLoader{
 	@Override
 	public Object load(Map<?, ?> params) {
 		logger.info(params.get("uid"));
-		new  SpringBeanService().getBean(ServiceInfoLoader.class, "documentFlowLoader").load(params);
+		((ServiceInfoLoader)Utils.Beans.getSpringBeanByName("documentFlowLoader")).load(params);
 		return params.get("uid");
 	}
 
