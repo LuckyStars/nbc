@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 
 import com.nbcedu.core.framework.filter.ServiceInfoLoader;
 import com.nbcedu.function.documentflow.service.SpringBeanService;
-import com.opensymphony.xwork2.ActionContext;
 
 public class SchoolMaster2Loader implements ServiceInfoLoader{
 

@@ -44,6 +44,7 @@ public class SM2DataBizImpl extends BaseBizImpl<SM2Datas> implements SM2DataBiz{
 		}
 		hql.append(" order by createDate desc");
 		Object[] params = new Object[list.size()];
+		list.toArray(params);
 		return this.sm2DataDao.searchPaginated(hql.toString(),params);
 	}
 }
