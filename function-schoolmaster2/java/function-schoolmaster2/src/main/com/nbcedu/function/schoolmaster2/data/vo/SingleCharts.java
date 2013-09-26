@@ -9,7 +9,7 @@ import org.springframework.util.CollectionUtils;
 public class SingleCharts {
 	
 	private static final String chartXml = 
-			"<graph caption='${caption}'" +
+			"<graph caption='${caption}' baseFontSize='20' bgColor='f0f8fc'" +
 				" xAxisName='${xAxisName}' " +
 				"yAxisName='${yAxisName}' numberPrefix='${numberPrefix}' showValues='0'>"+
 				"${sets}"+
