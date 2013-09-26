@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
+import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -35,7 +35,7 @@ public class DataAction extends BaseAction{
 	public void show(){
 		DataGenerator dataGen = DataContext.getContext().getbyMatcher(matcher);
 		if(dataGen!=null){
-			Struts2Util.renderXml(dataGen.getDataByTime(start, end));
+			Struts2Utils.renderXml(dataGen.getDataByTime(start, end));
 		}
 	}
 

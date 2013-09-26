@@ -9,13 +9,21 @@
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
 		</id>
 		<property name="title" column="title" type="string" length="50" not-null="true" />
-		<property name="startDate" column="start_date" type="timestamp" not-null="true" />
-		<property name="endDate" column="end_date" type="timestamp" not-null="true" />
-		<property name="createDate" column="create_date" type="timestamp" not-null="true" />
-		<property name="lastUpdate" column="last_update" type="timestamp" not-null="true" />
+		
+		<property name="startDate" column="start_date" type="datetime" not-null="true" />
+		
+		<property name="endDate" column="end_date" type="datetime" not-null="true" />
+		
+		<property name="createDate" column="create_date" type="datetime" not-null="true" />
+		
+		<property name="lastUpdate" column="last_update" type="datetime" not-null="true" />
+		
 		<property name="status" column="status" type="integer" not-null="true" />
+		
 		<property name="creatorUid" column="creator_uid" type="string" length="32" not-null="true" />
-		<property name="content" column="content" type="text" not-null="true" />
+		
+		<property name="content" column="content" type="text"  />
+		
 		<property name="matcher" column="matcher" type="string" length="32" not-null="true" />
 	
 	</class>

@@ -4,9 +4,9 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.criterion.Restrictions;
 
-import com.nbcedu.function.documentflow.utils.StringUtil;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -34,11 +34,11 @@ public class SM2DataBizImpl extends BaseBizImpl<SM2Datas> implements SM2DataBiz{
 		StringBuffer hql = new StringBuffer("from SM2Datas where matcher=? ");
 		List<Object> list = new ArrayList<Object>();
 		list.add(m.getMatcher());
-		if(m.getStartDate()!=null&&!StringUtil.isBlank(m.getStartDate().toString())){
+		if(m.getStartDate()!=null&&StringUtils.isNotBlank(m.getStartDate().toString())){
 			hql.append(" and createDate >? ");
 			list.add(m.getCreateDate());
 		}
-		if(m.getEndDate()!=null&&!StringUtil.isBlank(m.getEndDate().toString())){
+		if(m.getEndDate()!=null&&StringUtils.isNotBlank(m.getEndDate().toString())){
 			hql.append(" and createDate <? ");
 			list.add(m.getEndDate());
 		}
