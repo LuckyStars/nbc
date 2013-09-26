@@ -18,10 +18,20 @@ public class DataAction extends BaseAction{
 	private String matcher;
 	private Date start;
 	private Date end;
-	private SM2Datas data;
+	private SM2Datas data = new SM2Datas();
 	
-	private SM2DataBiz dataBiz;
+	private SM2DataBiz sm2DataBiz;
 	
+	public String listStatistic(){
+		this.data.setStartDate(start);
+		this.data.setEndDate(end);
+		this.data.setMatcher(matcher);
+		this.sm2DataBiz.findPageByModel(data);
+		return "listStatistic";
+	}
+	public String toChart(){
+		return "toChart";
+	}
 	public void show(){
 		DataGenerator dataGen = DataContext.getContext().getbyMatcher(matcher);
 		if(dataGen!=null){
@@ -31,30 +41,29 @@ public class DataAction extends BaseAction{
 
 	public String chart(){
 		
-		
-		return "chart";
+		return "toChart";
 	}
 	
 	public String add(){
 		this.data.setLastUpdate(new Date());
 		this.data.setCreateDate(new Date());
-		this.dataBiz.add(data);
+		this.sm2DataBiz.add(data);
 		return "refreshTeacherList";
 	}
 	
 	public String listByType(){
-		this.pm = this.dataBiz.findPageByMatcher(matcher);
+		this.pm = this.sm2DataBiz.findPageByMatcher(matcher);
 		return "commonList";
 	}
 	
 	public String remove(){
-		this.dataBiz.removeById(this.id);
+		this.sm2DataBiz.removeById(this.id);
 		return "refreshTeacherList";
 	}
 	
 	public String modify(){
 		this.data.setLastUpdate(new Date());
-		this.dataBiz.modify(this.data);
+		this.sm2DataBiz.modify(this.data);
 		return "refreshTeacherList";
 	}
 	
@@ -91,8 +100,8 @@ public class DataAction extends BaseAction{
 	public void setData(SM2Datas data) {
 		this.data = data;
 	}
-	public void setDataBiz(SM2DataBiz dataBiz) {
-		this.dataBiz = dataBiz;
+	public void setSm2DataBiz(SM2DataBiz sm2DataBiz) {
+		this.sm2DataBiz = sm2DataBiz;
 	}
 }
  
