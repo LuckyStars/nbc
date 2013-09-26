@@ -6,6 +6,6 @@
 	<bean id="snsLoader" class="com.nbcedu.function.schoolmaster2.filter.SchoolMaster2Loader"></bean>
 	
 	<bean id="sm2DataAction" class="com.nbcedu.function.schoolmaster2.action.DataAction">
-		<property name="dataBiz" ref="sm2DataBiz" />
+		<property name="sm2DataBiz" ref="sm2DataBiz" />
 	</bean>
 </beans>

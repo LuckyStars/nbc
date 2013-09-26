@@ -6,4 +6,5 @@ import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 
 public interface SM2DataBiz extends BaseBiz<SM2Datas>{
 	PagerModel findPageByMatcher(String matcher);
+	PagerModel findPageByModel(SM2Datas m);
 }
