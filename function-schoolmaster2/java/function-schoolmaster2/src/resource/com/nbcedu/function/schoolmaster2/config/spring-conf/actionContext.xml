@@ -8,4 +8,9 @@
 	<bean id="sm2DataAction" class="com.nbcedu.function.schoolmaster2.action.DataAction">
 		<property name="sm2DataBiz" ref="sm2DataBiz" />
 	</bean>
+	
+	<bean id="sm2indexAction" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
+		<property name="dao" ref="dataHibernateDao"></property>
+	</bean>
+	
 </beans>

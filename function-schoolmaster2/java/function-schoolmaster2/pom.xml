@@ -175,10 +175,10 @@
 			<artifactId>guava</artifactId>
 			<version>15.0-rc1</version>
 		</dependency>
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.nbcedu.bizplatform</groupId>
 			<artifactId>function-documentFlow-new</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-		</dependency> -->
+		</dependency>
 	</dependencies>
 </project>

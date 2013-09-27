@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<sql-query name="index_photo">
+     <![CDATA[
+     	SELECT ph.HEADPHOTOPATH AS photo
+		FROM t_portal_userphoto ph,(
+			SELECT PK_T_PORTAL_ACCOUNT_USERID AS ID
+			FROM t_portal_account 
+			WHERE UID = :uid ) temp
+		WHERE ph.ACCOUNT = temp.ID ;
+     ]]>
+    </sql-query>
+
+</hibernate-mapping>

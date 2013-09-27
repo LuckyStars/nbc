@@ -3,7 +3,7 @@
 <struts>
 	<package name="schoolmaster2" namespace="/scMaster2" extends="struts-default">
 		
-		<action name="*_index" method="{1}" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
+		<action name="*_index" method="{1}" class="sm2indexAction">
 			<result name="index">/function/index.jsp</result>
 			<result name="home">/function/home.jsp</result>
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
