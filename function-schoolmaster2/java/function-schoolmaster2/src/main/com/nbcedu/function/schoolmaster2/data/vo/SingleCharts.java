@@ -1,12 +1,16 @@
 package com.nbcedu.function.schoolmaster2.data.vo;
 
 import static org.apache.commons.lang.xwork.StringUtils.trimToEmpty;
+import static org.apache.commons.lang.xwork.StringUtils.isBlank;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.util.CollectionUtils;
 
 public class SingleCharts {
+	
+	private static final Logger logger = Logger.getLogger(SingleCharts.class);
 	
 	private static final String chartXml = 
 			"<graph caption='${caption}' baseFontSize='20' bgColor='f0f8fc'" +
@@ -62,6 +66,16 @@ public class SingleCharts {
 				.replace("${sets}", setStr.toString()).toString());
 		
 	}
+	
+	
+	private boolean validated(){
+		if(isBlank(this.getxAxisName())){
+			logger.error("");
+		}
+		
+		return Boolean.TRUE;
+	}
+	
 	////////////////////
 	///////get&set//////
 	////////////////////

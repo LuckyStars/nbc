@@ -36,12 +36,12 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 			}
 		});
 		
-		final Map<String, String> result = new HashMap<String, String>();
-		if(resultSet!=null&& resultSet.size() >0){
-			for (Object[] obj : resultSet) {
-				result.put(obj[1].toString(), obj[0].toString());
-			}
-		}
+//		final Map<String, String> result = new HashMap<String, String>();
+//		if(resultSet!=null&& resultSet.size() >0){
+//			for (Object[] obj : resultSet) {
+//				result.put(obj[1].toString(), obj[0].toString());
+//			}
+//		}
 		
 		SingleCharts xmlData = new SingleCharts();
 		xmlData.setCaption("场馆预定");
