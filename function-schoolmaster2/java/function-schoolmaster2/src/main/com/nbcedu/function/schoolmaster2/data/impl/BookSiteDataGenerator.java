@@ -31,7 +31,7 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				return session.getNamedQuery("documentFlow_query").
+				return session.getNamedQuery("bookSite_query").
 					setDate("start",st).setDate("end", en).list();
 			}
 		});
