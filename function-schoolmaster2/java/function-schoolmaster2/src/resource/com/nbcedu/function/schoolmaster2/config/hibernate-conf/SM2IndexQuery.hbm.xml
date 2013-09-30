@@ -12,5 +12,17 @@
 		WHERE ph.ACCOUNT = temp.ID ;
      ]]>
     </sql-query>
+    
+    <sql-query name="index_phrase" >
+    	<![CDATA[
+    	SELECT PHRASE
+		FROM t_portal_moodphrase
+		WHERE ACCOUNT IN (
+			SELECT PK_T_PORTAL_ACCOUNT_USERID
+			FROM t_portal_account
+			WHERE UID = :uid
+		);
+    	]]>
+    </sql-query>
 
 </hibernate-mapping>

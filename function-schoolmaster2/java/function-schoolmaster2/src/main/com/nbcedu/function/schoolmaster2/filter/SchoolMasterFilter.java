@@ -36,8 +36,7 @@ public class SchoolMasterFilter implements Filter{
 		}
 
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
-			Map paramMap = new HashMap();
-			String uid = (String) req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+			final String uid = (String) req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
 			
@@ -48,8 +47,11 @@ public class SchoolMasterFilter implements Filter{
 				resp.sendRedirect(req.getContextPath() + "/teacherIndex.jsp");
 				return;
 			}
-			paramMap.put("uid", uid);
-			Object obj = getLoader(serviceName, req).load(paramMap);
+			Object obj = getLoader(serviceName, req).
+				load(new HashMap<String, String>(){{
+					put("uid", uid);
+				}});
+			
 			req.getSession().setAttribute(getAttributeName(serviceName), obj);
 		}
 

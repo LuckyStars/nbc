@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
+import com.nbcedu.function.schoolmaster2.utils.UCService;
 
 /**
  * 
@@ -22,6 +23,8 @@ public class IndexAction extends BaseAction{
 	private String rightURL;
 	private static final Logger logger = Logger.getLogger(IndexAction.class);
 	private String photoPath ;
+	private String userName;
+	private String userPhrase;
 	private HibernateDao dao;
 	
 	public String index(){
@@ -29,6 +32,10 @@ public class IndexAction extends BaseAction{
 		if(logger.isInfoEnabled()){
 			logger.info(photoPath);
 		}
+		this.userPhrase = this.getPhrase();
+		this.userName = (getSession().get("curUserName")!=null?
+				getSession().get("curUserName").toString():
+				getSession().put("curUserName", UCService.findNameByUid(getUserId())).toString());
 		return "index";
 	}
 	
@@ -53,6 +60,20 @@ public class IndexAction extends BaseAction{
 		});
 		return StringUtils.trimToEmpty(photo);
 	}
+	
+	private String getPhrase(){
+		final String uid = this.getUserId();
+		String phrase = (String) dao.getHibernateTemplate().execute(new HibernateCallback() {
+			@Override
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				Query q = session.getNamedQuery("index_phrase");
+				q.setString("uid", uid);
+				return q.uniqueResult();
+			}
+		});
+		return StringUtils.trimToEmpty(phrase);
+	}
 	////////////////////////////////
 	/////getters&setters//////
 	/////////////////////////////
@@ -70,6 +91,18 @@ public class IndexAction extends BaseAction{
 	}
 	public String getPhotoPath() {
 		return photoPath;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPhrase() {
+		return userPhrase;
+	}
+	public void setUserPhrase(String userPhrase) {
+		this.userPhrase = userPhrase;
 	}
 	
 }
