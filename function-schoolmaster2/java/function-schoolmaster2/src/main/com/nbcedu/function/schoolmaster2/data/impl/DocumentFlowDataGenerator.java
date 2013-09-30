@@ -17,8 +17,8 @@ import com.nbcedu.function.schoolmaster2.data.interfaces.Matcher;
 import com.nbcedu.function.schoolmaster2.data.vo.SingleCharts;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 
-@Matcher("bookSite")
-public class BookSiteDataGenerator extends AbstractDataGenerator{
+@Matcher("documentFlow")
+public class DocumentFlowDataGenerator extends AbstractDataGenerator{
 
 	@Override
 	@SuppressWarnings({ "unchecked", "serial" })
@@ -36,12 +36,12 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 			}
 		});
 		
-//		final Map<String, String> result = new HashMap<String, String>();
-//		if(resultSet!=null&& resultSet.size() >0){
-//			for (Object[] obj : resultSet) {
-//				result.put(obj[1].toString(), obj[0].toString());
-//			}
-//		}
+		final Map<String, String> result = new HashMap<String, String>();
+		if(resultSet!=null&& resultSet.size() >0){
+			for (Object[] obj : resultSet) {
+				result.put(obj[1].toString(), obj[0].toString());
+			}
+		}
 		
 		SingleCharts xmlData = new SingleCharts();
 		xmlData.setCaption("场馆预定");

@@ -29,8 +29,19 @@ public class DataAction extends BaseAction{
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listStatistic";
 	}
+	public String listMasterStatistics(){
+		this.data.setStartDate(start);
+		this.data.setEndDate(end);
+		this.data.setMatcher(matcher);
+		this.pm=this.sm2DataBiz.findPageByModel(data);
+		return "listMasterStatistic";
+	}
 	public String toChart(){
 		return "toChart";
+	}
+	public String toMasterChart(){
+		this.data = this.sm2DataBiz.findById(id);
+		return "toMasterChart";
 	}
 	public void show(){
 		DataGenerator dataGen = DataContext.getContext().getbyMatcher(matcher);
