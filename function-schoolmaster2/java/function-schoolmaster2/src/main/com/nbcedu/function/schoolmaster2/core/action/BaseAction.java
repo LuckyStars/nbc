@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
 import com.nbcedu.function.schoolmaster2.core.pager.Pager;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -35,7 +36,7 @@ public class BaseAction extends ActionSupport {
 	
 	protected HttpServletResponse response;
 	
-	protected HttpServletRequest request;
+	 protected HttpServletRequest request ;
 	
 	protected String getUserId() {
 		 
@@ -44,7 +45,9 @@ public class BaseAction extends ActionSupport {
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
 	}
-	
+	protected HttpServletRequest getRequest(){
+		return this.request = ServletActionContext.getRequest();
+	}
 	protected Object getFromSession(Object key){
 		return ActionContext.getContext().getSession().get(key);
 	}

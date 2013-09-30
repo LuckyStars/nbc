@@ -18,17 +18,10 @@
      
     </sql-query>
 <sql-query name="documentFlow_query">
-	
      <![CDATA[
-     	SELECT 
-     		COUNT(bs.pk_BOOKSITE_ID) as numcount,lv.activityLevel_NAME lvname 
-     	FROM 
-     		t_booksite_booksite bs,t_booksite_activitylevel lv 
-     	WHERE 
-     		bs.FK_ACTIVITYLEVEL_NO=lv.PK_activityLevel_ID and  
-     		(bookSite_uploadDateTime between :start and :end)
-   		GROUP BY 
-   			bs.FK_ACTIVITYLEVEL_NO 
+     		SELECT count(d.id) FROM Document d, DocumentTask dt WHERE 
+				 d.status in (1,3) AND d.id = dt.documentId 
+				and (publishTime between :start and :end)
      ]]>
      
     </sql-query>

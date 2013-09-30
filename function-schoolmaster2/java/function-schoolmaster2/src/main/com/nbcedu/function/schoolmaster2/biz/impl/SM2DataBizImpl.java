@@ -36,7 +36,7 @@ public class SM2DataBizImpl extends BaseBizImpl<SM2Datas> implements SM2DataBiz{
 		list.add(m.getMatcher());
 		if(m.getStartDate()!=null&&StringUtils.isNotBlank(m.getStartDate().toString())){
 			hql.append(" and createDate >? ");
-			list.add(m.getCreateDate());
+			list.add(m.getStartDate());
 		}
 		if(m.getEndDate()!=null&&StringUtils.isNotBlank(m.getEndDate().toString())){
 			hql.append(" and createDate <? ");

@@ -44,9 +44,9 @@ public class DocumentFlowDataGenerator extends AbstractDataGenerator{
 		}
 		
 		SingleCharts xmlData = new SingleCharts();
-		xmlData.setCaption("场馆预定");
+		xmlData.setCaption("公文流转");
 		xmlData.setNumberPrefix("");
-		xmlData.setSubcaption("活动级别统计");
+		xmlData.setSubcaption("公文处理");
 		xmlData.setxAxisName("预定次数");
 		xmlData.setyAxisName("活动类型");
 		xmlData.setDatas(new ArrayList<SingleCharts.DataSet>(){{

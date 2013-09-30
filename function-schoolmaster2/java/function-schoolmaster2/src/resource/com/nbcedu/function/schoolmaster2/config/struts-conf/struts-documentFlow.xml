@@ -1,36 +1,16 @@
-<!-- <?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="masterDocumentFlow" namespace="/masterDocumentFlow" extends="struts-default">
-		<interceptors>
-			<interceptor name="doucumentFlowURLInterceptor" class="doucumentFlowURLInterceptor" />
-			<interceptor-stack name="doucumentFlowURLInterceptorLogin">
-				<interceptor-ref name="doucumentFlowURLInterceptor" />
-				<interceptor-ref name="defaultStack" />
-			</interceptor-stack>
-		</interceptors>
-		<default-interceptor-ref name="doucumentFlowURLInterceptorLogin" />
-		
-		 全局
-		<global-results>
-			<result name="doucumentFlowError">/function/function-documentFlow/errorPage.jsp</result>
-			<result name="doucumentFlowLogin">/function/function-documentFlow/login.jsp</result>
-		</global-results>
-				
-		全局捕获异常
-		<global-exception-mappings>
-		 	<exception-mapping exception="java.lang.Exception" result="doucumentFlowError" />
-		</global-exception-mappings>
 			
-		============= 首页 ===================
+<!--		============= 首页 ===================-->
 		<action name="home" class="homeAction" method="home">
 			<result name="home">/function/function-documentFlow/home.jsp</result>
 		</action>
 		
 		
-		============= 公文 ===================
+<!--		============= 公文 ===================-->
 		<action name="*Document" class="documentAction" method="{1}">
-			<result name="newDoc">/function/function-documentFlow/newDoc.jsp</result>
 			<result name="listMy" type="redirectAction">listMyDocument.action</result>
 			<result name="listFlowing">/function/function-documentFlow/listFlowing.jsp</result>
 			<result name="toListFlowing" type="chain">listFlowingDocument</result>
@@ -48,7 +28,7 @@
 		<action name="checkEditable" class="documentAction" method="checkEditable"></action>
 		
 		
-		============= 公文任务 ===================
+<!--		============= 公文任务 ===================-->
 		<action name="*DocumentTask" class="documentTaskAction" method="{1}">
 			<result name="unhandledDocList">/function/function-masterDocumentFlow/unHandledDocList.jsp</result>
 			<result name="handledDocList">/function/function-documentFlow/handledDocList.jsp</result>
@@ -57,7 +37,7 @@
 		</action>
 		
 		
-		============= 统计 ===================
+<!--		============= 统计 ===================-->
 		<action name="*Statistics" class="statAction" method="{1}">
 			<result name="statistics">/function/function-documentFlow/statistics.jsp</result>
 			<result name="export" type="stream">
@@ -69,7 +49,7 @@
 		</action>
 		
 		
-		============= 配置 ===================
+<!--		============= 配置 ===================-->
 		<action name="*Profile" class="profileAction" method="{1}">
 			<result name="profile">/function/function-documentFlow/profile.jsp</result>
 			<result name="privilege">/function/function-documentFlow/privilege.jsp</result>
@@ -81,7 +61,7 @@
 		<action name="setUpPrivilege" class="profileAction" method="setUpPrivilege"></action>
 		
 		
-		============= 附件 ===================
+<!--		============= 附件 ===================-->
 		<action name="*Attachment" class="attachmentAction" method="{1}">
 			<result name="download" type="stream">
 				<param name="contentType">application/octet-stream;charset=utf-8</param>  
@@ -100,4 +80,3 @@
 		
 	</package>
 </struts>
- -->
