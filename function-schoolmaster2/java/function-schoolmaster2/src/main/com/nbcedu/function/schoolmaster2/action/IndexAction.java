@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
@@ -26,6 +27,9 @@ public class IndexAction extends BaseAction{
 	private String userName;
 	private String userPhrase;
 	private HibernateDao dao;
+	private String start;
+	private String end;
+	private String matcher;
 	
 	public String index(){
 		this.photoPath = this.getPhoto();
@@ -40,6 +44,7 @@ public class IndexAction extends BaseAction{
 	}
 	
 	public String home(){
+		this.rightURL += "?start="+start+"&end="+end+"&matcher"+matcher;
 		return "home";
 	}
 	
@@ -103,6 +108,30 @@ public class IndexAction extends BaseAction{
 	}
 	public void setUserPhrase(String userPhrase) {
 		this.userPhrase = userPhrase;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = (start==null)?"":start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = (end==null)?"":end;
+	}
+
+	public String getMatcher() {
+		return matcher;
+	}
+
+	public void setMatcher(String matcher) {
+		this.matcher = matcher;
 	}
 	
 }
