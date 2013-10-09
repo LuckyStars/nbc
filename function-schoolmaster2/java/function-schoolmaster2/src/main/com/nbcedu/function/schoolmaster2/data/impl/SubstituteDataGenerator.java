@@ -15,8 +15,8 @@ import com.nbcedu.function.schoolmaster2.data.interfaces.Matcher;
 import com.nbcedu.function.schoolmaster2.data.vo.SingleCharts;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 
-@Matcher("bookSite")
-public class BookSiteDataGenerator extends AbstractDataGenerator{
+@Matcher("substitute")
+public class SubstituteDataGenerator extends AbstractDataGenerator{
 
 	@Override
 	@SuppressWarnings({ "unchecked", "serial" })
@@ -29,24 +29,18 @@ public class BookSiteDataGenerator extends AbstractDataGenerator{
 			@Override
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				return session.getNamedQuery("bookSite_query").
+				return session.getNamedQuery("substitute_query").
 					setDate("start",st).setDate("end", en).list();
 			}
 		});
 		
-//		final Map<String, String> result = new HashMap<String, String>();
-//		if(resultSet!=null&& resultSet.size() >0){
-//			for (Object[] obj : resultSet) {
-//				result.put(obj[1].toString(), obj[0].toString());
-//			}
-//		}
 		
 		SingleCharts xmlData = new SingleCharts();
-		xmlData.setCaption("场馆预定");
+		xmlData.setCaption("请假代课");
 		xmlData.setNumberPrefix("");
-		xmlData.setSubcaption("活动级别统计");
-		xmlData.setxAxisName("预定次数");
-		xmlData.setyAxisName("活动类型");
+		xmlData.setSubcaption("请假代课类型统计");
+		xmlData.setxAxisName("请假次数");
+		xmlData.setyAxisName("请假类型");
 		xmlData.setDatas(new ArrayList<SingleCharts.DataSet>(){{
 			for (Object[] obj : resultSet) {
 				SingleCharts.DataSet dataSet = new SingleCharts.DataSet();

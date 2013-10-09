@@ -1,12 +1,9 @@
 package com.nbcedu.function.schoolmaster2.action;
 
-
 import java.util.Date;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
-import com.nbcedu.function.schoolmaster2.core.util.date.DateUtil;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
@@ -29,34 +26,15 @@ public class DataAction extends BaseAction{
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
 		this.pm=this.sm2DataBiz.findPageByModel(data);
-		return "listStatistic";
+		return "listStatistics";
 	}
 	public String listMasterStatistics(){
-		matcher = (String)getRequest().getAttribute("matcher");
-		String s = (String)getRequest().getAttribute("start");
-		String e = (String)getRequest().getAttribute("end");
-		if(!StringUtil.isEmpty(s)){
-			try {
-				DateUtil.str2Date(s, "yyyy-mm-dd");
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		if(!StringUtil.isEmpty(e)){
-			try {
-				DateUtil.str2Date(e, "yyyy-mm-dd");
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		
 		this.data.setMatcher(matcher);
 		this.pm=this.sm2DataBiz.findPageByModel(data);
-		return "listMasterStatistic";
+		return "listMasterStatistics";
 	}
 	public String toChart(){
 		return "toChart";

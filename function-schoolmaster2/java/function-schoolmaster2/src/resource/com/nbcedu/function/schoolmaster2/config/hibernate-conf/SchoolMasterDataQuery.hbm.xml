@@ -17,12 +17,33 @@
      ]]>
      
     </sql-query>
-<sql-query name="documentFlow_query">
+	<sql-query name="documentFlow_query">
      <![CDATA[
      		SELECT count(d.id) FROM Document d, DocumentTask dt WHERE 
 				 d.status in (1,3) AND d.id = dt.documentId 
 				and (publishTime between :start and :end)
      ]]>
      
+    </sql-query>
+    <sql-query name="substitute_query">
+     <![CDATA[
+     		SELECT COUNT(s.PK_T_SUBSTITUTELEAVING_SUBSTITUTE_ID) as countnum,c.displayname FROM t_substituteleaving_course c ,
+			t_substituteleaving_substitute s where s.COURSENAME=c.COURSENAME and (SUBSTITUTEDATE between :start and :end)
+			GROUP BY c.displayname
+     ]]>
+    </sql-query>
+    <sql-query name="repair_query">
+     <![CDATA[
+     		select COUNT(r.id) as co ,NAME from t_repairsystem_repairservice r,
+			t_repairsystem_repairitems s where r.REPAIRITEMSID=s.ID and (createdate between :start and :end)
+			 GROUP BY s.name
+     ]]>
+    </sql-query>
+    <sql-query name="logistics_query">
+     <![CDATA[
+     		SELECT COUNT(b.ID) as  co ,name from t_logistics_educationservice e ,
+			t_logistics_bookingservice b where b.EDUCATIONSERVICEID=e.ID and (bookingdate between :start and :end)
+			GROUP BY  e.ID
+     ]]>
     </sql-query>
 </hibernate-mapping>
