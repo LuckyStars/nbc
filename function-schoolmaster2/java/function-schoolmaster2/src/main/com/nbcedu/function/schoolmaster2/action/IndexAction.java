@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
@@ -9,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
@@ -60,7 +62,8 @@ public class IndexAction extends BaseAction{
 					SQLException {
 				Query q = session.getNamedQuery("index_photo");
 				q.setString("uid", uid);
-				return q.uniqueResult();
+				List result = q.list();
+				return CollectionUtils.isEmpty(result)?"":result.get(0).toString();
 			}
 		});
 		return StringUtils.trimToEmpty(photo);
@@ -74,7 +77,8 @@ public class IndexAction extends BaseAction{
 					SQLException {
 				Query q = session.getNamedQuery("index_phrase");
 				q.setString("uid", uid);
-				return q.uniqueResult();
+				List result = q.list();
+				return CollectionUtils.isEmpty(result)?"":result.get(0).toString();
 			}
 		});
 		return StringUtils.trimToEmpty(phrase);
