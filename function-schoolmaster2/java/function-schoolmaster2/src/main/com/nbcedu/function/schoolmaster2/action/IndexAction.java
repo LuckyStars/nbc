@@ -1,7 +1,6 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
@@ -44,7 +43,10 @@ public class IndexAction extends BaseAction{
 	}
 	
 	public String home(){
-		this.rightURL += "?start="+start+"&end="+end+"&matcher"+matcher;
+		return "home";
+	}
+	public String login(){
+		this.rightURL += "?matcher="+matcher;
 		return "home";
 	}
 	
