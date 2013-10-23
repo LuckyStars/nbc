@@ -94,6 +94,14 @@
 		<filter-name>serviceInfoFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<filter>
+		<filter-name>pagerFilter</filter-name>
+		<filter-class>com.nbcedu.function.schoolmaster2.core.pager.PagerFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>pagerFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
