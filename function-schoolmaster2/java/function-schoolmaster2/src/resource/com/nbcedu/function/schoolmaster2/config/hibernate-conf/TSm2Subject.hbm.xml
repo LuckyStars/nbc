@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.nbcedu.function.schoolmaster2.data.model.TSm2Subject" table="t_sm2_subject">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="com.nbcedu.common.uuid.UIDGenerator" />
+        </id>
+        <property name="createrId" type="java.lang.String">
+            <column name="createrId" length="32" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="createTime" length="0" />
+        </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" length="65535" />
+        </property>
+        <property name="flag" type="java.lang.Integer">
+            <column name="flag" />
+        </property>
+        <property name="departmentId" type="java.lang.String">
+            <column name="departmentId" length="32" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="title" />
+        </property>
+        <property name="moduleId" type="java.lang.String">
+            <column name="moduleId" length="32" />
+        </property>
+        <property name="lastUpdateTime" type="java.sql.Timestamp">
+            <column name="lastUpdateTime" length="0" />
+        </property>
+        <property name="parentId" type="java.lang.String">
+            <column name="parentId" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>
