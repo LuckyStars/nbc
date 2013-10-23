@@ -2,7 +2,6 @@ package com.nbcedu.function.schoolmaster2.filter;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -23,11 +22,13 @@ public class SchoolMasterFilter implements Filter{
 	 
 	private static Logger logger = Logger.getLogger(SchoolMasterFilter.class);
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("serial")
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
+		
 		String serviceName = getServiceName(req);
 
 		if (serviceName.equals("exclusive")) {
@@ -36,10 +37,10 @@ public class SchoolMasterFilter implements Filter{
 		}
 
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
-			final String uid = (String) req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+			final String uid = (String) 
+				req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
-			
 //			uid = (String) attributes.get("exuserid");
 
 			if ((uid == null) || ("".equals(uid))) {
@@ -61,19 +62,24 @@ public class SchoolMasterFilter implements Filter{
 	
 	private String getServiceName(HttpServletRequest request) {
 		String functionName = null;
-	
-	    if (request.getContextPath().contains("schoolapp")){
-	      functionName = request.getRequestURI().replaceFirst(request.getContextPath() + "/", "");
-	    }else if(request.getRequestURI().contains("masterDocumentFlow")){
-	    	return "documentFlow";
-	    }else {
-	      return "sns";
-	    }
 
-	    if (functionName.contains("/")) {
-	    	int i = functionName.indexOf("/");
-	    	functionName = functionName.substring(0, i);
-	    }
+		if (request.getContextPath().contains("schoolapp")) {
+			
+			functionName = request.getRequestURI().
+				replaceFirst(request.getContextPath() + "/", "");
+			
+		} else if (request.getRequestURI().contains("masterDocumentFlow")) {
+			
+			return "documentFlow";
+		} else {
+			
+			return "sns";
+		}
+
+		if (functionName.contains("/")) {
+			int i = functionName.indexOf("/");
+			functionName = functionName.substring(0, i);
+		}
 	    return functionName;
 	}
 	
@@ -86,7 +92,9 @@ public class SchoolMasterFilter implements Filter{
 	}
 	
 	private ServiceInfoLoader getLoader(String serviceName, HttpServletRequest request) {
-		ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());
+		ApplicationContext ac = 
+			WebApplicationContextUtils.
+			getWebApplicationContext(request.getSession().getServletContext());
 		return (ServiceInfoLoader)ac.getBean(getLoaderName(serviceName));
 	}
 	
