@@ -1,0 +1,275 @@
+html,body,h1,h2{
+	margin:0;
+	padding:0;
+}
+img{
+border:none;
+}
+.header {
+	height: 65px;
+	line-height: 65px;
+	width: 1200px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;	
+	background-image: url(../images/header_bg.jpg);
+}
+.header .logo{
+	height: 65px;
+	line-height: 65px;
+	width:314px;
+	display:table-cell;
+	vertical-align:middle;
+	text-indent: 20px;
+}
+.main{
+	width:1200px;
+	height:700px;
+	margin:0 auto;
+}
+.module{
+	width:384px;
+	height:331px;
+	float:left;
+}
+.module h1{
+	height:29px;
+	line-height:29px;
+	font-size:14px;
+	color:#0273c2;
+	text-indent:10px;
+}
+.module1{
+	background:url(../images/module_bg1.png) no-repeat;	
+	margin-top:16px;
+}
+.module2{
+	background:url(../images/module_bg2.png) no-repeat;
+	margin-top:20px;
+}
+.photo{
+	float:left;
+	border:8px solid #ededed;
+}
+.userinfo{
+	padding:20px 6px;
+	margin:0px;
+}
+.userinfo p{
+	text-indent:8px;
+	font-size:14px;
+	margin:0;
+	height:36px;
+	line-height:36px;
+	color:#333333;
+}
+.userinfo .name,.userinfo .state{
+	color:#0273c2;
+	font-weight:bold;
+}
+.userinfo .write textarea{
+	width:172px;
+	height:114px;
+	resize:none;
+}
+.office{
+	position:relative;
+	width:127px;
+	height:149px;
+	margin:1px 0 0 1px;
+	float:left;
+}
+.office span{
+	position:absolute;
+	display:inline-block;
+	width:125px;
+	bottom:20px;
+	left:0px;
+	color:#fff;
+	text-align:center;
+	font-size:14px;
+}
+.office i{
+	position:absolute;
+	background:url(../images/new1.png) no-repeat;
+	width:17px;
+	height:14px;
+	line-height:14px;
+	color:#fff;
+	right:34px;
+	top:34px;
+	font-style: normal;
+	font-size:12px;
+	text-align:center;
+}
+.mail i{
+	top:40px;
+}
+.genzhong{
+	background:#e3d8e5;
+}
+.genzhong td{
+	background:#fff;
+	font-size:14px;
+	color:#0273c2;
+}
+.genzhong td a{
+	color:#0273c2;
+}
+.genzhong img{
+	float:left;
+	margin:0 0 0 8px;
+}
+.genzhong span{
+	float:left;
+	margin:8px 0 0 6px;
+}
+.tongtai{
+	position:relative;
+	float:left;
+	margin:8px 0 0 8px;
+	width:179px;
+	height:140px;
+}
+.tongtai i{
+	position: absolute;
+	background: url(../images/new1.png) no-repeat;
+	width: 17px;
+	height: 14px;
+	line-height: 14px;
+	color: #fff;
+	right: 34px;
+	top: 26px;
+	font-style: normal;
+	font-size: 12px;
+	text-align: center;
+}
+.tongtai span{
+	position:absolute;
+	display:inline-block;
+	width:179px;
+	bottom:16px;
+	left:0px;
+	color:#fff;
+	text-align:center;
+	font-size:14px;
+}
+
+.linshi{
+	background:url(../images/pp.png) no-repeat;
+	position:relative;
+	float:left;
+	margin:12px 0 0 10px;
+	width:115px;
+	height:131px;
+}
+.linshi img{
+	display:block;
+	margin:12px auto;
+}
+.linshi span{
+	position:absolute;
+	display:inline-block;
+	width:115px;
+	bottom:16px;
+	left:0px;
+	color:#fff;
+	text-align:center;
+	font-size:14px;
+}
+.qi{
+	position:absolute;
+	display:inline-block;
+	background:url(../images/qi.png);
+	width:16px;
+	height:16px;
+	top:10px;
+	right:10px;
+}
+.text{
+	position:absolute;
+	display:inline-block;
+	background:url(../images/text.png);
+	width:14px;
+	height:14px;
+	top:10px;
+	right:10px;
+}
+.new{
+	position:absolute;
+	display:inline-block;
+	background:url(../images/new.png);
+	width:30px;
+	height:11px;
+	top:10px;
+	right:10px;
+}
+.tongji {
+}
+.tongji td a{
+	color:#fff;
+	font-size:14px;
+}
+.tongji img{
+	float: left;
+    margin: 20px 0 0 22px;
+}
+.tongji span{
+	float: left;
+    margin: 28px 0 0 6px;
+}
+.office .pointer{
+	position:absolute;
+	width:125px;
+	height:147px;
+	top:0;
+	left:0;
+}
+.tongtai .pointer{
+	position:absolute;
+	width:179px;
+	height:140px;
+	top:0;
+	left:0;
+}
+.linshi .pointer{
+	position:absolute;
+	width:114px;
+	height:130px;
+	top:0;
+	left:0;
+}
+.tongji .pointer{
+	display: inline-block;
+    height: 70px;
+    position: relative;
+    vertical-align: middle;
+    width: 188px;
+}
+.genzhong .pointer{
+	display:table-cell;
+	vertical-align:middle;
+	width:176px;
+	height:63px;
+}
+.genzhong .ts{
+	display:table-cell;
+	vertical-align:middle;
+	width:250px;
+	height:63px;
+}
+.pointer:hover{	
+	border: 1px solid rgba(0,0,0,0.3);
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	outline: 0;
+	-webkit-box-shadow: 0 0 7px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 0 7px rgba(0,0,0,0.3);
+	box-shadow: 0 0 7px rgba(0,0,0,0.3);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+}
+	

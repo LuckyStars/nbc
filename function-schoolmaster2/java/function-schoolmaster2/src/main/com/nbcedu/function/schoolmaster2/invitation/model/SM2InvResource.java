@@ -1,11 +1,12 @@
 package com.nbcedu.function.schoolmaster2.invitation.model;
 
+import java.io.Serializable;
 
-public abstract class SM2Resource {
+@SuppressWarnings("serial")
+public abstract class SM2InvResource implements Serializable{
 
 	protected String id;
-	protected String InvitationId;
-
+	protected String invId;
 	public abstract String displayStr();
 	
 	/////////////////////
@@ -18,11 +19,11 @@ public abstract class SM2Resource {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getInvitationId() {
-		return InvitationId;
+	public String getInvId() {
+		return invId;
 	}
-	public void setInvitationId(String invitationId) {
-		InvitationId = invitationId;
+	public void setInvId(String invId) {
+		this.invId = invId;
 	}
 	
 }
