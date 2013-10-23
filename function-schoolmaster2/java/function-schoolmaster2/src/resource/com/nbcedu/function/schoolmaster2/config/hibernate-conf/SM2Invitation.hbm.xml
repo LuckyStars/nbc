@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.schoolmaster2.invitation.model.SM2Invitation" table="t_sm2_invitation">
+		
+		<id name="id" column="ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		<property name="title" column="title" type="string" length="50" not-null="true" />
+		
+		<property name="content" column="content" type="text"  />
+		
+		<property name="creatorUid" column="creator_uid" type="string" length="32" not-null="true" />
+		
+		<property name="creatorName" column="creator_name" type="string" length="32" not-null="true" />
+		
+		<property name="receiverUid" column="receiver_uid" type="string" length="32" not-null="true"/>
+
+		<property name="createDate" column="create_date" type="timestamp" not-null="true" />
+		
+		<property name="status" column="status" type="integer" not-null="true" />
+		
+	</class>
+</hibernate-mapping>

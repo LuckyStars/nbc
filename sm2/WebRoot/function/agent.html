@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title></title>
+        <script type="text/javascript">		    
+            ;(function(){
+				var arr = window.location.hostname.split(".");
+				if(arr.length==3){
+					document.domain = arr[1]+"."+arr[2];
+				}
+				if(arr.length==2){
+					document.domain = arr[0]+"."+arr[1];
+				}
+				if(parent.parent.iframeResize){
+					parent.parent.iframeResize(window.location.hash.replace("#",""));
+				}              
+			})();
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
