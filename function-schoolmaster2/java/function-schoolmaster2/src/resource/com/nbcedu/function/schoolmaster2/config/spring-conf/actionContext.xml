@@ -13,6 +13,7 @@
 		<property name="dao" ref="dataHibernateDao"></property>
 	</bean>
 	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction">
+		<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
 	</bean>
 	
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">

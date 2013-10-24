@@ -1,6 +1,9 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class TSm2Subject implements java.io.Serializable {
 
@@ -16,6 +19,11 @@ public class TSm2Subject implements java.io.Serializable {
 	private String moduleId;
 	private Timestamp lastUpdateTime;
 	private String parentId;
+	/*
+	 * 执行者
+	 */
+	private Set<TSm2SubjectUser> excuteUsers=new HashSet<TSm2SubjectUser>();
+
 
 	// Constructors
 

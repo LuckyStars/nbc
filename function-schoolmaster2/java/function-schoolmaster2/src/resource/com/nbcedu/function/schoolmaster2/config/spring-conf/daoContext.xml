@@ -10,4 +10,10 @@
 	<bean id="sm2DataDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2DataDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="sm2SubjectDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2SubjectDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="sm2ModuleDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2ModuleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>

@@ -66,6 +66,9 @@ public class SchoolMasterFilter implements Filter{
 				}});
 			
 			req.getSession().setAttribute(getAttributeName(serviceName), obj);
+//			放入角色
+			
+			
 		}
 
 		resp.setHeader("P3P","CP=CAO PSA OUR IDC DSP COR ADM DEVi TAIi PSD IVAi IVDi CONi HIS IND CNT");

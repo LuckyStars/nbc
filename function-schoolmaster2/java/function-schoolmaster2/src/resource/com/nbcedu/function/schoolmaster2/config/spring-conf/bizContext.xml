@@ -7,4 +7,12 @@
 		<property name="sm2DataDao" ref="sm2DataDao"></property>
 	</bean>
 	
+	<bean id="sm2SubjectBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2SubjectBizImpl">
+		<property name="sm2SubjectDao" ref="sm2SubjectDao"></property>
+	</bean>
+	
+	<bean id="sm2ModuleBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2ModuleBizImpl">
+		<property name="sm2ModuleDao" ref="sm2ModuleDao"></property>
+	</bean>
+	
 </beans>
