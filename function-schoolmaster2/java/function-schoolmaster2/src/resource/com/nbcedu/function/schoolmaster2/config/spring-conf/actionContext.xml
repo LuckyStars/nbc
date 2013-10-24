@@ -12,5 +12,6 @@
 	<bean id="sm2indexAction" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
 		<property name="dao" ref="dataHibernateDao"></property>
 	</bean>
-	
+	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction">
+	</bean>
 </beans>
