@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
-<%@ taglib prefix="sns" uri="/function/function-linshi/SNSTag.tld"%>
+<%@ taglib prefix="invStatus" uri="InvStatus.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,9 +12,8 @@
 	<link href="${prc}/function/function-invatition/css/index.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
-	<script type="text/javascript" src="${prc}/function//kindeditor-4.1.5/kindeditor-min.js" ></script>
-	<script type="text/javascript" src="${prc}/function//kindeditor-4.1.5/lang/zh_CN.js"></script>
-	
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	
 	<script type="text/javascript">
     $(function () {
@@ -87,14 +86,30 @@
 			</div>
 			<table width="100%" border="0">
 				<tr>
-					<th width="10%" scope="col">序号</th>
-					<th width="21%" scope="col">标题</th>
-					<th width="18%" scope="col">发布时间</th>
-					<th width="20%" scope="col">状态</th>
-					<th width="26%" scope="col">操作</th>
+					<th width="25%" scope="col">标题</th>
+					<th width="25%" scope="col">发布时间</th>
+					<th width="25%" scope="col">状态</th>
+					<th width="25%" scope="col">操作</th>
 				</tr>
+				<c:forEach items="${pm.datas }" var="subject">
+					<tr>
+						<td>
+							<c:out value="${subject.title}" escapeXml="true"></c:out>
+						</td>
+						<td>
+							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />
+						</td>
+						<td><invStatus:showStatus statusId="${subject.status}" /></td>
+						<td>
+							<span class="space">发布</span>
+							<span class="space">查看</span>
+							<span class="space download">
+								<a href="#">下载</a>
+							</span>
+						</td>
+					</tr>
+				</c:forEach>
 				<tr>
-					<td>1</td>
 					<td>东兴杯论文一等奖</td>
 					<td>2013-4-23</td>
 					<td>已发布</td>
@@ -107,7 +122,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td>2</td>
 					<td>全国优秀校长论坛讲稿</td>
 					<td>2013-4-23</td>
 					<td>已发布</td>

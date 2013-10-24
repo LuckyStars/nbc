@@ -17,6 +17,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private String departmentId;
 	private String title;
 	private String moduleId;
+	private Integer status;
 	private Timestamp lastUpdateTime;
 	private String parentId;
 	/*
@@ -126,6 +127,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }
