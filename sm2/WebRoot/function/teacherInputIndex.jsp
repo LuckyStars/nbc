@@ -12,13 +12,15 @@
 	<c:set var="ctxPath" value="http://localhost/sm2"></c:set>
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
-			<dl class="warp">
-				<a href="${prc}/scMaster2/find_subject.action?module=ndzx&userId=${sns_init}">
-					<dt>
-						<img src="${prc}/function/img/tu4.jpg" />
-					</dt>
-					<dd>年度重心工作</dd> </a>
-			</dl>
+			<c:forEach items="modules" var="module">
+				<dl class="warp">
+					<a href="${prc}/scMaster2/find_subject.action?moduleId=${module.id}">
+						<dt>
+							<img src="${prc}/function/img/tu4.jpg" />
+						</dt>
+						<dd>${module.name}</dd> </a>
+				</dl>
+			</c:forEach>		
 			<dl class="warp">
 				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">
 					<dt>

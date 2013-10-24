@@ -57,6 +57,8 @@ public class IndexAction extends BaseAction{
 	}
 	
 	public String teacherInput(){
+//		List<TSm2Module> modules = this.sm2ModuleBiz.findAll();
+//		this.getRequest().setAttribute("modules", modules);
 		return "teacherInput";
 	}
 	
