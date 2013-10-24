@@ -45,14 +45,14 @@ public class SchoolMasterFilter implements Filter{
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
 //			uid = (String) attributes.get("exuserid");
 			
-			test:{
-				Enumeration<String> attrInSession = req.getSession().getAttributeNames();
-				while (attrInSession.hasMoreElements()) {
-					String key = attrInSession.nextElement();
-					System.out.print(key + "===:");
-					System.out.println(req.getSession().getAttribute(key));
-				}
-			}
+//			test:{
+//				Enumeration<String> attrInSession = req.getSession().getAttributeNames();
+//				while (attrInSession.hasMoreElements()) {
+//					String key = attrInSession.nextElement();
+//					System.out.print(key + "===:");
+//					System.out.println(req.getSession().getAttribute(key));
+//				}
+//			}
 			
 			
 			if ((uid == null) || ("".equals(uid))) {

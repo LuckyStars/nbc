@@ -9,44 +9,63 @@
 	
 	<title>邀请查看 教师列表</title>
 	
-	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
-	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
-	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
+	<link href="${prc}/function/function-invatition/css/index.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
+	<script type="text/javascript" src="${prc}/function//kindeditor-4.1.5/kindeditor-min.js" ></script>
+	<script type="text/javascript" src="${prc}/function//kindeditor-4.1.5/lang/zh_CN.js"></script>
+	
 	
 	<script type="text/javascript">
     $(function () {
-        $("table tr:odd").css("background", "#f0f8fc")
-        $("table tr:even").css("background", "#d5e0ee")
+    	
+        $("table tr:odd").css("background", "#f0f8fc");
+        $("table tr:even").css("background", "#d5e0ee");
+        
         $(".cx1").click(function () {
             $(".bg").css("display", "block");
             $(".add1").css("display", "block");
-        })
+        });
+        
         $(".add-top1 img").click(function () {
             $(".bg").css("display", "none");
             $(".add1").css("display", "none");
-        })
+        });
      
         $(".download").click(function () {
             $(".bg").css("display", "block");
             $(".add-load").css("display", "block");
-        })
+        });
+        
         $(".add-loadtop1 img").click(function () {
             $(".bg").css("display", "none");
             $(".add-load").css("display", "none");
-        })
+        });
+        
         $(".lian").click(function () {
             $(".plans").css("display", "block");
             $(".plan").css("display", "none");
             $(".password").css("display", "none");
-        })
+        });
+        
         $(".wen").click(function () {
             $(".plan").css("display", "block");
             $(".password").css("display", "block");
             $(".plans").css("display", "none");
-        })
-    })
+        });
+    });
+    KindEditor.ready(function(K) {
+    	editorCourseContent = K.create('textarea[name="detailContent"]', {
+    		resizeType : 0,
+    		allowFileManager : false,
+    		allowImageUpload : true,
+    		uploadJson : '${prc}/scMaster2/upload.action',
+    		items : [
+    				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+    				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+    				'insertunorderedlist', 'link', '|', 'insertfile', 'image']
+   		});
+    });
 </script>
 
 </head>
@@ -106,7 +125,7 @@
 	<div class="add1">
 		<div class="add-top1">
 			<p>选学生</p>
-			<img src="${prc}/img/erro.jpg" class="close" style="cursor: pointer;" />
+			<img src="${prc}/function/img/erro.jpg" class="close" style="cursor: pointer;" />
 		</div>
 		<div class="add-down">
 			<p class="tit">
@@ -115,7 +134,7 @@
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
-				<textarea></textarea>
+				<textarea name="detailContent" style="width:500px;"></textarea>
 			</div>
 			<p class="tit2">
 				附件/链接：
@@ -156,7 +175,7 @@
 	<div class="add-load">
 		<div class="add-loadtop1">
 			<p>下载</p>
-			<img src="${prc}/img/erro.jpg" class="close" style="cursor: pointer;" />
+			<img src="${prc}/function/img/erro.jpg" class="close" style="cursor: pointer;" />
 		</div>
 		<div class="add-loaddown">
 			<table width="430px"
