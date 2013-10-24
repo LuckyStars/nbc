@@ -16,7 +16,7 @@
         <property name="createtime" type="java.util.Date">
             <column name="CREATETIME" length="0" />
         </property>
-        <property name="createrid" type="java.lang.String">
+        <property name="createrId" type="java.lang.String">
             <column name="CREATERID" length="32" />
         </property>
     </class>
