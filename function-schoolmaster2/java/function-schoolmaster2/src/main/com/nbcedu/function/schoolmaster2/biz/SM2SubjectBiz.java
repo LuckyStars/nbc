@@ -16,7 +16,9 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	 */
 	public PagerModel findByModel(TSm2Subject subject);
 	
-	public PagerModel findByCreaterId(String createrId);
+	public PagerModel findByCreaterId(String createrId,String moduleId);
 	
-	public PagerModel findByExceuteUserId(String userId);
+	public PagerModel findByExceuteUserId(String userId,String moduleId);
+	
+	public PagerModel findByModule(String moduleId);
 }

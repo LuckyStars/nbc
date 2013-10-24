@@ -33,24 +33,24 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		this.sm2DataDao = sm2DataDao;
 	}
 	@Override
-	public PagerModel findByExceuteUserId(String userId) {
-		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u where u.subjectId=s.id and u.userId=? ");
-		List<Object> list = new ArrayList<Object>();
-		list.add(userId);
+	public PagerModel findByExceuteUserId(String userId,String moduleId) {
+		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
+				"where u.subjectId=s.id and u.userId=? AND s.moduleId = ?");
 		hql.append(" order by createDate desc");
-		Object[] params = new Object[list.size()];
-		list.toArray(params);
-		return this.sm2DataDao.searchPaginated(hql.toString(),params);
+		return this.sm2DataDao.searchPaginated(hql.toString(),new String[]{userId,moduleId});
 	}
 	@Override
-	public PagerModel findByCreaterId(String createrId) {
-		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u where u.subjectId=s.id and u.createrId=? ");
-		List<Object> list = new ArrayList<Object>();
-		list.add(createrId);
+	public PagerModel findByCreaterId(String createrId,String moduleId) {
+		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
+				"where u.subjectId=s.id and u.createrId=? AND s.moduleId = ?");
 		hql.append(" order by createDate desc");
-		Object[] params = new Object[list.size()];
-		list.toArray(params);
-		return this.sm2DataDao.searchPaginated(hql.toString(),params);
+		return this.sm2DataDao.searchPaginated(hql.toString(),new String[]{createrId,moduleId});
+	}
+	
+	@Override
+	public PagerModel findByModule(String moduleId) {
+		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createDate DESC";
+		return this.sm2DataDao.searchPaginated(hql,moduleId);
 	}
 	
 }
