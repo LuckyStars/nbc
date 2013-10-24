@@ -6,15 +6,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
-<link href="${prc}/function/css/index.css" rel="stylesheet"
-	type="text/css" />
+<link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<c:set var="ctxPath" value="http://172.16.30.183:9080/sns_sjoa"></c:set>
+	<c:set var="ctxPath" value="http://localhost/sm2"></c:set>
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
 			<dl class="warp">
-				<a href="${ctxPath }/showSubjectWorkbench.action?module=ndzx&userId=${sns_init}">
+				<a href="${prc}/scMaster2/find_subject.action?module=ndzx&userId=${sns_init}">
 					<dt>
 						<img src="${prc}/function/img/tu4.jpg" />
 					</dt>
@@ -49,6 +48,25 @@
 					<dd>让校长关注的事项</dd>
 				</a>
 			</dl>
+			
+			 <dl class="warp">
+			 <a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">
+     		 <dt><img src="${prc}/function/img/tu9.jpg" /></dt>
+	      	<dd>邀请您参与的工作</dd>
+	     </a>
+	    </dl>
+	     
+	      <dl class="warp">
+	       <a href="${ctxPath }/findAllModule.action?module.parentId=tjfx">
+		      <dt><img src="${prc}/function/img/tu10.jpg" /></dt>
+		      <dd>统计分析B部分管理</dd>
+	      	</a>
+	    </dl>
+	      <dl class="warp">
+	      <dt><img src="${prc}/function/img/tu11.jpg" /></dt>
+	      <dd>统计分析B部分</dd>
+    </dl>
+			
 		</div>
 	</div>
 </body>

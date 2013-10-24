@@ -34,5 +34,9 @@
         <property name="parentId" type="java.lang.String">
             <column name="parentId" length="32" />
         </property>
+<!--        <set name="excuteUsers" table="SNS_SUBJECTEXTAND_USER" inverse="false" cascade="all">-->
+<!--    		<key column="subject_extand_id"/>-->
+<!--    		<one-to-many class="com.nbcedu.sns.sjoa.model.SnsSubjectExtandUser"/>-->
+<!--		</set>-->
     </class>
 </hibernate-mapping>

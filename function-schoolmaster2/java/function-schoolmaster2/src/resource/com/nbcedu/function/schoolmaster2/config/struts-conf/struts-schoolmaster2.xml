@@ -21,6 +21,10 @@
 			<result name="commonList"></result>
 			<result name="chart" >/function/function-charts/charts.jsp</result>
 		</action>
-		
+		<action name="*_subject" method="{1}" class="sm2SubjectAction">
+			<result name="list">/function/function-teacher/subject_list.jsp</result>
+			<result name="home">/function/home.jsp</result>
+			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
+		</action>
 	</package>
 </struts>
