@@ -14,4 +14,7 @@
 	</bean>
 	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction">
 	</bean>
+	
+	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">
+	</bean>
 </beans>

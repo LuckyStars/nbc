@@ -22,5 +22,8 @@
 			<result name="chart" >/function/function-charts/charts.jsp</result>
 		</action>
 		
+		<action name="upload" method="upload" class="sm2UploadAction">
+		
+		</action>
 	</package>
 </struts>
