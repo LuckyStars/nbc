@@ -15,6 +15,12 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	
+	<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
+<script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.js"></script>
+<script type="text/javascript" src="${prc}/function/swfupload/js/fileprogress.js"></script>
+<script type="text/javascript" src="${prc}/function/swfupload/js/handlers.js"></script>
+<script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.queue.js"></script>
+	
 	<script type="text/javascript">
     $(function () {
     	
@@ -67,6 +73,53 @@
     });
 </script>
 
+<script type="text/javascript">
+	var swfu;
+	window.onload = function() {
+		var settings = {
+			flash_url : "${prc}/function/swfupload/js/swfupload.swf",
+			upload_url: "${prc}/scMaster2/swfUpload.action",	
+			file_post_name: "exl",   
+			file_size_limit : "20 MB",
+			file_types : "*.*",
+			file_types_description : "",
+			file_upload_limit : 20,
+			file_queue_limit : 1,
+			custom_settings : {
+				progressTarget : "fsUploadProgress"
+			},
+			debug: false,
+			// Button settings
+			button_image_url: "${prc}/function/swfupload/images/TestImageNoText_65x29.png",
+			button_width: "60",
+			button_height: "24",
+			button_placeholder_id: "spanButtonPlaceHolder",
+			button_text: '<span class="">浏览文件</span>',
+			button_text_style: ".theFont { font-size: 12;text-align:center;color:#ffffff;}",
+			button_text_top_padding: 2,
+			
+			// The event handler functions are defined in handlers.js
+		    file_queued_handler : fileQueued,
+			file_queue_error_handler : fileQueueError,
+			upload_start_handler : uploadStart,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			queue_complete_handler : queueComplete,
+			use_query_string : true
+		};
+		swfu = new SWFUpload(settings);
+	};
+	function uploadSuccess(){
+		alert('上传成功');
+		window.location.href='#';//TODO
+	}
+	function uploadError(){
+		alert('上传失败');
+		window.location.href='#';//TODO
+	}
+
+</script>
 </head>
 <body>
 	<div class="con_conent fixed">
@@ -138,7 +191,7 @@
 	<div class="bg"></div>
 	<div class="add1">
 		<div class="add-top1">
-			<p>选学生</p>
+			<p>新增</p>
 			<img src="${prc}/function/img/erro.jpg" class="close" style="cursor: pointer;" />
 		</div>
 		<div class="add-down">
