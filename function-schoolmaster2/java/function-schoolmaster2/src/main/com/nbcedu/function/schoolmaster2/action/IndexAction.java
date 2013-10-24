@@ -13,7 +13,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 
