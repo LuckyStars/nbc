@@ -32,7 +32,7 @@
 		<init-param>
 			<param-name>logoutUrl</param-name>
 			<param-value>
-				http://localhost:8080/ssoserver/logout
+				http://127.0.0.1:8080/ssoserver/logout
 			</param-value>
 		</init-param>
 		<init-param>
@@ -47,11 +47,11 @@
 		<filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
-			<param-value>http://localhost:8080/ssoserver/login</param-value>
+			<param-value>http://127.0.0.1:8080/ssoserver/login</param-value>
 		</init-param>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
-			<param-value>http://localhost:8080/ssoserver/proxyValidate</param-value>
+			<param-value>http://127.0.0.1:8080/ssoserver/proxyValidate</param-value>
 		</init-param>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.gateway</param-name>

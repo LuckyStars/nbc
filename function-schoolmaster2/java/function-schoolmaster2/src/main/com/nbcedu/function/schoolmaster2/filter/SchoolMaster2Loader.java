@@ -13,7 +13,7 @@ public class SchoolMaster2Loader implements ServiceInfoLoader{
 	@Override
 	public Object load(Map<?, ?> params) {
 		logger.info("用户登录UID: "  + params.get("uid"));
-		((ServiceInfoLoader)Utils.Beans.getSpringBeanByName("documentFlowLoader")).load(params);
+		//((ServiceInfoLoader)Utils.Beans.getSpringBeanByName("documentFlowLoader")).load(params);
 		return params.get("uid");
 	}
 

@@ -1,7 +1,9 @@
 package com.nbcedu.function.schoolmaster2.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -42,7 +44,17 @@ public class SchoolMasterFilter implements Filter{
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
 //			uid = (String) attributes.get("exuserid");
-
+			
+			test:{
+				Enumeration<String> attrInSession = req.getSession().getAttributeNames();
+				while (attrInSession.hasMoreElements()) {
+					String key = attrInSession.nextElement();
+					System.out.print(key + "===:");
+					System.out.println(req.getSession().getAttribute(key));
+				}
+			}
+			
+			
 			if ((uid == null) || ("".equals(uid))) {
 				logger.info("===单点登录中获取的UID为null，无法载入loader...");
 				resp.sendRedirect(req.getContextPath() + "/teacherIndex.jsp");
@@ -73,7 +85,7 @@ public class SchoolMasterFilter implements Filter{
 			return "documentFlow";
 		} else {
 			
-			return "sns";
+			return "sm2";
 		}
 
 		if (functionName.contains("/")) {
