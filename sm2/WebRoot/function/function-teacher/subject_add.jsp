@@ -32,7 +32,7 @@
        <div class="add-down">
            <div id="choice">
                <div class="nav11">
-               <c:if test="${types.size()>0}">
+               <c:if test="${not empty types}">
                		<p> 类型：<select name="subject.moduleId">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>

@@ -22,6 +22,7 @@ public class SubjectAction extends BaseAction{
 	public String toAdd(){
 		List<TSm2Type> types = this.sm2TypeBiz.findByModUseId(moduleId, this.getUserId());
 		this.getRequest().setAttribute("types", types);
+		types.isEmpty();
 		return "subjectAdd";
 	}
 	

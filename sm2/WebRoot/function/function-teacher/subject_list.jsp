@@ -10,10 +10,9 @@
 <link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 <link rel="stylesheet" type="text/css" href="${prc}/function/css/gzt.css" type="text/css"></link>
 <link rel="stylesheet" type="text/css" href="${prc}/function/css/index.css" type="text/css"></link>
-<script type="text/javascript">var APP_PATH = "${prc}";</script>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${appContext.skinPath}/js/jquery.form.js"></script>
-<script type="text/javascript" src="${appContext.skinPath}/js/jquery.json-2.4.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/jquery.form.js"></script>
+<script type="text/javascript" src="${prc}/function/js/jquery.json-2.4.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
@@ -149,14 +148,41 @@
             </tr>
             </c:forEach>
         </table>
-         <c:if test="${pm.total > 0}">
-    		<jsp:include page="/pages/sjoa/page.jsp" flush="true">
-				<jsp:param name="urlAction" value="showSubjectWorkbench.action" />
-				<jsp:param name="page" value="page" />
-			</jsp:include>
+    	<c:if test="${pm.total>0}">
+    		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
+        		<pg:pager url="${prc}/scMaster2/listMasterStatistics_data.action"
+					items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
+				<pg:param name="start" value="${start}"/>
+				<pg:param name="end" value="${end}"/>
+				<pg:param name="matcher" value="${matcher}"/>
+				总计${pm.total}条
+				<pg:first>
+					<a href="${pageUrl}">首页</a>
+				</pg:first>
+				<pg:prev>
+					<a href="${pageUrl}" >上一页</a> 
+				</pg:prev>
+				<pg:pages>
+					<c:choose>
+						<c:when test="${currentPageNumber eq pageNumber}">
+							<font color="red">${pageNumber}</font>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageUrl}">${pageNumber }</a>
+						</c:otherwise>
+					</c:choose>
+				</pg:pages>
+				<pg:next>
+					<a href="${pageUrl}" >下一页</a> 
+				</pg:next>
+				<pg:last>
+					<a href="${pageUrl}">尾页</a>
+				</pg:last>
+			</pg:pager>
+			</div>
 		</c:if> 
+		</div>
     </div>
-</div>
            <!--弹出层-->
     <div class="bg"></div>
       <div id="addsubjectDiv" >
