@@ -12,10 +12,10 @@
 	<bean id="sm2indexAction" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
 		<property name="dao" ref="dataHibernateDao"></property>
 		<property name="sm2ModuleBiz" ref="sm2ModuleBiz"></property>
-		<property name="sm2TypeBiz" ref="sm2TypeBiz"></property>
 	</bean>
 	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction">
 		<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
+		<property name="sm2TypeBiz" ref="sm2TypeBiz"></property>
 	</bean>
 	
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">
