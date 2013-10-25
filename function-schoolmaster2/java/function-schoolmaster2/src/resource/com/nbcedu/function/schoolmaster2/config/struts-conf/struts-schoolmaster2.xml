@@ -29,5 +29,9 @@
 		<action name="upload" method="upload" class="sm2UploadAction">
 		
 		</action>
+		
+		<action name="_master" method="{1}" class="masterSubAction">
+			<result name="subList"></result>
+		</action>
 	</package>
 </struts>

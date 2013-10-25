@@ -14,7 +14,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 
 public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2SubjectBiz{
 
-	private SM2SubjectDao sm2SubjectDao ; 
+	protected SM2SubjectDao sm2SubjectDao ; 
 	@Override
 	public PagerModel findByModel(TSm2Subject subject) {
 		StringBuffer hql = new StringBuffer("from TSm2Subject where 1=1 ");

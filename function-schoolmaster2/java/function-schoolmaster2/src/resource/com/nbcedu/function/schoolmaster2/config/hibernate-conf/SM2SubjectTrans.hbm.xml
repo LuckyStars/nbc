@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster" table="t_sm2_subject_master">
+		
+		<id name="id" column="ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		
+		<property name="userUid" column="user_uid" type="string" length="32" not-null="true" />
+		
+		<property name="userName" column="user_name" type="string" length="5" not-null="true" />
+		
+		<property name="subId" column="sub_id" type="string" length="32" not-null="true" />
+		
+	</class>
+</hibernate-mapping>
