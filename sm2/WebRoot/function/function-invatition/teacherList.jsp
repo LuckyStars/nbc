@@ -59,19 +59,24 @@
             $(".plans").css("display", "none");
         });
     });
-    KindEditor.ready(function(K) {
-    	editorCourseContent = K.create('textarea[name="detailContent"]', {
-    		resizeType : 0,
-    		allowFileManager : false,
-    		allowImageUpload : true,
-    		uploadJson : '${prc}/scMaster2/upload.action',
-    		items : [
-    				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-    				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-    				'insertunorderedlist', 'link', '|', 'insertfile', 'image']
-   		});
-    });
+    
 </script>
+
+<script type="text/javascript">
+	KindEditor.ready(function(K) {
+	editorCourseContent = K.create('textarea[name="detailContent"]', {
+		resizeType : 0,
+		allowFileManager : false,
+		allowImageUpload : true,
+		uploadJson : '${prc}/scMaster2/upload.action',
+		items : [
+				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', 'link', '|', 'insertfile', 'image']
+		});
+	});
+</script>
+
 
 <script type="text/javascript">
 	var swfu;
@@ -189,6 +194,7 @@
 	</div>
 	<!--新增-->
 	<div class="bg"></div>
+	
 	<div class="add1">
 		<div class="add-top1">
 			<p>新增</p>
@@ -201,7 +207,7 @@
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
-				<textarea name="detailContent" style="width:500px;"></textarea>
+				<textarea name="detailContent" style="width:500px;height: 200px;"></textarea>
 			</div>
 			<p class="tit2">
 				附件/链接：
@@ -216,21 +222,26 @@
 					</a>
 				</span>
 			</p>
+			
 			<div class="tit3 plan">
-				<input type="radio" checked="checked" />
-				<p>文件</p>
-				<textarea></textarea>
+				<div style="margin-left:50px; maroverflow:auto;overflow-x:hidden;">
+                	<div style="height: 20px;width:500px;" class="fieldset flash" id="fsUploadProgress">
+                	</div>
+                </div>
 			</div>
-			<div class="password">
-				<p>选择文件</p>
-				<p>开始上传</p>
-				<p>中断上传</p>
+			
+			<div class="password" id="divMovieContainer" >
+				<span id="spanButtonPlaceHolder" ></span>
+				<input id="btnUpload1" type="button" value="开始上传" onclick="swfu.startUpload()" 
+				style="width:66px; height:26px;font-size:12px;background: url(${prc}/function/img/btnbg.jpg) no-repeat" />
 			</div>
+			
 			<div class="tit3 plans">
 				<input type="radio" checked="checked" />
 				<p>链接</p>
 				<textarea></textarea>
 			</div>
+			
 			<a href="#" class="return" style="margin-left: 200px;">提交</a> 
 			<a href="#" class="return">返回</a>
 		</div>
