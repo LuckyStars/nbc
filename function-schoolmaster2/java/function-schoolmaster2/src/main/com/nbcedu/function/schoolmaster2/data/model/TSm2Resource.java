@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 public class TSm2Resource implements java.io.Serializable {
@@ -9,8 +10,8 @@ public class TSm2Resource implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String createrId;
-	private Timestamp createTime;
-	private Timestamp lastUpdateTime;
+	private Date createTime;
+	private Date lastUpdateTime;
 	private String fileName;
 	private String filePath;
 	private String progressId;
@@ -22,8 +23,8 @@ public class TSm2Resource implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TSm2Resource(String createrId, Timestamp createTime,
-			Timestamp lastUpdateTime, String fileName, String filePath,
+	public TSm2Resource(String createrId, Date createTime,
+			Date lastUpdateTime, String fileName, String filePath,
 			String progressId) {
 		this.createrId = createrId;
 		this.createTime = createTime;
@@ -51,19 +52,19 @@ public class TSm2Resource implements java.io.Serializable {
 		this.createrId = createrId;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return this.createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Timestamp getLastUpdateTime() {
+	public Date getLastUpdateTime() {
 		return this.lastUpdateTime;
 	}
 
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
+	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 

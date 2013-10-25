@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="sns" uri="/sns-tags" %> 
 <%@ include file="/function/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,7 +28,7 @@
                 $(this).css("color", "#000");
             });
             $(".cx1").click(function(){
-            	$.post("getByIdWorkbench.action",{module : "${param.module}" },function(data){
+            	$.post("toAdd_subject.action",{moduleId : "${moduleId}" },function(data){
             		if(data != ''){
             			$("#addsubjectDiv").html(data);
             			$(".bg").css("display", "block");
@@ -115,7 +114,7 @@
 </script>
 </head>
 <body>
-<form action="searchSubjectWorkbench.action" id="form" method="post">
+<form action="find_Subject.action" id="form" method="post">
 <div class="con_conent fixed">
      <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${appContext.appPath}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">临时事项</span></h1>
         <div class="table_box fixed">
@@ -127,7 +126,7 @@
                 <a class="cx" href="javascript:matterQuery();">查询</a>
                 <a class="cx1" href="javascript:void(0);">增加</a>
             </div>
-        <table width="92%" border="0">
+        <table width="100%" border="0">
             <tr>
                 <th width="5%" scope="col">序号</th>
                 <th width="30%" scope="col">标题</th>
@@ -136,21 +135,21 @@
                 <th width="15%" scope="col">所属部门</th>
                 <th width="20%" scope="col">操作</th>
             </tr>
-            <c:forEach items="${page.datas}" var="sub" varStatus="i">
+            <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
                 <td align="center">${i.index+1 }</td>
                 <td align="center">${sub.title }</td>
                 <td align="center">${sub.createTime }</td>
-                <td align="center">${sub.createrName}</td>
-                <td align="center">${sub.departmentName }</td>
+                <td align="center">${sub.createrId}</td>
+                <td align="center">${sub.id}</td>
                 <td align="center">
                 <span class="space"><a href="reportDetailedWorkbench.action?id=${sub.id }">查看</a></span>
                 <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }')" id="edit">编辑</a>
-                </span><span class="space""><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
+                </span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
             </tr>
             </c:forEach>
         </table>
-         <c:if test="${page.count > 0}">
+         <c:if test="${pm.total > 0}">
     		<jsp:include page="/pages/sjoa/page.jsp" flush="true">
 				<jsp:param name="urlAction" value="showSubjectWorkbench.action" />
 				<jsp:param name="page" value="page" />

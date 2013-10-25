@@ -36,20 +36,20 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 	public PagerModel findByExceuteUserId(String userId,String moduleId) {
 		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
 				"where u.subjectId=s.id and u.userId=? AND s.moduleId = ?");
-		hql.append(" order by createDate desc");
+		hql.append(" order by createTime desc");
 		return this.sm2SubjectDao.searchPaginated(hql.toString(),new String[]{userId,moduleId});
 	}
 	@Override
 	public PagerModel findByCreaterId(String createrId,String moduleId) {
-		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
-				"where u.subjectId=s.id and u.createrId=? AND s.moduleId = ?");
-		hql.append(" order by createDate desc");
+		StringBuffer hql = new StringBuffer("from TSm2Subject s " +
+				"where s.createrId=? AND s.moduleId = ?");
+		hql.append(" order by createTime desc");
 		return this.sm2SubjectDao.searchPaginated(hql.toString(),new String[]{createrId,moduleId});
 	}
 	
 	@Override
 	public PagerModel findByModule(String moduleId) {
-		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createDate DESC";
+		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
 		return this.sm2SubjectDao.searchPaginated(hql,moduleId);
 	}
 	

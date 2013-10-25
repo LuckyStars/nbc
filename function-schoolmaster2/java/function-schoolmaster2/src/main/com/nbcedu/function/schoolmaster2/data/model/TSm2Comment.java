@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 public class TSm2Comment implements java.io.Serializable {
@@ -9,8 +10,8 @@ public class TSm2Comment implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String createrId;
-	private Timestamp createtime;
-	private Timestamp lastUpdateTime;
+	private Date createtime;
+	private Date lastUpdateTime;
 	private String progressId;
 	private String content;
 
@@ -21,8 +22,8 @@ public class TSm2Comment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TSm2Comment(String createrId, Timestamp createtime,
-			Timestamp lastUpdateTime, String progressId, String content) {
+	public TSm2Comment(String createrId, Date createtime,
+			Date lastUpdateTime, String progressId, String content) {
 		this.createrId = createrId;
 		this.createtime = createtime;
 		this.lastUpdateTime = lastUpdateTime;
@@ -48,19 +49,19 @@ public class TSm2Comment implements java.io.Serializable {
 		this.createrId = createrId;
 	}
 
-	public Timestamp getCreatetime() {
+	public Date getCreatetime() {
 		return this.createtime;
 	}
 
-	public void setCreatetime(Timestamp createtime) {
+	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
 
-	public Timestamp getLastUpdateTime() {
+	public Date getLastUpdateTime() {
 		return this.lastUpdateTime;
 	}
 
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
+	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 

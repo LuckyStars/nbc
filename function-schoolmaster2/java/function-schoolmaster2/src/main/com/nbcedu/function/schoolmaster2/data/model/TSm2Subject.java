@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,14 +12,14 @@ public class TSm2Subject implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String createrId;
-	private Timestamp createTime;
+	private Date createTime;
 	private String content;
 	private Integer flag;
 	private String departmentId;
 	private String title;
 	private String moduleId;
 	private Integer status;
-	private Timestamp lastUpdateTime;
+	private Date lastUpdateTime;
 	private String parentId;
 	/*
 	 * 执行者
@@ -35,7 +36,7 @@ public class TSm2Subject implements java.io.Serializable {
 	/** full constructor */
 	public TSm2Subject(String createrId, Timestamp createTime, String content,
 			Integer flag, String departmentId, String title, String moduleId,
-			Timestamp lastUpdateTime, String parentId) {
+			Timestamp lastUpdateTime, String parentId,Set<TSm2SubjectUser> excuteUsers) {
 		this.createrId = createrId;
 		this.createTime = createTime;
 		this.content = content;
@@ -45,6 +46,7 @@ public class TSm2Subject implements java.io.Serializable {
 		this.moduleId = moduleId;
 		this.lastUpdateTime = lastUpdateTime;
 		this.parentId = parentId;
+		this.excuteUsers = excuteUsers;
 	}
 
 	// Property accessors
@@ -65,11 +67,11 @@ public class TSm2Subject implements java.io.Serializable {
 		this.createrId = createrId;
 	}
 
-	public Timestamp getCreateTime() {
+	public Date getCreateTime() {
 		return this.createTime;
 	}
 
-	public void setCreateTime(Timestamp createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
@@ -113,11 +115,11 @@ public class TSm2Subject implements java.io.Serializable {
 		this.moduleId = moduleId;
 	}
 
-	public Timestamp getLastUpdateTime() {
+	public Date getLastUpdateTime() {
 		return this.lastUpdateTime;
 	}
 
-	public void setLastUpdateTime(Timestamp lastUpdateTime) {
+	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
 
@@ -135,6 +137,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Set<TSm2SubjectUser> getExcuteUsers() {
+		return excuteUsers;
+	}
+
+	public void setExcuteUsers(Set<TSm2SubjectUser> excuteUsers) {
+		this.excuteUsers = excuteUsers;
 	}
 
 }

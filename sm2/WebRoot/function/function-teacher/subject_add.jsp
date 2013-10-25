@@ -32,28 +32,28 @@
        <div class="add-down">
            <div id="choice">
                <div class="nav11">
-               <c:if test="${module=='ndzx'}">
-               <p>　　 类型：<select name="subject.module">
-               		<c:forEach items="${moduleList}" var="module">
-               			<option value="${module.id}">${module.name}</option>
+               <c:if test="${types.size()>0}">
+               		<p> 类型：<select name="subject.moduleId">
+               		<c:forEach items="${types}" var="type">
+               			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
                    </select></p>
 				</c:if>
-				  <c:if test="${module!='ndzx'}"><input type="hidden" name="subject.module" value="${module}"/></c:if>
-                   <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title }"/></p>
-                  <c:if test="${module=='lssx' || module=='xxdt_1'}">
-                  <p>关联重心工作：<select>
-                   <c:forEach items="${subjectPage.datas }" var="obj">
-                   	<option value=""></option>
-                   	<option value="${obj.id }">${obj.title }</option>
-                   	</c:forEach>
-                   </select></p>
-                   </c:if>
-				<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'treeWorkbench.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
-                   <div class="more1">
-                       <span>事件详情：</span>
-                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>
-                   </div>
+<!--				  <c:if test="${module!='ndzx'}"><input type="hidden" name="subject.module" value="${module}"/></c:if>-->
+<!--                   <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title }"/></p>-->
+<!--                  <c:if test="${module=='lssx' || module=='xxdt_1'}">-->
+<!--                  <p>关联重心工作：<select>-->
+<!--                   <c:forEach items="${subjectPage.datas }" var="obj">-->
+<!--                   	<option value=""></option>-->
+<!--                   	<option value="${obj.id }">${obj.title }</option>-->
+<!--                   	</c:forEach>-->
+<!--                   </select></p>-->
+<!--                   </c:if>-->
+<!--				<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'treeWorkbench.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>-->
+<!--                   <div class="more1">-->
+<!--                       <span>事件详情：</span>-->
+<!--                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>-->
+<!--                   </div>-->
                </div>
            </div>
            <a href="javascript:matterSubmit();" class="return" style="margin-left:100px;">提交</a>

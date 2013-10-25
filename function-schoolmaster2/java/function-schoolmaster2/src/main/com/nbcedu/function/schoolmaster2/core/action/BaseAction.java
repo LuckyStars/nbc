@@ -40,7 +40,7 @@ public class BaseAction extends ActionSupport {
 	
 	protected String getUserId() {
 		 
-		return (String)ActionContext.getContext().getSession().get("sns_init");
+		return (String)ActionContext.getContext().getSession().get("sm2_init");
 	}
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();

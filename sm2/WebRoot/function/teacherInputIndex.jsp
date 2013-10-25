@@ -12,7 +12,7 @@
 	<c:set var="ctxPath" value="http://localhost/sm2"></c:set>
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
-			<c:forEach items="modules" var="module">
+			<c:forEach items="${modules}" var="module">
 				<dl class="warp">
 					<a href="${prc}/scMaster2/find_subject.action?moduleId=${module.id}">
 						<dt>
