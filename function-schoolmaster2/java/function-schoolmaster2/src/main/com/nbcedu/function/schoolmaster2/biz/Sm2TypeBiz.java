@@ -12,5 +12,5 @@ public interface Sm2TypeBiz extends BaseBiz<TSm2Type>{
 	 * @param moduleId
 	 * @return
 	 */
-	public List<TSm2Type> findByModUseId(String moduleId,String UserId);
+	public List<TSm2Type> findByModUseId(String moduleId,String UserId,int mold);
 }

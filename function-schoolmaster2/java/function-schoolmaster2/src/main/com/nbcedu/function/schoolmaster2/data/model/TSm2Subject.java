@@ -21,6 +21,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private Integer status;
 	private Date lastUpdateTime;
 	private String parentId;
+	private Integer mold;
 	/*
 	 * 执行者
 	 */
@@ -36,7 +37,7 @@ public class TSm2Subject implements java.io.Serializable {
 	/** full constructor */
 	public TSm2Subject(String createrId, Timestamp createTime, String content,
 			Integer flag, String departmentId, String title, String moduleId,
-			Timestamp lastUpdateTime, String parentId,Set<TSm2SubjectUser> excuteUsers) {
+			Timestamp lastUpdateTime, String parentId,Set<TSm2SubjectUser> excuteUsers,Integer mold) {
 		this.createrId = createrId;
 		this.createTime = createTime;
 		this.content = content;
@@ -47,6 +48,7 @@ public class TSm2Subject implements java.io.Serializable {
 		this.lastUpdateTime = lastUpdateTime;
 		this.parentId = parentId;
 		this.excuteUsers = excuteUsers;
+		this.mold = mold;
 	}
 
 	// Property accessors
@@ -145,6 +147,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setExcuteUsers(Set<TSm2SubjectUser> excuteUsers) {
 		this.excuteUsers = excuteUsers;
+	}
+
+	public Integer getMold() {
+		return mold;
+	}
+
+	public void setMold(Integer mold) {
+		this.mold = mold;
 	}
 
 }

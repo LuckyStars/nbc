@@ -20,4 +20,6 @@
 	
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">
 	</bean>
+	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction">
+	</bean>
 </beans>

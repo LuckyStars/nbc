@@ -27,7 +27,7 @@
       <div class="add" style="height: 450px;">
        <div class="add-top">
            <p>添加事项</p>
-           <img src="${appContext.skinPath}/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+           <img src="${prc}/sm2/function/img/erro.jpg"  class="close" style="cursor:pointer;"/>
        </div>
        <div class="add-down">
            <div id="choice">
@@ -39,8 +39,7 @@
                    </c:forEach>
                    </select></p>
 				</c:if>
-<!--				  <c:if test="${module!='ndzx'}"><input type="hidden" name="subject.module" value="${module}"/></c:if>-->
-<!--                   <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title }"/></p>-->
+                <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
 <!--                  <c:if test="${module=='lssx' || module=='xxdt_1'}">-->
 <!--                  <p>关联重心工作：<select>-->
 <!--                   <c:forEach items="${subjectPage.datas }" var="obj">-->
@@ -49,11 +48,11 @@
 <!--                   	</c:forEach>-->
 <!--                   </select></p>-->
 <!--                   </c:if>-->
-<!--				<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'treeWorkbench.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>-->
-<!--                   <div class="more1">-->
-<!--                       <span>事件详情：</span>-->
-<!--                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>-->
-<!--                   </div>-->
+					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+                   <div class="more1">
+                       <span>事件详情：</span>
+                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>
+                   </div>
                </div>
            </div>
            <a href="javascript:matterSubmit();" class="return" style="margin-left:100px;">提交</a>

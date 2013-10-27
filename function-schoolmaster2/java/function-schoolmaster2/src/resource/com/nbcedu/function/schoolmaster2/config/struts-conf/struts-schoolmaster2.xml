@@ -28,6 +28,8 @@
 		</action>
 		<action name="upload" method="upload" class="sm2UploadAction">
 		
+		
 		</action>
+		<action name="*_user" method="{1}" class="sm2UserAction" />
 	</package>
 </struts>
