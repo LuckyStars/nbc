@@ -11,6 +11,7 @@ public class TSm2Type implements java.io.Serializable {
 	private String id;
 	private String name;
 	private String moduleId;
+	private Integer mold; 
 	
 	private Set<TSm2TypeUser> typeUsers = new HashSet<TSm2TypeUser>();
 
@@ -59,6 +60,14 @@ public class TSm2Type implements java.io.Serializable {
 
 	public void setTypeUsers(Set<TSm2TypeUser> typeUsers) {
 		this.typeUsers = typeUsers;
+	}
+
+	public Integer getMold() {
+		return mold;
+	}
+
+	public void setMold(Integer mold) {
+		this.mold = mold;
 	}
 
 }
