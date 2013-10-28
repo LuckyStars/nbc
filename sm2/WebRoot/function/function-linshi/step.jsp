@@ -121,10 +121,13 @@
 				<div class="article" id="article_${prog.id}" style="height: 212px;">
 				
 					<p class="p">
-					<c:out value="${post.name}" escapeXml="true">
+					<c:out value="${prog.name}" escapeXml="true">
 					</c:out>
 					</p>
+					
+					<%-- 批示
 					<c:forEach items="" var="comment">
+					
 					<dl class="new1">
 						<dt>
 							<img src="${prc}/function/function-linshi/img/tu.jpg" />
@@ -139,27 +142,29 @@
 						</dd>
 					</dl>
 					</c:forEach>
+					 --%>
 					<p class="pack1">查看所有批示</p>
 				</div>
 				
 				<div class="box-top">
 						<ul>
 							<li class="two">
-								<a href="javascript:switchHide('comment_${post.id }');">评论</a>
+								<a href="javascript:switchHide('comment_${prog.id }');">评论</a>
 								<img src="${prc}/function/function-linshi/images/up1.jpg" style="margin-top: 10px; display: block; float: left;" />
 							</li>
 							<img src="${prc}/function/function-linshi/images/pen.png" style="display: block; float: right; margin: 2px 20px 0 0" />
 						</ul>
-					</div>
-				<div class="box" id="comment_${post.id }" >
-					<form name="addCommentform_${post.id }" action="${prc }/addCommWorkbench.action?type=2" >
+				</div>
+				<div class="box" id="comment_${prog.id }" >
+					<form name="addCommentform_${prog.id }" action="${prc }/addCommWorkbench.action?type=2" >
 					
-					<input type="hidden" name="subjectId" value="${block.subject.id }"/> 
-					<input type="hidden" name="postId" value="${post.id }" /> 
+					<input type="hidden" name="progId" value="${prog.id }" /> 
 					
 					<div class="conshen box-down" >
 						<input type="text" name="comment.content" class="erro" /> 
-						<a href="javascript:document.addCommentform_${post.id }.submit();" class="btn">发表</a>
+						<a href="javascript:document.addCommentform_${prog.id }.submit();" class="btn">发表</a>
+						
+						<%--评论
 						<c:forEach items="${posts.commList }" var="comm">
 						<dl class="new">
 							<dt>
@@ -173,6 +178,7 @@
 							</dd>
 						</dl>
 						</c:forEach>
+						 --%>
 						<p class="pack">查看所有评论</p>
 					</div>
 					</form>
@@ -184,7 +190,7 @@
 	</div>
 	<!--弹出层-->
 	<div class="bg"></div>
-	<!--弹出层1-->
+	<!--弹出层  赞-->
 	<div class="bg"></div>
 	<div class="adds1" id="divZan">
 		<div class="add-tops1">
@@ -224,6 +230,9 @@
 			</dl>
 		</div>
 	</div>
+	<!--弹出层  赞-->
+	
+	
 	<!--弹出层2-->
 	<div class="bg"></div>
 	<div class="adds2" id="divReads">

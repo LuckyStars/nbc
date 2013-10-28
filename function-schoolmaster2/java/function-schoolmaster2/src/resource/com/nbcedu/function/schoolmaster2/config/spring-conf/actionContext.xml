@@ -5,30 +5,30 @@
 	
 	<bean id="sm2Loader" class="com.nbcedu.function.schoolmaster2.filter.SchoolMaster2Loader"></bean>
 	
-	<bean id="sm2DataAction" class="com.nbcedu.function.schoolmaster2.action.DataAction">
+	<bean id="sm2DataAction" class="com.nbcedu.function.schoolmaster2.action.DataAction" scope="prototype" >
 		<property name="sm2DataBiz" ref="sm2DataBiz" />
 	</bean>
 	
-	<bean id="sm2indexAction" class="com.nbcedu.function.schoolmaster2.action.IndexAction">
+	<bean id="sm2indexAction" class="com.nbcedu.function.schoolmaster2.action.IndexAction" scope="prototype" >
 		<property name="dao" ref="dataHibernateDao"></property>
 		<property name="sm2ModuleBiz" ref="sm2ModuleBiz"></property>
 	</bean>
 	
-	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction">
+	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction" scope="prototype" >
 		<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
 		<property name="sm2TypeBiz" ref="sm2TypeBiz"></property>
 	</bean>
 	
-	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">
+	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction" scope="prototype" >
 	</bean>
 	
 	
-	<bean id="masterSubAction" class="com.nbcedu.function.schoolmaster2.action.MasterSubjectAction" >
+	<bean id="masterSubAction" class="com.nbcedu.function.schoolmaster2.action.MasterSubjectAction" scope="prototype" >
 		<property name="subBiz" ref="masterSubBiz" />
 		<property name="stepBiz" ref="sm2StepBiz" />
 		<property name="progBiz" ref="sm2ProgressBiz" />
 	</bean>
 	
-	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction">
+	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction" scope="prototype" >
 	</bean>
 </beans>
