@@ -31,9 +31,8 @@ public class UploadAction extends BaseAction{
 	 */
 	@SuppressWarnings("unchecked")
 	public String upload() {
-		request = this.getRequest();
-		String savePath = (request.getSession().getServletContext().getRealPath("/") + Constants.COMMON_UPLOAD + "/");
-		String saveUrl = request.getContextPath() + "/" + Constants.COMMON_UPLOAD + "/";
+		String savePath = (getRequest().getSession().getServletContext().getRealPath("/") + Constants.COMMON_UPLOAD + "/");
+		String saveUrl = getRequest().getContextPath() + "/" + Constants.COMMON_UPLOAD + "/";
 
 		// 定义允许上传的文件扩展名
 		Map<String, String> extMap = new HashMap<String, String>(){{
@@ -46,7 +45,7 @@ public class UploadAction extends BaseAction{
 		// 最大文件大小
 		long maxSize = 1000000;
 
-		if (!ServletFileUpload.isMultipartContent(request)) {
+		if (!ServletFileUpload.isMultipartContent(getRequest())) {
 			Struts2Utils.renderJson(getError("请选择文件。"));
 			return null;
 		}
@@ -62,7 +61,7 @@ public class UploadAction extends BaseAction{
 			return null;
 		}
 
-		String dirName = request.getParameter("dir");
+		String dirName = getRequest().getParameter("dir");
 		if (dirName == null) {
 			dirName = "image";
 		}
