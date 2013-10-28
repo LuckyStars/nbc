@@ -13,7 +13,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
 public class SM2TypeDaoImpl extends SimpleBaseDAOImpl<TSm2Type> implements SM2TypeDao {
 
 	@SuppressWarnings("unchecked")
-	public List<TSm2Type> findByModUseId(String moduleId, String userId) {
+	public List<TSm2Type> findByModUseId(String moduleId, String userId,int mold) {
 		Criteria c = this.getSession().createCriteria(TSm2Type.class);
 		c.add(Expression.eq("moduleId",moduleId ));
 		Criteria addc = c.createCriteria("typeUsers");
