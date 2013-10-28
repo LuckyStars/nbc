@@ -12,17 +12,13 @@
                 $(".add").css("display", "none");
             });
             $('#cc').combotree({  
-           	 url: 'treeWorkbench.action',
+           	 url: 'tree_user.action',
            	 required: true  
            	});  
             
         });
  </script>
  <form id="saveForm" method="post">
-<input name="subject.id" type="hidden" value="${subject.id }" />
-<input name="subject.textContent" value="" type="hidden" />
-<input name="subject.group.id" value="" type="hidden" />
-<input name="subject.group.id" value="" type="hidden" />
 	<div class="bg"></div>
       <div class="add" style="height: 450px;">
        <div class="add-top">
@@ -39,19 +35,21 @@
                    </c:forEach>
                    </select></p>
 				</c:if>
-                <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
-<!--                  <c:if test="${module=='lssx' || module=='xxdt_1'}">-->
-<!--                  <p>关联重心工作：<select>-->
-<!--                   <c:forEach items="${subjectPage.datas }" var="obj">-->
-<!--                   	<option value=""></option>-->
-<!--                   	<option value="${obj.id }">${obj.title }</option>-->
-<!--                   	</c:forEach>-->
-<!--                   </select></p>-->
-<!--                   </c:if>-->
+                <p>事项名称：
+                	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
+ 					<c:if test="${not empty types1}">
+	                  <p>关联重心工作：<select>
+	                   <c:forEach items="${types1}" var="obj">
+	                   	<option value=""></option>
+	                   	<option value="${obj.id }">${obj.name}</option>
+	                   	</c:forEach>
+	                   </select>
+	             	  </p>
+                   </c:if>
 					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
-                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>
+                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content}</textarea>
                    </div>
                </div>
            </div>
