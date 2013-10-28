@@ -33,5 +33,9 @@
 		<action name="_master" method="{1}" class="masterSubAction">
 			<result name="subList"></result>
 		</action>
+		
+		<action name="_master" method="{1}" class="masterSubAction">
+			<result name="subList"></result>
+		</action>
 	</package>
 </struts>
