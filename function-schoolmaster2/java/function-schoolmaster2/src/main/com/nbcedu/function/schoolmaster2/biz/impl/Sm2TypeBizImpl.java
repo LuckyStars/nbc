@@ -17,8 +17,8 @@ public class Sm2TypeBizImpl extends BaseBizImpl<TSm2Type> implements Sm2TypeBiz{
 	}
 
 	@Override
-	public List<TSm2Type> findByModUseId(String moduleId, String userId) {
-		return this.sm2TypeDao.findByModUseId(moduleId, userId);
+	public List<TSm2Type> findByModUseId(String moduleId, String userId,int mold) {
+		return this.sm2TypeDao.findByModUseId(moduleId, userId, mold);
 	}
 	
 }

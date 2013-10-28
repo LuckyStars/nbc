@@ -9,3 +9,6 @@ build/
 .settings/
 .svn/
 *.MF
+web.xml
+clientconfig.properties
+jdbc.properties
