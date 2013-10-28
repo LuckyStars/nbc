@@ -7,6 +7,7 @@ import org.apache.commons.lang.xwork.StringUtils;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 /**
@@ -23,19 +24,31 @@ public class MasterSubjectAction extends BaseAction{
 	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
-			this.pm = this.subBiz.findByMaster(moduleId, this.getUserId());
+			if(Utils.getDefaultMasterUids().contains(this.getUserId())){
+				this.pm = this.subBiz.findByModule(moduleId); 
+			}else{
+				this.pm = this.subBiz.findByMaster(moduleId, this.getUserId());
+			}
 			return moduleId + "List";
 		}else{
 			return "404";
 		}
 	}
 	
+	/**
+	 * 查看详细
+	 * @return
+	 * @author xuechong
+	 */
 	public String detail(){
 		this.subject = this.subBiz.findById(this.id);
 		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
 		this.getRequestMap().put("steps", steps);
 		return "detail";
 	}
+	
+	
+	
 	
 	///////////////////////
 	////getters&setters////
