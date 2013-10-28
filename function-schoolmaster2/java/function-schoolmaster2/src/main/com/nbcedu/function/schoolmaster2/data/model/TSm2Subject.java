@@ -12,6 +12,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String createrId;
+	private String createrName;
 	private Date createTime;
 	private String content;
 	private Integer flag;
@@ -37,7 +38,8 @@ public class TSm2Subject implements java.io.Serializable {
 	/** full constructor */
 	public TSm2Subject(String createrId, Timestamp createTime, String content,
 			Integer flag, String departmentId, String title, String moduleId,
-			Timestamp lastUpdateTime, String parentId,Set<TSm2SubjectUser> excuteUsers,Integer mold) {
+			Timestamp lastUpdateTime, String parentId,String createrName,
+			Set<TSm2SubjectUser> excuteUsers,Integer mold) {
 		this.createrId = createrId;
 		this.createTime = createTime;
 		this.content = content;
@@ -49,6 +51,7 @@ public class TSm2Subject implements java.io.Serializable {
 		this.parentId = parentId;
 		this.excuteUsers = excuteUsers;
 		this.mold = mold;
+		this.createrName = createrName;
 	}
 
 	// Property accessors
@@ -155,6 +158,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setMold(Integer mold) {
 		this.mold = mold;
+	}
+
+	public String getCreaterName() {
+		return createrName;
+	}
+
+	public void setCreaterName(String createrName) {
+		this.createrName = createrName;
 	}
 
 }

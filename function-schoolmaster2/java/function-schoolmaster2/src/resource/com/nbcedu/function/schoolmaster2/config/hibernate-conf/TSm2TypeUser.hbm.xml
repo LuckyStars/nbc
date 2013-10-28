@@ -13,5 +13,8 @@
           <property name="userId" type="java.lang.String">
             <column name="USERID" length="32" />
         </property>
+               <property name="userName" type="java.lang.String">
+            <column name="USERNAME" length="100" />
+        </property>
     </class>
 </hibernate-mapping>
