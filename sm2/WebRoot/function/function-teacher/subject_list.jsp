@@ -37,7 +37,7 @@
                
             });
             $("#edit").click(function(){
-            	$.post("getByIdWorkbench.action",function(data){
+            	$.post("getById_subject.action",function(data){
             		if(data != ''){
             			$("#addsubjectDiv").html(data);
             			$(".bg").css("display", "block");
@@ -54,7 +54,7 @@
        
         //查询
         function matteredit(obj){
-        	$.post("getByIdWorkbench.action?id="+obj,function(data){
+        	$.post("getById_subject.action?id="+obj,function(data){
         		if(data != ''){
         			$("#addsubjectDiv").html(data);
         			$(".bg").css("display", "block");
@@ -70,11 +70,11 @@
     	}	
     	function on_delete(subjectId){
     		if(confirm("确定要删除吗?")){
-    			$.post("deleteWorkbench.action", { id: subjectId},
+    			$.post("delete_subject.action", { id: subjectId},
     				function(data){
     					var dateObj=$.parseJSON(data);
     					if(0==dateObj.result){
-    						document.location.href="showSubjectWorkbench.action?module=${param.module}";
+    						document.location.href="showSubject_subject.action?module=${param.module}";
     					}else{
     						alert("删除失败");
     					}
@@ -84,7 +84,7 @@
     	
     	//验证主题重名
     	function isSubjectExist(){
-    		var url ="isExistWorkbench.action";
+    		var url ="isExist_subject.action";
     		var subjectTile = $("input[name='subject.title']").val();
     		$.post(url,{subjectTile:subjectTile},function(data){
     				if(data.result == 0){
@@ -98,12 +98,12 @@
     	function doSave(){
         	var users = $("#cc").combotree('getValues');
     		$("#saveForm").ajaxSubmit({
-    			url:"addSubjectWorkbench.action",
+    			url:"addSubject_subject.action",
     			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString()},
     			success:function(data){
     				var dateObj=$.parseJSON(data);
     				alert((0==dateObj.result)?"成功!":"失败!");
-    				document.location.href="showSubjectWorkbench.action?module=${param.module}";
+    				document.location.href="showSubject_subject.action?module=${param.module}";
     			}
     		});
     	}
@@ -115,7 +115,7 @@
 <body>
 <form action="find_Subject.action" id="form" method="post">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${appContext.appPath}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">临时事项</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">临时事项</span></h1>
         <div class="table_box fixed">
             <div class="nav">
                 <span>提交日期:</span>
@@ -142,7 +142,7 @@
                 <td align="center">${sub.createrId}</td>
                 <td align="center">${sub.id}</td>
                 <td align="center">
-                <span class="space"><a href="reportDetailedWorkbench.action?id=${sub.id }">查看</a></span>
+                <span class="space"><a href="reportDetailed_subject.action?id=${sub.id }">查看</a></span>
                 <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }')" id="edit">编辑</a>
                 </span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
             </tr>

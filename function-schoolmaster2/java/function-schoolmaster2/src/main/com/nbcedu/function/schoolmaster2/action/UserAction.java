@@ -10,7 +10,7 @@ public class UserAction extends BaseAction{
 	
 	public void tree() {
 		String result = UCService.getPersonJsonString();
-		Struts2Utils.renderText(result, "text/html;charset=UTF-8");
+		Struts2Utils.renderText(result, "encoding:UTF-8");
 
 	}
 	

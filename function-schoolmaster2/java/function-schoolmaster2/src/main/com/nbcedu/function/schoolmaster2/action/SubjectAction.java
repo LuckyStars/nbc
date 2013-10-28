@@ -21,11 +21,15 @@ public class SubjectAction extends BaseAction{
 	
 	public String toAdd(){
 		List<TSm2Type> types = this.sm2TypeBiz.findByModUseId(moduleId, this.getUserId(),0);
+		List<TSm2Type> types1 = this.sm2TypeBiz.findByModUseId(moduleId, this.getUserId(),1);
 		this.getRequest().setAttribute("types", types);
-		types.isEmpty();
+		this.getRequest().setAttribute("types1", types1);
 		return "subjectAdd";
 	}
-	
+	public String add(){
+		this.sm2SubjectBiz.add(subject);
+		return RELOAD;
+	}
 	public String find(){
 //		判断角色 如果是主管则查询所有自己的，否则只查看主管指定执行者可看
 		if(1==1){
@@ -33,16 +37,7 @@ public class SubjectAction extends BaseAction{
 		}else{
 			pm = this.sm2SubjectBiz.findByExceuteUserId(this.getUserId(),moduleId);
 		}
-		
 		return "list";
-	}
-	
-	public String remove(){
-		return "refreshTeacherList";
-	}
-	
-	public String modify(){
-		return "refreshTeacherList";
 	}
 	
 	/////////////////////////
