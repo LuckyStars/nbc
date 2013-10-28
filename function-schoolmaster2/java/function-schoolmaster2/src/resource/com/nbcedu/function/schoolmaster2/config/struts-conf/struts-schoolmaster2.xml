@@ -31,7 +31,7 @@
 		</action>
 		<action name="*_user" method="{1}" class="sm2UserAction" />
 		
-		<action name="_master" method="{1}" class="masterSubAction">
+		<action name="*_master" method="{1}" class="masterSubAction">
 			<result name="subList"></result>
 		</action>
 		

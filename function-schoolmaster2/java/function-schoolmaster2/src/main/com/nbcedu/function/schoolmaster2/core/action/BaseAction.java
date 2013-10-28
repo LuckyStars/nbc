@@ -34,9 +34,6 @@ public class BaseAction extends ActionSupport {
 	
 	protected List<String> idList = new ArrayList<String>();
 	
-	protected HttpServletResponse response = ServletActionContext.getResponse();
-	
-	protected HttpServletRequest request = ServletActionContext.getRequest();
 	
 	protected String getUserId() {
 		return (String)ActionContext.getContext().getSession().get("sm2_init");
@@ -52,7 +49,11 @@ public class BaseAction extends ActionSupport {
 	}
 	
 	protected HttpServletRequest getRequest(){
-		return this.request = ServletActionContext.getRequest();
+		return ServletActionContext.getRequest();
+	}
+	
+	protected HttpServletResponse getResponse(){
+		return ServletActionContext.getResponse();
 	}
 	
 	protected Object getFromSession(Object key){

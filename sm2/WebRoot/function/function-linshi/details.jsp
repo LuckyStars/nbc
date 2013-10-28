@@ -164,7 +164,6 @@
 							<a href="javascript:changeTab('${block.id}');">${block.name }</a>
 						</li>
 						</c:forEach>
-						
 					</ul>
 					<div class="mids">
 					<div class="conls">
@@ -444,7 +443,7 @@
 	        min: 5,
 	        max: 100,
 	        disabled: true ,
-	        value: ${subjectExtand.sechdule},
+	        value: ${},
 	        step: 5,
 	        slide: function (event, ui) {
 	            $("#amount").val(ui.value+"%");
@@ -453,10 +452,10 @@
 	    $("#amount").val($("#slider-range-max").slider("value")+"%");
 	});
 	
-	function changeTab(blockId){
+	function changeTab(stepId){
 		$("li").removeClass("cur");
-		$("#" + blockId).addClass("cur");
-		$("#postFrame").attr('src','${prc}/detail/viewBlock_detail.action?id=' + blockId);
+		$("#" + stepId).addClass("cur");
+		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);
 	}
 </script>
 </body>
