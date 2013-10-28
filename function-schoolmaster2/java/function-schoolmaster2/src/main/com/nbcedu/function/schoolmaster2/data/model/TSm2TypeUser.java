@@ -7,6 +7,7 @@ public class TSm2TypeUser implements java.io.Serializable {
 	private String id;
 	private String typeId;
 	private String userId;
+	private String userName;
 
 	// Constructors
 
@@ -47,4 +48,11 @@ public class TSm2TypeUser implements java.io.Serializable {
 		this.userId = userId;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 }
