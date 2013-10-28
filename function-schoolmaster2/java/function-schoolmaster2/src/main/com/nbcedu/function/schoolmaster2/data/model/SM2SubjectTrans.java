@@ -9,7 +9,7 @@ public class SM2SubjectTrans {
 	private String id;
 	private String userUid;
 	private String userName;
-	private String subtId;
+	private String subId;
 	
 	//////////////////////
 	////getters&setters///
@@ -32,11 +32,11 @@ public class SM2SubjectTrans {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getSubtId() {
-		return subtId;
+	public String getSubId() {
+		return subId;
 	}
-	public void setSubtId(String subtId) {
-		this.subtId = subtId;
+	public void setSubId(String subId) {
+		this.subId = subId;
 	}
 	
 }

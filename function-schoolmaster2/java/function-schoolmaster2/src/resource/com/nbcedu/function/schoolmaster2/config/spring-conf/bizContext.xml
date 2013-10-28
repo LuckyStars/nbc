@@ -11,10 +11,14 @@
 		<property name="sm2SubjectDao" ref="sm2SubjectDao"></property>
 	</bean>
 	
-	<bean id="sm2ModuleBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ModuleBizImpl">
+	<bean id="sm2ModuleBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2ModuleBizImpl">
 		<property name="sm2ModuleDao" ref="sm2ModuleDao"></property>
 	</bean>
 	<bean id="sm2TypeBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2TypeBizImpl">
 		<property name="sm2TypeDao" ref="sm2TypeDao"></property>
+	</bean>
+	
+	<bean id="masterSubBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2MasterSubBizImpl">
+		<property name="sm2SubjectDao" ref="sm2SubjectDao"></property>
 	</bean>
 </beans>

@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster" table="t_sm2_subject_master">
+	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectTrans" table="t_sm2_subject_trans">
 		
 		<id name="id" column="ID" type="string" length="32">
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />

@@ -11,7 +11,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.CollectionUtils;
 
-import com.nbcedu.function.schoolmaster2.biz.Sm2ModuleBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
@@ -34,7 +34,7 @@ public class IndexAction extends BaseAction{
 	private String end;
 	private String matcher;
 	
-	private Sm2ModuleBiz sm2ModuleBiz;
+	private SM2ModuleBiz sm2ModuleBiz;
 	
 	public String index(){
 		this.photoPath = this.getPhoto();
@@ -146,7 +146,7 @@ public class IndexAction extends BaseAction{
 		this.matcher = matcher;
 	}
 
-	public void setSm2ModuleBiz(Sm2ModuleBiz sm2ModuleBiz) {
+	public void setSm2ModuleBiz(SM2ModuleBiz sm2ModuleBiz) {
 		this.sm2ModuleBiz = sm2ModuleBiz;
 	}
 	
