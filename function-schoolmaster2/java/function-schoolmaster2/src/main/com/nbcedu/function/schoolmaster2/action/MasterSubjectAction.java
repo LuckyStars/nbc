@@ -1,9 +1,13 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.util.List;
+
 import org.apache.commons.lang.xwork.StringUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 /**
  * 校长
@@ -13,6 +17,7 @@ import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 public class MasterSubjectAction extends BaseAction{
 	
 	private String moduleId;
+	private TSm2Subject subject;
 	
 	private SM2MasterSubBiz subBiz;
 	
@@ -25,11 +30,16 @@ public class MasterSubjectAction extends BaseAction{
 		}
 	}
 	
+	public String detail(){
+		this.subject = this.subBiz.findById(this.id);
+		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
+		
+		return "detail";
+	}
 	
 	///////////////////////
 	////getters&setters////
 	///////////////////////
-	
 	public String getModuleId() {
 		return moduleId;
 	}
@@ -38,6 +48,12 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setSubBiz(SM2MasterSubBiz subBiz) {
 		this.subBiz = subBiz;
+	}
+	public TSm2Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(TSm2Subject subject) {
+		this.subject = subject;
 	}
 	
 }

@@ -88,6 +88,10 @@ public interface BaseDAO<T extends Serializable> {
 	
 	public List<Object[]> findBySQL(String sql) throws DBException;
 	
+	public List<Object[]> findByHQL(String hql,Object...param );
+	
+	public List<Object[]> findByHQL(String hql, int beginIndex, int size);
+	
 	public void updateBySql(String sql,Object... params) throws DBException;
 	
 	public void updateBySql(String sql) throws DBException;

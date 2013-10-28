@@ -45,6 +45,10 @@ public class BaseAction extends ActionSupport {
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
 	}
+	
+	protected Map<String,Object> getRequestMap(){
+		return (Map<String, Object>) ActionContext.getContext().get("request");
+	}
 	protected HttpServletRequest getRequest(){
 		return this.request = ServletActionContext.getRequest();
 	}

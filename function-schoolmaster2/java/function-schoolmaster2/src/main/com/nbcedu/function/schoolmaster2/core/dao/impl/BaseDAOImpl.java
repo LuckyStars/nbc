@@ -669,6 +669,52 @@ public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSu
 		}
 		return result;
 	}
+	
+	@Override
+	public List<Object[]> findByHQL(String hql,Object...params) {
+		Assert.notNull(hql);
+		Session session = null;
+		List<Object[]> result = null;
+		try {
+			session = super.getSession();
+			if(logger.isDebugEnabled()){
+				logger.debug("hql = " + hql);
+			}
+			Query q = session.createQuery(hql);
+			if(params!=null){
+				for (int i=0;i<params.length;i++) {
+					q.setParameter(i,params[i]);
+				}
+			}
+			result = session.createQuery(hql).list();
+		} catch (Exception e) {
+			logger.error("通过HQL查询数据异常！findByHQL(String)中。",e);
+		} finally {
+			this.releaseSession(session);
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Object[]> findByHQL(String hql, int beginIndex, int size) {
+		Assert.notNull(hql);
+		Session session = null;
+		List<Object[]> result = null;
+		try {
+			session = super.getSession();
+			if(logger.isDebugEnabled()){
+				logger.debug("hql = " + hql);
+			}
+			result = session.createQuery(hql)
+				.setFirstResult(beginIndex)
+				.setMaxResults(size).list();
+		} catch (Exception e) {
+			logger.error("通过HQL查询数据异常！findByHQL(String,int,int)中。",e);
+		} finally {
+			this.releaseSession(session);
+		}
+		return result;
+	}
 
 	/**
 	 * 通过HQL获取唯一的实体对象
