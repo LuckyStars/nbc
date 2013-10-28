@@ -142,9 +142,9 @@
 				</h2>
 
 				<h3>
-					发布日期： <fmt:formatDate value="${subject.lastTime }" pattern="yyyy年MM月dd日" />
-					关联重心工作： ${subjectExtand.associateName}
-					执行者：<span>${subjectExtand.executeUsers }</span>
+					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
+					关联重心工作： <span> </span>
+					执行者：<span> </span>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
@@ -154,14 +154,14 @@
 				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">
-						<c:forEach items="${blockList }" var="block" varStatus="i">
-							<li  id="${block.id}" 
+						<c:forEach items="${steps }" var="step" varStatus="i">
+							<li  id="${step.id}" 
 							class="blocksTab 
 								<c:if test="${i.index==0 }">
 								cur
 								</c:if>"
 							>
-							<a href="javascript:changeTab('${block.id}');">${block.name }</a>
+							<a href="javascript:changeTab('${step.id}');">${step.name }</a>
 						</li>
 						</c:forEach>
 					</ul>
@@ -169,12 +169,12 @@
 					<div class="conls">
 							<a>
 								<img src="${prc}/function/function-linshi/images/shou.png" width="13" height="13"class="shou" />
-								(${subPraiseCount})
+								(999)
 							</a>
 							<span> | </span>
 							<a>
 								<img src="${prc}/function/function-linshi/images/ico1.png" width="13" height="13" class="ico1" />
-								（${subReadCount}）
+								（999）
 							</a>
 							<span> | </span>
 							<a>
@@ -184,10 +184,10 @@
 					</div>
 				</div>
 				
-				<c:forEach items="${blockList }" var="block" varStatus="i">
+				<c:forEach items="${steps }" var="block" varStatus="i">
 					<c:if test="${i.index==0 }">
 					<iframe id="postFrame" name="postFrame" style="border:0px;width:870px;height:900px; hidden;" scrolling="no"
-					 src="${prc}/detail/viewBlock_detail.action?id=${block.id}" >
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
 					
 					
 					</iframe>
@@ -197,96 +197,7 @@
 			</div>
 		</div>
 	</div>
-	<!--弹出层-->
-	<div class="bg"></div>
-	<div class="adds" id="add-tab">
-		<div class="add-tops">
-			<p>资源</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs">
-			<%-- <p>全部 | 本步骤 | 本进展</p> --%>
-			<div class="resources doc">
-				<h5>
-					<ul>
-						<li class="cur">文档</li>
-						<li>图片</li>
-						<li>视频</li>
-					</ul>
-					<%-- <a href="#" class="mores">更多&gt;&gt;</a>--%>
-				</h5>
-				<div class="resource-lists">
-					<c:forEach items="${documentRes }" var="doc">
-						<div class="juti">
-							<img src="${prc}/function/function-linshi/images/doc.jpg" width="102" height="140" />
-							<a href="${prc}/downloadRes.action?id=${doc.id}" >
-								<c:out value="${doc.name }" escapeXml="true"></c:out>
-							</a>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="resource-lists" style="display: none">
-					<c:forEach items="${imgRes }" var="img">
-						<div class="juti">
-							<img src="${prc}/downloadRes.action?id=${img.id}" width="102" height="140" />
-							<c:out value="${img.name }" escapeXml="true"></c:out>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="resource-lists" style="display: none">
-					<c:forEach items="${videoRes }" var="video">
-						<div class="juti">
-							<img src="${prc}/function/function-linshi/images/video.jpg" width="102" height="140" />
-							<a href="${prc}/downloadRes.action?id=${video.id}">${video.name }</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--弹出层1-->
-	<div class="bg"></div>
-	<div class="adds1">
-		<div class="add-tops1">
-			<p>赞</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs1">
-			<dl class="comments">
-				<dt>
-					<img src="${prc}/function/function-linshi/img/tu.jpg" />
-				</dt>
-				<dd>
-					<p>
-						<span class="blue">沫儿</span>
-						<img src="${prc}/function/function-linshi/img/tu3.jpg" /><br />
-					</p>
-					<span class="gray">(3天前)</span>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!--弹出层2-->
-	<div class="bg"></div>
-	<div class="adds2">
-		<div class="add-tops2">
-			<p>阅读</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs2">
-			<dl class="comments">
-				<dt>
-					<img src="${prc}/function/function-linshi/images/tu.jpg" />
-				</dt>
-				<dd>
-					<span class="grays">金强</span>
-					<span class="grays">2013-09-10</span>
-					<span class="grays">2013-09-13</span>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!--弹出层4-->
+	<!--弹出层 转发-->
 	<div class="bg"></div>
 	<div class="adds4">
 		<div class="add-tops4">
@@ -355,6 +266,9 @@
 		</div>
 		<div style="clear: both"></div>
 	</div>
+	<!--弹出层 转发-->
+	
+	
 	<!--弹出层3-->
 	<div class="bg"></div>
 	<div class="adds3">
@@ -443,7 +357,7 @@
 	        min: 5,
 	        max: 100,
 	        disabled: true ,
-	        value: ${},
+	        value: ,
 	        step: 5,
 	        slide: function (event, ui) {
 	            $("#amount").val(ui.value+"%");

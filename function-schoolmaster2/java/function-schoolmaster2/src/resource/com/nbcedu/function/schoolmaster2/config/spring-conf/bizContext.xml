@@ -21,4 +21,12 @@
 	<bean id="masterSubBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2MasterSubBizImpl">
 		<property name="sm2SubjectDao" ref="sm2SubjectDao"></property>
 	</bean>
+	
+	<bean id="sm2StepBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2StepBizImpl">
+		<property name="stepDao" ref="sm2StepDao"></property>
+	</bean>
+	
+	<bean id="sm2ProgressBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ProgressBizImpl">
+		<property name="progressDao" ref="sm2ProgressDao" />
+	</bean>
 </beans>

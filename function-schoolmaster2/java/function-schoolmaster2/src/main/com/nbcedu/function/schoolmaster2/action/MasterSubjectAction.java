@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.lang.xwork.StringUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
@@ -26,6 +28,8 @@ public class MasterSubjectAction extends BaseAction{
 	private List<TSm2Progress> proList = new ArrayList<TSm2Progress>();
 	
 	private SM2MasterSubBiz subBiz;
+	private Sm2StepBiz stepBiz;
+	private Sm2ProgressBiz progBiz;
 	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
@@ -34,7 +38,7 @@ public class MasterSubjectAction extends BaseAction{
 			}else{
 				this.pm = this.subBiz.findByMaster(moduleId, this.getUserId());
 			}
-			return moduleId + "List";
+			return "subList";
 		}else{
 			return "404";
 		}
@@ -52,9 +56,17 @@ public class MasterSubjectAction extends BaseAction{
 		return "detail";
 	}
 	
+	/**
+	 * 查看步骤
+	 * @return
+	 * @author xuechong
+	 */
 	public String showStep(){
+		this.step = this.stepBiz.findById(this.id);
+		this.proList = this.progBiz.findAllByStepId(this.id);
 		return "stepDetail";
 	}
+	
 	
 	
 	///////////////////////
@@ -74,6 +86,24 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setSubject(TSm2Subject subject) {
 		this.subject = subject;
+	}
+	public TSm2Step getStep() {
+		return step;
+	}
+	public void setStep(TSm2Step step) {
+		this.step = step;
+	}
+	public List<TSm2Progress> getProList() {
+		return proList;
+	}
+	public void setProList(List<TSm2Progress> proList) {
+		this.proList = proList;
+	}
+	public void setStepBiz(Sm2StepBiz stepBiz) {
+		this.stepBiz = stepBiz;
+	}
+	public void setProgBiz(Sm2ProgressBiz progBiz) {
+		this.progBiz = progBiz;
 	}
 	
 }

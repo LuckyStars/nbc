@@ -14,15 +14,6 @@
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
 	
-	<script type="text/javascript" src="${prc}/plugins/json/jquery.json-2.4.min.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfobject/swfobject.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_all_min.js"></script>
-	<script type="text/javascript" >var APP_PATH = '${prc}';</script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_config_sns.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckfinder/ckfinder.js"></script>
-	<script type="" src="${prc}/function/agent.js"></script>
 	
 	<style>
 		
@@ -111,12 +102,12 @@
 <body style="height: 100%;">
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
-		<c:forEach items="${postViews}" var="post">
+		<c:forEach items="${proList}" var="prog">
 			<div class="content">
 				
 				<div class="mids">
 					<a class="h4">
-						<span><a href="javascript:switchHide('article_${post.id}');">·${post.title}</a></span>
+						<span><a href="javascript:switchHide('article_${prog.id}');">·${prog.name}</a></span>
 						<img src="${prc}/function/function-linshi/images/up.png" width="13" height="13" class="mids-img" />
 						<img src="${prc}/function/function-linshi/images/ico3.png" />
 						<img src="${prc}/function/function-linshi/images/ico4.png" />
@@ -127,13 +118,13 @@
 					</a>
 				</div>
 				
-				<div class="article" id="article_${post.id}" style="height: 212px;">
+				<div class="article" id="article_${prog.id}" style="height: 212px;">
 				
 					<p class="p">
-					<c:out value="${post.content}" escapeXml="true">
+					<c:out value="${post.name}" escapeXml="true">
 					</c:out>
 					</p>
-					<c:forEach items="${post.commentList }" var="comment">
+					<c:forEach items="" var="comment">
 					<dl class="new1">
 						<dt>
 							<img src="${prc}/function/function-linshi/img/tu.jpg" />

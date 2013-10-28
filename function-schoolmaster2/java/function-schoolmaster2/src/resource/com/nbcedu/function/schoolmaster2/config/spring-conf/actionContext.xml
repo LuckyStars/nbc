@@ -25,6 +25,8 @@
 	
 	<bean id="masterSubAction" class="com.nbcedu.function.schoolmaster2.action.MasterSubjectAction" >
 		<property name="subBiz" ref="masterSubBiz" />
+		<property name="stepBiz" ref="sm2StepBiz" />
+		<property name="progBiz" ref="sm2ProgressBiz" />
 	</bean>
 	
 	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction">

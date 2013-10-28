@@ -683,10 +683,10 @@ public abstract class BaseDAOImpl<T extends Serializable> extends HibernateDaoSu
 			Query q = session.createQuery(hql);
 			if(params!=null){
 				for (int i=0;i<params.length;i++) {
-					q.setParameter(i,params[i]);
+					q.setParameter(i, params[i]);
 				}
 			}
-			result = session.createQuery(hql).list();
+			result = q.list();
 		} catch (Exception e) {
 			logger.error("通过HQL查询数据异常！findByHQL(String)中。",e);
 		} finally {
