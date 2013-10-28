@@ -33,7 +33,7 @@ public class MasterSubjectAction extends BaseAction{
 	public String detail(){
 		this.subject = this.subBiz.findById(this.id);
 		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
-		
+		this.getRequestMap().put("steps", steps);
 		return "detail";
 	}
 	
