@@ -20,4 +20,9 @@
 	
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction">
 	</bean>
+	
+	<bean id="masterSubAction" class="com.nbcedu.function.schoolmaster2.action.MasterSubjectAction" >
+		<property name="subBiz" ref="masterSubBiz" />
+	</bean>
+	
 </beans>
