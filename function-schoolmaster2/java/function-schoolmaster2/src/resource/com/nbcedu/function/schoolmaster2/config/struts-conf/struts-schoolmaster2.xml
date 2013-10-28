@@ -27,7 +27,11 @@
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
 		</action>
 		<action name="upload" method="upload" class="sm2UploadAction">
+		</action>
+		<action name="*_user" method="{1}" class="sm2UserAction" />
 		
+		<action name="_master" method="{1}" class="masterSubAction">
+			<result name="subList"></result>
 		</action>
 		
 		<action name="_master" method="{1}" class="masterSubAction">

@@ -13,6 +13,9 @@
           <property name="moduleId" type="java.lang.String">
             <column name="MODULEID" length="32" />
         </property>
+        <property name="mold" type="java.lang.Integer">
+            <column name="MOLD" length="2" />
+        </property>
          <set name="typeUsers" table="t_sm2_type_user" inverse="false" cascade="all">
     		<key column="typeId"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.TSm2TypeUser"/>
