@@ -52,5 +52,10 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
 		return this.sm2SubjectDao.searchPaginated(hql,moduleId);
 	}
+	@Override
+	public List<TSm2Subject> findBYModuleId(String moduleId) {
+		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
+		return this.sm2SubjectDao.find(hql,moduleId );
+	}
 	
 }
