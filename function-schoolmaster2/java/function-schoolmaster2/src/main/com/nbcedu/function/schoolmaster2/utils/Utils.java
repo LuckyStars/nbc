@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.ContextLoader;
 
@@ -32,6 +33,15 @@ public class Utils {
 	/***获取当前登录用户的UID**/
 	public static String curUserUid(){
 		return ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY).toString();
+	}
+	
+	/***获取当前登录用户的姓名**/
+	public static String curUserName(){
+		String userName = (String) ActionContext.getContext().getSession().get(Constants.SESSION_USER_NAME);
+		if(StringUtils.isBlank(userName)){
+			userName = 	UCService.findNameByUid(curUserUid());
+		}
+		return userName;
 	}
 	
 	/**

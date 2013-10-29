@@ -29,4 +29,8 @@
 	<bean id="sm2ProgressBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ProgressBizImpl">
 		<property name="progressDao" ref="sm2ProgressDao" />
 	</bean>
+	
+	<bean id="sm2ZanBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2ZanBizImpl">
+		<property name="zanDao" ref="sm2ZanDao"></property>
+	</bean>
 </beans>

@@ -27,4 +27,8 @@
 	<bean id="sm2ProgressDao" class="com.nbcedu.function.schoolmaster2.dao.impl.Sm2ProgressDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<bean id="sm2ZanDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2ZanDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>
