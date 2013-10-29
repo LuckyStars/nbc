@@ -13,15 +13,8 @@
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
-	
-	<script type="text/javascript" src="${prc}/plugins/json/jquery.json-2.4.min.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfobject/swfobject.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_all_min.js"></script>
-	<script type="text/javascript" >var APP_PATH = '${prc}';</script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_config_sns.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckfinder/ckfinder.js"></script>
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	
 	<style>
 		
@@ -135,11 +128,14 @@
 						<div id="slider-range-max"></div>
 					</div>
 					<%-- --%>
-					
-					<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
+					<pri:showWhenManager>
+					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
 					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />
+					</pri:showWhenManager>
+					<script type="text/javascript">
+						
 					
-					
+					</script>
 				</h2>
 
 				<h3>
@@ -151,6 +147,8 @@
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
+					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
+	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
 					<a class="button" id="btn-addfujian">增加附件</a>
 				</div>
 				<div class="tabs-wp">
@@ -166,30 +164,12 @@
 						</li>
 						</c:forEach>
 					</ul>
-					<div class="mids">
-					<div class="conls">
-							<a>
-								<img src="${prc}/function/function-linshi/images/shou.png" width="13" height="13"class="shou" />
-								(999)
-							</a>
-							<span> | </span>
-							<a>
-								<img src="${prc}/function/function-linshi/images/ico1.png" width="13" height="13" class="ico1" />
-								（999）
-							</a>
-							<span> | </span>
-							<a>
-								<img src="${prc}/function/function-linshi/images/ico2.png" width="13" height="13" class="ico2" />
-							</a>
-						</div>
-					</div>
 				</div>
 				
-				<c:forEach items="${steps }" var="block" varStatus="i">
+				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
-					<iframe id="postFrame" name="postFrame" style="border:0px;width:870px;height:900px; hidden;" scrolling="no"
+					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;height:900px; hidden;" scrolling="no"
 					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
-					
 					
 					</iframe>
 					</c:if>
@@ -358,7 +338,7 @@
 	        min: 5,
 	        max: 100,
 	        disabled: true ,
-	        value: ,
+	        value: 90,
 	        step: 5,
 	        slide: function (event, ui) {
 	            $("#amount").val(ui.value+"%");

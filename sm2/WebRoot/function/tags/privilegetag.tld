@@ -5,7 +5,7 @@
 	<tlib-version>1.0</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>pri</short-name>
-	<uri>/privilege</uri>
+	<uri>/privilege-tags</uri>
 	<tag>
 		<name>showWhenMaster</name>
 		<tag-class>com.nbcedu.function.schoolmaster2.tags.ShowWheMaster</tag-class>
