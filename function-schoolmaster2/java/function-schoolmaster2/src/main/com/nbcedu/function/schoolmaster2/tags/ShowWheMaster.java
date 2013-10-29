@@ -1,25 +1,24 @@
 package com.nbcedu.function.schoolmaster2.tags;
 
-import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
-
 import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
+import com.nbcedu.function.schoolmaster2.tags.display.AbstractDisplayTag;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 /**
- * display content if curUser is headmaster
+ * display content if curUser is school master
  * @author xuechong
  */
-public class HeadMasterTag extends TagSupport{
+@SuppressWarnings("serial")
+public class ShowWheMaster extends AbstractDisplayTag{
 	
 	@Override
-	public int doStartTag() throws JspException {
+	protected boolean display() {
 		for (PersonVo person : Utils.getAllSchoolMaster()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
-				return EVAL_PAGE;
+				return Boolean.TRUE;
 			}
 		}
-		return SKIP_BODY;
+		return Boolean.FALSE;
 	}
 	
 }

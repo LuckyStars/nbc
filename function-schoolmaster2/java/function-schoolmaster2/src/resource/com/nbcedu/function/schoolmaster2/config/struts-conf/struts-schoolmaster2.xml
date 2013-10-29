@@ -35,7 +35,7 @@
 		<action name="*_master" method="{1}" class="masterSubAction">
 			<result name="subList" ></result>
 			<result name="detail" >/function/function-linshi/details.jsp</result>
-			<result name="stepDetail" >/function/function-linshi/step.jsp</result>
+			<result name="stepDetail" >/function/detail-step/step.jsp</result>
 		</action>
 	</package>
 </struts>

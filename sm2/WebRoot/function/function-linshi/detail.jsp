@@ -189,7 +189,7 @@ $(function(){
 				${subject.title }
 				<img id="aaa" src="${prc}/function/images/tb1.png" width="80"
 					height="80" /> 
-					<img src="${prc}/function/images/qi2.png" class="qi" />
+				<img src="${prc}/function/images/qi2.png" class="qi" />
 			</h2>
 			<h3>
 				发布日期：<input value="<fmt:formatDate value="${subject.lastTime }" pattern="yyyy年MM月dd日" />"> 

@@ -22,5 +22,8 @@
         <property name="stepId" type="java.lang.String">
             <column name="stepId" length="32" />
         </property>
+        <property name="content" type="java.lang.String">
+            <column name="content" length="65535" />
+        </property>
     </class>
 </hibernate-mapping>
