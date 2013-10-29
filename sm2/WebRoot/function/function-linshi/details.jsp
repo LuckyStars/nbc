@@ -141,7 +141,7 @@
 				<h3>
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					关联重心工作： <span> </span>
-					执行者：<span> </span>
+					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
@@ -149,6 +149,7 @@
 				<div class="buttons">
 					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
 	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
+					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs"/>
 					<a class="button" id="btn-addfujian">增加附件</a>
 				</div>
 				<div class="tabs-wp">
@@ -327,7 +328,7 @@
 	      	
 	      	<div class="sure">
 	          <a href="#">确定 </a>
-	           <a href="#">关闭 </a>
+	          <a href="#">关闭 </a>
 	      	</div>
 		</div>
 	</div>

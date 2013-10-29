@@ -11,6 +11,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
+import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
@@ -29,7 +30,7 @@ public class SubjectAction extends BaseAction{
 	private Sm2TypeBiz sm2TypeBiz;
 	
 	public String toAdd(){
-		List<TSm2Type> types = this.sm2TypeBiz.findByModUseId(subjectVo.getModuleId(), this.getUserId(),0);
+		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if(moduleId.equals("lssx")|| moduleId.equals("ndzx")){
 			subjects = this.sm2SubjectBiz.findBYModuleId(moduleId);
@@ -40,7 +41,7 @@ public class SubjectAction extends BaseAction{
 	}
 	
 	public String toUpdate(){
-		List<TSm2Type> types = this.sm2TypeBiz.findByModUseId(moduleId, this.getUserId(),0);
+		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if("lssx".equals(moduleId)|| "ndzx".equals(moduleId)){
 			subjects = this.sm2SubjectBiz.findBYModuleId(moduleId);
@@ -58,6 +59,7 @@ public class SubjectAction extends BaseAction{
 		for(String u : usersId.split(",")){
 			TSm2SubjectUser user =  new TSm2SubjectUser();
 			user.setUserId(u);
+			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
 		
@@ -81,9 +83,17 @@ public class SubjectAction extends BaseAction{
 		for(String u : usersId.split(",")){
 			TSm2SubjectUser user =  new TSm2SubjectUser();
 			user.setUserId(u);
+			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
-		subject.setExcuteUsers(users);
+		String checkusersId = this.getRequest().getParameter("checkUsers");
+		Set<TSm2SubjectUser> checkUsers = new HashSet<TSm2SubjectUser>();
+		for(String u : checkusersId.split(",")){
+			TSm2SubjectUser user =  new TSm2SubjectUser();
+			user.setUserId(u);
+			checkUsers.add(user);
+		}
+		subject.setCheckUsers(checkUsers);
 		this.sm2SubjectBiz.update(subject);
 		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
 	}

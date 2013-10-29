@@ -23,9 +23,13 @@
             <c:forEach items="${subject.excuteUsers}" var="type">
    				a.push('${type.userId }');
       		 </c:forEach>
-        
+      	    
             $('#cc').combotree('setValues', a);
-            
+            var b = new Array();
+            <c:forEach items="${subject.checkUsers}" var="type">
+   				b.push('${type.userId }');
+      		 </c:forEach>
+      	    $('#master').combotree('setValues', b);
             
         });
  </script>
@@ -58,13 +62,14 @@
 	             	  </p>
                    </c:if>
 					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+                     <p>　审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
                        <textarea id="textContent"  class="big" name="subject.content" >${subject.content}</textarea>
                    </div>
                </div>
            </div>
-           <a href="javascript:matterSubmit();" class="return" style="margin-left:100px;">提交</a>
+           <a href="javascript:updateSubmit();" class="return" style="margin-left:100px;">提交</a>
            <a href="#" class="return">返回</a>
        </div>
           </div>

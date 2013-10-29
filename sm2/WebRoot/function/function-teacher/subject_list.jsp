@@ -67,7 +67,11 @@
     	function matterSubmit(){
     		if(!doValid()){return;};
     		isSubjectExist();
-    	}	
+    	}
+    	function updateSubmit(){
+    		if(!doValid()){return;};
+    		doUpdate();
+    	}
     	function on_delete(subjectId){
     		if(confirm("确定要删除吗?")){
     			$.post("delete_subject.action", { id: subjectId},
@@ -94,7 +98,19 @@
     		//		};
     		//	},"json");
     	}
-    	
+    	function doUpdate(){
+        	var users = $("#cc").combotree('getValues');
+        	var checkUsers = $("#master").combotree('getValues');
+    		$("#saveForm").ajaxSubmit({
+    			url:"update_subject.action",
+    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
+    			success:function(data){
+    				var dateObj=$.parseJSON(data);
+    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
+    				document.location.href="find_subject.action?moduleId=${moduleId}";
+    			}
+    		});
+    	}
     	function doSave(){
         	var users = $("#cc").combotree('getValues');
         	var checkUsers = $("#master").combotree('getValues');

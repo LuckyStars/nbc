@@ -75,8 +75,14 @@ public class Utils {
 		String masterJson = loadFileToString("xiaozhang.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
-	public static String getAllManagerS(){
-		return loadFileToString("xiaozhang.json");
+	
+	public static boolean isManager(){
+		for (PersonVo person : Utils.getAllSchoolMaster()) {
+			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
+				return true;
+			}
+		}
+		return false;
 	}
 	/**
 	 * 从classPath文件中读取字符串

@@ -11,7 +11,6 @@ import org.apache.commons.lang.xwork.StringUtils;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
-import com.nbcedu.function.schoolmaster2.core.util.date.DateUtil;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.SM2SubjectDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
@@ -106,7 +105,8 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		s.setModuleId(subject.getModuleId());
 		s.setTypeId(subject.getTypeId());
 		s.setExcuteUsers(subject.getExcuteUsers());
-//		s.s
+		s.setCheckUsers(subject.getCheckUsers());
+		this.sm2SubjectDao.update(s);
 	}
 	
 }
