@@ -24,6 +24,7 @@
 		<action name="*_subject" method="{1}" class="sm2SubjectAction">
 			<result name="list">/function/function-teacher/subject_list.jsp</result>
 			<result name="subjectAdd">/function/function-teacher/subject_add.jsp</result>
+			<result name="subjectUpdate">/function/function-teacher/subject_update.jsp</result>
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
 			<result name="reload" type="redirectAction">find_subject</result>
 		</action>

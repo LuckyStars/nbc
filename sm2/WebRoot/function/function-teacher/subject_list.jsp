@@ -37,7 +37,7 @@
                
             });
             $("#edit").click(function(){
-            	$.post("getById_subject.action",function(data){
+            	$.post("toUpdate_subject.action",function(data){
             		if(data != ''){
             			$("#addsubjectDiv").html(data);
             			$(".bg").css("display", "block");
@@ -53,8 +53,8 @@
         });
        
         //查询
-        function matteredit(obj){
-        	$.post("getById_subject.action?id="+obj,function(data){
+        function matteredit(obj,m){
+        	$.post("toUpdate_subject.action?id="+obj+"&moduleId="+m,function(data){
         		if(data != ''){
         			$("#addsubjectDiv").html(data);
         			$(".bg").css("display", "block");
@@ -97,9 +97,10 @@
     	
     	function doSave(){
         	var users = $("#cc").combotree('getValues');
+        	var checkUsers = $("#master").combotree('getValues');
     		$("#saveForm").ajaxSubmit({
     			url:"add_subject.action",
-    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString()},
+    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
     			success:function(data){
     				var dateObj=$.parseJSON(data);
     				alert((0==dateObj.result)?"保存成功!":"保存失败!");
@@ -115,13 +116,11 @@
 <body>
 <form action="find_Subject.action" id="form" method="post">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">临时事项</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${subjectVo.moduleName }</span></h1>
         <div class="table_box fixed">
             <div class="nav">
-                <span>提交日期:</span>
-                <select id=""></select>
                 <span>事项标题:</span>
-                <input type="text" id="" name="subject.title" />
+                <input type="text"  name="subjectVo.title" />
                 <a class="cx" href="javascript:matterQuery();">查询</a>
                 <a class="cx1" href="javascript:void(0);">增加</a>
             </div>
@@ -138,23 +137,21 @@
             <tr>
                 <td align="center">${i.index+1 }</td>
                 <td align="center">${sub.title }</td>
-                <td align="center">${sub.createTime }</td>
-                <td align="center">${sub.createrId}</td>
+                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
+                <td align="center">${sub.createrName}</td>
                 <td align="center">${sub.id}</td>
                 <td align="center">
                 <span class="space"><a href="reportDetailed_subject.action?id=${sub.id }">查看</a></span>
-                <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }')" id="edit">编辑</a>
+                <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
                 </span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
             </tr>
             </c:forEach>
         </table>
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
-        		<pg:pager url="${prc}/scMaster2/listMasterStatistics_data.action"
+        		<pg:pager url="${prc}/scMaster2/find_subject.action"
 					items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
-				<pg:param name="start" value="${start}"/>
-				<pg:param name="end" value="${end}"/>
-				<pg:param name="matcher" value="${matcher}"/>
+				<pg:param name="subjectVo.moduleId" value="${moduleId}"/>
 				总计${pm.total}条
 				<pg:first>
 					<a href="${pageUrl}">首页</a>

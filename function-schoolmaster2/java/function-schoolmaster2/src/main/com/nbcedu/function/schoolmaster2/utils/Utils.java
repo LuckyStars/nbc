@@ -65,7 +65,9 @@ public class Utils {
 		String masterJson = loadFileToString("xiaozhang.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
-
+	public static String getAllManagerS(){
+		return loadFileToString("xiaozhang.json");
+	}
 	/**
 	 * 从classPath文件中读取字符串
 	 * @param filePath
