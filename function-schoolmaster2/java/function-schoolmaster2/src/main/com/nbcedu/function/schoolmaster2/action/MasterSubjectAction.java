@@ -5,13 +5,16 @@ import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 
+import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
@@ -68,6 +71,14 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	
 	
+	/**
+	 * 转发人员树
+	 * @author xuechong
+	 */
+	public void transTree(){
+		String json = UCService.getPersonJson(Lists.newArrayList(getUserId()));
+		Struts2Utils.renderJson(json);
+	}
 	
 	///////////////////////
 	////getters&setters////

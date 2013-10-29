@@ -247,7 +247,9 @@
 						<%--<img src="${prc}/img/tu.jpg" /> --%>
 					</dt>
 					<dd>
-						<span class="grays"><sns:user id="${sup.userId}" /></span>
+						<span class="grays"> 
+						用户名
+						</span>
 						<span class="grays">
 							<fmt:formatDate 
 							value="${record.firstDate }" 

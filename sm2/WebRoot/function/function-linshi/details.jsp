@@ -134,10 +134,12 @@
 						</p>
 						<div id="slider-range-max"></div>
 					</div>
-					<%-- 
+					<%-- --%>
+					
 					<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
 					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />
-					--%>
+					
+					
 				</h2>
 
 				<h3>
