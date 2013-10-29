@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+                        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>pri</short-name>
+	<uri>/privilege</uri>
+	<tag>
+		<name>showWhenMaster</name>
+		<tag-class>com.nbcedu.function.schoolmaster2.tags.ShowWheMaster</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
+		<name>hideWhenMaster</name>
+		<tag-class>com.nbcedu.function.schoolmaster2.tags.HideWhenMaster</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
+		<name>showWhenManager</name>
+		<tag-class>com.nbcedu.function.schoolmaster2.tags.ShowWhenManager</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
+		<name>hideWhenManager</name>
+		<tag-class>com.nbcedu.function.schoolmaster2.tags.HideWhenManager</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+</taglib>
