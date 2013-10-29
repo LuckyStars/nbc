@@ -15,7 +15,10 @@
            	 url: 'tree_user.action',
            	 required: true  
            	});  
-            
+            $('#master').combotree({  
+              	 url: 'findAllMaster_user.action',
+              	 required: true  
+              	});  
         });
  </script>
  <form id="saveForm" method="post">
@@ -37,7 +40,7 @@
                    </select></p>
 				</c:if>
                 <p>事项名称：
-                	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
+                	<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
  					<c:if test="${not empty subjects}">
 	                  <p>关联重心工作：<select name="subject.parentId">
 	                   <c:forEach items="${subjects}" var="obj">
@@ -47,9 +50,10 @@
 	             	  </p>
                    </c:if>
 					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+                    <p>　审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
-                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content}</textarea>
+                       <textarea id="textContent"  class="big" name="subject.content" ></textarea>
                    </div>
                </div>
            </div>

@@ -9,7 +9,7 @@
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
 		</id>
 		
-		<property name="subId" column="sub_id" type="string" length="32" not-null="true" />
+		<property name="subId" column="sub_id" type="string" length="32"/>
 		
 		<property name="userUid" column="user_uid" type="string" length="32" not-null="true" />
 		
