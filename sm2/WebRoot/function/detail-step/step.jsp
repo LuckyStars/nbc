@@ -121,7 +121,21 @@
     			$("#art_" + id).slideUp();
     		}();
     	}
-    	
+    	function zan(progId){
+    		$("#clickZan_" +progId).hide(); 
+    		$.ajax({
+    			url:"${prc}/scMaster2/add_zan.action",
+    			data:{id:progId}
+    		}).always(function(resp,status){
+    			if(resp!='true'||status!='success'){
+    				alert("点赞失败请稍后重试");
+    				$("#clickZan_" +progId).fadeIn();
+    			}else{
+    				var zanCount = parseInt($("#zan_"+progId).html());
+    				$("#zan_"+progId).html(isNaN(zanCount)?1:(zanCount+1));
+    			}
+    		});
+    	}
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -137,12 +151,14 @@
    			<img src="${prc }/function/detail-step/images/ico4.png" class="ico8"/><%--转移步骤 --%>
    			<img src="${prc }/function/detail-step/images/ico5.png" /><%--删除进展 --%>
    			<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/><%--上传附件 --%>
-   			<img src="${prc }/function/detail-step/images/ico7.png" /><%--点赞狂魔 --%>
+   			<img src="${prc }/function/detail-step/images/ico7.png" 
+   			id="clickZan_${prog.id}"
+   			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
    		</a>
         <div class="conls"> 
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
-        		width="13" height="13"  class="shou"/>(20)
+        		width="13" height="13"  class="shou"/>(<span id="zan_${prog.id }">20</span>)
         	</a>
         	
         	<span> | </span>

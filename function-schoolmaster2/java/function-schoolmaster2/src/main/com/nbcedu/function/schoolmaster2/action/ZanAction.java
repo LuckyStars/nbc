@@ -1,20 +1,26 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.Date;
+import java.util.List;
 
+import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.nbcedu.function.schoolmaster2.vo.ZanVo;
 
 /**
  * 赞action
  * @author xuechong
  *
  */
+@SuppressWarnings("serial")
 public class ZanAction extends BaseAction{
 	
 	private SM2ZanBiz zanBiz;
+	private Integer zanSize = null;
 	
 	/**
 	 * 新增赞
@@ -26,9 +32,19 @@ public class ZanAction extends BaseAction{
 		zan.setUserName(Utils.curUserName());
 		zan.setUserUid(getUserId());
 		zan.setCreateTime(new Date());
-		this.zanBiz.addOrUpdate(zan);
+		Boolean result = this.zanBiz.addOrUpdate(zan)!=null;
+		Struts2Util.renderText(result.toString());
 	}
 	
+	/**
+	 * 查询有多少人赞过
+	 * @author xuechong
+	 */
+	public void showZans(){
+		List<ZanVo> zans = this.zanBiz.findByProg(this.id, zanSize);
+		String json = Utils.gson.toJson(zans, new TypeToken<List<ZanVo>>() {
+		}.getType());
+	}
 	///////////////////////
 	////getters&setters////
 	///////////////////////

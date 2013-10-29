@@ -108,13 +108,16 @@ public class Utils {
 	public static class Dates{
 		
 		public static final SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd");
-		
+		public static final SimpleDateFormat fullSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static Date safeParseSimpleDate(String origin){
 			try {
 				return dateSdf.parse(origin);
 			} catch (Exception e) {
 				return new Date();
 			}
+		}
+		public static String formateFullDateStr(Date date){
+			return fullSdf.format(date);
 		}
 	}
 	

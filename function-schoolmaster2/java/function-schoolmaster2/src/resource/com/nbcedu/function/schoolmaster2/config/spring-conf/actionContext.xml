@@ -22,11 +22,13 @@
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction" scope="prototype" >
 	</bean>
 	
-	
 	<bean id="masterSubAction" class="com.nbcedu.function.schoolmaster2.action.MasterSubjectAction" scope="prototype" >
 		<property name="subBiz" ref="masterSubBiz" />
 		<property name="stepBiz" ref="sm2StepBiz" />
 		<property name="progBiz" ref="sm2ProgressBiz" />
+	</bean>
+	
+	<bean id="sm2ZanAction" class="com.nbcedu.function.schoolmaster2.action.ZanAction" scope="prototype">
 		<property name="zanBiz" ref="sm2ZanBiz"/>
 	</bean>
 	

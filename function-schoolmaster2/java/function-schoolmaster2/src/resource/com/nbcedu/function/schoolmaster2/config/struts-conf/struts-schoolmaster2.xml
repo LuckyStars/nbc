@@ -37,5 +37,8 @@
 			<result name="detail" >/function/function-linshi/details.jsp</result>
 			<result name="stepDetail" >/function/detail-step/step.jsp</result>
 		</action>
+		
+		<action name="*_zan" method="{1}" class="sm2ZanAction">
+		</action>
 	</package>
 </struts>
