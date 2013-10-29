@@ -19,6 +19,7 @@
         });
  </script>
  <form id="saveForm" method="post">
+ 	<input type="hidden" name="subject.moduleId" value="${moduleId }"/>
 	<div class="bg"></div>
       <div class="add" style="height: 450px;">
        <div class="add-top">
@@ -29,7 +30,7 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p> 类型：<select name="subject.moduleId">
+               		<p> 类型：<select name="subject.typeId">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
@@ -37,11 +38,10 @@
 				</c:if>
                 <p>事项名称：
                 	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
- 					<c:if test="${not empty types1}">
-	                  <p>关联重心工作：<select>
-	                   <c:forEach items="${types1}" var="obj">
-	                   	<option value=""></option>
-	                   	<option value="${obj.id }">${obj.name}</option>
+ 					<c:if test="${not empty subjects}">
+	                  <p>关联重心工作：<select name="subject.parentId">
+	                   <c:forEach items="${subjects}" var="obj">
+	                   	<option value="${obj.id }">${obj.title}</option>
 	                   	</c:forEach>
 	                   </select>
 	             	  </p>

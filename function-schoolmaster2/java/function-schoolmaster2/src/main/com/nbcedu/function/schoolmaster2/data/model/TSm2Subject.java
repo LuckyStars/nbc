@@ -23,6 +23,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private String parentId;
 	private Integer mold;
+	private String typeId;
 	/*
 	 * 执行者
 	 */
@@ -39,7 +40,7 @@ public class TSm2Subject implements java.io.Serializable {
 	public TSm2Subject(String createrId, Timestamp createTime, String content,
 			Integer flag, String departmentId, String title, String moduleId,
 			Timestamp lastUpdateTime, String parentId,String createrName,
-			Set<TSm2SubjectUser> excuteUsers,Integer mold) {
+			Set<TSm2SubjectUser> excuteUsers,Integer mold,String typeId) {
 		this.createrId = createrId;
 		this.createTime = createTime;
 		this.content = content;
@@ -52,6 +53,7 @@ public class TSm2Subject implements java.io.Serializable {
 		this.excuteUsers = excuteUsers;
 		this.mold = mold;
 		this.createrName = createrName;
+		this.typeId = typeId;
 	}
 
 	// Property accessors
@@ -166,6 +168,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setCreaterName(String createrName) {
 		this.createrName = createrName;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
 	}
 
 }

@@ -74,7 +74,7 @@
     				function(data){
     					var dateObj=$.parseJSON(data);
     					if(0==dateObj.result){
-    						document.location.href="showSubject_subject.action?module=${param.module}";
+    						document.location.href="find_subject.action?moduleId=${moduleId}";
     					}else{
     						alert("删除失败");
     					}
@@ -84,26 +84,26 @@
     	
     	//验证主题重名
     	function isSubjectExist(){
-    		var url ="isExist_subject.action";
-    		var subjectTile = $("input[name='subject.title']").val();
-    		$.post(url,{subjectTile:subjectTile},function(data){
-    				if(data.result == 0){
+    		//var url ="isExist_subject.action";
+    	//	var subjectTile = $("input[name='subject.title']").val();
+    	//	$.post(url,{subjectTitle:subjectTitle},function(data){
+    			//	if(data.result == 0){
     						doSave();
-    				}else{
-    					alert(data.msg);
-    				};
-    			},"json");
+    		//		}else{
+    		//			alert(data.msg);
+    		//		};
+    		//	},"json");
     	}
     	
     	function doSave(){
         	var users = $("#cc").combotree('getValues');
     		$("#saveForm").ajaxSubmit({
-    			url:"addSubject_subject.action",
+    			url:"add_subject.action",
     			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString()},
     			success:function(data){
     				var dateObj=$.parseJSON(data);
-    				alert((0==dateObj.result)?"成功!":"失败!");
-    				document.location.href="showSubject_subject.action?module=${param.module}";
+    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
+    				document.location.href="find_subject.action?moduleId=${moduleId}";
     			}
     		});
     	}
