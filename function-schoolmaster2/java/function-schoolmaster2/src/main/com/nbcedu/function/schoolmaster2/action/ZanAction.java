@@ -7,6 +7,7 @@ import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
+import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.ZanVo;
@@ -44,7 +45,9 @@ public class ZanAction extends BaseAction{
 		List<ZanVo> zans = this.zanBiz.findByProg(this.id, zanSize);
 		String json = Utils.gson.toJson(zans, new TypeToken<List<ZanVo>>() {
 		}.getType());
+		Struts2Utils.renderJson(json);
 	}
+	
 	///////////////////////
 	////getters&setters////
 	///////////////////////
