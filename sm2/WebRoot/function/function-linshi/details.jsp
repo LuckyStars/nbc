@@ -29,6 +29,14 @@
         .content h2 p {
          margin-left:100px;
         }
+        .tabs li{
+        	padding:0 0 0 15px;
+        }
+        .tabs li img{
+        	float:right;position:relative; padding-left: 5px;
+        	width:16px;
+        	height:14px;
+        }
     </style>
     
 	<script type="text/javascript">
@@ -103,15 +111,40 @@
              $(".adds6").hide();
              $(".adds7").hide();
          });
+         //步骤操作
          $("#stepSave").click(function(){
-             var name = $("input[name=step.name]").val();
-        	 $("#stepForm").ajaxSubmit({
-     			url : "addStep_master.action",
-     			success : function(data) {
-      				$(".tab").append('<li  id="${step.id}" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a></li>');
-     			}
-        	 });
-          });
+        	 var name = $.trim($("input[name='step.name']").val());
+        	 if(name.length>0){
+	            $.post("isExistStep_master.action",{name:name},function(data1){
+	            	if(data1==0){
+			         	var formParams = $("#stepForm").serialize();
+			    		$.post("addStep_master.action", formParams, function(data) {
+			      				$(".tabs-wp ul").append('<li id="'+data+'" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a>'+
+					      				'<img src="${prc}/function/function-linshi/img/errotab.png" /></li>');
+			      				$("input[name='step.name']").val("");
+				   				 $(".bg").hide();
+				   				 $(".adds7").hide();
+			      				changeTab(data);
+			     			});
+	            	}else{
+						alert("存在相同步骤！");
+	            	}
+		          });
+	          }else{
+					alert("请填写步骤名称！");
+	          }
+         	});
+      	$(".tabs li img").click(function(){
+				var id = $(this).attr("name");
+				$.post("deleteStep_master.action",{id:id},function(data){
+						if(data==0){
+							$("#"+id).remove();
+						}else{
+							alert("删除失败！");
+						}
+					});
+          	});
+      	//步骤结束
 	  });
 	</script>
 	<script>
@@ -162,14 +195,10 @@
 				<div class="tabs-wp">
 					<ul class="tabs">
 						<c:forEach items="${steps }" var="step" varStatus="i">
-							<li  id="${step.id}" 
-							class="blocksTab 
-								<c:if test="${i.index==0 }">
-								cur
-								</c:if>"
-							>
-							<a href="javascript:changeTab('${step.id}');">${step.name }</a>
-						</li>
+							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>" >
+								<a href="javascript:changeTab('${step.id}');">${step.name }</a>
+								<img name="${step.id}" src="${prc}/function/function-linshi/img/errotab.png" />
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -186,8 +215,10 @@
 			</div>
 		</div>
 	</div>
-	<!--弹出层 转发-->
+	<!--弹出层 遮盖-->
 	<div class="bg"></div>
+	<!--弹出层 转发-->
+	
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
@@ -259,7 +290,6 @@
 	
 	
 	<!--弹出层3-->
-	<div class="bg"></div>
 	<div class="adds3">
 	<div class="add-tops3">
 	 	<p>转移</p>
@@ -287,7 +317,6 @@
 		</div>
 	</div>
 	<!--弹出层6-->
-	<div class="bg"></div>
 	<div class="adds6">
 		<div class="add-tops6">
 		    <p>增加工作进展</p>
@@ -314,9 +343,8 @@
 			</div>
 		</div>
 	<!--弹出层7-->
-    <div class="bg"></div>
     <form action="addStep_master.action" id="stepForm">
-    <input type="hidden" name="step.subjectId" value="subject.id" />
+    <input type="hidden" name="step.subjectId" value="${subject.id}" />
     <div class="adds7">
   		<div class="add-tops7">
 	    	<p>编辑</p>

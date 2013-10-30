@@ -34,6 +34,7 @@ public class MasterSubjectAction extends BaseAction{
 	private TSm2Subject subject;
 	private TSm2Step step;
 	private List<TSm2Progress> proList = new ArrayList<TSm2Progress>();
+	private String name;
 	
 	private SM2MasterSubBiz subBiz;
 	private Sm2StepBiz stepBiz;
@@ -71,7 +72,6 @@ public class MasterSubjectAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public String showStep(){
-		this.step = this.stepBiz.findById(this.id);
 		this.proList = this.progBiz.findAllByStepId(this.id);
 		this.readsBiz.addByStep(this.id, getUserId());
 		return "stepDetail";
@@ -81,6 +81,15 @@ public class MasterSubjectAction extends BaseAction{
 		this.step.setCreateTime(new Date());
 		TSm2Step s = this.stepBiz.add(step);
 		Struts2Utils.renderText(s.getId(),"encoding:UTF-8");
+	}
+	public void isExistStep(){
+		boolean b = this.stepBiz.findByName(name);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}
+	}
+	public void deleteStep(){
+		
 	}
 	
 	/**
@@ -130,6 +139,14 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setReadsBiz(Sm2ReadsBiz readsBiz) {
 		this.readsBiz = readsBiz;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
