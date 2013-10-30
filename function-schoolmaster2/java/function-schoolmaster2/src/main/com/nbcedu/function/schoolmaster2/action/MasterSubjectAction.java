@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
@@ -71,7 +72,12 @@ public class MasterSubjectAction extends BaseAction{
 		this.proList = this.progBiz.findAllByStepId(this.id);
 		return "stepDetail";
 	}
-	
+	public void addStep(){
+		this.step.setCreaterId(this.getUserId());
+		this.step.setCreateTime(new Date());
+		TSm2Step s = this.stepBiz.add(step);
+		Struts2Utils.renderText(s.getId(),"encoding:UTF-8");
+	}
 	
 	/**
 	 * 转发人员树

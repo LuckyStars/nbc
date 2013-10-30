@@ -16,6 +16,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 
 @SuppressWarnings("serial")
@@ -99,7 +100,7 @@ public class SubjectAction extends BaseAction{
 	}
 	public String find(){
 //		判断角色 如果是主管则查询所有自己的，否则只查看主管指定执行者可看
-		if(1==1){
+		if(Utils.isManager()){
 			subjectVo.setCreaterId(this.getUserId());
 			pm = this.sm2SubjectBiz.findByCreaterId(subjectVo);
 		}else{

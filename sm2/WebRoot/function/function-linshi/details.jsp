@@ -17,7 +17,6 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	
 	<style>
-		
         .ui-widget-content {
         width:230px; height:10px; background:#EA605E
         }
@@ -104,7 +103,16 @@
              $(".adds6").hide();
              $(".adds7").hide();
          });
-     });
+         $("#stepSave").click(function(){
+             var name = $("input[name=step.name]").val();
+        	 $("#stepForm").ajaxSubmit({
+     			url : "addStep_master.action",
+     			success : function(data) {
+      				$(".tab").append('<li  id="${step.id}" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a></li>');
+     			}
+        	 });
+          });
+	  });
 	</script>
 	<script>
 	</script>
@@ -150,7 +158,6 @@
 					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
 	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
 					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs"/>
-					<a class="button" id="btn-addfujian">增加附件</a>
 				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">
@@ -308,6 +315,8 @@
 		</div>
 	<!--弹出层7-->
     <div class="bg"></div>
+    <form action="addStep_master.action" id="stepForm">
+    <input type="hidden" name="step.subjectId" value="subject.id" />
     <div class="adds7">
   		<div class="add-tops7">
 	    	<p>编辑</p>
@@ -315,23 +324,18 @@
 	    </div>
 	  	<div class="add-downs7">
 			<div class="chen">
-	          <p>步骤名称1：</p>
-	          <input type="text" />
-	          <img src="${prc}/function/function-linshi/images/jia.jpg" />
-	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>
+	          <p>步骤名称：</p>
+	          <input type="text" name="step.name"/>
+<!--	          <img src="${prc}/function/function-linshi/images/jia.jpg" />-->
+<!--	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>-->
 	      	</div>
-	      	<div class="chen">
-	          	<p>步骤名称2：</p>
-	          	<input type="text" />
-	          	<img src="${prc}/function/function-linshi/images/jia.jpg" />
-	      	</div>
-	      	
 	      	<div class="sure">
-	          <a href="#">确定 </a>
-	          <a href="#">关闭 </a>
+	          <a id="stepSave" href="#">确定 </a>
+	          <a href="#" class="close">关闭 </a>
 	      	</div>
 		</div>
 	</div>
+	</form>
 <script>
 	$(function () {
 	    $("#slider-range-max").slider({
