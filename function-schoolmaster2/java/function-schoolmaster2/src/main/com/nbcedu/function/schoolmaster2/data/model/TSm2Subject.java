@@ -28,7 +28,7 @@ public class TSm2Subject implements java.io.Serializable {
 	 */
 	private Set<TSm2SubjectUser> excuteUsers=new HashSet<TSm2SubjectUser>();
 
-	private Set<TSm2SubjectUser> checkUsers=new HashSet<TSm2SubjectUser>();
+	private Set<SM2SubjectMaster> checkUsers=new HashSet<SM2SubjectMaster>();
 	// Constructors
 
 	/** default constructor */
@@ -177,11 +177,11 @@ public class TSm2Subject implements java.io.Serializable {
 		this.typeId = typeId;
 	}
 
-	public Set<TSm2SubjectUser> getCheckUsers() {
+	public Set<SM2SubjectMaster> getCheckUsers() {
 		return checkUsers;
 	}
 
-	public void setCheckUsers(Set<TSm2SubjectUser> checkUsers) {
+	public void setCheckUsers(Set<SM2SubjectMaster> checkUsers) {
 		this.checkUsers = checkUsers;
 	}
 

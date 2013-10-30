@@ -41,7 +41,7 @@
     		<key column="subjectId"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser"/>
 		</set>
-		<set name="checkUsers" table="t_sm2_master" inverse="false" cascade="all">
+		<set name="checkUsers" table="t_sm2_subject_master" inverse="false" cascade="all">
     		<key column="subId"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster"/>
 		</set>

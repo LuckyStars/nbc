@@ -138,7 +138,7 @@
                 <span>事项标题:</span>
                 <input type="text"  name="subjectVo.title" />
                 <a class="cx" href="javascript:matterQuery();">查询</a>
-                <a class="cx1" href="javascript:void(0);">增加</a>
+                	<a class="cx1" href="javascript:void(0);">增加</a>
             </div>
         <table width="100%" border="0">
             <tr>
@@ -152,14 +152,17 @@
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
                 <td align="center">${i.index+1 }</td>
-                <td align="center">${sub.title }</td>
+                <td align="center"></td>
                 <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
                 <td align="center">${sub.createrName}</td>
                 <td align="center">${sub.id}</td>
                 <td align="center">
                 <span class="space"><a href="reportDetailed_subject.action?id=${sub.id }">查看</a></span>
-                <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
-                </span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
+	                <pri:showWhenManager>
+	                	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
+	                	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>
+                	</pri:showWhenManager>
+                </td>
             </tr>
             </c:forEach>
         </table>
@@ -197,10 +200,8 @@
 		</div>
     </div>
            <!--弹出层-->
-    <div class="bg"></div>
-      <div id="addsubjectDiv" >
-     
-       </div>
+    		<div class="bg"></div>
+      		<div id="addsubjectDiv"></div>
      </form>
      <script>
       function doValid(){
