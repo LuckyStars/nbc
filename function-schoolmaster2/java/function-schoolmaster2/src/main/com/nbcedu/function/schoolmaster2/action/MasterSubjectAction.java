@@ -10,9 +10,11 @@ import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
+import com.nbcedu.function.schoolmaster2.data.model.SM2Reads;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
@@ -36,6 +38,7 @@ public class MasterSubjectAction extends BaseAction{
 	private SM2MasterSubBiz subBiz;
 	private Sm2StepBiz stepBiz;
 	private Sm2ProgressBiz progBiz;
+	private Sm2ReadsBiz readsBiz;
 	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
@@ -70,6 +73,7 @@ public class MasterSubjectAction extends BaseAction{
 	public String showStep(){
 		this.step = this.stepBiz.findById(this.id);
 		this.proList = this.progBiz.findAllByStepId(this.id);
+		this.readsBiz.addByStep(this.id, getUserId());
 		return "stepDetail";
 	}
 	public void addStep(){
@@ -123,6 +127,9 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setProgBiz(Sm2ProgressBiz progBiz) {
 		this.progBiz = progBiz;
+	}
+	public void setReadsBiz(Sm2ReadsBiz readsBiz) {
+		this.readsBiz = readsBiz;
 	}
 	
 }
