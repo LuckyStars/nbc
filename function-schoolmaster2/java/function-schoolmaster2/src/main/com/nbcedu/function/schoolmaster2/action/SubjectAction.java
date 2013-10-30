@@ -53,6 +53,9 @@ public class SubjectAction extends BaseAction{
 		return "subjectUpdate";
 	}
 	public void add(){
+		for(int i=0;i<100;i++){
+			subject = new TSm2Subject();
+			subject.setId("");
 		subject.setCreateTime(new Date());
 		
 		String usersId = this.getRequest().getParameter("executeUsersId");
@@ -65,16 +68,17 @@ public class SubjectAction extends BaseAction{
 		}
 		
 		String checkusersId = this.getRequest().getParameter("checkUsers");
-		Set<TSm2SubjectUser> checkUsers = new HashSet<TSm2SubjectUser>();
+		Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
 		for(String u : checkusersId.split(",")){
-			TSm2SubjectUser user =  new TSm2SubjectUser();
-			user.setUserId(u);
+			SM2SubjectMaster user =  new SM2SubjectMaster();
+			user.setUserUid(u);
 			checkUsers.add(user);
 		}
 		subject.setCheckUsers(checkUsers);
 		subject.setCreaterId(this.getUserId());
 		subject.setCreaterName(UCService.findNameByUid(this.getUserId()));
 		this.sm2SubjectBiz.add(subject);
+		}
 		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
 	}
 	
@@ -88,10 +92,10 @@ public class SubjectAction extends BaseAction{
 			users.add(user);
 		}
 		String checkusersId = this.getRequest().getParameter("checkUsers");
-		Set<TSm2SubjectUser> checkUsers = new HashSet<TSm2SubjectUser>();
+		Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
 		for(String u : checkusersId.split(",")){
-			TSm2SubjectUser user =  new TSm2SubjectUser();
-			user.setUserId(u);
+			SM2SubjectMaster user =  new SM2SubjectMaster();
+			user.setUserUid(u);
 			checkUsers.add(user);
 		}
 		subject.setCheckUsers(checkUsers);
