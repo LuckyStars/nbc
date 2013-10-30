@@ -60,11 +60,6 @@
                 $(".bg").show();
                 $(".adds").show();
             });
-            $(".shou").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds1").show();
-            });
             $(".ico1").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
@@ -112,6 +107,12 @@
     </script>
     
     <script type="text/javascript">
+    	
+    	function hideDiv(eleId){
+    		$("#" + eleId).fadeOut();
+    	}
+    
+    
     	function switchArticle(id){
     		$("#art_" + id).is(":hidden")?
     		function(){
@@ -121,6 +122,7 @@
     			$("#art_" + id).slideUp();
     		}();
     	}
+    	
     	function zan(progId){
     		$("#clickZan_" +progId).hide(); 
     		$.ajax({
@@ -136,6 +138,26 @@
     			}
     		});
     	}
+    	
+    	function showZans(progId){
+    		//zanContentsDiv
+    		$("#zanContentsDiv").html("");
+    		$.post("${prc}/scMaster2/showZans_zan.action?id="+progId,function(data){
+    			if(data.length<=0){
+    				return;
+    			}
+    			for(var i = 0;i<data.length;i++){
+	    			$('<dl class="comments"><dd><p><span class="blue">'
+	 					+ data[i].name +
+	   					'</span><br /></p><span class="gray">('
+						+ data[i].date + 
+						')</span></dd></dl>').appendTo($("#zanContentsDiv"));
+    			}
+    		});
+    		
+    		$("#divZan").show();
+    	}
+    	
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -158,8 +180,10 @@
         <div class="conls"> 
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
-        		width="13" height="13"  class="shou"/>(<span id="zan_${prog.id }">20</span>)
+        		onclick="showZans('${prog.id}');"
+        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">20</span>)
         	</a>
+        	
         	
         	<span> | </span>
         	
@@ -356,8 +380,8 @@
               		</p>
               		<span class="gray float">(32分钟前)</span>
               	</dd>
-               
              	<div style="clear:both;"></div>
+             	
           	</dl>
           
 			<dl class="new">
@@ -503,56 +527,31 @@
 <!-- 弹出层 资源 END -->
 
     <!--弹出层 赞-->
-    <div class="adds1">
-  <div class="add-tops1">
-    <p>赞</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs1">
-      <dl class="comments">
+	<div class="adds1" id="divZan" style="position: absolute;">
+  		<div class="add-tops1">
+	   		<p>赞</p>
+	    	<img src="${prc}/function/detail-step/img/erro.jpg" 
+	    	onclick="hideDiv('divZan');"
+	    	class="close" style="cursor:pointer;"/>
+    	</div>
+  		<div class="add-downs1" id="zanContentsDiv">
+      		<dl class="comments">
+            	<dd>
+              		<p>
+              			<span class="blue">沫儿</span><br />
+              		</p>
+              		<span class="gray">(3天前)</span>
+              	</dd>
+          	</dl>
+      		<dl class="comments">
             <dt><img src="img/tu.jpg" /></dt>
             <dd>
               <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
               </p>
               <span class="gray">(3天前)</span> </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
-              </p>
-              <span class="gray">(3天前)</span> </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
-              </p>
-              <span class="gray">(3天前)</span> </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
-              </p>
-              <span class="gray">(3天前)</span> </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
-              </p>
-              <span class="gray">(3天前)</span> </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
-              </p>
-              <span class="gray">(3天前)</span> </dd>
-          </dl>
-    <!--<a href="#" class="return" style="margin-left:100px;">提交</a> <a href="#" class="return">返回</a> </div>-->
-</div>
-</div>
+          	</dl>
+		</div>
+	</div>
 <!--弹出层 赞-->
 
 
