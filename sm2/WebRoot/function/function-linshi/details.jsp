@@ -145,6 +145,27 @@
 					});
           	});
       	//步骤结束
+      	 $("#progressSave").click(function(){
+        	 var name = $.trim($("input[name='progress.name']").val());
+        	 if(name.length>0){
+	            $.post("isExistStep_progress.action",{name:name},function(data1){
+	            	if(data1==0){
+			         	var formParams = $("#progressForm").serialize();
+			    		$.post("add_progress.action", formParams, function(data) {
+			      				$("input[name='progress.name']").val("");
+			      				$("#textarea").val("");
+				   				 $(".bg").hide();
+				   				 $(".adds6").hide();
+			      				changeTab(jQuery("#select1  option:selected").val());
+			     			});
+	            	}else{
+						alert("存在相同工作进展！");
+	            	}
+		          });
+	          }else{
+					alert("请填写工作进展名称！");
+	          }
+         	});
 	  });
 	</script>
 	<script>
@@ -318,30 +339,34 @@
 	</div>
 	<!--弹出层6-->
 	<div class="adds6">
-		<div class="add-tops6">
-		    <p>增加工作进展</p>
-		    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-		  	<div class="add-downs6">
-	      		<div>
-	          		<p>所属步骤：</p>
-	          		<select>
-	
-	          		</select>
-	      		</div>
-		      	<div>
-		          	<p>工作进展：</p>
-		          	<input type="text" />
-		      	</div>
-	      		<div>
-	          		<p>具体工作内容：</p>
-	          		<textarea></textarea>
-	      		</div>
-	      		<div class="sure">
-	          		<a href="#">确定 </a>
-	           		<a href="#">关闭 </a>
-	      		</div>
+		<form action="" id="progressForm">
+			<div class="add-tops6">
+			    <p>增加工作进展</p>
+			    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+			  	<div class="add-downs6">
+		      		<div>
+		          		<p>所属步骤：</p>
+			          	<select name="progress.stepId">
+							<c:forEach items="${steps }" var="step" >
+								<option value="${step.id }">${step.name}</option>
+					 		</c:forEach>
+			          	</select>
+		      		</div>
+			      	<div>
+			          	<p>工作进展：</p>
+			          	<input type="text" name="progress.name"/>
+			      	</div>
+		      		<div>
+		          		<p>具体工作内容：</p>
+		          		<textarea name="progress.content" id="progress.content"></textarea>
+		      		</div>
+		      		<div class="sure">
+		          		<a id="progressSave" href="#">确定 </a>
+		           		<a href="#" class="close">关闭 </a>
+		      		</div>
 			</div>
-		</div>
+		</form>
+	</div>
 	<!--弹出层7-->
     <form action="addStep_master.action" id="stepForm">
     <input type="hidden" name="step.subjectId" value="${subject.id}" />

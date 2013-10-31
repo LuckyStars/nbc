@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
@@ -21,7 +22,13 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		cri.add(Restrictions.eq("stepId", stepId));
 		return cri.list();
 	}
-	
+	@Override
+	public List<TSm2Progress> findByNameStepId(String stepId, String name) {
+		Criteria cri = this.progressDao.createCriteria();
+		cri.add(Restrictions.eq("stepId", stepId));
+		cri.add(Expression.eq("name",name));
+		return cri.list();
+	}
 	//////////////////////////
 	//////getters&setters///////
 	///////////////////////
@@ -29,4 +36,6 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		super.setDao(progressDao);
 		this.progressDao = progressDao;
 	}
+
+
 }
