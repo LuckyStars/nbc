@@ -57,5 +57,6 @@
 		<action name="*_step" method="{1}" class="sm2StepAction">
 		
 		</action>
+		
 	</package>
 </struts>
