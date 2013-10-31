@@ -15,8 +15,7 @@ form {
 }
 div.fieldset {
 	border:  1px solid #afe14c;
-	margin: 10px 0;
-	padding: 20px 10px;
+	padding: 5px 10px;
 }
 div.fieldset span.legend {
 	position: relative;
@@ -59,7 +58,6 @@ td {
 }
 
 .progressWrapper {
-	width: 332px;
 	overflow: hidden;
 }
 
@@ -100,7 +98,6 @@ td {
 	font-size:14px;
 	font-weight: 700;
 	color: #555;
-	width: 323px;
 	height: 20px;
 	text-align: left;
 	white-space: nowrap;

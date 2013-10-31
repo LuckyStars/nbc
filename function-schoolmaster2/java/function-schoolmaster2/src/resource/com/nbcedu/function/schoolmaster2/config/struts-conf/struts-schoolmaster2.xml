@@ -34,8 +34,13 @@
 			<result name="subList"></result>
 		</action>
 		
-		<action name="_master" method="{1}" class="masterSubAction">
-			<result name="subList"></result>
+		<action name="*_invatition" method="{1}" class="invatitionAction">
+			<result name="teacherList">/function/function-invatition/teacherList.jsp</result>
+			<result name="teacherShow">/function/function-invatition/teacherShow.jsp</result>
+			<result name="masterList">/function/function-invatition/masterList.jsp</result>
+			<result name="masterShow">/function/function-invatition/masterShow.jsp</result>
+			<result name="download">/function/function-invatition/download.jsp</result>
 		</action>
+		<action name="swfUpload" method="upload" class="sm2SWFUploadAction"></action>
 	</package>
 </struts>
