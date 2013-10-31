@@ -2,8 +2,6 @@ package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.util.Date;
 
-import org.aspectj.weaver.ast.Var;
-
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 
 

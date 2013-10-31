@@ -1,6 +1,5 @@
 package com.nbcedu.function.schoolmaster2.biz.impl;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;

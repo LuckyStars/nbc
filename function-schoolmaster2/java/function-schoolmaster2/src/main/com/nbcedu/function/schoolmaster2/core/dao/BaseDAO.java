@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;

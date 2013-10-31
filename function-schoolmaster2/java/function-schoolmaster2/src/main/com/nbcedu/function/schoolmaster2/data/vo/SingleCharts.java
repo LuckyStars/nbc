@@ -1,7 +1,7 @@
 package com.nbcedu.function.schoolmaster2.data.vo;
 
-import static org.apache.commons.lang.xwork.StringUtils.trimToEmpty;
 import static org.apache.commons.lang.xwork.StringUtils.isBlank;
+import static org.apache.commons.lang.xwork.StringUtils.trimToEmpty;
 
 import java.util.List;
 

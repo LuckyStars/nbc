@@ -3,7 +3,6 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import java.util.List;
 
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;

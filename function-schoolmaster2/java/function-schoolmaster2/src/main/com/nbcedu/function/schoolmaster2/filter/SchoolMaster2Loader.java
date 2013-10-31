@@ -5,7 +5,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.nbcedu.core.framework.filter.ServiceInfoLoader;
-import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 public class SchoolMaster2Loader implements ServiceInfoLoader{
 

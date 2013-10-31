@@ -15,28 +15,21 @@ import com.nbcedu.function.schoolmaster2.biz.SM2MasterCommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterReplyBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ResourceBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-<<<<<<< HEAD
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Invatition;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterComment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterReply;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
-=======
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 
 @SuppressWarnings("serial")
 public class InvatitionAction extends BaseAction{
 
-<<<<<<< HEAD
 	private TSm2Invatition tsm2Invatition;
-=======
-	private static final String INV_MODULE_ID = null;
-
+	
 	private TSm2Subject subject;
 	private SubjectVo subjectVo = new SubjectVo();
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 
 	private SM2InvatitionBiz sm2InvatitionBiz;
 	
@@ -59,6 +52,7 @@ public class InvatitionAction extends BaseAction{
 	private List<TSm2MasterComment> tsm2MasterComments;
 
 	private Integer score;
+
 
 	public String add(){
 		
@@ -83,6 +77,7 @@ public class InvatitionAction extends BaseAction{
 		return null;
 	}
 	public String modify() throws IllegalAccessException, InvocationTargetException{
+		
 		TSm2Invatition tsm = sm2InvatitionBiz.findById(tsm2Invatition.getId());
 		Date date = new Date();
 		if ("0".equals(tsm.getFlag())&&"1".equals(tsm2Invatition.getFlag())) {
@@ -142,12 +137,7 @@ public class InvatitionAction extends BaseAction{
 		return null;
 	}
 	public String teacherList(){
-<<<<<<< HEAD
-        this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId());
-=======
-		subjectVo.setCreaterId(getUserId());
-		this.pm =  this.subBiz.findByCreaterId(subjectVo);
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
+		this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId());
 		return "teacherList";
 	}
 	public String masterList(){
@@ -349,8 +339,6 @@ public class InvatitionAction extends BaseAction{
 	public List<TSm2MasterComment> getTsm2MasterComments() {
 		return tsm2MasterComments;
 	}
-<<<<<<< HEAD
-=======
 
 	public SubjectVo getSubjectVo() {
 		return subjectVo;
@@ -360,5 +348,4 @@ public class InvatitionAction extends BaseAction{
 		this.subjectVo = subjectVo;
 	}
 	
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 }
