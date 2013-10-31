@@ -16,6 +16,7 @@
 <script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8080/schoolapp/common/agent.js"></script>
 <script type="text/javascript">
         $(function () {
             $("table tr:odd").css("background", "#f0f8fc");
@@ -78,7 +79,7 @@
     				function(data){
     					var dateObj=$.parseJSON(data);
     					if(0==dateObj.result){
-    						document.location.href="find_subject.action?moduleId=${moduleId}";
+    						document.forms[0].submit();
     					}else{
     						alert("删除失败");
     					}
@@ -107,7 +108,7 @@
     			success:function(data){
     				var dateObj=$.parseJSON(data);
     				alert((0==dateObj.result)?"保存成功!":"保存失败!");
-    				document.location.href="find_subject.action?moduleId=${moduleId}";
+    				document.forms[0].submit();
     			}
     		});
     	}
@@ -120,17 +121,23 @@
     			success:function(data){
     				var dateObj=$.parseJSON(data);
     				alert((0==dateObj.result)?"保存成功!":"保存失败!");
-    				document.location.href="find_subject.action?moduleId=${moduleId}";
+    				document.forms[0].submit();
     			}
     		});
     	}
     function matterQuery(){
     	$("#form").submit();
     }
+    function look(id){
+    	document.location.href="${prc}/scMaster2/detail_master.action?id="+id;
+    	sethash();
+    }
 </script>
 </head>
 <body>
-<form action="find_Subject.action" id="form" method="post">
+<form action="${prc}/scMaster2/find_subject.action" id="form" method="post">
+<input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
+<input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
 <div class="con_conent fixed">
      <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${subjectVo.moduleName }</span></h1>
         <div class="table_box fixed">
@@ -138,7 +145,7 @@
                 <span>事项标题:</span>
                 <input type="text"  name="subjectVo.title" />
                 <a class="cx" href="javascript:matterQuery();">查询</a>
-                	<a class="cx1" href="javascript:void(0);">增加</a>
+                <a class="cx1" href="javascript:void(0);">增加</a>
             </div>
         <table width="100%" border="0">
             <tr>
@@ -151,26 +158,37 @@
             </tr>
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
-                <td align="center">${i.index+1 }</td>
-                <td align="center"></td>
-                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
-                <td align="center">${sub.createrName}</td>
-                <td align="center">${sub.id}</td>
-                <td align="center">
-                <span class="space"><a href="reportDetailed_subject.action?id=${sub.id }">查看</a></span>
-	                <pri:showWhenManager>
-	                	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
-	                	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>
-                	</pri:showWhenManager>
-                </td>
+            	<pri:hideWhenManager>
+	                <td align="center">${i.index+1 }</td>
+	                <td align="center">${sub[1].title }</td>
+	                <td align="center"><fmt:formatDate value="${sub[1].createTime}" pattern="yyyy-MM-dd"/></td>
+	                <td align="center">${sub[1].createrName}</td>
+	                <td align="center">${sub[1].id}</td>
+	                <td align="center">
+	                	<span class="space"><a href="javascript:look('${sub[1].id}">查看</a></span>
+	                </td>
+                </pri:hideWhenManager>
+                <pri:showWhenManager>
+	                <td align="center">${i.index+1 }</td>
+	                <td align="center">${sub.title }</td>
+	                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
+	                <td align="center">${sub.createrName}</td>
+	                <td align="center">${sub.id}</td>
+	                <td align="center">
+	                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
+	               	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
+	               	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>
+	                </td>
+                </pri:showWhenManager>
             </tr>
             </c:forEach>
         </table>
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
         		<pg:pager url="${prc}/scMaster2/find_subject.action"
-					items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
-				<pg:param name="subjectVo.moduleId" value="${moduleId}"/>
+					items="${pm.total}" maxPageItems="${pm.totalPageNo}" maxIndexPages="7" export="currentPageNumber=pageNumber">
+				<pg:param name="subjectVo.moduleId" value="${subjectVo.moduleId}"/>
+				<pg:param name="subjectVo.moduleName" value="${subjectVo.moduleName}"/>
 				总计${pm.total}条
 				<pg:first>
 					<a href="${pageUrl}">首页</a>

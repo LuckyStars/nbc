@@ -11,6 +11,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
+import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
@@ -53,9 +54,6 @@ public class SubjectAction extends BaseAction{
 		return "subjectUpdate";
 	}
 	public void add(){
-		for(int i=0;i<100;i++){
-			subject = new TSm2Subject();
-			subject.setId("");
 		subject.setCreateTime(new Date());
 		
 		String usersId = this.getRequest().getParameter("executeUsersId");
@@ -66,19 +64,20 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
-		
+		subject.setExcuteUsers(users);
 		String checkusersId = this.getRequest().getParameter("checkUsers");
-		Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
-		for(String u : checkusersId.split(",")){
-			SM2SubjectMaster user =  new SM2SubjectMaster();
-			user.setUserUid(u);
-			checkUsers.add(user);
+		if(!StringUtil.isEmpty(checkusersId)){
+			Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
+			for(String u : checkusersId.split(",")){
+				SM2SubjectMaster user =  new SM2SubjectMaster();
+				user.setUserUid(u);
+				checkUsers.add(user);
+			}
+			subject.setCheckUsers(checkUsers);
 		}
-		subject.setCheckUsers(checkUsers);
 		subject.setCreaterId(this.getUserId());
 		subject.setCreaterName(UCService.findNameByUid(this.getUserId()));
 		this.sm2SubjectBiz.add(subject);
-		}
 		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
 	}
 	

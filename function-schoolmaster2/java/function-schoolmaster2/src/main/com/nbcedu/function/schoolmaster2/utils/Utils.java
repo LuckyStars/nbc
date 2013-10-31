@@ -73,7 +73,7 @@ public class Utils {
 	}
 	
 	public static boolean isManager(){
-		for (PersonVo person : Utils.getAllSchoolMaster()) {
+		for (PersonVo person : Utils.getAllManager()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
 				return true;
 			}
