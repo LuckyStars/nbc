@@ -53,5 +53,8 @@
 	<bean id="sm2StepAction" class="com.nbcedu.function.schoolmaster2.action.StepAction" scope="prototype" >
 		<property name="stepBiz" ref="sm2StepBiz" />
 	</bean>
+	<bean id="sm2ProressAction" class="com.nbcedu.function.schoolmaster2.action.StepAction" scope="prototype" >
+		<property name="progBiz" ref="sm2ProgressBiz" />
+	</bean>
 	
 </beans>
