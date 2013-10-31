@@ -13,10 +13,9 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 public class StepAction extends BaseAction{
 
 	private Sm2StepBiz stepBiz;
-
 	
 	public void stepList(){
-		List<StepVo> step = this.stepBiz.findBySubId(this.id);
+		List<StepVo> step = this.stepBiz.findByProgId(this.id);
 		Struts2Utils.renderJson(
 				Utils.gson.toJson(
 						step,

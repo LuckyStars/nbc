@@ -54,6 +54,8 @@
 		
 		<action name="swfUpload" method="upload" class="sm2SWFUploadAction"></action>
 		
-		<action name="*_step" method="{1}" class=""></action>
+		<action name="*_step" method="{1}" class="sm2StepAction">
+		
+		</action>
 	</package>
 </struts>

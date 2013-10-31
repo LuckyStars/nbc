@@ -58,4 +58,24 @@
 			AND trans.user_uid = :uid ;
     	]]>
     </sql-query>
+    
+    <sql-query name="find_step_by_prog">
+    	<![CDATA[
+		SELECT st.id,st.name 
+		FROM 
+			t_sm2_step st,
+			(
+				SELECT subjectId
+				FROM 
+					t_sm2_step,
+					(
+						SELECT stepId
+						FROM t_sm2_progress
+						WHERE id = :progId
+					) pro
+				WHERE pro.stepId = t_sm2_step.id
+			) sub
+		WHERE st.subjectId = sub.subjectId;
+		]]>
+    </sql-query>
 </hibernate-mapping>
