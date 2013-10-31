@@ -285,7 +285,7 @@ if (this.getStats().files_queued === 0) {
 function queueComplete(numFilesUploaded) {
 //var status = document.getElementById("divStatus");
 //status.innerHTML = numFilesUploaded + " 文件"  + " 上传成功.";
-var url =document.getElementById("forwardUrl").value;
+var url =document.getElementById("forwardUrl").value; 
 if(url!=""){
    document.location.href=url;
 }

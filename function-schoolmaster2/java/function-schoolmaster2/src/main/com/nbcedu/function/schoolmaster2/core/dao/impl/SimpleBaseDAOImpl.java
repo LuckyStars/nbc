@@ -15,6 +15,7 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.Assert;
 
@@ -252,4 +253,10 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 	public void removeAll() {
 		this.getSession().createQuery("delete FROM " + this.getPersistentClass().getSimpleName()).executeUpdate();
 	}
+	
+	@Override
+	public Query getNamedQuery(String queryName) {
+		return this.getSession().getNamedQuery(queryName);
+	}
+	
 }
