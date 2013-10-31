@@ -156,16 +156,20 @@
     	function showStepTrans(progId){
     		
     		$("#step_radios").html("");
-    		
+    		$("#trans_prog_id").val(progId);
     		$.post("${prc}/scMaster2/stepList_step.action?id="+progId,function(data){
     			if(data.length<=0){
     				return;
     			}
     			for(var i = 0;i<data.length;i++){
+    				var checked_ = '';
+    				if(data[i].id=='${id}'){
+    					checked_ = 'checked="checked"';
+    				}
 	    			$('<p><input type="radio" name="stepId" value="'
 	    					+ data[i].id + 
-	    					'" /><span>' 
-	    					+ data[i].name+
+	    					'"'+checked_+' /><span>' 
+	    					+ data[i].name +
 	    					'</span></p>').appendTo($("#step_radios"));
     			}
     		});
@@ -692,18 +696,15 @@
     		<p>转移</p>
     		<img src="img/erro.jpg"  class="close" style="cursor:pointer;"/>
     	</div>
-    	<form action="" >
-    		<input type="hidden" id="" name="" />
-    	</form>
-  		<div class="add-downs3" id="step_radios">
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	       	<p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-		</div>
+    	<form action="${prc}/scMaster2/changeStep_progress.action" method="post" onsubmit="return confirm('确认转移步骤吗?');" >
+    		<input type="hidden" id="trans_prog_id" name="id" />
+    		<input type="hidden" name="originStepId" value="${id }"/>
+	  		<div class="add-downs3" id="step_radios">
+		       	<p><input type="radio" name="stepId" /><span>步骤二：xxxxxxxxxxxx</span></p>
+			</div>
+			
+			<input type="submit" value="提交"/>
+		</form>
 	</div>
  	<!--弹出层 转移步骤END-->
  

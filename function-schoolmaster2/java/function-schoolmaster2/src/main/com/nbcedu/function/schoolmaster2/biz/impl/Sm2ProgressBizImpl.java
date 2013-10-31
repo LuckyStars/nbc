@@ -29,6 +29,16 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		cri.add(Expression.eq("name",name));
 		return cri.list();
 	}
+	
+	@Override
+	public void modifyStep(String stepId, String progId) {
+		TSm2Progress prog = this.progressDao.findUniqueBy("id", progId);
+		if(prog!=null){
+			prog.setStepId(stepId);
+			this.progressDao.update(prog);
+		}
+	}
+	
 	//////////////////////////
 	//////getters&setters///////
 	///////////////////////
@@ -36,6 +46,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		super.setDao(progressDao);
 		this.progressDao = progressDao;
 	}
+
 
 
 }

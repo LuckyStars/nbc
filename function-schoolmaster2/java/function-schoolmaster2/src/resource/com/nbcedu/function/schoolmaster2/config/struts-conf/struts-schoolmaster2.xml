@@ -57,7 +57,12 @@
 		<action name="*_step" method="{1}" class="sm2StepAction">
 		</action>
 		
-		<action name="*_progress" method="{1}" class="sm2ProgressAction"></action>
+		<action name="*_progress" method="{1}" class="sm2ProgressAction">
+			<result name="refreshStep" type="redirectAction">
+				<param name="actionName">showStep_master</param>
+				<param name="id">${stepId}</param>
+			</result>
+		</action>
 		
 	</package>
 </struts>
