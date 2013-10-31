@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.nbcedu.function.schoolmaster2.data.model.TSm2Invatition" table="t_sm2_invatition">
+        <id name="id" type="java.lang.String">
+            <column name="id" length="32" />
+            <generator class="com.nbcedu.common.uuid.UIDGenerator" />
+        </id>
+        <property name="createrId" type="java.lang.String">
+            <column name="createrId" length="32" />
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="createTime" length="0" />
+        </property>
+		<property name="content" type="text">
+            <column name="content" length = "16777216" />
+        </property>  
+        <property name="flag" type="java.lang.String">
+            <column name="flag" length="1" />
+        </property>
+        <property name="title" type="java.lang.String">
+            <column name="title" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="status" length="1" />
+        </property>
+        <property name="lastUpdateTime" type="java.sql.Timestamp">
+            <column name="lastUpdateTime" length="0" />
+        </property>
+        <property name="link" type="java.lang.String">
+            <column name="link" length="500" />
+        </property>
+        <property name="invatId" type="java.lang.String">
+            <column name="invatId" length="32" />
+        </property>
+        <property name="score" type="java.lang.Integer">
+            <column name="score" />
+        </property>
+    </class>
+</hibernate-mapping>

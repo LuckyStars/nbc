@@ -9,7 +9,7 @@
 	
 	<title>邀请查看 教师列表</title>
 	
-	<link href="${prc}/function/function-invatition/css/index.css" rel="stylesheet" type="text/css" />
+	<link href="${prc}/function/function-invatition/teacherList/css/index.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
@@ -20,26 +20,232 @@
 <script type="text/javascript" src="${prc}/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/handlers.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.queue.js"></script>
-	
-	<script type="text/javascript">
+<script type="text/javascript">
+	var prc ="${pageContext.request.contextPath}";
+	var swfu;
+	var filePaths=new Array();
+	var delFilePaths=new Array();
+	var uploadData={};
+	var addUpdate="";
+	var vid="";
+	var post_url="";
+	var delCount=0;
+	var count=0;
+	var settings = {
+			flash_url : "${prc}/function/swfupload/js/swfupload.swf",
+			upload_url: "${prc}/scMaster2/swfUpload.action",	
+			file_post_name: "file",   
+			file_size_limit : "20 MB",
+			file_types : "*.*",
+			file_types_description : "",
+			file_upload_limit : 20,
+			file_queue_limit : 100,
+			custom_settings : {
+				progressTarget : "fsUploadProgress"
+			},
+			debug: false,
+			// Button settings
+			button_image_url: "${prc}/function/swfupload/images/TestImageNoText_65x29.png",
+			button_width: "60",
+			button_height: "24",
+			button_placeholder_id: "spanButtonPlaceHolder",
+			button_text: '<span class="">浏览文件:</span>',
+			button_text_style: ".theFont { font-size: 12;text-align:center;color:#ffffff;}",
+			button_text_top_padding: 2,
+			
+			// The event handler functions are defined in handlers.js
+		    file_queued_handler : fileQueued,
+			file_queue_error_handler : fileQueueError,
+			upload_start_handler : uploadStart,
+			upload_progress_handler : uploadProgress,
+			upload_error_handler : uploadError,
+			upload_success_handler : uploadSuccess,
+			queue_complete_handler : queueComplete,
+			use_query_string : true
+		};
+	function uploadStart(file) {
+		try {
+		   /* I don't want to do any file validation or anything, I'll just update the UI and
+		   return true to indicate that the upload should start.
+		   It's important to update the UI here because in Linux no uploadProgress events are called. The best
+		   we can do is say we are uploading.
+		   */
+		   //Capture start time
+		   var currentTime = new Date()
+		   iTime = currentTime;
+		   //Set Timeleft to estimating
+		   Timeleft = "计算中...";
+		    
+		   var progress = new FileProgress(file, this.customSettings.progressTarget);
+		   progress.setStatus("Uploading...");
+		   progress.toggleCancel(true, this);
+		   var params = {fileName:file.name,"t":Math.random()};
+		   this.setPostParams(params);
+		}
+		catch (ex) {}
+
+		return true;
+		}
+	function uploadSuccess(file, serverData){
+		   var str=$.parseJSON(JSON.stringify(serverData));
+		   var obj=$.parseJSON(str);
+		   var error=obj.error;
+		   if(error==0){
+				filePaths.push(obj.path);
+				var currentTime = new Date();
+				var progress = new FileProgress(file, this.customSettings.progressTarget);
+			    progress.setComplete();
+				//Calculate upload time
+				var cTime = (Math.ceil(currentTime-iTime)/1000);
+				var zmin = 0;
+				var zsec = 0;
+				zmin = Math.floor(cTime/60);
+				if (zmin < 10) {
+				  zmin = "0" + zmin; 
+				}
+				zsec = Math.ceil(cTime % 60);
+				if (zsec < 10) {
+				  zsec = "0" + zsec; 
+				}
+				//Show how long the upload took
+				progress.setStatus("上传完成，用时:<b><font color=red> " + zmin + "分:" + zsec + '秒</font></b>');
+				progress.toggleCancel(false);
+			}else{
+				alert(obj.message);
+			}
+	}
+	function queueComplete(numFilesUploaded) {
+		if(numFilesUploaded==0){
+			alert("上传文件失败！");
+		}else{
+			uploadData.t = Math.random();
+			uploadData.resourses = filePaths;
+	    	$.ajax({
+	    		url:post_url,
+	    		type:'post',
+	    		data:$.param(uploadData, true),
+	    		dataType:'json',
+	    		success:function(data){
+	    			window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+	    		},
+	    		error:function(XMLHttpRequest, textStatus, errorThrown){
+	    			alert("出错了!");
+	    			window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+	    		}
+	    	});
+		}
+	}
     $(function () {
-    	
         $("table tr:odd").css("background", "#f0f8fc");
         $("table tr:even").css("background", "#d5e0ee");
-        
-        $(".cx1").click(function () {
-            $(".bg").css("display", "block");
-            $(".add1").css("display", "block");
+    	delWare = function(id){
+    		delCount=delCount+1;
+    		delFilePaths.push(id);
+    		$("#"+id).remove();
+    	};
+        $(".cx1,.modify").click(function () {
+        	var id= $(this).attr("id");
+    	    if(!swfu){
+    			swfu = new SWFUpload(settings);
+    	    }
+            var id= $(this).attr("id");
+            if(id=="add"){
+            	addUpdate="add";
+            	vid="";
+            	post_url=prc+"/scMaster2/add_invatition.action";
+                $(".bg").css("display", "block");
+                $(".add1").css("display", "block");
+                $(".plan").css("display", "block");
+                $(".password").css("display", "block");
+                $(".plans").css("display", "none");
+            }else{
+            	var obj = $(this).parents("tr");
+        		vid = obj.attr("id");
+            	addUpdate="modify";
+            	post_url=prc+"/scMaster2/modify_invatition.action";
+            	$.ajax({
+    				url:prc+"/scMaster2/detail_invatition.action",
+    				type:'post',
+    				data:{"tsm2Invatition.id":vid,"t":Math.random()},
+    				dataType:'json',
+    				success:function(data){
+    		        $("#t_name").val(data.name);
+    		        $("#t_user").val(data.invatId);
+    		        editorCourseContent.html(data.content);
+					$("input[name='a2']").each(function(){
+						if(data.flag ==$(this).val()){
+							$(this).attr("checked","checked");
+						}
+					});
+					if("0"==data.flag){
+						var coursewares = eval('('+data.resources+')');
+						var cwsHtml = "";
+						count=coursewares.length;
+						for(var i=0;i<count;i++){
+							cwsHtml = cwsHtml +"<div id=\""+coursewares[i].id+"\">" +coursewares[i].fileName +"<a class=\"progressCancel\" href=\"#\" onclick=\"delWare('"+coursewares[i].id+"')\" style=\"visibility: visible;float:right;margin:2px;\">×</a></div>";
+						}
+						$("#wareFile").html(cwsHtml);
+		                $(".plan").css("display", "block");
+		                $(".password").css("display", "block");
+		                $(".plans").css("display", "none");
+		                $("#showWareFile").css("display", "block");
+					}else{
+						 $("#t_link").val(data.link);
+			             $(".plan").css("display", "none");
+			             $(".password").css("display", "none");
+			             $(".plans").css("display", "block");
+					}
+	                $(".bg").css("display", "block");
+	                $(".add1").css("display", "block");
+    				},
+    				error:function(XMLHttpRequest, textStatus, errorThrown){
+    					alert("出错了!");
+    					window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+    				}
+            	});
+            }
         });
         
         $(".add-top1 img").click(function () {
             $(".bg").css("display", "none");
             $(".add1").css("display", "none");
         });
-     
+        $(".push").click(function () {
+        	var obj = $(this).parents("tr");
+    		var id = obj.attr("id");
+    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id;
+        });
+        $(".del").click(function () {
+        	var obj = $(this).parents("tr");
+    		var id = obj.attr("id");
+    		window.location.href=prc+"/scMaster2/del_invatition.action?tsm2Invatition.id="+id;
+        });
         $(".download").click(function () {
             $(".bg").css("display", "block");
             $(".add-load").css("display", "block");
+            var obj = $(this).parents("tr");
+    		var id = obj.attr("id");
+    		$.ajax({
+    			url:prc+"/scMaster2/detail_invatition.action",
+    			type:'post',
+    			data:{"tsm2Invatition.id":id,"t":Math.random()},
+    			dataType:'json',
+    			success:function(data){
+					var coursewares = eval('('+data.resources+')');
+					var cwsHtml = "<tr><th width=\"13%\" scope=\"col\">序号</th><th width=\"66%\" scope=\"col\">附件名称</th><th width=\"21%\" scope=\"col\">操作</th></tr>";
+					count=coursewares.length;
+					var num=0;
+					for(var i=0;i<count;i++){
+						num = i+1;
+						cwsHtml = cwsHtml +"<tr><td>"+num+"</td><td><span>"+coursewares[i].fileName+"</span></td><td>"+"<a class=\"downfile\" href=\""+prc + "/scMaster2/download_invatition.action?tsm2Invatition.id="+coursewares[i].id+"\">下载</a></td></tr>";
+					}
+					$("#downFiles").html(cwsHtml);
+    			},
+    			error:function(XMLHttpRequest, textStatus, errorThrown){
+    				alert("出错了!");
+    				window.location.href=prc+"/listSections.action?courseId="+courseId;
+    			}
+        	});
         });
         
         $(".add-loadtop1 img").click(function () {
@@ -57,6 +263,58 @@
             $(".plan").css("display", "block");
             $(".password").css("display", "block");
             $(".plans").css("display", "none");
+        });
+        $("#btnUpload1").click(function () {
+            var _name = $.trim($("#t_name").val());
+            var _user = $.trim($("#t_user").val());
+            editorCourseContent.sync();
+            var _content = $.trim($("#t_content").val());
+            var _div = $("input[name='a2'][type='radio']:checked").val();
+            var _link=$.trim($("#t_link").val());
+            filePaths=new Array();
+            if(_name ==""){
+                alert("标题名称不能为空！");
+                return false;
+            }
+            if(_user ==""){
+                alert("邀请人不能为空！");
+                return false;
+            }
+            if((_div=="0"&&swfu.getStats().files_queued == 0&&addUpdate=="add")||(_div=="0"&&delCount==count&&swfu.getStats().files_queued == 0&&addUpdate=="modify")){
+                alert("附件不能为空！");
+                return false;
+            }
+            if(_div=="1"&&_link == ""){
+                alert("连接不能为空！");
+                return false;
+            }
+			uploadData = {
+					"tsm2Invatition.id":vid,
+					"tsm2Invatition.title":_name,
+					"tsm2Invatition.invatId":_user,
+					"tsm2Invatition.content":_content,
+					"tsm2Invatition.flag":_div,
+					"tsm2Invatition.link":_link,
+					"delResourses":delFilePaths
+			};
+			if((_div=="0"&&addUpdate=="add")||(_div=="0"&&addUpdate=="modify"&&swfu.getStats().files_queued > 0)){
+				swfu.startUpload();
+			}else{
+				uploadData.t = Math.random();
+		    	$.ajax({
+		    		url:post_url,
+		    		type:'post',
+		    		data:$.param(uploadData, true),
+		    		dataType:'json',
+		    		success:function(data){
+		    			window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+		    		},
+		    		error:function(XMLHttpRequest, textStatus, errorThrown){
+		    			alert("出错了!");
+		    			window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+		    		}
+		    	});
+			}
         });
     });
     
@@ -76,55 +334,6 @@
 		});
 	});
 </script>
-
-
-<script type="text/javascript">
-	var swfu;
-	window.onload = function() {
-		var settings = {
-			flash_url : "${prc}/function/swfupload/js/swfupload.swf",
-			upload_url: "${prc}/scMaster2/swfUpload.action",	
-			file_post_name: "exl",   
-			file_size_limit : "20 MB",
-			file_types : "*.*",
-			file_types_description : "",
-			file_upload_limit : 20,
-			file_queue_limit : 1,
-			custom_settings : {
-				progressTarget : "fsUploadProgress"
-			},
-			debug: false,
-			// Button settings
-			button_image_url: "${prc}/function/swfupload/images/TestImageNoText_65x29.png",
-			button_width: "60",
-			button_height: "24",
-			button_placeholder_id: "spanButtonPlaceHolder",
-			button_text: '<span class="">浏览文件</span>',
-			button_text_style: ".theFont { font-size: 12;text-align:center;color:#ffffff;}",
-			button_text_top_padding: 2,
-			
-			// The event handler functions are defined in handlers.js
-		    file_queued_handler : fileQueued,
-			file_queue_error_handler : fileQueueError,
-			upload_start_handler : uploadStart,
-			upload_progress_handler : uploadProgress,
-			upload_error_handler : uploadError,
-			upload_success_handler : uploadSuccess,
-			queue_complete_handler : queueComplete,
-			use_query_string : true
-		};
-		swfu = new SWFUpload(settings);
-	};
-	function uploadSuccess(){
-		alert('上传成功');
-		window.location.href='#';//TODO
-	}
-	function uploadError(){
-		alert('上传失败');
-		window.location.href='#';//TODO
-	}
-
-</script>
 </head>
 <body>
 	<div class="con_conent fixed">
@@ -140,7 +349,7 @@
 				<span>事项标题:</span> 
 				<input type="text" />
 				<a class="cx" href="#">查询</a>
-				<a class="cx1" href="#">增加</a>
+				<a class="cx1" href="#" id="add">增加</a>
 			</div>
 			<table width="100%" border="0">
 				<tr>
@@ -150,7 +359,7 @@
 					<th width="25%" scope="col">操作</th>
 				</tr>
 				<c:forEach items="${pm.datas }" var="subject">
-					<tr>
+					<tr id="${subject.id}">
 						<td>
 							<c:out value="${subject.title}" escapeXml="true"></c:out>
 						</td>
@@ -158,37 +367,12 @@
 							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />
 						</td>
 						<td><invStatus:showStatus statusId="${subject.status}" /></td>
-						<td>
-							<span class="space">发布</span>
-							<span class="space">查看</span>
-							<span class="space download">
-								<a href="#">下载</a>
-							</span>
+						<td><c:if test="${subject.status ==0}"><span class="space push">发布</span><span class="space modify">编辑</span><span class="space del">删除</span></c:if>
+							<c:if test="${subject.status ==1}"><span class="space"><a href="${prc}/scMaster2/teacherShow_invatition.action?tsm2Invatition.id=${subject.id}">查看</a></span></c:if>
+							<c:if test="${subject.flag ==0}"><span class="space download"><a href="#">附件</a></span></c:if>
 						</td>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td>东兴杯论文一等奖</td>
-					<td>2013-4-23</td>
-					<td>已发布</td>
-					<td>
-						<span class="space">发布</span>
-						<span class="space">查看</span>
-						<span class="space download">
-							<a href="#">下载</a>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td>全国优秀校长论坛讲稿</td>
-					<td>2013-4-23</td>
-					<td>已发布</td>
-					<td>
-						<span class="space">发布</span>
-						<span class="space">查看</span>
-						<span class="space">附件</span>
-					</td>
-				</tr>
 			</table>
 		</div>
 	</div>
@@ -197,52 +381,51 @@
 	
 	<div class="add1">
 		<div class="add-top1">
-			<p>新增</p>
+			<p>新增/编辑</p>
 			<img src="${prc}/function/img/erro.jpg" class="close" style="cursor: pointer;" />
 		</div>
 		<div class="add-down">
 			<p class="tit">
 				<span>标题名称：</span>
-				<input type="text" value="东兴杯论文一等奖" />
+				<input id="t_name" type="text" value="" />
+			</p>
+			 <p class="tit">
+				<span>邀&nbsp;&nbsp;请&nbsp;&nbsp;人：</span>
+				<input id="t_user" type="text" value="" />
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
-				<textarea name="detailContent" style="width:500px;height: 200px;"></textarea>
+				<textarea id="t_content" name="detailContent" style="width:500px;height: 200px;"></textarea>
 			</div>
 			<p class="tit2">
 				附件/链接：
 				<span>
 					<a href="#" class="wen">
-						<input type="radio" name="a2" />文件
+						<input type="radio" name="a2" value="0" checked="checked"/>附件
 					</a>
 				</span>
 				<span>
 					<a href="#" class="lian">
-						<input type="radio" name="a2" />链接
+						<input type="radio" name="a2" value="1"/>链接
 					</a>
 				</span>
 			</p>
-			
+			<div id="showWareFile" style="display:none">
+			<p class="titword">
+				<span>已传文件：</span>
+			</p><div id="wareFile" style="float:left;width:502px; height:80px;overflow:auto; border:1px solid #ccc;margin-bottom:10px;"></div></div>
 			<div class="tit3 plan">
-				<div style="margin-left:50px; maroverflow:auto;overflow-x:hidden;">
-                	<div style="height: 20px;width:500px;" class="fieldset flash" id="fsUploadProgress">
-                	</div>
+			    <div class="password" id="divMovieContainer" style="disapply:block;margin-left:12px;display:inline"><span id="spanButtonPlaceHolder" ></span></div>
+
+				<div style="margin-left:15px; width:480px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left" id="fsUploadProgress" class="fieldset flash">
                 </div>
 			</div>
-			
-			<div class="password" id="divMovieContainer" >
-				<span id="spanButtonPlaceHolder" ></span>
-				<input id="btnUpload1" type="button" value="开始上传" onclick="swfu.startUpload()" 
-				style="width:66px; height:26px;font-size:12px;background: url(${prc}/function/img/btnbg.jpg) no-repeat" />
-			</div>
-			
 			<div class="tit3 plans">
-				<input type="radio" checked="checked" />
-				<p>链接</p>
-				<textarea></textarea>
+				<p style="width:60px;height:20px;margin-left:15px;">链&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接：</p>
+				<textarea id="t_link"></textarea>
 			</div>
 			
-			<a href="#" class="return" style="margin-left: 200px;">提交</a> 
+			<a href="#" class="return" id="btnUpload1" style="margin-left: 200px;">提交</a> 
 			<a href="#" class="return">返回</a>
 		</div>
 	</div>
@@ -252,100 +435,12 @@
 	<div class="bg"></div>
 	<div class="add-load">
 		<div class="add-loadtop1">
-			<p>下载</p>
+			<p>附件列表</p>
 			<img src="${prc}/function/img/erro.jpg" class="close" style="cursor: pointer;" />
 		</div>
 		<div class="add-loaddown">
-			<table width="430px"
-				style="border: 1px solid #d7d7d7; margin-top: 10px;">
-				<tr>
-					<th width="13%" scope="col">
-						<input type="checkbox" />
-					</th>
-					<th width="21%" scope="col">附件名称</th>
-					<th width="18%" scope="col">大小</th>
-					<th width="27%" scope="col">下载进度</th>
-					<th width="21%" scope="col">速度</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" />
-					</td>
-					<td>
-						<span class="blue">我们的家园</span>
-					</td>
-					<td>
-						<span class="blue">1.61GB</span>
-					</td>
-					<td>
-						<p class="load">0.0%</p>
-					</td>
-					<td>46KB/s</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" />
-					</td>
-					<td>
-						<span class="blue">我们的家园</span>
-					</td>
-					<td>
-						<span class="blue">1.61GB</span>
-					</td>
-					<td>
-						<p class="load">0.0%</p>
-					</td>
-					<td>46KB/s</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" />
-					</td>
-					<td>
-						<span class="blue">我们的家园</span>
-					</td>
-					<td>
-						<span class="blue">1.61GB</span>
-					</td>
-					<td>
-						<p class="load">0.0%</p>
-					</td>
-					<td>46KB/s</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" />
-					</td>
-					<td>
-						<span class="blue">我们的家园</span>
-					</td>
-					<td>
-						<span class="blue">1.61GB</span>
-					</td>
-					<td>
-						<p class="load">0.0%</p>
-					</td>
-					<td>46KB/s</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="checkbox" />
-					</td>
-					<td>
-						<span class="blue">我们的家园</span>
-					</td>
-					<td>
-						<span class="blue">1.61GB</span>
-					</td>
-					<td>
-						<p class="load">0.0%</p>
-					</td>
-					<td>46KB/s</td>
-				</tr>
+			<table width="430px" style="border: 1px solid #d7d7d7; margin-top: 10px;" id="downFiles">
 			</table>
-
-			<a href="#" class="return" style="margin-left: 120px;">下载</a> 
-			<a href="#" class="return">返回</a>
 		</div>
 	</div>
 </body>

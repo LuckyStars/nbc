@@ -38,7 +38,17 @@
 			<result name="stepDetail" >/function/detail-step/step.jsp</result>
 		</action>
 		
+<<<<<<< HEAD
+		<action name="*_invatition" method="{1}" class="invatitionAction">
+			<result name="teacherList">/function/function-invatition/teacherList.jsp</result>
+			<result name="teacherShow">/function/function-invatition/teacherShow.jsp</result>
+			<result name="masterList">/function/function-invatition/masterList.jsp</result>
+			<result name="masterShow">/function/function-invatition/masterShow.jsp</result>
+			<result name="download">/function/function-invatition/download.jsp</result>
+=======
 		<action name="*_zan" method="{1}" class="sm2ZanAction">
+>>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 		</action>
+		<action name="swfUpload" method="upload" class="sm2SWFUploadAction"></action>
 	</package>
 </struts>
