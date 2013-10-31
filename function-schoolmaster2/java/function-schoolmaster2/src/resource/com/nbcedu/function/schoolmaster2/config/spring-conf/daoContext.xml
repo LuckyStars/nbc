@@ -19,20 +19,22 @@
 	<bean id="sm2TypeDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2TypeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-<<<<<<< HEAD
+	
 	<bean id="sm2InvatitionDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2InvatitionDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
 	<bean id="sm2ResourceDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2ResourceDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
 	<bean id="sm2MasterCommentDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2MasterCommentDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
 	<bean id="sm2MasterReplyDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2MasterReplyDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-=======
 	
 	<bean id="sm2StepDao" class="com.nbcedu.function.schoolmaster2.dao.impl.Sm2StepDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -50,5 +52,4 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 </beans>

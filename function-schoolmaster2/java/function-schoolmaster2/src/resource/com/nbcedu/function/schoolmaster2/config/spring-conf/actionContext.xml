@@ -36,12 +36,10 @@
 	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction" scope="prototype" >
 	</bean>
 	
-<<<<<<< HEAD
 	<bean id="sm2ReadsAction" class="com.nbcedu.function.schoolmaster2.action.ReadsAction" scope="prototype" >
 		<property name="readsBiz" ref="sm2ReadsBiz" />
 	</bean>
 	
-=======
 	<bean id="invatitionAction" class="com.nbcedu.function.schoolmaster2.action.InvatitionAction" scope="prototype">
 		<property name="sm2InvatitionBiz" ref="sm2InvatitionBiz" />
 		<property name="sm2ResourceBiz" ref="sm2ResourceBiz" />
@@ -51,5 +49,4 @@
 
 	<bean id="sm2SWFUploadAction" class="com.nbcedu.function.schoolmaster2.action.SWFUploadAction" >
 	</bean>
->>>>>>> caa61e9277c8a4c6bba49aa7948670ba9cd48c72
 </beans>

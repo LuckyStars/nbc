@@ -21,7 +21,6 @@
 	<bean id="masterSubBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2MasterSubBizImpl">
 		<property name="sm2SubjectDao" ref="sm2SubjectDao"></property>
 	</bean>
-<<<<<<< HEAD
 
 	<bean id="sm2InvatitionBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2InvatitionBizImpl">
 		<property name="sm2InvatitionDao" ref="sm2InvatitionDao"></property>
@@ -37,7 +36,7 @@
 	
 	<bean id="sm2MasterReplyBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2MasterReplyBizImpl">
 		<property name="sm2MasterReplyDao" ref="sm2MasterReplyDao"></property>
-=======
+	</bean>
 	
 	<bean id="sm2StepBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2StepBizImpl">
 		<property name="stepDao" ref="sm2StepDao"></property>
@@ -53,6 +52,5 @@
 	
 	<bean id="sm2ReadsBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ReadsBizImpl" >
 		<property name="readsDao" ref="sm2ReadsDao" ></property>
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 	</bean>
 </beans>
