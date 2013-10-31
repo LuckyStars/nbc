@@ -53,4 +53,5 @@
 	<bean id="sm2ReadsBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ReadsBizImpl" >
 		<property name="readsDao" ref="sm2ReadsDao" ></property>
 	</bean>
+	
 </beans>
