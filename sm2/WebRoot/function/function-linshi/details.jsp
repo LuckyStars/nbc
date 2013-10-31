@@ -40,7 +40,30 @@
     </style>
     
 	<script type="text/javascript">
-	
+	KindEditor.ready(function(K) {
+		var contentOptions = {
+			resizeType : 1,
+			width: 416,
+			height : 320,
+			pasteType:1,
+			filterMode:true,
+		//	uploadJson : '${prc}/cadreManual/cyclesAction!uploadImage.action',
+			allowFileManager : false,
+			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
+			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
+			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight',
+					'removeformat', '|',  'table', 'hr'],
+			filterMode : true,
+			urlType : "",
+			afterChange : function() {
+				var self = this;
+				self.sync();
+			}
+		};
+		K.create('textarea[name="progress.content"]', contentOptions);
+ 	 });
 	 $(function () {
          $(".resources li").click(function () {
              $(".resources .cur").removeClass("cur");
@@ -92,6 +115,7 @@
          $(".ico4").click(function () {
              $("body").css("overflow", "hidden");
              $(".bg").show();
+	         
              $(".adds6").show();
          });
          $(".addtabs").click(function () {
@@ -148,12 +172,12 @@
       	 $("#progressSave").click(function(){
         	 var name = $.trim($("input[name='progress.name']").val());
         	 if(name.length>0){
-	            $.post("isExistStep_progress.action",{name:name},function(data1){
+	            $.post("isExist_progress.action",{name:name},function(data1){
 	            	if(data1==0){
 			         	var formParams = $("#progressForm").serialize();
 			    		$.post("add_progress.action", formParams, function(data) {
 			      				$("input[name='progress.name']").val("");
-			      				$("#textarea").val("");
+			      				$("textarea[name='progress.content']").val("");
 				   				 $(".bg").hide();
 				   				 $(".adds6").hide();
 			      				changeTab(jQuery("#select1  option:selected").val());
@@ -358,7 +382,7 @@
 			      	</div>
 		      		<div>
 		          		<p>具体工作内容：</p>
-		          		<textarea name="progress.content" id="progress.content"></textarea>
+		          		<textarea name="progress.content" ></textarea>
 		      		</div>
 		      		<div class="sure">
 		          		<a id="progressSave" href="#">确定 </a>

@@ -184,7 +184,6 @@
         		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">20</span>)
         	</a>
         	
-        	
         	<span> | </span>
         	
         	<a>
@@ -203,14 +202,12 @@
 	</div>
 	
     <div class="article" style="height:inherit;" id="art_${prog.id }">
-    
         <textarea style="width:700px;height:200px;" id="content_${prog.id}"></textarea>
-        
         <script type="text/javascript">
 	        KindEditor.ready(function(K) {
 	        	var options = {items : []};
 	        	var editor${prog.id} = K.create('#content_${prog.id}',options);
-	        	editor${prog.id}.html('${prog.content}');
+	       		editor${prog.id}.html('${prog.content}');
 	        	editor${prog.id}.readonly(true);
 	        });
         </script>
