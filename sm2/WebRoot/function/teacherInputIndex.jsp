@@ -14,7 +14,7 @@
 		<div class="table_box fixed">
 			<c:forEach items="${modules}" var="module">
 				<dl class="warp">
-					<a href="${prc}/scMaster2/find_subject.action?moduleId=${module.id}">
+					<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
 						<dt>
 							<img src="${prc}/function/img/tu4.jpg" />
 						</dt>

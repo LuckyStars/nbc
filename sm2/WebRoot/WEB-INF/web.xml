@@ -38,7 +38,7 @@
 		<init-param>
 			<param-name>serviceUrl</param-name>
 			<param-value>
-				http://127.0.0.1/sm2/scMaster2/index_index.action
+				http://127.0.0.1:8080/sm2/scMaster2/index_index.action
 			</param-value>
 		</init-param>
 	</filter>

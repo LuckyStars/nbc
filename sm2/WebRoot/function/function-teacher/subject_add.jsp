@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" type="text/css" href="${prc}/function/css/index.css" type="text/css"></link>
 <script type="text/javascript">
  $(function () {
             $(".add-top img").click(function () {
@@ -12,17 +13,17 @@
                 $(".add").css("display", "none");
             });
             $('#cc').combotree({  
-           	 url: 'treeWorkbench.action',
+           	 url: 'tree_user.action',
            	 required: true  
            	});  
-            
+            $('#master').combotree({  
+              	 url: 'findAllMaster_user.action',
+              	 required: true  
+              	});  
         });
  </script>
  <form id="saveForm" method="post">
-<input name="subject.id" type="hidden" value="${subject.id }" />
-<input name="subject.textContent" value="" type="hidden" />
-<input name="subject.group.id" value="" type="hidden" />
-<input name="subject.group.id" value="" type="hidden" />
+ 	<input type="hidden" name="subject.moduleId" value="${moduleId }"/>
 	<div class="bg"></div>
       <div class="add" style="height: 450px;">
        <div class="add-top">
@@ -33,25 +34,27 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p> 类型：<select name="subject.moduleId">
+               		<p> 类型：<select name="subject.typeId">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
                    </select></p>
 				</c:if>
-                <p>事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
-<!--                  <c:if test="${module=='lssx' || module=='xxdt_1'}">-->
-<!--                  <p>关联重心工作：<select>-->
-<!--                   <c:forEach items="${subjectPage.datas }" var="obj">-->
-<!--                   	<option value=""></option>-->
-<!--                   	<option value="${obj.id }">${obj.title }</option>-->
-<!--                   	</c:forEach>-->
-<!--                   </select></p>-->
-<!--                   </c:if>-->
+                <p>事项名称：
+                	<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
+ 					<c:if test="${not empty subjects}">
+	                  <p>关联重心工作：<select name="subject.parentId">
+	                   <c:forEach items="${subjects}" var="obj">
+	                   	<option value="${obj.id }">${obj.title}</option>
+	                   	</c:forEach>
+	                   </select>
+	             	  </p>
+                   </c:if>
 					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+                    <p>　审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
-                       <textarea id="textContent"  class="big" name="subject.content" >${subject.content }</textarea>
+                       <textarea id="textContent"  class="big" name="subject.content" ></textarea>
                    </div>
                </div>
            </div>

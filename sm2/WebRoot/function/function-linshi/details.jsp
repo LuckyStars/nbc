@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
-<%@ taglib prefix="sns" uri="/function/function-linshi/SNSTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -14,18 +13,10 @@
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
-	
-	<script type="text/javascript" src="${prc}/plugins/json/jquery.json-2.4.min.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/swfobject/swfobject.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_all_min.js"></script>
-	<script type="text/javascript" >var APP_PATH = '${prc}';</script>
-	<script type="text/javascript" src="${prc}/plugins/ueditor/editor_config_sns.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckeditor/ckeditor.js"></script>
-	<script type="text/javascript" src="${prc}/plugins/fck/ckfinder/ckfinder.js"></script>
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
+	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	
 	<style>
-		
         .ui-widget-content {
         width:230px; height:10px; background:#EA605E
         }
@@ -37,6 +28,14 @@
         }
         .content h2 p {
          margin-left:100px;
+        }
+        .tabs li{
+        	padding:0 0 0 15px;
+        }
+        .tabs li img{
+        	float:right;position:relative; padding-left: 5px;
+        	width:16px;
+        	height:14px;
         }
     </style>
     
@@ -112,7 +111,41 @@
              $(".adds6").hide();
              $(".adds7").hide();
          });
-     });
+         //步骤操作
+         $("#stepSave").click(function(){
+        	 var name = $.trim($("input[name='step.name']").val());
+        	 if(name.length>0){
+	            $.post("isExistStep_master.action",{name:name},function(data1){
+	            	if(data1==0){
+			         	var formParams = $("#stepForm").serialize();
+			    		$.post("addStep_master.action", formParams, function(data) {
+			      				$(".tabs-wp ul").append('<li id="'+data+'" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a>'+
+					      				'<img src="${prc}/function/function-linshi/img/errotab.png" /></li>');
+			      				$("input[name='step.name']").val("");
+				   				 $(".bg").hide();
+				   				 $(".adds7").hide();
+			      				changeTab(data);
+			     			});
+	            	}else{
+						alert("存在相同步骤！");
+	            	}
+		          });
+	          }else{
+					alert("请填写步骤名称！");
+	          }
+         	});
+      	$(".tabs li img").click(function(){
+				var id = $(this).attr("name");
+				$.post("deleteStep_master.action",{id:id},function(data){
+						if(data==0){
+							$("#"+id).remove();
+						}else{
+							alert("删除失败！");
+						}
+					});
+          	});
+      	//步骤结束
+	  });
 	</script>
 	<script>
 	</script>
@@ -135,61 +168,45 @@
 						</p>
 						<div id="slider-range-max"></div>
 					</div>
-					<%-- 
-					<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
+					<%-- --%>
+					<pri:showWhenManager>
+					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
 					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />
-					--%>
+					</pri:showWhenManager>
+					<script type="text/javascript">
+						
+					
+					</script>
 				</h2>
 
 				<h3>
-					发布日期： <fmt:formatDate value="${subject.lastTime }" pattern="yyyy年MM月dd日" />
-					关联重心工作： ${subjectExtand.associateName}
-					执行者：<span>${subjectExtand.executeUsers }</span>
+					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
+					关联重心工作： <span> </span>
+					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
-					<a class="button" id="btn-addfujian">增加附件</a>
+					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
+	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
+					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs"/>
 				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">
-						<c:forEach items="${blockList }" var="block" varStatus="i">
-							<li  id="${block.id}" 
-							class="blocksTab 
-								<c:if test="${i.index==0 }">
-								cur
-								</c:if>"
-							>
-							<a href="javascript:changeTab('${block.id}');">${block.name }</a>
-						</li>
+						<c:forEach items="${steps }" var="step" varStatus="i">
+							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>" >
+								<a href="javascript:changeTab('${step.id}');">${step.name }</a>
+								<img name="${step.id}" src="${prc}/function/function-linshi/img/errotab.png" />
+							</li>
 						</c:forEach>
-						
 					</ul>
-					<div class="mids">
-					<div class="conls">
-							<a>
-								<img src="${prc}/function/function-linshi/images/shou.png" width="13" height="13"class="shou" />
-								(${subPraiseCount})
-							</a>
-							<span> | </span>
-							<a>
-								<img src="${prc}/function/function-linshi/images/ico1.png" width="13" height="13" class="ico1" />
-								（${subReadCount}）
-							</a>
-							<span> | </span>
-							<a>
-								<img src="${prc}/function/function-linshi/images/ico2.png" width="13" height="13" class="ico2" />
-							</a>
-						</div>
-					</div>
 				</div>
 				
-				<c:forEach items="${blockList }" var="block" varStatus="i">
+				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
-					<iframe id="postFrame" name="postFrame" style="border:0px;width:870px;height:900px; hidden;" scrolling="no"
-					 src="${prc}/detail/viewBlock_detail.action?id=${block.id}" >
-					
+					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;height:900px; hidden;" scrolling="no"
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
 					
 					</iframe>
 					</c:if>
@@ -198,97 +215,10 @@
 			</div>
 		</div>
 	</div>
-	<!--弹出层-->
+	<!--弹出层 遮盖-->
 	<div class="bg"></div>
-	<div class="adds" id="add-tab">
-		<div class="add-tops">
-			<p>资源</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs">
-			<%-- <p>全部 | 本步骤 | 本进展</p> --%>
-			<div class="resources doc">
-				<h5>
-					<ul>
-						<li class="cur">文档</li>
-						<li>图片</li>
-						<li>视频</li>
-					</ul>
-					<%-- <a href="#" class="mores">更多&gt;&gt;</a>--%>
-				</h5>
-				<div class="resource-lists">
-					<c:forEach items="${documentRes }" var="doc">
-						<div class="juti">
-							<img src="${prc}/function/function-linshi/images/doc.jpg" width="102" height="140" />
-							<a href="${prc}/downloadRes.action?id=${doc.id}" >
-								<c:out value="${doc.name }" escapeXml="true"></c:out>
-							</a>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="resource-lists" style="display: none">
-					<c:forEach items="${imgRes }" var="img">
-						<div class="juti">
-							<img src="${prc}/downloadRes.action?id=${img.id}" width="102" height="140" />
-							<c:out value="${img.name }" escapeXml="true"></c:out>
-						</div>
-					</c:forEach>
-				</div>
-				<div class="resource-lists" style="display: none">
-					<c:forEach items="${videoRes }" var="video">
-						<div class="juti">
-							<img src="${prc}/function/function-linshi/images/video.jpg" width="102" height="140" />
-							<a href="${prc}/downloadRes.action?id=${video.id}">${video.name }</a>
-						</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--弹出层1-->
-	<div class="bg"></div>
-	<div class="adds1">
-		<div class="add-tops1">
-			<p>赞</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs1">
-			<dl class="comments">
-				<dt>
-					<img src="${prc}/function/function-linshi/img/tu.jpg" />
-				</dt>
-				<dd>
-					<p>
-						<span class="blue">沫儿</span>
-						<img src="${prc}/function/function-linshi/img/tu3.jpg" /><br />
-					</p>
-					<span class="gray">(3天前)</span>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!--弹出层2-->
-	<div class="bg"></div>
-	<div class="adds2">
-		<div class="add-tops2">
-			<p>阅读</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
-		</div>
-		<div class="add-downs2">
-			<dl class="comments">
-				<dt>
-					<img src="${prc}/function/function-linshi/images/tu.jpg" />
-				</dt>
-				<dd>
-					<span class="grays">金强</span>
-					<span class="grays">2013-09-10</span>
-					<span class="grays">2013-09-13</span>
-				</dd>
-			</dl>
-		</div>
-	</div>
-	<!--弹出层4-->
-	<div class="bg"></div>
+	<!--弹出层 转发-->
+	
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
@@ -356,8 +286,10 @@
 		</div>
 		<div style="clear: both"></div>
 	</div>
+	<!--弹出层 转发-->
+	
+	
 	<!--弹出层3-->
-	<div class="bg"></div>
 	<div class="adds3">
 	<div class="add-tops3">
 	 	<p>转移</p>
@@ -385,7 +317,6 @@
 		</div>
 	</div>
 	<!--弹出层6-->
-	<div class="bg"></div>
 	<div class="adds6">
 		<div class="add-tops6">
 		    <p>增加工作进展</p>
@@ -412,7 +343,8 @@
 			</div>
 		</div>
 	<!--弹出层7-->
-    <div class="bg"></div>
+    <form action="addStep_master.action" id="stepForm">
+    <input type="hidden" name="step.subjectId" value="${subject.id}" />
     <div class="adds7">
   		<div class="add-tops7">
 	    	<p>编辑</p>
@@ -420,23 +352,18 @@
 	    </div>
 	  	<div class="add-downs7">
 			<div class="chen">
-	          <p>步骤名称1：</p>
-	          <input type="text" />
-	          <img src="${prc}/function/function-linshi/images/jia.jpg" />
-	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>
+	          <p>步骤名称：</p>
+	          <input type="text" name="step.name"/>
+<!--	          <img src="${prc}/function/function-linshi/images/jia.jpg" />-->
+<!--	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>-->
 	      	</div>
-	      	<div class="chen">
-	          	<p>步骤名称2：</p>
-	          	<input type="text" />
-	          	<img src="${prc}/function/function-linshi/images/jia.jpg" />
-	      	</div>
-	      	
 	      	<div class="sure">
-	          <a href="#">确定 </a>
-	           <a href="#">关闭 </a>
+	          <a id="stepSave" href="#">确定 </a>
+	          <a href="#" class="close">关闭 </a>
 	      	</div>
 		</div>
 	</div>
+	</form>
 <script>
 	$(function () {
 	    $("#slider-range-max").slider({
@@ -444,7 +371,7 @@
 	        min: 5,
 	        max: 100,
 	        disabled: true ,
-	        value: ${subjectExtand.sechdule},
+	        value: 90,
 	        step: 5,
 	        slide: function (event, ui) {
 	            $("#amount").val(ui.value+"%");
@@ -453,10 +380,10 @@
 	    $("#amount").val($("#slider-range-max").slider("value")+"%");
 	});
 	
-	function changeTab(blockId){
+	function changeTab(stepId){
 		$("li").removeClass("cur");
-		$("#" + blockId).addClass("cur");
-		$("#postFrame").attr('src','${prc}/detail/viewBlock_detail.action?id=' + blockId);
+		$("#" + stepId).addClass("cur");
+		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);
 	}
 </script>
 </body>

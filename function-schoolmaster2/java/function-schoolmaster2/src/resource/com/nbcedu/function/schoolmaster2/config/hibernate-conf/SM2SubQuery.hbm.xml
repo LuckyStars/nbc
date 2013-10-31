@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="subject_master_module">
+    	<![CDATA[
+     		SELECT 
+     			sub.id,
+				sub.createrId,
+				sub.createTime,
+				sub.content,
+				sub.flag,
+				sub.departmentId,
+				sub.title,
+				sub.moduleId,
+				sub.lastUpdateTime,
+				sub.parentId,
+				sub.createrName
+			FROM
+				t_sm2_subject AS sub,
+				(
+					SELECT sub_id as subId
+					FROM t_sm2_subject_master
+					WHERE user_uid = :uid
+				) subIds
+			WHERE 
+				sub.id = subIds.subId
+				AND sub.moduleId = :moduleId 
+			ORDER BY 
+				sub.lastUpdateTime DESC
+    	]]>
+    </sql-query>
+    <sql-query name="subject_master_module_count">
+    	<![CDATA[
+     		SELECT 
+     			COUNT(sub.id)
+			FROM
+				t_sm2_subject AS sub,
+				(
+					SELECT sub_id as subId
+					FROM t_sm2_subject_master
+					WHERE user_uid = :uid
+				) subIds
+			WHERE 
+				sub.id = subIds.subId
+				AND sub.moduleId = :moduleId 
+    	]]>
+    </sql-query>
+    
+    <sql-query name="trans_query" >
+    	<![CDATA[
+    	SELECT COUNT(trans.id) 
+		FROM 
+			t_sm2_subject_trans trans ,
+			( SELECT subjectId subId FROM t_sm2_step WHERE id=:stepId) step
+		WHERE 
+			trans.sub_id = step.subId
+			AND trans.user_uid = :uid ;
+    	]]>
+    </sql-query>
+</hibernate-mapping>

@@ -1,0 +1,72 @@
+package com.nbcedu.function.schoolmaster2.biz.impl;
+
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.xwork.StringUtils;
+import org.hibernate.Query;
+import org.springframework.util.CollectionUtils;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
+import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.dao.Sm2ReadsDao;
+import com.nbcedu.function.schoolmaster2.data.model.SM2Reads;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
+
+public class Sm2ReadsBizImpl extends BaseBizImpl<SM2Reads> implements Sm2ReadsBiz{
+
+	private Sm2ReadsDao readsDao;
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public synchronized void addByStep(String stepId, String userId) {
+		
+		StringBuilder hql = new StringBuilder("FROM TSm2Progress p WHERE p.stepId = ?");
+		Query proq = this.readsDao.createQuery(hql.toString(),stepId);
+		List<TSm2Progress> progList = proq.list();
+		
+		if(!CollectionUtils.isEmpty(progList)){
+			
+			Query transQuery = this.readsDao.getNamedQuery("trans_query");
+			transQuery.setString("stepId", stepId);
+			transQuery.setString("uid", userId);
+			Object result = transQuery.uniqueResult();
+			boolean isTrans = result!=null
+				&&Integer.valueOf(transQuery.uniqueResult().toString())>0;
+			
+			String inStr = StringUtils.join(
+					Lists.transform(progList, 
+							new Function<TSm2Progress, String>() {
+								@Override
+								public String apply(TSm2Progress input) {
+									return input.getId();
+								}
+							}),
+						",");
+			Query delete = this.readsDao.createQuery(
+					"DELETE FROM SM2Reads r WHERE r.progressId in ?",inStr);
+			delete.executeUpdate();
+			
+			for (TSm2Progress pro : progList) {
+				SM2Reads read = new SM2Reads();
+				read.setCreateTime(new Date());
+				read.setProgressId(pro.getId());
+				read.setUserName(Utils.curUserName());
+				read.setUserUid(Utils.curUserUid());
+				read.setTrans(isTrans?1:0);
+				this.readsDao.save(read);
+			}
+			
+		}
+	}
+	
+	/////////////////////////
+	/////getters&setters//////
+	/////////////////////////
+	public void setReadsDao(Sm2ReadsDao readsDao) {
+		this.readsDao = readsDao;
+	}
+}

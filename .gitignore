@@ -12,3 +12,4 @@ build/
 web.xml
 clientconfig.properties
 jdbc.properties
+sm2/src/resource/jdbc.properties 

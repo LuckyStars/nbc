@@ -1,0 +1,6 @@
+2013-10-30 15:58:29 line 1:84: unexpected token: (
+2013-10-30 16:42:23 line 1:84: unexpected token: (
+2013-10-30 16:48:24 line 1:12: expecting IDENT, found '*'
+2013-10-30 16:48:24 line 1:81: unexpected token: (
+2013-10-30 16:49:20 line 1:87: unexpected token: (
+2013-10-30 19:10:32 Error parsing XML: XML InputStream(40) Attribute "lazy" with value "fasle" must have a value from the list "true false extra ".

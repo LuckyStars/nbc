@@ -34,20 +34,28 @@ public class BaseAction extends ActionSupport {
 	
 	protected List<String> idList = new ArrayList<String>();
 	
-	protected HttpServletResponse response;
-	
-	 protected HttpServletRequest request ;
 	
 	protected String getUserId() {
-		 
 		return (String)ActionContext.getContext().getSession().get("sm2_init");
 	}
+	
 	protected Map<String,Object> getSession(){
 		return ActionContext.getContext().getSession();
 	}
-	protected HttpServletRequest getRequest(){
-		return this.request = ServletActionContext.getRequest();
+	
+	@SuppressWarnings("unchecked")
+	protected Map<String,Object> getRequestMap(){
+		return (Map<String, Object>) ActionContext.getContext().get("request");
 	}
+	
+	protected HttpServletRequest getRequest(){
+		return ServletActionContext.getRequest();
+	}
+	
+	protected HttpServletResponse getResponse(){
+		return ServletActionContext.getResponse();
+	}
+	
 	protected Object getFromSession(Object key){
 		return ActionContext.getContext().getSession().get(key);
 	}
@@ -64,10 +72,7 @@ public class BaseAction extends ActionSupport {
 	 * 查看详细
 	 */
 	public static final String LOOK = "look";
-	/**
-	 * 排序
-	 */
-	protected String ORDERBYID ="ORDER BY id DESC";
+	
 	
 	//////////////////////////
 	///////getters&setters////
@@ -95,14 +100,6 @@ public class BaseAction extends ActionSupport {
 	}
 	public void setIdList(List<String> idList) {
 		this.idList = idList;
-	}
-	
-	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
-	}
-
-	public void setServletResponse(HttpServletResponse response) {
-		this.response = response;
 	}
 	
 }

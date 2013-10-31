@@ -8,10 +8,13 @@
             <generator class="com.nbcedu.common.uuid.UIDGenerator" />
         </id>
         <property name="subjectId" type="java.lang.String">
-            <column name="subjectId" length="32" not-null="true" />
+            <column name="subjectId" length="32"  />
         </property>
         <property name="userId" type="java.lang.String">
             <column name="userId" length="32" not-null="true" />
+        </property>
+           <property name="userName" type="java.lang.String">
+            <column name="userName" length="100"/>
         </property>
     </class>
 </hibernate-mapping>

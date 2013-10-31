@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.schoolmaster2.data.model.Sm2Zan" table="t_sm2_zan">
+		
+		<id name="id" column="ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		
+		<property name="userUid" column="user_uid" type="string" length="32" not-null="true" />
+		
+		<property name="userName" column="user_name" type="string" length="20" not-null="true" />
+		
+		<property name="progressId" column="progress_id" type="string" length="32" not-null="true" />
+		
+		<property name="createTime" type="java.sql.Timestamp">
+            <column name="create_time" />
+        </property>
+        
+	</class>
+</hibernate-mapping>

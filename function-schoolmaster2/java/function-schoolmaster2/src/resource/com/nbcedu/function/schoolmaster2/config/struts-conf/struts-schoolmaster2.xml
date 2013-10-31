@@ -24,22 +24,30 @@
 		<action name="*_subject" method="{1}" class="sm2SubjectAction">
 			<result name="list">/function/function-teacher/subject_list.jsp</result>
 			<result name="subjectAdd">/function/function-teacher/subject_add.jsp</result>
+			<result name="subjectUpdate">/function/function-teacher/subject_update.jsp</result>
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
+			<result name="reload" type="redirectAction">find_subject</result>
 		</action>
 		<action name="upload" method="upload" class="sm2UploadAction">
 		</action>
 		<action name="*_user" method="{1}" class="sm2UserAction" />
 		
-		<action name="_master" method="{1}" class="masterSubAction">
-			<result name="subList"></result>
+		<action name="*_master" method="{1}" class="masterSubAction">
+			<result name="subList" ></result>
+			<result name="detail" >/function/function-linshi/details.jsp</result>
+			<result name="stepDetail" >/function/detail-step/step.jsp</result>
 		</action>
 		
+<<<<<<< HEAD
 		<action name="*_invatition" method="{1}" class="invatitionAction">
 			<result name="teacherList">/function/function-invatition/teacherList.jsp</result>
 			<result name="teacherShow">/function/function-invatition/teacherShow.jsp</result>
 			<result name="masterList">/function/function-invatition/masterList.jsp</result>
 			<result name="masterShow">/function/function-invatition/masterShow.jsp</result>
 			<result name="download">/function/function-invatition/download.jsp</result>
+=======
+		<action name="*_zan" method="{1}" class="sm2ZanAction">
+>>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 		</action>
 		<action name="swfUpload" method="upload" class="sm2SWFUploadAction"></action>
 	</package>

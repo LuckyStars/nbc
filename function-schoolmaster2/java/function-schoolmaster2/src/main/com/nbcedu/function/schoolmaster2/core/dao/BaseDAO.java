@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
@@ -71,6 +72,8 @@ public interface BaseDAO<T extends Serializable> {
 	
 	public Query createSqlQuery(String sql, Object... values);
 	
+	public Query getNamedQuery(String queryName);
+	
 	public  Criteria createCriteria(Criterion... criterions);
 	
 	public  Criteria createCriteria(String orderBy, boolean isAsc, Criterion... criterions);
@@ -87,6 +90,10 @@ public interface BaseDAO<T extends Serializable> {
 	public List<Object[]> findBySQL(String sql, int beginIndex, int size) throws DBException;
 	
 	public List<Object[]> findBySQL(String sql) throws DBException;
+	
+	public List<Object[]> findByHQL(String hql,Object...param );
+	
+	public List<Object[]> findByHQL(String hql, int beginIndex, int size);
 	
 	public void updateBySql(String sql,Object... params) throws DBException;
 	
@@ -134,4 +141,5 @@ public interface BaseDAO<T extends Serializable> {
 	public List<Map> getListBySql(String sql) throws DBException;
 	
 	public void removeAll();
+	
 }

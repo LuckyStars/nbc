@@ -1,6 +1,5 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -10,6 +9,7 @@ public class TSm2Progress implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
+	private String content;
 	private String createrId;
 	private Date createTime;
 	private Date lastUpdateTime;
@@ -80,5 +80,15 @@ public class TSm2Progress implements java.io.Serializable {
 	public void setStepId(String stepId) {
 		this.stepId = stepId;
 	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	
 
 }

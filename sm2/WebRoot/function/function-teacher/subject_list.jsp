@@ -37,7 +37,7 @@
                
             });
             $("#edit").click(function(){
-            	$.post("getByIdWorkbench.action",function(data){
+            	$.post("toUpdate_subject.action",function(data){
             		if(data != ''){
             			$("#addsubjectDiv").html(data);
             			$(".bg").css("display", "block");
@@ -53,8 +53,8 @@
         });
        
         //查询
-        function matteredit(obj){
-        	$.post("getByIdWorkbench.action?id="+obj,function(data){
+        function matteredit(obj,m){
+        	$.post("toUpdate_subject.action?id="+obj+"&moduleId="+m,function(data){
         		if(data != ''){
         			$("#addsubjectDiv").html(data);
         			$(".bg").css("display", "block");
@@ -67,14 +67,18 @@
     	function matterSubmit(){
     		if(!doValid()){return;};
     		isSubjectExist();
-    	}	
+    	}
+    	function updateSubmit(){
+    		if(!doValid()){return;};
+    		doUpdate();
+    	}
     	function on_delete(subjectId){
     		if(confirm("确定要删除吗?")){
-    			$.post("deleteWorkbench.action", { id: subjectId},
+    			$.post("delete_subject.action", { id: subjectId},
     				function(data){
     					var dateObj=$.parseJSON(data);
     					if(0==dateObj.result){
-    						document.location.href="showSubjectWorkbench.action?module=${param.module}";
+    						document.location.href="find_subject.action?moduleId=${moduleId}";
     					}else{
     						alert("删除失败");
     					}
@@ -84,26 +88,39 @@
     	
     	//验证主题重名
     	function isSubjectExist(){
-    		var url ="isExistWorkbench.action";
-    		var subjectTile = $("input[name='subject.title']").val();
-    		$.post(url,{subjectTile:subjectTile},function(data){
-    				if(data.result == 0){
+    		//var url ="isExist_subject.action";
+    	//	var subjectTile = $("input[name='subject.title']").val();
+    	//	$.post(url,{subjectTitle:subjectTitle},function(data){
+    			//	if(data.result == 0){
     						doSave();
-    				}else{
-    					alert(data.msg);
-    				};
-    			},"json");
+    		//		}else{
+    		//			alert(data.msg);
+    		//		};
+    		//	},"json");
     	}
-    	
-    	function doSave(){
+    	function doUpdate(){
         	var users = $("#cc").combotree('getValues');
+        	var checkUsers = $("#master").combotree('getValues');
     		$("#saveForm").ajaxSubmit({
-    			url:"addSubjectWorkbench.action",
-    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString()},
+    			url:"update_subject.action",
+    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
     			success:function(data){
     				var dateObj=$.parseJSON(data);
-    				alert((0==dateObj.result)?"成功!":"失败!");
-    				document.location.href="showSubjectWorkbench.action?module=${param.module}";
+    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
+    				document.location.href="find_subject.action?moduleId=${moduleId}";
+    			}
+    		});
+    	}
+    	function doSave(){
+        	var users = $("#cc").combotree('getValues');
+        	var checkUsers = $("#master").combotree('getValues');
+    		$("#saveForm").ajaxSubmit({
+    			url:"add_subject.action",
+    			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
+    			success:function(data){
+    				var dateObj=$.parseJSON(data);
+    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
+    				document.location.href="find_subject.action?moduleId=${moduleId}";
     			}
     		});
     	}
@@ -115,15 +132,13 @@
 <body>
 <form action="find_Subject.action" id="form" method="post">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${appContext.appPath}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">临时事项</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${subjectVo.moduleName }</span></h1>
         <div class="table_box fixed">
             <div class="nav">
-                <span>提交日期:</span>
-                <select id=""></select>
                 <span>事项标题:</span>
-                <input type="text" id="" name="subject.title" />
+                <input type="text"  name="subjectVo.title" />
                 <a class="cx" href="javascript:matterQuery();">查询</a>
-                <a class="cx1" href="javascript:void(0);">增加</a>
+                	<a class="cx1" href="javascript:void(0);">增加</a>
             </div>
         <table width="100%" border="0">
             <tr>
@@ -137,24 +152,25 @@
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
                 <td align="center">${i.index+1 }</td>
-                <td align="center">${sub.title }</td>
-                <td align="center">${sub.createTime }</td>
-                <td align="center">${sub.createrId}</td>
+                <td align="center"></td>
+                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
+                <td align="center">${sub.createrName}</td>
                 <td align="center">${sub.id}</td>
                 <td align="center">
-                <span class="space"><a href="reportDetailedWorkbench.action?id=${sub.id }">查看</a></span>
-                <span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }')" id="edit">编辑</a>
-                </span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span></td>
+                <span class="space"><a href="reportDetailed_subject.action?id=${sub.id }">查看</a></span>
+	                <pri:showWhenManager>
+	                	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
+	                	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>
+                	</pri:showWhenManager>
+                </td>
             </tr>
             </c:forEach>
         </table>
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
-        		<pg:pager url="${prc}/scMaster2/listMasterStatistics_data.action"
+        		<pg:pager url="${prc}/scMaster2/find_subject.action"
 					items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
-				<pg:param name="start" value="${start}"/>
-				<pg:param name="end" value="${end}"/>
-				<pg:param name="matcher" value="${matcher}"/>
+				<pg:param name="subjectVo.moduleId" value="${moduleId}"/>
 				总计${pm.total}条
 				<pg:first>
 					<a href="${pageUrl}">首页</a>
@@ -184,10 +200,8 @@
 		</div>
     </div>
            <!--弹出层-->
-    <div class="bg"></div>
-      <div id="addsubjectDiv" >
-     
-       </div>
+    		<div class="bg"></div>
+      		<div id="addsubjectDiv"></div>
      </form>
      <script>
       function doValid(){

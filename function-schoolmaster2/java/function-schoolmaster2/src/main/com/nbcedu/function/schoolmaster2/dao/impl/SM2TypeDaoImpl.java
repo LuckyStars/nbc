@@ -20,4 +20,11 @@ public class SM2TypeDaoImpl extends SimpleBaseDAOImpl<TSm2Type> implements SM2Ty
 		addc.add(Expression.eq("userId", userId));
 		return c.list();
 	}
+	@SuppressWarnings("unchecked")
+	public List<TSm2Type> findByUserId( String userId) {
+		Criteria c = this.getSession().createCriteria(TSm2Type.class);
+		Criteria addc = c.createCriteria("typeUsers");
+		addc.add(Expression.eq("userId", userId));
+		return c.list();
+	}
 }

@@ -1,6 +1,9 @@
 package com.nbcedu.function.schoolmaster2.biz;
 
+import java.util.List;
+
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public interface SM2MasterSubBiz extends SM2SubjectBiz {
 
@@ -12,4 +15,12 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public PagerModel findByMaster(String modId,String masterUid);
+	
+	/**
+	 * 按subjectId查找所有步骤
+	 * @param subId
+	 * @return
+	 * @author xuechong
+	 */
+	public List<StepVo> findAllSteps(String subId);
 }

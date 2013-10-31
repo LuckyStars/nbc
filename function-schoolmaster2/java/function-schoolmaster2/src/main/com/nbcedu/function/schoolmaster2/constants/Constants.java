@@ -5,4 +5,6 @@ public class Constants {
 	public static final String SESSION_UID_KEY = "sm2_init";
 	public static final String COMMON_UPLOAD = "uploads";
 	
+	public static final String SESSION_USER_NAME = "sm2_userName";
+	
 }

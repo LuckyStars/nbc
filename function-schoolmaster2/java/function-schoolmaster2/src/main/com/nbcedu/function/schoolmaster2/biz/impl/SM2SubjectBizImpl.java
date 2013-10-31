@@ -2,7 +2,12 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.xwork.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Expression;
 
 
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
@@ -11,6 +16,8 @@ import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.SM2SubjectDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
+import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 
 public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2SubjectBiz{
 
@@ -33,24 +40,79 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		this.sm2SubjectDao = sm2SubjectDao;
 	}
 	@Override
-	public PagerModel findByExceuteUserId(String userId,String moduleId) {
-		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
-				"where u.subjectId=s.id and u.userId=? AND s.moduleId = ?");
-		hql.append(" order by createTime desc");
-		return this.sm2SubjectDao.searchPaginated(hql.toString(),new String[]{userId,moduleId});
+	public PagerModel findByExceuteUserId(SubjectVo subject) {
+		return this.sm2SubjectDao.findByExceuteUserId(subject);
+		
+		
+//		StringBuffer hql = new StringBuffer("select TSm2Subject from TSm2Subject s,TSm2SubjectUser u " +
+//				"where u.subjectId=s.id and u.userId=? AND s.moduleId = ?");
+//	
+//		List<Object> list = new ArrayList<Object>();
+//		list.add(subject.getExcuteUserId());
+//		list.add(subject.getModuleId());
+//		if(!StringUtil.isEmpty(subject.getTitle())){
+//			hql.append(" and s.title like ?");
+//			list.add("%"+subject.getTitle().trim()+"%");
+//		}
+//		if(subject.getBeginDate()!=null&&StringUtils.isNotBlank(subject.getBeginDate().toString())){
+//			hql.append(" and createTime >? ");
+//			list.add(subject.getBeginDate());
+//		}
+//		if(subject.getEndDate()!=null&&StringUtils.isNotBlank(subject.getEndDate().toString())){
+//			hql.append(" and createTime <? ");
+//			list.add(subject.getEndDate());
+//		}
+//		Object[] params = new Object[list.size()];
+//		list.toArray(params);
+//		hql.append(" order by createTime desc");
+//		return this.sm2SubjectDao.searchPaginated(hql.toString(),params);
 	}
 	@Override
-	public PagerModel findByCreaterId(String createrId,String moduleId) {
+	public PagerModel findByCreaterId(SubjectVo subject) {
 		StringBuffer hql = new StringBuffer("from TSm2Subject s " +
-				"where s.createrId=? AND s.moduleId = ?");
+				"where s.createrId=? AND s.moduleId = ? ");
+		List<Object> list = new ArrayList<Object>();
+		list.add(subject.getCreaterId());
+		list.add(subject.getModuleId());
+		if(!StringUtil.isEmpty(subject.getTitle())){
+			hql.append(" and s.title like ?");
+			list.add("%"+subject.getTitle().trim()+"%");
+		}
+		if(subject.getBeginDate()!=null&&StringUtils.isNotBlank(subject.getBeginDate().toString())){
+			hql.append(" and createTime >? ");
+			list.add(subject.getBeginDate());
+		}
+		if(subject.getEndDate()!=null&&StringUtils.isNotBlank(subject.getEndDate().toString())){
+			hql.append(" and createTime <? ");
+			list.add(subject.getEndDate());
+		}
+		Object[] params = new Object[list.size()];
+		list.toArray(params);
 		hql.append(" order by createTime desc");
-		return this.sm2SubjectDao.searchPaginated(hql.toString(),new String[]{createrId,moduleId});
+		return this.sm2SubjectDao.searchPaginated(hql.toString(),params);
 	}
 	
 	@Override
 	public PagerModel findByModule(String moduleId) {
 		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
 		return this.sm2SubjectDao.searchPaginated(hql,moduleId);
+	}
+	@Override
+	public List<TSm2Subject> findBYModuleId(String moduleId) {
+		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
+		return this.sm2SubjectDao.find(hql,moduleId );
+	}
+	@Override
+	public void update(TSm2Subject subject) {
+		TSm2Subject s = this.sm2SubjectDao.load(subject.getId());
+		s.setContent(subject.getContent());
+		s.setLastUpdateTime(new Date());
+		s.setTitle(subject.getTitle());
+		s.setModuleId(subject.getModuleId());
+		s.setTypeId(subject.getTypeId());
+		s.setExcuteUsers(subject.getExcuteUsers());
+		s.setCheckUsers(subject.getCheckUsers());
+		this.sm2SubjectDao.update(s);
 	}
 	
 }

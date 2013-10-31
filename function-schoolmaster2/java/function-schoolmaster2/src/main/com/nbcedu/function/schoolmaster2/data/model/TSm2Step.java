@@ -1,6 +1,5 @@
 package com.nbcedu.function.schoolmaster2.data.model;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class TSm2Step implements java.io.Serializable {

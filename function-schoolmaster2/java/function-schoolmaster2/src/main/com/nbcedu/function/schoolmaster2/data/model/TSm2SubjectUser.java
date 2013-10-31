@@ -7,6 +7,7 @@ public class TSm2SubjectUser implements java.io.Serializable {
 	private String id;
 	private String subjectId;
 	private String userId;
+	private String userName;
 
 	// Constructors
 
@@ -15,9 +16,10 @@ public class TSm2SubjectUser implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TSm2SubjectUser(String subjectId, String userId) {
+	public TSm2SubjectUser(String subjectId, String userId,String userName) {
 		this.subjectId = subjectId;
 		this.userId = userId;
+		this.userName = userName;
 	}
 
 	// Property accessors
@@ -44,6 +46,14 @@ public class TSm2SubjectUser implements java.io.Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
