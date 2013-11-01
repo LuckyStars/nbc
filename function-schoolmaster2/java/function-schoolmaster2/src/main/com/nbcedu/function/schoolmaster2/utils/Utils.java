@@ -69,7 +69,7 @@ public class Utils {
 	 */
 	@SuppressWarnings("serial")
 	public static Collection<PersonVo> getAllManager(){
-		String masterJson = loadFileToString("xiaozhang.json");
+		String masterJson = loadFileToString("zhuguan.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
 	

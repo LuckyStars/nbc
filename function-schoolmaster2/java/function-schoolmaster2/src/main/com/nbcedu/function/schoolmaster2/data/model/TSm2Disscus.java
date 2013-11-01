@@ -18,8 +18,6 @@ public class TSm2Disscus implements java.io.Serializable {
 	private String progressId;
 	private String content;
 
-	// Constructors
-
 	/** default constructor */
 	public TSm2Disscus() {
 	}

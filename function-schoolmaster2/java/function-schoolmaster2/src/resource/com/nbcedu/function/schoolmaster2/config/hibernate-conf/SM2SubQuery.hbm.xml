@@ -78,4 +78,5 @@
 		WHERE st.subjectId = sub.subjectId;
 		]]>
     </sql-query>
+    
 </hibernate-mapping>

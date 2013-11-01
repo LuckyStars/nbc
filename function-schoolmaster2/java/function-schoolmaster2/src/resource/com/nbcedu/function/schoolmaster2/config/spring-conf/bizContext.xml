@@ -54,4 +54,7 @@
 		<property name="readsDao" ref="sm2ReadsDao" ></property>
 	</bean>
 	
+	<bean id="sm2DisscusBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2DisscusBizImpl">
+		<property name="disDao" ref="sm2DisscusDao"></property>
+	</bean>
 </beans>

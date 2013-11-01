@@ -1,18 +1,28 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.xwork.StringUtils;
+import org.springframework.util.CollectionUtils;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
@@ -37,6 +47,7 @@ public class MasterSubjectAction extends BaseAction{
 	private Sm2StepBiz stepBiz;
 	private Sm2ProgressBiz progBiz;
 	private Sm2ReadsBiz readsBiz;
+	private SM2DisscusBiz disscusBiz;
 	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
@@ -71,6 +82,37 @@ public class MasterSubjectAction extends BaseAction{
 	public String showStep(){
 		this.proList = this.progBiz.findAllByStepId(this.id);
 		this.readsBiz.addByStep(this.id, getUserId());
+		
+		if(!CollectionUtils.isEmpty(proList)){
+			Collection<String> progIds = Collections2.transform(
+					proList, new Function<TSm2Progress, String>() {
+						@Override
+						public String apply(TSm2Progress input) {
+							return input.getId();
+						}
+					});
+			
+			/*disCuz map*/{
+				List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(progIds);
+				if(!CollectionUtils.isEmpty(disList)){
+					
+					HashMap<String, List<TSm2Disscus>> disMap = new HashMap<String, List<TSm2Disscus>>(disList.size());
+					
+					for (TSm2Disscus dis : disList) {
+						if(!disMap.containsKey(dis.getProgressId())){
+							disMap.put(dis.getProgressId(),
+									new ArrayList<TSm2Disscus>());
+						}
+						disMap.get(dis.getProgressId()).add(dis);
+					}
+					
+					this.getRequestMap().put("disMap", disMap);
+				}
+			}
+			
+		}
+		
+		
 		return "stepDetail";
 	}
 	public void addStep(){
@@ -137,13 +179,14 @@ public class MasterSubjectAction extends BaseAction{
 	public void setReadsBiz(Sm2ReadsBiz readsBiz) {
 		this.readsBiz = readsBiz;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
+	}
+	public void setDisscusBiz(SM2DisscusBiz disscusBiz) {
+		this.disscusBiz = disscusBiz;
 	}
 	
 }

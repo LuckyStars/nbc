@@ -2,7 +2,7 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.Date;
 
-import com.nbcedu.function.schoolmaster2.biz.Sm2DisscusBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
@@ -14,41 +14,46 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 @SuppressWarnings("serial")
 public class DisscusAction extends BaseAction{
 
-	private Sm2DisscusBiz disscusBiz;
+	private SM2DisscusBiz disscusBiz;
 	
 	private TSm2Disscus disscus = new TSm2Disscus();
-	private String progressId;
+	private String progId;
+	private String stepId;
+	
 	/**
 	 * 增加评论
 	 */
-	public void add(){
+	public String add(){
 		disscus.setCreaterId(this.getUserId());
 		disscus.setCreateTime(new Date());
 		this.disscusBiz.add(disscus);
-		Struts2Utils.renderText("0","encoding:UTF-8");
+		return "refreshStep";
 	}
+	
+	
 	////////////////////////
 	////getters&setters////
 	//////////////////////
-	
 	public TSm2Disscus getDisscus() {
 		return disscus;
 	}
-
 	public void setDisscus(TSm2Disscus disscus) {
 		this.disscus = disscus;
 	}
-
-	public String getProgressId() {
-		return progressId;
-	}
-
-	public void setProgressId(String progressId) {
-		this.progressId = progressId;
-	}
-
-	public void setDisscusBiz(Sm2DisscusBiz disscusBiz) {
+	public void setDisscusBiz(SM2DisscusBiz disscusBiz) {
 		this.disscusBiz = disscusBiz;
+	}
+	public String getProgId() {
+		return progId;
+	}
+	public void setProgId(String progId) {
+		this.progId = progId;
+	}
+	public String getStepId() {
+		return stepId;
+	}
+	public void setStepId(String stepId) {
+		this.stepId = stepId;
 	}
 
 }
