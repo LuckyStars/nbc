@@ -108,6 +108,7 @@
              $('#trans').tree({
  				checkbox: true,
  				url: 'tree_user.action',
+ 				//onlyLeafCheck:true,
  				onClick:function(node){
  					$(this).tree('toggle', node.target);
  					//alert('you click '+node.text);
@@ -115,10 +116,6 @@
  				onContextMenu: function(e, node){
  					e.preventDefault();
  					$('#tt2').tree('select', node.target);
- 					$('#mm').menu('show', {
- 						left: e.pageX,
- 						top: e.pageY
- 					});
  				}
  			});
               
@@ -190,6 +187,7 @@
 					});
           	});
       	//步骤结束
+      	//工作进展
       	 $("#progressSave").click(function(){
         	 var name = $.trim($("input[name='progress.name']").val());
         	 if(name.length>0){
@@ -210,6 +208,29 @@
 	          }else{
 					alert("请填写工作进展名称！");
 	          }
+         	});
+      	//转发
+    	 $("#transSave").click(function(){
+ 			var nodes = $('#trans').tree('getChecked');
+			var s = '';
+			var n = '';
+			for(var i=0; i<nodes.length; i++){
+				var b = $('#tt2').tree('isLeaf', nodes[i].target);
+				if(b){
+					if (s != '') s += ',';
+					s += nodes[i].id;
+					n += nodes[i].text;
+				}
+			}
+        	 if(s.length>0){
+	         	var content = $("textarea[name='trans.content']").val("");
+	    		$.post("add_trans.action",{ids:s,names:n,content:content}, function(data) {
+	      				$("textarea[name='trans.content']").val("");
+		   				 $(".bg").hide();
+		   				 $(".adds4").hide();
+		   				 alert("发送成功！");
+	     			});
+        	 }else{ alert("请选择转发人！");}
          	});
 	  });
 	</script>
@@ -284,6 +305,7 @@
 	<!--弹出层 遮盖-->
 	<div class="bg"></div>
 	<!--弹出层 转发-->
+	<form action="">
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
@@ -296,7 +318,7 @@
 					<input type="checkbox" /><span>史家小学教师</span>
 				</p>
 				<div style="width:200px;height:350px;overflow:auto;;margin-left:10px;">
-					<ul id="trans" class="easyui-tree" animate="true" dnd="true" />
+					<ul id="trans" class="easyui-tree" animate="true" />
 				</div>
 				<div style="clear: both"></div>
 			</div>
@@ -314,13 +336,14 @@
 				<div class="right-up">
 					<p>填写转发内容</p>
 					<textarea></textarea>
-					<a href="#">发送</a>
+					<a href="#" id="transSave">发送</a>
 				</div>
 			</div>
 			<div style="clear: both"></div>
 		</div>
 		<div style="clear: both"></div>
 	</div>
+	</form>
 	<!--弹出层 转发-->
 	
 	

@@ -4,12 +4,13 @@ package com.nbcedu.function.schoolmaster2.data.model;
  * 转发
  * @author xuechong
  */
-public class SM2SubjectTrans {
+public class SM2SubjectTrans  implements java.io.Serializable{
 
 	private String id;
 	private String userUid;
 	private String userName;
 	private String subId;
+	private String content;
 	
 	//////////////////////
 	////getters&setters///
@@ -37,6 +38,12 @@ public class SM2SubjectTrans {
 	}
 	public void setSubId(String subId) {
 		this.subId = subId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

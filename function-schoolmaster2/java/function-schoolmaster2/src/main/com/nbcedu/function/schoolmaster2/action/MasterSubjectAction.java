@@ -94,7 +94,7 @@ public class MasterSubjectAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public void transTree(){
-		String json = UCService.getPersonJson(Lists.newArrayList(getUserId()));
+		String json = UCService.getPersonJson(Lists.newArrayList(getUserId()),false);
 		Struts2Utils.renderJson(json);
 	}
 	

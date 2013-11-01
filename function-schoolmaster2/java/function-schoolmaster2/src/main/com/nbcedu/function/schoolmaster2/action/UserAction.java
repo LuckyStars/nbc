@@ -23,7 +23,7 @@ public class UserAction extends BaseAction{
 		 for(PersonVo person : p){
 			 checkedUids.add(person.getUid());
 		 }
-		String result = UCService.getPersonJson(checkedUids);
+		String result = UCService.getPersonJson(checkedUids,true);
 		Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
 	public void findAllMaster() {
