@@ -93,10 +93,11 @@ public class MasterSubjectAction extends BaseAction{
 					});
 			
 			/*disCuz map*/{
-				List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(progIds);
+				List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(progIds,5);
 				if(!CollectionUtils.isEmpty(disList)){
 					
-					HashMap<String, List<TSm2Disscus>> disMap = new HashMap<String, List<TSm2Disscus>>(disList.size());
+					HashMap<String, List<TSm2Disscus>> disMap = 
+						new HashMap<String, List<TSm2Disscus>>(disList.size());
 					
 					for (TSm2Disscus dis : disList) {
 						if(!disMap.containsKey(dis.getProgressId())){
@@ -109,6 +110,8 @@ public class MasterSubjectAction extends BaseAction{
 					this.getRequestMap().put("disMap", disMap);
 				}
 			}
+			
+			
 			
 		}
 		

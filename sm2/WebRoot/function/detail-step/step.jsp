@@ -273,14 +273,30 @@
           	</ul>
         </div>
         <div class="conshen box-down">
-        
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
 	          	<input type="text" id="disc__content_${prog.id }" name="disscus.content" class="erro"/>
+	          	<input type="hidden" name="stepId" value="${id }"/>
+	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	
+        	<c:forEach items="${disMap}" var="disEntry">
+        		<c:if test="${disEntry.key==prog.id }">
+        			<c:forEach items="${disEntry.value }" var="dis">
+        				<dl class="new">
+			            	<dd>
+			              		<p>
+			              			<span class="blue">${dis.userName }：</span>
+			              			<c:out value="${dis.content }" escapeXml="true"></c:out><br />
+			              		</p>
+			              		<span class="gray float">(<fmt:formatDate value="${dis.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>)</span>
+			              	</dd>
+			             	<div style="clear:both;"></div>
+			          	</dl>
+        			</c:forEach>
+        		</c:if>
+        	</c:forEach>
           	<dl class="new">
             	<dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
             	<dd>
@@ -304,7 +320,8 @@
 	              	<span class="gray">(32分钟前)</span>
               	</dd>
           	</dl>
-          	<p class="pack">查看所有评论</p>
+          	
+          	<p class="pack"><a >查看所有评论</a></p>
 		</div>
 	</div>
 	
