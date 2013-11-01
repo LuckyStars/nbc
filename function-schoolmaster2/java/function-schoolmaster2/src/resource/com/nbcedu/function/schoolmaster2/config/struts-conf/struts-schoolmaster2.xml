@@ -21,6 +21,7 @@
 			<result name="commonList"></result>
 			<result name="chart" >/function/function-charts/charts.jsp</result>
 		</action>
+		
 		<action name="*_subject" method="{1}" class="sm2SubjectAction">
 			<result name="list">/function/function-teacher/subject_list.jsp</result>
 			<result name="subjectAdd">/function/function-teacher/subject_add.jsp</result>
@@ -28,8 +29,10 @@
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
 			<result name="reload" type="redirectAction">find_subject</result>
 		</action>
+		
 		<action name="upload" method="upload" class="sm2UploadAction">
 		</action>
+		
 		<action name="*_user" method="{1}" class="sm2UserAction" />
 		
 		<action name="*_master" method="{1}" class="masterSubAction">
@@ -45,8 +48,21 @@
 			<result name="masterShow">/function/function-invatition/masterShow.jsp</result>
 			<result name="download">/function/function-invatition/download.jsp</result>
 		</action>
+		
 		<action name="*_zan" method="{1}" class="sm2ZanAction">
 		</action>
+		
 		<action name="swfUpload" method="upload" class="sm2SWFUploadAction"></action>
+		
+		<action name="*_step" method="{1}" class="sm2StepAction">
+		</action>
+		
+		<action name="*_progress" method="{1}" class="sm2ProgressAction">
+			<result name="refreshStep" type="redirectAction">
+				<param name="actionName">showStep_master</param>
+				<param name="id">${stepId}</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>

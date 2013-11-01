@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
@@ -11,9 +12,18 @@ import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 @SuppressWarnings("serial")
 public class UserAction extends BaseAction{
-	
+	/**
+	 * 查询教师树过滤掉校长与主管
+	 */
 	public void tree() {
-		String result = UCService.getPersonJsonString();
+		 Collection<PersonVo> p = Utils.getAllManager();
+		 Collection<PersonVo> p1 = Utils.getAllSchoolMaster();
+		 p.addAll(p1);
+		 Collection<String> checkedUids = new ArrayList<String>();
+		 for(PersonVo person : p){
+			 checkedUids.add(person.getUid());
+		 }
+		String result = UCService.getPersonJson(checkedUids);
 		Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
 	public void findAllMaster() {

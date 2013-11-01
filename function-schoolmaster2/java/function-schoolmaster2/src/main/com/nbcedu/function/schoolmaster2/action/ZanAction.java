@@ -43,8 +43,8 @@ public class ZanAction extends BaseAction{
 	 */
 	public void showZans(){
 		List<ZanVo> zans = this.zanBiz.findByProg(this.id, zanSize);
-		String json = Utils.gson.toJson(zans, new TypeToken<List<ZanVo>>() {
-		}.getType());
+		String json = Utils.gson.toJson(zans, 
+				new TypeToken<List<ZanVo>>() {}.getType());
 		Struts2Utils.renderJson(json);
 	}
 	

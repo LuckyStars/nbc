@@ -26,13 +26,18 @@
 		<property name="subBiz" ref="masterSubBiz" />
 		<property name="stepBiz" ref="sm2StepBiz" />
 		<property name="progBiz" ref="sm2ProgressBiz" />
+		<property name="readsBiz" ref="sm2ReadsBiz" />
 	</bean>
 	
-	<bean id="sm2ZanAction" class="com.nbcedu.function.schoolmaster2.action.ZanAction" scope="prototype">
+	<bean id="sm2ZanAction" class="com.nbcedu.function.schoolmaster2.action.ZanAction" scope="prototype" >
 		<property name="zanBiz" ref="sm2ZanBiz"/>
 	</bean>
 	
 	<bean id="sm2UserAction" class="com.nbcedu.function.schoolmaster2.action.UserAction" scope="prototype" >
+	</bean>
+	
+	<bean id="sm2ReadsAction" class="com.nbcedu.function.schoolmaster2.action.ReadsAction" scope="prototype" >
+		<property name="readsBiz" ref="sm2ReadsBiz" />
 	</bean>
 	
 	<bean id="invatitionAction" class="com.nbcedu.function.schoolmaster2.action.InvatitionAction" scope="prototype">
@@ -44,4 +49,12 @@
 
 	<bean id="sm2SWFUploadAction" class="com.nbcedu.function.schoolmaster2.action.SWFUploadAction" scope="prototype">
 	</bean>
+	
+	<bean id="sm2StepAction" class="com.nbcedu.function.schoolmaster2.action.StepAction" scope="prototype" >
+		<property name="stepBiz" ref="sm2StepBiz" />
+	</bean>
+	<bean id="sm2ProgressAction" class="com.nbcedu.function.schoolmaster2.action.ProgressAction" scope="prototype" >
+		<property name="progBiz" ref="sm2ProgressBiz" />
+	</bean>
+	
 </beans>

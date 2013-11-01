@@ -2,14 +2,10 @@ package com.nbcedu.function.schoolmaster2.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -78,7 +74,7 @@ public class Utils {
 	}
 	
 	public static boolean isManager(){
-		for (PersonVo person : Utils.getAllSchoolMaster()) {
+		for (PersonVo person : Utils.getAllManager()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
 				return true;
 			}

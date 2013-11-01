@@ -1,9 +1,7 @@
 package com.nbcedu.function.schoolmaster2.filter;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

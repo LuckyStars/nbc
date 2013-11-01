@@ -10,11 +10,15 @@
 	
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
 	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
+	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 	
 	<style>
         .ui-widget-content {
@@ -40,7 +44,30 @@
     </style>
     
 	<script type="text/javascript">
-	
+	KindEditor.ready(function(K) {
+		var contentOptions = {
+			resizeType : 1,
+			width: 416,
+			height : 320,
+			pasteType:1,
+			filterMode:true,
+		//	uploadJson : '${prc}/cadreManual/cyclesAction!uploadImage.action',
+			allowFileManager : false,
+			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
+			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
+			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight',
+					'removeformat', '|',  'table', 'hr'],
+			filterMode : true,
+			urlType : "",
+			afterChange : function() {
+				var self = this;
+				self.sync();
+			}
+		};
+		K.create('textarea[name="progress.content"]', contentOptions);
+ 	 });
 	 $(function () {
          $(".resources li").click(function () {
              $(".resources .cur").removeClass("cur");
@@ -78,6 +105,23 @@
              $("body").css("overflow", "hidden");
              $(".bg").show();
              $(".adds4").show();
+             $('#trans').tree({
+ 				checkbox: true,
+ 				url: 'tree_user.action',
+ 				onClick:function(node){
+ 					$(this).tree('toggle', node.target);
+ 					//alert('you click '+node.text);
+ 				},
+ 				onContextMenu: function(e, node){
+ 					e.preventDefault();
+ 					$('#tt2').tree('select', node.target);
+ 					$('#mm').menu('show', {
+ 						left: e.pageX,
+ 						top: e.pageY
+ 					});
+ 				}
+ 			});
+              
          });
          $(".ico8").click(function () {
              $("body").css("overflow", "hidden");
@@ -92,6 +136,7 @@
          $(".ico4").click(function () {
              $("body").css("overflow", "hidden");
              $(".bg").show();
+	         
              $(".adds6").show();
          });
          $(".addtabs").click(function () {
@@ -145,6 +190,27 @@
 					});
           	});
       	//步骤结束
+      	 $("#progressSave").click(function(){
+        	 var name = $.trim($("input[name='progress.name']").val());
+        	 if(name.length>0){
+	            $.post("isExist_progress.action",{name:name},function(data1){
+	            	if(data1==0){
+			         	var formParams = $("#progressForm").serialize();
+			    		$.post("add_progress.action", formParams, function(data) {
+			      				$("input[name='progress.name']").val("");
+			      				$("textarea[name='progress.content']").val("");
+				   				 $(".bg").hide();
+				   				 $(".adds6").hide();
+			      				changeTab(jQuery("#select1  option:selected").val());
+			     			});
+	            	}else{
+						alert("存在相同工作进展！");
+	            	}
+		          });
+	          }else{
+					alert("请填写工作进展名称！");
+	          }
+         	});
 	  });
 	</script>
 	<script>
@@ -218,7 +284,6 @@
 	<!--弹出层 遮盖-->
 	<div class="bg"></div>
 	<!--弹出层 转发-->
-	
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
@@ -230,39 +295,9 @@
 				<p class="teacher">
 					<input type="checkbox" /><span>史家小学教师</span>
 				</p>
-				<ul>
-					<li>
-						<p class="bigs">
-							<input type="checkbox" /><span>办公室</span>
-						</p>
-						<p class="smalls">
-							<input type="checkbox" /><span>金强</span>
-						</p>
-						<p class="smalls">
-							<input type="checkbox" /><span>汪忱</span>
-						</p>
-					</li>
-					<li>
-						<p class="bigs">
-							<input type="checkbox" />
-							<span>教务处</span>
-						</p>
-						<p class="smalls">
-							<input type="checkbox" />
-							<span>李丽霞</span>
-						</p>
-					</li>
-					<li>
-						<p class="bigs">
-							<input type="checkbox" />
-							<span>教务处</span>
-						</p>
-						<p class="smalls">
-							<input type="checkbox" />
-							<span>陈凤伟</span>
-						</p>
-					</li>
-				</ul>
+				<div style="width:200px;height:350px;overflow:auto;;margin-left:10px;">
+					<ul id="trans" class="easyui-tree" animate="true" dnd="true" />
+				</div>
 				<div style="clear: both"></div>
 			</div>
 			<div class="down-cen">
@@ -301,7 +336,6 @@
 	</div>
 	</div>
     <!--弹出层5-->
-    <div class="bg"></div>
     <div class="adds5">
 	<div class="add-tops5">
     	<p>批示</p>
@@ -318,30 +352,34 @@
 	</div>
 	<!--弹出层6-->
 	<div class="adds6">
-		<div class="add-tops6">
-		    <p>增加工作进展</p>
-		    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-		  	<div class="add-downs6">
-	      		<div>
-	          		<p>所属步骤：</p>
-	          		<select>
-	
-	          		</select>
-	      		</div>
-		      	<div>
-		          	<p>工作进展：</p>
-		          	<input type="text" />
-		      	</div>
-	      		<div>
-	          		<p>具体工作内容：</p>
-	          		<textarea></textarea>
-	      		</div>
-	      		<div class="sure">
-	          		<a href="#">确定 </a>
-	           		<a href="#">关闭 </a>
-	      		</div>
+		<form action="" id="progressForm">
+			<div class="add-tops6">
+			    <p>增加工作进展</p>
+			    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+			  	<div class="add-downs6">
+		      		<div>
+		          		<p>所属步骤：</p>
+			          	<select name="progress.stepId">
+							<c:forEach items="${steps }" var="step" >
+								<option value="${step.id }">${step.name}</option>
+					 		</c:forEach>
+			          	</select>
+		      		</div>
+			      	<div>
+			          	<p>工作进展：</p>
+			          	<input type="text" name="progress.name"/>
+			      	</div>
+		      		<div>
+		          		<p>具体工作内容：</p>
+		          		<textarea name="progress.content" ></textarea>
+		      		</div>
+		      		<div class="sure">
+		          		<a id="progressSave" href="#">确定 </a>
+		           		<a href="#" class="close">关闭 </a>
+		      		</div>
 			</div>
-		</div>
+		</form>
+	</div>
 	<!--弹出层7-->
     <form action="addStep_master.action" id="stepForm">
     <input type="hidden" name="step.subjectId" value="${subject.id}" />

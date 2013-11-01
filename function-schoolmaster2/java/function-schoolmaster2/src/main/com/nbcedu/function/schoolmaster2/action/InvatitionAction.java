@@ -61,6 +61,7 @@ public class InvatitionAction extends BaseAction{
 
 	private List<TSm2Invatition> users;
 
+
 	public String add(){
 		
 		Date date = new Date();
@@ -84,6 +85,7 @@ public class InvatitionAction extends BaseAction{
 		return null;
 	}
 	public String modify() throws IllegalAccessException, InvocationTargetException{
+		
 		TSm2Invatition tsm = sm2InvatitionBiz.findById(tsm2Invatition.getId());
 		Date date = new Date();
 		if ("0".equals(tsm.getFlag())&&"1".equals(tsm2Invatition.getFlag())) {
@@ -142,12 +144,14 @@ public class InvatitionAction extends BaseAction{
 		Struts2Utils.renderJson(jo.toJSONString());
 		return null;
 	}
+	
 	public String teacherList() throws ParseException{
         this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId(),searchDate,searchTitle,searchUser);
         persons = Utils.getAllSchoolMaster();
         users = sm2InvatitionBiz.findInvatIds(this.getUserId());
 		return "teacherList";
 	}
+	
 	public String masterList() throws ParseException{
         this.pm = sm2InvatitionBiz.findByInvatId(this.getUserId(),searchDate,searchTitle,searchUser);
         users = sm2InvatitionBiz.findCreaterIds(this.getUserId());
