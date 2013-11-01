@@ -15,5 +15,6 @@
 		
 		<property name="subId" column="sub_id" type="string" length="32" not-null="true" />
 		
+		<property name="content" column="content" type="java.lang.String" length="65535" />
 	</class>
 </hibernate-mapping>

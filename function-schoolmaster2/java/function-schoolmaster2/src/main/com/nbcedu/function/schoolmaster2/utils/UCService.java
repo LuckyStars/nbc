@@ -14,7 +14,7 @@ public class UCService {
 	private static final BaseClient client = new BaseClient();
 
 
-	public static String getPersonJson(final Collection<String> checkedUids){
+	public static String getPersonJson(final Collection<String> checkedUids,final boolean b){
 		
 		class CloumnTree {
 			
@@ -32,26 +32,31 @@ public class UCService {
 
 			private void disk_NbcUcTreeNode(NbcUcTreeNode treeNode) {
 				List<NbcUcTreeNode> list = getTreeNode(treeNode.getId());
-				jsonString.append("{");
-				jsonString.append("\"id\":");
-				jsonString.append("\"");
-				jsonString.append(treeNode.getId().replace("u|", ""));
-				jsonString.append("\"");
-				jsonString.append(",\"text\":");
-				jsonString.append("\"");
-				jsonString.append(treeNode.getTitle());
-				jsonString.append("\"");
-				if(Checked(treeNode.getId().replace("u|", ""))){
-					jsonString.append(",\"checked\":true");
-				}
-				if(list!=null && list.size()>0){
-					jsonString.append(",\"children\":[");
-					for (NbcUcTreeNode tNode : list) {
-						disk_NbcUcTreeNode(tNode);
+				if(Checked(treeNode.getId().replace("u|", "").replace("ne|", "")) && b){
+					
+				}else{
+					jsonString.append("{");
+					jsonString.append("\"id\":");
+					jsonString.append("\"");
+					jsonString.append(treeNode.getId().replace("u|", ""));
+					jsonString.append("\"");
+					jsonString.append(",\"text\":");
+					jsonString.append("\"");
+					jsonString.append(treeNode.getTitle());
+					jsonString.append("\"");
+					if(Checked(treeNode.getId().replace("u|", ""))){
+						jsonString.append(",\"checked\":true");
 					}
-					jsonString.append("]");
+					
+					if(list!=null && list.size()>0){
+						jsonString.append(",\"children\":[");
+						for (NbcUcTreeNode tNode : list) {
+							disk_NbcUcTreeNode(tNode);
+						}
+						jsonString.append("]");
+					}
+					jsonString.append("},");
 				}
-				jsonString.append("},");
 			}
 
 			List<NbcUcTreeNode> getTreeNode(String pid) {
@@ -81,7 +86,7 @@ public class UCService {
 	 * @author xuechong
 	 */
 	public static String getPersonJsonString() {
-		return getPersonJson(null);
+		return getPersonJson(null,false);
 	}
 	
 	

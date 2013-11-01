@@ -55,5 +55,7 @@
 	<bean id="sm2DisscusDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2DisscusDaoImpl" >
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	
+	<bean id="sm2TransDao" class="com.nbcedu.function.schoolmaster2.dao.impl.SM2TransDaoImpl" >
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>
