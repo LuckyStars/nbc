@@ -70,7 +70,7 @@
 				<param name="id">${stepId}</param>
 			</result>
 		</action>
-		
+		<action name="*_trans" method="{1}" class="sm2TransAction" ></action>
 		
 	</package>
 </struts>

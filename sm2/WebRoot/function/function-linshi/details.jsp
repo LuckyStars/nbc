@@ -224,7 +224,7 @@
 			}
         	 if(s.length>0){
 	         	var content = $("textarea[name='trans.content']").val("");
-	    		$.post("add_trans.action",{ids:s,names:n,content:content}, function(data) {
+	    		$.post("add_trans.action",{transUids:s,transNames:n,content:content}, function(data) {
 	      				$("textarea[name='trans.content']").val("");
 		   				 $(".bg").hide();
 		   				 $(".adds4").hide();
@@ -238,6 +238,7 @@
 	</script>
 </head>
 <body>
+	<input type="hidden" name="subjectId" value="${subject.id}"/>
 	<div class="con_conent fixed">
 		<h1 class="title">
 			<span class="title">当前位置：</span>
@@ -305,7 +306,6 @@
 	<!--弹出层 遮盖-->
 	<div class="bg"></div>
 	<!--弹出层 转发-->
-	<form action="">
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
@@ -335,7 +335,7 @@
 				</div>
 				<div class="right-up">
 					<p>填写转发内容</p>
-					<textarea></textarea>
+					<textarea name="trans.content"></textarea>
 					<a href="#" id="transSave">发送</a>
 				</div>
 			</div>
@@ -343,7 +343,6 @@
 		</div>
 		<div style="clear: both"></div>
 	</div>
-	</form>
 	<!--弹出层 转发-->
 	
 	
