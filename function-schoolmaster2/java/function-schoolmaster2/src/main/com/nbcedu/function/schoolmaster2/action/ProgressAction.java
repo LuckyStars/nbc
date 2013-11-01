@@ -35,6 +35,12 @@ public class ProgressAction extends BaseAction{
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}
 	}
+	
+	public String changeStep(){
+		this.progBiz.modifyStep(this.stepId, this.id);
+		this.stepId = this.getRequest().getParameter("originStepId").toString();
+		return "refreshStep";
+	}
 	////////////////////////
 	////getters&setters////
 	//////////////////////

@@ -70,11 +70,6 @@
                 $(".bg").show();
                 $(".adds4").show();
             });
-            $(".ico8").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds3").show();
-            });
             $(".ico5").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
@@ -158,6 +153,30 @@
     		$("#divZan").show();
     	}
     	
+    	function showStepTrans(progId){
+    		
+    		$("#step_radios").html("");
+    		$("#trans_prog_id").val(progId);
+    		$.post("${prc}/scMaster2/stepList_step.action?id="+progId,function(data){
+    			if(data.length<=0){
+    				return;
+    			}
+    			for(var i = 0;i<data.length;i++){
+    				var checked_ = '';
+    				if(data[i].id=='${id}'){
+    					checked_ = 'checked="checked"';
+    				}
+	    			$('<p><input type="radio" name="stepId" value="'
+	    					+ data[i].id + 
+	    					'"'+checked_+' /><span>' 
+	    					+ data[i].name +
+	    					'</span></p>').appendTo($("#step_radios"));
+    			}
+    		});
+    		$(".bg").show();
+    		$("#step_trans_div").show();
+    	}
+    	
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -170,7 +189,7 @@
    				onclick="switchArticle('${prog.id}');"
    			 width="13" height="13" class="mids-img"/>
    			
-   			<img src="${prc }/function/detail-step/images/ico4.png" class="ico8"/><%--转移步骤 --%>
+   			<img src="${prc }/function/detail-step/images/ico4.png" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
    			<img src="${prc }/function/detail-step/images/ico5.png" /><%--删除进展 --%>
    			<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/><%--上传附件 --%>
    			<img src="${prc }/function/detail-step/images/ico7.png" 
@@ -667,23 +686,27 @@
 <!--弹出层  转发END-->
 
 
-
-          <!--弹出层 转移步骤-->
-    <div class="adds3">
-  <div class="add-tops3">
-    <p>转移</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs3">
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-       <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-</div>
-</div>
- <!--弹出层 转移步骤END-->
+	
+	<!--弹出层 转移步骤-->
+	<script type="text/javascript">
+	
+	</script>
+	<div class="adds3" id="step_trans_div" >
+  		<div class="add-tops3">
+    		<p>转移</p>
+    		<img src="img/erro.jpg"  class="close" style="cursor:pointer;"/>
+    	</div>
+    	<form action="${prc}/scMaster2/changeStep_progress.action" method="post" onsubmit="return confirm('确认转移步骤吗?');" >
+    		<input type="hidden" id="trans_prog_id" name="id" />
+    		<input type="hidden" name="originStepId" value="${id }"/>
+	  		<div class="add-downs3" id="step_radios">
+		       	<p><input type="radio" name="stepId" /><span>步骤二：xxxxxxxxxxxx</span></p>
+			</div>
+			
+			<input type="submit" value="提交"/>
+		</form>
+	</div>
+ 	<!--弹出层 转移步骤END-->
  
  
  

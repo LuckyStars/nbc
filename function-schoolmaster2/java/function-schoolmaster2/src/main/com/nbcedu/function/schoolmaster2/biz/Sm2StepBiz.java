@@ -10,4 +10,20 @@ public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
 	public boolean findByName(String name);
 	
 	public List<StepVo> findBySubId(String subjectId);
+	
+	/**
+	 * 根据stepId获取同一个subject下所有step
+	 * @param stepId
+	 * @return
+	 * @author xuechong
+	 */
+	public List<StepVo> findByStepId(String stepId);
+	
+	/**
+	 * 根据progId查询相同subject下所有step
+	 * @param progId
+	 * @return
+	 * @author xuechong
+	 */
+	public List<StepVo> findByProgId(String progId);
 }

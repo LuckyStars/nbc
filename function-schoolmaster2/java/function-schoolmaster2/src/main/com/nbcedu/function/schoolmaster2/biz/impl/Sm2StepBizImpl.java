@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
@@ -38,6 +39,36 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 		if(CollectionUtils.isEmpty(resultSet)){
 			return new LinkedList<StepVo>();
 		}
+		return transResult(resultSet);
+	}
+
+	@Override
+	public List<StepVo> findByStepId(String stepId) {
+		StringBuilder hql = new StringBuilder("");
+		hql.append("SELECT s.id,s.name ");
+		hql.append("FROM TSm2Step s ");
+		hql.append("WHERE s.subjectId = (SELECT st.subjectId FROM TSm2Step st WHERE st.id=?)");
+		List<Object[]> resultSet = this.stepDao.findByHQL(hql.toString(), stepId);
+		if(CollectionUtils.isEmpty(resultSet)){
+			return new LinkedList<StepVo>();
+		}
+		return transResult(resultSet);
+	}
+
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<StepVo> findByProgId(String progId) {
+		Query q  = this.stepDao.getNamedQuery("find_step_by_prog");
+		q.setString("progId", progId);
+		List<Object[]> resultSet = q.list();
+		return transResult(resultSet);
+	}
+	
+	///////////////////////
+	//////PRIVATE//////////
+	///////////////////////
+	private List<StepVo> transResult(List<Object[]> resultSet){
 		return Lists.transform(resultSet, new Function<Object[], StepVo>() {
 			@Override
 			public StepVo apply(Object[] input) {
