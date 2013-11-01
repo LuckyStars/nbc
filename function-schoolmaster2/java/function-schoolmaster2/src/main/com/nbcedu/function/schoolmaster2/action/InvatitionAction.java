@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -15,28 +16,18 @@ import com.nbcedu.function.schoolmaster2.biz.SM2MasterCommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterReplyBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ResourceBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-<<<<<<< HEAD
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Invatition;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterComment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterReply;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
-=======
-import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
-import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
+import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 @SuppressWarnings("serial")
 public class InvatitionAction extends BaseAction{
 
-<<<<<<< HEAD
 	private TSm2Invatition tsm2Invatition;
-=======
-	private static final String INV_MODULE_ID = null;
-
-	private TSm2Subject subject;
-	private SubjectVo subjectVo = new SubjectVo();
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
 
 	private SM2InvatitionBiz sm2InvatitionBiz;
 	
@@ -58,7 +49,17 @@ public class InvatitionAction extends BaseAction{
 	
 	private List<TSm2MasterComment> tsm2MasterComments;
 
+	private List<PersonVo> persons;
+
 	private Integer score;
+	
+	private String searchDate;
+
+	private String searchTitle;
+	
+	private String searchUser;
+
+	private List<TSm2Invatition> users;
 
 	public String add(){
 		
@@ -141,20 +142,18 @@ public class InvatitionAction extends BaseAction{
 		Struts2Utils.renderJson(jo.toJSONString());
 		return null;
 	}
-	public String teacherList(){
-<<<<<<< HEAD
-        this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId());
-=======
-		subjectVo.setCreaterId(getUserId());
-		this.pm =  this.subBiz.findByCreaterId(subjectVo);
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
+	public String teacherList() throws ParseException{
+        this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId(),searchDate,searchTitle,searchUser);
+        persons = Utils.getAllSchoolMaster();
+        users = sm2InvatitionBiz.findInvatIds(this.getUserId());
 		return "teacherList";
 	}
-	public String masterList(){
-        this.pm = sm2InvatitionBiz.findByInvatId(this.getUserId());
+	public String masterList() throws ParseException{
+        this.pm = sm2InvatitionBiz.findByInvatId(this.getUserId(),searchDate,searchTitle,searchUser);
+        users = sm2InvatitionBiz.findCreaterIds(this.getUserId());
 		return "masterList";
 	}
-	public String push(){
+	public String push() throws ParseException{
 		tsm2Invatition = sm2InvatitionBiz.findById(tsm2Invatition.getId());
 		tsm2Invatition.setStatus("1");
 		sm2InvatitionBiz.modify(tsm2Invatition);
@@ -184,7 +183,7 @@ public class InvatitionAction extends BaseAction{
 		Struts2Utils.renderJson(jo.toJSONString());
 		return null;
 	}
-	public String del(){
+	public String del() throws ParseException{
 		sm2InvatitionBiz.removeById(tsm2Invatition.getId());
 		return this.teacherList();
 	}
@@ -349,16 +348,64 @@ public class InvatitionAction extends BaseAction{
 	public List<TSm2MasterComment> getTsm2MasterComments() {
 		return tsm2MasterComments;
 	}
-<<<<<<< HEAD
-=======
-
-	public SubjectVo getSubjectVo() {
-		return subjectVo;
+	/**
+	 * @return the persons
+	 */
+	public List<PersonVo> getPersons() {
+		return persons;
 	}
-
-	public void setSubjectVo(SubjectVo subjectVo) {
-		this.subjectVo = subjectVo;
+	/**
+	 * @param persons the persons to set
+	 */
+	public void setPersons(List<PersonVo> persons) {
+		this.persons = persons;
 	}
-	
->>>>>>> a0df6b4f4bb3cdb10d0b37057234edf6de7478b4
+	/**
+	 * @return the searchDate
+	 */
+	public String getSearchDate() {
+		return searchDate;
+	}
+	/**
+	 * @param searchDate the searchDate to set
+	 */
+	public void setSearchDate(String searchDate) {
+		this.searchDate = searchDate;
+	}
+	/**
+	 * @return the searchTitle
+	 */
+	public String getSearchTitle() {
+		return searchTitle;
+	}
+	/**
+	 * @param searchTitle the searchTitle to set
+	 */
+	public void setSearchTitle(String searchTitle) {
+		this.searchTitle = searchTitle;
+	}
+	/**
+	 * @return the searchUser
+	 */
+	public String getSearchUser() {
+		return searchUser;
+	}
+	/**
+	 * @param searchUser the searchUser to set
+	 */
+	public void setSearchUser(String searchUser) {
+		this.searchUser = searchUser;
+	}
+	/**
+	 * @return the users
+	 */
+	public List<TSm2Invatition> getUsers() {
+		return users;
+	}
+	/**
+	 * @param users the users to set
+	 */
+	public void setUsers(List<TSm2Invatition> users) {
+		this.users = users;
+	}
 }

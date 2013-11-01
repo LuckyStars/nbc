@@ -2,8 +2,6 @@ package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.util.Date;
 
-import org.aspectj.weaver.ast.Var;
-
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 
 
@@ -27,6 +25,10 @@ public class TSm2Invatition implements java.io.Serializable {
 
 	/** default constructor */
 	public TSm2Invatition() {
+	}
+
+	public TSm2Invatition(String createrId) {
+		this.createrId=createrId;
 	}
 
 	/** full constructor */
