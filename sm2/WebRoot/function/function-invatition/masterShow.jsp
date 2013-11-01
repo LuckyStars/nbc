@@ -163,13 +163,13 @@
             <dd>
               <p><span class="blue">${createrName}：</span>${content}<br />
               </p>
-              <span class="gray float">${createtime}</span></dd>
+             <span class="gray float"><s:date name="createtime" format="yyyy年MM月dd日HH时mm分ss秒"/></span></dd>
              <s:iterator value="replys">
-             <dd class="clears"><p><img src="${prc}/function/function-invatition/masterShow/img/tu.jpg" /></p></dd>
+             <div class="clears"><p><img src="${prc}/function/function-invatition/masterShow/img/tu.jpg" /></p></div>
               <dd class="spaceing">
               <p><span class="blue">${createrName}：</span>${content}<br />
               </p>
-              <span class="gray float">${createtime}</span><span class="answ"></span> </dd>
+              <span class="gray float"><s:date name="createtime" format="yyyy年MM月dd日HH时mm分ss秒"/></span><span class="answ"></span> </dd>
              	  <div style="clear:both;"></div>
           	 </s:iterator>
           </dl>

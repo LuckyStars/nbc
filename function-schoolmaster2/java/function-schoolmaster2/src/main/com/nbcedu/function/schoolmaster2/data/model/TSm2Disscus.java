@@ -2,13 +2,17 @@ package com.nbcedu.function.schoolmaster2.data.model;
 
 import java.sql.Timestamp;
 import java.util.Date;
-
+/**
+ * 评论
+ * @author xuechong
+ */
 public class TSm2Disscus implements java.io.Serializable {
 
 	// Fields
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String createrId;
+	private String userName;
 	private Date createTime;
 	private Date lastUpdateTime;
 	private String progressId;
@@ -78,6 +82,13 @@ public class TSm2Disscus implements java.io.Serializable {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

@@ -27,6 +27,10 @@ public class TSm2Invatition implements java.io.Serializable {
 	public TSm2Invatition() {
 	}
 
+	public TSm2Invatition(String createrId) {
+		this.createrId=createrId;
+	}
+
 	/** full constructor */
 	public TSm2Invatition(String id,String createrId,Date createTime,String content,String flag,String title,String status,Date lastUpdateTime,String link,String invatId,Integer score){
 		this.id=id;
