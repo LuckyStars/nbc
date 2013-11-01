@@ -45,7 +45,6 @@ public class BaseAction extends ActionSupport {
 	
 	@SuppressWarnings("unchecked")
 	protected Map<String,Object> getRequestMap(){
-		Object o = ActionContext.getContext().get("request");
 		return (Map<String, Object>) ActionContext.getContext().get("request");
 	}
 	
