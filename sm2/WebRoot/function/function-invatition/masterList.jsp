@@ -12,20 +12,18 @@
 	<link href="${prc}/function/function-invatition/teacherList/css/index.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
 	var prc ="${pageContext.request.contextPath}";
     $(function () {
         $("table tr:odd").css("background", "#f0f8fc");
         $("table tr:even").css("background", "#d5e0ee");
-        $(".push").click(function () {
-        	var obj = $(this).parents("tr");
-    		var id = obj.attr("id");
-    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id;
+        $(".add-loadtop1 img").click(function () {
+            $(".bg").css("display", "none");
+            $(".add-load").css("display", "none");
         });
-        $(".del").click(function () {
-        	var obj = $(this).parents("tr");
-    		var id = obj.attr("id");
-    		window.location.href=prc+"/scMaster2/del_invatition.action?tsm2Invatition.id="+id;
+        $("#search").click(function () {
+        	window.location.href=prc+"/scMaster2/masterList_invatition.action?searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".download").click(function () {
             $(".bg").css("display", "block");
@@ -68,16 +66,18 @@
 		<div class="table_box fixed">
 			<div class="nav">
 				<span>提交日期:</span>
-				<select> </select> 
-				<span>事项标题:</span> 
-				<input type="text" />
-				<a class="cx" href="#">查询</a>
+				<input type="text" name="searchDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${searchDate}" id="searchDate" style="width:180px;"/>
+				<span>创建人:</span>
+				<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:90px;height:29px;"></s:select>
+				<span>标题:</span> 
+				<input type="text" name="searchTitle" value="${searchTitle}" id="searchTitle"/>
+				<a class="cx" href="javascript:void(0);" id="search">查询</a>
 			</div>
 			<table width="100%" border="0">
 				<tr>
 					<th width="25%" scope="col">标题</th>
-					<th width="25%" scope="col">发布时间</th>
-					<th width="25%" scope="col">发布人</th>
+					<th width="25%" scope="col">提交时间</th>
+					<th width="25%" scope="col">创建人</th>
 					<th width="25%" scope="col">操作</th>
 				</tr>
 				<c:forEach items="${pm.datas }" var="subject">
@@ -96,6 +96,40 @@
 					</tr>
 				</c:forEach>
 			</table>
+		</div>
+		<div  style="text-align:center;font-size:15px;margin-top:20px;">
+		<c:if test="${pm.total>0}">
+        <pg:pager url="${prc}/scMaster2/masterList_invatition.action"
+			items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
+			<pg:param name="searchDate" value="${searchDate}"/>
+			<pg:param name="searchTitle" value="${searchTitle}"/>
+			<pg:param name="searchUser" value="${searchUser}"/>
+
+			总计${pm.total}条
+			<pg:first>
+				<a href="${pageUrl}">首页</a>
+			</pg:first>
+			<pg:prev>
+				<a href="${pageUrl}" >上一页</a> 
+			</pg:prev>
+			<pg:pages>
+				<c:choose>
+					<c:when test="${currentPageNumber eq pageNumber}">
+						<font color="red">${pageNumber}</font>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageUrl}">${pageNumber }</a>
+					</c:otherwise>
+				</c:choose>
+			</pg:pages>
+			<pg:next>
+				<a href="${pageUrl}" >下一页</a> 
+			</pg:next>
+			<pg:last>
+				<a href="${pageUrl}">尾页</a>
+			</pg:last>
+		</pg:pager>
+		</c:if>
 		</div>
 	</div>
 

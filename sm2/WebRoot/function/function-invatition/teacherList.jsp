@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
-	
+	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 	<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
 <script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/fileprogress.js"></script>
@@ -49,7 +49,7 @@
 			button_width: "60",
 			button_height: "24",
 			button_placeholder_id: "spanButtonPlaceHolder",
-			button_text: '<span class="">浏览文件:</span>',
+			button_text: '<span class="">浏览文件：</span>',
 			button_text_style: ".theFont { font-size: 12;text-align:center;color:#ffffff;}",
 			button_text_top_padding: 2,
 			
@@ -182,7 +182,7 @@
 						var cwsHtml = "";
 						count=coursewares.length;
 						for(var i=0;i<count;i++){
-							cwsHtml = cwsHtml +"<div id=\""+coursewares[i].id+"\">" +coursewares[i].fileName +"<a class=\"progressCancel\" href=\"#\" onclick=\"delWare('"+coursewares[i].id+"')\" style=\"visibility: visible;float:right;margin:2px;\">×</a></div>";
+							cwsHtml = cwsHtml +"<div id=\""+coursewares[i].id+"\">" +coursewares[i].fileName +"<a class=\"progressCancel\" href=\"javascript:void(0);\" onclick=\"delWare('"+coursewares[i].id+"')\" style=\"visibility: visible;float:right;margin:2px;\">×</a></div>";
 						}
 						$("#wareFile").html(cwsHtml);
 		                $(".plan").css("display", "block");
@@ -207,18 +207,20 @@
         });
         
         $(".add-top1 img").click(function () {
-            $(".bg").css("display", "none");
-            $(".add1").css("display", "none");
+        	window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+        });
+        $("#search").click(function () {
+        	window.location.href=prc+"/scMaster2/teacherList_invatition.action?searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".push").click(function () {
         	var obj = $(this).parents("tr");
     		var id = obj.attr("id");
-    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id;
+    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id+"&searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".del").click(function () {
         	var obj = $(this).parents("tr");
     		var id = obj.attr("id");
-    		window.location.href=prc+"/scMaster2/del_invatition.action?tsm2Invatition.id="+id;
+    		window.location.href=prc+"/scMaster2/del_invatition.action?tsm2Invatition.id="+id+"&searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".download").click(function () {
             $(".bg").css("display", "block");
@@ -257,12 +259,17 @@
             $(".plans").css("display", "block");
             $(".plan").css("display", "none");
             $(".password").css("display", "none");
+            $("#showWareFile").css("display", "none");
+            
         });
         
         $(".wen").click(function () {
             $(".plan").css("display", "block");
             $(".password").css("display", "block");
             $(".plans").css("display", "none");
+            if(addUpdate=="modify"){
+           	 $("#showWareFile").css("display", "block");
+           }
         });
         $("#btnUpload1").click(function () {
             var _name = $.trim($("#t_name").val());
@@ -345,16 +352,18 @@
 		<div class="table_box fixed">
 			<div class="nav">
 				<span>提交日期:</span>
-				<select> </select> 
-				<span>事项标题:</span> 
-				<input type="text" />
-				<a class="cx" href="#">查询</a>
-				<a class="cx1" href="#" id="add">增加</a>
+				<input type="text" name="searchDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${searchDate}" id="searchDate" style="width:110px;"/>
+				<span>邀请人:</span>
+				<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:80px;height:29px;"></s:select>
+				<span>标题:</span> 
+				<input type="text" name="searchTitle" value="${searchTitle}" id="searchTitle"/>
+				<a class="cx" href="javascript:void(0);" id="search">查询</a>
+				<a class="cx1" href="javascript:void(0);" id="add">增加</a>
 			</div>
 			<table width="100%" border="0">
 				<tr>
 					<th width="25%" scope="col">标题</th>
-					<th width="25%" scope="col">发布时间</th>
+					<th width="25%" scope="col">提交时间</th>
 					<th width="25%" scope="col">状态</th>
 					<th width="25%" scope="col">操作</th>
 				</tr>
@@ -367,14 +376,48 @@
 							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />
 						</td>
 						<td><invStatus:showStatus statusId="${subject.status}" /></td>
-						<td><c:if test="${subject.status ==0}"><span class="space push">发布</span><span class="space modify">编辑</span><span class="space del">删除</span></c:if>
+						<td><c:if test="${subject.status ==0}"><span class="space push"><a href="javascript:void(0);">发布</a></span><span class="space modify"><a href="javascript:void(0);">编辑</a></span><span class="space del"><a href="javascript:void(0);">删除</a></span></c:if>
 							<c:if test="${subject.status ==1}"><span class="space"><a href="${prc}/scMaster2/teacherShow_invatition.action?tsm2Invatition.id=${subject.id}">查看</a></span></c:if>
-							<c:if test="${subject.flag ==0}"><span class="space download"><a href="#">附件</a></span></c:if>
+							<c:if test="${subject.flag ==0}"><span class="space download"><a href="javascript:void(0);">附件</a></span></c:if>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
 		</div>
+		<div  style="text-align:center;font-size:15px;margin-top:20px;">
+   		<c:if test="${pm.total>0}">
+        <pg:pager url="${prc}/scMaster2/teacherList_invatition.action"
+			items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
+			<pg:param name="searchDate" value="${searchDate}"/>
+			<pg:param name="searchTitle" value="${searchTitle}"/>
+			<pg:param name="searchUser" value="${searchUser}"/>
+
+			总计${pm.total}条
+			<pg:first>
+				<a href="${pageUrl}">首页</a>
+			</pg:first>
+			<pg:prev>
+				<a href="${pageUrl}" >上一页</a> 
+			</pg:prev>
+			<pg:pages>
+				<c:choose>
+					<c:when test="${currentPageNumber eq pageNumber}">
+						<font color="red">${pageNumber}</font>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageUrl}">${pageNumber }</a>
+					</c:otherwise>
+				</c:choose>
+			</pg:pages>
+			<pg:next>
+				<a href="${pageUrl}" >下一页</a> 
+			</pg:next>
+			<pg:last>
+				<a href="${pageUrl}">尾页</a>
+			</pg:last>
+		</pg:pager>
+		</c:if>
+    </div>
 	</div>
 	<!--新增-->
 	<div class="bg"></div>
@@ -391,7 +434,7 @@
 			</p>
 			 <p class="tit">
 				<span>邀&nbsp;&nbsp;请&nbsp;&nbsp;人：</span>
-				<input id="t_user" type="text" value="" />
+				<s:select list="persons" listKey="uid" listValue="name" id="t_user" cssStyle="width:218px;height:29px;"></s:select>
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
@@ -400,12 +443,12 @@
 			<p class="tit2">
 				附件/链接：
 				<span>
-					<a href="#" class="wen">
+					<a href="javascript:void(0);" class="wen">
 						<input type="radio" name="a2" value="0" checked="checked"/>附件
 					</a>
 				</span>
 				<span>
-					<a href="#" class="lian">
+					<a href="javascript:void(0);" class="lian">
 						<input type="radio" name="a2" value="1"/>链接
 					</a>
 				</span>
@@ -425,8 +468,8 @@
 				<textarea id="t_link"></textarea>
 			</div>
 			
-			<a href="#" class="return" id="btnUpload1" style="margin-left: 200px;">提交</a> 
-			<a href="#" class="return">返回</a>
+			<a href="javascript:void(0);" class="return" id="btnUpload1" style="margin-left: 200px;">提交</a> 
+			<a href="javascript:void(0);" class="return">返回</a>
 		</div>
 	</div>
 	<!--新增 END-->

@@ -64,5 +64,13 @@
 			</result>
 		</action>
 		
+		<action name="*_disc" method="{1}" class="sm2DisscusAction" >
+			<result name="refreshStep" type="redirectAction">
+				<param name="actionName">showStep_master</param>
+				<param name="id">${stepId}</param>
+			</result>
+		</action>
+		
+		
 	</package>
 </struts>

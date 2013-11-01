@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.xwork.StringUtils;
@@ -56,9 +57,9 @@ public class Utils {
 	 * @author xuechong
 	 */
 	@SuppressWarnings("serial")
-	public static Collection<PersonVo> getAllSchoolMaster(){
+	public static List<PersonVo> getAllSchoolMaster(){
 		String masterJson = loadFileToString("xiaozhang.json");
-		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
+		return gson.fromJson(masterJson,new TypeToken<List<PersonVo>>(){}.getType());
 	}
 	
 	/**
@@ -68,7 +69,7 @@ public class Utils {
 	 */
 	@SuppressWarnings("serial")
 	public static Collection<PersonVo> getAllManager(){
-		String masterJson = loadFileToString("xiaozhang.json");
+		String masterJson = loadFileToString("zhuguan.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
 	

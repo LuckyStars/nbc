@@ -50,7 +50,8 @@ public class Sm2ReadsBizImpl extends BaseBizImpl<SM2Reads> implements Sm2ReadsBi
 						",");
 			
 			Query delete = this.readsDao.createQuery(
-					"DELETE FROM SM2Reads r WHERE r.progressId in ("+inStr+")");
+					"DELETE FROM SM2Reads r WHERE r.progressId in ("+inStr+") AND userUid=:uid");
+			delete.setString("uid", userId);
 			delete.executeUpdate();
 			
 			for (TSm2Progress pro : progList) {

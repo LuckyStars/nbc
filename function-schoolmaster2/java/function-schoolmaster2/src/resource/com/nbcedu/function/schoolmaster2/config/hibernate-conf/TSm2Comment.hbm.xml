@@ -10,6 +10,9 @@
         <property name="createrId" type="java.lang.String">
             <column name="createrId" length="32" />
         </property>
+        <property name="userName" type="java.lang.String">
+            <column name="user_name" length="50" />
+        </property>
         <property name="createtime" type="java.sql.Timestamp">
             <column name="createtime" length="0" />
         </property>

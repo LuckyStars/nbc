@@ -177,6 +177,14 @@
     		$("#step_trans_div").show();
     	}
     	
+    	function subDiscForm(progId){
+    		if($.trim($("#disc__content_"+progId).val())==""){
+    			alert("请填写内容");
+    			return;
+    		}
+    		$("#disc_form_"+progId).submit();
+    	}
+    	
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -250,36 +258,29 @@
               </p>
               <span class="gray">(2013-4-20 10:00)</span> </dd>
       	</dl>
-      	<dl class="new1">
-            <dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-      	</dl>
-      	<dl class="new1">
-            <dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-      	</dl>
       	
         <p class="pack1">查看所有批示</p>
 	</div>
 	
+	<!-- 评论  -->
     <div class="box">
     	<div class="box-top">
        		<ul>
-            	<li class="two"><a href="javascript:;">校长评论</a>
+            	<li class="two"><a href="javascript:;">评论</a>
             		<img src="${prc }/function/detail-step/images/up1.jpg"
             	 	class="img" style="margin-top:10px; display:block; float:left; cursor:pointer;"/>
             	</li>
           	</ul>
         </div>
         <div class="conshen box-down">
-          	<input type="text"  class="erro"/>
-          	<a href="#" class="btn">发表</a>
+        
+        	<form action="${prc}/scMaster2/add_disc.action" method="post"
+        	id="disc_form_${prog.id }"
+        	 >
+	          	<input type="text" id="disc__content_${prog.id }" name="disscus.content" class="erro"/>
+	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
+        	</form>
+        	
           	<dl class="new">
             	<dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
             	<dd>
@@ -303,19 +304,11 @@
 	              	<span class="gray">(32分钟前)</span>
               	</dd>
           	</dl>
-          	<dl class="new">
-         		<dt><img src="img/tu.jpg" /></dt>
-            	<dd>
-              		<p>
-              			<span class="blue">金校长：</span>
-              			好好学习天天向上<br />
-              		</p>
-              		<span class="gray">(32分钟前)</span> 
-              	</dd>
-          	</dl>
           	<p class="pack">查看所有评论</p>
 		</div>
-	</div>	
+	</div>
+	
+	<!-- 评论 END -->
 	</c:forEach>
 	
    	<div class="mids">
@@ -423,15 +416,6 @@
           	<p class="pack">查看所有评论</p>
 		</div>
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
     <div class="mids"> <a class="h4"><span>·六一儿童节</span><img src="${prc }/function/detail-step/images/up.png" width="13" height="13"  class="mids-img"/><img src="images/ico3.png"  class="ico4"/><img src="images/ico4.png"  class="ico8"/><img src="images/ico5.png" /><img src="images/ico6.png"    class="ico5"/><img src="images/ico7.png" /><img src="images/ico8.png" class="ico7"/></a>
         <div class="conls"> <a><img src="images/shou.png" width="13" height="13"  class="shou"/>(20)</a><span> | </span><a><img src="images/ico1.png"  width="13" height="13" class="ico1"/>（120）</a><span> | </span> <a><img src="images/ico2.png"   width="13" height="13" class="ico2"/>（5620）</a> </div>
@@ -688,9 +672,6 @@
 
 	
 	<!--弹出层 转移步骤-->
-	<script type="text/javascript">
-	
-	</script>
 	<div class="adds3" id="step_trans_div" >
   		<div class="add-tops3">
     		<p>转移</p>
