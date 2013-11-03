@@ -256,6 +256,17 @@
 	        });
         </script>
         
+        <div class="conshen">
+        	<form action="${prc}/scMaster2/add_comment.action" method="post"
+        	id="disc_form_${prog.id }"
+        	 >
+	          	<input type="text" id="disc__content_${prog.id }" name="disscus.content" class="erro"/>
+	          	<input type="hidden" name="stepId" value="${id }"/>
+	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
+	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
+        	</form>
+        </div>
+        
         <dl class="new1">
             <dt>
             	<img src="${prc }/function/detail-step/img/tu.jpg" />
@@ -268,13 +279,6 @@
               	<span class="gray">(2013-4-20 10:00)</span>
             </dd>
         </dl>
-        <dl class="new1">
-            <dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-      	</dl>
       	
         <p class="pack1">查看所有批示</p>
 	</div>
