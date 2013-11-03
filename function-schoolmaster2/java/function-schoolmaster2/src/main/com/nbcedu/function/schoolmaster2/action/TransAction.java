@@ -30,10 +30,10 @@ public class TransAction extends BaseAction{
 			for(int i=0;i<ids.length;i++){
 				trans1 = new SM2SubjectTrans();
 				trans1.setSubId(subjectId);
-				trans1.setUserName(names[1]);
-				trans1.setUserUid(ids[1]);
+				trans1.setUserName(names[0]);
+				trans1.setUserUid(ids[0]);
 				trans1.setContent(content);
-				this.transBiz.add(trans);
+				this.transBiz.add(trans1);
 			}
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}

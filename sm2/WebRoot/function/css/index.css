@@ -273,14 +273,12 @@ h1.title span.text {
 .nav11 {
 width:395px; height: 233px; margin:15px auto;
 }
-.nav11 span{
-    
-}
+
 .nav11 select{
-    width:115px; height:22px;
+    width:200px; height:22px;
 }
 .nav11 .input{
-    width:120px; height:22px;
+    width:200px; height:22px; 
 }
 .more {
 	clear:both;

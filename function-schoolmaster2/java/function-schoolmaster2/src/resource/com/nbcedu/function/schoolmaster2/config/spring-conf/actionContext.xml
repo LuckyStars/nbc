@@ -17,6 +17,7 @@
 	<bean id="sm2SubjectAction" class="com.nbcedu.function.schoolmaster2.action.SubjectAction" scope="prototype" >
 		<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
 		<property name="sm2TypeBiz" ref="sm2TypeBiz"></property>
+		<property name="moduleBiz" ref="sm2ModuleBiz"></property>
 	</bean>
 	
 	<bean id="sm2UploadAction" class="com.nbcedu.function.schoolmaster2.action.UploadAction" scope="prototype" >

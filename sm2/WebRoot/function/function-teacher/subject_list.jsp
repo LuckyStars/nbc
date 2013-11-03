@@ -28,7 +28,7 @@
                 $(this).css("color", "#000");
             });
             $(".cx1").click(function(){
-            	$.post("toAdd_subject.action",{moduleId : "${moduleId}" },function(data){
+            	$.post("toAdd_subject.action",{moduleId : "${subjectVo.moduleId}" },function(data){
             		if(data != ''){
             			$("#addsubjectDiv").html(data);
             			$(".bg").css("display", "block");
@@ -106,9 +106,12 @@
     			url:"update_subject.action",
     			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
     			success:function(data){
-    				var dateObj=$.parseJSON(data);
-    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
-    				document.forms[0].submit();
+        			if(data==0){
+						alert("保存成功！");
+						document.forms[0].submit();
+            		}else{
+						alert("保存失败！");
+            		}
     			}
     		});
     	}
@@ -119,9 +122,12 @@
     			url:"add_subject.action",
     			data: {executeUsers:$("#cc").combotree('getText'),executeUsersId:users.toString(),checkUsers:checkUsers.toString()},
     			success:function(data){
-    				var dateObj=$.parseJSON(data);
-    				alert((0==dateObj.result)?"保存成功!":"保存失败!");
-    				document.forms[0].submit();
+    				if(data==0){
+						alert("保存成功！");
+						document.forms[0].submit();
+            		}else{
+						alert("保存失败！");
+            		}
     			}
     		});
     	}

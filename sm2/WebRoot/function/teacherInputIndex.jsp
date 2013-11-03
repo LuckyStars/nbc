@@ -13,13 +13,26 @@
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
 			<c:forEach items="${modules}" var="module">
-				<dl class="warp">
-					<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
-						<dt>
-							<img src="${prc}/function/img/tu4.jpg" />
-						</dt>
-						<dd>${module.name}</dd> </a>
-				</dl>
+				<c:if test="${module.flag==0}">
+					<dl class="warp">
+						<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
+							<dt>
+								<img src="${prc}/function/img/tu4.jpg" />
+							</dt>
+							<dd>${module.name}</dd> </a>
+					</dl>
+				</c:if>
+				<c:if test="${module.flag==1}">
+					<pri:showWhenManager>
+						<dl class="warp">
+							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
+								<dt>
+									<img src="${prc}/function/img/tu4.jpg" />
+								</dt>
+								<dd>${module.name}</dd> </a>
+						</dl>
+					</pri:showWhenManager>
+				</c:if>
 			</c:forEach>		
 			<dl class="warp">
 				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">

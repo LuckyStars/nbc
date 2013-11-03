@@ -19,5 +19,8 @@
         <property name="createrId" type="java.lang.String">
             <column name="CREATERID" length="32" />
         </property>
+         <property name="flag" type="java.lang.Integer">
+            <column name="FLAG" length="32" />
+        </property>
     </class>
 </hibernate-mapping>
