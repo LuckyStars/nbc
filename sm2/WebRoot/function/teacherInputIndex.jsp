@@ -15,7 +15,7 @@
 			<c:forEach items="${modules}" var="module">
 				<c:if test="${module.flag==0}">
 					<dl class="warp">
-						<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
+						<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 							<dt>
 								<img src="${prc}/function/img/tu4.jpg" />
 							</dt>
@@ -25,13 +25,22 @@
 				<c:if test="${module.flag==1}">
 					<pri:showWhenManager>
 						<dl class="warp">
-							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
+							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
 									<img src="${prc}/function/img/tu4.jpg" />
 								</dt>
 								<dd>${module.name}</dd> </a>
 						</dl>
 					</pri:showWhenManager>
+				</c:if>
+				<c:if test="${module.flag==2}">
+						<dl class="warp">
+							<a href="${prc}/scMaster2/findB_subject.action?subjectVo.moduleId=${module.id}">
+								<dt>
+									<img src="${prc}/function/img/tu4.jpg" />
+								</dt>
+								<dd>${module.name}</dd> </a>
+						</dl>
 				</c:if>
 			</c:forEach>		
 			<dl class="warp">

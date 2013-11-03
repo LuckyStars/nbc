@@ -77,8 +77,8 @@
     		if(confirm("确定要删除吗?")){
     			$.post("delete_subject.action", { id: subjectId},
     				function(data){
-    					var dateObj=$.parseJSON(data);
-    					if(0==dateObj.result){
+    					
+    					if(0==data){
     						document.forms[0].submit();
     					}else{
     						alert("删除失败");

@@ -12,6 +12,8 @@ public class TSm2Module implements java.io.Serializable {
 	private String discription;
 	private Date createtime;
 	private String createrId;
+	private String parentId;
+	//为1：主管显示
 	private int flag;
 
 	// Constructors
@@ -78,6 +80,14 @@ public class TSm2Module implements java.io.Serializable {
 
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 
 }

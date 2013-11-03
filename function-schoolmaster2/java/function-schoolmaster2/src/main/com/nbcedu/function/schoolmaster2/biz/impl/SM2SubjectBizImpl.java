@@ -110,5 +110,10 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		s.setCheckUsers(subject.getCheckUsers());
 		this.sm2SubjectDao.update(s);
 	}
+	@Override
+	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,
+			String exceuteUserId) {
+		return this.sm2SubjectDao.findByModuleIdExceuteUserId(moduleId, exceuteUserId);
+	}
 	
 }

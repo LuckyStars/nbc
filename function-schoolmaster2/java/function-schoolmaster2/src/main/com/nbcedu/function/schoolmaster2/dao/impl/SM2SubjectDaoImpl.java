@@ -1,6 +1,8 @@
 package com.nbcedu.function.schoolmaster2.dao.impl;
 
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Expression;
 
@@ -26,4 +28,15 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 		addc.add(Expression.eq("userId", subject.getExcuteUserId()));
 		return this.searchPaginated(c);
 	}
+
+	@Override
+	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,
+			String exceuteUserId) {
+		StringBuilder hql = new StringBuilder("");
+		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
+		hql.append("AND sub.id in (SELECT subjectId FROM TSm2SubjectUser m WHERE m.userId = ?) ");
+		hql.append("ORDER BY sub.createTime DESC");
+		return this.find(hql.toString(), new Object[]{moduleId,exceuteUserId});
+	}
+
 }

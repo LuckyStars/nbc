@@ -23,6 +23,8 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	
 	public List<TSm2Subject> findBYModuleId(String moduleId);
 	
+	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,String exceuteUserId);
+	
 	public void update(TSm2Subject subject);
 	
 }

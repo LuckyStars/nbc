@@ -50,7 +50,7 @@ public class SubjectAction extends BaseAction{
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if("lssx".equals(moduleId)|| "ndzx".equals(moduleId)){
-			subjects = this.sm2SubjectBiz.findBYModuleId(moduleId);
+			subjects = this.sm2SubjectBiz.findBYModuleId("ndzx");
 		}
 		subject = this.sm2SubjectBiz.findById(id);
 		this.getRequest().setAttribute("types", types);
@@ -102,10 +102,12 @@ public class SubjectAction extends BaseAction{
 			checkUsers.add(user);
 		}
 		subject.setCheckUsers(checkUsers);
+		subject.setLastUpdateTime(new Date());
 		this.sm2SubjectBiz.update(subject);
-		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
+		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
 	public String find(){
+		module = this.moduleBiz.findById(subjectVo.getModuleId());
 //		判断角色 如果是主管则查询所有自己的，否则只查看主管指定执行者可看
 		if(Utils.isManager()){
 			subjectVo.setCreaterId(this.getUserId());
@@ -116,10 +118,20 @@ public class SubjectAction extends BaseAction{
 		}
 		return "list";
 	}
-	
+	public String findB(){
+		//判断模块是否为子模块，如果为子则查询父模块所有并跳转模块列表
+		module = this.moduleBiz.findById(subjectVo.getModuleId());
+		if(!StringUtil.isEmpty(module.getParentId())){
+			List<TSm2Subject> list = this.sm2SubjectBiz.
+			findByModuleIdExceuteUserId(module.getParentId(), this.getUserId());
+			this.getRequest().setAttribute("list",list);
+		}
+		return "listB";
+	}
+
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
-		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
+		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
 	/**
 	 * 判断重名

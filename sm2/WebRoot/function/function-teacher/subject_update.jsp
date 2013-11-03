@@ -35,6 +35,7 @@
  </script>
  <form id="saveForm" method="post">
  	<input type="hidden" name="subject.id" value="${id}"/>
+ 		<input type="hidden" name="subject.moduleId" value="${moduleId }"/>
 	<div class="bg"></div>
       <div class="add" style="height: 450px;">
        <div class="add-top">
