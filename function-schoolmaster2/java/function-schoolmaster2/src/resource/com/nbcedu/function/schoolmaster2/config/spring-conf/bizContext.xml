@@ -60,4 +60,7 @@
 	<bean id="sm2TransBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2TransBizImpl">
 		<property name="transDao" ref="sm2TransDao"></property>
 	</bean>
+	<bean id="sm2CommentBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2CommentBizImpl">
+		<property name="comDao" ref="sm2CommentDao" />
+	</bean>
 </beans>
