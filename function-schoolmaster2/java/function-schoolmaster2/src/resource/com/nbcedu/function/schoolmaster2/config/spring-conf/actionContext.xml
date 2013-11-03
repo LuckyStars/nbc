@@ -29,6 +29,7 @@
 		<property name="progBiz" ref="sm2ProgressBiz" />
 		<property name="readsBiz" ref="sm2ReadsBiz" />
 		<property name="disscusBiz" ref="sm2DisscusBiz" />
+		<property name="comBiz" ref="sm2CommentBiz" />
 	</bean>
 	
 	<bean id="sm2ZanAction" class="com.nbcedu.function.schoolmaster2.action.ZanAction" scope="prototype" >
@@ -64,5 +65,8 @@
 	</bean>
 	<bean id="sm2TransAction" class="com.nbcedu.function.schoolmaster2.action.TransAction" scope="prototype" >
 		<property name="transBiz" ref="sm2TransBiz" />
+	</bean>
+	<bean id="sm2CommentAction" class="com.nbcedu.function.schoolmaster2.action.CommentAction" scope="prototype">
+		<property name="comBiz" ref="sm2CommentBiz" />
 	</bean>
 </beans>

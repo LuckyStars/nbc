@@ -74,5 +74,12 @@
 		<action name="*_trans" method="{1}" class="sm2TransAction" ></action>
 		
 		<action name="*_reads" method="{1}" class="sm2ReadsAction" ></action>
+		
+		<action name="*_comment" method="{1}" class="sm2CommentAction">
+			<result name="refreshStep" type="redirectAction">
+				<param name="actionName">showStep_master</param>
+				<param name="id">${stepId}</param>
+			</result>
+		</action>
 	</package>
 </struts>
