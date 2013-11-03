@@ -180,6 +180,14 @@
     		$("#disc_form_"+progId).submit();
     	}
     	
+    	function subCommForm(progId){
+    		if($.trim($("#comm__content_"+progId).val())==""){
+    			alert("请填写内容");
+    			return;
+    		}
+    		$("#comm_form_"+progId).submit();
+    	}
+    	
     	function showReads(progId){
     		$("#reads_contents").html("");
     		$.post("${prc}/scMaster2/showReads_reads.action?id="+progId,function(data){
@@ -255,18 +263,35 @@
 	        	editor${prog.id}.readonly(true);
 	        });
         </script>
-        
+    
+    	<!-- 增加批示 -->    
         <div class="conshen">
         	<form action="${prc}/scMaster2/add_comment.action" method="post"
-        	id="disc_form_${prog.id }"
+        	id="comm_form_${prog.id }"
         	 >
-	          	<input type="text" id="disc__content_${prog.id }" name="disscus.content" class="erro"/>
+	          	<input type="text" id="comm__content_${prog.id }" name="comm.content" class="erro"/>
 	          	<input type="hidden" name="stepId" value="${id }"/>
-	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
-	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
+	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
+	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>
         	</form>
         </div>
-        
+        <!-- 增加批示 END  -->   
+        <c:forEach items="${comMap}" var="comEntry">
+       		<c:if test="${comEntry.key==prog.id }">
+       			<c:forEach items="${comEntry.value }" var="com">
+       				<dl class="new">
+		            	<dd>
+		              		<p>
+		              			<span class="blue">${com.userName }：</span>
+		              			<c:out value="${com.content }" escapeXml="true"></c:out><br />
+		              		</p>
+		              		<span class="gray float">(<fmt:formatDate value="${com.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/>)</span>
+		              	</dd>
+		             	<div style="clear:both;"></div>
+		          	</dl>
+       			</c:forEach>
+       		</c:if>
+       	</c:forEach>
         <dl class="new1">
             <dt>
             	<img src="${prc }/function/detail-step/img/tu.jpg" />

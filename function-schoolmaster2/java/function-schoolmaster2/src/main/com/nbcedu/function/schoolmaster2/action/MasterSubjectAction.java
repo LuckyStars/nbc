@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.nbcedu.function.schoolmaster2.biz.SM2CommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
@@ -22,6 +23,7 @@ import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Comment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
@@ -48,6 +50,7 @@ public class MasterSubjectAction extends BaseAction{
 	private Sm2ProgressBiz progBiz;
 	private Sm2ReadsBiz readsBiz;
 	private SM2DisscusBiz disscusBiz;
+	private SM2CommentBiz comBiz;
 	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
@@ -109,8 +112,25 @@ public class MasterSubjectAction extends BaseAction{
 					
 					this.getRequestMap().put("disMap", disMap);
 				}
-			}
+			}/*disCuz map*/
 			
+			/*comment map*/{
+				List<TSm2Comment> comList = this.comBiz.findByProgIds(progIds,5);
+				if(!CollectionUtils.isEmpty(comList)){
+					
+					HashMap<String, List<TSm2Comment>> comMap = 
+						new HashMap<String, List<TSm2Comment>>(comList.size());
+					
+					for (TSm2Comment comment : comList) {
+						if(!comMap.containsKey(comment.getProgressId())){
+							comMap.put(comment.getProgressId(),
+									new ArrayList<TSm2Comment>());
+						}
+						comMap.get(comment.getProgressId()).add(comment);
+					}
+					this.getRequestMap().put("comMap", comMap);
+				}
+			}/*comment map*/
 			
 			
 		}
@@ -118,6 +138,7 @@ public class MasterSubjectAction extends BaseAction{
 		
 		return "stepDetail";
 	}
+	
 	public void addStep(){
 		this.step.setCreaterId(this.getUserId());
 		this.step.setCreateTime(new Date());
@@ -190,6 +211,9 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setDisscusBiz(SM2DisscusBiz disscusBiz) {
 		this.disscusBiz = disscusBiz;
+	}
+	public void setComBiz(SM2CommentBiz comBiz) {
+		this.comBiz = comBiz;
 	}
 	
 }
