@@ -78,5 +78,22 @@
 		WHERE st.subjectId = sub.subjectId;
 		]]>
     </sql-query>
-    
+    <sql-query>
+    	SELECT t_sm2_progress.*,rcount.rcou,zcount.zcou
+		FROM 
+			t_sm2_progress left join 
+			(
+				SELECT count(progress_id) as rcou,progress_id 
+				FROM t_sm2_reads 
+				GROUP BY progress_id
+			) rcount
+			on t_sm2_progress.id = rcount.progress_id
+			left join 
+			(
+				SELECT count(progress_id) as zcou,progress_id 
+				FROM t_sm2_zan 
+				GROUP BY progress_id
+			) zcount
+			on t_sm2_progress.id = zcount.progress_id;
+    </sql-query>
 </hibernate-mapping>
