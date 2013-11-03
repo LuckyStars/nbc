@@ -60,11 +60,6 @@
                 $(".bg").show();
                 $(".adds").show();
             });
-            $(".ico1").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds2").show();
-            });
             $(".ico7").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
@@ -185,6 +180,27 @@
     		$("#disc_form_"+progId).submit();
     	}
     	
+    	function showReads(progId){
+    		$("#reads_contents").html("");
+    		$.post("${prc}/scMaster2/showReads_reads.action?id="+progId,function(data){
+    			if(data.length<=0){
+    				return;
+    			}
+    			for(var i = 0;i<data.length;i++){
+    				
+	    			$('<dl class="comments"><dd><p><span '+ 
+	    					function (isTrans){return isTrans=='true'?'':'class="blue"';}(data[i].trans)
+	    					+'>'
+	 					+ data[i].name +
+	   					'</span><br /></p><span class="gray">('
+						+ data[i].time + 
+						')</span></dd></dl>').appendTo($("#reads_contents"));
+    			}
+    		});
+    		
+    		$("#reads_div").show();
+    	}
+    	
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -208,14 +224,15 @@
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
         		onclick="showZans('${prog.id}');"
-        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">20</span>)
+        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">20</span>)<%--赞 --%>
         	</a>
         	
         	<span> | </span>
         	
         	<a>
         		<img src="${prc }/function/detail-step/images/ico1.png" 
-        		width="13" height="13" class="ico1"/>（120）
+        		onclick="showReads('${prog.id}')"
+        		width="13" height="13" class="ico1"/>（120）<%--阅读 --%>
         	</a>
        		
        		<span> | </span>
@@ -324,9 +341,11 @@
           	<p class="pack"><a >查看所有评论</a></p>
 		</div>
 	</div>
-	
 	<!-- 评论 END -->
+	
 	</c:forEach>
+	
+	
 	
    	<div class="mids">
    		<a class="h4">
@@ -569,67 +588,30 @@
           	</dl>
 		</div>
 	</div>
-<!--弹出层 赞-->
+	<!--弹出层 赞 END-->
 
 
 
-     <!--弹出层 阅读-->
-    <div class="adds2">
-  <div class="add-tops2">
-    <p>阅读</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs2">
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-      <dl class="comments">
-            <dt><img src="images/tu.jpg" /></dt>
-            <dd>
-              <span class="grays">金强</span>
-              <span class="grays">2013-09-10</span>
-                <span class="grays">2013-09-13</span>
-            </dd>
-          </dl>
-</div>
-</div>
- <!--弹出层 阅读-->
+    <!--弹出层 阅读-->
+	<div class="adds2" id="reads_div">
+  		<div class="add-tops2">
+    		<p>阅读</p>
+    		<img src="${prc }/function/detail-step/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+    	</div>
+    	
+  		<div class="add-downs2" id="reads_contents">
+   			<dl class="comments">
+            	<dt><img src="${prc }/function/detail-step/images/tu.jpg" /></dt>
+            	<dd>
+              		<span class="grays">金强</span>
+	              	<span class="grays">2013-09-10</span>
+	                <span class="grays">2013-09-13</span>
+            	</dd>
+          	</dl>
+		</div>
+		
+	</div>
+ 	<!--弹出层 阅读 END -->
  
 
     <!--弹出层  转发-->
@@ -646,20 +628,6 @@
                   <p class="bigs"><input type="checkbox" /><span>办公室</span></p>
                   <p class="smalls"><input type="checkbox" /><span>金强</span></p>
                   <p class="smalls"><input type="checkbox" /><span>汪忱</span></p>
-              </li>
-              <li>
-                  <p class="bigs"><input type="checkbox" /><span>教务处</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>李丽霞</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>李雪</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>张光北</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>王东</span></p>
-              </li>
-              <li>
-                  <p class="bigs"><input type="checkbox" /><span>教务处</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>陈凤伟</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>陈凤伟</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>陈凤伟</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>陈凤伟</span></p>
               </li>
           </ul>
           <div style="clear:both"></div>
