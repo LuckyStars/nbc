@@ -6,6 +6,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 /**
  * 评论action
@@ -17,7 +18,6 @@ public class DisscusAction extends BaseAction{
 	private SM2DisscusBiz disscusBiz;
 	
 	private TSm2Disscus disscus = new TSm2Disscus();
-	private String progId;
 	private String stepId;
 	
 	/**
@@ -26,6 +26,7 @@ public class DisscusAction extends BaseAction{
 	public String add(){
 		disscus.setCreaterId(this.getUserId());
 		disscus.setCreateTime(new Date());
+		disscus.setUserName(Utils.curUserName());
 		this.disscusBiz.add(disscus);
 		return "refreshStep";
 	}
@@ -42,12 +43,6 @@ public class DisscusAction extends BaseAction{
 	}
 	public void setDisscusBiz(SM2DisscusBiz disscusBiz) {
 		this.disscusBiz = disscusBiz;
-	}
-	public String getProgId() {
-		return progId;
-	}
-	public void setProgId(String progId) {
-		this.progId = progId;
 	}
 	public String getStepId() {
 		return stepId;
