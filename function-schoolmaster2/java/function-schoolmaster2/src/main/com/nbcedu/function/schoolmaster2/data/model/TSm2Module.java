@@ -12,6 +12,7 @@ public class TSm2Module implements java.io.Serializable {
 	private String discription;
 	private Date createtime;
 	private String createrId;
+	private int flag;
 
 	// Constructors
 
@@ -21,11 +22,12 @@ public class TSm2Module implements java.io.Serializable {
 
 	/** full constructor */
 	public TSm2Module(String name, String discription, Date createtime,
-			String createrId) {
+			String createrId,int flag ) {
 		this.name = name;
 		this.discription = discription;
 		this.createtime = createtime;
 		this.createrId = createrId;
+		this.flag = flag;
 	}
 
 	// Property accessors
@@ -68,6 +70,14 @@ public class TSm2Module implements java.io.Serializable {
 
 	public void setCreaterId(String createrid) {
 		this.createrId = createrid;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 }

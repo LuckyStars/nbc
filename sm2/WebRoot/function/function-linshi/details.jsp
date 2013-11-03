@@ -223,11 +223,13 @@
 				}
 			}
         	 if(s.length>0){
-	         	var content = $("textarea[name='trans.content']").val("");
+	         	var content = $("textarea[name='trans.content']").val();
+	         	alert(content);
 	    		$.post("add_trans.action",{transUids:s,transNames:n,content:content}, function(data) {
 	      				$("textarea[name='trans.content']").val("");
 		   				 $(".bg").hide();
 		   				 $(".adds4").hide();
+		   				$("textarea[name='trans.content']").val("");
 		   				 alert("发送成功！");
 	     			});
         	 }else{ alert("请选择转发人！");}

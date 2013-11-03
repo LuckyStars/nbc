@@ -7,12 +7,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
@@ -23,19 +25,21 @@ import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 @SuppressWarnings("serial")
 public class SubjectAction extends BaseAction{
 	
-	private String moduleId;
-	
 	private TSm2Subject subject = new TSm2Subject(); 
 	private SubjectVo subjectVo = new SubjectVo();
+	private TSm2Module module = new TSm2Module();
+	
+	private String moduleId;
 	
 	private SM2SubjectBiz sm2SubjectBiz;
 	private Sm2TypeBiz sm2TypeBiz;
+	private SM2ModuleBiz moduleBiz;
 	
 	public String toAdd(){
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if(moduleId.equals("lssx")|| moduleId.equals("ndzx")){
-			subjects = this.sm2SubjectBiz.findBYModuleId(moduleId);
+			subjects = this.sm2SubjectBiz.findBYModuleId(subjectVo.getModuleId());
 		}
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
@@ -78,7 +82,7 @@ public class SubjectAction extends BaseAction{
 		subject.setCreaterId(this.getUserId());
 		subject.setCreaterName(UCService.findNameByUid(this.getUserId()));
 		this.sm2SubjectBiz.add(subject);
-		Struts2Util.renderJson("{'result':0}", "encoding:UTF-8");
+		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
 	
 	public void update(){
@@ -140,14 +144,6 @@ public class SubjectAction extends BaseAction{
 		return subject;
 	}
 
-	public String getModuleId() {
-		return moduleId;
-	}
-
-	public void setModuleId(String moduleId) {
-		this.moduleId = moduleId;
-	}
-
 	public void setSubject(TSm2Subject subject) {
 		this.subject = subject;
 	}
@@ -166,6 +162,26 @@ public class SubjectAction extends BaseAction{
 
 	public void setSubjectVo(SubjectVo subjectVo) {
 		this.subjectVo = subjectVo;
+	}
+
+	public void setModuleBiz(SM2ModuleBiz moduleBiz) {
+		this.moduleBiz = moduleBiz;
+	}
+
+	public TSm2Module getModule() {
+		return module;
+	}
+
+	public void setModule(TSm2Module module) {
+		this.module = module;
+	}
+
+	public String getModuleId() {
+		return moduleId;
+	}
+
+	public void setModuleId(String moduleId) {
+		this.moduleId = moduleId;
 	}
 	
 }

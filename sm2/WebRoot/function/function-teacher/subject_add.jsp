@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" type="text/css" href="${prc}/function/css/index.css" type="text/css"></link>
+<link rel="stylesheet" type="text/css" href="${prc}/sm2/function/css/index.css" type="text/css"></link>
 <script type="text/javascript">
  $(function () {
             $(".add-top img").click(function () {
@@ -34,24 +34,23 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p> 类型：<select name="subject.typeId">
+               		<p style="margin:5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<select name="subject.typeId">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
                    </select></p>
 				</c:if>
-                <p>事项名称：
-                	<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
+                <p style="margin:5px;">事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
  					<c:if test="${not empty subjects}">
-	                  <p>关联重心工作：<select name="subject.parentId">
+	                  <p >关联重心工作：<select name="subject.parentId">
 	                   <c:forEach items="${subjects}" var="obj">
 	                   	<option value="${obj.id }">${obj.title}</option>
 	                   	</c:forEach>
 	                   </select>
 	             	  </p>
                    </c:if>
-					<p>　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
-                    <p>　审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+					<p style="margin:5px;">　执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+                    <p style="margin:5px;">　审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
                        <textarea id="textContent"  class="big" name="subject.content" ></textarea>
