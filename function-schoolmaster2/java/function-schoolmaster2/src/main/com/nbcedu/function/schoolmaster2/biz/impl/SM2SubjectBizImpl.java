@@ -115,5 +115,17 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 			String exceuteUserId) {
 		return this.sm2SubjectDao.findByModuleIdExceuteUserId(moduleId, exceuteUserId);
 	}
-	
+	@Override
+	public PagerModel findBySubjectMaster(SubjectVo subject) {
+		List<Object> list = new ArrayList<Object>();
+		list.add(subject.getModuleId());
+		list.add(subject.getCheckUserId());
+		StringBuilder hql = new StringBuilder("");
+		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
+		hql.append("AND sub.id in (SELECT subjectId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
+		hql.append("ORDER BY sub.createTime DESC");
+		Object[] params = new Object[list.size()];
+		list.toArray(params);
+		return this.sm2SubjectDao.searchPaginated(hql.toString(),params);
+	}
 }

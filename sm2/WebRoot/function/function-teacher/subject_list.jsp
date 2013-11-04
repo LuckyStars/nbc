@@ -37,16 +37,6 @@
           	  });
                
             });
-            $("#edit").click(function(){
-            	$.post("toUpdate_subject.action",function(data){
-            		if(data != ''){
-            			$("#addsubjectDiv").html(data);
-            			$(".bg").css("display", "block");
-                        $(".add").css("display", "block");
-            		}
-          	  });
-            });
-            
             $(".add-top img").click(function () {
                 $(".bg").css("display", "none");
                 $("#add").css("display", "none");
@@ -66,18 +56,15 @@
       
         //异步新建提交
     	function matterSubmit(){
-    		if(!doValid()){return;};
-    		isSubjectExist();
+    		if(doValid()){isSubjectExist();}
     	}
     	function updateSubmit(){
-    		if(!doValid()){return;};
-    		doUpdate();
+    		if(doValid()){	doUpdate();}
     	}
     	function on_delete(subjectId){
     		if(confirm("确定要删除吗?")){
     			$.post("delete_subject.action", { id: subjectId},
     				function(data){
-    					
     					if(0==data){
     						document.forms[0].submit();
     					}else{
@@ -145,7 +132,7 @@
 <input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
 <input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${subjectVo.moduleName }</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${module.name }</span></h1>
         <div class="table_box fixed">
             <div class="nav">
                 <span>事项标题:</span>
@@ -182,7 +169,7 @@
 	                <td align="center">${sub.id}</td>
 	                <td align="center">
 	                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
-	               	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')" id="edit">编辑</a>
+	               	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')">编辑</a>
 	               	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>
 	                </td>
                 </pri:showWhenManager>
@@ -192,7 +179,7 @@
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
         		<pg:pager url="${prc}/scMaster2/find_subject.action"
-					items="${pm.total}" maxPageItems="${pm.totalPageNo}" maxIndexPages="7" export="currentPageNumber=pageNumber">
+					items="${pm.totalPageNo}" maxPageItems="${pm.total}" maxIndexPages="7" export="currentPageNumber=pageNumber">
 				<pg:param name="subjectVo.moduleId" value="${subjectVo.moduleId}"/>
 				<pg:param name="subjectVo.moduleName" value="${subjectVo.moduleName}"/>
 				总计${pm.total}条
@@ -230,7 +217,11 @@
      <script>
       function doValid(){
 		 if($("#addSubjectInput").val()==''){
-			 alert("请添加主题");
+			 alert("请添加主题！");
+				return false;
+		 }
+		 if($("#cc").combotree('getValues')==''){
+			 alert("请选择执行人！");
 				return false;
 		 }
     	  var text = $("#textContent").val();
