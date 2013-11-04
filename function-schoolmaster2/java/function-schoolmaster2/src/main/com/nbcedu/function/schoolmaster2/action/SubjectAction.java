@@ -134,6 +134,7 @@ public class SubjectAction extends BaseAction{
 		return "listB";
 	}
 	public String findMaster(){
+		subjectVo.setCheckUserId(this.getUserId());
 		module = this.moduleBiz.findById(subjectVo.getModuleId());
 		pm = this.sm2SubjectBiz.findBySubjectMaster(subjectVo);
 		return module.getId()+"list";

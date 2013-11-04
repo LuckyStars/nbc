@@ -22,6 +22,9 @@
         <property name="flag" type="java.lang.Integer">
             <column name="flag" />
         </property>
+          <property name="progress" type="java.lang.Integer">
+            <column name="progress" />
+        </property>
         <property name="departmentId" type="java.lang.String">
             <column name="departmentId" length="32" />
         </property>
