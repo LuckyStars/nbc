@@ -1,6 +1,10 @@
-2013-10-30 15:58:29 line 1:84: unexpected token: (
-2013-10-30 16:42:23 line 1:84: unexpected token: (
-2013-10-30 16:48:24 line 1:12: expecting IDENT, found '*'
-2013-10-30 16:48:24 line 1:81: unexpected token: (
-2013-10-30 16:49:20 line 1:87: unexpected token: (
-2013-10-30 19:10:32 Error parsing XML: XML InputStream(40) Attribute "lazy" with value "fasle" must have a value from the list "true false extra ".
+2013-11-04 11:07:50 Unsuccessful: alter table t_sm2_subject_trans add column content varchar(65535)
+2013-11-04 11:07:50 Column length too big for column 'content' (max = 21845); use BLOB or TEXT instead
+2013-11-04 11:08:01 Unsuccessful: alter table t_sm2_subject_trans add column content varchar(65535)
+2013-11-04 11:08:01 Column length too big for column 'content' (max = 21845); use BLOB or TEXT instead
+2013-11-04 11:08:27 Unsuccessful: alter table t_sm2_subject_trans add column content varchar(65535)
+2013-11-04 11:08:27 Column length too big for column 'content' (max = 21845); use BLOB or TEXT instead
+2013-11-04 11:08:44 Unsuccessful: alter table t_sm2_subject_trans add column content varchar(65535)
+2013-11-04 11:08:44 Column length too big for column 'content' (max = 21845); use BLOB or TEXT instead
+2013-11-04 11:10:09 Unsuccessful: alter table t_sm2_subject_trans add column content varchar(65535)
+2013-11-04 11:10:09 Column length too big for column 'content' (max = 21845); use BLOB or TEXT instead
