@@ -115,5 +115,6 @@
     </table>
   </div>
 </div>
+<%@ include file="pager.jsp" %>
 </body>
 </html>
