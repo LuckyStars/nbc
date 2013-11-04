@@ -31,6 +31,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 /**
@@ -45,6 +46,7 @@ public class MasterSubjectAction extends BaseAction{
 	private TSm2Step step;
 	private List<ProgressVo> proList = new ArrayList<ProgressVo>();
 	private String name;
+	private MasterSubSearchVO search;
 	
 	private SM2MasterSubBiz subBiz;
 	private Sm2StepBiz stepBiz;
@@ -53,13 +55,15 @@ public class MasterSubjectAction extends BaseAction{
 	private SM2DisscusBiz disscusBiz;
 	private SM2CommentBiz comBiz;
 	
+	
+	
 	public String list(){
 		if(StringUtils.isNotBlank(moduleId)){
-			if(Utils.getDefaultMasterUids().contains(this.getUserId())){
-				this.pm = this.subBiz.findByModule(moduleId); 
-			}else{
-				this.pm = this.subBiz.findByMaster(moduleId, this.getUserId());
+			this.search.setModuleId(moduleId);
+			if(!Utils.getDefaultMasterUids().contains(this.getUserId())){
+				this.search.setReceiverUid( this.getUserId());
 			}
+			this.pm = this.subBiz.findBySearchVo(search); 
 			return "subList";
 		}else{
 			return "404";
@@ -215,6 +219,12 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setComBiz(SM2CommentBiz comBiz) {
 		this.comBiz = comBiz;
+	}
+	public MasterSubSearchVO getSearch() {
+		return search;
+	}
+	public void setSearch(MasterSubSearchVO search) {
+		this.search = search;
 	}
 	
 }
