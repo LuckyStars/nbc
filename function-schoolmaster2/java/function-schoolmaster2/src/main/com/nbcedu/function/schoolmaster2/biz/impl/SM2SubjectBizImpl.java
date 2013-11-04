@@ -118,11 +118,25 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 	@Override
 	public PagerModel findBySubjectMaster(SubjectVo subject) {
 		List<Object> list = new ArrayList<Object>();
-		list.add(subject.getModuleId());
-		list.add(subject.getCheckUserId());
 		StringBuilder hql = new StringBuilder("");
 		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
-		hql.append("AND sub.id in (SELECT subjectId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
+		list.add(subject.getModuleId());
+		if(subject.getBeginDate()!=null&&StringUtils.isNotBlank(subject.getBeginDate().toString())){
+			hql.append(" and createTime >? ");
+			list.add(subject.getBeginDate());
+		}
+		if(subject.getEndDate()!=null&&StringUtils.isNotBlank(subject.getEndDate().toString())){
+			hql.append(" and createTime <? ");
+			list.add(subject.getEndDate());
+		}
+		if(!StringUtil.isEmpty(subject.getTitle())){
+			hql.append(" and s.title like ?");
+			list.add("%"+subject.getTitle().trim()+"%");
+		}
+		
+		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
+		list.add(subject.getCheckUserId());
+		
 		hql.append("ORDER BY sub.createTime DESC");
 		Object[] params = new Object[list.size()];
 		list.toArray(params);

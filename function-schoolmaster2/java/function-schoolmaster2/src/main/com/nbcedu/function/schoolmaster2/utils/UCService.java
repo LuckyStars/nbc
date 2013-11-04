@@ -1,9 +1,12 @@
 package com.nbcedu.function.schoolmaster2.utils;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.nbcedu.integration.uc.client.facade.BaseClient;
+import com.nbcedu.integration.uc.client.vo.NbcUcDepartment;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
 
 /**
@@ -92,5 +95,12 @@ public class UCService {
 	
 	public static String findNameByUid(String uid){
 		return uid.equals("1") ? "admin" : client.queryPerson(1, uid).getName();
+	}
+	public static Map<String,String> findDepartmentByUid(String uid){
+		NbcUcDepartment l= client.queryDepartmentByUid(uid).get(0);
+		Map<String,String> m = new HashMap<String,String>();
+		m.put("id",l.getId() );
+		m.put("name", l.getName());
+		return m;
 	}
 }

@@ -21,9 +21,9 @@ public class TSm2Subject implements java.io.Serializable {
 	private Integer status;
 	private Date lastUpdateTime;
 	private String parentId;
-	private Integer mold;
 	private String typeId;
 	private Integer progress;
+	private String departmentName;
 	/*
 	 * 执行者
 	 */
@@ -36,25 +36,6 @@ public class TSm2Subject implements java.io.Serializable {
 	public TSm2Subject() {
 	}
 
-	/** full constructor */
-	public TSm2Subject(String createrId, Date createTime, String content,
-			Integer flag, String departmentId, String title, String moduleId,
-			Date lastUpdateTime, String parentId,String createrName,
-			Set<TSm2SubjectUser> excuteUsers,Integer mold,String typeId) {
-		this.createrId = createrId;
-		this.createTime = createTime;
-		this.content = content;
-		this.flag = flag;
-		this.departmentId = departmentId;
-		this.title = title;
-		this.moduleId = moduleId;
-		this.lastUpdateTime = lastUpdateTime;
-		this.parentId = parentId;
-		this.excuteUsers = excuteUsers;
-		this.mold = mold;
-		this.createrName = createrName;
-		this.typeId = typeId;
-	}
 
 	// Property accessors
 
@@ -154,14 +135,6 @@ public class TSm2Subject implements java.io.Serializable {
 		this.excuteUsers = excuteUsers;
 	}
 
-	public Integer getMold() {
-		return mold;
-	}
-
-	public void setMold(Integer mold) {
-		this.mold = mold;
-	}
-
 	public String getCreaterName() {
 		return createrName;
 	}
@@ -192,6 +165,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setProgress(Integer progress) {
 		this.progress = progress;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 }

@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${prc}/function/css/index.css" type="text/css"></link>
 <link rel="stylesheet" href="${prc}/function/css/gzt.css" type="text/css"></link>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="${prc}/function/js/schoolNews.js"></script>
+<script type="text/javascript" src="${prc}/function/function-masterSubList/js/schoolMaster.js"></script>
  <style>
  table th {
 	background:url(${prc}/function/img/table-bg.jpg) repeat-x;
@@ -75,7 +75,7 @@
 </head>
 <body>
 <div class="main" style="width: 990px;">
-  <div class="right">
+  <div class="right1">
     <h1>当前位置：首页 - <span style="color:#E00001">紧急重要事件处理</span></h1>
     <div class="right-input">
         <p><label>部门:</label><select></select></p>
@@ -92,20 +92,20 @@
         <th width="15%" scope="col">发布时间</th>
         <th width="25%" scope="col">操作</th>
       </tr>
-      <c:forEach items="${pm.data }" var="subject" varStatus="i">
+      <c:forEach items="${pm.datas }" var="subject" varStatus="i">
 	      <tr>
 	        <td align="center">${i.index+1 }</td>
-	        <td class="lan" align="center"><span class="word"><a href="detailedWorkbench.action?id=${subject.id }" target="_blank">${subject.title }</a> </span><img src="${appContext.skinPath}/img/now.png"  class="now"/></td>
+	        <td class="lan" align="center"><span class="word"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" target="_blank">${subject.title }</a> </span><img src="${appContext.skinPath}/img/now.png"  class="now"/></td>
 	        <td align="center">${subject.departmentId}</td>
 	        <td align="center">${subject.createrName}</td>
-	        <td align="center">${subject.createTime }</td>
+	        <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
 	        <td align="center">
-	        	<span style="margin:20px;"><img src="${prc}/function/img/right.jpg" /></span>
+<!--	        	<span style="margin:20px;"><img src="${prc}/function/img/right.jpg" /></span>-->
 	        	<c:if test="${subject.flag==1}">
-					<a href="#" onclick="javascript:stick('${subject.id }',0);" id="${subject.id }"><img src="${appContext.skinPath}/img/blue1.png"/></a>
+					<a href="#" onclick="javascript:stick('${subject.id }',0);" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
 				</c:if>
-				<c:if test="${subject.hasFlag !=1}">
-					<a href="#" onclick="javascript:stick('${subject.id }',1);" id="${subject.id }"><img src="${appContext.skinPath}/img/blue0.png"/></a>
+				<c:if test="${subject.flag !=1}">
+					<a href="#" onclick="javascript:stick('${subject.id }',1);" id="${subject.id }"><img src="${prc}/function/img/blue0.png"/></a>
 				</c:if>
 	        </td>
 	      </tr>

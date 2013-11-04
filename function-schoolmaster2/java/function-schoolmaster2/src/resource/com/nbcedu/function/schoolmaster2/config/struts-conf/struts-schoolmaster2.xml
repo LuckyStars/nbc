@@ -30,9 +30,9 @@
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
 			<result name="reload" type="redirectAction">find_subject</result>
 			
-			<result name="jjzylist">/function/function-teacher/jjzy_list.jsp</result>
-			<result name="qsbplist">/function/function-teacher/qsbp_list.jsp</result>
-			<result name="zjhblist">/function/function-teacher/zjhb_list.jsp</result>
+			<result name="jinjizhongyao">/function/function-masterSubList/jinjizhongyao_list.jsp</result>
+			<result name="qingshibaopi">/function/function-masterSubList/qingshibaopi_list.jsp</result>
+			<result name="zongjiehuibao">/function/function-masterSubList/zongjiehuibao_list.jsp</result>
 		</action>
 		
 		<action name="upload" method="upload" class="sm2UploadAction">

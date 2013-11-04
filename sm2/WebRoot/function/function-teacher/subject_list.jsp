@@ -156,7 +156,7 @@
 	                <td align="center">${sub[1].title }</td>
 	                <td align="center"><fmt:formatDate value="${sub[1].createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">${sub[1].createrName}</td>
-	                <td align="center">${sub[1].id}</td>
+	                <td align="center">${sub[1].departmentName}</td>
 	                <td align="center">
 	                	<span class="space"><a href="javascript:look('${sub[1].id}">查看</a></span>
 	                </td>
@@ -166,7 +166,7 @@
 	                <td align="center">${sub.title }</td>
 	                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">${sub.createrName}</td>
-	                <td align="center">${sub.id}</td>
+	                <td align="center">${sub.departmentName}</td>
 	                <td align="center">
 	                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
 	               	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')">编辑</a>

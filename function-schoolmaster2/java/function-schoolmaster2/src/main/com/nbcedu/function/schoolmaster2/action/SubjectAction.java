@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
@@ -68,6 +69,9 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
+		Map<String,String> m =  UCService.findDepartmentByUid(this.getUserId());
+		subject.setDepartmentName(m.get("name"));
+		subject.setDepartmentId(m.get("id"));
 		subject.setExcuteUsers(users);
 		String checkusersId = this.getRequest().getParameter("checkUsers");
 		if(!StringUtil.isEmpty(checkusersId)){
@@ -137,7 +141,7 @@ public class SubjectAction extends BaseAction{
 		subjectVo.setCheckUserId(this.getUserId());
 		module = this.moduleBiz.findById(subjectVo.getModuleId());
 		pm = this.sm2SubjectBiz.findBySubjectMaster(subjectVo);
-		return module.getId()+"list";
+		return module.getId();
 	}
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
