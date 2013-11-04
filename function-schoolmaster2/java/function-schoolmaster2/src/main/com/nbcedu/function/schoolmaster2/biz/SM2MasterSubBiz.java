@@ -32,5 +32,5 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @return
 	 * @author xuechong
 	 */
-	public PagerModel findBySearchVo(MasterSubSearchVO vo,String uid);
+	public PagerModel findBySearchVo(MasterSubSearchVO vo);
 }
