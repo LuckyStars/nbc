@@ -18,17 +18,15 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 
 	public PagerModel findByExceuteUserId(SubjectVo subject){
 		Criteria c = this.getSession().createCriteria(TSm2Subject.class);
-		c.add(Expression.eq("moduleId",subject.getModuleId() )).
-		setFetchMode("excuteUsers", FetchMode.JOIN).
-		add(Expression.eq("userId", subject.getExcuteUserId()));
+		c.add(Expression.eq("moduleId",subject.getModuleId() ));
 		if(!StringUtil.isEmpty(subject.getTitle())){
 			c.add(Expression.like("title","%"+subject.getTitle().trim()+"%" ));
 		}
 		if(subject.getBeginDate()!=null&&!StringUtil.isEmpty(subject.getBeginDate().toString())){
 			
 		}
-//		Criteria addc = c.createCriteria("excuteUsers");
-//		addc.add(Expression.eq("userId", subject.getExcuteUserId()));
+		Criteria addc = c.createCriteria("excuteUsers");
+		addc.add(Expression.eq("userId", subject.getExcuteUserId()));
 
 		return this.searchPaginated(c);
 	}
