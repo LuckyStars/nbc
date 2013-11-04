@@ -1,0 +1,752 @@
+﻿@charset "utf-8";
+/* ------------------CSS 基本样式--------------------- */
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, ul, button, textarea, iframe, table, th, td {
+	margin: 0;
+	padding: 0;
+}
+img {
+	border:0 none;
+}
+ul, li {
+	list-style-type: none;
+}
+body, input, select, button, textarea {
+	font-size: 12px;
+	color:#666;
+	font-family: Arial, Helvetica, sans-serif;
+}
+button {
+	cursor: pointer;
+}
+body {
+	background:#fff;
+	color:#333;/*overflow:hidden;whitespace:nowrap;text-overflow: ellipsis;*/
+}
+a {
+	text-decoration:none;
+	color:#275a8d;
+}
+a:active, a:hover {
+	text-decoration:none;
+}
+a:focus {
+	outline: none;
+}
+.fixed:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.fixed {
+	display: block;
+	min-height: 1%;
+}
+*html .fixed {
+	height: 1%;
+}
+.clear {
+	diplay: block!important;
+	float: none!important;
+	clear:both;
+	overflow:hidden;
+	width: auto!important;
+	height: 0!important;
+	margin: 0 auto!important;
+	padding: 0!important;
+	font-size: 0;
+	line-height: 0;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.txl {
+	text-align:left;
+}
+.txz {
+	text-align:center;
+}
+.red {
+	color:#F00;
+}
+.fontem {
+	color:#275a8d;
+}
+/*--表格通用样式--*/
+table {
+	border:0;
+	margin:0;
+	border-collapse:collapse;
+    margin:0 auto;
+}
+table th, table td {
+	padding:0;
+}
+table th {
+	height:30px;
+	line-height:30px;
+	background:url(../img/tab_h.gif) repeat-x;
+	font-weight:100;
+	margin:0 auto;
+}
+table th .sqbox {
+	width:40px;
+	height:30px;
+	margin:0 auto;
+	text-align:center;
+}
+table th span {
+	display:block;
+	line-height:30px;
+	float:left;
+}
+table td {
+	height:24px;
+	line-height:22px;
+	text-align:center;
+}
+table td select {
+	width:115px;
+}
+/*--css样式--*/
+.con_conent {
+	width:790px;
+    height:auto !important;
+    min-height:930px;
+	height:931px;
+	background:#f0f8fc;
+    padding-bottom:10px;
+}
+.nav {
+	width:787px;
+	height:46px;
+	margin:13px 0 13px 0;
+}
+.nav input, .nav select {
+	margin-top:7px;
+	float:left;
+}
+.nav span {
+	margin-left:15px;
+	margin-right:5px;
+	font-size:14px;
+	color:#0A5FB0;
+	margin-top:12px;
+	float:left;
+}
+.nav select {
+	width:108px;
+	height:25px;
+}
+.nav input {
+	width:220px;
+	height:25px;
+}
+.cx, .cx1 {
+	background:url(../img/btn-bg.jpg) no-repeat;
+	text-decoration:none;
+	margin-left:10px;
+	display:block;
+	float:left;
+	width:72px;
+	height:21px;
+	line-height:21px;
+	text-align:center;
+	margin-top:12px;
+	color:#fff;
+}
+.space {
+	margin-left:15px;
+	color:#1F5488
+}
+.space a{
+    color:#1F5488
+}
+.space1 {
+	width:75px;
+	margin-left:5px;
+	display:block;
+	float:left;
+	color:#1F5488
+}
+/*--标题--*/
+h1.title {
+	height:36px;
+	line-height:36px;
+	font-size:12px;
+	background:#f0f8fc;
+}
+h1.title span.title {
+	padding-left:15px;
+	color:#075DB0;
+	float:left;
+	background:url(../img/tit.jpg) no-repeat 6px 8px;
+}
+h1.title span.text {
+	padding-left:10px;
+	color:#095FB2;
+	font-weight:100;
+	float:left;
+	background:none
+}
+.back {
+	font-weight:normal;
+	color:#f00;
+}
+/*--弹出层样式--*/
+.bg {
+	position:fixed;
+	width:100%;
+	height:100%;
+	background-color:#000;
+	z-index:6;
+	left:0;
+	top:0;
+	filter: alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	display:none;
+}
+.add {
+	width:418px;
+	height:359px;
+	border:1px solid #3E88CF;
+	background-color:#fff;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:50;
+	margin-left:-199px;
+	margin-top:-178px;
+	display:none
+}
+.add-top {
+	width:414px;
+	height:37px;
+	background:url(../img/tan-bg.jpg) repeat-x;
+	margin:2px;
+}
+.add-top p {
+	color:#fff;
+	float:left;
+	padding-left:13px;
+	font-weight:bold;
+	font-size:14px;
+	line-height:37px;
+}
+.add-top img {
+	float:right;
+	padding-right:15px;
+	padding-top:10px;
+}
+.return {
+	display:block;
+	float:left;
+	width:91px;
+	height:28px;
+	background:url(../img/btnbg.jpg) no-repeat;
+	color:#fff;
+	text-align:center;
+	line-height:28px;
+	margin-top:10px;
+	margin-left:20px;
+	font-size:14px;
+	font-weight:bold;
+}
+.nav1 {
+	width:395px;
+	height: 233px;
+	margin:15px auto;
+}
+.nav1 span {
+	margin-left:5px;
+	margin-top:4px;
+	float:left;
+}
+.nav1 select {
+	width:115px;
+	height:22px;
+	float:left;
+}
+.nav1 .input {
+	width:120px;
+	height:22px;
+	float:left;
+}
+.more {
+	clear:both;
+	padding-top:17px;
+	width:390px;
+	height:183px;
+}
+.big {
+	width:321px;
+	height:183px;
+	float: right;
+}
+/*--盒子样式--*/
+.box {
+	width:758px;
+	height:auto !important;
+	height:298px;
+	min-height:298px;
+	border:2px solid #d9d9d9;
+	margin:0 auto;
+}
+.box-top {
+	width:758px;
+	height:27px;
+	background:url(../img/box-bg.jpg) repeat-x;
+}
+.box-top li {
+	float:left;
+	line-height:27px;
+	padding:0 33px 0 33px;
+}
+.box-top li a {
+	color:#fff; float:left;
+}
+.box-top li:hover {
+	background:#0052A4
+}
+.erro {
+	width:750px;
+	height:48px;
+	margin:8px auto;
+	display:block;
+	border:1px solid #ccc;
+}
+.btn {
+	background:url(../img/btn-bg.jpg) no-repeat;
+	text-decoration:none;
+	margin-right:27px;
+	display:block;
+	float:right;
+	width:72px;
+	height:21px;
+	line-height:21px;
+	text-align:center;
+	color:#fff;
+}
+.pack {
+	width:750px;
+	height:12px;
+	margin:0 auto;
+	color:#0A5FB2;
+	padding:10px 0 10px 0;
+	clear:both;
+}
+.pack img {
+	margin:3px 0 0 5px;
+}
+.new {
+	width:745px;
+	height:41px;
+	margin:15px auto 0;
+	border-bottom:1px solid #cecece;
+}
+.none {
+	border:none;
+}
+.new dt {
+	float:left;
+}
+.new dd {
+	float:left;
+	margin-left:5px;
+}
+.box-down1, .box-down2, .box-down3 {
+	display:none;
+}
+.blue {
+	color:#0A5FB2;
+}
+.gray {
+	color:#808080;
+	margin-top:4px;
+	display:block;
+}
+.grays {
+	display:block;
+}
+.resource1 {
+	width:818px;
+	height:40px;
+	margin:0 auto;
+	line-height:40px;
+}
+.resource1 img {
+	float:left;
+	margin:8px 40px 0px 0;
+}
+.resource1 p {
+	float:left;
+	color:#008eda;
+}
+.resource1 span {
+	margin-left:15px;
+	color:#858585;
+}
+.comment {
+	width:100px;
+	height:44px;
+	margin:30px 0 0 40px;
+	float:left;
+}
+.comment dt {
+	float:left;
+}
+.comment dd {
+	float:left;
+	margin-left:5px;
+}
+.comments {
+	width:120px;
+	height:44px;
+	margin:12px 0 0 15px;
+	float:left;
+}
+.comments dt {
+	float:left;
+}
+.comments dd {
+	float:left;
+	margin-left:5px; 
+    color:#808080;
+}
+    .comments dd:hover {
+    color:#008eda
+    }
+/*--工作台样式--*/
+.warp {
+	width:106px;
+	height:153px;
+	float:left;
+	margin-top:34px;
+	margin-left:40px;
+}
+.warp dd {
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	color:#0C5EB2;
+	width:98px;
+}
+.warp dd:hover {
+	color:#f00;
+}
+/*--弹出层3--*/
+.add2 {width:398px; border:1px solid #3E88CF; background-color:#fff; position:absolute;left:50%; top:50%;z-index:50;margin-left:-199px; margin-top:-155px;display:none;}
+.add-top2{width:394px; height:37px; background:url(../img/tan-bg.jpg) repeat-x; margin:2px;}
+.add-top2 p{ color:#fff;float:left; padding-left:13px; font-weight:bold;font-size:14px; line-height:37px;}
+.add-top2 img{float:right; padding-right:15px; padding-top:10px;}
+.return2 {
+display:block;float:left;width:91px; height:28px; background:url(../img/btnbg.jpg) no-repeat; color:#fff; text-align:center; line-height:28px; margin-top:10px; margin-left:20px; padding-bottom:10px;
+}
+#choices{ width:200px; height:auto!important; height:33px; min-height:33px; border:1px solid #7E9DBA; margin:0 auto; padding:14px 18px 0 18px; margin-top:10px;}
+#choices h3{ float:left;width:20px; }
+#choices h2{ font-size:16px; padding:0 0 0 30px; }
+#choices div{margin-bottom:16px;}
+#choices p{ clear:both;  width:150px;  text-align:center; margin-top:8px; }
+#choices p input{
+     margin-right:10px;
+}
+/*校长邀请弹出层*/
+.add1 {
+	width:604px;
+	height:511px;
+	border:1px solid #3E88CF;
+	background-color:#fff;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:50;
+	margin-left:-302px;
+	margin-top:-260px;
+	display:none
+}
+.add-top1 {
+	width:600px;
+	height:37px;
+	background:url(../img/tan-bg.jpg) repeat-x;
+	margin:2px;
+}
+.add-top1 p {
+	color:#fff;
+	float:left;
+	padding-left:13px;
+	font-weight:bold;
+	font-size:14px;
+	line-height:37px;
+}
+.add-top1 img {
+	float:right;
+	padding-right:15px;
+	padding-top:10px;
+}
+.tit, .tit1, .tit2, .tit3 {
+clear:both;
+}
+.tit {
+margin-left:15px; height:54px; line-height:54px; 
+}
+.tit input{
+    width:213px; height:25px;
+}
+.tit1 {
+margin-left:15px; height:200px; line-height:20px;
+}
+.tit1 p{
+    float:left;
+}
+.tit1 textarea{
+    width:470px; height:184px;
+}
+.tit2 {
+margin-left:15px; height:35px; line-height:35px;width:500px;
+}
+.tit2 span{
+    margin-left:20px;
+}
+.tit3 input {
+     float:left;margin-left:15px;
+}
+.tit3 p {
+     float:left; margin:0 10px 0 10px;
+}
+.tit3 textarea {
+     float:left;width:475px; height:57px;
+}
+.password {
+width:300px; height:42px;margin:0 auto; clear:both;
+}
+.password p{
+    width:72px; height:21px; text-align:center;line-height:21px; color:#fff; background:url(../img/btn-bg.jpg) no-repeat; float:left; margin-top:10px;margin-left:15px;
+}
+/*--弹出层样式1--*/
+.adds1,.adds2,.adds3,.adds5,.adds6,.adds7 {
+	width:417px;
+    height:auto !important;
+    min-height:300px;
+	height:300px;
+	border:1px solid #3E88CF;
+	background-color:#fff;
+	position:fixed;
+	left:50%;
+	top:50%;
+	z-index:50;
+	margin-left:-208px;
+	margin-top:-150px;
+   display:none
+}
+.add-downs6 div {
+    clear:both;
+}
+.add-downs7 .chen {
+    clear:both; width:300px; height:25px; margin:15px auto 0; position:relative;
+}
+.add-downs7 .chen img{
+    position:absolute; right:10px; top:7px;
+}
+.add-downs7 div p {
+    float:left; margin-left:10px;
+}
+.add-downs7 div input {
+    float:left;width:215px; height:24px;
+}
+.add-downs6 div p {
+float:left; margin-left:10px;  margin-top:10px;
+}
+.add-downs6 div select {
+float:left;width:240px; height:24px; margin-top:10px;
+}
+.add-downs6 div input {
+float:left;width:215px; height:24px;  margin-top:10px;
+}
+.add-downs6 div textarea {
+float:left;width:304px; height:170px;  margin-top:10px;
+}
+.sure {
+width:238px; height:28px;  margin:0 auto; padding-top:15px; padding-bottom:10px; 
+}
+.sure a{
+    display:block; background:url(../img/btnbg.jpg) no-repeat;width:91px; height:27px; line-height:27px; text-align:center; font-size:14px; font-weight:bold; color:#fff; float:left; margin-left:20px;
+}
+.add-downs5 p {
+float:left; margin-top:15px; margin-left:10px;
+}
+.add-downs5 textarea {
+float:left;width:330px; height:125px; margin-top:15px; margin-bottom:15px;
+}
+.chico {
+clear:both;width:284px; height:25px; margin:0 auto
+}
+.chico a{
+    display:block;width:72px; height:21px; text-align:center; line-height:21px; background:url(../images/button.png) no-repeat; color:#fff; float:left; margin-left:20px;
+}
+.add-downs3 p{
+ height:35px; line-height:35px; text-align:center
+}
+.add-downs3 p input{
+    margin-right:15px;
+}
+.add-tops1,.add-tops2,.add-tops3,.add-tops5,.add-tops6,.add-tops7 {
+	width:413px;
+	height:37px;
+	background:url(../img/tan-bg.jpg) repeat-x;
+	margin:2px;
+}
+.add-tops1 p,.add-tops2 p,.add-tops3 p,.add-tops5 p,.add-tops6 p,.add-tops7 p {
+	color:#fff;
+	float:left;
+	padding-left:13px;
+	font-weight:bold;
+	font-size:14px;
+	line-height:37px;
+}
+.add-tops1 img,.add-tops2 img,.add-tops3 img,.add-tops5 img,.add-tops6 img,.add-tops7 img{
+	float:right;
+	padding-right:15px;
+	padding-top:10px;
+}
+
+.adds,.adds4 {
+	width:595px;
+    height:auto !important;
+    min-height:504px;
+	height:504px;
+	border:1px solid #3E88CF;
+	background-color:#fff;
+	position:fixed;
+	left:50%;
+	top:50%;
+	z-index:50;
+	margin-left:-298px;
+	margin-top:-252px;
+    display:none;
+}
+.adds4 {
+position:fixed;
+}
+.add-tops,.add-tops4 {
+	width:591px;
+	height:37px;
+	background:url(../img/tan-bg.jpg) repeat-x;
+	margin:2px;
+}
+.add-tops p,.add-tops4 p {
+	color:#fff;
+	float:left;
+	padding-left:13px;
+	font-weight:bold;
+	font-size:14px;
+	line-height:37px;
+}
+.add-tops img,.add-tops4 img {
+	float:right;
+	padding-right:15px;
+	padding-top:10px;
+}
+.add-downs p {
+width:595px; height:44px; line-height:44px; text-align:center;color:#006FD1; font-size:14px; font-weight:bold;
+}
+.down-left {
+width:208px;height:auto !important;min-height:400px; height:400px; float:left;
+}
+.down-left .check{
+    width:198px; height:44px; line-height:44px; text-align:right;color:#006FD1; font-size:14px; font-weight:bold;
+}
+.teacher {
+width:208px; height:30px; line-height:30px; text-align:center;
+}
+.teacher span{
+    color:#494949; font-size:14px; font-weight:bold;
+}
+.teacher input{
+    margin-right:10px;
+}
+.bigs {
+padding-left:70px; height:25px; line-height:25px;
+}
+.bigs input{
+    margin-right:10px;
+}
+.smalls {
+padding-left:95px;height:25px; line-height:25px;
+}
+.smalls input{
+    margin-right:10px;
+}
+.down-cen {
+float:left; width:12px;
+}
+.down-right {
+width:371px;height:auto !important;min-height:462px; height:462px;float:left; 
+}
+.right-p {
+width:334px;height:auto !important;min-height:51px; height:51px; line-height:51px; border-bottom:1px dashed #c8c8c8; margin:0 auto;
+}
+.right-p p{
+    float:left; margin-right:15px;
+}
+.right-p p input{
+    margin-right:10px;
+}
+.right-up {
+width:334px; height:404px; margin:0 auto; clear:both
+}
+.right-up p{
+    width:334px; height:44px; line-height:44px; text-align:left;color:#006FD1; font-size:14px; font-weight:bold;
+}
+.right-up textarea{
+    resize:none; height:297px; width:334px;
+}
+.right-up a{
+    display:block; background:url(../img/btnbg.jpg) no-repeat;width:91px; height:27px; line-height:27px; text-align:center; font-size:14px; font-weight:bold; color:#fff; margin:20px auto 0;
+}
+.plan, .plans, .password {
+display:none;
+}
+
+/*load*/
+.add-load {
+	width:445px;
+    height:auto !important;
+    min-height:329px;
+	height:329px;
+	border:1px solid #3E88CF;
+	background-color:#fff;
+	position:absolute;
+	left:50%;
+	top:50%;
+	z-index:50;
+	margin-left:-199px;
+	margin-top:-178px;
+    display:none;
+}
+.add-loadtop1 {
+	width:441px;
+	height:37px;
+	background:url(../img/tan-bg.jpg) repeat-x;
+	margin:2px;
+}
+.add-loadtop1 p {
+	color:#fff;
+	float:left;
+	padding-left:13px;
+	font-weight:bold;
+	font-size:14px;
+	line-height:37px;
+}
+.add-loadtop1 img {
+	float:right;
+	padding-right:15px;
+	padding-top:10px;
+}
+.load {
+width:90%; height:12px; border:1px solid #d7d7d7; text-align:center; line-height:12px;
+}
