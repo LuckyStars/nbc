@@ -94,6 +94,7 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
+		subject.setExcuteUsers( users);
 		String checkusersId = this.getRequest().getParameter("checkUsers");
 		Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
 		for(String u : checkusersId.split(",")){
@@ -106,6 +107,10 @@ public class SubjectAction extends BaseAction{
 		this.sm2SubjectBiz.update(subject);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
+	/**
+	 * 主管执行者查询
+	 * @return
+	 */
 	public String find(){
 		module = this.moduleBiz.findById(subjectVo.getModuleId());
 //		判断角色 如果是主管则查询所有自己的，否则只查看主管指定执行者可看
@@ -128,7 +133,12 @@ public class SubjectAction extends BaseAction{
 		}
 		return "listB";
 	}
-
+	public String findMaster(){
+		subjectVo.setCheckUserId(this.getUserId());
+		module = this.moduleBiz.findById(subjectVo.getModuleId());
+		pm = this.sm2SubjectBiz.findBySubjectMaster(subjectVo);
+		return module.getId()+"list";
+	}
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
 		Struts2Util.renderText("0", "encoding:UTF-8");

@@ -215,7 +215,7 @@
 			<h1>学校动态</h1>
 			<div class="content">
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=xxdt_1">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=zjhb">
 						<img src="${prc}/function/images/pic1.png" width="179" height="140" />
 						<span style="color: #0273c2;">总结·汇报·关注性工作</span>
 					</a>
@@ -228,14 +228,14 @@
 					</a>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=xxdt_2">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=qsbp">
 						<img src="${prc}/function/images/pic3.png" width="179" height="140" />
 						<span style="color: #ff7200;">请示·报批性工作</span>
 					</a>
 					<i id="qingshi">6</i>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=xxdt_3">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=jjzy">
 						<img src="${prc}/function/images/pic4.png" width="179" height="140" />
 						<span style="color: #9910ac;">紧急重要事件处理</span>
 					</a>

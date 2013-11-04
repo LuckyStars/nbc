@@ -27,7 +27,7 @@
             $('#cc').combotree('setValues', a);
             var b = new Array();
             <c:forEach items="${subject.checkUsers}" var="type">
-   				b.push('${type.userId }');
+   				b.push('${type.userUid }');
       		 </c:forEach>
       	    $('#master').combotree('setValues', b);
             

@@ -108,14 +108,10 @@
              $('#trans').tree({
  				checkbox: true,
  				url: 'tree_user.action',
- 				//onlyLeafCheck:true,
  				onClick:function(node){
  					$(this).tree('toggle', node.target);
- 					//alert('you click '+node.text);
  				},
  				onContextMenu: function(e, node){
- 					e.preventDefault();
- 					$('#tt2').tree('select', node.target);
  				}
  			});
               
@@ -153,6 +149,7 @@
              $(".adds6").hide();
              $(".adds7").hide();
          });
+       
          //步骤操作
          $("#stepSave").click(function(){
         	 var name = $.trim($("input[name='step.name']").val());
@@ -224,17 +221,22 @@
 			}
         	 if(s.length>0){
 	         	var content = $("textarea[name='trans.content']").val();
-	         	alert(content);
-	    		$.post("add_trans.action",{transUids:s,transNames:n,content:content}, function(data) {
+	    		$.post("add_trans.action",{transUids:s,transNames:n,content:content,subjectId: $("input[name='subjectId']").val()}, function(data) {
 	      				$("textarea[name='trans.content']").val("");
 		   				 $(".bg").hide();
 		   				 $(".adds4").hide();
-		   				$("textarea[name='trans.content']").val("");
 		   				 alert("发送成功！");
 	     			});
         	 }else{ alert("请选择转发人！");}
          	});
 	  });
+	  function select(select){
+      	if (select) {  
+        	$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox0").addClass("tree-checkbox1");
+      	} else {  
+      		$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+      	}  
+       }
 	</script>
 	<script>
 	</script>
@@ -315,9 +317,9 @@
 		</div>
 		<div class="add-downs4">
 			<div class="down-left">
-				<p class="check">全选 | 取消全选</p>
+				<p class="check"><a href="#" onclick="select('true');">全选</a> | <a href="#" onclick="select('false');">取消全选</a></p>
 				<p class="teacher">
-					<input type="checkbox" /><span>史家小学教师</span>
+					<span>史家小学教师</span>
 				</p>
 				<div style="width:200px;height:350px;overflow:auto;;margin-left:10px;">
 					<ul id="trans" class="easyui-tree" animate="true" />

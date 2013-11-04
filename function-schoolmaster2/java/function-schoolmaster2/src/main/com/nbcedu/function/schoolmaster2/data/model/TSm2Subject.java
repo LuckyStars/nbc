@@ -23,6 +23,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private String parentId;
 	private Integer mold;
 	private String typeId;
+	private Integer progress;
 	/*
 	 * 执行者
 	 */
@@ -183,6 +184,14 @@ public class TSm2Subject implements java.io.Serializable {
 
 	public void setCheckUsers(Set<SM2SubjectMaster> checkUsers) {
 		this.checkUsers = checkUsers;
+	}
+
+	public Integer getProgress() {
+		return progress;
+	}
+
+	public void setProgress(Integer progress) {
+		this.progress = progress;
 	}
 
 }
