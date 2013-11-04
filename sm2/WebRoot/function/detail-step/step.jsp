@@ -232,7 +232,7 @@
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
         		onclick="showZans('${prog.id}');"
-        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">20</span>)<%--赞 --%>
+        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
         	</a>
         	
         	<span> | </span>
@@ -240,7 +240,7 @@
         	<a>
         		<img src="${prc }/function/detail-step/images/ico1.png" 
         		onclick="showReads('${prog.id}')"
-        		width="13" height="13" class="ico1"/>（120）<%--阅读 --%>
+        		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
         	</a>
        		
        		<span> | </span>

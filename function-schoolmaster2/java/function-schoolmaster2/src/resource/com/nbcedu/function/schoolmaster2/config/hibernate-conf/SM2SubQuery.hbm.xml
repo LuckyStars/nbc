@@ -78,8 +78,17 @@
 		WHERE st.subjectId = sub.subjectId;
 		]]>
     </sql-query>
-    <sql-query>
-    	SELECT t_sm2_progress.*,rcount.rcou,zcount.zcou
+    <sql-query name="find_progress_by_step" >
+    	SELECT 
+    		t_sm2_progress.id,
+    		t_sm2_progress.name,
+    		t_sm2_progress.content,
+    		t_sm2_progress.createrId,
+    		t_sm2_progress.createTime,
+    		t_sm2_progress.lastUpdateTime,
+    		t_sm2_progress.stepId,
+    		rcount.rcou,
+    		zcount.zcou
 		FROM 
 			t_sm2_progress left join 
 			(
@@ -94,6 +103,7 @@
 				FROM t_sm2_zan 
 				GROUP BY progress_id
 			) zcount
-			on t_sm2_progress.id = zcount.progress_id;
+			on t_sm2_progress.id = zcount.progress_id 
+			WHERE t_sm2_progress.stepId=:stepId
     </sql-query>
 </hibernate-mapping>

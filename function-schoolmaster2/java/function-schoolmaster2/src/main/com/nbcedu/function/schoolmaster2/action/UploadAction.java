@@ -145,7 +145,7 @@ public class UploadAction extends BaseAction{
 		JSONObject obj = new JSONObject();
 		obj.put("error", 0);
 		obj.put("url", saveUrl + "/" + newImgName);
-		Struts2Utils.renderJson(obj.toJSONString());
+		Struts2Utils.renderText(obj.toJSONString());
 		return null;
 	}
 	

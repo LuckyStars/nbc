@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 

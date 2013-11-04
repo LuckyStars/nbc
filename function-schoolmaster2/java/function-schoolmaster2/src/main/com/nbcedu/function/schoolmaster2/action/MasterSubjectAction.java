@@ -28,6 +28,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
@@ -42,7 +43,7 @@ public class MasterSubjectAction extends BaseAction{
 	private String moduleId;
 	private TSm2Subject subject;
 	private TSm2Step step;
-	private List<TSm2Progress> proList = new ArrayList<TSm2Progress>();
+	private List<ProgressVo> proList = new ArrayList<ProgressVo>();
 	private String name;
 	
 	private SM2MasterSubBiz subBiz;
@@ -83,7 +84,7 @@ public class MasterSubjectAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public String showStep(){
-		this.proList = this.progBiz.findAllByStepId(this.id);
+		this.proList = this.progBiz.findVoByStepId(this.id);
 		this.readsBiz.addByStep(this.id, getUserId());
 		
 		if(!CollectionUtils.isEmpty(proList)){
@@ -188,10 +189,10 @@ public class MasterSubjectAction extends BaseAction{
 	public void setStep(TSm2Step step) {
 		this.step = step;
 	}
-	public List<TSm2Progress> getProList() {
+	public List<ProgressVo> getProList() {
 		return proList;
 	}
-	public void setProList(List<TSm2Progress> proList) {
+	public void setProList(List<ProgressVo> proList) {
 		this.proList = proList;
 	}
 	public void setStepBiz(Sm2StepBiz stepBiz) {
