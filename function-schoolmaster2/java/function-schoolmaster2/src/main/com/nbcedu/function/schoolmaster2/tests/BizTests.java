@@ -8,7 +8,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
+import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
+import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 
 public class BizTests {
 	
@@ -37,5 +40,19 @@ public class BizTests {
 		System.out.println(result.toString());
 	}
 	
+	
+	@Test
+	public void masterPmTest(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		MasterSubSearchVO vo = new MasterSubSearchVO();
+		//vo.setCreaterName("");
+		vo.setModuleId("guanzhu");
+		//vo.setReceiverUid("1");
+		PagerModel pm = biz.findBySearchVo(vo);
+		for (Object sub :pm.getDatas()) {
+			TSm2Subject su = (TSm2Subject)sub;
+			System.out.println(su.getTitle());
+		}
+	}
 	
 }

@@ -4,16 +4,15 @@ import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
 import java.util.List;
 
-import org.apache.commons.lang.xwork.StringUtils;
-import org.hamcrest.core.IsNot;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
@@ -77,6 +76,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 	
 	@Override
+	@SuppressWarnings("unchecked")
 	public PagerModel findBySearchVo(MasterSubSearchVO vo) {
 		Criteria cri = this.sm2SubjectDao.createCriteria();
 		
@@ -84,7 +84,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			cri.add(Restrictions.eq("moduleId", vo.getModuleId()));
 		}
 		if(isNotBlank(vo.getCreaterName())){
-			cri.add(Restrictions.eq("createrName", vo.getCreaterName()));
+			cri.add(Restrictions.like("createrName",vo.getCreaterName(),MatchMode.ANYWHERE));
 		}
 		if(isNotBlank(vo.getDepartId())){
 			cri.add(Restrictions.eq("departmentId", vo.getDepartId()));
@@ -99,10 +99,23 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			cri.add(Restrictions.le("createTime", vo.getEnd()));
 		}
 		if(isNotBlank(vo.getReceiverUid())){
-			Criteria addc = cri.createCriteria("checkUsers");
-			addc.add(Expression.eq("userId",vo.getReceiverUid()));
+			cri.createAlias("checkUsers","checkUsers");
+			cri.add(Restrictions.eq("checkUsers.userUid",vo.getReceiverUid()));
 		}
 		
-		return this.sm2SubjectDao.searchPaginated(cri);
+		PagerModel pm =  this.sm2SubjectDao.searchPaginated(cri);
+		if(pm!=null&&pm.getDatas()!=null&&pm.getDatas().size()>0){
+			if(!(pm.getDatas().get(0) instanceof TSm2Subject)){
+				pm.setDatas(
+						Lists.transform(pm.getDatas(),
+								new Function<Object[], TSm2Subject>() {
+				@Override
+				public TSm2Subject apply(Object[] input) {
+					return (TSm2Subject)input[1];
+				}
+				}));
+			}
+		}
+		return pm;
 	}
 }
