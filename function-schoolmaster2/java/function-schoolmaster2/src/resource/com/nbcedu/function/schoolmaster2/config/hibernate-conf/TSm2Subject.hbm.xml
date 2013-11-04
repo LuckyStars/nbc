@@ -14,13 +14,13 @@
             <column name="createrName" length="100" />
         </property>
         <property name="createTime" type="java.sql.Timestamp">
-            <column name="createTime" length="0" />
+            <column name="createTime" />
         </property>
         <property name="content" type="java.lang.String">
             <column name="content" length="65535" />
         </property>
         <property name="flag" type="java.lang.Integer">
-            <column name="flag" />
+            <column name="flag" default="0"/>
         </property>
           <property name="progress" type="java.lang.Integer">
             <column name="progress" />
@@ -38,7 +38,7 @@
             <column name="moduleId" length="32" />
         </property>
         <property name="lastUpdateTime" type="java.sql.Timestamp">
-            <column name="lastUpdateTime" length="0" />
+            <column name="lastUpdateTime" />
         </property>
         <property name="parentId" type="java.lang.String">
             <column name="parentId" length="32" />

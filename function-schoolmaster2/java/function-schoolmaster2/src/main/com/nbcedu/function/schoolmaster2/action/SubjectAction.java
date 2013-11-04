@@ -21,6 +21,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.nbcedu.function.schoolmaster2.vo.DepartmentVo;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 
 @SuppressWarnings("serial")
@@ -138,6 +139,7 @@ public class SubjectAction extends BaseAction{
 		return "listB";
 	}
 	public String findMaster(){
+		List<DepartmentVo> departments = UCService.findDepartment();
 		subjectVo.setCheckUserId(this.getUserId());
 		module = this.moduleBiz.findById(subjectVo.getModuleId());
 		pm = this.sm2SubjectBiz.findBySubjectMaster(subjectVo);
@@ -146,6 +148,17 @@ public class SubjectAction extends BaseAction{
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
 		Struts2Util.renderText("0", "encoding:UTF-8");
+	}
+	/**
+	 * 插旗异步方法
+	 */
+	public void stick(){
+		String subjectId = this.getRequest().getParameter("subjectId");
+		String flag = this.getRequest().getParameter("flag");
+		TSm2Subject s = this.sm2SubjectBiz.findById(subjectId);
+		s.setFlag(Integer.parseInt(flag));
+		this.sm2SubjectBiz.update(s);
+		Struts2Util.renderText("success", "encoding:UTF-8");
 	}
 	/**
 	 * 判断重名

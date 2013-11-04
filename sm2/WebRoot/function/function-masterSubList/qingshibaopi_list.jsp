@@ -102,7 +102,7 @@
         <td align="center">${subject.createrName}</td>
         <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
         <td align="center">
-        	<span style="margin-right:20px ;"><img src="${prc}/function/img/but.jpg" /></span>
+<!--        	<span style="margin-right:20px ;"><img src="${prc}/function/img/but.jpg" /></span>-->
         	<c:if test="${subject.flag eq '1'}">
 				<a href="#" onclick="javascript:stick('${subject.id }',0);" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
 			</c:if>

@@ -1,10 +1,12 @@
 package com.nbcedu.function.schoolmaster2.utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nbcedu.function.schoolmaster2.vo.DepartmentVo;
 import com.nbcedu.integration.uc.client.facade.BaseClient;
 import com.nbcedu.integration.uc.client.vo.NbcUcDepartment;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
@@ -102,5 +104,17 @@ public class UCService {
 		m.put("id",l.getId() );
 		m.put("name", l.getName());
 		return m;
+	}
+	public static List<DepartmentVo> findDepartment(){
+		List<NbcUcTreeNode> l = client.queryDepartTree("root", 1);
+		List<DepartmentVo> list = new ArrayList<DepartmentVo>();
+		DepartmentVo d;
+		for(NbcUcTreeNode n : l){
+			d = new DepartmentVo();
+			d.setId(n.getId().replace("ne|", ""));
+			d.setName(n.getTitle());
+			list.add(d);
+		}
+		return list;
 	}
 }

@@ -4,6 +4,7 @@ package com.nbcedu.function.schoolmaster2.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.criterion.Expression;
 
 import com.nbcedu.function.schoolmaster2.core.dao.impl.SimpleBaseDAOImpl;
@@ -17,15 +18,18 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 
 	public PagerModel findByExceuteUserId(SubjectVo subject){
 		Criteria c = this.getSession().createCriteria(TSm2Subject.class);
-		c.add(Expression.eq("moduleId",subject.getModuleId() ));
+		c.add(Expression.eq("moduleId",subject.getModuleId() )).
+		setFetchMode("excuteUsers", FetchMode.JOIN).
+		add(Expression.eq("userId", subject.getExcuteUserId()));
 		if(!StringUtil.isEmpty(subject.getTitle())){
 			c.add(Expression.like("title","%"+subject.getTitle().trim()+"%" ));
 		}
 		if(subject.getBeginDate()!=null&&!StringUtil.isEmpty(subject.getBeginDate().toString())){
 			
 		}
-		Criteria addc = c.createCriteria("excuteUsers");
-		addc.add(Expression.eq("userId", subject.getExcuteUserId()));
+//		Criteria addc = c.createCriteria("excuteUsers");
+//		addc.add(Expression.eq("userId", subject.getExcuteUserId()));
+
 		return this.searchPaginated(c);
 	}
 
