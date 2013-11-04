@@ -1,12 +1,20 @@
 package com.nbcedu.function.schoolmaster2.biz.impl;
 
+import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
 import java.util.List;
+
+import org.apache.commons.lang.xwork.StringUtils;
+import org.hamcrest.core.IsNot;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterSubBiz{
@@ -68,4 +76,33 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		
 	}
 	
+	@Override
+	public PagerModel findBySearchVo(MasterSubSearchVO vo) {
+		Criteria cri = this.sm2SubjectDao.createCriteria();
+		
+		if(isNotBlank(vo.getModuleId())){
+			cri.add(Restrictions.eq("moduleId", vo.getModuleId()));
+		}
+		if(isNotBlank(vo.getCreaterName())){
+			cri.add(Restrictions.eq("createrName", vo.getCreaterName()));
+		}
+		if(isNotBlank(vo.getDepartId())){
+			cri.add(Restrictions.eq("departmentId", vo.getDepartId()));
+		}
+		if(vo.getFlag()!=null){
+			cri.add(Restrictions.eq("flag", vo.getFlag()));
+		}
+		if(vo.getStart()!=null){
+			cri.add(Restrictions.ge("createTime", vo.getStart()));
+		}
+		if(vo.getEnd()!=null){
+			cri.add(Restrictions.le("createTime", vo.getEnd()));
+		}
+		if(isNotBlank(vo.getReceiverUid())){
+			Criteria addc = cri.createCriteria("checkUsers");
+			addc.add(Expression.eq("userId",vo.getReceiverUid()));
+		}
+		
+		return this.sm2SubjectDao.searchPaginated(cri);
+	}
 }
