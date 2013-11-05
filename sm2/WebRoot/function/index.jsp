@@ -135,7 +135,7 @@
 				</div>
 
 				<div class="office" style="width: 125px; height: 148px;">
-					<a class="pointer" href="${prc}/function/gzt/我收到的邀请查看及消息.html">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=/scMaster2/masterList_invatition.action">
 						<img src="${prc}/function/images/yaoqing.jpg" />
 						<span>邀请查看及消息</span>
 					</a>

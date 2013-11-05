@@ -247,7 +247,6 @@
 		<h1 class="title">
 			<span class="title">当前位置：</span>
 			<span class="text">首页 - 校长工作台 - </span>
-			<span class="back">临时事项</span>
 		</h1>
 		<div class="table_box fixed">
 			<div class="content">

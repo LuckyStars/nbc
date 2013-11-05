@@ -221,17 +221,17 @@
    				onclick="switchArticle('${prog.id}');"
    			 width="13" height="13" class="mids-img"/>
    			
-   			<img src="${prc }/function/detail-step/images/ico4.png" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
+   			<img src="${prc }/function/detail-step/images/ico4.png" alt="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
    			<img src="${prc }/function/detail-step/images/ico5.png" /><%--删除进展 --%>
    			<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/><%--上传附件 --%>
-   			<img src="${prc }/function/detail-step/images/ico7.png" 
+   			<img src="${prc }/function/detail-step/images/ico7.png" alt="赞"
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
    		</a>
         <div class="conls"> 
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
-        		onclick="showZans('${prog.id}');"
+        		onclick="showZans('${prog.id}');" alt="赞"
         		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
         	</a>
         	
@@ -239,7 +239,7 @@
         	
         	<a>
         		<img src="${prc }/function/detail-step/images/ico1.png" 
-        		onclick="showReads('${prog.id}')"
+        		onclick="showReads('${prog.id}')" alt="阅读"
         		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
         	</a>
        		
@@ -247,7 +247,7 @@
         	
         	<a>
         		<img src="${prc }/function/detail-step/images/ico2.png" 
-        		width="13" height="13" class="ico2"/>（5620）
+        		width="13" height="13" class="ico2"/>（0）
         	</a>
         	
         </div>
