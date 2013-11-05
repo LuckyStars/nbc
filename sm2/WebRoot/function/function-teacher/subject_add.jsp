@@ -34,11 +34,13 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p style="margin:5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<select name="subject.typeId">
-               		<c:forEach items="${types}" var="type">
-               			<option value="${type.id}">${type.name}</option>
-                   </c:forEach>
-                   </select></p>
+               		<p style="margin:5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：
+	               		<select name="subject.typeId">
+		               		<c:forEach items="${types}" var="type">
+		               			<option value="${type.id}">${type.name}</option>
+		                   </c:forEach>
+	                   </select>
+                   </p>
 				</c:if>
                 <p style="margin:5px;">事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
  					<c:if test="${not empty subjects}">

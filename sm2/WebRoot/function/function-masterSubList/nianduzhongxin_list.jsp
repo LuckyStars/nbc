@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
-<link href="${prc}/function/function-masterSubList/css/index.css" rel="stylesheet" type="text/css" />
+<link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${prc}/function/css/gzt.css" type="text/css"></link>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 <link rel="stylesheet" href="${prc}/function/function-masterSubList/css/gzt.css" />
-
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 
 <style>
@@ -28,8 +28,8 @@ table td {
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("table tr:odd").css("border", "1px solid #EDEFFF")
-		$("table tr:even").css("border", "1px solid #EDEFFF")
+		$("table tr:odd").css("border", "1px solid #EDEFFF");
+		$("table tr:even").css("border", "1px solid #EDEFFF");
 	});
 </script>
 <script type="text/javascript">
@@ -80,12 +80,13 @@ table td {
 </script>
 </head>
 <body>
+<div class="main" style="width: 990px;">
 		<div class="right1">
 			<h1>
-				当前位置：首页 - <span style="color: #002F7F">工作计划跟踪 - 学期工作计划动态</span>
+				当前位置：首页 - <span style="color: #002F7F">工作计划跟踪 -</span>
 			</h1>
 			<form action="${prc}/scMaster2/list_master.action" method="post">
-			<input type="hidden" name="moduleId" value="${moduleId}" />
+    		<input type="hidden" name="moduleId" value="${moduleId}" />
 			<input type="hidden" name="search.typeId" value="${search.typeId}" />
 			<div class="right-input">
 				<p>
@@ -99,24 +100,22 @@ table td {
 				</p>
 				<p>
 					<label>发布者:</label>
-					<input type="text" name="search.createrName" />
+					<input type="text" name="search.createrName" value="${search.createrName }" />
 				</p>
 				<p>
 					<label>发布时间:</label>
-					
 					<input type="text" name="search.start" id="startDate"
-					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})"
-					/>
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" 
+					value="<fmt:formatDate value='${search.start}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
 					
 					<input type="text" name="search.end" id="endDate"
-					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})"
-					/>
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})" 
+					value="<fmt:formatDate value='${search.end}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
 				</p>
 					<a href="javascript:document.forms[0].submit();">查询</a>
 			</div>
 			</form>
 			<table width="100%" border="0">
-				
 				<tr>
 					<th width="20%" scope="col">名称</th>
 					<th width="10%" scope="col">部门</th>
@@ -127,11 +126,13 @@ table td {
 				<c:forEach items="${pm.datas}" var="sub">
 					<tr>
 						<td class="other">
-						<c:out value="${sub.title}" escapeXml="true"></c:out>
+							<a href="${prc}/scMaster2/detail_master.action?id=${sub.id }" target="_blank">
+								<c:out value="${sub.title}" escapeXml="true"></c:out>
+							</a>
 						</td>
-						<td>${sub.departmentName }</td>
+						<td>${sub.departmentName}</td>
 						<td>${sub.createrName}</td>
-						<td><fmt:formatDate value="${sub.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+						<td><fmt:formatDate value="${sub.createTime }" pattern="yyyy-MM-dd"/></td>
 						<td>
 							<div class="pross">
 								<img src="${prc}/function/function-masterSubList/img/pro-bg1.jpg"
@@ -142,22 +143,10 @@ table td {
 						</td>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td class="other">蓝天工程工作计划</td>
-					<td>财务部</td>
-					<td>刘莉莉</td>
-					<td>今天</td>
-					<td>
-						<div class="pross">
-							<img src="${prc}/function/function-masterSubList/img/pro-bg1.jpg"
-								class="pross-img" style="width:50%;" />
-						</div>
-						<p class="pross-p">90%</p> <img
-						src="${prc}/function/function-masterSubList/img/qi.png" class="qi" />
-					</td>
-				</tr>
+				
 			</table>
 		</div>
-		
 		<%@ include file="pager.jsp" %>
+	</div>
 </body>
+</html>

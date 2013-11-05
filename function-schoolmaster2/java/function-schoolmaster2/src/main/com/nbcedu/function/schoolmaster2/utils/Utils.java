@@ -61,7 +61,6 @@ public class Utils {
 		String masterJson = loadFileToString("xiaozhang.json");
 		return gson.fromJson(masterJson,new TypeToken<List<PersonVo>>(){}.getType());
 	}
-	
 	/**
 	 * 所有主管
 	 * @return

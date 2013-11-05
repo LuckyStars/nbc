@@ -13,7 +13,7 @@ public class TSm2Module implements java.io.Serializable {
 	private Date createtime;
 	private String createrId;
 	private String parentId;
-	//为1：主管显示
+//	为1：主管显示   3:有关联重心工作
 	private int flag;
 
 	// Constructors
