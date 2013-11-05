@@ -62,7 +62,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 //		return pm;
 		
 		
-		return this.sm2SubjectDao.searchPaginated(findByMasterHql.toString(), new Object[]{masterUid,modId});
+		return this.sm2SubjectDao.searchPaginated(findByMasterHql.toString(), new Object[]{modId,masterUid});
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		Query query = null;
 		if(StringUtils.isNotBlank(masterUid)){
 			query = this.sm2SubjectDao.createQuery(this.findByMasterHql.toString(), 
-					new Object[]{masterUid,modId});
+					new Object[]{modId,masterUid});
 		}else{
 			query = this.sm2SubjectDao.createQuery(
 					"FROM TSm2Subject sub WHERE sub.moduleId =? ",new Object[]{modId});

@@ -24,7 +24,7 @@ public class MasterIndexAction extends BaseAction{
 
 	private static volatile Map<String, String> CACHE = new HashMap<String, String>();
 	private static final Timer timer = new Timer();
-	private static final String LINSHI_MODULEID = "linshi";
+	private static final String LINSHI_MODULEID = "linshishixiang";
 	
 	private SM2MasterSubBiz masterSubBiz;
 	
