@@ -2,13 +2,19 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -143,4 +149,94 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		}
 		return pm;
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TSm2Subject> findByMsterModule(String masterUid,
+			Collection<String> moduleId, Integer size) {
+		StringBuilder sql = new StringBuilder("");
+		for (String modId : moduleId) {
+			sql.append("SELECT  ");
+				sql.append("id,");
+				sql.append("createrId,");
+				sql.append("createTime,");
+				sql.append("content,");
+				sql.append("flag,");
+				sql.append("departmentId,");
+				sql.append("title,");
+				sql.append("moduleId,");
+				sql.append("lastUpdateTime,");
+				sql.append("parentId,");
+				sql.append("createrName,");
+				sql.append("progress,");
+				sql.append("departmentName,");
+				sql.append("status,");
+			sql.append("FROM ");
+				sql.append("t_sm2_subject sub,");
+				sql.append("(SELECT sub_id as subId ");
+				sql.append("FROM t_sm2_subject_master ");
+				sql.append("WHERE user_uid = '");
+				sql.append(masterUid);
+				sql.append("'");
+				sql.append(") masterSub ");
+			sql.append("WHERE ");
+				sql.append("sub.flag=1 ");	
+				sql.append("AND masterSub.subId = sub.id ");
+				sql.append("AND sub.moduleId='");
+				sql.append(modId);
+				sql.append("'");
+			sql.append("LIMIT 0,");
+			sql.append(size.toString());
+			sql.append(" UNION ALL ");
+		}
+		sql.delete(sql.lastIndexOf("UNION ALL"),sql.length());
+		
+		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql.toString());
+		query.addScalar("id",Hibernate.STRING);
+		query.addScalar("createrId",Hibernate.STRING);
+		query.addScalar("createTime",Hibernate.TIMESTAMP);
+		query.addScalar("content",Hibernate.STRING);
+		query.addScalar("flag",Hibernate.INTEGER);
+		query.addScalar("departmentId",Hibernate.STRING);
+		query.addScalar("title",Hibernate.STRING);
+		query.addScalar("moduleId",Hibernate.STRING);
+		query.addScalar("lastUpdateTime",Hibernate.TIMESTAMP);
+		query.addScalar("parentId",Hibernate.STRING);
+		query.addScalar("createrName",Hibernate.STRING);
+		query.addScalar("progress",Hibernate.INTEGER);
+		query.addScalar("departmentName",Hibernate.STRING);
+		query.addScalar("status",Hibernate.STRING);
+		
+		List<Object[]> resultSet = query.list();
+		if(CollectionUtils.isEmpty(resultSet)){
+			return Collections.EMPTY_LIST;
+		}
+		
+		return Lists.transform(resultSet, new Function<Object[], TSm2Subject>() {
+			@Override
+			public TSm2Subject apply(Object[] in) {
+				TSm2Subject result = new TSm2Subject();
+				result.setId(trim(in[0]));
+				result.setCreaterId(trim(in[1]));
+				result.setCreateTime((Date)in[2]);
+				result.setContent(trim(in[3]));
+				result.setFlag(Integer.parseInt(in[4].toString()));
+				result.setDepartmentId(trim(in[5]));
+				result.setTitle(trim(in[6]));
+				result.setModuleId(trim(in[7]));
+				result.setLastUpdateTime((Date)in[8]);
+				result.setParentId(trim(in[9]));
+				result.setCreaterName(trim(in[10]));
+				result.setProgress(Integer.parseInt(in[11].toString()));
+				result.setDepartmentName(trim(in[12]));
+				result.setStatus(trim(in[13]));
+				return result;
+			}
+		});
+	}
+	
+	private String trim(Object str){
+		return str==null?"":str.toString();
+	}
+	
 }

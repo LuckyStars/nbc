@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.biz;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -43,4 +44,7 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public PagerModel findBySearchVo(MasterSubSearchVO vo);
+	
+	public List<TSm2Subject> findByMsterModule(String masterUid,Collection<String> moduleId,Integer size);
+
 }
