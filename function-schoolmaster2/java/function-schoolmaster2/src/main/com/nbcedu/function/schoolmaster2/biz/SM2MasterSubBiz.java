@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.biz;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -17,7 +18,14 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public PagerModel findByMaster(String modId,String masterUid);
-	
+	/**
+	 * 按校长和模块类型查询前 size个内容
+	 * @param modId
+	 * @param masterUid 如果为null 或 "" 则查询所有
+	 * @param size
+	 * @return
+	 * @author xuechong
+	 */
 	public List<TSm2Subject> findByMasterAndCount(String modId,String masterUid,Integer size);
 	
 	/**
@@ -36,4 +44,7 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public PagerModel findBySearchVo(MasterSubSearchVO vo);
+	
+	public List<TSm2Subject> findByMsterModule(String masterUid,Collection<String> moduleId,Integer size);
+
 }
