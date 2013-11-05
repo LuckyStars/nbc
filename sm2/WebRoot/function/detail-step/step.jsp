@@ -222,8 +222,8 @@
    			 width="13" height="13" class="mids-img"/>
    			
    			<img src="${prc }/function/detail-step/images/ico4.png" alt="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
-   			<img src="${prc }/function/detail-step/images/ico5.png" /><%--删除进展 --%>
-   			<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/><%--上传附件 --%>
+   			<%--<img src="${prc }/function/detail-step/images/ico5.png" />删除进展 --%>
+   			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
    			<img src="${prc }/function/detail-step/images/ico7.png" alt="赞"
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
@@ -660,7 +660,7 @@
 	<div class="adds3" id="step_trans_div" >
   		<div class="add-tops3">
     		<p>转移</p>
-    		<img src="img/erro.jpg"  class="close" style="cursor:pointer;"/>
+    		<img src="${prc }/function/img/erro.jpg"  class="close" style="cursor:pointer;"/>
     	</div>
     	<form action="${prc}/scMaster2/changeStep_progress.action" method="post" onsubmit="return confirm('确认转移步骤吗?');" >
     		<input type="hidden" id="trans_prog_id" name="id" />
