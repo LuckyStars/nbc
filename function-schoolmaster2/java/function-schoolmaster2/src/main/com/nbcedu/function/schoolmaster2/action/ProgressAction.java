@@ -26,8 +26,8 @@ public class ProgressAction extends BaseAction{
 	public void add(){
 		progress.setCreaterId(this.getUserId());
 		progress.setCreateTime(new Date());
-		this.progBiz.add(progress);
-		Struts2Utils.renderText("0","encoding:UTF-8");
+		TSm2Progress progress1 = this.progBiz.add(progress);
+		Struts2Utils.renderText(progress1.getStepId(),"encoding:UTF-8");
 	}
 	public void isExist(){
 		List<TSm2Progress> p = this.progBiz.findByNameStepId(stepId, name);

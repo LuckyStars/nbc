@@ -48,7 +48,7 @@
 		var contentOptions = {
 			resizeType : 1,
 			width: 416,
-			height : 320,
+			height : 220,
 			pasteType:1,
 			filterMode:true,
 		//	uploadJson : '${prc}/cadreManual/cyclesAction!uploadImage.action',
@@ -122,18 +122,15 @@
              $(".adds3").show();
          });
          $(".ico5").click(function () {
-             $("body").css("overflow", "hidden");
              $(".bg").show();
              $(".adds5").show();
          });
          $(".ico4").click(function () {
-             $("body").css("overflow", "hidden");
              $(".bg").show();
 	         
              $(".adds6").show();
          });
          $(".addtabs").click(function () {
-             $("body").css("overflow", "hidden");
              $(".bg").show();
              $(".adds7").show();
          });
@@ -164,6 +161,7 @@
 				   				 $(".bg").hide();
 				   				 $(".adds7").hide();
 			      				changeTab(data);
+			      				location.reload();
 			     			});
 	            	}else{
 						alert("存在相同步骤！");
@@ -196,7 +194,7 @@
 			      				$("textarea[name='progress.content']").val("");
 				   				 $(".bg").hide();
 				   				 $(".adds6").hide();
-			      				changeTab(jQuery("#select1  option:selected").val());
+			      				changeTab(data);
 			     			});
 	            	}else{
 						alert("存在相同工作进展！");
@@ -341,7 +339,7 @@
 				<div class="right-p">
 					<p>
 						<input type="checkbox" checked="checked" />
-						<span>李丽霞</span>
+<!--						<span>李丽霞</span>-->
 					</p>
 					<div style="clear: both"></div>
 				</div>

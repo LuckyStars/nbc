@@ -41,7 +41,7 @@
 	.flagattention{
 		position: absolute;
 		display: inline-block;
-		background: url(${prc}/function/images/lvqi.png);
+		background: url(${prc}/function/img/lvqi.png);
 		width: 30px;
 		height: 11px;
 		top: 10px;

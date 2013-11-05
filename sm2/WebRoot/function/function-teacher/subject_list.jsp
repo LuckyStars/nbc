@@ -143,8 +143,8 @@
         <table width="100%" border="0">
             <tr>
                 <th width="5%" scope="col">序号</th>
-                <th width="30%" scope="col">标题</th>
-                <th width="20%" scope="col">创建日期</th>
+                <th width="35%" scope="col">标题</th>
+                <th width="15%" scope="col">创建日期</th>
                 <th width="10%" scope="col">创建人</th>
                 <th width="15%" scope="col">所属部门</th>
                 <th width="20%" scope="col">操作</th>

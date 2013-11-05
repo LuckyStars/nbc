@@ -104,6 +104,7 @@
 				GROUP BY progress_id
 			) zcount
 			on t_sm2_progress.id = zcount.progress_id 
-			WHERE t_sm2_progress.stepId=:stepId
+			WHERE t_sm2_progress.stepId=:stepId ORDER BY t_sm2_progress.createTime DESC
+			
     </sql-query>
 </hibernate-mapping>

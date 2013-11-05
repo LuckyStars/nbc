@@ -34,6 +34,7 @@
 					</pri:showWhenManager>
 				</c:if>
 				<c:if test="${module.flag==2}">
+					<pri:hideWhenManager>
 						<dl class="warp">
 							<a href="${prc}/scMaster2/findB_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
@@ -41,6 +42,7 @@
 								</dt>
 								<dd>${module.name}</dd> </a>
 						</dl>
+					</pri:hideWhenManager>
 				</c:if>
 				<c:if test="${module.flag==3}">
 						<dl class="warp">
