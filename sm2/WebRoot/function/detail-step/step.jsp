@@ -266,6 +266,7 @@
     
     	<!-- 增加批示 -->    
         <div class="conshen">
+        	<pri:showWhenMaster>
         	<form action="${prc}/scMaster2/add_comment.action" method="post"
         	id="comm_form_${prog.id }"
         	 >
@@ -274,6 +275,7 @@
 	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>
         	</form>
+        	</pri:showWhenMaster>
         </div>
         <!-- 增加批示 END  -->   
         <c:forEach items="${comMap}" var="comEntry">
@@ -319,6 +321,8 @@
           	</ul>
         </div>
         <div class="conshen box-down">
+        	
+        	<pri:showWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
@@ -327,6 +331,8 @@
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
+        	</pri:showWhenMaster>
+        	
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
         			<c:forEach items="${disEntry.value }" var="dis">

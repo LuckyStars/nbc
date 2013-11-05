@@ -258,7 +258,16 @@
 							<label for="amount"></label> 
 							<input disabled="disabled" type="text" id="amount" style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" />
 						</p>
+						<pri:hideWhenMaster>
 						<div id="slider-range-max"></div>
+						</pri:hideWhenMaster>
+						<pri:showWhenMaster>
+						<div>
+							<img 
+							src='${prc}/function/images/percent/${subject.progress }.png' 
+							width='80' height='80'/>
+						</div>
+						</pri:showWhenMaster>
 					</div>
 					<%-- --%>
 					<pri:showWhenManager>
