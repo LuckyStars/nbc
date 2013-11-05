@@ -30,7 +30,7 @@ public class MasterIndexAction extends BaseAction{
 	
 	public void findLinshi(){
 		
-		String uid = Utils.getAllSchoolMaster().
+		String uid = Utils.getDefaultMasterUids().
 			contains(this.getUserId())?null:getUserId();
 		//url,progress,title
 		final List<TSm2Subject> subList=
