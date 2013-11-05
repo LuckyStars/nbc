@@ -185,6 +185,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("AND sub.moduleId='");
 				sql.append(modId);
 				sql.append("'");
+				
+				
 			sql.append("LIMIT 0,");
 			sql.append(size.toString());
 			sql.append(" UNION ALL ");

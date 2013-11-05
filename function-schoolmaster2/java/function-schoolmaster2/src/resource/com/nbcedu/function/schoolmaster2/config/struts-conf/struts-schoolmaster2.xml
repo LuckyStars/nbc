@@ -41,6 +41,7 @@
 			<result name="qingshibaopi">/function/function-masterSubList/qingshibaopi_list.jsp</result>
 			<result name="zongjiehuibao">/function/function-masterSubList/zongjiehuibao_list.jsp</result>
 			
+			<result name="daibanshiyi" >/function/function-masterSubList/daibanshiyi.jsp</result>
 			<result name="detail" >/function/function-linshi/details.jsp</result>
 			<result name="stepDetail" >/function/detail-step/step.jsp</result>
 		</action>

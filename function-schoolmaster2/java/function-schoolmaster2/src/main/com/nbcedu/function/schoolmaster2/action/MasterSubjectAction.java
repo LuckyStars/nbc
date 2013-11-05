@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -172,6 +173,18 @@ public class MasterSubjectAction extends BaseAction{
 		Struts2Utils.renderJson(json);
 	}
 	
+	public String daiban(){
+		List<TSm2Subject> list = this.subBiz.findByMsterModule(
+				this.getUserId(),
+				new LinkedList<String>(){{
+					add("jinjizhongyao");
+					add("qingshibaopi");
+					add("zongjiehuibao");
+				}}
+				, 5);
+		this.getRequestMap().put("subList", list);
+		return "daibanshiyi";
+	}
 	///////////////////////
 	////getters&setters////
 	///////////////////////
