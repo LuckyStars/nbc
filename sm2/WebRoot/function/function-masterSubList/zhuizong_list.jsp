@@ -71,7 +71,7 @@ table td {
 		$(".button").click(function() {
 			$(".bg").show();
 			$(".add2").show();
-		});
+		});	
 		$(".close").click(function() {
 			$(".bg").hide();
 			$(".add2").hide();
