@@ -7,7 +7,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.apache.commons.lang.xwork.StringUtils;
-import org.apache.struts2.ServletActionContext;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -32,7 +31,7 @@ public class MasterIndexAction extends BaseAction{
 		
 		String uid = Utils.getDefaultMasterUids().
 			contains(this.getUserId())?null:getUserId();
-		//url,progress,title
+		
 		final List<TSm2Subject> subList=
 			this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
 		
@@ -47,6 +46,7 @@ public class MasterIndexAction extends BaseAction{
 								result.setTitle(input.getTitle());
 								result.setUrl("/scMaster2/detail_master.action?id=" + input.getId());
 								result.setProgress(String.valueOf(input.getProgress()));
+								result.setStatu(input.getStatus());
 								return result;
 							}
 						}),
@@ -54,18 +54,20 @@ public class MasterIndexAction extends BaseAction{
 				);
 			}
 			@Override
-			public String getId() {
-				return LINSHI_MODULEID;
-			}
+			public String getId() {return LINSHI_MODULEID;}
 		};
 		
 		Struts2Utils.renderJson(findData(linshi));
 	}
 	
 	class Linshi {
+		
 		private String url;
 		private String progress;
 		private String title;
+		private String statu;
+		//////////
+		////getters&setters
 		public String getUrl() {
 			return url;
 		}
@@ -83,6 +85,12 @@ public class MasterIndexAction extends BaseAction{
 		}
 		public void setTitle(String title) {
 			this.title = title;
+		}
+		public String getStatu() {
+			return statu;
+		}
+		public void setStatu(String statu) {
+			this.statu = statu;
 		}
 	}
 	
