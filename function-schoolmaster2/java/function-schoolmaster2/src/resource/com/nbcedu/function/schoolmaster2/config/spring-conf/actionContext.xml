@@ -69,4 +69,7 @@
 	<bean id="sm2CommentAction" class="com.nbcedu.function.schoolmaster2.action.CommentAction" scope="prototype">
 		<property name="comBiz" ref="sm2CommentBiz" />
 	</bean>
+	<bean id="sm2MasterIndex" class="com.nbcedu.function.schoolmaster2.action.MasterIndexAction">
+		<property name="masterSubBiz" ref="masterSubBiz" />
+	</bean>
 </beans>

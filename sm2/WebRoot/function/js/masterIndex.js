@@ -86,7 +86,7 @@ function refreshNews(url,newsId){
 
 var refLinshi = function (){
 	
-	$.post(ctxPath + '/jsonWorkbench.action?module=lssx', function(data) {
+	$.post(ctxPath + '/scMaster2/findLinshi_maIndex.action', function(data) {
 		if(data.length<=0){
 			return;
 		}

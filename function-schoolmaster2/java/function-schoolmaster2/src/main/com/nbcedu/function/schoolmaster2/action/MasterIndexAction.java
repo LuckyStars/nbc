@@ -30,13 +30,11 @@ public class MasterIndexAction extends BaseAction{
 	
 	public void findLinshi(){
 		
+		String uid = Utils.getAllSchoolMaster().
+			contains(this.getUserId())?null:getUserId();
 		//url,progress,title
-		final List<TSm2Subject> subList;
-		if(Utils.getAllSchoolMaster().contains(this.getUserId())){
-			subList = this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, null,6);
-		}else{
-			subList = this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, getUserId(),6);
-		}
+		final List<TSm2Subject> subList=
+			this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
 		
 		SearchFunction linshi = new SearchFunction() {
 			@Override

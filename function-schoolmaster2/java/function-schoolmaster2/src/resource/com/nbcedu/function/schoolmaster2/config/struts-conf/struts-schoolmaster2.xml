@@ -84,5 +84,8 @@
 				<param name="id">${stepId}</param>
 			</result>
 		</action>
+		<action name="*_maIndex" method="{1}" class="sm2MasterIndex">
+		
+		</action>
 	</package>
 </struts>
