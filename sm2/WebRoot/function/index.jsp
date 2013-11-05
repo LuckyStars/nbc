@@ -168,7 +168,7 @@
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_2">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
 							<img src="${prc}/function/images/icon3.png" />
 							<span>教育教研工作</span>
 							<img src="${prc}/function/images/new.png" id="deyujiaoyan" />
@@ -177,14 +177,14 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_3">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
 								<img src="${prc}/function/images/new.png" id="xinxihua" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_4">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
 								<img src="${prc}/function/images/icon5.png" />
 								<span>后勤·卫生工作</span>
 								<img src="${prc}/function/images/new.png" id="houqinweisheng" />
@@ -193,7 +193,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_5">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
 								<img src="${prc}/function/images/icon6.png" />
 								<span>党团工作</span>
 								<img src="${prc}/function/images/new.png" id="dangtuan" />

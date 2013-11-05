@@ -42,54 +42,63 @@
 								<dd>${module.name}</dd> </a>
 						</dl>
 				</c:if>
+				<c:if test="${module.flag==3}">
+						<dl class="warp">
+							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
+								<dt>
+									<img src="${prc}/function/img/tu4.jpg" />
+								</dt>
+								<dd>${module.name}</dd> </a>
+						</dl>
+				</c:if>
 			</c:forEach>		
-			<dl class="warp">
-				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">
-					<dt>
-						<img src="${prc}/function/img/tu5.jpg" />
-					</dt>
-					<dd>临时事项</dd> </a>
-			</dl>
-			<dl class="warp">
-				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_3&userId=${sns_init}">
-					<dt>
-						<img src="${prc}/function/img/tu6.jpg" />
-					</dt>
-					<dd>紧急重要事件</dd> </a>
-			</dl>
-			<dl class="warp">
-				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_2&userId=${sns_init}">
-					<dt>
-						<img src="${prc}/function/img/tu7.jpg" />
-					</dt>
-					<dd>请示报批事项</dd> </a>
-			</dl>
-			<dl class="warp">
-				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">
-					<dt>
-						<img src="${prc}/function/img/tu8.jpg" />
-					</dt>
-					<dd>让校长关注的事项</dd>
-				</a>
-			</dl>
-			
-			 <dl class="warp">
-			 <a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">
-     		 <dt><img src="${prc}/function/img/tu9.jpg" /></dt>
-	      	<dd>邀请您参与的工作</dd>
-	     </a>
-	    </dl>
-	     
-	      <dl class="warp">
-	       <a href="${ctxPath }/findAllModule.action?module.parentId=tjfx">
-		      <dt><img src="${prc}/function/img/tu10.jpg" /></dt>
-		      <dd>统计分析B部分管理</dd>
-	      	</a>
-	    </dl>
-	      <dl class="warp">
-	      <dt><img src="${prc}/function/img/tu11.jpg" /></dt>
-	      <dd>统计分析B部分</dd>
-    </dl>
+<!--			<dl class="warp">-->
+<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">-->
+<!--					<dt>-->
+<!--						<img src="${prc}/function/img/tu5.jpg" />-->
+<!--					</dt>-->
+<!--					<dd>临时事项</dd> </a>-->
+<!--			</dl>-->
+<!--			<dl class="warp">-->
+<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_3&userId=${sns_init}">-->
+<!--					<dt>-->
+<!--						<img src="${prc}/function/img/tu6.jpg" />-->
+<!--					</dt>-->
+<!--					<dd>紧急重要事件</dd> </a>-->
+<!--			</dl>-->
+<!--			<dl class="warp">-->
+<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_2&userId=${sns_init}">-->
+<!--					<dt>-->
+<!--						<img src="${prc}/function/img/tu7.jpg" />-->
+<!--					</dt>-->
+<!--					<dd>请示报批事项</dd> </a>-->
+<!--			</dl>-->
+<!--			<dl class="warp">-->
+<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">-->
+<!--					<dt>-->
+<!--						<img src="${prc}/function/img/tu8.jpg" />-->
+<!--					</dt>-->
+<!--					<dd>让校长关注的事项</dd>-->
+<!--				</a>-->
+<!--			</dl>-->
+<!--			-->
+<!--			 <dl class="warp">-->
+<!--			 <a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">-->
+<!--     		 <dt><img src="${prc}/function/img/tu9.jpg" /></dt>-->
+<!--	      	<dd>邀请您参与的工作</dd>-->
+<!--	     </a>-->
+<!--	    </dl>-->
+<!--	     -->
+<!--	      <dl class="warp">-->
+<!--	       <a href="${ctxPath }/findAllModule.action?module.parentId=tjfx">-->
+<!--		      <dt><img src="${prc}/function/img/tu10.jpg" /></dt>-->
+<!--		      <dd>统计分析B部分管理</dd>-->
+<!--	      	</a>-->
+<!--	    </dl>-->
+<!--	      <dl class="warp">-->
+<!--	      <dt><img src="${prc}/function/img/tu11.jpg" /></dt>-->
+<!--	      <dd>统计分析B部分</dd>-->
+<!--    </dl>-->
 			
 		</div>
 	</div>
