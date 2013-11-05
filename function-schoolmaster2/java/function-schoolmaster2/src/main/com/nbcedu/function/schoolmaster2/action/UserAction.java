@@ -27,7 +27,7 @@ public class UserAction extends BaseAction{
 		Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
 	public void findAllMaster() {
-		 Collection<PersonVo> ps = Utils.getAllManager();
+		Collection<PersonVo> ps = Utils.getAllSchoolMaster();
 		 StringBuffer s = new StringBuffer("[");
 		 Object[] p = ps.toArray();
 		 for(int i=0;i<p.length;i++){
@@ -44,8 +44,8 @@ public class UserAction extends BaseAction{
 		 }
 		 s.append("]");
 		 Struts2Utils.renderJson(s.toString(), "encoding:UTF-8");
-
 	}
+	
 	/////////////////////////
 	/////getters&setters/////
 	/////////////////////////

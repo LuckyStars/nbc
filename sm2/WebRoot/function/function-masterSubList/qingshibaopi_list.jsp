@@ -95,17 +95,19 @@
 				</p>
 				<p>
 					<label>发布者:</label>
-					<input type="text" name="search.createrName" />
+					<input type="text" name="search.createrName" value="${search.createrName }" />
 				</p>
 				<p>
 					<label>发布时间:</label>
 					<input type="text" name="search.start" id="startDate"
-					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})"/>
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" 
+					value="<fmt:formatDate value='${search.start}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
 					
 					<input type="text" name="search.end" id="endDate"
-					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})"/>
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})" 
+					value="<fmt:formatDate value='${search.end}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
 				</p>
-					<a href="javascript:document.forms[0].submit();">查询</a>
+				<a href="javascript:document.forms[0].submit();">查询</a>
 			</div>
 		</form>
     </div>

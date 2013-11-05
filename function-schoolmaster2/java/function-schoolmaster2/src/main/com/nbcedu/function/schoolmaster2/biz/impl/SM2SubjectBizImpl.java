@@ -100,15 +100,7 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 	}
 	@Override
 	public void update(TSm2Subject subject) {
-		TSm2Subject s = this.sm2SubjectDao.load(subject.getId());
-		s.setContent(subject.getContent());
-		s.setLastUpdateTime(new Date());
-		s.setTitle(subject.getTitle());
-		s.setModuleId(subject.getModuleId());
-		s.setTypeId(subject.getTypeId());
-		s.setExcuteUsers(subject.getExcuteUsers());
-		s.setCheckUsers(subject.getCheckUsers());
-		this.sm2SubjectDao.update(s);
+		this.sm2SubjectDao.update(subject);
 	}
 	@Override
 	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,

@@ -52,8 +52,7 @@ public class SubjectVo{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
-	public String getModuleId() {
+	public String getModuleId(){
 		return this.moduleId;
 	}
 

@@ -19,9 +19,9 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
+import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
-import com.nbcedu.function.schoolmaster2.vo.DepartmentVo;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 
 @SuppressWarnings("serial")
@@ -39,8 +39,9 @@ public class SubjectAction extends BaseAction{
 	
 	public String toAdd(){
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
+		module = this.moduleBiz.findById(moduleId);
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
-		if(moduleId.equals("lssx")|| moduleId.equals("ndzx")){
+		if(module.getFlag()==3){
 			subjects = this.sm2SubjectBiz.findBYModuleId(subjectVo.getModuleId());
 		}
 		this.getRequest().setAttribute("types", types);
@@ -73,6 +74,10 @@ public class SubjectAction extends BaseAction{
 		Map<String,String> m =  UCService.findDepartmentByUid(this.getUserId());
 		subject.setDepartmentName(m.get("name"));
 		subject.setDepartmentId(m.get("id"));
+		subject.setLastUpdateTime(new Date());
+		subject.setStatus("new");
+		subject.setFlag(0);
+		subject.setProgress(0);
 		subject.setExcuteUsers(users);
 		String checkusersId = this.getRequest().getParameter("checkUsers");
 		if(!StringUtil.isEmpty(checkusersId)){
@@ -92,6 +97,7 @@ public class SubjectAction extends BaseAction{
 	
 	public void update(){
 		String usersId = this.getRequest().getParameter("executeUsersId");
+		TSm2Subject s = this.sm2SubjectBiz.load(subject.getId()); 
 		Set<TSm2SubjectUser> users = new HashSet<TSm2SubjectUser>();
 		for(String u : usersId.split(",")){
 			TSm2SubjectUser user =  new TSm2SubjectUser();
@@ -99,7 +105,7 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
-		subject.setExcuteUsers( users);
+		s.setExcuteUsers( users);
 		String checkusersId = this.getRequest().getParameter("checkUsers");
 		Set<SM2SubjectMaster> checkUsers = new HashSet<SM2SubjectMaster>();
 		for(String u : checkusersId.split(",")){
@@ -107,9 +113,14 @@ public class SubjectAction extends BaseAction{
 			user.setUserUid(u);
 			checkUsers.add(user);
 		}
-		subject.setCheckUsers(checkUsers);
-		subject.setLastUpdateTime(new Date());
-		this.sm2SubjectBiz.update(subject);
+		s.setCheckUsers(checkUsers);
+		s.setLastUpdateTime(new Date());
+		s.setContent(subject.getContent());
+		s.setTitle(subject.getTitle());
+		s.setTypeId(subject.getTypeId());
+		s.setStatus("updated");
+		this.sm2SubjectBiz.modify(s);
+		
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
 	/**
@@ -137,13 +148,6 @@ public class SubjectAction extends BaseAction{
 			this.getRequest().setAttribute("list",list);
 		}
 		return "listB";
-	}
-	public String findMaster(){
-		List<DepartmentVo> departments = UCService.findDepartment();
-		subjectVo.setCheckUserId(this.getUserId());
-		module = this.moduleBiz.findById(subjectVo.getModuleId());
-		pm = this.sm2SubjectBiz.findBySubjectMaster(subjectVo);
-		return module.getId();
 	}
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
