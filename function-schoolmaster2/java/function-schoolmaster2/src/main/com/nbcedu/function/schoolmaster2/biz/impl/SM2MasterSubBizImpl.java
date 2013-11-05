@@ -4,7 +4,9 @@ import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
@@ -18,6 +20,14 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterSubBiz{
 
+	
+	private StringBuilder findByMasterHql = new StringBuilder("");
+	{
+		findByMasterHql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
+		findByMasterHql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
+		findByMasterHql.append("ORDER BY sub.createTime DESC");
+	}
+	
 	@Override
 	public PagerModel findByMaster(final String modId, final String masterUid) {
 //		SQLQuery q = (SQLQuery) this.sm2SubjectDao.createSqlQuery(this.sm2SubjectDao.getNamedQuery("subject_master_module").getQueryString());
@@ -51,13 +61,28 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 //			);
 //		return pm;
 		
-		StringBuilder hql = new StringBuilder("");
-		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
-		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
-		hql.append("ORDER BY sub.createTime DESC");
-		return this.sm2SubjectDao.searchPaginated(hql.toString(), new Object[]{masterUid,modId});
+		
+		return this.sm2SubjectDao.searchPaginated(findByMasterHql.toString(), new Object[]{masterUid,modId});
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TSm2Subject> findByMasterAndCount(String modId,
+			String masterUid, Integer size) {
+		Query query = null;
+		if(StringUtils.isNotBlank(masterUid)){
+			query = this.sm2SubjectDao.createQuery(this.findByMasterHql.toString(), 
+					new Object[]{masterUid,modId});
+		}else{
+			query = this.sm2SubjectDao.createQuery(
+					"FROM TSm2Subject sub WHERE sub.moduleId =? ",new Object[]{modId});
+		}
+		if(size!=null&&size>0){
+			query.setMaxResults(size);
+		}
+		return query.list();
+	}
+	
 	@Override
 	public List<StepVo> findAllSteps(String subId) {
 		String hql = "SELECT s.id,s.name FROM TSm2Step s WHERE s.subjectId=? ORDER BY s.lastUpdateTime DESC";
