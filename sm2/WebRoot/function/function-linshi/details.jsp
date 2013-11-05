@@ -339,7 +339,7 @@
 				<div class="right-p">
 					<p>
 						<input type="checkbox" checked="checked" />
-						<span>李丽霞</span>
+<!--						<span>李丽霞</span>-->
 					</p>
 					<div style="clear: both"></div>
 				</div>
