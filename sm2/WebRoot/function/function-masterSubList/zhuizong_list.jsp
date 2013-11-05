@@ -90,7 +90,12 @@ table td {
 			<div class="right-input">
 				<p>
 					<label>部门:</label>
-					<select name="search.departId" ></select>
+					<select name="search.departId" >
+						<option></option>
+						<c:forEach items="${departments}" var="department" >
+							<option id="${department.id}" <c:if test="${search.departId==department.id}">selected</c:if>>${department.name}</option>
+						</c:forEach>
+					</select>
 				</p>
 				<p>
 					<label>发布者:</label>
@@ -107,7 +112,7 @@ table td {
 					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})"
 					/>
 				</p>
-				<a href="#">查询</a>
+					<a href="javascript:document.forms[0].submit();">查询</a>
 			</div>
 			</form>
 			<table width="100%" border="0">
