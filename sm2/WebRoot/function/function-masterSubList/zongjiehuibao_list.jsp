@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${prc}/function/css/gzt.css" type="text/css"></link>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="${prc}/function/function-masterSubList/js/schoolMaster.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <style>
 table th {
 	background: url(${prc}/function/img/table-bg.jpg) repeat-x;
@@ -80,17 +81,36 @@ table td {
 			<h1>
 				当前位置：首页 - <span style="color: #0374C2">总结·汇报·关注性工作</span>
 			</h1>
+				<form action="${prc}/scMaster2/list_master.action" method="post">
+    		<input type="hidden" name="moduleId" value="${moduleId}" />
+			<input type="hidden" name="search.typeId" value="${search.typeId}" />
 			<div class="right-input">
 				<p>
-					<label>部门:</label><select></select>
+					<label>部门:</label>
+					<select name="search.departId" >
+						<option></option>
+						<c:forEach items="${departments}" var="department" >
+							<option id="${department.id}" <c:if test="${search.departId==department.id}">selected</c:if>>${department.name}</option>
+						</c:forEach>
+					</select>
 				</p>
 				<p>
-					<label>发布者:</label><select></select>
+					<label>发布者:</label>
+					<input type="text" name="search.createrName" value="${search.createrName }" />
 				</p>
 				<p>
-					<label>发布时间:</label><select></select>
+					<label>发布时间:</label>
+					<input type="text" name="search.start" id="startDate"
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" 
+					value="<fmt:formatDate value='${search.start}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
+					
+					<input type="text" name="search.end" id="endDate"
+					readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startDate\')}'})" 
+					value="<fmt:formatDate value='${search.end}' pattern='yyyy-MM-dd'></fmt:formatDate>"/>
 				</p>
-				<a href="#">查询</a>
+					<a href="javascript:document.forms[0].submit();">查询</a>
+			</div>
+		</form>
 			</div>
 			<table width="100%" border="0">
 				<tr>
@@ -131,8 +151,7 @@ table td {
 					</tr>
 				</c:forEach>
 			</table>
+			<%@ include file="pager.jsp"%>
 		</div>
-	</div>
-	<%@ include file="pager.jsp"%>
 </body>
 </html>

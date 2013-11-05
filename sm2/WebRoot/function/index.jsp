@@ -215,7 +215,7 @@
 			<h1>学校动态</h1>
 			<div class="content">
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=zongjiehuibao">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=zongjiehuibao">
 						<img src="${prc}/function/images/pic1.png" width="179" height="140" />
 						<span style="color: #0273c2;">总结·汇报·关注性工作</span>
 					</a>
@@ -228,14 +228,14 @@
 					</a>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=qingshibaopi">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=qingshibaopi">
 						<img src="${prc}/function/images/pic3.png" width="179" height="140" />
 						<span style="color: #ff7200;">请示·报批性工作</span>
 					</a>
 					<i id="qingshi">6</i>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/findMaster_subject.action?subjectVo.moduleId=jinjizhongyao">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=jinjizhongyao">
 						<img src="${prc}/function/images/pic4.png" width="179" height="140" />
 						<span style="color: #9910ac;">紧急重要事件处理</span>
 					</a>
@@ -288,14 +288,14 @@
 					cellspacing="1" style="margin: 0 auto;">
 					<tr>
 						<td width="190" height="72" bgcolor="#d15b47">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=listMasterStatistics_data.action&matcher=bookSite">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=bookSite">
 								<img src="${prc}/function/images/png1.png" />
 								<span>场馆预订统计</span>
 								<d class="new"></d>
 							</a>
 						</td>
 						<td bgcolor="#ffb752">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=listMasterStatistics_data.action&matcher=substitute">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=substitute">
 								<img src="${prc}/function/images/png2.png" />
 								<span>请假代课统计</span>
 								<d class="text"></d>
@@ -304,13 +304,13 @@
 					</tr>
 					<tr>
 						<td bgcolor="#87b87f">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=listMasterStatistics_data.action&matcher=repair">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=repair">
 								<img src="${prc}/function/images/png3.png" />
 								<span>在线报修统计</span>
 							</a>
 						</td>
 						<td bgcolor="#d48bde">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=listMasterStatistics_data.action&matcher=logistics">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=logistics">
 								<img src="${prc}/function/images/png4.png" />
 								<span>电教服务统计</span>
 							</a>

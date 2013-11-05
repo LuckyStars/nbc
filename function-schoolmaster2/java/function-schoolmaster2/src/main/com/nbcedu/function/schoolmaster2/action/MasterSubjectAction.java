@@ -31,6 +31,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.nbcedu.function.schoolmaster2.vo.DepartmentVo;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
@@ -46,7 +47,7 @@ public class MasterSubjectAction extends BaseAction{
 	private TSm2Step step;
 	private List<ProgressVo> proList = new ArrayList<ProgressVo>();
 	private String name;
-	private MasterSubSearchVO search;
+	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2MasterSubBiz subBiz;
 	private Sm2StepBiz stepBiz;
@@ -58,13 +59,15 @@ public class MasterSubjectAction extends BaseAction{
 	
 	
 	public String list(){
+		List<DepartmentVo> departments = UCService.findDepartment();
+		this.getRequest().setAttribute("departments",departments);
 		if(StringUtils.isNotBlank(moduleId)){
 			this.search.setModuleId(moduleId);
 			if(!Utils.getDefaultMasterUids().contains(this.getUserId())){
 				this.search.setReceiverUid( this.getUserId());
 			}
 			this.pm = this.subBiz.findBySearchVo(search); 
-			return "subList";
+			return moduleId;
 		}else{
 			return "404";
 		}
