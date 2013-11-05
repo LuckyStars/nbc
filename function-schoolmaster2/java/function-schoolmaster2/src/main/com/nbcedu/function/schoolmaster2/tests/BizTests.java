@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.tests;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
@@ -52,6 +53,21 @@ public class BizTests {
 		for (Object sub :pm.getDatas()) {
 			TSm2Subject su = (TSm2Subject)sub;
 			System.out.println(su.getTitle());
+		}
+	}
+	
+	public static void main(String[] args) {
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		List<TSm2Subject> list = biz.findByMsterModule(
+				"1",
+				new LinkedList<String>(){{
+					add("jinjizhongyao");
+					add("qingshibaopi");
+					add("zongjiehuibao");
+				}}
+				, 5);
+		for (TSm2Subject tSm2Subject : list) {
+			tSm2Subject.getId();
 		}
 	}
 	

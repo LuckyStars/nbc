@@ -120,6 +120,9 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		if(isNotBlank(vo.getDepartId())){
 			cri.add(Restrictions.eq("departmentId", vo.getDepartId()));
 		}
+		if(isNotBlank(vo.getTypeId())){
+			cri.add(Restrictions.eq("typeId", vo.getTypeId()));
+		}
 		if(vo.getFlag()!=null){
 			cri.add(Restrictions.eq("flag", vo.getFlag()));
 		}
@@ -170,7 +173,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("createrName,");
 				sql.append("progress,");
 				sql.append("departmentName,");
-				sql.append("status,");
+				sql.append("status ");
 			sql.append("FROM ");
 				sql.append("t_sm2_subject sub,");
 				sql.append("(SELECT sub_id as subId ");
@@ -184,14 +187,14 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("AND masterSub.subId = sub.id ");
 				sql.append("AND sub.moduleId='");
 				sql.append(modId);
-				sql.append("'");
+				sql.append("' ");
 				
 				
 			sql.append("LIMIT 0,");
 			sql.append(size.toString());
 			sql.append(" UNION ALL ");
 		}
-		sql.delete(sql.lastIndexOf("UNION ALL"),sql.length());
+		sql.delete(sql.lastIndexOf(" UNION ALL "),sql.length());
 		
 		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql.toString());
 		query.addScalar("id",Hibernate.STRING);

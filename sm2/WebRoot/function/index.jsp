@@ -41,7 +41,7 @@
 	.flagattention{
 		position: absolute;
 		display: inline-block;
-		background: url(${prc}/function/images/qi.png);
+		background: url(${prc}/function/images/lvqi.png);
 		width: 30px;
 		height: 11px;
 		top: 10px;
@@ -112,7 +112,7 @@
 				</div>
 
 				<div class="office" style="width: 125px; height: 150px;">
-					<a class="pointer" href="${prc}/function/gzt/待办事宜.html">
+					<a class="pointer" href="${prc}/scMaster2/daiban_master.action">
 						<img src="${prc}/function/images/daiban.jpg"/>
 						<span>待办事宜</span>
 						<i id="daibanshiyi" >6</i>
