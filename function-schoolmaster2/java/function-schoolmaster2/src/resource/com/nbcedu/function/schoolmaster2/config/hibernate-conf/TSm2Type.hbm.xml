@@ -10,9 +10,7 @@
         <property name="name" type="java.lang.String">
             <column name="NAME" length="30" />
         </property>
-          <property name="moduleId" type="java.lang.String">
-            <column name="MODULEID" length="32" />
-        </property>
+        
         <property name="mold" type="java.lang.Integer">
             <column name="MOLD" length="2" />
         </property>

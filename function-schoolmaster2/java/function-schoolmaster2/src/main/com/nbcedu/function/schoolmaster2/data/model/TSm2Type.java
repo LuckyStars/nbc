@@ -10,7 +10,6 @@ public class TSm2Type implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
 	private String name;
-	private String moduleId;
 	private Integer mold; 
 	
 	private Set<TSm2TypeUser> typeUsers = new HashSet<TSm2TypeUser>();
@@ -22,9 +21,8 @@ public class TSm2Type implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public TSm2Type(String name,String moduleId,Set typeUsers) {
+	public TSm2Type(String name,Set typeUsers) {
 		this.name = name;
-		this.moduleId = moduleId;
 		this.typeUsers = typeUsers;
 	}
 
@@ -44,14 +42,6 @@ public class TSm2Type implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getModuleId() {
-		return moduleId;
-	}
-
-	public void setModuleId(String moduleId) {
-		this.moduleId = moduleId;
 	}
 
 	public Set<TSm2TypeUser> getTypeUsers() {

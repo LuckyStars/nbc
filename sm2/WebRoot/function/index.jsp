@@ -151,7 +151,7 @@
 					<tr>
 						<td colspan="2">
 							<div style="width: 200px; margin: 0 auto;">
-							<a class="pointer ts" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=flag"> 
+							<a class="pointer ts" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin"> 
 								<img src="${prc}/function/images/icon1.png" />
 								<span>我关注的核心工作</span>
 								<img src="${prc}/function/images/new.png" id="hexin" />
@@ -161,7 +161,7 @@
 					</tr>
 					<tr>
 						<td width="177">
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_1">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
 								<img src="${prc}/function/images/icon2.png" />
 								<span>德育工作</span>
 								<img src="${prc}/function/images/new.png" id="deyugongzuo" />

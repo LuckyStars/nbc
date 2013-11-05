@@ -23,7 +23,7 @@
             <column name="flag" default="0"/>
         </property>
           <property name="progress" type="java.lang.Integer">
-            <column name="progress" />
+            <column name="progress" default="0"/>
         </property>
         <property name="departmentId" type="java.lang.String">
             <column name="departmentId" length="32" />

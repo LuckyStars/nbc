@@ -91,11 +91,11 @@ var refLinshi = function (){
 			return;
 		}
 		$("#linshiDiv").html("");
-		var curData = $.parseJSON(data);
+		var curData = data;
 		for(var i = 0;i<data.length;i++){
 			
 			var content = $("<div class='linshi'></div>");
-			var aTag = $("<a class='pointer' href='" + curData[i].url + "' target=_blank></a>");
+			var aTag = $("<a class='pointer' href='" +ctxPath+ curData[i].url + "' target=_blank></a>");
 			$("<img src='" + ctxPath +"/function/images/percent/" 
 					+ curData[i].progress+
 					".png' width='80' height='80'>").appendTo(aTag);
