@@ -43,6 +43,9 @@
         <property name="parentId" type="java.lang.String">
             <column name="parentId" length="32" />
         </property>
+       <property name="status" type="java.lang.String">
+            <column name="status" length="10" />
+        </property>
         <set name="excuteUsers" lazy="false" table="t_sm2_subject_user" inverse="false" cascade="all">
     		<key column="subjectId"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser"/>

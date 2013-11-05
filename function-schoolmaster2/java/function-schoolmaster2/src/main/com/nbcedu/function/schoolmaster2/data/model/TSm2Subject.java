@@ -18,7 +18,7 @@ public class TSm2Subject implements java.io.Serializable {
 	private String departmentId;
 	private String title;
 	private String moduleId;
-	private Integer status;
+	private String status;//new:新建立,updated:最近更新,attention:关注的,common:普通的
 	private Date lastUpdateTime;
 	private String parentId;
 	private String typeId;
@@ -119,11 +119,11 @@ public class TSm2Subject implements java.io.Serializable {
 		this.parentId = parentId;
 	}
 
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
