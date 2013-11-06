@@ -82,11 +82,11 @@
       <img src="${prc}/function/images/nav_01.png" width="16" height="16" />个人办公<span class="cols"></span></a>
         <ul class="nav-list-inner">
           <li><a href="${prc}/masterDocumentFlow/listUnhandledDocumentTask.action" target="fm_right">·我的待处理公文</a></li>
-          <li><a href="#">·我的日程安排</a></li>
+<!--          <li><a href="#">·我的日程安排</a></li>
           <li><a href="#">·我的通讯录</a></li>
-          <li><a href="#">·我要看的学校动态</a></li>
-          <li><a href="#">·我收到的邀请和消息</a></li>
-          <li><a href="#">·我的邮件</a></li>
+          <li><a href="#">·我要看的学校动态</a></li>-->
+          <li><a href="${prc}/scMaster2/masterList_invatition.action" target="fm_right">·我收到的邀请和消息</a></li>
+<!--          <li><a href="#">·我的邮件</a></li>-->
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav2">
@@ -116,40 +116,38 @@
       <li><a href="#" class="li-blue" id="nav5">
       <img src="${prc}/function/images/nav_05.png" width="16" height="16" />工作计划跟踪<span class="cols-open"></span></a>
         <ul class="nav-list-inner" style="display:block;">
-          <li><a class="current" href="${prc}/getSubByModuleWorkbench.action?module=flag" target="fm_right">·我关注的核心工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_2" target="fm_right">·教育教研工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_1" target="fm_right">·德育工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_4" target="fm_right">·后勤·卫生工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_3" target="fm_right">·信息化工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_6" target="fm_right">·财务工作</a></li>
-          <li><a href="${prc}/getSubByModuleWorkbench.action?module=ndzx_5" target="fm_right">·党团工作</a></li>
+          <li><a class="current" href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin" target="fm_right">·我关注的核心工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx" target="fm_right">·教育教研工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx" target="fm_right">·德育工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx" target="fm_right">·后勤·卫生工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx" target="fm_right">·信息化工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=caiwu" target="fm_right">·财务工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx" target="fm_right">·党团工作</a></li>
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav6">
       <img src="${prc}/function/images/nav_06.png" width="16" height="16" />请示报批性工作汇总<span class="cols"></span></a>
         <ul class="nav-list-inner">
-          <li><a href="#">·财务方面请示</a></li>
-          <li><a href="#">·人事方面请示</a></li>
-          <li><a href="#">·事务方面请示</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=qingshibaopi" target="fm_right">·财务方面请示</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=qingshibaopi" target="fm_right">·人事方面请示</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=qingshibaopi" target="fm_right">·事务方面请示</a></li>
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav7">
       <img src="${prc}/function/images/nav_07.png" width="16" height="16" />总结·汇报性工作汇总<span class="cols"></span></a>
         <ul class="nav-list-inner">
-          <li><a href="#">·年度工作总结</a></li>
-          <li><a href="#">·教学质量总结</a></li>
-          <li><a href="#">·学校宣传总结</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=zongjiehuibao" target="fm_right">·年度工作总结</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=zongjiehuibao" target="fm_right">·教学质量总结</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=zongjiehuibao" target="fm_right">·学校宣传总结</a></li>
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav8">
       <img src="${prc}/function/images/nav_08.png" width="16" height="16" />统计分析<span class="cols"></span></a>
         <ul class="nav-list-inner">
-          <li><a href="#">·数校应用分析</a></li>
-          <li><a href="#">·预算执行统计</a></li>
-          <li><a href="#">·财务收支统计</a></li>
-          <li><a href="#">·教师报销统计</a></li>
-          <li><a href="#">·学生参赛统计</a></li>
-          <li><a href="#">·教师参赛统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=bookSite" target="fm_right">·场馆预定统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=substitute" target="fm_right">·请假代课统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=repair" target="fm_right">·在线保修统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=logistics" target="fm_right">·电教服务统计</a></li>
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav9">
