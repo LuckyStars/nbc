@@ -42,7 +42,7 @@ public class EmotionDisplayTag extends TagSupport {
 		if(this.content==null||this.content.trim().length() <=0){
 			return "";
 		}
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder(content.length());
 		int next = 0;
 		char[] origin = content.trim().toCharArray();
 		for (int i = 0; i < origin.length; i++) {
@@ -62,14 +62,6 @@ public class EmotionDisplayTag extends TagSupport {
 		}
 		return result.toString();
 	}
-	
-	public static void main(String[] args) {
-		String origin = "asdsdaasd[0]asdasdasd[x]fgg[01]ggggg[02][aaaa]gfgggg[";
-		EmotionDisplayTag tag = new EmotionDisplayTag();
-		tag.setContent(origin);
-		System.out.println(tag.replaceEmos());
-	}
-
 	
 	///////////////////////
 	////getters&setters///
