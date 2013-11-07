@@ -16,14 +16,14 @@ public class EmotionDisplayTag extends TagSupport {
 	
 	private String content;
 	private Map<String, String> emos =  new HashMap<String, String>(){{
-		put("[01]","111");	
-		put("[02]","222");	
-		put("[03]","333");	
-		put("[04]","444");	 
-		put("[05]","555");	
-		put("[06]","666");	
-		put("[07]","777");	
-		put("[08]","8888");	
+		put("[01]","01.png");	
+		put("[02]","02.png");	
+		put("[03]","03.png");	
+		put("[04]","04.png");	 
+		put("[05]","05.png");	
+		put("[06]","06.png");	
+		put("[07]","07.png");	
+		put("[08]","08.png");	
 	}};	
 	
 	
@@ -45,6 +45,7 @@ public class EmotionDisplayTag extends TagSupport {
 		StringBuilder result = new StringBuilder(content.length());
 		int next = 0;
 		char[] origin = content.trim().toCharArray();
+		String ctx = this.pageContext.getServletContext().getContextPath();
 		for (int i = 0; i < origin.length; i++) {
 			if(i<next){
 				continue;
@@ -52,7 +53,11 @@ public class EmotionDisplayTag extends TagSupport {
 			if(origin[i]=='[' && (i+3) <=origin.length){
 				String mat = new String(new char[]{origin[i],origin[i+1],origin[i+2],origin[i+3]});
 				if(emos.containsKey(mat)){
+					result.append("<img src='");
+					result.append(ctx);
+					result.append("/fcuntion/emotion/images/");
 					result.append(emos.get(mat));
+					result.append("' />");
 					next += 4;
 					continue;
 				}
