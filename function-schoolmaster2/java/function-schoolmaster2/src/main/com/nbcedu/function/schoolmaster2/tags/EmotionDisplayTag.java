@@ -1,5 +1,7 @@
 package com.nbcedu.function.schoolmaster2.tags;
 
+import static org.apache.taglibs.standard.tag.common.core.Util.escapeXml;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,7 @@ public class EmotionDisplayTag extends TagSupport {
 		if(this.content==null||this.content.trim().length() <=0){
 			return "";
 		}
+		this.content = escapeXml(this.content);
 		StringBuilder result = new StringBuilder(content.length());
 		int next = 0;
 		char[] origin = content.trim().toCharArray();
@@ -67,7 +70,7 @@ public class EmotionDisplayTag extends TagSupport {
 		}
 		return result.toString();
 	}
-	
+
 	///////////////////////
 	////getters&setters///
 	///////////////////////

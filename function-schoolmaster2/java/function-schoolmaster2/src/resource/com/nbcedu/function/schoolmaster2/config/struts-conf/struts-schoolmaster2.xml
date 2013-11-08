@@ -44,6 +44,10 @@
 			<result name="daibanshiyi" >/function/function-masterSubList/daibanshiyi.jsp</result>
 			<result name="detail" >/function/function-linshi/details.jsp</result>
 			<result name="stepDetail" >/function/detail-step/step.jsp</result>
+			<result name="refreshDetail" type="redirectAction">
+				<param name="actionName">detail_master</param>
+				<param name="id">${id}</param>
+			</result>
 		</action>
 		
 		<action name="*_invatition" method="{1}" class="invatitionAction">
