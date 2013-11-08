@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.vo;
 public class StepVo {
 	private String id;
 	private String name;
+	private String createrId;
 	public String getId() {
 		return id;
 	}
@@ -15,4 +16,11 @@ public class StepVo {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getCreaterId() {
+		return createrId;
+	}
+	public void setCreaterId(String createrId) {
+		this.createrId = createrId;
+	}
+	
 }

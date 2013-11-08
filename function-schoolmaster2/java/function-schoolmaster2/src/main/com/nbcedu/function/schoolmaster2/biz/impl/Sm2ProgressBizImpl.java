@@ -23,6 +23,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.Sm2ProgressDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
@@ -48,8 +49,12 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 	@Override
 	public List<TSm2Progress> findByNameStepId(String stepId, String name) {
 		Criteria cri = this.progressDao.createCriteria();
-		cri.add(Restrictions.eq("stepId", stepId));
-		cri.add(Expression.eq("name",name));
+		if(!StringUtil.isEmpty(stepId)){
+			cri.add(Restrictions.eq("stepId", stepId));
+		}
+		if(!StringUtil.isEmpty(name)){
+			cri.add(Expression.eq("name",name));
+		}
 		return cri.list();
 	}
 	

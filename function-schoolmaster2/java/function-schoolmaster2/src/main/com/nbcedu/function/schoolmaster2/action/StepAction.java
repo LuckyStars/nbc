@@ -27,7 +27,7 @@ public class StepAction extends BaseAction{
 	 * @return
 	 */
 	public String delete(){
-		this.stepBiz.delete(id);
+		this.stepBiz.removeById(id);
 		return RELOAD;
 	}
 	

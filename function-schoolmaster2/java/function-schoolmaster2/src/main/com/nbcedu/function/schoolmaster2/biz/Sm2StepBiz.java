@@ -27,6 +27,4 @@ public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
 	 */
 	public List<StepVo> findByProgId(String progId);
 	
-	
-	public void delete(String id);
 }

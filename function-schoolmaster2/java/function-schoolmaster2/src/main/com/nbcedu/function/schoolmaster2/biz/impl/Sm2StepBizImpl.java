@@ -19,7 +19,6 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 
 	private Sm2StepDao stepDao;
-	private Sm2ProgressBiz progressBiz;
 
 	public void setStepDao(Sm2StepDao stepDao) {
 		super.setDao(stepDao);
@@ -66,14 +65,6 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 		q.setString("progId", progId);
 		List<Object[]> resultSet = q.list();
 		return transResult(resultSet);
-	}
-	@Override
-	public void delete(String id) {
-		List<TSm2Progress> l = this.progressBiz.findAllByStepId(id);
-		for(TSm2Progress p : l){
-			this.progressBiz.removeById(p.getId());
-		}
-		this.stepDao.removeById(id);
 	}
 	///////////////////////
 	//////PRIVATE//////////
