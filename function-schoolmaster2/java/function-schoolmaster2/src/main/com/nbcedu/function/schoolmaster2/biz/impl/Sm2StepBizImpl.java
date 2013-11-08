@@ -71,7 +71,7 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 	public void delete(String id) {
 		List<TSm2Progress> l = this.progressBiz.findAllByStepId(id);
 		for(TSm2Progress p : l){
-			this.progressBiz.deleteById(p.getId());
+			this.progressBiz.removeById(p.getId());
 		}
 		this.stepDao.removeById(id);
 	}

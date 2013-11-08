@@ -20,5 +20,5 @@ public interface Sm2ProgressBiz extends BaseBiz<TSm2Progress> {
 	 *删除工作进展，包括：赞；转发；
 	 * @param id
 	 */
-	public void deleteById(String id);
+	public void removeById1(String id);
 }

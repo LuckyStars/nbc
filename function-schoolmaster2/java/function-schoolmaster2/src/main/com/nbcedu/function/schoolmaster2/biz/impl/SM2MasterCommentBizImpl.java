@@ -29,7 +29,7 @@ public class SM2MasterCommentBizImpl extends BaseBizImpl<TSm2MasterComment> impl
 	}
 
 	@Override
-	public void deleteByProgId(String progId) {
-		this.sm2MasterCommentDao.createQuery("delete TSm2MasterComment where progressId=?", progId);
+	public void removeByProgId(String progId) {
+		this.sm2MasterCommentDao.createQuery("delete from TSm2MasterComment where progressId=?", progId);
 	}
 }

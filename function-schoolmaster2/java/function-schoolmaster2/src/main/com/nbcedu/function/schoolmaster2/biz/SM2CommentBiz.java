@@ -10,5 +10,5 @@ public interface SM2CommentBiz extends BaseBiz<TSm2Comment> {
 	
 	public List<TSm2Comment> findByProgIds(Collection<String> progIds,Integer size);
 	
-	public void deleteByProgId(String progId);
+	public void removeByProgId(String progId);
 }

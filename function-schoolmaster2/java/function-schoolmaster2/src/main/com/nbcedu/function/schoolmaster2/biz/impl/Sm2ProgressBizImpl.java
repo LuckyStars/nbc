@@ -104,14 +104,14 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		
 	}
 	@Override
-	public void deleteById(String id) {
-		this.zanBiz.deleteByProg(id);
-		this.resourceBiz.deleteByProgId(id);
-		readsBiz.deleteByProgId(id);
-		masterReplyBiz.deleteByProgId(id);
-		masterCommentBiz.deleteByProgId(id);
-		disscusBiz.deleteByProgId(id);
-		commentBiz.deleteByProgId(id);
+	public void removeById1(String id) {
+		this.zanBiz.removeByProg(id);
+		this.resourceBiz.removeByProgId(id);
+		readsBiz.removeByProgId(id);
+		masterReplyBiz.removeByProgId(id);
+		masterCommentBiz.removeByProgId(id);
+		disscusBiz.removeByProgId(id);
+		commentBiz.removeByProgId(id);
 		this.progressDao.removeById(id);
 	}
 	

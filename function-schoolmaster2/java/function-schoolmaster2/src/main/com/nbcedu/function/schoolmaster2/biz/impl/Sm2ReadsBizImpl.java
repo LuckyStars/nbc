@@ -93,8 +93,8 @@ public class Sm2ReadsBizImpl extends BaseBizImpl<SM2Reads> implements Sm2ReadsBi
 		return new LinkedList<ReadsVo>();
 	}
 	@Override
-	public void deleteByProgId(String progId) {
-		this.readsDao.createQuery("delete SM2Reads where progressId=?", progId);
+	public void removeByProgId(String progId) {
+		this.readsDao.createQuery("delete from SM2Reads where progressId=?", progId);
 		
 	}
 	/////////////////////////

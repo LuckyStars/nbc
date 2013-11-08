@@ -96,7 +96,7 @@
             //删除工作进展
             $(".prog").click(function () {
             	if(confirm("确定要删除吗?")){
-		    		$.post("delete_progress.action", formParams, function(data) {
+		    		$.post("delete_progress.action", {id:this.id}, function(data) {
 			    		if(data==0){
 				    		alert("删除成功！");
 		      				location.reload();
@@ -235,7 +235,7 @@
    			
    			<img src="${prc }/function/detail-step/images/ico4.png" alt="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
    			<c:if test="${sessionScope.sm2_init==prog.createrId}">
-   				<img src="${prc }/function/detail-step/images/ico5.png" class="prog"/><%--删除进展 --%>
+   				<img src="${prc }/function/detail-step/images/ico5.png" class="prog" id="${prog.id}"/><%--删除进展 --%>
    			</c:if>
    			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
    			<img src="${prc }/function/detail-step/images/ico7.png" alt="赞"

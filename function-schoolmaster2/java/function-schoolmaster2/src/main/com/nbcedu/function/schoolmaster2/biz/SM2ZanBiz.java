@@ -19,5 +19,5 @@ public interface SM2ZanBiz extends BaseBiz<Sm2Zan>{
 	 */
 	List<ZanVo> findByProg(String progId,Integer size);
 	
-	void deleteByProg(String progId);
+	void removeByProg(String progId);
 }

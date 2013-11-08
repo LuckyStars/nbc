@@ -43,7 +43,7 @@ public class ProgressAction extends BaseAction{
 	}
 	
 	public void delete(){
-		this.progBiz.deleteById(id);
+		this.progBiz.removeById1(id);
 		Struts2Utils.renderText("0","encoding:UTF-8");
 	}
 	////////////////////////

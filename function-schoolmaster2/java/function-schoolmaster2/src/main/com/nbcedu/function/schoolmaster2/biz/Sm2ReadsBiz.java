@@ -12,5 +12,5 @@ public interface Sm2ReadsBiz extends BaseBiz<SM2Reads> {
 	
 	public List<ReadsVo> findByProg(String progId,Integer size);
 	
-	public void deleteByProgId(String progId);
+	public void removeByProgId(String progId);
 }
