@@ -26,9 +26,9 @@ public class StepAction extends BaseAction{
 	 * 删除步骤只能删除自己建的步骤
 	 * @return
 	 */
-	public String delete(){
+	public void delete(){
 		this.stepBiz.removeById(id);
-		return RELOAD;
+		Struts2Utils.renderText("0","encoding:UTF-8");
 	}
 	
 	//////////////////////////
