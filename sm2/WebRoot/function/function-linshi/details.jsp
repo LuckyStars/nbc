@@ -175,7 +175,7 @@
 			var id = $(this).attr("name");
 			 $.post("isExist_progress.action",{stepId:id},function(data1){
 				if(data1==0){
-					$.post("deleteStep_master.action",{id:id},function(data){
+					$.post("delete_step.action",{id:id},function(data){
 						if(data==0){
 							$("#"+id).remove();
 						}else{
