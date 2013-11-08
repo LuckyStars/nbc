@@ -81,10 +81,5 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 		});
 	}
 
-	public void setProgressBiz(Sm2ProgressBiz progressBiz) {
-		this.progressBiz = progressBiz;
-	}
-
-	
 	
 }
