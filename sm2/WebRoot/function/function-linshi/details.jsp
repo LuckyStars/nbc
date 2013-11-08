@@ -268,8 +268,9 @@
 					</div>
 					<%-- --%>
 					<pri:showWhenManager>
-					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
-					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />
+					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
+					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
+<!--					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />-->
 					</pri:showWhenManager>
 					<script type="text/javascript">
 						

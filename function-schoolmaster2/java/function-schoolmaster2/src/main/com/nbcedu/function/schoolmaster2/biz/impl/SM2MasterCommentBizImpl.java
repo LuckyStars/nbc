@@ -27,4 +27,9 @@ public class SM2MasterCommentBizImpl extends BaseBizImpl<TSm2MasterComment> impl
 		String hql = "from TSm2MasterComment s where s.progressId = ? order by s.createtime desc";
 		return sm2MasterCommentDao.find(hql, invatitionId);
 	}
+
+	@Override
+	public void deleteByProgId(String progId) {
+		this.sm2MasterCommentDao.createQuery("delete TSm2MasterComment where progressId=?", progId);
+	}
 }

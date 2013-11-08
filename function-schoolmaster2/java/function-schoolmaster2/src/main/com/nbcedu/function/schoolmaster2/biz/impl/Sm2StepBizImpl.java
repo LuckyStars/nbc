@@ -8,15 +8,18 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.dao.Sm2StepDao;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 
 	private Sm2StepDao stepDao;
+	private Sm2ProgressBiz progressBiz;
 
 	public void setStepDao(Sm2StepDao stepDao) {
 		super.setDao(stepDao);
@@ -64,7 +67,14 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 		List<Object[]> resultSet = q.list();
 		return transResult(resultSet);
 	}
-	
+	@Override
+	public void delete(String id) {
+		List<TSm2Progress> l = this.progressBiz.findAllByStepId(id);
+		for(TSm2Progress p : l){
+			this.progressBiz.deleteById(p.getId());
+		}
+		this.stepDao.removeById(id);
+	}
 	///////////////////////
 	//////PRIVATE//////////
 	///////////////////////
@@ -79,5 +89,11 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 			}
 		});
 	}
+
+	public void setProgressBiz(Sm2ProgressBiz progressBiz) {
+		this.progressBiz = progressBiz;
+	}
+
+	
 	
 }

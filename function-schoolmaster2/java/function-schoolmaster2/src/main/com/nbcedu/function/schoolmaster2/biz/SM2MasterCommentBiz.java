@@ -8,4 +8,6 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterComment;
 
 public interface SM2MasterCommentBiz extends BaseBiz<TSm2MasterComment>{
 	public List<TSm2MasterComment> findByInvatitionId(String invatitionId);
+
+	public void deleteByProgId(String progId);
 }

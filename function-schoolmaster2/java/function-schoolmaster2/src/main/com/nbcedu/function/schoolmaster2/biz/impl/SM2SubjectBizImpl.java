@@ -2,13 +2,13 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.SM2SubjectDao;
@@ -133,5 +133,10 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		Object[] params = new Object[list.size()];
 		list.toArray(params);
 		return this.sm2SubjectDao.searchPaginated(hql.toString(),params);
+	}
+	@Override
+	public void updateMasterFlag(int flag, String subId,String userUid) throws DBException {
+		this.sm2SubjectDao.updateByHql("update SM2SubjectMaster set flag=? where subId=? and userUid=?",flag,subId,userUid);
+		
 	}
 }

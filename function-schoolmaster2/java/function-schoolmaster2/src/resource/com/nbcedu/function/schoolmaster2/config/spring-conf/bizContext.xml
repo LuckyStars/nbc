@@ -40,10 +40,18 @@
 
 	<bean id="sm2StepBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2StepBizImpl">
 		<property name="stepDao" ref="sm2StepDao"></property>
+		<property name="progressBiz" ref="sm2ProgressBiz"></property>
 	</bean>
 	
 	<bean id="sm2ProgressBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ProgressBizImpl">
 		<property name="progressDao" ref="sm2ProgressDao" />
+		<property name="zanBiz" ref="sm2ZanBiz" />
+		<property name="resourceBiz" ref="sm2ResourceBiz"></property>
+		<property name="readsBiz" ref="sm2ReadsBiz" ></property>
+		<property name="masterReplyBiz" ref="sm2MasterReplyBiz"></property>
+		<property name="masterCommentBiz" ref="sm2MasterCommentBiz"></property>
+		<property name="disscusBiz" ref="sm2DisscusBiz"></property>
+		<property name="commentBiz" ref="sm2CommentBiz"></property>
 	</bean>
 	
 	<bean id="sm2ZanBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2ZanBizImpl">

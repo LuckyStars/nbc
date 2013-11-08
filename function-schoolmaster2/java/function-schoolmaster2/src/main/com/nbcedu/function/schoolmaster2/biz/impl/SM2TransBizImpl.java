@@ -15,5 +15,11 @@ public class SM2TransBizImpl extends BaseBizImpl<SM2SubjectTrans> implements SM2
 		super.setDao(transDao);
 		this.transDao = transDao;
 	}
+
+
+	@Override
+	public void deleteBySubId(String subId) {
+		this.transDao.createQuery("delete SM2SubjectTrans where subId=?", subId);
+	}
 	
 }

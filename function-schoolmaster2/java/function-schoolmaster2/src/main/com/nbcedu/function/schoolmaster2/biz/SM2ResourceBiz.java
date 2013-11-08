@@ -8,4 +8,6 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
 
 public interface SM2ResourceBiz extends BaseBiz<TSm2Resource>{
 	public List<TSm2Resource> findByInvatitionId(String invatitionId);
+	
+	public void deleteByProgId(String progId);
 }

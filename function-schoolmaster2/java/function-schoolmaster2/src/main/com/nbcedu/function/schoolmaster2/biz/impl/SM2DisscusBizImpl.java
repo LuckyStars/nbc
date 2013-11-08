@@ -109,5 +109,11 @@ public class SM2DisscusBizImpl extends BaseBizImpl<TSm2Disscus> implements SM2Di
 		super.setDao(disDao);
 		this.disDao = disDao;
 	}
+
+	@Override
+	public void deleteByProgId(String progId) {
+		this.disDao.createQuery("delete TSm2Disscus where progressId=?", progId);
+		
+	}
 	
 }

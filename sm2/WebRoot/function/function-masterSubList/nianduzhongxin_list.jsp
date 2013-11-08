@@ -7,11 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="${prc}/function/css/gzt.css" type="text/css"></link>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 <link rel="stylesheet" href="${prc}/function/function-masterSubList/css/gzt.css" />
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
-
+<script type="text/javascript" src="${prc}/function/function-masterSubList/js/schoolMaster.js"></script>
 <style>
 table th {
 	background: url(${prc}/function/function-masterSubList/img/table-bg.jpg)
@@ -138,8 +137,18 @@ table td {
 								<img src="${prc}/function/function-masterSubList/img/pro-bg1.jpg"
 									class="pross-img" style="width:${sub.progress}%;" />
 							</div>
-							<p class="pross-p">${sub.progress}%</p> <img
-							src="${prc}/function/function-masterSubList/img/qi.png" class="qi" />
+							<p class="pross-p">${sub.progress}%</p>
+								<c:if test="${sub.flag eq '1'}">
+								<a href="#" onclick="javascript:stick('${sub.id }',0,'qi1.png');" id="${sub.id }">
+									<img src="${prc}/function/function-masterSubList/img/qi.png" />
+								</a>
+							</c:if> 
+							<c:if test="${sub.flag ne '1'}">
+								<a href="#" onclick="javascript:stick('${sub.id }',1,'qi.png');" id="${sub.id }">
+									<img src="${prc}/function/function-masterSubList/img/qi1.png" />
+								</a>
+							</c:if>
+<!--								<img src="${prc}/fu nction/function-masterSubList/img/qi.png" class="qi" />-->
 						</td>
 					</tr>
 				</c:forEach>

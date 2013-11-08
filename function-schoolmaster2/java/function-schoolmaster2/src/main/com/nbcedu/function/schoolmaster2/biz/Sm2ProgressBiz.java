@@ -16,4 +16,9 @@ public interface Sm2ProgressBiz extends BaseBiz<TSm2Progress> {
 	public void modifyStep(String stepId,String progId);
 	
 	public List<ProgressVo> findVoByStepId(String stepId);
+	/**
+	 *删除工作进展，包括：赞；转发；
+	 * @param id
+	 */
+	public void deleteById(String id);
 }

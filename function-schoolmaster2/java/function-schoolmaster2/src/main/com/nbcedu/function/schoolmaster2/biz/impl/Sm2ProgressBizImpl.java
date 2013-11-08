@@ -8,14 +8,20 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.Expression;
 import org.hibernate.criterion.Restrictions;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.nbcedu.function.schoolmaster2.biz.SM2CommentBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2MasterCommentBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2MasterReplyBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2ResourceBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.dao.Sm2ProgressDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
@@ -24,6 +30,13 @@ import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2ProgressBiz {
 	
 	private Sm2ProgressDao progressDao;
+	private SM2ZanBiz zanBiz;
+	private SM2ResourceBiz resourceBiz;
+	private Sm2ReadsBiz readsBiz;
+	private SM2MasterReplyBiz masterReplyBiz;
+	private SM2MasterCommentBiz masterCommentBiz;
+	private SM2DisscusBiz disscusBiz;
+	private SM2CommentBiz commentBiz;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -90,7 +103,17 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		});
 		
 	}
-	
+	@Override
+	public void deleteById(String id) {
+		this.zanBiz.deleteByProg(id);
+		this.resourceBiz.deleteByProgId(id);
+		readsBiz.deleteByProgId(id);
+		masterReplyBiz.deleteByProgId(id);
+		masterCommentBiz.deleteByProgId(id);
+		disscusBiz.deleteByProgId(id);
+		commentBiz.deleteByProgId(id);
+		this.progressDao.removeById(id);
+	}
 	
 	private Integer objToInteger(Object obj){
 		return obj==null?0:Integer.valueOf(obj.toString());
@@ -102,7 +125,26 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		super.setDao(progressDao);
 		this.progressDao = progressDao;
 	}
-
-
+	public void setZanBiz(SM2ZanBiz zanBiz) {
+		this.zanBiz = zanBiz;
+	}
+	public void setResourceBiz(SM2ResourceBiz resourceBiz) {
+		this.resourceBiz = resourceBiz;
+	}
+	public void setReadsBiz(Sm2ReadsBiz readsBiz) {
+		this.readsBiz = readsBiz;
+	}
+	public void setMasterReplyBiz(SM2MasterReplyBiz masterReplyBiz) {
+		this.masterReplyBiz = masterReplyBiz;
+	}
+	public void setMasterCommentBiz(SM2MasterCommentBiz masterCommentBiz) {
+		this.masterCommentBiz = masterCommentBiz;
+	}
+	public void setDisscusBiz(SM2DisscusBiz disscusBiz) {
+		this.disscusBiz = disscusBiz;
+	}
+	public void setCommentBiz(SM2CommentBiz commentBiz) {
+		this.commentBiz = commentBiz;
+	}
 
 }

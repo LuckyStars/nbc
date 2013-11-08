@@ -22,8 +22,14 @@ public class StepAction extends BaseAction{
 						new TypeToken<List<StepVo>>() {}.getType())
 		);
 	}
-	
-	
+	/**
+	 * 删除步骤只能删除自己建的步骤
+	 * @return
+	 */
+	public String delete(){
+		this.stepBiz.delete(id);
+		return RELOAD;
+	}
 	
 	//////////////////////////
 	/////getters&setters/////

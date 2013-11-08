@@ -92,12 +92,18 @@ public class Sm2ReadsBizImpl extends BaseBizImpl<SM2Reads> implements Sm2ReadsBi
 		}
 		return new LinkedList<ReadsVo>();
 	}
-	
+	@Override
+	public void deleteByProgId(String progId) {
+		this.readsDao.createQuery("delete SM2Reads where progressId=?", progId);
+		
+	}
 	/////////////////////////
 	/////getters&setters//////
 	/////////////////////////
 	public void setReadsDao(Sm2ReadsDao readsDao) {
 		this.readsDao = readsDao;
 	}
+
+	
 
 }

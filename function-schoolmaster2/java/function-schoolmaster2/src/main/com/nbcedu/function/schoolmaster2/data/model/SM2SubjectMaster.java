@@ -8,6 +8,8 @@ public class SM2SubjectMaster {
 	private String id;
 	private String subId;
 	private String userUid;
+	private Integer flag;
+	private String userName;
 	/////////////////////////
 	////getters&Setters//////
 	/////////////////////////
@@ -28,5 +30,17 @@ public class SM2SubjectMaster {
 	}
 	public void setUserUid(String userUid) {
 		this.userUid = userUid;
+	}
+	public Integer getFlag() {
+		return flag;
+	}
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

@@ -19,7 +19,6 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Type;
-import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
@@ -85,6 +84,7 @@ public class SubjectAction extends BaseAction{
 			for(String u : checkusersId.split(",")){
 				SM2SubjectMaster user =  new SM2SubjectMaster();
 				user.setUserUid(u);
+				user.setUserName(UCService.findNameByUid(u));
 				checkUsers.add(user);
 			}
 			subject.setCheckUsers(checkUsers);
@@ -111,6 +111,7 @@ public class SubjectAction extends BaseAction{
 		for(String u : checkusersId.split(",")){
 			SM2SubjectMaster user =  new SM2SubjectMaster();
 			user.setUserUid(u);
+			user.setUserName(UCService.findNameByUid(u));
 			checkUsers.add(user);
 		}
 		s.setCheckUsers(checkUsers);
@@ -159,9 +160,12 @@ public class SubjectAction extends BaseAction{
 	public void stick(){
 		String subjectId = this.getRequest().getParameter("subjectId");
 		String flag = this.getRequest().getParameter("flag");
-		TSm2Subject s = this.sm2SubjectBiz.findById(subjectId);
-		s.setFlag(Integer.parseInt(flag));
-		this.sm2SubjectBiz.update(s);
+		try {
+			this.sm2SubjectBiz.updateMasterFlag(Integer.parseInt(flag),subjectId,this.getUserId());
+		} catch (Exception e) {
+			Struts2Util.renderText("false", "encoding:UTF-8");
+			e.printStackTrace();
+		}
 		Struts2Util.renderText("success", "encoding:UTF-8");
 	}
 	/**

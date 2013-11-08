@@ -41,6 +41,11 @@ public class ProgressAction extends BaseAction{
 		this.stepId = this.getRequest().getParameter("originStepId").toString();
 		return "refreshStep";
 	}
+	
+	public void delete(){
+		this.progBiz.deleteById(id);
+		Struts2Utils.renderText("0","encoding:UTF-8");
+	}
 	////////////////////////
 	////getters&setters////
 	//////////////////////
