@@ -73,7 +73,7 @@ public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
 
 	@Override
 	public void removeByProg(String progId) {
-		this.zanDao.createQuery("delete from Sm2Zan where progressId=?", progId);
+		this.zanDao.createQuery("delete from Sm2Zan where progressId=?", progId).executeUpdate();
 		
 	}
 

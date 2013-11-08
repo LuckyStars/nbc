@@ -30,6 +30,6 @@ public class SM2ResourceBizImpl extends BaseBizImpl<TSm2Resource> implements SM2
 
 	@Override
 	public void removeByProgId(String progId) {
-		this.sm2ResourceDao.createQuery("delete from TSm2Resource where progressId=?", progId);
+		this.sm2ResourceDao.createQuery("delete from TSm2Resource where progressId=?", progId).executeUpdate();
 	}
 }

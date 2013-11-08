@@ -112,7 +112,7 @@ public class SM2DisscusBizImpl extends BaseBizImpl<TSm2Disscus> implements SM2Di
 
 	@Override
 	public void removeByProgId(String progId) {
-		this.disDao.createQuery("delete from TSm2Disscus where progressId=?", progId);
+		this.disDao.createQuery("delete from TSm2Disscus where progressId=?", progId).executeUpdate();
 		
 	}
 	

@@ -94,7 +94,7 @@ public class Sm2ReadsBizImpl extends BaseBizImpl<SM2Reads> implements Sm2ReadsBi
 	}
 	@Override
 	public void removeByProgId(String progId) {
-		this.readsDao.createQuery("delete from SM2Reads where progressId=?", progId);
+		this.readsDao.createQuery("delete from SM2Reads where progressId=?", progId).executeUpdate();
 		
 	}
 	/////////////////////////

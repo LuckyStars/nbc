@@ -86,7 +86,7 @@ public class SM2CommentBizImpl extends BaseBizImpl<TSm2Comment> implements SM2Co
 
 	@Override
 	public void removeByProgId(String progId) {
-		this.comDao.createQuery("delete from TSm2Comment where progressId=?", progId);
+		this.comDao.createQuery("delete from TSm2Comment where progressId=?", progId).executeUpdate();
 	}
 
 	
