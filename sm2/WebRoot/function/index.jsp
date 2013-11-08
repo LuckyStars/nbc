@@ -9,17 +9,9 @@
 	<link rel="stylesheet" href="${prc}/function/css/masterindex.css" />
 	<script type="text/javascript"
 	src="${prc}/function/js/jquery-1.8.3.min.js"></script>
-	
-	<script type="text/javascript">
-		var ctxPath = '${prc}';
-		var curUid = '${sns_init}';
-	</script>
 	<script type="text/javascript"
 	src="${prc}/function/js/masterIndex.js"></script>
 	<style type="text/css">
-	.flagcommon{
-		
-	}
 	.flagupdated{
 		position: absolute;
 		display: inline-block;
@@ -161,14 +153,14 @@
 					</tr>
 					<tr>
 						<td width="177">
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
 								<img src="${prc}/function/images/icon2.png" />
 								<span>德育工作</span>
 								<img src="${prc}/function/images/new.png" id="deyugongzuo" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
 							<img src="${prc}/function/images/icon3.png" />
 							<span>教育教研工作</span>
 							<img src="${prc}/function/images/new.png" id="deyujiaoyan" />
@@ -177,14 +169,14 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
 								<img src="${prc}/function/images/new.png" id="xinxihua" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
 								<img src="${prc}/function/images/icon5.png" />
 								<span>后勤·卫生工作</span>
 								<img src="${prc}/function/images/new.png" id="houqinweisheng" />
@@ -193,14 +185,14 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
 								<img src="${prc}/function/images/icon6.png" />
 								<span>党团工作</span>
 								<img src="${prc}/function/images/new.png" id="dangtuan" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=getSubByModuleWorkbench.action?module=ndzx_6">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=caiwu">
 								<img src="${prc}/function/images/icon7.png" />
 								<span>财务工作</span>
 								<img src="${prc}/function/images/new.png" id="caiwu" />
@@ -288,14 +280,14 @@
 					cellspacing="1" style="margin: 0 auto;">
 					<tr>
 						<td width="190" height="72" bgcolor="#d15b47">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=bookSite">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=bookSite">
 								<img src="${prc}/function/images/png1.png" />
 								<span>场馆预订统计</span>
 								<d class="new"></d>
 							</a>
 						</td>
 						<td bgcolor="#ffb752">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=substitute">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=substitute">
 								<img src="${prc}/function/images/png2.png" />
 								<span>请假代课统计</span>
 								<d class="text"></d>
@@ -304,13 +296,13 @@
 					</tr>
 					<tr>
 						<td bgcolor="#87b87f">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=repair">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=repair">
 								<img src="${prc}/function/images/png3.png" />
 								<span>在线报修统计</span>
 							</a>
 						</td>
 						<td bgcolor="#d48bde">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?rightURL=scMaster2/listMasterStatistics_data.action&matcher=logistics">
+							<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=logistics">
 								<img src="${prc}/function/images/png4.png" />
 								<span>电教服务统计</span>
 							</a>

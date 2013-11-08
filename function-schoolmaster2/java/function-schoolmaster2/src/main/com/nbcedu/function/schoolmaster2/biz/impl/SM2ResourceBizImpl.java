@@ -27,4 +27,9 @@ public class SM2ResourceBizImpl extends BaseBizImpl<TSm2Resource> implements SM2
 		String hql = "from TSm2Resource s where s.progressId = ?";
 		return sm2ResourceDao.find(hql, invatitionId);
 	}
+
+	@Override
+	public void deleteByProgId(String progId) {
+		this.sm2ResourceDao.createQuery("delete TSm2Resource where progressId=?", progId);
+	}
 }

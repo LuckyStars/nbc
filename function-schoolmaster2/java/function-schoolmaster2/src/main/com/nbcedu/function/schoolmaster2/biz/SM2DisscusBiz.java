@@ -14,4 +14,6 @@ public interface SM2DisscusBiz extends BaseBiz<TSm2Disscus> {
 	public List<TSm2Disscus> findByProgIds(Collection<String> progIds,Integer size);
 	
 	public Map<String, List<TSm2Disscus>> findMapByProgIds(Collection<String> progIds);
+
+	public void deleteByProgId(String progId);
 }

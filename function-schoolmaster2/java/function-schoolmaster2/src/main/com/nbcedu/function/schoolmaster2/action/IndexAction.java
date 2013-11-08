@@ -16,6 +16,7 @@ import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
+import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 
 /**
  * 
@@ -32,7 +33,8 @@ public class IndexAction extends BaseAction{
 	private HibernateDao dao;
 	private String start;
 	private String end;
-	private String matcher;
+	private String moduleId;
+	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2ModuleBiz sm2ModuleBiz;
 	
@@ -52,7 +54,7 @@ public class IndexAction extends BaseAction{
 		return "home";
 	}
 	public String login(){
-		this.rightURL += "?matcher="+matcher;
+		this.rightURL = "scMaster2/list_master.action?search.typeId="+search.getTypeId()+"&moduleId="+moduleId;
 		return "home";
 	}
 	
@@ -138,16 +140,24 @@ public class IndexAction extends BaseAction{
 		this.end = (end==null)?"":end;
 	}
 
-	public String getMatcher() {
-		return matcher;
+	public String getModuleId() {
+		return moduleId;
 	}
 
-	public void setMatcher(String matcher) {
-		this.matcher = matcher;
+	public void setModuleId(String moduleId) {
+		this.moduleId = moduleId;
 	}
 
 	public void setSm2ModuleBiz(SM2ModuleBiz sm2ModuleBiz) {
 		this.sm2ModuleBiz = sm2ModuleBiz;
+	}
+
+	public MasterSubSearchVO getSearch() {
+		return search;
+	}
+
+	public void setSearch(MasterSubSearchVO search) {
+		this.search = search;
 	}
 	
 }

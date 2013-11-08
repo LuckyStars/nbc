@@ -81,7 +81,7 @@ table td {
 			<h1>
 				当前位置：首页 - <span style="color: #0374C2">总结·汇报·关注性工作</span>
 			</h1>
-				<form action="${prc}/scMaster2/list_master.action" method="post">
+			<form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
 			<input type="hidden" name="search.typeId" value="${search.typeId}" />
 			<div class="right-input">
@@ -110,8 +110,8 @@ table td {
 				</p>
 					<a href="javascript:document.forms[0].submit();">查询</a>
 			</div>
-		</form>
-			</div>
+			</form>
+		</div>
 			<table width="100%" border="0">
 				<tr>
 					<th width="5%" scope="col">序号</th>
@@ -138,14 +138,13 @@ table td {
 						<td align="center">
 							<!--        	<span class="praise">赞</span>--> <!--        	<span class="konw">我知道了</span>-->
 							<c:if test="${subject.flag eq '1'}">
-								<a href="#" onclick="javascript:stick('${subject.id }',0);"
-									id="${subject.id }"><img
-									src="${prc}/function/img/blue1.png" />
+								<a href="#" onclick="javascript:stick('${subject.id }',0,'blue0.png');" id="${subject.id }">
+									<img src="${prc}/function/img/blue1.png" />
 								</a>
-							</c:if> <c:if test="${subject.flag ne '1'}">
-								<a href="#" onclick="javascript:stick('${subject.id }',1);"
-									id="${subject.id }"><img
-									src="${prc}/function/img/blue0.png" />
+							</c:if> 
+							<c:if test="${subject.flag ne '1'}">
+								<a href="#" onclick="javascript:stick('${subject.id }',1,'blue1.png');" id="${subject.id }">
+									<img src="${prc}/function/img/blue0.png" />
 								</a>
 							</c:if></td>
 					</tr>

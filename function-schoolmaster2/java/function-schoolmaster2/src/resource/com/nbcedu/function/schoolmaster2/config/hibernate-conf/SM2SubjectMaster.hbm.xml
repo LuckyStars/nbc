@@ -13,5 +13,12 @@
 		
 		<property name="userUid" column="user_uid" type="string" length="32" not-null="true" />
 		
+		
+		<property name="userName" column="user_Name" type="string" length="60" not-null="true" />
+		
+		<property name="flag" type="java.lang.Integer">
+            <column name="flag" default="0"/>
+        </property>
+		
 	</class>
 </hibernate-mapping>

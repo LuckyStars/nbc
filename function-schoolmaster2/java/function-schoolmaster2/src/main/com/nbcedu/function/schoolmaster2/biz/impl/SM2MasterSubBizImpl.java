@@ -20,6 +20,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
@@ -145,7 +146,10 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 								new Function<Object[], TSm2Subject>() {
 				@Override
 				public TSm2Subject apply(Object[] input) {
-					return (TSm2Subject)input[1];
+					TSm2Subject s = (TSm2Subject)input[1];
+					SM2SubjectMaster m = (SM2SubjectMaster)input[0];
+					s.setFlag(m.getFlag());
+					return s;
 				}
 				}));
 			}

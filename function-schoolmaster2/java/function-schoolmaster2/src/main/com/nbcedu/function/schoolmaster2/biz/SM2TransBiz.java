@@ -6,5 +6,5 @@ import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectTrans;
 
 public interface SM2TransBiz extends BaseBiz<SM2SubjectTrans> {
 
-	
+	public void deleteBySubId(String subId);
 }

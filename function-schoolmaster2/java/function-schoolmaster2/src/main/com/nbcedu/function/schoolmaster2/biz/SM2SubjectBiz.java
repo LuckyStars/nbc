@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.biz;
 import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.core.biz.BaseBiz;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
@@ -32,5 +33,7 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	 * @return
 	 */
 	PagerModel findBySubjectMaster(SubjectVo subject);
+	
+	public void updateMasterFlag(int flag, String subId,String userUid) throws DBException ;
 	
 }
