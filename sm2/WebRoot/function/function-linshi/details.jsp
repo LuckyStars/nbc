@@ -165,14 +165,20 @@
 	          }
          	});
       	$(".tabs li img").click(function(){
-				var id = $(this).attr("name");
-				$.post("deleteStep_master.action",{id:id},function(data){
+			var id = $(this).attr("name");
+			 $.post("isExist_progress.action",{stepId:id},function(data1){
+				if(data1==0){
+					$.post("delete_step.action",{id:id},function(data){
 						if(data==0){
 							$("#"+id).remove();
 						}else{
 							alert("删除失败！");
 						}
 					});
+				}else{
+					alert("请先删除工作进展。");
+				}
+			});
           	});
       	//步骤结束
       	//工作进展
@@ -290,7 +296,9 @@
 						<c:forEach items="${steps }" var="step" varStatus="i">
 							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>" >
 								<a href="javascript:changeTab('${step.id}');">${step.name }</a>
-								<img name="${step.id}" src="${prc}/function/function-linshi/img/errotab.png" />
+								<c:if test="${sessionScope.sm2_init==step.createrId}">
+									<img name="${step.id}" src="${prc}/function/function-linshi/img/errotab.png" />
+								</c:if>
 							</li>
 						</c:forEach>
 					</ul>

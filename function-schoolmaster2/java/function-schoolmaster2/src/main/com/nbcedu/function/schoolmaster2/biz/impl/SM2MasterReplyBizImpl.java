@@ -29,8 +29,8 @@ public class SM2MasterReplyBizImpl extends BaseBizImpl<TSm2MasterReply> implemen
 	}
 
 	@Override
-	public void deleteByProgId(String progId) {
-		this.sm2MasterReplyDao.createQuery("delete TSm2MasterReply where progressId=?", progId);
+	public void removeByProgId(String progId) {
+		this.sm2MasterReplyDao.createQuery("delete from TSm2MasterReply where progressId=?", progId).executeUpdate();
 		
 	}
 }

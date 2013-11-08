@@ -92,7 +92,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	
 	@Override
 	public List<StepVo> findAllSteps(String subId) {
-		String hql = "SELECT s.id,s.name FROM TSm2Step s WHERE s.subjectId=? ORDER BY s.lastUpdateTime DESC";
+		String hql = "SELECT s.id,s.name,s.createrId FROM TSm2Step s WHERE s.subjectId=? ORDER BY s.lastUpdateTime DESC";
 		List<Object[]> resulSet = this.sm2SubjectDao.findByHQL(hql,new Object[]{subId});
 		
 		return Lists.transform(resulSet, new Function<Object[], StepVo>() {
@@ -101,6 +101,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				StepVo vo = new StepVo();
 				vo.setId(input[0].toString());
 				vo.setName(input[1].toString());
+				vo.setCreaterId(input[2].toString());
 				return vo;
 			}
 		});

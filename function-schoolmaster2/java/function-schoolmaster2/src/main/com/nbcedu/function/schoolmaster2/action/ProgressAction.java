@@ -33,6 +33,8 @@ public class ProgressAction extends BaseAction{
 		List<TSm2Progress> p = this.progBiz.findByNameStepId(stepId, name);
 		if(p==null||p.size()<1){
 			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
 		}
 	}
 	
@@ -43,7 +45,7 @@ public class ProgressAction extends BaseAction{
 	}
 	
 	public void delete(){
-		this.progBiz.deleteById(id);
+		this.progBiz.removeById1(id);
 		Struts2Utils.renderText("0","encoding:UTF-8");
 	}
 	////////////////////////
