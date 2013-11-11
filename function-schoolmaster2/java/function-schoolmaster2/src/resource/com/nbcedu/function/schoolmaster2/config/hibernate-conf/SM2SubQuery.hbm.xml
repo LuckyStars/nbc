@@ -88,7 +88,8 @@
     		t_sm2_progress.lastUpdateTime,
     		t_sm2_progress.stepId,
     		rcount.rcou,
-    		zcount.zcou
+    		zcount.zcou,
+    		zaned.zd
 		FROM 
 			t_sm2_progress left join 
 			(
@@ -104,6 +105,14 @@
 				GROUP BY progress_id
 			) zcount
 			on t_sm2_progress.id = zcount.progress_id 
+			left join 
+			(
+				SELECT count(progress_id) as zd,progress_id 
+				FROM t_sm2_zan 
+				WHERE t_sm2_zan.user_uid=:uid
+				GROUP BY progress_id
+			) zaned
+			on t_sm2_progress.id = zaned.progress_id 
 			WHERE t_sm2_progress.stepId=:stepId ORDER BY t_sm2_progress.createTime DESC
 			
     </sql-query>

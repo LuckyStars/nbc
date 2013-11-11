@@ -26,6 +26,13 @@ public class EmotionDisplayTag extends TagSupport {
 		put("[06]","06.png");	
 		put("[07]","07.png");	
 		put("[08]","08.png");	
+		put("[09]","09.png");	
+		put("[0A]","0A.png");	
+		put("[0B]","0B.png");	
+		put("[0C]","0C.png");	
+		put("[0D]","0D.png");	
+		put("[0E]","0E.png");	
+		put("[0F]","0F.png");	
 	}};	
 	
 	
@@ -58,7 +65,7 @@ public class EmotionDisplayTag extends TagSupport {
 				if(emos.containsKey(mat)){
 					result.append("<img src='");
 					result.append(ctx);
-					result.append("/fcuntion/emotion/images/");
+					result.append("/function/emotion/images/");
 					result.append(emos.get(mat));
 					result.append("' />");
 					next += 4;

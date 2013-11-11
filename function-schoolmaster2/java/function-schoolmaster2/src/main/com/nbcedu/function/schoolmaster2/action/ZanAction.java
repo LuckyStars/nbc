@@ -15,7 +15,6 @@ import com.nbcedu.function.schoolmaster2.vo.ZanVo;
 /**
  * 赞action
  * @author xuechong
- *
  */
 @SuppressWarnings("serial")
 public class ZanAction extends BaseAction{
@@ -48,10 +47,26 @@ public class ZanAction extends BaseAction{
 		Struts2Utils.renderJson(json);
 	}
 	
+	/**
+	 * 取消zan
+	 * @author xuechong
+	 */
+	public void cancel(){
+		String result = "suc";
+		try {
+			this.zanBiz.removeByUserProg(this.id);
+		} catch (Exception e) {
+			logger.error("取消赞出现错误",e);
+			result = "err";
+		}
+		Struts2Utils.renderText(result);
+	}
+	
 	///////////////////////
 	////getters&setters////
 	///////////////////////
 	public void setZanBiz(SM2ZanBiz zanBiz) {
 		this.zanBiz = zanBiz;
 	}
+	
 }

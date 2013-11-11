@@ -14,6 +14,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.dao.SM2ZanDao;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.ZanVo;
 
 public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
@@ -74,7 +75,12 @@ public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
 	@Override
 	public void removeByProg(String progId) {
 		this.zanDao.createQuery("delete from Sm2Zan where progressId=?", progId).executeUpdate();
-		
 	}
-
+	
+	@Override
+	public void removeByUserProg(String progId) {
+		this.zanDao.createQuery("DELETE FROM Sm2Zan z WHERE z.progressId=? AND z.userUid=?",
+				new Object[]{progId,Utils.curUserUid()}).executeUpdate();
+	}
+	
 }

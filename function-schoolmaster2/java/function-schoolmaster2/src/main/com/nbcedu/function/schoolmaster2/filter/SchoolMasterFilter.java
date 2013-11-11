@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.nbcedu.core.framework.filter.ServiceInfoLoader;
+import com.nbcedu.function.functionsupport.util.PropertiesUtil;
 
 public class SchoolMasterFilter implements Filter{
 	 
@@ -35,7 +36,9 @@ public class SchoolMasterFilter implements Filter{
 			chain.doFilter(req, response);
 			return;
 		}
-
+		logger.info("serviceName = :" + serviceName);
+		logger.info("getAttributeName = :"  + getAttributeName(serviceName));
+		
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
 			final String uid = (String) 
 				req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
@@ -85,8 +88,7 @@ public class SchoolMasterFilter implements Filter{
 			
 			return "documentFlow";
 		} else {
-			
-			return "sm2";
+			return ctxName;
 		}
 
 		if (functionName.contains("/")) {
@@ -110,7 +112,9 @@ public class SchoolMasterFilter implements Filter{
 			getWebApplicationContext(request.getSession().getServletContext());
 		return (ServiceInfoLoader)ac.getBean(getLoaderName(serviceName));
 	}
-	
-	public void init(FilterConfig filterConfig) throws ServletException {}
+	private String ctxName;
+	public void init(FilterConfig filterConfig) throws ServletException {
+		this.ctxName = PropertiesUtil.findPropertieValue("config.properties", "webappname");
+	}
 	public void destroy() {}
 }

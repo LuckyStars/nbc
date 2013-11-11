@@ -19,5 +19,17 @@ public interface SM2ZanBiz extends BaseBiz<Sm2Zan>{
 	 */
 	List<ZanVo> findByProg(String progId,Integer size);
 	
+	/**
+	 * 按 prog删除所有
+	 * @param progId
+	 * @author xuechong
+	 */
 	void removeByProg(String progId);
+	
+	/**
+	 * 按prog删除当前用户zan
+	 * @param progId
+	 * @author xuechong
+	 */
+	void removeByUserProg(String progId);
 }

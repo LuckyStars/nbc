@@ -11,7 +11,11 @@
     <script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
+	<script type="text/javascript" src="${prc}/function/emotion/emotion.js"></script>
+	<link rel="stylesheet" href="${prc }/function/emotion/emotion.css" type="text/css"/>
+    
     <script>
+    	var ctx = '${prc}';
         $(function () {
             $(".img").each(function () {
                 $(this).click(function () {
@@ -137,6 +141,23 @@
     			}else{
     				var zanCount = parseInt($("#zan_"+progId).html());
     				$("#zan_"+progId).html(isNaN(zanCount)?1:(zanCount+1));
+    				$("#cancelZan_" +progId).fadeIn();
+    			}
+    		});
+    	}
+    	function cancelZan(progId){
+    		$("#cancelZan_" +progId).hide();
+    		$.ajax({
+    			url:"${prc}/scMaster2/add_zan.action",
+    			data:{id:progId}
+    		}).always(function(resp,status){
+    			if(resp!='suc'||status!='success'){
+    				alert("取消赞失败请稍后重试");
+    				$("#cancelZan_" +progId).fadeIn();
+    			}else{
+    				var zanCount = parseInt($("#zan_"+progId).html());
+    				$("#zan_"+progId).html(isNaN(zanCount)?0:(zanCount-1));
+    				$("#clickZan_" +progId).fadeIn();
     			}
     		});
     	}
@@ -238,9 +259,12 @@
    				<img src="${prc }/function/detail-step/images/ico5.png" class="prog" id="${prog.id}"/><%--删除进展 --%>
    			</c:if>
    			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
-   			<img src="${prc }/function/detail-step/images/ico7.png" alt="赞"
+   			<img src="${prc }/function/detail-step/images/zan.png" alt="赞"
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
+   			<img style="display: none;" src="${prc }/function/detail-step/images/zancancel.png" alt="赞"
+   			id="cancelZan_${prog.id}"
+   			onclick="cancelZan('${prog.id}');" />
    		</a>
         <div class="conls"> 
         	<a>
@@ -324,16 +348,30 @@
         </div>
         <div class="conshen box-down">
         	
-        	<pri:showWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
-	          	<input type="text" id="disc__content_${prog.id }" name="disscus.content" class="erro"/>
+        	 	<div class="emo_comment">
+			        <div class="emo_form">
+			            <div class="face_tool" id="emodiv_${prog.id }">
+			               
+			            </div>
+			            <p><span class="emotion" id="emospan_${prog.id }"></span></p>
+			            <textarea class="emo_content" name="disscus.content" id="disc__content_${prog.id}" cols="" rows=""></textarea>
+			        </div>
+			    </div>
+			    <script type="text/javascript">
+			    	var emo_${prog.id} = new EmoFace(
+			    			'disc__content_${prog.id}',
+			    			'emodiv_${prog.id }',
+			    			'emospan_${prog.id }'
+			    			);
+			    	emo_${prog.id}.Create();
+			    </script>
 	          	<input type="hidden" name="stepId" value="${id }"/>
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	</pri:showWhenMaster>
         	
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
@@ -342,7 +380,8 @@
 			            	<dd>
 			              		<p>
 			              			<span class="blue">${dis.userName }：</span>
-			              			<c:out value="${dis.content }" escapeXml="true"></c:out><br />
+			              			<emo:show content="${dis.content }"/>
+			              			<br />
 			              		</p>
 			              		<span class="gray float">(<fmt:formatDate value="${dis.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/>)</span>
 			              	</dd>

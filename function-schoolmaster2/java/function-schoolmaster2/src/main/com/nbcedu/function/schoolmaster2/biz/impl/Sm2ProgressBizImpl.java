@@ -27,6 +27,7 @@ import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.Sm2ProgressDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2ProgressBiz {
 	
@@ -74,6 +75,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		String sql = this.progressDao.getNamedQuery("find_progress_by_step").getQueryString();
 		SQLQuery query = (SQLQuery) this.progressDao.createSqlQuery(sql);
 		query.setString("stepId", stepId);
+		query.setString("uid", Utils.curUserUid());
 		
 		query.addScalar("id", Hibernate.STRING);
 		query.addScalar("name", Hibernate.STRING);
@@ -84,6 +86,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		query.addScalar("stepId", Hibernate.STRING);
 		query.addScalar("rcou", Hibernate.INTEGER);
 		query.addScalar("zcou", Hibernate.INTEGER);
+		query.addScalar("zd", Hibernate.INTEGER);
 		
 		List<Object[]> resultSet = query.list();
 		if(isEmpty(resultSet)){
@@ -103,6 +106,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 				result.setStepId(in[6].toString());
 				result.setReadCount(objToInteger(in[7]));
 				result.setZanCount(objToInteger(in[8]));
+				result.setZand(objToInteger(in[9]));
 				return result;
 			}
 		});

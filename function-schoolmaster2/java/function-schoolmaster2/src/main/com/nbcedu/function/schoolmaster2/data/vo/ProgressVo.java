@@ -7,6 +7,10 @@ public class ProgressVo extends TSm2Progress{
 
 	private Integer zanCount;
 	private Integer readCount;
+	/***
+	 * 是否本人已赞过
+	 */
+	private Integer zand;
 	public Integer getZanCount() {
 		return zanCount;
 	}
@@ -18,6 +22,12 @@ public class ProgressVo extends TSm2Progress{
 	}
 	public void setReadCount(Integer readCount) {
 		this.readCount = readCount;
+	}
+	public Integer getZand() {
+		return zand;
+	}
+	public void setZand(Integer zand) {
+		this.zand = zand;
 	}
 	
 }
