@@ -148,7 +148,7 @@
     	function cancelZan(progId){
     		$("#cancelZan_" +progId).hide();
     		$.ajax({
-    			url:"${prc}/scMaster2/add_zan.action",
+    			url:"${prc}/scMaster2/cancel_zan.action",
     			data:{id:progId}
     		}).always(function(resp,status){
     			if(resp!='suc'||status!='success'){
@@ -259,12 +259,23 @@
    				<img src="${prc }/function/detail-step/images/ico5.png" class="prog" id="${prog.id}"/><%--删除进展 --%>
    			</c:if>
    			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
+   			
+   			
+   			
    			<img src="${prc }/function/detail-step/images/zan.png" alt="赞"
+   			<c:if test="${prog.zand > 0}">
+   			 style="display: none;" 
+   			</c:if>
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
-   			<img style="display: none;" src="${prc }/function/detail-step/images/zancancel.png" alt="赞"
+   			
+   			<img  src="${prc }/function/detail-step/images/zancancel.png" alt="取消赞" 
+   			<c:if test="${prog.zand <= 0}">
+   			 style="display: none;" 
+   			</c:if>
    			id="cancelZan_${prog.id}"
    			onclick="cancelZan('${prog.id}');" />
+   			
    		</a>
         <div class="conls"> 
         	<a>
