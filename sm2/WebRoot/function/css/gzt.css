@@ -126,7 +126,7 @@ a {
 }
 .right1 h1 {
 	background:url(../images/right_title.png);
-	width:983px;
+	width:972px;
 	height:30px;
 	line-height:30px;
 	margin:4px auto;
@@ -555,4 +555,8 @@ display:block; float:left;width:60px; height:24px; line-height:24px; text-align:
 }
 .bun a{
     width:95px; height:28px; line-height:28px; text-align:center; background:url(../img/a-bg1.jpg) no-repeat;margin-left:20px; display:block; float:left; color:#fff; font-size:14px;
+}
+
+.qi {
+display:block;float:left; margin:5px 0 0 10px;
 }

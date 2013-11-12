@@ -138,7 +138,9 @@
                 <span>事项标题:</span>
                 <input type="text"  name="subjectVo.title" />
                 <a class="cx" href="javascript:matterQuery();">查询</a>
-                <a class="cx1" href="javascript:void(0);">增加</a>
+                <pri:showWhenManager>
+                	<a class="cx1" href="javascript:void(0);">增加</a>
+                </pri:showWhenManager>
             </div>
         <table width="100%" border="0">
             <tr>
