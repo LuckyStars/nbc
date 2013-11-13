@@ -40,7 +40,7 @@
 		right: 10px;
 	}
 	.box_logo_right{
-	height:30px;
+	height:20px;
 	width:auto;
 	color:#fff;
 	margin:43px 10px 0 0 ;

@@ -32,6 +32,8 @@ public class MasterIndexAction extends BaseAction{
 		String uid = Utils.getDefaultMasterUids().
 			contains(this.getUserId())?null:getUserId();
 		
+		final String cache_key  = LINSHI_MODULEID +  getUserId();
+		
 		final List<TSm2Subject> subList=
 			this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
 		
@@ -54,11 +56,24 @@ public class MasterIndexAction extends BaseAction{
 				);
 			}
 			@Override
-			public String getId() {return LINSHI_MODULEID;}
+			public String getId() {return cache_key;}
 		};
 		
 		Struts2Utils.renderJson(findData(linshi));
 	}
+	
+	public void findDongtai(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	class Linshi {
 		

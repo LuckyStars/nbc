@@ -62,7 +62,7 @@ public class ZanAction extends BaseAction{
 		Struts2Utils.renderText(result);
 	}
 	
-	private void sendMsg(String ){
+	private void sendMsg(){
 		
 	}
 	
