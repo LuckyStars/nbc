@@ -22,8 +22,11 @@ import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
+import com.nbcedu.function.schoolmaster2.vo.SubWeekSearch;
+import com.nbcedu.function.schoolmaster2.vo.SubjectWeekVo;
 
 public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterSubBiz{
 
@@ -245,8 +248,120 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		});
 	}
 	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<SubjectWeekVo> findWeekSingle(SubWeekSearch search) {
+		
+		if(search.getPublisher().size()!=1){
+			throw new IllegalArgumentException("按单个人查询时条件不匹配");
+		}
+		
+		StringBuilder sql = new StringBuilder("");
+		
+		sql.append("SELECT ");
+			sql.append("sub.id as id,");
+			sql.append("sub.title as title,");
+			sql.append("sub.createrId as createrId,");
+			sql.append("sub.createrName as createrName,");
+			sql.append("subtype.name as typeName,");
+			sql.append("subtype.id as typeId");
+
+		sql.append("FROM t_sm2_subject sub,");
+		
+			sql.append("(");
+				sql.append("SELECT id,name ");
+				sql.append("FROM t_sm2_type ");	
+			sql.append(") subtype,");
+			
+			sql.append("(");
+				sql.append("SELECT sub_id ");
+				sql.append("FROM t_sm2_subject_master ");
+				sql.append("WHERE user_uid = '" + Utils.curUserUid() + "' ");
+			sql.append(") submaster ");
+	
+		sql.append("WHERE ");
+			sql.append("sub.id = submaster.sub_id ");
+			
+			if(search.getStatus().size()>0){//状态
+				StringBuilder in = new StringBuilder("");
+				for (String statu : search.getStatus()) {
+					in.append("'" + statu + "',");
+				}
+				sql.append("AND sub.status in (" + in.deleteCharAt(in.length()-1).toString() + ") ");
+			}
+			
+			if(search.getUpdateDate()!=null){//选择指定日期				
+				sql.append(
+						"AND (DATE(sub.createTime)='${date}' OR DATE(sub.lastUpdateTime)='${date}') "
+						.replace("${date}", Utils.Dates.dateSdf.format(search.getUpdateDate()))
+						);
+			}
+			
+			if(search.getStart()!=null){//按周查询
+				sql.append(
+						"AND (sub.createTime > '${date}' OR sub.lastUpdateTime > '${date}') "
+						.replace("${date}", Utils.Dates.dateSdf.format(search.getStart()))
+				); 
+			}
+			sql.append("AND sub.typeId = subtype.id ");
+			
+			if(search.getSubType().size() > 0){//类型
+				StringBuilder in = new StringBuilder("");
+				for (String type : search.getSubType()) {
+					in.append("'" + type + "',");
+				}
+				sql.append("AND sub.typeId in (" + in.deleteCharAt(in.length()-1).toString() + ") ");
+			}
+			
+			sql.append("AND sub.createrId = '${uid}' ".replace("${uid}", search.getPublisher().get(0)));
+	
+		sql.append("ORDER BY ");
+			sql.append("sub.createTime DESC , ");
+			sql.append("sub.lastUpdateTime DESC ");
+		
+		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql.toString());
+		query.addScalar("id", Hibernate.STRING);
+		query.addScalar("title", Hibernate.STRING);
+		query.addScalar("createrId", Hibernate.STRING);
+		query.addScalar("createrName", Hibernate.STRING);
+		query.addScalar("typeName", Hibernate.STRING);
+		query.addScalar("typeId", Hibernate.STRING);
+		
+		List<Object[]> resultSet = query.list();
+		if(CollectionUtils.isEmpty(resultSet)){
+			return Collections.EMPTY_LIST;
+		}
+		
+		return Lists.transform(resultSet, new Function<Object[], SubjectWeekVo>() {
+			@Override
+			public SubjectWeekVo apply(Object[] in) {
+				SubjectWeekVo result = new SubjectWeekVo();
+				result.setSubId(trim(in[0]));
+				result.setSubTitle(trim(in[1]));
+				result.setCreatorUid(trim(in[2]));
+				result.setCreatorName(trim(in[3]));
+				result.setTypeName(trim(in[4]));
+				result.setTypeId(trim(in[5]));
+				return result;
+			}
+		});
+		
+	}
+	
+	
+	
+	@Override
+	public List<SubjectWeekVo> findWeek(SubWeekSearch search) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+	
 	private String trim(Object str){
 		return str==null?"":str.toString();
 	}
+	
 	
 }
