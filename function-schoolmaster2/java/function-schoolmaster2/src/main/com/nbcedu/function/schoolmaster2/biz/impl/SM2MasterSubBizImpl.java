@@ -247,9 +247,10 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			}
 		});
 	}
-	
+	/**
+	 * 原语句见 config/db/querys.sql
+	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<SubjectWeekVo> findWeekSingle(SubWeekSearch search) {
 		
 		if(search.getPublisher().size()!=1){
@@ -319,7 +320,100 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			sql.append("sub.createTime DESC , ");
 			sql.append("sub.lastUpdateTime DESC ");
 		
-		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql.toString());
+		return weekSqltoList(sql.toString());
+	}
+	
+	/**
+	 * 原语句见 config/db/querys.sql
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<SubjectWeekVo> findWeek(SubWeekSearch search) {
+		
+		if(search==null){ return Collections.EMPTY_LIST;}
+		
+		if (search.getStatus().size() > 0 && search.getPublisher().size() > 0) {
+		
+			StringBuilder sql = new StringBuilder("");
+			for (String uid : search.getPublisher()) {
+				for (String statu : search.getStatus()) {
+					sql.append("SELECT id,title,createrId,createrName,typeName,typeId ");
+					sql.append("FROM (");
+					
+						sql.append("SELECT ");
+							sql.append("sub.id as id,");
+							sql.append("sub.title as title,");
+							sql.append("sub.createrId as createrId,");
+							sql.append("sub.createrName as createrName,");
+							sql.append("subtype.name as typeName,");
+							sql.append("subtype.id as typeId");
+			
+						sql.append("FROM t_sm2_subject sub,");
+						
+							sql.append("(");
+								sql.append("SELECT id,name ");
+								sql.append("FROM t_sm2_type ");	
+							sql.append(") subtype,");
+							
+							sql.append("(");
+								sql.append("SELECT sub_id ");
+								sql.append("FROM t_sm2_subject_master ");
+								sql.append("WHERE user_uid = '" + Utils.curUserUid() + "' ");
+							sql.append(") submaster ");
+					
+						sql.append("WHERE ");
+							sql.append("sub.id = submaster.sub_id ");
+							sql.append("AND sub.status ='" + statu + "' ");
+							
+							if(search.getUpdateDate()!=null){//选择指定日期				
+								sql.append(
+										"AND (DATE(sub.createTime)='${date}' OR DATE(sub.lastUpdateTime)='${date}') "
+										.replace("${date}", Utils.Dates.dateSdf.format(search.getUpdateDate()))
+										);
+							}
+							
+							if(search.getStart()!=null){//按周查询
+								sql.append(
+										"AND (sub.createTime > '${date}' OR sub.lastUpdateTime > '${date}') "
+										.replace("${date}", Utils.Dates.dateSdf.format(search.getStart()))
+								); 
+							}
+							sql.append("AND sub.typeId = subtype.id ");
+							
+							if(search.getSubType().size() > 0){//类型
+								StringBuilder in = new StringBuilder("");
+								for (String type : search.getSubType()) {
+									in.append("'" + type + "',");
+								}
+								sql.append("AND sub.typeId in (" + in.deleteCharAt(in.length()-1).toString() + ") ");
+							}
+							
+							sql.append("AND sub.createrId = '${uid}' ".replace("${uid}", uid));
+					
+						sql.append("ORDER BY ");
+							sql.append("sub.createTime DESC , ");
+							sql.append("sub.lastUpdateTime DESC ");
+						sql.append("LIMIT 5 ");
+						
+					sql.append(") "+statu + uid);
+					sql.append(" UNION ALL ");
+				}
+			}
+			sql.delete(sql.lastIndexOf(" UNION ALL "),sql.length());
+			
+			return weekSqltoList(sql.toString());
+			
+		}else{
+			return Collections.EMPTY_LIST;
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<SubjectWeekVo> weekSqltoList(String sql){
+		
+		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql);
+		
 		query.addScalar("id", Hibernate.STRING);
 		query.addScalar("title", Hibernate.STRING);
 		query.addScalar("createrId", Hibernate.STRING);
@@ -345,19 +439,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				return result;
 			}
 		});
-		
 	}
-	
-	
-	
-	@Override
-	public List<SubjectWeekVo> findWeek(SubWeekSearch search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	
 	
 	private String trim(Object str){
 		return str==null?"":str.toString();

@@ -14,6 +14,8 @@ import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.ContextLoader;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.nbcedu.function.functionsupport.util.PropertiesUtil;
@@ -71,7 +73,14 @@ public class Utils {
 		String masterJson = loadFileToString("zhuguan.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
-	
+	public static List<String> getAllManagerUids(){
+		return Lists.transform(Lists.newArrayList(getAllManager()), new Function<PersonVo, String>() {
+			@Override
+			public String apply(PersonVo input) {
+				return input.getUid();
+			}
+		});
+	}
 	public static boolean isManager(){
 		for (PersonVo person : Utils.getAllManager()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
@@ -102,8 +111,9 @@ public class Utils {
 	}
 	
 	public static class Dates{
-		
+		/**yyyy-MM-dd**/
 		public static final SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd");
+		/**yyyy-MM-dd HH:mm:ss**/
 		public static final SimpleDateFormat fullSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static Date safeParseSimpleDate(String origin){
 			try {
