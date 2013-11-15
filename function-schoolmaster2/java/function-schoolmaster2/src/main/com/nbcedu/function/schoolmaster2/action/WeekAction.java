@@ -25,7 +25,7 @@ import com.nbcedu.function.schoolmaster2.vo.SubjectWeekVo;
 @SuppressWarnings("serial")
 public class WeekAction extends BaseAction{
 	
-	private SubWeekSearch search;
+	private SubWeekSearch search = new SubWeekSearch();
 	
 	private SM2MasterSubBiz subBiz;
 	
@@ -35,8 +35,9 @@ public class WeekAction extends BaseAction{
 			search.setPublisher(Utils.getAllManagerUids());
 		}
 		
+		Date weekStart = weekStart();
 		if(search.getUpdateDate() == null){
-			search.setStart(weekStart());
+			search.setStart(weekStart);
 		}
 		
 		if(search.getStatus().size()<=0){
@@ -44,7 +45,8 @@ public class WeekAction extends BaseAction{
 		}
 		
 		Map<String, WeekDisplayVo> result =null;
-		if(search.getPublisher().size()==1){
+		
+		if(search.getPublisher().size()==1){//单个人
 			
 			List<SubjectWeekVo> list = this.subBiz.findWeekSingle(search);
 			
@@ -68,6 +70,7 @@ public class WeekAction extends BaseAction{
 			}
 			
 		}else{
+			
 			List<SubjectWeekVo> list = this.subBiz.findWeek(search);
 			
 			if(!CollectionUtils.isEmpty(list)){
@@ -91,6 +94,7 @@ public class WeekAction extends BaseAction{
 		
 		this.getRequestMap().put("view",
 				result == null ? Collections.EMPTY_MAP : result);
+		this.getRequestMap().put("weekStart", weekStart);
 		return "weekList";
 	}
 	
@@ -144,6 +148,21 @@ public class WeekAction extends BaseAction{
 		
 		return result;
 		
+	}
+
+	
+	
+	//////////////////////////////////
+	//////getters&setters//////
+	////////////////////////
+	public SubWeekSearch getSearch() {
+		return search;
+	}
+	public void setSearch(SubWeekSearch search) {
+		this.search = search;
+	}
+	public void setSubBiz(SM2MasterSubBiz subBiz) {
+		this.subBiz = subBiz;
 	}
 	
 	

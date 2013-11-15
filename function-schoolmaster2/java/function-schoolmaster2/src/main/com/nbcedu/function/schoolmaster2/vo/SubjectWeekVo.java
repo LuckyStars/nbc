@@ -11,6 +11,7 @@ public class SubjectWeekVo {
 	private String creatorUid;
 	private String typeName;
 	private String typeId;
+	private String status;
 	public String getSubId() {
 		return subId;
 	}
@@ -46,6 +47,12 @@ public class SubjectWeekVo {
 	}
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }

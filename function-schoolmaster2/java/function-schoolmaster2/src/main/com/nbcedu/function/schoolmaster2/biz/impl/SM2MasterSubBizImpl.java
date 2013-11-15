@@ -265,7 +265,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			sql.append("sub.createrId as createrId,");
 			sql.append("sub.createrName as createrName,");
 			sql.append("subtype.name as typeName,");
-			sql.append("subtype.id as typeId");
+			sql.append("subtype.id as typeId,");
+			sql.append("sub.status as status ");
 
 		sql.append("FROM t_sm2_subject sub,");
 		
@@ -337,7 +338,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			StringBuilder sql = new StringBuilder("");
 			for (String uid : search.getPublisher()) {
 				for (String statu : search.getStatus()) {
-					sql.append("SELECT id,title,createrId,createrName,typeName,typeId ");
+					sql.append("SELECT id,title,createrId,createrName,typeName,typeId,status ");
 					sql.append("FROM (");
 					
 						sql.append("SELECT ");
@@ -346,7 +347,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 							sql.append("sub.createrId as createrId,");
 							sql.append("sub.createrName as createrName,");
 							sql.append("subtype.name as typeName,");
-							sql.append("subtype.id as typeId");
+							sql.append("subtype.id as typeId,");
+							sql.append("sub.status as status ");
 			
 						sql.append("FROM t_sm2_subject sub,");
 						
@@ -420,6 +422,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		query.addScalar("createrName", Hibernate.STRING);
 		query.addScalar("typeName", Hibernate.STRING);
 		query.addScalar("typeId", Hibernate.STRING);
+		query.addScalar("status", Hibernate.STRING);
 		
 		List<Object[]> resultSet = query.list();
 		if(CollectionUtils.isEmpty(resultSet)){
@@ -436,6 +439,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				result.setCreatorName(trim(in[3]));
 				result.setTypeName(trim(in[4]));
 				result.setTypeId(trim(in[5]));
+				result.setStatus(trim(in[6]));
 				return result;
 			}
 		});

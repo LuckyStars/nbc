@@ -92,5 +92,9 @@
 		<action name="*_maIndex" method="{1}" class="sm2MasterIndex">
 		
 		</action>
+		
+		<action name="*_week" method="{1}" class="sm2WeekAction">
+			<result name="weekList" >/function/function-week/week.jsp</result>		
+		</action>
 	</package>
 </struts>
