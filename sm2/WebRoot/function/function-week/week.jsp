@@ -30,7 +30,7 @@ $('#managers').combotree({
 		</h1>
 		<div class="content">
 			<h3>
-				<form action="">
+				<form action="${prc}/scMaster2/search_week.action" method="post" name="searchForm">
 				发布时间： 
 				<input class="Wdate" 
 				name="search.updateDate" 
@@ -39,7 +39,11 @@ $('#managers').combotree({
 				onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'<fmt:formatDate value='${weekStart}' pattern='yyyy-MM-dd'/>'})"/>
 				负责人： 
 				
-				<select style="width:120px;" id="managers" class="easyui-combotree" data-options="url:'findAllManager_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select>
+				<select name="search.publisher" 
+				style="width:120px;" id="managers" 
+				class="easyui-combotree" 
+				data-options="url:'findAllManager_user.action'" multiple="true" 
+				cascadeCheck="false" ></select>
 				事件状态： 
 				<select name="search.status" >
 					<option value="" >全部</option>
@@ -47,15 +51,20 @@ $('#managers').combotree({
 					<option value="updated" >更新</option>
 				</select>
 				事件类型： 
-				<select>
-					<option>全部</option>
+				<select name="search.subType"
+					style="width:120px;"
+					class="easyui-combotree" 
+					data-options="url:'${prc}/function/function-week/types.json'" multiple="true" 
+					cascadeCheck="false" >
 				</select>
 				
-				<a class="button" id="select1">查询</a>
+				<a class="button" id="select1" href="javascript:document.searchForm.submit();">查询</a>
 				</form>
 			</h3>
 
-			<h2>汪忱本周工作汇总</h2>
+			
+			<h2>${personTitle}</h2>
+			
 			<div class="workspace">
 				<div class="water">
 				
@@ -65,7 +74,7 @@ $('#managers').combotree({
 					<div class="listright"></div>
 					<div class="listes">
 						<ul class="workspacelist">
-							<p class="listtitle">汪忱的本周工作${entry.value.name }</p>
+							<p class="listtitle">${entry.value.name }</p>
 							<p class="news">
 								<span>本周新增</span>
 							</p>
@@ -108,8 +117,7 @@ $('#managers').combotree({
 				</div>
 				</c:forEach>
 				
-				
-					<div class="workspaceleft con1">
+					<%--<div class="workspaceleft con1">
 						<div class="list-top"></div>
 						<div class="listright"></div>
 						<div class="listes">
@@ -131,36 +139,15 @@ $('#managers').combotree({
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div>--%>
+
 
 
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--弹出层-->
-	<!-- <div class="bg"></div>
-      <div class="add2">
-       <div class="add-top2">
-           <p>负责人</p>
-           <img src="images/erro.jpg"  class="close" style="cursor:pointer;"/>
-       </div>
-       <div class="add-down">
-           <div id="choice">
-               <div>
-                   <h3>
-                       <img src="images/img.gif" /></h3>
-                   <h2>教务处</h2>
-                   <p><input type="checkbox" />付航</p>
-                   <p><input type="checkbox" />金强</p>
-                   <p><input type="checkbox" />郭红</p>
-                   <p><input type="checkbox" />李静</p>
-               </div>
-           </div>
-           <a href="#" class="return2" style="margin-left:100px;">确定</a>
-           <a href="#" class="return2">返回</a>
-       </div>
-          </div>-->
+	
 </body>
 </html>
 <script>

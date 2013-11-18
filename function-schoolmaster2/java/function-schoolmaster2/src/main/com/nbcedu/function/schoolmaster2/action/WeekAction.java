@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.SubWeekSearch;
 import com.nbcedu.function.schoolmaster2.vo.SubjectWeekVo;
@@ -46,9 +47,9 @@ public class WeekAction extends BaseAction{
 		
 		Map<String, WeekDisplayVo> result =null;
 		
-		if(search.getPublisher().size()==1){//单个人
+		if(search.getPublisher().size()>1){//多个人
 			
-			List<SubjectWeekVo> list = this.subBiz.findWeekSingle(search);
+			List<SubjectWeekVo> list = this.subBiz.findWeek(search);
 			
 			if(!CollectionUtils.isEmpty(list)){
 				result = new HashMap<String, WeekAction.WeekDisplayVo>(list.size());
@@ -69,9 +70,12 @@ public class WeekAction extends BaseAction{
 				
 			}
 			
-		}else{
+		}else{//单个人
 			
-			List<SubjectWeekVo> list = this.subBiz.findWeek(search);
+			List<SubjectWeekVo> list = this.subBiz.findWeekSingle(search);
+			
+			String userName = UCService.findNameByUid(search.getPublisher().get(0));
+			this.getRequestMap().put("personTitle", userName+"的本周工作");
 			
 			if(!CollectionUtils.isEmpty(list)){
 				
@@ -85,7 +89,6 @@ public class WeekAction extends BaseAction{
 					}
 					
 					result.get(sub.getTypeId()).getSubs().add(sub);
-					
 				}
 				
 			}
