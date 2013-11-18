@@ -32,4 +32,6 @@ public interface SM2ZanBiz extends BaseBiz<Sm2Zan>{
 	 * @author xuechong
 	 */
 	void removeByUserProg(String progId);
+	
+	String findSubIdByZan(String zanId);
 }

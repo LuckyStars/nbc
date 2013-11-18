@@ -15,6 +15,7 @@
 <script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${prc}/function/js/masonry.pkgd.js"></script>
 
 <script type="text/javascript">
 $('#managers').combotree({  
@@ -36,9 +37,8 @@ $('#managers').combotree({
 				name="search.updateDate" 
 				value="<fmt:formatDate value='${search.updateDate}' pattern='yyyy-MM-dd'/>" 
 				type="text" 
-				onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'<fmt:formatDate value='${weekStart}' pattern='yyyy-MM-dd'/>'})"/>
-				负责人： 
-				
+				onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'<fmt:formatDate value='${weekStart}' pattern='yyyy-MM-dd'/>',maxDate:'今天'})"/>
+				负责人：
 				<select name="search.publisher" 
 				style="width:120px;" id="managers" 
 				class="easyui-combotree" 
@@ -65,13 +65,16 @@ $('#managers').combotree({
 			
 			<h2>${personTitle}</h2>
 			
+			
+			
+			
 			<div class="workspace">
-				<div class="water">
+				<div class="masonry js-masonry"
+					data-masonry-options='{ "columnWidth": 60, "gutter": 10 }'
+				>
 				
 				<c:forEach items="${view}" var="entry" >
-				<div class="workspaceleft con1">
-					<div class="list-top"></div>
-					<div class="listright"></div>
+				<div class="item con1">
 					<div class="listes">
 						<ul class="workspacelist">
 							<p class="listtitle">${entry.value.name }</p>
@@ -117,9 +120,9 @@ $('#managers').combotree({
 				</div>
 				</c:forEach>
 				
-					<%--<div class="workspaceleft con1">
-						<div class="list-top"></div>
-						<div class="listright"></div>
+					<%----%>
+					
+					<div class="item con1">
 						<div class="listes">
 							<ul class="workspacelist">
 								<p class="listtitle">汪忱的本周工作</p>
@@ -139,7 +142,7 @@ $('#managers').combotree({
 								</li>
 							</ul>
 						</div>
-					</div>--%>
+					</div>
 
 
 
@@ -150,76 +153,3 @@ $('#managers').combotree({
 	
 </body>
 </html>
-<script>
-    $(function () {
-        $("#choice img").each(function () {
-            $(this).click(function () {
-                if ($("#choice p").css("display") == "block") {
-                    $("#choice p").css("display", "none");
-                    $("img[src=${prc}/function/function-week/images/img1.gif]").attr("src", "${prc}/function/function-week/images/img.gif");
-                } else {
-                    $("#choice p").css("display", "block");
-                    $("img[src=${prc}/function/function-week/images/img.gif]").attr("src", "${prc}/function/function-week/images/img1.gif");
-                }
-            });
-
-        });
-    });
-</script>
-<script>
-
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (searchElement /*, fromIndex */) {
-            if (this == null) {
-                throw new TypeError();
-            }
-            var t = Object(this);
-            var len = t.length >>> 0;
-            if (len === 0) {
-                return -1;
-            }
-            var n = 0;
-            if (arguments.length > 1) {
-                n = Number(arguments[1]);
-                if (n != n) { // shortcut for verifying if it's NaN
-                    n = 0;
-                } else if (n != 0 && n != Infinity && n != -Infinity) {
-                    n = (n > 0 || -1) * Math.floor(Math.abs(n));
-                }
-            }
-            if (n >= len) {
-                return -1;
-            }
-            var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-            for (; k < len; k++) {
-                if (k in t && t[k] === searchElement) {
-                    return k;
-                }
-            }
-            return -1;
-        };
-    }
-
-    $.fn.waterfall = function () {
-        var containerWidth = this.width();
-        var $childrens = this.children();
-        var boxWidth = $childrens.first().outerWidth();
-        var count = Math.floor(containerWidth / boxWidth);
-        var heightArr = [];
-        for (var i = 0; i < count; i++) {
-            heightArr[i] = 0;
-        }
-        for (var i = 0, j = $childrens.length; i < j; i++) {
-            var minHeight = Math.min.apply(Math, heightArr);
-            var index = heightArr.indexOf(minHeight);
-            var $child = $childrens.eq(i);
-            $child.css({ left: index * boxWidth, top: minHeight })
-            heightArr[index] += $child.height();
-        }
-        this.height(Math.max.apply(Math, heightArr));
-        var self = this;
-    };
-    
-    
-    $(".water").waterfall();
-    </script>

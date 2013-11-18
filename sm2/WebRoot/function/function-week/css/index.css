@@ -1,4 +1,4 @@
-/* ------------------CSS »ù±¾ÑùÊ½--------------------- */
+/* ------------------CSS ï¿½ï¿½ï¿½ï¿½Ê½--------------------- */
 html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, ul, button, textarea, iframe, table, th, td {
 	margin: 0;
 	padding: 0;
@@ -298,7 +298,7 @@ a:focus {
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
 }
-	/* ×ÜÌåÑùÊ½ */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ */
 
 .right h1 {
 	background:url(../images/right_title.png);
@@ -367,7 +367,7 @@ color:#085EB3;
 .listtitle {
 width:241px; height:37px; background:url(../images/ul-bg.jpg) no-repeat; line-height:37px; text-align:center;font-size:16px; color:#0760B2; font-weight:bold;
 }
-/* µ¯³ö²ã */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 .bg {
 position:fixed; width:100%; height:100%; background-color:#000; z-index:6; left:0; top:0;filter: alpha(opacity=50);-moz-opacity: 0.5;opacity: 0.5;
 }
@@ -390,7 +390,7 @@ position:fixed; width:100%; height:100%; background-color:#000; z-index:6; left:
     margin-right:10px;
     margin-left:18px;
 }
-/* ±¾ÖÜ¹¤×÷»ã×Üµ¯³ö²ã */
+/* ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ */
 .add2 {width:398px; border:1px solid #3E88CF; background-color:#fff; position:fixed;left:50%; top:50%;z-index:50;margin-left:-199px; margin-top:-155px;}
 .add-top2{width:394px; height:37px; background:url(../images/tan-bg.jpg) repeat-x; margin:2px;}
 .add-top2 p{ color:#fff;float:left; padding-left:13px; font-weight:bold;font-size:14px; line-height:37px;}
@@ -406,7 +406,7 @@ display:block;float:left;width:91px; height:28px; background:url(../images/btnbg
 #choice p input{
      margin-right:10px;
 }
-/* ÐÂ¼Ó */
+/* ï¿½Â¼ï¿½ */
 .right {
 	background:#fff;
 	float:left;
@@ -462,4 +462,12 @@ width:241px; height:auto !important; min-height:200px;height:200px; -moz-border-
 }
 .list-top {
     height:10px; width:100%;
+}
+.masonry {
+ margin-left:60px;
+}
+.masonry .item {
+  width:265px;
+  float: left;
+  margin-bottom: 10px;
 }

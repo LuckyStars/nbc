@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
@@ -83,4 +84,22 @@ public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
 				new Object[]{progId,Utils.curUserUid()}).executeUpdate();
 	}
 	
+	@Override
+	public String findSubIdByZan(String zanId) {
+		StringBuilder sql =new StringBuilder("");
+		sql.append("SELECT steps.subjectId ");
+		sql.append("FROM t_sm2_step steps,( ");
+			sql.append("SELECT stepId ");
+			sql.append("FROM t_sm2_progress,( ");
+				sql.append("SELECT progress_id ");
+				sql.append("FROM t_sm2_zan ");
+				sql.append("WHERE id=? ");
+				sql.append(") zan ");
+			sql.append("WHERE t_sm2_progress.id = zan.progress_id ");
+		sql.append(") stepId ");
+		sql.append("WHERE steps.id = stepId.stepId ");
+		Query q = this.zanDao.createSqlQuery(sql.toString(), zanId);
+		Object result = q.uniqueResult();
+		return result==null?"":result.toString().trim();
+	}
 }

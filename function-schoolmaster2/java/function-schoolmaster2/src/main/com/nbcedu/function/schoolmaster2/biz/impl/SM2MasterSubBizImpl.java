@@ -27,6 +27,7 @@ import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 import com.nbcedu.function.schoolmaster2.vo.SubWeekSearch;
 import com.nbcedu.function.schoolmaster2.vo.SubjectWeekVo;
+import com.nbcedu.function.schoolmaster2.vo.SubjectZanVo;
 
 public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterSubBiz{
 
@@ -411,6 +412,19 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		
 	}
 	
+	@Override
+	public SubjectZanVo findByProgId(String progId) {
+		Query q = this.sm2SubjectDao.getNamedQuery("find_subtitle_uid_by_progid");
+		q.setString("progId", progId);
+		Object[] result = (Object[]) q.uniqueResult();
+		if(result!=null){
+			return new SubjectZanVo(trim(result[0]),trim(result[1]),trim(result[2]));
+		}
+		return null;
+	}
+	///////////////////////
+	////////privates///////
+	////////////////////
 	@SuppressWarnings("unchecked")
 	private List<SubjectWeekVo> weekSqltoList(String sql){
 		

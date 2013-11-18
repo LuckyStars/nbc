@@ -113,6 +113,7 @@ table td {
 					/>
 				</p>
 					<a href="javascript:document.forms[0].submit();">查询</a>
+					<div style="clear:both;"></div>
 			</div>
 			</form>
 			<table width="100%" border="0">

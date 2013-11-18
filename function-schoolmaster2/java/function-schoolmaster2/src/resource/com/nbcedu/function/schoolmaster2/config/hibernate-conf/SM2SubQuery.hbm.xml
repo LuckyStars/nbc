@@ -79,6 +79,7 @@
 		]]>
     </sql-query>
     <sql-query name="find_progress_by_step" >
+    <![CDATA[
     	SELECT 
     		t_sm2_progress.id,
     		t_sm2_progress.name,
@@ -114,6 +115,24 @@
 			) zaned
 			on t_sm2_progress.id = zaned.progress_id 
 			WHERE t_sm2_progress.stepId=:stepId ORDER BY t_sm2_progress.createTime DESC
-			
+	]]>	
+    </sql-query>
+    
+    <sql-query name="find_subtitle_uid_by_progid">
+    <![CDATA[
+	    SELECT sub.id as id , sub.createrId as uid,sub.title as title
+		FROM t_sm2_subject sub,
+			(
+				SELECT subjectId
+				FROM t_sm2_step step,
+					(
+						SELECT stepId
+						FROM t_sm2_progress
+						WHERE id=:progId
+					) progs
+				WHERE step.id = progs.stepId
+			) steps
+		WHERE sub.id = steps.subjectId
+    ]]>
     </sql-query>
 </hibernate-mapping>

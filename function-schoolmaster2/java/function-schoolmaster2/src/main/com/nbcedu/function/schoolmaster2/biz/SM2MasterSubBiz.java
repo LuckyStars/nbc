@@ -9,6 +9,7 @@ import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 import com.nbcedu.function.schoolmaster2.vo.SubWeekSearch;
 import com.nbcedu.function.schoolmaster2.vo.SubjectWeekVo;
+import com.nbcedu.function.schoolmaster2.vo.SubjectZanVo;
 
 public interface SM2MasterSubBiz extends SM2SubjectBiz {
 
@@ -53,4 +54,6 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	public List<SubjectWeekVo> findWeek(SubWeekSearch search);
 	
 	public List<SubjectWeekVo> findWeekSingle(SubWeekSearch search);
+	
+	public SubjectZanVo findByProgId(String progId);
 }

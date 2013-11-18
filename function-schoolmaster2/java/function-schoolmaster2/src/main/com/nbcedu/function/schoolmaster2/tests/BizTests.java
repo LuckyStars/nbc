@@ -13,6 +13,7 @@ import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
+import com.nbcedu.function.schoolmaster2.vo.SubjectZanVo;
 
 public class BizTests {
 	
@@ -71,4 +72,11 @@ public class BizTests {
 		}
 	}
 	
+	@Test
+	public void findSubVoByProg(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		String progId = "1";
+		SubjectZanVo vo = biz.findByProgId(progId);
+		System.out.println(vo.getId());
+	}
 }

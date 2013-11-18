@@ -18,8 +18,12 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.nbcedu.function.functionsupport.core.FunctionSupportUtil;
+import com.nbcedu.function.functionsupport.core.SupportManager;
+import com.nbcedu.function.functionsupport.mapping.PortalMessage;
 import com.nbcedu.function.functionsupport.util.PropertiesUtil;
 import com.nbcedu.function.schoolmaster2.constants.Constants;
+import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -134,4 +138,19 @@ public class Utils {
 			.getBean(name);
 		}
 	}
+	
+	
+	/**
+	 * 门户和协同消息
+	 * @author xuechong
+	 */
+	public static class Message{
+		
+		
+	}
+	
+	public static String getCurAppLocation(){
+		return PropertiesUtil.findPropertieValue("config.properties", "curapplocation");
+	}
+	
 }
