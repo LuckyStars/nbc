@@ -11,6 +11,7 @@
 	src="${prc}/function/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript"
 	src="${prc}/function/js/masterIndex.js"></script>
+	<script type="text/javascript">var ctxPath = '${prc}';</script>
 	<style type="text/css">
 	.flagupdated{
 		position: absolute;

@@ -1,63 +1,12 @@
 ﻿var allNums = [
 	               {
-	            	   url:"/masterDocumentFlow/sumUnHandledDocumentTask.action?userId=" + curUid,
+	            	   url:"/masterDocumentFlow/sumUnHandledDocumentTask.action",
 	            	   numId:"documentNum",
 	            	   name:"公文"
-	               },
-	               {
-	            	   url:"/countWorkbench.action?module=xxdt_1&status=new?userId=" + curUid,
-	            	   numId:"zongjie",
-	            	   name:"总结汇报关注性工作"
-	               },
-	               {
-	            	   url:"/countWorkbench.action?module=xxdt_2&status=new?userId=" + curUid,
-	            	   numId:"qingshi",
-	            	   name:"请示报批工作"
-	               },
-	               {
-	            	   url:"/countWorkbench.action?module=xxdt_3&status=new?userId=" + curUid,
-	            	   numId:"jinji",
-	            	   name:"紧急重要事件处理"
 	               }
                ];
 
 var allNews = [
-               		{
-               			url:"/countWorkbench.action?module=ndzx&status=updated?userId=" + curUid,
-               			newsId:"hexin",
-               			name:"我关注的核心工作"
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_1&status=new?userId=" + curUid,
-               			newsId:"deyugongzuo",
-               			name:"德育工作"
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_2&status=new?userId=" + curUid,
-               			newsId:"deyujiaoyan",
-               			name:"教育教研工作"
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_3&status=new?userId=" + curUid,
-               			newsId:"xinxihua",
-               			name:"信息化工作"
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_4&status=new?userId=" + curUid,
-               			newsId:"houqinweisheng",
-               			name:"后勤卫生工作"
-               				
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_5&status=new?userId=" + curUid,
-               			newsId:"dangtuan",
-               			name:"党团工作"
-               		},
-               		{
-               			url:"/countWorkbench.action?module=ndzx_6&status=new?userId=" + curUid,
-               			newsId:"caiwu",
-               			name:"财务工作"
-               		}
                ];
 
 
@@ -69,6 +18,23 @@ function refreshNumber(url,numId){
 			$('#' + numId).html(data);
 		}else{
 			$('#' + numId).hide();
+		}
+	});
+	
+}
+
+
+function refreshDongtai(){
+	var modules = ['qingshi','zongjie','jinji'];
+	$.getJSON(ctxPath + '/scMaster2/findDongtai_maIndex.action',function(data){
+		alert(ctxPath + '/scMaster2/findDongtai_maIndex.action');
+		for ( var i = 0; i < modules.length; i++) {
+			if(data[modules[i]]>0){
+				$("#" + modules[i]).show();
+				$("#" + modules[i]).html(data[modules[i]]);
+			}else{
+				$("#" + modules[i]).hide();
+			}
 		}
 	});
 }
@@ -108,6 +74,7 @@ var refLinshi = function (){
 		}
 	});
 };
+
 
 var daibanCount = 0;
 function refreshDaiban(){
@@ -154,6 +121,7 @@ function refreshAll (){
 		var curNews = allNews[i];
 		refreshNews(curNews.url,curNews.newsId);
 	}
+	refreshDongtai();
 	refreshDaiban();
 	refLinshi();
 }

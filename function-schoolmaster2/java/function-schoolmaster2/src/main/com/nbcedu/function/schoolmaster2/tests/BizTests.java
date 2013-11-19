@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.google.gson.JsonObject;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -88,5 +89,11 @@ public class BizTests {
 		for (Map.Entry<String, Integer> entry : result.entrySet()) {
 			System.out.println(entry.getKey() +":"+ entry.getValue());
 		}
+		Map<String, Integer> results = biz.findNewCountByModule("1");
+		JsonObject json = new JsonObject();
+		for (Map.Entry<String, Integer> entry : results.entrySet()) {
+			json.addProperty(entry.getKey(),entry.getValue());
+		}
+		System.out.println(json.toString());
 	}
 }

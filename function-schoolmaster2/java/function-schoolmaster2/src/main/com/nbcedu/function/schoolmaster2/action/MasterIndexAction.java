@@ -11,6 +11,7 @@ import org.apache.commons.lang.xwork.StringUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
+import com.google.gson.JsonObject;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
@@ -29,17 +30,19 @@ public class MasterIndexAction extends BaseAction{
 	
 	public void findLinshi(){
 		
-		String uid = Utils.getDefaultMasterUids().
+		final String uid = Utils.getDefaultMasterUids().
 			contains(this.getUserId())?null:getUserId();
 		
 		final String cache_key  = LINSHI_MODULEID +  getUserId();
 		
-		final List<TSm2Subject> subList=
-			this.masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
 		
 		SearchFunction linshi = new SearchFunction() {
 			@Override
 			public String search() {
+				
+				List<TSm2Subject> subList=
+					masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
+				
 				return Utils.gson.toJson(
 						Lists.transform(subList, new Function<TSm2Subject, Linshi>() {
 							@Override
@@ -63,16 +66,28 @@ public class MasterIndexAction extends BaseAction{
 	}
 	
 	public void findDongtai(){
+		
+		final String uid = this.getUserId();
+		
+		SearchFunction dongtai = new SearchFunction(){
+			@Override
+			public String search() {
+				Map<String, Integer> results = masterSubBiz.findNewCountByModule(uid);
+				JsonObject json = new JsonObject();
+				for (Map.Entry<String, Integer> entry : results.entrySet()) {
+					json.addProperty(entry.getKey(),entry.getValue());
+				}
+				return json.toString();
+			}
+			@Override
+			public String getId() {
+				return "find_dongtai" + uid;
+			}
+		};
+		
+		Struts2Utils.renderJson(findData(dongtai));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	class Linshi {
 		
