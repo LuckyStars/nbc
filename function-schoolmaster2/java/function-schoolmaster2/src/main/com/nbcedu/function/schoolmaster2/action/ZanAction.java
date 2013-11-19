@@ -13,7 +13,6 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
-import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.SubjectZanVo;
@@ -42,11 +41,10 @@ public class ZanAction extends BaseAction{
 		zan.setCreateTime(new Date());
 		Sm2Zan upResult = (Sm2Zan) this.zanBiz.addOrUpdate(zan);
 		Boolean result = upResult!=null;
+		Struts2Util.renderText(result.toString());
 		if(result){
 			sendMsg(upResult);
 		}
-		Struts2Util.renderText(result.toString());
-		
 	}
 	
 	/**

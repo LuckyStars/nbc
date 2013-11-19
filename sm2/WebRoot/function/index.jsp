@@ -119,10 +119,9 @@
 				</div>
 
 				<div class="office mail" style="width: 126px; height: 148px;">
-					<a class="pointer" href="#">
+					<a class="pointer" href="${prc}/scMaster2/search_week.action">
 						<img src="${prc}/function/images/mail.jpg" />
-						<span>电子邮件</span>
-						<i>6</i>
+						<span>本周工作汇总</span>
 					</a>
 				</div>
 
