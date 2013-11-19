@@ -144,10 +144,10 @@
       <li><a href="#" class="li-blue" id="nav8">
       <img src="${prc}/function/images/nav_08.png" width="16" height="16" />统计分析<span class="cols"></span></a>
         <ul class="nav-list-inner">
-          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=bookSite" target="fm_right">·场馆预定统计</a></li>
-          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=substitute" target="fm_right">·请假代课统计</a></li>
-          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=repair" target="fm_right">·在线保修统计</a></li>
-          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action&matcher=logistics" target="fm_right">·电教服务统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=bookSite" target="fm_right">·场馆预定统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=substitute" target="fm_right">·请假代课统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=repair" target="fm_right">·在线保修统计</a></li>
+          <li><a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=logistics" target="fm_right">·电教服务统计</a></li>
         </ul>
       </li>
       <li><a href="#" class="li-blue" id="nav9">

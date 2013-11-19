@@ -30,7 +30,15 @@ public class StepAction extends BaseAction{
 		this.stepBiz.removeById(id);
 		Struts2Utils.renderText("0","encoding:UTF-8");
 	}
-	
+	public void isExist(){
+		List<StepVo> step = this.stepBiz.findByProgId(this.id);
+		if(step != null && step.size()>0){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
+		
+	}
 	//////////////////////////
 	/////getters&setters/////
 	/////////////////////////

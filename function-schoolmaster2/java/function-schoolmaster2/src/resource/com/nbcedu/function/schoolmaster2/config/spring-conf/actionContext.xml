@@ -72,4 +72,9 @@
 	<bean id="sm2MasterIndex" class="com.nbcedu.function.schoolmaster2.action.MasterIndexAction">
 		<property name="masterSubBiz" ref="masterSubBiz" />
 	</bean>
+	<bean id="sm2Resource" class="com.nbcedu.function.schoolmaster2.action.ResourceAction" scope="prototype">
+		<property name="resourceBiz" ref="sm2ResourceBiz" />
+	</bean>
+		<bean id="sm2ResourceUpload" class="com.nbcedu.function.schoolmaster2.action.ResourceUploadAction" scope="prototype">
+	</bean>
 </beans>

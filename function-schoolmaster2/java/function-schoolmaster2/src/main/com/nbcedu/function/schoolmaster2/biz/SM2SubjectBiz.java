@@ -35,5 +35,4 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	PagerModel findBySubjectMaster(SubjectVo subject);
 	
 	public void updateMasterFlag(int flag, String subId,String userUid) throws DBException ;
-	
 }

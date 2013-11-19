@@ -62,16 +62,24 @@
     		if(doValid()){	doUpdate();}
     	}
     	function on_delete(subjectId){
-    		if(confirm("确定要删除吗?")){
-    			$.post("delete_subject.action", { id: subjectId},
-    				function(data){
-    					if(0==data){
-    						document.forms[0].submit();
-    					}else{
-    						alert("删除失败");
-    					}
-    			});
-    		}
+        	$.post("isExist_step.action",{sujectId:subjectId},
+				function(data){
+					if(data==0){
+		        		if(confirm("确定要删除吗?")){
+		        			$.post("delete_subject.action", { id: subjectId},
+		        				function(data){
+		        					if(0==data){
+		        						document.forms[0].submit();
+		        					}else{
+		        						alert("删除失败");
+		        					}
+		        			});
+		        		}
+					}else{
+						alert("主题下存在步骤，请先删除步骤！");
+					}
+        		});
+    
     	}
     	
     	//验证主题重名

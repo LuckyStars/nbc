@@ -1,18 +1,22 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
     <link href="${prc }/function/detail-step/css/index.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="${prc }/function/detail-step/css/gzt.css" type="text/css"/>
     <script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
+	
     <script>
         $(function () {
+        	  $("table tr:odd").css("background", "#f0f8fc");
+        	    $("table tr:even").css("background", "#d5e0ee");
+        	    $("table tr").css("height","27px");
             $(".img").each(function () {
                 $(this).click(function () {
                     if ($(".conshen").css("display") == "block") {
@@ -44,22 +48,42 @@
             });
             $(".resources li").click(function () {
                 $(".resources .cur").removeClass("cur");
+              // $(".resource-lists").empty();
                 var index = $(this).index();
                 if (index == 0) {
                     $(".resources").attr("class", "resources doc");
+                    findAllResource($("#progId").val(),index);
                 } else if (index == 1) {
-                    $(".resources").attr("class", "resources pic");
+                   	$(".resources").attr("class", "resources pic");
+                   	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index},function(data){
+                   		if(data != ''){
+                   			$(".resource-lists").html(data);
+                   		}
+                 	  	});
                 } else if (index == 2) {
                     $(".resources").attr("class", "resources video");
+                    findAllResource($("#progId").val(),index);
                 }
-                $(".resource-lists").hide().eq(index).show();
+              
+               // $(".resource-lists").hide().eq(index).show();
                 $(this).addClass("cur");
             });
             $(".ico2").click(function () {
                 $("body").css("overflow", "hidden");
+                $("#progId").val(this.id);
                 $(".bg").show();
                 $(".adds").show();
+                findAllResource(this.id,0);
             });
+            function findAllResource(progId,type){
+            	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
+            		if(data != ''){
+            			$(".resource-lists").empty();
+            			$(".resource-lists").html(data);
+            		}
+          	  	});
+
+                }
             $(".ico7").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
@@ -114,7 +138,6 @@
     		$("#" + eleId).fadeOut();
     	}
     
-    
     	function switchArticle(id){
     		$("#art_" + id).is(":hidden")?
     		function(){
@@ -156,12 +179,10 @@
 						')</span></dd></dl>').appendTo($("#zanContentsDiv"));
     			}
     		});
-    		
     		$("#divZan").show();
     	}
     	
     	function showStepTrans(progId){
-    		
     		$("#step_radios").html("");
     		$("#trans_prog_id").val(progId);
     		$.post("${prc}/scMaster2/stepList_step.action?id="+progId,function(data){
@@ -207,14 +228,10 @@
     				return;
     			}
     			for(var i = 0;i<data.length;i++){
-    				
 	    			$('<dl class="comments"><dd><p><span '+ 
-	    					function (isTrans){return isTrans=='true'?'':'class="blue"';}(data[i].trans)
-	    					+'>'
-	 					+ data[i].name +
-	   					'</span><br /></p><span class="gray">('
-						+ data[i].time + 
-						')</span></dd></dl>').appendTo($("#reads_contents"));
+	    					function (isTrans){return isTrans=='true'?'':'class="blue"';}(data[i].trans)+'>'
+	 					+ data[i].name +'</span><br /></p><span class="gray">('
+						+ data[i].time + ')</span></dd></dl>').appendTo($("#reads_contents"));
     			}
     		});
     		
@@ -248,19 +265,15 @@
         		onclick="showZans('${prog.id}');" alt="赞"
         		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
         	</a>
-        	
         	<span> | </span>
-        	
         	<a>
         		<img src="${prc }/function/detail-step/images/ico1.png" 
         		onclick="showReads('${prog.id}')" alt="阅读"
         		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
         	</a>
-       		
        		<span> | </span>
-        	
         	<a>
-        		<img src="${prc }/function/detail-step/images/ico2.png" 
+        		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
         		width="13" height="13" class="ico2"/>（0）
         	</a>
         	
@@ -356,223 +369,43 @@
 		</div>
 	</div>
 	<!-- 评论 END -->
-	
 	</c:forEach>
-	
-	
-	
-<!--   	<div class="mids">-->
-<!--   		<a class="h4">-->
-<!--   			<span>·六一儿童节11111</span>-->
-<!--   			-->
-<!--   			<img src="${prc }/function/detail-step/images/up.png" width="13" height="13" class="mids-img"/>-->
-<!--   			<img src="${prc }/function/detail-step/images/ico4.png" class="ico8"/>-->
-<!--   			<img src="${prc }/function/detail-step/images/ico5.png" />-->
-<!--   			<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>-->
-<!--   			<img src="${prc }/function/detail-step/images/ico7.png" />-->
-<!--   		</a>-->
-<!--        <div class="conls"> -->
-<!--        	<a>-->
-<!--        		<img src="${prc }/function/detail-step/images/shou.png" -->
-<!--        		width="13" height="13"  class="shou"/>(20)-->
-<!--        	</a>-->
-<!--        	-->
-<!--        	<span> | </span>-->
-<!--        	-->
-<!--        	<a>-->
-<!--        		<img src="${prc }/function/detail-step/images/ico1.png" -->
-<!--        		width="13" height="13" class="ico1"/>（120）-->
-<!--        	</a>-->
-<!--       		-->
-<!--       		<span> | </span>-->
-<!--        	-->
-<!--        	<a>-->
-<!--        		<img src="${prc }/function/detail-step/images/ico2.png" -->
-<!--        		width="13" height="13" class="ico2"/>（5620）-->
-<!--        	</a>-->
-<!--        	-->
-<!--        </div>-->
-<!--	</div>-->
-	
- <!--   <div class="article" style="height:212px;">
-        <p class="p">2011年6月1日上午，在“六一”国际儿童节这天，东城区人民政府区长牛青山、东城区人民政府办公室主任袁秀江、东城区教委主任冯洪荣等领导来到府学胡同小学，亲切看望慰问学校师生，向同学们致以节日的美好祝福。 来宾们在府学小导游的带领下参观了府学石学府、奥运博物馆、府学展室、府学园林等，聆听了同学们精彩细致的讲解。同学们表演了快板等节目，表达了对党和祖国的感恩和祝福。牛区长与孩子们亲切交谈，饶有兴趣地与孩子们一起感受府学600余年的历史文化，把节日的礼物送给孩子们，勉励孩子们快乐学习，健康成长，长大报效祖国。</p>
-        <dl class="new1">
-            <dt>
-            	<img src="${prc }/function/detail-step/img/tu.jpg" />
-            </dt>
-            <dd>
-            	<p>
-            		<span class="blue">金校长：</span>
-            		好好学习天天向上<br />
-            	</p>
-              	<span class="gray">(2013-4-20 10:00)</span>
-            </dd>
-        </dl>
-        <dl class="new1">
-            <dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-      	</dl>
-        <p class="pack1">查看所有批示</p>
-	</div>
-	
-    <div class="box">
-    	<div class="box-top">
-       		<ul>
-            	<li class="two"><a href="javascript:;">校长评论</a>
-            		<img src="${prc }/function/detail-step/images/up1.jpg"
-            	 	class="img" style="margin-top:10px; display:block; float:left; cursor:pointer;"/>
-            	</li>
-          	</ul>
-        </div>
-        <div class="conshen box-down">
-          	<input type="text"  class="erro"/>
-          	<a href="#" class="btn">发表</a>
-          	<dl class="new">
-            	<dt><img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            	<dd>
-              		<p>
-              			<span class="blue">金校长：</span>
-              			好好学习天天向上<br />
-              		</p>
-              		<span class="gray float">(32分钟前)</span>
-              	</dd>
-             	<div style="clear:both;"></div>
-             	
-          	</dl>
-          
-			<dl class="new">
-            	<dt>
-            		<img src="${prc }/function/detail-step/img/tu.jpg" /></dt>
-            	<dd>
-	              	<p>
-	              		<span class="blue">金校长：</span>好好学习天天向上<br />
-	              	</p>
-	              	<span class="gray">(32分钟前)</span>
-              	</dd>
-          	</dl>
-          	<dl class="new">
-         		<dt><img src="img/tu.jpg" /></dt>
-            	<dd>
-              		<p>
-              			<span class="blue">金校长：</span>
-              			好好学习天天向上<br />
-              		</p>
-              		<span class="gray">(32分钟前)</span> 
-              	</dd>
-          	</dl>
-          	<p class="pack">查看所有评论</p>
-		</div>
-	</div>
-	
-    <div class="mids"> <a class="h4"><span>·六一儿童节</span><img src="${prc }/function/detail-step/images/up.png" width="13" height="13"  class="mids-img"/><img src="images/ico3.png"  class="ico4"/><img src="images/ico4.png"  class="ico8"/><img src="images/ico5.png" /><img src="images/ico6.png"    class="ico5"/><img src="images/ico7.png" /><img src="images/ico8.png" class="ico7"/></a>
-        <div class="conls"> <a><img src="images/shou.png" width="13" height="13"  class="shou"/>(20)</a><span> | </span><a><img src="images/ico1.png"  width="13" height="13" class="ico1"/>（120）</a><span> | </span> <a><img src="images/ico2.png"   width="13" height="13" class="ico2"/>（5620）</a> </div>
-      </div>
-      <div class="article" style="height:212px;">
-        <p class="p">2011年6月1日上午，在“六一”国际儿童节这天，东城区人民政府区长牛青山、东城区人民政府办公室主任袁秀江、东城区教委主任冯洪荣等领导来到府学胡同小学，亲切看望慰问学校师生，向同学们致以节日的美好祝福。 来宾们在府学小导游的带领下参观了府学石学府、奥运博物馆、府学展室、府学园林等，聆听了同学们精彩细致的讲解。同学们表演了快板等节目，表达了对党和祖国的感恩和祝福。牛区长与孩子们亲切交谈，饶有兴趣地与孩子们一起感受府学600余年的历史文化，把节日的礼物送给孩子们，勉励孩子们快乐学习，健康成长，长大报效祖国。</p>
-          <dl class="new1">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-          </dl>
-          <dl class="new1">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(2013-4-20 10:00)</span> </dd>
-          </dl>
-          <p class="pack1">查看所有批示</p>
-      </div>
-      <div class="box">
-        <div class="box-top">
-          <ul>
-            <li class="two"><a href="javascript:;">校长评论</a><img src="images/up1.jpg"  id="imgs" style="margin-top:10px; display:block; float:left; cursor:pointer;"/></li>
-          </ul>
-        </div>
-        <div class="conshens box-downs">
-          <input type="text"  class="erro"/>
-          <a href="#" class="btn">发表</a>
-          <dl class="new">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray float">(32分钟前)</span> </dd>
-               
-             <div style="clear:both;"></div>
-          </dl>
-          <dl class="new">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(32分钟前)</span> </dd>
-          </dl>
-          <dl class="new">
-            <dt><img src="img/tu.jpg" /></dt>
-            <dd>
-              <p><span class="blue">金校长：</span>好好学习天天向上<br />
-              </p>
-              <span class="gray">(32分钟前)</span> </dd>
-          </dl>
-          <p class="pack">查看所有评论</p>
-        </div>
-      </div>
-      
-      -->
-      
       
       <!--弹出层 资源-->
 <div class="bg"></div>
 <div class="adds" id="add-tab">
   <div class="add-tops">
     <p>资源</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs">
-    <p>全部 | 本步骤 | 本进展</p>
-      <div class="resources doc">
-        <h5>
-          <ul>
-            <li class="cur">文档</li>
-            <li>图片</li>
-            <li>视频</li>
-          </ul>
-          <a href="#" class="mores">更多&gt;&gt;</a> </h5>
-        <div class="resource-lists">
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-        </div>
-        <div class="resource-lists" style="display:none">
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-        </div>
-        <div class="resource-lists" style="display:none">
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-          <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>
-        </div>
+    <img src="${prc }/function/detail-step/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+    <input type="hidden" id="progId" />
+ 	<div class="add-downs">
+    	<p>全部 | 本步骤 | 本进展</p>
+        <div class="resources doc" >
+        	<h5>
+          		<ul>
+            		<li class="cur" >文档</li>
+		            <li>图片</li>
+		            <li>视频</li>
+          		</ul>
+         	 	<a href="#" class="mores">更多&gt;&gt;</a>
+         	</h5>
+	        <div class="resource-lists" style="height:380px;maroverflow:auto;overflow-x:hidden;">
+	<!--          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
+	        </div>
+	        <div class="resource-lists" style="display:none">
+	       		<iframe id="postFrame" name="postFrame" style="border:0px;width:570px;height:540px; hidden;" scrolling="no"
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
+				</iframe>
+	        <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
+	        </div>
+	        <div class="resource-lists" style="display:none">
+	         	<iframe id="postFrame" name="postFrame" style="border:0px;width:570px;height:540px; hidden;" scrolling="no"
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
+				</iframe>
+           <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>-->
+	        </div>
       </div>
-    <!--<a href="#" class="return" style="margin-left:100px;">提交</a> <a href="#" class="return">返回</a> </div>-->
-</div>
+    <a href="#" class="return" style="margin-left:100px;">提交</a> <a href="#" class="return">返回</a> </div>
 </div>
 <!-- 弹出层 资源 END -->
 
@@ -667,9 +500,6 @@
 </div>
 
 <!--弹出层  转发END-->
-
-
-	
 	<!--弹出层 转移步骤-->
 	<div class="adds3" id="step_trans_div" >
   		<div class="add-tops3">
@@ -682,7 +512,6 @@
 	  		<div class="add-downs3" id="step_radios">
 		       	<p><input type="radio" name="stepId" /><span>步骤二：xxxxxxxxxxxx</span></p>
 			</div>
-			
 			<input type="submit" value="提交"/>
 		</form>
 	</div>
@@ -737,8 +566,6 @@
 </div>
 </div>
 <!--弹出层增加工作进展 END-->
-
-
                   <!--弹出层编辑-->
     <div class="adds7">
   <div class="add-tops7">
@@ -780,8 +607,5 @@
 </div>
 
 <!--弹出层编辑END-->
-
-
-
 </body>
 </html>

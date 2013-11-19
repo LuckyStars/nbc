@@ -214,7 +214,7 @@
 					<i id="zongjie">6</i>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=${prc}/masterDocumentFlow/listAllDocumentTask.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=/masterDocumentFlow/listAllDocumentTask.action">
 						<img src="${prc}/function/images/pic2.png" width="179" height="140" />
 						<span style="color: #447c0e;">公文处理</span>
 					</a>

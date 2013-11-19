@@ -53,7 +53,14 @@
 								<dd>${module.name}</dd> </a>
 						</dl>
 				</c:if>
-			</c:forEach>		
+			</c:forEach>	
+			<dl class="warp">
+				<a href="${prc}/scMaster2/teacherList_invatition.action">
+					<dt>
+						<img src="${prc}/function/img/tu4.jpg" />
+					</dt>
+					<dd>邀请查看</dd> </a>
+			</dl>	
 <!--			<dl class="warp">-->
 <!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">-->
 <!--					<dt>-->
