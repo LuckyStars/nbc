@@ -25,5 +25,8 @@
         <property name="progressId" type="java.lang.String">
             <column name="progressId" length="32" />
         </property>
+        <property name="type" type="int">
+            <column name="type" length="2" />
+        </property>
     </class>
 </hibernate-mapping>

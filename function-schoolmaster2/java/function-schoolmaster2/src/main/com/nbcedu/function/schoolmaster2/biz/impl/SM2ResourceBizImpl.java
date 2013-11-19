@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2ResourceBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.dao.SM2ResourceDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
 
@@ -31,5 +32,17 @@ public class SM2ResourceBizImpl extends BaseBizImpl<TSm2Resource> implements SM2
 	@Override
 	public void removeByProgId(String progId) {
 		this.sm2ResourceDao.createQuery("delete from TSm2Resource where progressId=?", progId).executeUpdate();
+	}
+
+	@Override
+	public PagerModel findResource(String progId,int type) {
+		return this.sm2ResourceDao.searchPaginated("from TSm2Resource where progressId=? and type="+type, progId);
+	}
+
+	@Override
+	public void addAll(List<TSm2Resource> l) {
+		for(TSm2Resource r : l){
+			this.sm2ResourceDao.save(r);
+		}
 	}
 }

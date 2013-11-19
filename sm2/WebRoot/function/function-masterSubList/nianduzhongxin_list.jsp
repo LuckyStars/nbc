@@ -29,6 +29,7 @@ table td {
 	$(function() {
 		$("table tr:odd").css("border", "1px solid #EDEFFF");
 		$("table tr:even").css("border", "1px solid #EDEFFF");
+		$("td a img").addClass("qi");
 	});
 </script>
 <script type="text/javascript">
@@ -138,14 +139,14 @@ table td {
 									class="pross-img" style="width:${sub.progress}%;" />
 							</div>
 							<p class="pross-p">${sub.progress}%</p>
-								<c:if test="${sub.flag eq '1'}">
-								<a href="#" onclick="javascript:stick('${sub.id }',0,'qi1.png');" id="${sub.id }">
-									<img src="${prc}/function/function-masterSubList/img/qi.png" />
+							<c:if test="${sub.flag eq '1'}">
+								<a href="#" onclick="javascript:stick('${sub.id }',0,'qi');" id="${sub.id }">
+									<img src="${prc}/function/img/qi1.png" />
 								</a>
 							</c:if> 
 							<c:if test="${sub.flag ne '1'}">
-								<a href="#" onclick="javascript:stick('${sub.id }',1,'qi.png');" id="${sub.id }">
-									<img src="${prc}/function/function-masterSubList/img/qi1.png" />
+								<a href="#" onclick="javascript:stick('${sub.id }',1,'qi');" id="${sub.id }">
+									<img src="${prc}/function/img/qi0.png" />
 								</a>
 							</c:if>
 <!--								<img src="${prc}/fu nction/function-masterSubList/img/qi.png" class="qi" />-->

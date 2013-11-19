@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
+import com.nbcedu.function.schoolmaster2.constants.Constants;
 import com.nbcedu.function.schoolmaster2.core.pager.Pager;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.opensymphony.xwork2.ActionContext;
@@ -36,7 +37,7 @@ public class BaseAction extends ActionSupport {
 	
 	
 	protected String getUserId() {
-		return (String)ActionContext.getContext().getSession().get("sm2_init");
+		return (String)ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY);
 	}
 	
 	protected Map<String,Object> getSession(){

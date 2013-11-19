@@ -92,6 +92,11 @@
 		<action name="*_maIndex" method="{1}" class="sm2MasterIndex">
 		
 		</action>
+		<action name="*_resource" method="{1}" class="sm2Resource">
+			<result name="list">/function/detail-step/resource_list.jsp</result>
+			<result name="resource_pic">/function/detail-step/resource_pic.jsp</result>
+		</action>
+		<action name="resourceUpload" method="upload" class="sm2ResourceUpload" />
 		
 		<action name="*_week" method="{1}" class="sm2WeekAction">
 			<result name="weekList" >/function/function-week/week.jsp</result>		

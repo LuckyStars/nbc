@@ -71,24 +71,6 @@
 		K.create('textarea[name="progress.content"]', contentOptions);
  	 });
 	 $(function () {
-         $(".resources li").click(function () {
-             $(".resources .cur").removeClass("cur");
-             var index = $(this).index();
-             if (index == 0) {
-                 $(".resources").attr("class", "resources doc");
-             } else if (index == 1) {
-                 $(".resources").attr("class", "resources pic");
-             } else if (index == 2) {
-                 $(".resources").attr("class", "resources video");
-             }
-             $(".resource-lists").hide().eq(index).show();
-             $(this).addClass("cur");
-         });
-         $(".ico2").click(function () {
-             $("body").css("overflow", "hidden");
-             $(".bg").show();
-             $(".adds").show();
-         });
          $(".shou").click(function () {//赞
         	 window.frames["postFrame"].showZan();
          });

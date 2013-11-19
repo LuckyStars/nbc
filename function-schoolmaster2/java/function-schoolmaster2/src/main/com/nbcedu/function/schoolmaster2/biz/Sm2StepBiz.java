@@ -8,7 +8,11 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
 	public boolean findByName(String name);
-	
+	/**
+	 * g根据主题id查询所有step
+	 * @param subjectId
+	 * @return
+	 */
 	public List<StepVo> findBySubId(String subjectId);
 	
 	/**

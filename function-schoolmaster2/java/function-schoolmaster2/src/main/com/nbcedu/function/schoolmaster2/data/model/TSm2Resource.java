@@ -14,6 +14,7 @@ public class TSm2Resource implements java.io.Serializable {
 	private String fileName;
 	private String filePath;
 	private String progressId;
+	private int type;//资源类型，0：文档；1：图片；2：视频
 
 	// Constructors
 
@@ -89,6 +90,14 @@ public class TSm2Resource implements java.io.Serializable {
 
 	public void setProgressId(String progressId) {
 		this.progressId = progressId;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 }

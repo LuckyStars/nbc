@@ -34,6 +34,7 @@ public class IndexAction extends BaseAction{
 	private String start;
 	private String end;
 	private String moduleId;
+	private String matcher;
 	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2ModuleBiz sm2ModuleBiz;
@@ -149,6 +150,14 @@ public class IndexAction extends BaseAction{
 	}
 	public void setSearch(MasterSubSearchVO search) {
 		this.search = search;
+	}
+
+	public String getMatcher() {
+		return matcher;
+	}
+
+	public void setMatcher(String matcher) {
+		this.matcher = matcher;
 	}
 	
 }

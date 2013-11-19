@@ -20,6 +20,8 @@ import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
  */
 public class UCService {
 	private static final BaseClient client = new BaseClient();
+//	private static final Map department;
+	
 
 	private static final Logger logger = Logger.getLogger(UCService.class);
 
