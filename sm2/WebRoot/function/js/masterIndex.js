@@ -27,7 +27,6 @@ function refreshNumber(url,numId){
 function refreshDongtai(){
 	var modules = ['qingshi','zongjie','jinji'];
 	$.getJSON(ctxPath + '/scMaster2/findDongtai_maIndex.action',function(data){
-		alert(ctxPath + '/scMaster2/findDongtai_maIndex.action');
 		for ( var i = 0; i < modules.length; i++) {
 			if(data[modules[i]]>0){
 				$("#" + modules[i]).show();

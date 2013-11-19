@@ -40,6 +40,9 @@
         	width:16px;
         	height:14px;
         }
+        .cpoint{
+        	cursor: pointer;
+        }
     </style>
     
 	<script type="text/javascript">
@@ -274,7 +277,7 @@
 					<pri:showWhenManager>
 					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
 					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
-<!--					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />-->
+					<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
 					</pri:showWhenManager>
 				</h2>
 
@@ -287,9 +290,9 @@
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
-					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
-	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
-					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs"/>
+					<img  src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" />
+	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4 cpoint"/>
+					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs cpoint"/>
 				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">

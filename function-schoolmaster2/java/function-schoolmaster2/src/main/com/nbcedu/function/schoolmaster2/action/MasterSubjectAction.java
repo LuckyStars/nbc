@@ -13,7 +13,6 @@ import org.springframework.util.CollectionUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.nbcedu.function.schoolmaster2.biz.SM2CommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
@@ -54,7 +53,6 @@ public class MasterSubjectAction extends BaseAction{
 	private Sm2ReadsBiz readsBiz;
 	private SM2DisscusBiz disscusBiz;
 	private SM2CommentBiz comBiz;
-	
 	
 	
 	public String list(){
