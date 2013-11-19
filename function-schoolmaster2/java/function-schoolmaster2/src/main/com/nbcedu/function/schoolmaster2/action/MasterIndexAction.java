@@ -63,7 +63,6 @@ public class MasterIndexAction extends BaseAction{
 	}
 	
 	public void findDongtai(){
-		
 	}
 	
 	

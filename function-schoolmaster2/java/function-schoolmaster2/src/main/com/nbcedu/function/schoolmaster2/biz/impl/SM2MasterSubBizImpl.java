@@ -5,7 +5,9 @@ import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Criteria;
@@ -18,6 +20,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
@@ -422,6 +425,26 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		}
 		return null;
 	}
+	
+	@Override
+	@SuppressWarnings({ "serial", "unchecked" })
+	public Map<String, Integer> findNewCountByModule(String uid) {
+		
+		final List<Object[]> resultSet = 
+			this.sm2SubjectDao.getNamedQuery("subject_count_by_module").
+			setString("uid", uid).list();
+		
+		return new HashMap<String, Integer>(){{
+			if(resultSet!=null&&resultSet.size()>0){
+				for (Object[] result : resultSet) {
+					int count = result[1]==null?
+							0:Integer.parseInt(result[1].toString());
+					put(result[0].toString(),count);
+				}
+			}
+		}};
+	}
+	
 	///////////////////////
 	////////privates///////
 	////////////////////

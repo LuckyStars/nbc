@@ -135,4 +135,25 @@
 		WHERE sub.id = steps.subjectId
     ]]>
     </sql-query>
+    
+    <sql-query name="subject_count_by_module">
+   	<![CDATA[
+	SELECT t_sm2_module.id,sub.counts
+	FROM t_sm2_module LEFT JOIN
+		(
+			SELECT COUNT(id) as counts ,moduleId
+			FROM t_sm2_subject,
+				(
+					SELECT sub_id
+					FROM t_sm2_subject_master
+					WHERE user_uid = :uid
+				) master 
+			WHERE
+				t_sm2_subject.id = master.sub_id AND 
+			 	(t_sm2_subject.status = 'new' or t_sm2_subject.status='updated')
+			GROUP BY moduleId
+		) sub
+		ON t_sm2_module.id = sub.moduleId   	
+   	]]>
+    </sql-query>
 </hibernate-mapping>

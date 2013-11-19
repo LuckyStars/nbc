@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.tests;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -78,5 +79,14 @@ public class BizTests {
 		String progId = "1";
 		SubjectZanVo vo = biz.findByProgId(progId);
 		System.out.println(vo.getId());
+	}
+	
+	@Test
+	public void findCountByModule(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		Map<String, Integer> result = biz.findNewCountByModule("1");
+		for (Map.Entry<String, Integer> entry : result.entrySet()) {
+			System.out.println(entry.getKey() +":"+ entry.getValue());
+		}
 	}
 }

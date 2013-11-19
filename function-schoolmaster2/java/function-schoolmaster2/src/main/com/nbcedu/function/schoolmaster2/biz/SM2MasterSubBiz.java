@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.biz;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
@@ -56,4 +57,6 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	public List<SubjectWeekVo> findWeekSingle(SubWeekSearch search);
 	
 	public SubjectZanVo findByProgId(String progId);
+	
+	public Map<String,Integer> findNewCountByModule(String uid);
 }
