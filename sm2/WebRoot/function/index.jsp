@@ -11,6 +11,7 @@
 	src="${prc}/function/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript"
 	src="${prc}/function/js/masterIndex.js"></script>
+	<script type="text/javascript">var ctxPath = '${prc}';</script>
 	<style type="text/css">
 	.flagupdated{
 		position: absolute;
@@ -40,7 +41,7 @@
 		right: 10px;
 	}
 	.box_logo_right{
-	height:30px;
+	height:20px;
 	width:auto;
 	color:#fff;
 	margin:43px 10px 0 0 ;
@@ -119,10 +120,9 @@
 				</div>
 
 				<div class="office mail" style="width: 126px; height: 148px;">
-					<a class="pointer" href="#">
+					<a class="pointer" href="${prc}/scMaster2/search_week.action">
 						<img src="${prc}/function/images/mail.jpg" />
-						<span>电子邮件</span>
-						<i>6</i>
+						<span>本周工作汇总</span>
 					</a>
 				</div>
 

@@ -2,17 +2,20 @@ package com.nbcedu.function.schoolmaster2.tests;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.google.gson.JsonObject;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
+import com.nbcedu.function.schoolmaster2.vo.SubjectZanVo;
 
 public class BizTests {
 	
@@ -71,4 +74,26 @@ public class BizTests {
 		}
 	}
 	
+	@Test
+	public void findSubVoByProg(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		String progId = "1";
+		SubjectZanVo vo = biz.findByProgId(progId);
+		System.out.println(vo.getId());
+	}
+	
+	@Test
+	public void findCountByModule(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		Map<String, Integer> result = biz.findNewCountByModule("1");
+		for (Map.Entry<String, Integer> entry : result.entrySet()) {
+			System.out.println(entry.getKey() +":"+ entry.getValue());
+		}
+		Map<String, Integer> results = biz.findNewCountByModule("1");
+		JsonObject json = new JsonObject();
+		for (Map.Entry<String, Integer> entry : results.entrySet()) {
+			json.addProperty(entry.getKey(),entry.getValue());
+		}
+		System.out.println(json.toString());
+	}
 }

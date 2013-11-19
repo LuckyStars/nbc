@@ -44,6 +44,10 @@
 			<result name="daibanshiyi" >/function/function-masterSubList/daibanshiyi.jsp</result>
 			<result name="detail" >/function/function-linshi/details.jsp</result>
 			<result name="stepDetail" >/function/detail-step/step.jsp</result>
+			<result name="refreshDetail" type="redirectAction">
+				<param name="actionName">detail_master</param>
+				<param name="id">${id}</param>
+			</result>
 		</action>
 		
 		<action name="*_invatition" method="{1}" class="invatitionAction">
@@ -92,7 +96,10 @@
 			<result name="list">/function/detail-step/resource_list.jsp</result>
 			<result name="resource_pic">/function/detail-step/resource_pic.jsp</result>
 		</action>
-		<action name="resourceUpload" method="upload" class="sm2ResourceUpload">
+		<action name="resourceUpload" method="upload" class="sm2ResourceUpload" />
+		
+		<action name="*_week" method="{1}" class="sm2WeekAction">
+			<result name="weekList" >/function/function-week/week.jsp</result>		
 		</action>
 	</package>
 </struts>

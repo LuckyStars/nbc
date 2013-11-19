@@ -1,5 +1,7 @@
 package com.nbcedu.function.schoolmaster2.tags;
 
+import static org.apache.taglibs.standard.tag.common.core.Util.escapeXml;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +26,13 @@ public class EmotionDisplayTag extends TagSupport {
 		put("[06]","06.png");	
 		put("[07]","07.png");	
 		put("[08]","08.png");	
+		put("[09]","09.png");	
+		put("[0A]","0A.png");	
+		put("[0B]","0B.png");	
+		put("[0C]","0C.png");	
+		put("[0D]","0D.png");	
+		put("[0E]","0E.png");	
+		put("[0F]","0F.png");	
 	}};	
 	
 	
@@ -42,6 +51,7 @@ public class EmotionDisplayTag extends TagSupport {
 		if(this.content==null||this.content.trim().length() <=0){
 			return "";
 		}
+		this.content = escapeXml(this.content);
 		StringBuilder result = new StringBuilder(content.length());
 		int next = 0;
 		char[] origin = content.trim().toCharArray();
@@ -55,7 +65,7 @@ public class EmotionDisplayTag extends TagSupport {
 				if(emos.containsKey(mat)){
 					result.append("<img src='");
 					result.append(ctx);
-					result.append("/fcuntion/emotion/images/");
+					result.append("/function/emotion/images/");
 					result.append(emos.get(mat));
 					result.append("' />");
 					next += 4;
@@ -67,7 +77,7 @@ public class EmotionDisplayTag extends TagSupport {
 		}
 		return result.toString();
 	}
-	
+
 	///////////////////////
 	////getters&setters///
 	///////////////////////

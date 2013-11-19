@@ -183,6 +183,18 @@ public class MasterSubjectAction extends BaseAction{
 		this.getRequestMap().put("subList", list);
 		return "daibanshiyi";
 	}
+	
+	public String changeProgress(){
+		Integer percent = this.subject.getProgress();
+		if(percent!=null ){
+			this.subject = this.subBiz.findById(this.id);
+			if(percent>subject.getProgress()){
+				this.subject.setProgress(percent);
+				this.subBiz.update(subject);
+			}
+		}
+		return "refreshDetail";
+	}
 	///////////////////////
 	////getters&setters////
 	///////////////////////

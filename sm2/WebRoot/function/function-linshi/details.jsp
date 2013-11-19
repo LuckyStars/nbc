@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<title>临时事项详细</title>
-	
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
 	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
-	<script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
@@ -70,16 +69,10 @@
  	 });
 	 $(function () {
          $(".shou").click(function () {//赞
-             //$("body").css("overflow", "hidden");
-             //$(".bg").show();
-             //$(".adds1").show();
         	 window.frames["postFrame"].showZan();
          });
          
          $(".ico1").click(function () {
-             //$("body").css("overflow", "hidden");
-             //$(".bg").show();
-             //$(".adds2").show();
              window.frames["postFrame"].showRead();
          });
          
@@ -241,10 +234,14 @@
 					<div style="float: left; margin-top: 15px; margin-left: 20px;">
 						<p style="">
 							<label for="amount"></label> 
-							<input disabled="disabled" type="text" id="amount" style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" />
+							<input type="text" disabled="disabled" 
+								type="text" id="amount" 
+								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" 
+							/>
 						</p>
 						<pri:hideWhenMaster>
-						<div id="slider-range-max"></div>
+						<div id="slider_pro"></div>
+						<span id="slider_num" ></span>
 						</pri:hideWhenMaster>
 						<pri:showWhenMaster>
 						<div>
@@ -254,16 +251,13 @@
 						</div>
 						</pri:showWhenMaster>
 					</div>
+					
 					<%-- --%>
 					<pri:showWhenManager>
 					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
 					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
 <!--					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />-->
 					</pri:showWhenManager>
-					<script type="text/javascript">
-						
-					
-					</script>
 				</h2>
 
 				<h3>
@@ -426,20 +420,41 @@
 	</div>
 	</form>
 <script>
-	$(function () {
-	    $("#slider-range-max").slider({
-	        range: "max",
-	        min: 5,
-	        max: 100,
-	        disabled: true ,
-	        value: 90,
-	        step: 5,
-	        slide: function (event, ui) {
-	            $("#amount").val(ui.value+"%");
-	        }
-	    });
-	    $("#amount").val($("#slider-range-max").slider("value")+"%");
-	});
+	<pri:hideWhenMaster>
+ 	$(function(){
+		
+		$("#slider_pro").slider({
+			value:${subject.progress},
+			
+			onSlideEnd : function(newVal){
+				var origin = ${subject.progress};
+				if(newVal<origin){
+					var sl = $("#slider_pro");
+					alert("不能小于原先进度");
+					sl.slider('setValue',${subject.progress});
+				}
+				
+				
+				
+				if(newVal>origin){
+					if(confirm('确定修改进度吗?')){
+						var newPercent = $("#slider_pro").slider('getValue');
+						location.href="${prc}/scMaster2/changeProgress_master.action?id=${subject.id}&subject.progress=" 
+							+ newPercent;
+					}else{
+						sl.slider('setValue',${subject.progress});
+					}
+				}
+			},
+			onChange:function(newVal,oldVal){
+				$("#amount").val(newVal + "%");
+			},
+			step:5
+		});
+		$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
+		
+	}); 
+ 	</pri:hideWhenMaster>
 	
 	function changeTab(stepId){
 		$("li").removeClass("cur");

@@ -14,10 +14,16 @@ import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.ContextLoader;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.nbcedu.function.functionsupport.core.FunctionSupportUtil;
+import com.nbcedu.function.functionsupport.core.SupportManager;
+import com.nbcedu.function.functionsupport.mapping.PortalMessage;
 import com.nbcedu.function.functionsupport.util.PropertiesUtil;
 import com.nbcedu.function.schoolmaster2.constants.Constants;
+import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -71,7 +77,14 @@ public class Utils {
 		String masterJson = loadFileToString("zhuguan.json");
 		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
 	}
-	
+	public static List<String> getAllManagerUids(){
+		return Lists.transform(Lists.newArrayList(getAllManager()), new Function<PersonVo, String>() {
+			@Override
+			public String apply(PersonVo input) {
+				return input.getUid();
+			}
+		});
+	}
 	public static boolean isManager(){
 		for (PersonVo person : Utils.getAllManager()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
@@ -102,8 +115,9 @@ public class Utils {
 	}
 	
 	public static class Dates{
-		
+		/**yyyy-MM-dd**/
 		public static final SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd");
+		/**yyyy-MM-dd HH:mm:ss**/
 		public static final SimpleDateFormat fullSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		public static Date safeParseSimpleDate(String origin){
 			try {
@@ -124,4 +138,19 @@ public class Utils {
 			.getBean(name);
 		}
 	}
+	
+	
+	/**
+	 * 门户和协同消息
+	 * @author xuechong
+	 */
+	public static class Message{
+		
+		
+	}
+	
+	public static String getCurAppLocation(){
+		return PropertiesUtil.findPropertieValue("config.properties", "curapplocation");
+	}
+	
 }

@@ -79,6 +79,7 @@
 		]]>
     </sql-query>
     <sql-query name="find_progress_by_step" >
+    <![CDATA[
     	SELECT 
     		t_sm2_progress.id,
     		t_sm2_progress.name,
@@ -88,7 +89,8 @@
     		t_sm2_progress.lastUpdateTime,
     		t_sm2_progress.stepId,
     		rcount.rcou,
-    		zcount.zcou
+    		zcount.zcou,
+    		zaned.zd
 		FROM 
 			t_sm2_progress left join 
 			(
@@ -104,7 +106,54 @@
 				GROUP BY progress_id
 			) zcount
 			on t_sm2_progress.id = zcount.progress_id 
+			left join 
+			(
+				SELECT count(progress_id) as zd,progress_id 
+				FROM t_sm2_zan 
+				WHERE t_sm2_zan.user_uid=:uid
+				GROUP BY progress_id
+			) zaned
+			on t_sm2_progress.id = zaned.progress_id 
 			WHERE t_sm2_progress.stepId=:stepId ORDER BY t_sm2_progress.createTime DESC
-			
+	]]>	
+    </sql-query>
+    
+    <sql-query name="find_subtitle_uid_by_progid">
+    <![CDATA[
+	    SELECT sub.id as id , sub.createrId as uid,sub.title as title
+		FROM t_sm2_subject sub,
+			(
+				SELECT subjectId
+				FROM t_sm2_step step,
+					(
+						SELECT stepId
+						FROM t_sm2_progress
+						WHERE id=:progId
+					) progs
+				WHERE step.id = progs.stepId
+			) steps
+		WHERE sub.id = steps.subjectId
+    ]]>
+    </sql-query>
+    
+    <sql-query name="subject_count_by_module">
+   	<![CDATA[
+	SELECT t_sm2_module.id,sub.counts
+	FROM t_sm2_module LEFT JOIN
+		(
+			SELECT COUNT(id) as counts ,moduleId
+			FROM t_sm2_subject,
+				(
+					SELECT sub_id
+					FROM t_sm2_subject_master
+					WHERE user_uid = :uid
+				) master 
+			WHERE
+				t_sm2_subject.id = master.sub_id AND 
+			 	(t_sm2_subject.status = 'new' or t_sm2_subject.status='updated')
+			GROUP BY moduleId
+		) sub
+		ON t_sm2_module.id = sub.moduleId   	
+   	]]>
     </sql-query>
 </hibernate-mapping>

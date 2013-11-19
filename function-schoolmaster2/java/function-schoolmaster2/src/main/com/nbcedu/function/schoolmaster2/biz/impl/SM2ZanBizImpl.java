@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
@@ -14,6 +15,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.dao.SM2ZanDao;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.ZanVo;
 
 public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
@@ -74,7 +76,30 @@ public class SM2ZanBizImpl extends BaseBizImpl<Sm2Zan> implements SM2ZanBiz {
 	@Override
 	public void removeByProg(String progId) {
 		this.zanDao.createQuery("delete from Sm2Zan where progressId=?", progId).executeUpdate();
-		
 	}
-
+	
+	@Override
+	public void removeByUserProg(String progId) {
+		this.zanDao.createQuery("DELETE FROM Sm2Zan z WHERE z.progressId=? AND z.userUid=?",
+				new Object[]{progId,Utils.curUserUid()}).executeUpdate();
+	}
+	
+	@Override
+	public String findSubIdByZan(String zanId) {
+		StringBuilder sql =new StringBuilder("");
+		sql.append("SELECT steps.subjectId ");
+		sql.append("FROM t_sm2_step steps,( ");
+			sql.append("SELECT stepId ");
+			sql.append("FROM t_sm2_progress,( ");
+				sql.append("SELECT progress_id ");
+				sql.append("FROM t_sm2_zan ");
+				sql.append("WHERE id=? ");
+				sql.append(") zan ");
+			sql.append("WHERE t_sm2_progress.id = zan.progress_id ");
+		sql.append(") stepId ");
+		sql.append("WHERE steps.id = stepId.stepId ");
+		Query q = this.zanDao.createSqlQuery(sql.toString(), zanId);
+		Object result = q.uniqueResult();
+		return result==null?"":result.toString().trim();
+	}
 }

@@ -69,12 +69,15 @@
 	<bean id="sm2CommentAction" class="com.nbcedu.function.schoolmaster2.action.CommentAction" scope="prototype">
 		<property name="comBiz" ref="sm2CommentBiz" />
 	</bean>
-	<bean id="sm2MasterIndex" class="com.nbcedu.function.schoolmaster2.action.MasterIndexAction">
+	<bean id="sm2MasterIndex" class="com.nbcedu.function.schoolmaster2.action.MasterIndexAction" scope="prototype">
 		<property name="masterSubBiz" ref="masterSubBiz" />
 	</bean>
 	<bean id="sm2Resource" class="com.nbcedu.function.schoolmaster2.action.ResourceAction" scope="prototype">
 		<property name="resourceBiz" ref="sm2ResourceBiz" />
 	</bean>
-		<bean id="sm2ResourceUpload" class="com.nbcedu.function.schoolmaster2.action.ResourceUploadAction" scope="prototype">
+		<bean id="sm2ResourceUpload" class="com.nbcedu.function.schoolmaster2.action.ResourceUploadAction" scope="prototype" />
+	
+	<bean id="sm2WeekAction" class="com.nbcedu.function.schoolmaster2.action.WeekAction" scope="prototype">
+		<property name="subBiz" ref="masterSubBiz" ></property>
 	</bean>
 </beans>

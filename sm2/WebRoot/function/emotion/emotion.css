@@ -1,0 +1,39 @@
+@charset "utf-8";
+.emo_comment {
+    width: 680px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.emo_form {
+    width: 100%;
+    position: relative;
+}
+
+.emo_content {
+    width: 99%;
+    height: 60px;
+    border: 1px solid #ccc;
+}
+
+.emo_form p {
+    height: 26px;
+    line-height: 26px;
+    position: relative;
+    margin-bottom:10px;
+}
+
+span.emotion {
+    width: 42px;
+    height: 42px;
+    background: url(images/ico.png) no-repeat;
+    padding-left: 20px;
+    cursor: pointer;
+    display:block;
+}
+.face_tool {
+width:180px; height:106px; border:1px solid #CEE5F7; position:absolute;top:-100px; left:30px; display:none; 
+}
+.face_tool img{
+    display:block;float:left;padding:4px; border:1px solid #CEE5F7;
+}

@@ -28,7 +28,7 @@ public class UserAction extends BaseAction{
 	}
 	public void findAllMaster() {
 		Collection<PersonVo> ps = Utils.getAllSchoolMaster();
-		 StringBuffer s = new StringBuffer("[");
+		StringBuilder s = new StringBuilder("[");
 		 Object[] p = ps.toArray();
 		 for(int i=0;i<p.length;i++){
 			 PersonVo pp =(PersonVo) p[i];
@@ -46,6 +46,25 @@ public class UserAction extends BaseAction{
 		 Struts2Utils.renderJson(s.toString(), "encoding:UTF-8");
 	}
 	
+	public void findAllManager(){
+		Collection<PersonVo> ps = Utils.getAllManager();
+		StringBuilder s = new StringBuilder("[");
+		Object[] p = ps.toArray();
+		for (int i = 0; i < p.length; i++) {
+			PersonVo pp = (PersonVo) p[i];
+			s.append("{\"id\":\"");
+			s.append(pp.getUid());
+			s.append("\",\"text\":\"");
+			s.append(pp.getName());
+			if (i == p.length - 1) {
+				s.append("\"}");
+			} else {
+				s.append("\"},");
+			}
+		}
+		s.append("]");
+		Struts2Utils.renderJson(s.toString(), "encoding:UTF-8");
+	}
 	/////////////////////////
 	/////getters&setters/////
 	/////////////////////////

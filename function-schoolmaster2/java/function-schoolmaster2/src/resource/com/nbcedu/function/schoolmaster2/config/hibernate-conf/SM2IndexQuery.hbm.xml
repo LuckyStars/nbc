@@ -25,4 +25,18 @@
     	]]>
     </sql-query>
 
+
+	<sql-query name="index_count_dongtai">
+		SELECT COUNT(sub.id),sub.moduleId
+		FROM t_sm2_subject sub,
+			(
+				SELECT sub_id as subId
+				FROM t_sm2_subject_master
+				WHERE user_uid = :uid
+			)subIds
+		WHERE 
+			sub.id = subIds.subId 
+			AND (sub.status='new' OR sub.status='updated')
+		GROUP BY sub.moduleId
+	</sql-query>
 </hibernate-mapping>

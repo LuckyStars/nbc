@@ -12991,7 +12991,7 @@ $.widget( "ui.slider", $.ui.mouse, {
 
 			//store the last changed value index for reference when handles overlap
 			this._lastChangedValue = index;
-
+			alert("aaaa");
 			this._trigger( "change", event, uiHash );
 		}
 	},
