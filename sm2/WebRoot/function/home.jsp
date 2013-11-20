@@ -68,6 +68,12 @@
             $(".add2").hide();
         });
     });
+    
+</script>
+<script>
+		function resizeFrame(height){
+			$("#content_frame").css("height",height);
+		}
 </script>
 </head>
 <body>
@@ -159,7 +165,7 @@
 			</li>
 		</ul>
 	</div>
-	<iframe class="right" id="fm_right" name="fm_right" scrolling="yes" height="100%" width="100%" frameborder="0" src="${prc}/${rightURL}"></iframe>
+	<iframe id="content_frame" class="right" id="fm_right" name="fm_right" scrolling="yes" height="100%" width="100%" frameborder="0" src="${prc}/${rightURL}"></iframe>
 </div>
 </body>
 </html>

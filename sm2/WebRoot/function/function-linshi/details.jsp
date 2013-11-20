@@ -18,7 +18,6 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
-	<script type="text/javascript" src="${prc}/function/agent.js"></script>
 	
 	<style>
         .ui-widget-content {

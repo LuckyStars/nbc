@@ -12,7 +12,6 @@
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/emotion/emotion.js"></script>
-	<script type="text/javascript" src="${prc}/function/agent.js"></script>
 	<link rel="stylesheet" href="${prc }/function/emotion/emotion.css" type="text/css"/>
     <script>
     	var ctx = '${prc}';
