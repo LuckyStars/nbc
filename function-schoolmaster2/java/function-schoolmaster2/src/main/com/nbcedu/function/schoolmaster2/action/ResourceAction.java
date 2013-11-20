@@ -21,10 +21,15 @@ public class ResourceAction extends BaseAction{
 		pm = this.resourceBiz.findResource(progId,type);
 		return LIST;
 	}
+//	public String findPic(){
+//		pm = this.resourceBiz.findResource(progId,type);
+//		return "resource_pic";
+//	}
 	public String findPic(){
-		pm = this.resourceBiz.findResource(progId,type);
+		List<TSm2Resource> list = this.resourceBiz.findAllResource(progId,type);
+		this.getRequest().setAttribute("list", list);
 		return "resource_pic";
-	}
+	} 
 	public void add(){
 		TSm2Resource r;
 		String paths = this.getRequest().getParameter("resourses");
@@ -36,7 +41,7 @@ public class ResourceAction extends BaseAction{
 			r.setFilePath(p);
 			r.setFileName(p.substring(p.lastIndexOf("/")+1));
 			r.setProgressId(progId);
-			r.setType(0);
+			r.setType(type);
 			list.add(r);
 		}
 		this.resourceBiz.addAll(list);

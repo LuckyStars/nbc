@@ -20,4 +20,6 @@ public interface SM2ResourceBiz extends BaseBiz<TSm2Resource>{
 	public PagerModel  findResource(String progId,int type);
 	
 	public void addAll(List<TSm2Resource> l);
+	
+	public List<TSm2Resource> findAllResource(String progId,int type);
 }
