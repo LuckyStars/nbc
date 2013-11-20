@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="${prc}/function/agent.js"></script>
 	
 	<style>
         .ui-widget-content {
@@ -224,6 +225,9 @@
        }
 	</script>
 	<script>
+		function resizeFrame(height){
+			$("#postFrame").css("height",height);
+		}
 	</script>
 </head>
 <body>
@@ -295,7 +299,7 @@
 				</div>
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
-					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;height:900px; hidden;" scrolling="no"
+					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;" scrolling="no"
 					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
 					
 					</iframe>

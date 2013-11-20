@@ -12,9 +12,15 @@
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/emotion/emotion.js"></script>
+	<script type="text/javascript" src="${prc}/function/agent.js"></script>
 	<link rel="stylesheet" href="${prc }/function/emotion/emotion.css" type="text/css"/>
     <script>
     	var ctx = '${prc}';
+    	function resizeParent(){
+    		var height = $(document).height();
+    		console.log(height);
+    		parent.resizeFrame(height);
+    	}
         $(function () {
         	  $("table tr:odd").css("background", "#f0f8fc");
         	    $("table tr:even").css("background", "#d5e0ee");
@@ -143,10 +149,10 @@
     	function switchArticle(id){
     		$("#art_" + id).is(":hidden")?
     		function(){
-    			$("#art_" + id).slideDown();
+    			$("#art_" + id).slideDown('fast',resizeParent);
     		}():
     		function(){
-    			$("#art_" + id).slideUp();
+    			$("#art_" + id).slideUp('fast',resizeParent);
     		}();
     	}
     	
@@ -257,6 +263,12 @@
     		$("#reads_div").show();
     	}
     	
+    	function showDiscusContent (progId){
+    		var divId = "#disc_content_"+progId;
+    		$(divId).is(":hidden")?
+    				$(divId).slideDown('fast',resizeParent)
+    				:$(divId).slideUp('fast',resizeParent);
+    	}
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -290,6 +302,8 @@
    			</c:if>
    			id="cancelZan_${prog.id}"
    			onclick="cancelZan('${prog.id}');" />
+   			
+   			<a href="javascript:showDiscusContent('${prog.id}');">查看评论</a>
    			
    		</a>
         <div class="conls"> 
@@ -359,16 +373,8 @@
 	</div>
 	
 	<!-- 评论  -->
-    <div class="box">
-    	<div class="box-top">
-       		<ul>
-            	<li class="two"><a href="javascript:;">评论</a>
-            		<img src="${prc }/function/detail-step/images/up1.jpg"
-            	 	class="img" style="margin-top:10px; display:block; float:left; cursor:pointer;"/>
-            	</li>
-          	</ul>
-        </div>
-        <div class="conshen box-down">
+    <div class="box" >
+        <div class="conshen box-down" id="disc_content_${prog.id }" style="display: none;" >
         	
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
@@ -653,7 +659,13 @@
       
 </div>
 </div>
+<script type="text/javascript">
 
+	$(function(){
+		resizeParent();
+	});
+</script>
 <!--弹出层编辑END-->
+
 </body>
 </html>

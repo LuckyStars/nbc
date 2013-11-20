@@ -1,6 +1,6 @@
 ﻿function sethash() {
 
-   var proxySrc = 'http://127.0.0.1:8080/sns/function/agent.html';   //设置门户的服务器地址
+   var proxySrc = 'http://127.0.0.1:8080/sm2/function/agent.html';   //设置门户的服务器地址
    
    var hashH = document.documentElement.scrollHeight;
    var frame =document.createElement("iframe");
