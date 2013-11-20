@@ -11,6 +11,7 @@
 <script type="text/javascript" src="/sm2/function/swfupload/js/handlers.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/sm2/function/js/jquery-1.8.3.min.js"></script>
+<%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
 <!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
 $(function () {
@@ -100,11 +101,10 @@ function queueComplete(numFilesUploaded) {
     		data:{resourses:filePaths.toString(),progId:$("#progId").val()},
     		dataType:'json',
     		success:function(data){
-    			//window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+    			findAll();
     		},
     		error:function(XMLHttpRequest, textStatus, errorThrown){
     			alert("出错了!");
-    			//window.location.href=prc+"/scMaster2/teacherList_invatition.action";
     		}
     	});
 	}
@@ -112,13 +112,35 @@ function queueComplete(numFilesUploaded) {
 $(".return").click(function(){
 	upload.startUpload();
 });
-	
+	function deleteR(id){
+		$.ajax({
+    		url:prc+"/scMaster2/delete_resource.action",
+    		type:'post',
+    		data:{id:this.id},
+    		dataType:'json',
+    		success:function(data){
+    			findAll();
+    		},
+    		error:function(XMLHttpRequest, textStatus, errorThrown){
+    			alert("删除出错!");
+    		}
+    	});
+		}
+	function findAll(){
+		$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
+    		if(data != ''){
+    			$(".resource-lists").empty();
+    			$(".resource-lists").html(data);
+    		}
+  	  	});
+	}
 });
 </script>
 </head>
 <body>
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
+	 	<input type="hidden" value="${type }" id="type"></input>
         <table width="570px" border="0" height="100%">
             <c:forEach items="${pm.datas}" var="resource" varStatus="i">
 	           <tr>
@@ -127,11 +149,43 @@ $(".return").click(function(){
 	                <td align="center"><fmt:formatDate value="${resource.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">
 	                	<span class="space"><a href="${resource.filePath}">下载</a></span>
-						<span class="space"><a href="javascript:look('${resource.id}">删除</a></span>
+						<span class="space"><a href="javascript:deleteR('${resource.id}">删除</a></span>
 	                </td>
 	           </tr>
             </c:forEach>
         </table>
+       <c:if test="${pagerUtils.totalResult>10}">
+		<div style="text-align:center;font-size:15px;margin-top:20px;">
+			 <pg:pager url="findAll_resource.action"
+    			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
+    			<pg:param name="progId" value="${progId }"/>
+    			<pg:param name="type" value="${type }"/>
+    			总计${pagerUtils.totalResult}条
+    			<pg:first>
+    				<a href="${pageUrl}">首页</a>
+    			</pg:first>
+    			<pg:prev>
+    				<a href="${pageUrl}" >上一页</a> 
+    			</pg:prev>
+    			<pg:pages>
+    				<c:choose>
+    					<c:when test="${currentPageNumber eq pageNumber}">
+    						<font color="red">${pageNumber}</font>
+    					</c:when>
+    					<c:otherwise>
+    						<a href="${pageUrl}">${pageNumber }</a>
+    					</c:otherwise>
+    				</c:choose>
+    			</pg:pages>
+    			<pg:next>
+    				<a href="${pageUrl}" >下一页</a> 
+    			</pg:next>
+    			<pg:last>
+    				<a href="${pageUrl}">尾页</a>
+    			</pg:last>
+    		</pg:pager>
+		</div>
+		</c:if>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
         <span id="spanButtonPlaceHolder" ></span>
 <!--    	<a href="#" class="return" style="margin-left:150px;">提交</a> <a href="#" class="return">返回</a> -->

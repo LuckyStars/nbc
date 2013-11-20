@@ -433,7 +433,7 @@
     <img src="${prc }/function/detail-step/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
     <input type="hidden" id="progId" />
  	<div class="add-downs">
-    	<p>全部 | 本步骤 | 本进展</p>
+<!--    	<p>全部 | 本步骤 | 本进展</p>-->
         <div class="resources doc" >
         	<h5>
           		<ul>

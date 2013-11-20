@@ -6,7 +6,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    <link rel="stylesheet" href="${prc }/function/detail-step/css/pic.css" type="text/css"/>
+<link rel="stylesheet" href="${prc }/function/detail-step/css/pic.css" type="text/css"/>
+<style type="text/css">
+ div.file-panel {
+    -moz-user-select: none;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
+    height: 0;
+    left: 0;
+    overflow: hidden;
+    top: 0;
+    width: 100%;
+    z-index: 300;
+}
+div.file-panel span {
+    background: url("/sm2/function/detail-step/img/picOper.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline;
+    float: right;
+    height: 24px;
+    margin: 5px 1px 1px;
+    //overflow: hidden;
+    text-indent: -9999px;
+    width: 24px;
+    background-position: -48px -24px;//取图片
+}
+</style>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/handlers.js"></script>
@@ -18,6 +42,38 @@
 $(function () {
 	$("img").lazyload(); 
 	$("table tr").css("height","27px");
+	$(".juti").bind({
+		  mouseenter:function(){
+						$(this).children(".file-panel").slideDown("slow",function(){
+							$(this).css("height","30px");	
+						 });
+					},  
+		  mouseleave:function(){
+						 $(this).children(".file-panel").slideUp("slow",function(){
+							$(this).css("height","0px");	
+			 			});
+			 		}  
+		});
+	$(".cancel").click(function(){
+		$.ajax({
+    		url:prc+"/scMaster2/delete_resource.action",
+    		type:'post',
+    		data:{id:this.id},
+    		dataType:'json',
+    		success:function(data){
+    			$.post("findPic_resource.action",{progId : $("#progId").val() ,type:1},function(data){
+            		if(data != ''){
+            			$(".resource-lists").empty();
+            			$(".resource-lists").html(data);
+            		}
+          	  	});
+    		},
+    		error:function(XMLHttpRequest, textStatus, errorThrown){
+    			alert("删除出错!");
+    		}
+    	});
+		});
+
 	var prc ="${pageContext.request.contextPath}"; 
 	var swfu;
 	var filePaths=new Array();
@@ -68,9 +124,7 @@ $(function () {
 	   var str=$.parseJSON(JSON.stringify(serverData));
 	   var obj=$.parseJSON(str);
 	   var error=obj.error;
-	   alert(error+"kkkk");
 	   if(error==0){
-		   alert(obj.path+"2222");
 			filePaths.push(obj.path);
 			var currentTime = new Date();
 			var progress = new FileProgress(file, this.customSettings.progressTarget);
@@ -127,11 +181,11 @@ $(function () {
             <c:forEach items="${pm.datas}" var="resource" varStatus="i">
                <div class="juti" style="border:1px solid #A4B3EE"> 
                		<img src="${resource.filePath }" width="102" height="140" />
-<!--               		<div class="file-panel" style="height: 0px; overflow: hidden;">-->
-<!--               			<span class="cancel">删除</span>-->
+               		<div class="file-panel" style="height: 0px; overflow: hidden;">
+               			<span class="cancel" id="${resource.id}">删除</span>
 <!--               			<span class="rotateRight">向右旋转</span>-->
 <!--               			<span class="rotateLeft">向左旋转</span>-->
-<!--               		</div>-->
+               		</div>
                </div>
             </c:forEach>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
