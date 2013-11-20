@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
-	<title>临时事项详细</title>
+	<title></title>
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
 	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
@@ -39,6 +39,12 @@
         	float:right;position:relative; padding-left: 5px;
         	width:16px;
         	height:14px;
+        }
+        .cpoint{
+        	cursor: pointer;
+        }
+        .tabs li{
+        padding:0 20px;
         }
     </style>
     
@@ -231,6 +237,11 @@
 			<div class="content">
 				<h2>
 					<span>${subject.title }</span>
+					<pri:showWhenMaster>
+								<img style="margin-top: 0px;"
+								src='${prc}/function/images/percent/${subject.progress }.png' 
+								width='80' height='80'/>
+							</pri:showWhenMaster>
 					<div style="float: left; margin-top: 15px; margin-left: 20px;">
 						<p style="">
 							<label for="amount"></label> 
@@ -238,25 +249,20 @@
 								type="text" id="amount" 
 								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" 
 							/>
+							
 						</p>
 						<pri:hideWhenMaster>
 						<div id="slider_pro"></div>
 						<span id="slider_num" ></span>
 						</pri:hideWhenMaster>
-						<pri:showWhenMaster>
-						<div>
-							<img 
-							src='${prc}/function/images/percent/${subject.progress }.png' 
-							width='80' height='80'/>
-						</div>
-						</pri:showWhenMaster>
+						
 					</div>
 					
 					<%-- --%>
 					<pri:showWhenManager>
 					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
 					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
-<!--					<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />-->
+					<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
 					</pri:showWhenManager>
 				</h2>
 
@@ -269,9 +275,9 @@
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
-					<img src="${prc}/function/function-linshi/images/ico8.png" class="ico7"/>
-	  				<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4"/>
-					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs"/>
+					<img  src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
+	  				
+					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs cpoint"/><%--编辑 --%>
 				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">
@@ -284,8 +290,9 @@
 							</li>
 						</c:forEach>
 					</ul>
+					<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4 cpoint"/><%--增加工作进展 --%>
+					
 				</div>
-				
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
 					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;height:900px; hidden;" scrolling="no"
@@ -374,14 +381,11 @@
 			    <p>增加工作进展</p>
 			    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
 			  	<div class="add-downs6">
-		      		<div>
-		          		<p>所属步骤：</p>
-			          	<select name="progress.stepId">
-							<c:forEach items="${steps }" var="step" >
-								<option value="${step.id }">${step.name}</option>
-					 		</c:forEach>
-			          	</select>
-		      		</div>
+			  		<c:forEach items="${steps }" var="step" varStatus="i">
+						<c:if test="${i.index==0 }">
+		          		<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
+						</c:if>
+					</c:forEach>
 			      	<div>
 			          	<p>工作进展：</p>
 			          	<input type="text" name="progress.name"/>
@@ -435,7 +439,6 @@
 				}
 				
 				
-				
 				if(newVal>origin){
 					if(confirm('确定修改进度吗?')){
 						var newPercent = $("#slider_pro").slider('getValue');
@@ -457,6 +460,7 @@
  	</pri:hideWhenMaster>
 	
 	function changeTab(stepId){
+		$("#prog_step_id").val(stepId);
 		$("li").removeClass("cur");
 		$("#" + stepId).addClass("cur");
 		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);

@@ -124,39 +124,30 @@ public class IndexAction extends BaseAction{
 	public void setUserPhrase(String userPhrase) {
 		this.userPhrase = userPhrase;
 	}
-
 	public String getStart() {
 		return start;
 	}
-
 	public void setStart(String start) {
 		this.start = (start==null)?"":start;
 	}
-
 	public String getEnd() {
 		return end;
 	}
-
 	public void setEnd(String end) {
 		this.end = (end==null)?"":end;
 	}
-
 	public String getModuleId() {
 		return moduleId;
 	}
-
 	public void setModuleId(String moduleId) {
 		this.moduleId = moduleId;
 	}
-
 	public void setSm2ModuleBiz(SM2ModuleBiz sm2ModuleBiz) {
 		this.sm2ModuleBiz = sm2ModuleBiz;
 	}
-
 	public MasterSubSearchVO getSearch() {
 		return search;
 	}
-
 	public void setSearch(MasterSubSearchVO search) {
 		this.search = search;
 	}
