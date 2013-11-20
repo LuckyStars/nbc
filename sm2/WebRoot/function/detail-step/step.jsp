@@ -87,14 +87,7 @@
             		}
           	  	});
             }
-           function resourceClose(){
-            	  $(".resources .cur").removeClass("cur");
-            	  $(".resources").attr("class", "resources doc");
-            	  $(".resources .doc").addClass("cur");
-            	  $(".bg").hide();
-            	  $(".adds").hide();
-
-             }
+      
             //资源 end
             $(".ico7").click(function () {
                 $("body").css("overflow", "hidden");
@@ -140,7 +133,14 @@
                 }
             });
         });
-		
+        function resourceClose(){
+      	  $(".resources .cur").removeClass("cur");
+      	  $(".resources").attr("class", "resources doc");
+      	  $(".resources .doc").addClass("cur");
+      	  $(".bg").hide();
+      	  $(".adds").hide();
+
+       }
     </script>
     
     <script type="text/javascript">
