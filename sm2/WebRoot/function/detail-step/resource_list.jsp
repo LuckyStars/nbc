@@ -14,9 +14,10 @@
 <%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
 <!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
+var prc ="${pageContext.request.contextPath}"; 
 $(function () {
 	  $("table tr").css("height","27px");
-	var prc ="${pageContext.request.contextPath}"; 
+	
 	var swfu;
 	var filePaths=new Array();
 	var delFilePaths=new Array();
@@ -66,7 +67,6 @@ $(function () {
 	   var str=$.parseJSON(JSON.stringify(serverData));
 	   var obj=$.parseJSON(str);
 	   var error=obj.error;
-	   alert(error);
 	   if(error==0){
 			filePaths.push(obj.path);
 			//var currentTime = new Date();
@@ -109,32 +109,34 @@ function queueComplete(numFilesUploaded) {
     	});
 	}
 }
-$(".return").click(function(){
+$("#upload").click(function(){
 	upload.startUpload();
 });
-	function deleteR(id){
-		$.ajax({
-    		url:prc+"/scMaster2/delete_resource.action",
-    		type:'post',
-    		data:{id:this.id},
-    		dataType:'json',
-    		success:function(data){
-    			findAll();
-    		},
-    		error:function(XMLHttpRequest, textStatus, errorThrown){
-    			alert("删除出错!");
-    		}
-    	});
-		}
-	function findAll(){
-		$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
-    		if(data != ''){
-    			$(".resource-lists").empty();
-    			$(".resource-lists").html(data);
-    		}
-  	  	});
-	}
+
+
 });
+function findAll(){
+	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
+		if(data != ''){
+			$(".resource-lists").empty();
+			$(".resource-lists").html(data);
+		}
+	  	});
+}
+function deleteR(id){
+	$.ajax({
+		url:prc+"/scMaster2/delete_resource.action",
+		type:'post',
+		data:{id:id},
+		dataType:'json',
+		success:function(data){
+			findAll();
+		},
+		error:function(XMLHttpRequest, textStatus, errorThrown){
+			alert("删除出错!");
+		}
+	});
+	}
 </script>
 </head>
 <body>
@@ -149,7 +151,7 @@ $(".return").click(function(){
 	                <td align="center"><fmt:formatDate value="${resource.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">
 	                	<span class="space"><a href="${resource.filePath}">下载</a></span>
-						<span class="space"><a href="javascript:deleteR('${resource.id}">删除</a></span>
+						<span class="space"><a href="javascript:deleteR('${resource.id}')">删除</a></span>
 	                </td>
 	           </tr>
             </c:forEach>
@@ -188,7 +190,6 @@ $(".return").click(function(){
 		</c:if>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
         <span id="spanButtonPlaceHolder" ></span>
-<!--    	<a href="#" class="return" style="margin-left:150px;">提交</a> <a href="#" class="return">返回</a> -->
 	</form>
 </body>
 </html>

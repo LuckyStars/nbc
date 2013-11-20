@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="${prc }/function/detail-step/css/pic.css" type="text/css"/>
 <style type="text/css">
  div.file-panel {
     -moz-user-select: none;
@@ -14,8 +13,9 @@
     height: 0;
     left: 0;
     overflow: hidden;
-    top: 0;
+    top: -140px;
     width: 100%;
+    position:relative;
     z-index: 300;
 }
 div.file-panel span {
@@ -40,7 +40,7 @@ div.file-panel span {
 <!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
 $(function () {
-	$("img").lazyload(); 
+	$("img.lazy").lazyload();
 	$("table tr").css("height","27px");
 	$(".juti").bind({
 		  mouseenter:function(){
@@ -61,19 +61,21 @@ $(function () {
     		data:{id:this.id},
     		dataType:'json',
     		success:function(data){
-    			$.post("findPic_resource.action",{progId : $("#progId").val() ,type:1},function(data){
-            		if(data != ''){
-            			$(".resource-lists").empty();
-            			$(".resource-lists").html(data);
-            		}
-          	  	});
+    			findAll();
     		},
     		error:function(XMLHttpRequest, textStatus, errorThrown){
     			alert("删除出错!");
     		}
     	});
 		});
-
+	function findAll(){
+		$.post("findPic_resource.action",{progId : $("#progId").val() ,type:1},function(data){
+		if(data != ''){
+			$(".resource-lists").empty();
+			$(".resource-lists").html(data);
+		}
+		});
+	}
 	var prc ="${pageContext.request.contextPath}"; 
 	var swfu;
 	var filePaths=new Array();
@@ -152,14 +154,13 @@ $(function () {
 		if(numFilesUploaded==0){
 			alert("上传文件失败！");
 		}else{
-			alert(filePaths.toString());
 	    	$.ajax({
 	    		url:prc+"/scMaster2/add_resource.action",
 	    		type:'post',
 	    		data:{resourses:filePaths.toString(),progId:$("#progId").val(),type:1},
 	    		dataType:'json',
 	    		success:function(data){
-	    			//window.location.href=prc+"/scMaster2/teacherList_invatition.action";
+	    			findAll();
 	    		},
 	    		error:function(XMLHttpRequest, textStatus, errorThrown){
 	    			alert("出错了!");
@@ -168,7 +169,7 @@ $(function () {
 	    	});
 		}
 	}
-	$(".return").click(function(){
+	$("#upload").click(function(){
 		upload.startUpload();
 	});
 	
@@ -178,7 +179,7 @@ $(function () {
 <body>
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
-            <c:forEach items="${pm.datas}" var="resource" varStatus="i">
+            <c:forEach items="${list}" var="resource" varStatus="i">
                <div class="juti" style="border:1px solid #A4B3EE"> 
                		<img src="${resource.filePath }" width="102" height="140" />
                		<div class="file-panel" style="height: 0px; overflow: hidden;">

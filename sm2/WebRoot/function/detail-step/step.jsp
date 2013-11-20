@@ -53,6 +53,7 @@
                 $(".article").hide();
                 $(".fu").show();
             });
+            //资源begin
             $(".resources li").click(function () {
                 $(".resources .cur").removeClass("cur");
               // $(".resource-lists").empty();
@@ -64,6 +65,7 @@
                    	$(".resources").attr("class", "resources pic");
                    	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index},function(data){
                    		if(data != ''){
+                       		$(".resource-lists").empty();
                    			$(".resource-lists").html(data);
                    		}
                  	  	});
@@ -89,8 +91,9 @@
             			$(".resource-lists").html(data);
             		}
           	  	});
-
-                }
+            }
+      
+            //资源 end
             $(".ico7").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
@@ -114,7 +117,6 @@
             $(".close").click(function () {
                 $("body").css("overflow", "auto");
                 $(".bg").hide();
-                $(".adds").hide();
                 $(".adds1").hide();
                 $(".adds2").hide();
                 $(".adds3").hide();
@@ -136,7 +138,14 @@
                 }
             });
         });
-		
+        function resourceClose(){
+      	  $(".resources .cur").removeClass("cur");
+      	  $(".resources").attr("class", "resources doc");
+      	  $(".resources .doc").addClass("cur");
+      	  $(".bg").hide();
+      	  $(".adds").hide();
+
+       }
     </script>
     
     <script type="text/javascript">
@@ -429,7 +438,7 @@
 <div class="adds" id="add-tab">
   <div class="add-tops">
     <p>资源</p>
-    <img src="${prc }/function/detail-step/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+    <img src="${prc }/function/detail-step/img/erro.jpg"  onclick="resourceClose();" style="cursor:pointer;"/> </div>
     <input type="hidden" id="progId" />
  	<div class="add-downs">
 <!--    	<p>全部 | 本步骤 | 本进展</p>-->
@@ -442,23 +451,9 @@
           		</ul>
          	 	<a href="#" class="mores">更多&gt;&gt;</a>
          	</h5>
-	        <div class="resource-lists" style="height:380px;maroverflow:auto;overflow-x:hidden;">
-	<!--          <div class="juti"><img src="images/doc.jpg" width="102" height="140" /></div>
-	        </div>
-	        <div class="resource-lists" style="display:none">
-	       		<iframe id="postFrame" name="postFrame" style="border:0px;width:570px;height:540px; hidden;" scrolling="no"
-					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
-				</iframe>
-	        <div class="juti"><img src="images/pic.jpg" width="102" height="140" /></div>
-	        </div>
-	        <div class="resource-lists" style="display:none">
-	         	<iframe id="postFrame" name="postFrame" style="border:0px;width:570px;height:540px; hidden;" scrolling="no"
-					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
-				</iframe>
-           <div class="juti"><img src="images/video.jpg" width="102" height="140" /></div>-->
-	        </div>
+	        <div class="resource-lists" style="height:380px;maroverflow:auto;overflow-x:hidden;"></div>
       </div>
-    <a href="#" class="return" style="margin-left:100px;">提交</a> <a href="#" class="return">返回</a> </div>
+    <a href="#" class="return" style="margin-left:100px;" id="upload">提交</a> <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
 </div>
 <!-- 弹出层 资源 END -->
 

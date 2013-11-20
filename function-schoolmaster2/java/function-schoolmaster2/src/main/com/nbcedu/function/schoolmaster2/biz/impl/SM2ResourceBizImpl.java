@@ -38,7 +38,10 @@ public class SM2ResourceBizImpl extends BaseBizImpl<TSm2Resource> implements SM2
 	public PagerModel findResource(String progId,int type) {
 		return this.sm2ResourceDao.searchPaginated("from TSm2Resource where progressId=? and type="+type, progId);
 	}
-
+	@Override
+	public List<TSm2Resource> findAllResource(String progId,int type) {
+		return this.sm2ResourceDao.find("from TSm2Resource where progressId=? and type="+type, progId);
+	}
 	@Override
 	public void addAll(List<TSm2Resource> l) {
 		for(TSm2Resource r : l){
