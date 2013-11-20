@@ -1,4 +1,120 @@
-div.file-panel {
+ .queueList {
+    margin: 0 20px 10px;
+}
+ .filelist:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+}
+
+ .filelist li p.title {
+    height: 24px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+    top: 5px;
+    white-space: nowrap;
+    width: 110px;
+    z-index: 2;
+}
+
+ .filelist li {
+    background: url("http://tb2.bdstatic.com/xiangce/webroot/static/picture/ui/upload/images/bg_94df3381.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 110px;
+    margin: 0 8px 8px 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 110px;
+}
+.filelist li p.title {
+    height: 24px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: left;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+    top: 5px;
+    white-space: nowrap;
+    width: 110px;
+    z-index: 2;
+}
+.filelist li p.progress {
+    bottom: 0;
+    height: 8px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 50;
+}
+.filelist li p.progress span {
+    animation: 2s linear 0s normal none infinite progressmove;
+    background: url("http://tb2.bdstatic.com/xiangce/webroot/static/picture/ui/upload/images/progress_ef92b3d1.png") repeat-x scroll 0 0 #1483D8;
+    display: none;
+    height: 100%;
+    overflow: hidden;
+    transition: width 200ms linear 0s;
+    width: 0;
+}
+@-moz-keyframes progressmove {
+0% {
+    background-position: 0 0;
+}
+100% {
+    background-position: 17px 0;
+}
+}
+@-moz-keyframes progressmove {
+0% {
+    background-position: 0 0;
+}
+100% {
+    background-position: 17px 0;
+}
+}
+#uploader .filelist li p.imgWrap {
+    height: 110px;
+    line-height: 109px;
+    overflow: hidden;
+    position: relative;
+    transform-origin: 50% 50% 0;
+    transition: transform 200ms ease-out 0s;
+    vertical-align: middle;
+    width: 110px;
+    z-index: 3;
+}
+#uploader .filelist li.preview-unavailable p.imgWrap {
+    background: url("http://tb1.bdstatic.com/xiangce/webroot/static/picture/ui/upload/images/preview-unavailable_f7c4770f.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    z-index: 1;
+}
+#uploader .filelist li img {
+    height: 100%;
+}
+#uploader .filelist li p.error {
+    background: none repeat scroll 0 0 #F43838;
+    bottom: 0;
+    color: #FFFFFF;
+    font-size: 12px;
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+
+ div.file-panel {
     -moz-user-select: none;
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0.5);
     height: 0;
@@ -8,4 +124,16 @@ div.file-panel {
     top: 0;
     width: 100%;
     z-index: 300;
+}
+
+ div.file-panel span {
+    background: url("http://tb1.bdstatic.com/xiangce/webroot/static/picture/ui/upload/images/icons_659e3fde.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline;
+    float: right;
+    height: 24px;
+    margin: 5px 1px 1px;
+    overflow: hidden;
+    text-indent: -9999px;
+    width: 24px;
 }
