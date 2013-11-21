@@ -158,6 +158,8 @@ a {
 }
 .content .article,.content .articles {
 	width:740px;
+	height:auto !important;
+	min-height:212px;
 	height:212px;
 	margin:10px auto;
 	border:1px solid #ccc;
