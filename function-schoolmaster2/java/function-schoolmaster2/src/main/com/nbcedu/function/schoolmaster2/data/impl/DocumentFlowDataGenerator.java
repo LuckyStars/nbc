@@ -22,7 +22,7 @@ public class DocumentFlowDataGenerator extends AbstractDataGenerator{
 
 	@Override
 	@SuppressWarnings({ "unchecked", "serial" })
-	public String getDataByTime(Date start, Date end)  {
+	public String getDataByTime(Date start, Date end,String color)  {
 		
 		final Date st = start!=null?start:Utils.Dates.safeParseSimpleDate("2000-01-01");
 		final Date en = end!=null?end:new Date();
@@ -49,6 +49,7 @@ public class DocumentFlowDataGenerator extends AbstractDataGenerator{
 		xmlData.setSubcaption("公文处理");
 		xmlData.setxAxisName("预定次数");
 		xmlData.setyAxisName("活动类型");
+		xmlData.setBgColor(color);
 		xmlData.setDatas(new ArrayList<SingleCharts.DataSet>(){{
 			for (Object[] obj : resultSet) {
 				SingleCharts.DataSet dataSet = new SingleCharts.DataSet();

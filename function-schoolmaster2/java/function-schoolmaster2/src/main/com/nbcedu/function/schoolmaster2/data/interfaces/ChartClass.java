@@ -37,13 +37,4 @@ public enum ChartClass {
 		}
 	};
 	
-	public static class Test{
-		public static void main(String[] args) {
-			new Object() {
-				void doSome() {
-					System.out.println("doSome");
-				}
-			}.doSome();
-		}
-	}
 }

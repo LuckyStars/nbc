@@ -43,12 +43,6 @@ public class DataAction extends BaseAction{
 		this.data = this.sm2DataBiz.findById(id);
 		return "toMasterChart";
 	}
-	public void show(){
-		DataGenerator dataGen = DataContext.getContext().getbyMatcher(matcher);
-		if(dataGen!=null){
-			Struts2Utils.renderXml(dataGen.getDataByTime(start, end));
-		}
-	}
 
 	public String chart(){
 		DataGenerator dataGen = 

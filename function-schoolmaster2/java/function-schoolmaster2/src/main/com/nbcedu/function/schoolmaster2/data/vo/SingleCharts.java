@@ -13,7 +13,7 @@ public class SingleCharts {
 	private static final Logger logger = Logger.getLogger(SingleCharts.class);
 	
 	private static final String chartXml = 
-			"<graph caption='${caption}' baseFontSize='20' bgColor='f0f8fc'" +
+			"<graph caption='${caption}' baseFontSize='20' bgColor='${bgColor}'" +
 				" xAxisName='${xAxisName}' " +
 				"yAxisName='${yAxisName}' numberPrefix='${numberPrefix}' showValues='0'>"+
 				"${sets}"+
@@ -26,6 +26,7 @@ public class SingleCharts {
 	private String xAxisName;
 	private String yAxisName;
 	private String numberPrefix;
+	private String bgColor;
 	
 	private List<DataSet> datas;
 	
@@ -63,7 +64,8 @@ public class SingleCharts {
 				.replace("${xAxisName}", getxAxisName())
 				.replace("${yAxisName}", getyAxisName())
 				.replace("${numberPrefix}", getNumberPrefix())
-				.replace("${sets}", setStr.toString()).toString());
+				.replace("${sets}", setStr.toString())
+				.replace("${bgColor}", getBgColor()).toString());
 		
 	}
 	
@@ -79,6 +81,12 @@ public class SingleCharts {
 	////////////////////
 	///////get&set//////
 	////////////////////
+	public String getBgColor() {
+		return bgColor;
+	}
+	public void setBgColor(String bgColor) {
+		this.bgColor = bgColor;
+	}
 	public String getCaption() {
 		return trimToEmpty(caption);
 	}
