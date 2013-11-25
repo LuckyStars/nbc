@@ -24,7 +24,7 @@ table td {
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../plugins/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(function(){
     $("table tr:odd").css("background", "#fff");

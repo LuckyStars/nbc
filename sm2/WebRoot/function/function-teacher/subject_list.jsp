@@ -35,7 +35,6 @@
                         $(".add").css("display", "block");
             		}
           	  });
-               
             });
             $(".add-top img").click(function () {
                 $(".bg").css("display", "none");
@@ -168,7 +167,7 @@
 	                <td align="center">${sub[1].createrName}</td>
 	                <td align="center">${sub[1].departmentName}</td>
 	                <td align="center">
-	                	<span class="space"><a href="javascript:look('${sub[1].id}">查看</a></span>
+	                	<span class="space"><a href="javascript:look('${sub[1].id}');">查看</a></span>
 	                </td>
                 </pri:hideWhenManager>
                 <pri:showWhenManager>
@@ -232,6 +231,10 @@
 		 }
 		 if($("#cc").combotree('getValues')==''){
 			 alert("请选择执行人！");
+				return false;
+		 }
+		 if($("#master").combotree('getValues')==''){
+			 alert("请选择审批人！");
 				return false;
 		 }
     	  var text = $("#textContent").val();

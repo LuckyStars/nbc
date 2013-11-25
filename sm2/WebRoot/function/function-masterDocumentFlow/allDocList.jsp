@@ -26,7 +26,7 @@ table td {
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../plugins/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 function changepage(page){
 	window.location.href="/schoolapp/masterDocumentFlow/listAllDocumentTask.action?pagerUtils.pageIndex="+page;
@@ -41,7 +41,7 @@ function changepage(page){
       <s:iterator value="documentTaskVoList" var="taskVo" status="st">
       <tr>
         <td style="text-align:left;">
-        	<a style="color:red;" href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
+        	<a style="color:red;" href="viewHandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
 			.<s:property value="#taskVo.longTitle"/></a>
 		</td>
         <td>.<s:property value="#taskVo.documentSourceDisplayName"/></td>

@@ -97,7 +97,7 @@
 					</a>
 				</div>
 				<div class="office" style="width: 126px; height: 150px;">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=${prc}/masterDocumentFlow/listUnhandledDocumentTask.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=masterDocumentFlow/listUnhandledDocumentTask.action">
 						<img src="${prc}/function/images/daichuli.jpg"/>
 						<span>待处理文件</span>
 						<i id="documentNum" style="display:none;"></i>
@@ -120,14 +120,14 @@
 				</div>
 
 				<div class="office mail" style="width: 126px; height: 148px;">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=/scMaster2/search_week.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/search_week.action">
 						<img src="${prc}/function/images/mail.jpg" />
 						<span>本周工作汇总</span>
 					</a>
 				</div>
 
 				<div class="office" style="width: 125px; height: 148px;">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=/scMaster2/masterList_invatition.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/masterList_invatition.action">
 						<img src="${prc}/function/images/yaoqing.jpg" />
 						<span>邀请查看及消息</span>
 					</a>
@@ -214,7 +214,7 @@
 					<i id="zongjie">6</i>
 				</div>
 				<div class="tongtai">
-					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=/masterDocumentFlow/listAllDocumentTask.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=masterDocumentFlow/listAllDocumentTask.action">
 						<img src="${prc}/function/images/pic2.png" width="179" height="140" />
 						<span style="color: #447c0e;">公文处理</span>
 					</a>

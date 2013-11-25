@@ -48,7 +48,7 @@ public class DataAction extends BaseAction{
 		DataGenerator dataGen = 
 			DataContext.getContext().getbyMatcher(matcher);
 		this.dataType = dataGen.defaultChartType();
-		this.xmlContent = dataGen.getDataByTime(start, end);
+		this.xmlContent = dataGen.getDataByTime(start, end,"#F0F8FC");
 		return "chart";
 	}
 	

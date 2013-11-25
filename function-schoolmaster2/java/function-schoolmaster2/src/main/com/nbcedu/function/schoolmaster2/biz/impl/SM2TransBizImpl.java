@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2TransBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.dao.SM2TransDao;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectTrans;
 
@@ -21,5 +22,7 @@ public class SM2TransBizImpl extends BaseBizImpl<SM2SubjectTrans> implements SM2
 	public void deleteBySubId(String subId) {
 		this.transDao.createQuery("delete SM2SubjectTrans where subId=?", subId);
 	}
-	
+//	public PagerModel findAllT(String userId){
+//		thi
+//	}
 }

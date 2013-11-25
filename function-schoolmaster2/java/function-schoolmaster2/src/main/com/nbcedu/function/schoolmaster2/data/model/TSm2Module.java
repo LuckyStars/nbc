@@ -13,6 +13,7 @@ public class TSm2Module implements java.io.Serializable {
 	private Date createtime;
 	private String createrId;
 	private String parentId;
+	private String icon;
 //	为1：主管显示   3:有关联重心工作
 	private int flag;
 
@@ -88,6 +89,14 @@ public class TSm2Module implements java.io.Serializable {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

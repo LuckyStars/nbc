@@ -85,6 +85,7 @@ public class SubjectAction extends BaseAction{
 				SM2SubjectMaster user =  new SM2SubjectMaster();
 				user.setUserUid(u);
 				user.setUserName(UCService.findNameByUid(u));
+				user.setFlag(0);
 				checkUsers.add(user);
 			}
 			subject.setCheckUsers(checkUsers);
