@@ -275,14 +275,15 @@ a {
     position:relative;
 }
 .tabs li.cur,.tabs1 li.cur {
-	position:relative;
-	height:30px;
-	line-height:30px;
-	top:-1px;
-	border:1px solid #85bbe9;
-	border-top:3px solid #0070d2;
-	border-bottom-color:#f0f8fc;
-	color:#0a5eb2;
+	position: relative;
+	height: 40px;
+	line-height: 50px;
+	top: -1px;
+	border: 0px;
+	border-top: 0px;
+	border-bottom-color: none;
+	background: url(../images/list-bg.jpg) no-repeat;
+	color: #fff;
 }
 .tabs li img{
     display:block; position:absolute;

@@ -286,7 +286,7 @@
 		
    	<div class="mids">
    		<a class="h4">
-   			<span>·${prog.name }</span>
+   			<span onclick="switchArticle('${prog.id}');" >·${prog.name }</span>
    			<img src="${prc }/function/detail-step/images/up.png"
    				onclick="switchArticle('${prog.id}');"
    			 width="13" height="13" class="mids-img"/>
@@ -332,7 +332,7 @@
        		<span> | </span>
         	<a>
         		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
-        		width="13" height="13" class="ico2"/>（0）
+        		title="资源" width="13" height="13" class="ico2"/>
         	</a>
         	
         </div>

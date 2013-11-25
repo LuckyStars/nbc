@@ -220,12 +220,12 @@ a {
 	cursor:pointer;
 }
 .tabs-wp {
-	height:32px;
-	line-height:32px;
-	border-bottom:1px solid #85bbe9;
-	width:750px;
-	margin:0 auto;
-	padding:0;
+	height: 38px;
+	line-height: 38px;
+	border-bottom: 1px solid #095DB3;
+	width: 750px;
+	margin: 0 auto;
+	padding: 0;
 }
 .tabs-wp1 {
 	height:32px;
@@ -246,13 +246,13 @@ a {
 	float:right;
 }
 .tabs {
-	height:32px;
-	line-height:32px;
-	border-bottom:1px solid #85bbe9;
-	width:725px;
-	margin:0 auto;
-	padding:0;
-	float:left;
+	height: 32px;
+	line-height: 32px;
+	border-bottom: none;
+	margin: 0 auto;
+	width: auto;
+	padding: 0;
+	float: left;
 }
 .tabs1 {
 	height:32px;
@@ -264,27 +264,31 @@ a {
 	float:left;
 }
 .tabs li,.tabs1 li {
-	border:1px solid #85bbe9;
-	border-bottom:none;
-	height:32px;
-	line-height:32px;
-	float:left;
-	list-style:none;
-	padding:0 20px;
-	font-size:16px;
-	color:#368fe8;
-	margin-left:10px;
-    position:relative;
+	border: none;
+	border-bottom: none;
+	height: 38px;
+	line-height: 48px;
+	float: left;
+	list-style: none;
+	padding: 0 25px;
+	font-size: 16px;
+	color: #939393;
+	margin-left: 10px;
+	position: relative;
+	background: url(../images/list-bg1.jpg) no-repeat;
+	font-weight: bold;
+	width:60px;
 }
 .tabs li.cur,.tabs1 li.cur {
-	position:relative;
-	height:30px;
-	line-height:30px;
-	top:-1px;
-	border:1px solid #85bbe9;
-	border-top:3px solid #0070d2;
-	border-bottom-color:#f0f8fc;
-	color:#0a5eb2;
+	position: relative;
+	height: 40px;
+	line-height: 50px;
+	top: -1px;
+	border: 0px;
+	border-top: 0px;
+	border-bottom-color: none;
+	background: url(../images/list-bg.jpg) no-repeat;
+	color: #fff;
 }
 .tabs li img{
     display:block; position:absolute;
@@ -294,6 +298,11 @@ top:18px; left:90px;
 }
 .small {
 top:5px;left:90px;
+}
+.small2 {
+top: 3px;
+left: 5px;
+cursor: pointer;
 }
 .mids {
 	width:750px;

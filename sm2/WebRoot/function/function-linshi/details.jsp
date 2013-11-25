@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
-	
+	<%-- 
 	<style>
         .ui-widget-content {
         width:230px; height:10px; background:#EA605E
@@ -46,7 +46,7 @@
         .tabs li{
         padding:0 20px;
         }
-    </style>
+    </style>--%>
     
 	<script type="text/javascript">
 	KindEditor.ready(function(K) {
@@ -106,11 +106,6 @@
              $(".bg").show();
              $(".adds5").show();
          });
-         $(".ico4").click(function () {
-             $(".bg").show();
-	         
-             $(".adds6").show();
-         });
          $(".addtabs").click(function () {
              $(".bg").show();
              $(".adds7").show();
@@ -152,22 +147,27 @@
 					alert("请填写步骤名称！");
 	          }
          	});
-      	$(".tabs li img").click(function(){
+      	$(".delete_step_ico").click(function(){
 			var id = $(this).attr("name");
-			 $.post("isExist_progress.action",{stepId:id},function(data1){
+		 	$.post("isExist_progress.action",{stepId:id},function(data1){
 				if(data1==0){
-					$.post("delete_step.action",{id:id},function(data){
-						if(data==0){
-							$("#"+id).remove();
-						}else{
-							alert("删除失败！");
-						}
-					});
+					if(confirm("确定删除此步骤吗?")){
+						$.post("delete_step.action",{id:id},function(data){
+							if(data==0){
+								
+								$("#"+id).remove();
+							}else{
+								alert("删除失败！");
+							}
+						});
+					}
 				}else{
 					alert("请先删除工作进展。");
 				}
-			});
-          	});
+			
+		 	});
+		 	
+       	});
       	//步骤结束
       	//工作进展
       	 $("#progressSave").click(function(){
@@ -222,6 +222,11 @@
       		$(".tree-checkbox.tree-checkbox1").removeClass("tree-checkbox1").addClass("tree-checkbox0");
       	}  
        }
+	  
+	  function popAddProg(stepId){
+		  $("#prog_step_id").val(stepId);
+		  $(".adds6").show();
+	  }
 	</script>
 	<script>
 		function resizeFrame(height){
@@ -273,13 +278,15 @@
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					关联重心工作： <span> </span>
 					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
-					<img style="float:right;" src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
+					<pri:showWhenMaster>
+					<img style="float:right;" title="转发" 
+					src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
+					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
-	  				
 					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs cpoint"/><%--编辑 --%>
 				</div>
 				<div class="tabs-wp">
@@ -288,8 +295,12 @@
 							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>" >
 								<a href="javascript:changeTab('${step.id}');">${step.name }</a>
 								<c:if test="${sessionScope.sm2_init==step.createrId}">
-									<img name="${step.id}" src="${prc}/function/function-linshi/img/errotab.png" />
 								</c:if>
+									<img name="${step.id}" class="delete_step_ico" 
+									src="${prc}/function/function-linshi/images/icon1.png"  class="small1"/><%--删除 --%>
+									<img src="${prc}/function/function-linshi/images/icon2.png"  class="small"/><%--编辑步骤 --%>
+									<img onclick="popAddProg('${step.id}');"
+									src="${prc}/function/function-linshi/images/icon3.png"  class="small2 ico4"/><%--增加工作进展 --%>
 							</li>
 						</c:forEach>
 					</ul>
