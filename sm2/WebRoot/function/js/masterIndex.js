@@ -80,15 +80,15 @@ function refreshDaiban(){
 	daibanCount = 0;
 	var contents = [
 		                {
-					 	   url:"/countWorkbench.action?module=xxdt_1&status=new?userId=" + curUid,
+					 	   url:"/countWorkbench.action?module=xxdt_1&status=new",
 					 	   name:"总结汇报关注性工作"
 					    },
 					    {
-					 	   url:"/countWorkbench.action?module=xxdt_2&status=new?userId=" + curUid,
+					 	   url:"/countWorkbench.action?module=xxdt_2&status=new",
 					 	   name:"请示报批工作"
 					    },
 					    {
-					 	   url:"/countWorkbench.action?module=xxdt_3&status=new?userId=" + curUid,
+					 	   url:"/countWorkbench.action?module=xxdt_3&status=new",
 					 	   name:"紧急重要事件处理"
 					    }
 			       ];
@@ -121,8 +121,8 @@ function refreshAll (){
 		refreshNews(curNews.url,curNews.newsId);
 	}
 	refreshDongtai();
-	refreshDaiban();
 	refLinshi();
+	refreshDaiban();
 }
 
 $(function(){

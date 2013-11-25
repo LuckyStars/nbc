@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -192,6 +193,21 @@ public class MasterSubjectAction extends BaseAction{
 			}
 		}
 		return "refreshDetail";
+	}
+	
+	/**
+	 * 显示所有评论
+	 * @author xuechong
+	 */
+	public void allDiss(){
+		List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(Arrays.asList(this.id));
+	}
+	/**
+	 * 显示所有批示
+	 * @author xuechong
+	 */
+	public void addComm(){
+		List<TSm2Comment> comList = this.comBiz.findByProgIds(Arrays.asList(this.id));
 	}
 	///////////////////////
 	////getters&setters////
