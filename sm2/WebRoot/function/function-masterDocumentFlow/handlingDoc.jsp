@@ -13,7 +13,7 @@
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../plugins/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#viewgroup").click(function(){
@@ -160,15 +160,16 @@ function checkName(){
 						</c:forEach>
 <!--        <a href="#" style="color:#02275B; margin-left:10px; text-decoration:underline;">(查看全部)</a>-->
 			</p>
-			
+	
           <p><span class="box-time">附件：</span>
           <s:if test="documentVo.attachments.size != 0">
 			<s:iterator value="documentVo.attachments" var="attachment">
-	          <span class="box-sp" style="background:url(../function/img/ico4.jpg) no-repeat left; padding-left:20px;"><s:property value="#attachment.fileName" /></span>
-	          <a href="javascript:preView('<s:property value='#attachment.id'/>');">预览</a>
-	          <a href="#" style="margin-left:10px; text-decoration:underline;">下载</a></p>
+	          <span class="box-sp" style="background:url(../function/img/ico4.jpg) no-repeat left; padding-left:20px;">
+	          	<s:property value="#attachment.fileName" /></span>
+	            <a href="javascript:preView('<s:property value='#attachment.id'/>');">预览</a>
+	          <a href="downloadAttachment.action?aid=<s:property value='#attachment.id'/>" style="margin-left:10px; text-decoration:underline;">下载</a></p>
           	</s:iterator>
-		</s:if>
+		  </s:if>
 		 <s:else>无</s:else>
       </div>
        <div class="articles">

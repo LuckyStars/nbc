@@ -17,7 +17,7 @@
 					<dl class="warp">
 						<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 							<dt>
-								<img src="${prc}/function/img/tu4.jpg" />
+								<img src="${prc}/function/img/${module.icon}" />
 							</dt>
 							<dd>${module.name}</dd> </a>
 					</dl>
@@ -27,7 +27,7 @@
 						<dl class="warp">
 							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
-									<img src="${prc}/function/img/tu4.jpg" />
+									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd>${module.name}</dd> </a>
 						</dl>
@@ -38,7 +38,7 @@
 						<dl class="warp">
 							<a href="${prc}/scMaster2/findB_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
-									<img src="${prc}/function/img/tu4.jpg" />
+									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd>${module.name}</dd> </a>
 						</dl>
@@ -48,7 +48,7 @@
 						<dl class="warp">
 							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
-									<img src="${prc}/function/img/tu4.jpg" />
+									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd>${module.name}</dd> </a>
 						</dl>
@@ -57,7 +57,7 @@
 			<dl class="warp">
 				<a href="${prc}/scMaster2/teacherList_invatition.action">
 					<dt>
-						<img src="${prc}/function/img/tu4.jpg" />
+						<img src="${prc}/function/img/tu9.jpg" />
 					</dt>
 					<dd>邀请查看</dd> </a>
 			</dl>	

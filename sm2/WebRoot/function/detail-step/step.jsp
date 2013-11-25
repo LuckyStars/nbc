@@ -18,7 +18,7 @@
     	function resizeParent(){
     		var height = $(document).height();
     		console.log(height);
-    		parent.resizeFrame(height);
+    		parent.resizeFrame(height+200);
     	}
         $(function () {
         	  $("table tr:odd").css("background", "#f0f8fc");
@@ -78,11 +78,13 @@
                 $(this).addClass("cur");
             });
             $(".ico2").click(function () {
+                
                 $("body").css("overflow", "hidden");
                 $("#progId").val(this.id);
                 $(".bg").show();
                 $(".adds").show();
                 findAllResource(this.id,0);
+                resizeParent();
             });
             function findAllResource(progId,type){
             	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
@@ -453,7 +455,7 @@
           		</ul>
          	 	<a href="#" class="mores">更多&gt;&gt;</a>
          	</h5>
-	        <div class="resource-lists" style="height:380px;maroverflow:auto;overflow-x:hidden;"></div>
+	        <div class="resource-lists" style="height:380px;"></div>
       </div>
     <a href="#" class="return" style="margin-left:100px;" id="upload">提交</a> <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
 </div>

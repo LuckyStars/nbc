@@ -13,11 +13,11 @@
             });
             $('#cc').combotree({  
            	 url: 'tree_user.action',
-           	 required: true  
+           	// required: true  
            	});  
             $('#master').combotree({  
              	 url: 'findAllMaster_user.action',
-             	 required: true  
+             //	 required: true  
             }); 
             var a = new Array();
             <c:forEach items="${subject.excuteUsers}" var="type">

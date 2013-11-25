@@ -219,7 +219,7 @@
       	if (select) {  
         	$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox0").addClass("tree-checkbox1");
       	} else {  
-      		$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+      		$(".tree-checkbox.tree-checkbox1").removeClass("tree-checkbox1").addClass("tree-checkbox0");
       	}  
        }
 	</script>
@@ -333,7 +333,7 @@
 			<div class="down-right">
 				<div class="right-p">
 					<p>
-						<input type="checkbox" checked="checked" />
+<!--						<input type="checkbox" checked="checked" />-->
 <!--						<span>李丽霞</span>-->
 					</p>
 					<div style="clear: both"></div>

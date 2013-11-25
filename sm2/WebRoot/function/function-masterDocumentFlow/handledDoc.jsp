@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
-<script type="text/javascript" src="../plugins/datePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 </head>
 <body>
   <div class="right1">
@@ -41,13 +41,23 @@
 						</c:forEach>
 <!--        <a href="#" style="color:#02275B; margin-left:10px; text-decoration:underline;">(查看全部)</a>-->
 			</p><br />
-          <p><span class="box-time">附件：</span><span class="box-sp" style="background:url(../function/img/ico4.jpg) no-repeat left; padding-left:20px;"><s:property value="#attachment.fileName" /></span><a href="#" style="margin-left:10px; text-decoration:underline;">下载</a></p>
+		 <s:if test="documentVo.attachments.size != 0">
+	          <p><span class="box-time">附件：</span>
+	          	<s:iterator value="documentVo.attachments" var="attachment">
+	          		<a href="downloadAttachment.action?aid=<s:property value='#attachment.id'/>" style="margin-left:10px; text-decoration:underline;">
+	          	  		<span class="box-sp" style="background:url(../function/img/ico4.jpg) no-repeat left; padding-left:20px;">
+		          			<s:property value="#attachment.fileName" />
+		          		</span>
+		          	</a>
+		        </s:iterator>  	
+	          </p>
+         </s:if>
       </div>
        <div class="articles">
        	<s:property value="documentVo.content" escape="false"/>
       </div>
       <div class="bun">
-          <a href="javascript:window.location.href='listUnhandledDocumentTask.action';">返回</a>
+          <a href="javascript:history.back();">返回</a>
       </div>
   </div>
 </body>

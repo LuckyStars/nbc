@@ -70,7 +70,7 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		List<Object> list = new ArrayList<Object>();
 		list.add(subject.getCreaterId());
 		list.add(subject.getModuleId());
-		if(!StringUtil.isEmpty(subject.getTitle())){
+		if(StringUtils.isNotBlank(subject.getTitle())){
 			hql.append(" and s.title like ?");
 			list.add("%"+subject.getTitle().trim()+"%");
 		}

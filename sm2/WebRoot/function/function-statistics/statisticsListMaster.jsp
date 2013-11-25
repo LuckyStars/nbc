@@ -35,7 +35,7 @@
 									<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
 									<span>的统计分析</span>
 								</a>
-								<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}" style="float:right;">
+								<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}" style="float:right;">
 									<img src="${prc}/function/function-statistics/images/ico.png" />
 								</a>
 							</li>
@@ -47,7 +47,7 @@
 									<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
 									<span>的统计分析</span>
 								</a>
-								<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}" style="float:right;">
+								<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}" style="float:right;">
 									<img src="${prc}/function/function-statistics/images/ico.png" />
 								</a>
 							</li>

@@ -13,13 +13,13 @@
                 $(".add").css("display", "none");
             });
             $('#cc').combotree({  
-           	 url: 'tree_user.action',
-           	 required: true  
+           	 url: 'tree_user.action'
+           	 //required: true  
            	});  
             $('#master').combotree({  
-              	 url: 'findAllMaster_user.action',
-              	 required: true  
-              	});  
+              	 url: 'findAllMaster_user.action'
+              //	 required: true  
+            });  
         });
  </script>
  <form id="saveForm" method="post">
@@ -42,7 +42,7 @@
 	                   </select>
                    </p>
 				</c:if>
-                <p style="margin:5px;">事项名称：<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
+                <p style="margin:5px;">事项标题：<input type="text" id="addSubjectInput" class="input" name="subject.title" /></p>
  					<c:if test="${not empty subjects}">
 	                  <p >关联重心工作：<select name="subject.parentId">
 	                   <c:forEach items="${subjects}" var="obj">

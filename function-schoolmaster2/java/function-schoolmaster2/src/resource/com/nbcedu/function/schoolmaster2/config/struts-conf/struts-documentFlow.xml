@@ -12,14 +12,10 @@
 <!--		============= 公文 ===================-->
 		<action name="*Document" class="documentAction" method="{1}">
 			<result name="listMy" type="redirectAction">listMyDocument.action</result>
-			<result name="listFlowing">/function/function-documentFlow/listFlowing.jsp</result>
 			<result name="toListFlowing" type="chain">listFlowingDocument</result>
-			<result name="myDocList">/function/function-documentFlow/myDocList.jsp</result>
 			<result name="handlingDoc">/function/function-masterDocumentFlow/handlingDoc.jsp</result>
 			<result name="listUnhandled" type="redirectAction">listUnhandledDocumentTask.action</result>
 			<result name="handledDoc">/function/function-masterDocumentFlow/handledDoc.jsp</result>
-			<result name="editMyDoc">/function/function-documentFlow/editMyDoc.jsp</result>
-			<result name="viewMyDoc">/function/function-documentFlow/viewMyDoc.jsp</result>
 			<result name="viewMyFlowingDoc">/function/function-documentFlow/viewMyFlowingDoc.jsp</result>
 			<result name="viewHandled" type="chain">viewHandledDocument</result>
 		</action>

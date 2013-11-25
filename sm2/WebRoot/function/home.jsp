@@ -104,7 +104,7 @@
 
         </ul>
       </li>
-      <li><a href="#" class="li-blue li-red" id="nav3">
+      <li><a href="#" class="li-blue" id="nav3">
       <img src="${prc}/function/images/nav_03.png" width="16" height="16" />紧急重要事件处理<span class="cols"></span></a>
         <ul class="nav-list-inner">
           <li><a href="#">·公众方面</a></li>

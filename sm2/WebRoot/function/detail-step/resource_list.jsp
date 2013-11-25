@@ -140,6 +140,8 @@ function deleteR(id){
 </script>
 </head>
 <body>
+	<div><span id="spanButtonPlaceHolder" style="height:30px"></span></div>
+	<div style="height:380px;maroverflow:auto;overflow-x:hidden;">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
 	 	<input type="hidden" value="${type }" id="type"></input>
@@ -189,7 +191,8 @@ function deleteR(id){
 		</div>
 		</c:if>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
-        <span id="spanButtonPlaceHolder" ></span>
+      
 	</form>
+	</div>
 </body>
 </html>
