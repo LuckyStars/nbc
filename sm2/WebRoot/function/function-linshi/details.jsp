@@ -279,32 +279,52 @@
 					关联重心工作： <span> </span>
 					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
 					<pri:showWhenMaster>
-					<img style="float:right;" title="转发" 
+					<img style="float:right;cursor: pointer;" title="转发" 
 					src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
 				</div>
-				<div class="buttons">
-					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs cpoint"/><%--编辑 --%>
-				</div>
 				<div class="tabs-wp">
 					<ul class="tabs">
 						<c:forEach items="${steps }" var="step" varStatus="i">
-							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>" >
-								<a href="javascript:changeTab('${step.id}');">${step.name }</a>
-								<c:if test="${sessionScope.sm2_init==step.createrId}">
-								</c:if>
-									<img name="${step.id}" class="delete_step_ico" 
-									src="${prc}/function/function-linshi/images/icon1.png"  class="small1"/><%--删除 --%>
-									<img src="${prc}/function/function-linshi/images/icon2.png"  class="small"/><%--编辑步骤 --%>
-									<img onclick="popAddProg('${step.id}');"
-									src="${prc}/function/function-linshi/images/icon3.png"  class="small2 ico4"/><%--增加工作进展 --%>
+							
+							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
+							onmouseover="$('#step_ops_${step.id}').show();"
+							onmouseout="$('#step_ops_${step.id}').hide();"
+							 >
+								<div style="width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+								<a title="${step.name }" 
+								href="javascript:changeTab('${step.id}');"
+								>${step.name }</a>
+								</div>
+								
+								<span id="step_ops_${step.id}" style="display: none;">
+									<c:if test="${sessionScope.sm2_init==step.createrId}">
+									<img title="删除" name="${step.id}"
+									class="delete_step_ico small1" 
+									src="${prc}/function/function-linshi/images/icon1.png"  /><%--删除 --%>
+									
+									<img title="编辑"
+									 src="${prc}/function/function-linshi/images/icon2.png" 
+									class="small"/><%--编辑步骤 --%>
+									</c:if>
+									
+									<pri:showWhenManager>
+									<img title="增加工作进展"
+									 onclick="popAddProg('${step.id}');"
+									src="${prc}/function/function-linshi/images/icon3.png" 
+									class="small2 ico4"/><%--增加工作进展 --%>
+									</pri:showWhenManager>
+								</span>
 							</li>
 						</c:forEach>
 					</ul>
-					<img src="${prc}/function/function-linshi/images/ico3.png"  class="ico4 cpoint"/><%--增加工作进展 --%>
+					<a class="addtabs">
+						<img title="增加步骤" class="ico4 cpoint"
+						 src="${prc}/function/function-linshi/images/add.png" /><%--增加步骤 --%>
+					</a>
 					
 				</div>
 				<c:forEach items="${steps }" var="step" varStatus="i">

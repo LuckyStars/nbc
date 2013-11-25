@@ -238,7 +238,7 @@ a {
 .tabs-wp .addtabs {
 	height:32px;
 	line-height:32px;
-	float:right;
+	float:left;
 	cursor:pointer;
 }
 .tabs-wp .addtabs img {
@@ -294,10 +294,14 @@ a {
     display:block; position:absolute;
 }
 .small1{
-top:18px; left:90px;
+top: 3px;
+left: 95px;
+cursor: pointer;
 }
 .small {
-top:5px;left:90px;
+top: 3px;
+left: 80px;
+cursor: pointer;
 }
 .small2 {
 top: 3px;
