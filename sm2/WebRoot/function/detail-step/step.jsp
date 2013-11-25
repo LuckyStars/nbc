@@ -288,14 +288,14 @@
    			<img src="${prc }/function/detail-step/images/up.png"
    				onclick="switchArticle('${prog.id}');"
    			 width="13" height="13" class="mids-img"/>
-   			
-   			<img src="${prc }/function/detail-step/images/ico4.png" alt="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
+   			<pri:hideWhenMaster>
+   			<img src="${prc }/function/detail-step/images/ico4.png" title="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
    			<c:if test="${sessionScope.sm2_init==prog.createrId}">
-   				<img src="${prc }/function/detail-step/images/ico5.png" class="prog" id="${prog.id}"/><%--删除进展 --%>
+   				<img src="${prc }/function/detail-step/images/ico5.png" title="删除" class="prog" id="${prog.id}"/><%--删除进展 --%>
    			</c:if>
    			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
    			
-   			
+   			</pri:hideWhenMaster>
    			
    			<img src="${prc }/function/detail-step/images/zan.png" title="赞"
    			<c:if test="${prog.zand > 0}">
@@ -304,26 +304,27 @@
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
    			
-   			<img  src="${prc }/function/detail-step/images/zancancel.png" alt="取消赞" 
+   			<img  src="${prc }/function/detail-step/images/zancancel.png" title="取消赞" 
    			<c:if test="${prog.zand <= 0}">
    			 style="display: none;" 
    			</c:if>
    			id="cancelZan_${prog.id}"
    			onclick="cancelZan('${prog.id}');" />
    			
-   			<a href="javascript:showDiscusContent('${prog.id}');">查看评论</a>
+   			<img src="${prc }/function/detail-step/images/icon4.png" 
+   			title="查看评论" onclick="javascript:showDiscusContent('${prog.id}');"/>
    			
    		</a>
         <div class="conls"> 
         	<a>
         		<img src="${prc }/function/detail-step/images/shou.png" 
-        		onclick="showZans('${prog.id}');" alt="赞"
+        		onclick="showZans('${prog.id}');" title="赞"
         		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
         	</a>
         	<span> | </span>
         	<a>
         		<img src="${prc }/function/detail-step/images/ico1.png" 
-        		onclick="showReads('${prog.id}')" alt="阅读"
+        		onclick="showReads('${prog.id}')" title="阅读"
         		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
         	</a>
        		<span> | </span>
@@ -384,7 +385,7 @@
 	<!-- 评论  -->
     <div class="box" >
         <div class="conshen box-down" id="disc_content_${prog.id }" style="display: none;" >
-        	
+        	<pri:hideWhenManager>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
@@ -409,7 +410,7 @@
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	
+        	</pri:hideWhenManager>
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
         			<c:forEach items="${disEntry.value }" var="dis">

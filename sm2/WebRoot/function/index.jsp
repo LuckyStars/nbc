@@ -65,7 +65,7 @@
 					
 			<a class="la"  style="float:left; background:url(${prc}/function/images/ico__1.png) no-repeat;padding-left:20px;" href="#">教师门户</a>
 		&nbsp;&nbsp;
-		<a class="tc" href="${logoutService}"><img class="png" src="${prc}/function/images/bg__1.png"
+		<a class="tc" href="${logoutService}"><img class="png" src="${prc}/function/images/ico_exit.png"
 			title="退出"  style="float:left; margin-top: 3px;" /> 退出登录</a></div>
 	</div>
 	<div class="main">
@@ -242,26 +242,6 @@
 					<span style="color: #e1517e;">东兴杯课程比赛</span>
 					</a>
 					<a class="qi"></a>
-				</div>
-				<div class="linshi">
-					<a class="pointer" href="#">
-						<img src="${prc}/function/images/tb2.png" width="80" height="80" />
-						<span style="color: #359127;">迎接香港同盟校</span>
-					</a>
-					<a class="new"></a>
-				</div>
-				<div class="linshi">
-					<a class="pointer" href="#">
-						<img src="${prc}/function/images/tb3.png" width="80" height="80" />
-						<span style="color: #f36d2f;">优秀校长论坛</span>
-					</a>
-					<a class="text"></a>
-				</div>
-				<div class="linshi">
-					<a class="pointer" href="#">
-						<img src="${prc}/function/images/tb4.png" width="80" height="80" />
-						<span style="color: #447c0e;">东兴杯课程比赛</span>
-					</a>
 				</div>
 				<div class="linshi">
 					<a class="pointer" href="#">

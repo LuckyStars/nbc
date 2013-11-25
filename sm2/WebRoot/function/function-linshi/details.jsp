@@ -273,12 +273,12 @@
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					关联重心工作： <span> </span>
 					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
+					<img style="float:right;" src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
 				</h3>
 				<div class="articles">
 					<p>${subject.content }</p>
 				</div>
 				<div class="buttons">
-					<img  src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
 	  				
 					<img src="${prc}/function/function-linshi/images/add.png"  class="addtabs cpoint"/><%--编辑 --%>
 				</div>
