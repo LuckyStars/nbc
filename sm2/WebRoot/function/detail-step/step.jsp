@@ -299,7 +299,7 @@
    			
    			
    			
-   			<img src="${prc }/function/detail-step/images/zan.png" alt="赞"
+   			<img src="${prc }/function/detail-step/images/zan.png" title="赞"
    			<c:if test="${prog.zand > 0}">
    			 style="display: none;" 
    			</c:if>
@@ -349,12 +349,13 @@
         </script>
     
     	<!-- 增加批示 -->    
-        <div class="conshen">
+        <div class="conshen" style="border:0px;">
         	<pri:showWhenMaster>
         	<form action="${prc}/scMaster2/add_comment.action" method="post"
         	id="comm_form_${prog.id }"
         	 >
-	          	<input type="text" id="comm__content_${prog.id }" name="comm.content" class="erro"/>
+	          	<input type="text" id="comm__content_${prog.id }" name="comm.content"
+	          	 class="erro" style="width:700px;margin:0px; margin-bottom:10px;"/>
 	          	<input type="hidden" name="stepId" value="${id }"/>
 	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>

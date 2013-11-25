@@ -81,13 +81,11 @@
 				<p class="state">
 					<img src="${prc}/function/images/xin.png" />&nbsp;${userPhrase }
 				</p>
-				<p class="write">
-					<textarea></textarea>
-				</p>
+				
 			</div>
 		</div>
 		
-		<div class="module module1" style="margin-left: 24px;">
+		<div class="module module1" style="margin-left: 10px;">
 			<h1>个人办公</h1>
 			<div class="content" style="padding: 0 1px;">
 				<div class="office">
@@ -135,7 +133,7 @@
 			</div>
 		</div>
 
-		<div class="module module1" style="margin-left: 24px;">
+		<div class="module module1" style="margin-left: 10px;">
 			<h1>年度重心工作跟踪</h1>
 			<div class="content">
 				<table width="354" height="272" border="0" cellpadding="1"
@@ -235,7 +233,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="module module2" style="margin-left: 24px;">
+		<div class="module module2" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
 				<!--<div class="linshi">
@@ -273,7 +271,7 @@
 				</div>-->
 			</div>
 		</div>
-		<div class="module module2" style="margin-left: 24px;">
+		<div class="module module2" style="margin-left: 10px;">
 			<h1>统计分析</h1>
 			<div class="content">
 				<table width="382" height="301" class="tongji" cellpadding="1"

@@ -82,7 +82,7 @@ public class SingleCharts {
 	///////get&set//////
 	////////////////////
 	public String getBgColor() {
-		return bgColor;
+		return bgColor ==null || bgColor.trim()=="" ?"FFFFFF":bgColor;
 	}
 	public void setBgColor(String bgColor) {
 		this.bgColor = bgColor;
