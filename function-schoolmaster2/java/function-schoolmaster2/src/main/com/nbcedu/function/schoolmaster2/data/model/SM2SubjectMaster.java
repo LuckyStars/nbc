@@ -8,7 +8,7 @@ public class SM2SubjectMaster {
 	private String id;
 	private String subId;
 	private String userUid;
-	private Integer flag;
+	private Integer flag;//0:新建立,1:关注的,2:最近更新,3:普通的
 	private String userName;
 	/////////////////////////
 	////getters&Setters//////

@@ -139,4 +139,8 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		this.sm2SubjectDao.updateByHql("update SM2SubjectMaster set flag=? where subId=? and userUid=?",flag,subId,userUid);
 		
 	}
+	@Override
+	public PagerModel findAlltrans(String userId,String typeId) throws DBException{
+		return sm2SubjectDao.findAllTrans(userId,typeId);
+	}
 }

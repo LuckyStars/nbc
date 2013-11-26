@@ -12,6 +12,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
@@ -185,7 +186,16 @@ public class SubjectAction extends BaseAction{
 //		}
 		return null;
 	}
-	
+	//查询转发
+	public String findAllTrans(){
+		try {
+			pm = sm2SubjectBiz.findAlltrans(this.getUserId(), "");
+		} catch (DBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 	/////////////////////////
 	/////getters&setters/////
 	/////////////////////////

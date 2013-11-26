@@ -61,13 +61,13 @@
 					</dt>
 					<dd>邀请查看</dd> </a>
 			</dl>	
-<!--			<dl class="warp">-->
-<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=lssx&userId=${sns_init}">-->
-<!--					<dt>-->
-<!--						<img src="${prc}/function/img/tu5.jpg" />-->
-<!--					</dt>-->
-<!--					<dd>临时事项</dd> </a>-->
-<!--			</dl>-->
+			<dl class="warp">
+				<a href="${prc}/scMaster2/findAllTrans_subject.action">
+					<dt>
+						<img src="${prc}/function/img/tu5.jpg" />
+					</dt>
+					<dd>临时11111项</dd> </a>
+			</dl>
 <!--			<dl class="warp">-->
 <!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_3&userId=${sns_init}">-->
 <!--					<dt>-->

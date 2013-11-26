@@ -52,6 +52,7 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 			});
 		} catch (Exception e) {
 			logger.error("查询数据错误");
+			e.printStackTrace();
 			new DBException(e.getMessage());
 		}
 		return result;

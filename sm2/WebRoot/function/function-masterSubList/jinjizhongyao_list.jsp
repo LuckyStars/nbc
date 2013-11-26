@@ -129,10 +129,10 @@
 	        <td align="center">
 <!--	        	<span style="margin:20px;"><img src="${prc}/function/img/right.jpg" /></span>-->
 	        	<c:if test="${subject.flag==1}">
-					<a href="#" onclick="javascript:stick('${subject.id }',0,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
+					<a href="#" onclick="javascript:stick('${subject.id }',3,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
 				</c:if>
 				<c:if test="${subject.flag !=1}">
-					<a href="#" onclick="javascript:stick('${subject.id }',1,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue0.png"/></a>
+					<a href="#" onclick="javascript:stick('${subject.id }',1,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue3.png"/></a>
 				</c:if>
 	        </td>
 	      </tr>

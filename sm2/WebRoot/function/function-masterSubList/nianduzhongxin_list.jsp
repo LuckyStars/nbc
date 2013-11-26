@@ -140,7 +140,7 @@ table td {
 							</div>
 							<p class="pross-p">${sub.progress}%</p>
 							<c:if test="${sub.flag eq '1'}">
-								<a href="#" onclick="javascript:stick('${sub.id }',0,'qi');" id="${sub.id }">
+								<a href="#" onclick="javascript:stick('${sub.id }',3,'qi');" id="${sub.id }">
 									<img src="${prc}/function/img/qi1.png" />
 								</a>
 							</c:if> 

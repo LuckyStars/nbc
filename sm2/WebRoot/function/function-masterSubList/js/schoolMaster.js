@@ -10,10 +10,10 @@ function stick(id,flag,banner){
 		   function(data){
  		   		if(data=="success"){
  		   			var flag1;
- 	 		   		if(flag==0){
+ 	 		   		if(flag==3){
  	 		   			flag1=1;
  	 		   		}else{
-						flag1=0;
+						flag1=3;
  	 		   		}
  	 		   		var a = '<a href="#" onclick="javascript:stick(\''+id+'\','+flag1+',\''+banner+'\');" id="'+id+'">';
  	 		   		var img1 = '<img src="../function/img/'+banner+flag+suff+'" class="qi"/></a>';

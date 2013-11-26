@@ -7,46 +7,46 @@
             <column name="id" length="32" />
             <generator class="com.nbcedu.common.uuid.UIDGenerator" />
         </id>
-        <property name="createrId" type="java.lang.String">
+        <property name="createrId" type="string">
             <column name="createrId" length="32" />
         </property>
-                <property name="createrName" type="java.lang.String">
+        <property name="createrName" type="string">
             <column name="createrName" length="100" />
         </property>
-        <property name="createTime" type="java.sql.Timestamp">
+        <property name="createTime" type="date">
             <column name="createTime" />
         </property>
-        <property name="content" type="java.lang.String">
-            <column name="content" length="65535" />
+        <property name="content" type="string">
+            <column name="content"  sql-type="text"/>
         </property>
-        <property name="flag" type="java.lang.Integer">
+        <property name="flag" type="int">
             <column name="flag" default="0"/>
         </property>
-          <property name="progress" type="java.lang.Integer">
+          <property name="progress" type="int">
             <column name="progress" default="0"/>
         </property>
-        <property name="departmentId" type="java.lang.String">
+        <property name="departmentId" type="string">
             <column name="departmentId" length="32" />
         </property>
-        <property name="departmentName" type="java.lang.String">
+        <property name="departmentName" type="string">
             <column name="departmentName" length="60" />
         </property>
-        <property name="title" type="java.lang.String">
+        <property name="title" type="string">
             <column name="title" />
         </property>
-            <property name="typeId" type="java.lang.String">
+            <property name="typeId" type="string">
             <column name="typeId" />
         </property>
-        <property name="moduleId" type="java.lang.String">
+        <property name="moduleId" type="string">
             <column name="moduleId" length="32" />
         </property>
-        <property name="lastUpdateTime" type="java.sql.Timestamp">
+        <property name="lastUpdateTime" type="date">
             <column name="lastUpdateTime" />
         </property>
-        <property name="parentId" type="java.lang.String">
+        <property name="parentId" type="string">
             <column name="parentId" length="32" />
         </property>
-       <property name="status" type="java.lang.String">
+       <property name="status" type="string">
             <column name="status" length="10" />
         </property>
         <set name="excuteUsers" lazy="false" table="t_sm2_subject_user" inverse="false" cascade="all">

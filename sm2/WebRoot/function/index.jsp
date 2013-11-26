@@ -176,7 +176,7 @@
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
 								<img src="${prc}/function/images/icon5.png" />
-								<span>后勤·卫生工作</span>
+								<span>后勤卫生工作</span>
 								<img src="${prc}/function/images/new.png" id="houqinweisheng" />
 							</a>
 						</td>
