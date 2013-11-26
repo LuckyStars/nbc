@@ -59,7 +59,7 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 		List result = null;
 		result = (List) getHibernateTemplate().executeWithNativeSession(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException {
-					return session.createSQLQuery(sql).addEntity(TSm2Subject.class).
+					return session.createSQLQuery(sql).
 					setFirstResult(SystemContext.getOffset()).
 					setMaxResults(SystemContext.getPagesize()).list();
 			}

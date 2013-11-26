@@ -13,6 +13,8 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 public class StepAction extends BaseAction{
 
 	private Sm2StepBiz stepBiz;
+	private String subjectId;
+	private String name;
 	
 	public void stepList(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -27,8 +29,12 @@ public class StepAction extends BaseAction{
 	 * @return
 	 */
 	public void delete(){
-		this.stepBiz.removeById(id);
-		Struts2Utils.renderText("0","encoding:UTF-8");
+		boolean b = this.stepBiz.removeById1(id);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
 	}
 	public void isExist(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -39,10 +45,31 @@ public class StepAction extends BaseAction{
 		}
 		
 	}
+	public void update(){
+		boolean b =this.stepBiz.updateBySubId(name, subjectId);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
+	}
 	//////////////////////////
 	/////getters&setters/////
 	/////////////////////////
 	public void setStepBiz(Sm2StepBiz stepBiz) {
 		this.stepBiz = stepBiz;
 	}
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

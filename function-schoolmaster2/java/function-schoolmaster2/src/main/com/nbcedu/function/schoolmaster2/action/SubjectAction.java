@@ -194,7 +194,7 @@ public class SubjectAction extends BaseAction{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "";
+		return "list";
 	}
 	/////////////////////////
 	/////getters&setters/////

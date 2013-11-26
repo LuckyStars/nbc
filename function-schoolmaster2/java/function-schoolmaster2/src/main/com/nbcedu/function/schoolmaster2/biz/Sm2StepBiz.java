@@ -30,5 +30,18 @@ public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
 	 * @author xuechong
 	 */
 	public List<StepVo> findByProgId(String progId);
+	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
+	public boolean removeById1(String id);
+	/**
+	 * 修改 step同时修改审批人的查询状态flag为修改
+	 * @param name
+	 * @param subId
+	 * @return
+	 */
+	boolean updateBySubId(String name, String subId);
 	
 }

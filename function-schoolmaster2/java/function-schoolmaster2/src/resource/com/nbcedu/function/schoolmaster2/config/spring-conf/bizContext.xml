@@ -40,6 +40,7 @@
 
 	<bean id="sm2StepBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2StepBizImpl">
 		<property name="stepDao" ref="sm2StepDao"></property>
+		<property name="subjectBiz" ref="sm2SubjectBiz"></property>
 	</bean>
 	
 	<bean id="sm2ProgressBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2ProgressBizImpl">

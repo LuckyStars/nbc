@@ -33,8 +33,21 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	 * @return
 	 */
 	PagerModel findBySubjectMaster(SubjectVo subject);
-	
+	/**
+	 * 修改插旗状态
+	 * @param flag
+	 * @param subId
+	 * @param userUid
+	 * @throws DBException
+	 */
 	public void updateMasterFlag(int flag, String subId,String userUid) throws DBException ;
 
 	PagerModel findAlltrans(String userId, String typeId) throws DBException;
+	/**
+	 * 修改所有subject的flag
+	 * @param flag
+	 * @param subId
+	 * @throws DBException
+	 */
+	void updateMasterFlagAll(int flag, String subId) throws DBException;
 }
