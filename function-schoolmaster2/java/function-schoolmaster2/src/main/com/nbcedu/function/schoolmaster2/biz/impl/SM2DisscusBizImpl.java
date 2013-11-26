@@ -28,7 +28,6 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 public class SM2DisscusBizImpl extends BaseBizImpl<TSm2Disscus> implements SM2DisscusBiz{
 	
 	private SM2DisscusDao disDao;
-	private JdbcTemplate jdbc;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -96,11 +95,6 @@ public class SM2DisscusBizImpl extends BaseBizImpl<TSm2Disscus> implements SM2Di
 		});
 	}
 	
-	@Override
-	public Map<String, List<TSm2Disscus>> findMapByProgIds(
-			Collection<String> progIds) {
-		return null;
-	}
 	
 	///////////////////////////
 	//////getters&setters//////

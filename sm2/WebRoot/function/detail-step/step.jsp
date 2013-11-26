@@ -276,7 +276,10 @@
     	function showDiscusContent (progId){
     		var divId = "#disc_content_"+progId;
     		$(divId).is(":hidden")?
-    				$(divId).slideDown('fast',resizeParent)
+    				function(){
+    					$(divId).slideDown('fast',resizeParent);
+    					window.location.hash="#disc_content_"+progId;
+    				}()
     				:$(divId).slideUp('fast',resizeParent);
     	}
     </script>
@@ -386,8 +389,10 @@
 	
 	<!-- 评论  -->
     <div class="box" >
-        <div class="conshen box-down" id="disc_content_${prog.id }" style="display: none;" >
-        	<pri:hideWhenManager>
+        <div class="conshen box-down" 
+        	name="disc_content_${prog.id }"
+         id="disc_content_${prog.id }" style="display: none;" >
+        	<pri:hideWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
@@ -412,7 +417,7 @@
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	</pri:hideWhenManager>
+        	</pri:hideWhenMaster>
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
         			<c:forEach items="${disEntry.value }" var="dis">

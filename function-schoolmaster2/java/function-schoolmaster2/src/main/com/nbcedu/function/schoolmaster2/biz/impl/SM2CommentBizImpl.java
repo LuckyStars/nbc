@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
@@ -87,6 +90,17 @@ public class SM2CommentBizImpl extends BaseBizImpl<TSm2Comment> implements SM2Co
 	@Override
 	public void removeByProgId(String progId) {
 		this.comDao.createQuery("delete from TSm2Comment where progressId=?", progId).executeUpdate();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<TSm2Comment> findByProgIds(Collection<String> progIds) {
+		if(CollectionUtils.isEmpty(progIds)){
+			return Lists.newArrayList();
+		}
+		Criteria cri = this.comDao.createCriteria(Restrictions.in("progressId", progIds));
+		cri.addOrder(Order.desc("createTime"));
+		return cri.list();
 	}
 
 	
