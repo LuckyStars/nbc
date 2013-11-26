@@ -10,6 +10,7 @@
 	<title></title>
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
 	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
+	<link href="${prc}/function/function-linshi/css/style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
@@ -18,35 +19,7 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
-	<%-- 
-	<style>
-        .ui-widget-content {
-        width:230px; height:10px; background:#EA605E
-        }
-        .ui-slider .ui-slider-handle {
-        width:15px; height:15px; top:-4px;
-        }
-        .ui-widget-header {
-        background:#D2DFE8
-        }
-        .content h2 p {
-         margin-left:100px;
-        }
-        .tabs li{
-        	padding:0 0 0 15px;
-        }
-        .tabs li img{
-        	float:right;position:relative; padding-left: 5px;
-        	width:16px;
-        	height:14px;
-        }
-        .cpoint{
-        	cursor: pointer;
-        }
-        .tabs li{
-        padding:0 20px;
-        }
-    </style>--%>
+	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
 	<script type="text/javascript">
 	KindEditor.ready(function(K) {
@@ -287,6 +260,11 @@
 					<p>${subject.content }</p>
 				</div>
 				<div class="tabs-wp">
+					<div id="spec-list">
+					<a href="javascript:;" class="spec-control2" id="spec-forward"></a>
+					<a href="javascript:;" class="spec-control1" id="spec-backward"></a>
+       			 	<div class="spec-items" style="position: absolute; width: 680px; height:38px; overflow: hidden; left:35px;">
+				
 					<ul class="tabs">
 						<c:forEach items="${steps }" var="step" varStatus="i">
 							
@@ -321,11 +299,13 @@
 							</li>
 						</c:forEach>
 					</ul>
+					
+					
+					</div>
 					<a class="addtabs">
 						<img title="增加步骤" class="ico4 cpoint"
 						 src="${prc}/function/function-linshi/images/add.png" /><%--增加步骤 --%>
 					</a>
-					
 				</div>
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
@@ -499,6 +479,11 @@
 		$("#" + stepId).addClass("cur");
 		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);
 	}
+    
+</script>
+
+<script type="text/javascript">
+$("#spec-backward").imgmag({ show: 5, number: 1});
 </script>
 </body>
 </html>

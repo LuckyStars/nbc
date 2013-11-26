@@ -17,7 +17,6 @@
     	var ctx = '${prc}';
     	function resizeParent(){
     		var height = $(document).height();
-    		console.log(height);
     		parent.resizeFrame(height+200);
     	}
         $(function () {
@@ -278,7 +277,6 @@
     		$(divId).is(":hidden")?
     				function(){
     					$(divId).slideDown('fast',resizeParent);
-    					window.location.hash="#disc_content_"+progId;
     				}()
     				:$(divId).slideUp('fast',resizeParent);
     	}
@@ -341,52 +339,6 @@
         </div>
 	</div>
 	
-    <div class="article" style="height:inherit;" id="art_${prog.id }">
-        <textarea style="width:700px;height:200px;" id="content_${prog.id}"></textarea>
-        <script type="text/javascript">
-	        KindEditor.ready(function(K) {
-	        	var options = {items : []};
-	        	var editor${prog.id} = K.create('#content_${prog.id}',options);
-	       		editor${prog.id}.html('${prog.content}');
-	        	editor${prog.id}.readonly(true);
-	        });
-        </script>
-    
-    	<!-- 增加批示 -->    
-        <div class="conshen" style="border:0px;">
-        	<pri:showWhenMaster>
-        	<form action="${prc}/scMaster2/add_comment.action" method="post"
-        	id="comm_form_${prog.id }"
-        	 >
-	          	<input type="text" id="comm__content_${prog.id }" name="comm.content"
-	          	 class="erro" style="width:700px;margin:0px; margin-bottom:10px;"/>
-	          	<input type="hidden" name="stepId" value="${id }"/>
-	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
-	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>
-        	</form>
-        	</pri:showWhenMaster>
-        </div>
-        <!-- 增加批示 END  -->   
-        <c:forEach items="${comMap}" var="comEntry">
-       		<c:if test="${comEntry.key==prog.id }">
-       			<c:forEach items="${comEntry.value }" var="com">
-       				<dl class="new">
-		            	<dd>
-		              		<p>
-		              			<span class="blue">${com.userName }：</span>
-		              			<c:out value="${com.content }" escapeXml="true"></c:out><br />
-		              		</p>
-		              		<span class="gray float">(<fmt:formatDate value="${com.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/>)</span>
-		              	</dd>
-		             	<div style="clear:both;"></div>
-		          	</dl>
-       			</c:forEach>
-       		</c:if>
-       	</c:forEach>
-       
-        <p class="pack1">查看所有批示</p>
-	</div>
-	
 	<!-- 评论  -->
     <div class="box" >
         <div class="conshen box-down" 
@@ -440,6 +392,54 @@
 		</div>
 	</div>
 	<!-- 评论 END -->
+	
+    <div class="article" style="height:inherit;" id="art_${prog.id }">
+        <textarea style="width:700px;height:200px;" id="content_${prog.id}"></textarea>
+        <script type="text/javascript">
+	        KindEditor.ready(function(K) {
+	        	var options = {items : []};
+	        	var editor${prog.id} = K.create('#content_${prog.id}',options);
+	       		editor${prog.id}.html('${prog.content}');
+	        	editor${prog.id}.readonly(true);
+	        });
+        </script>
+    
+    	<!-- 增加批示 -->    
+        <div class="conshen" style="border:0px;">
+        	<pri:showWhenMaster>
+        	<form action="${prc}/scMaster2/add_comment.action" method="post"
+        	id="comm_form_${prog.id }"
+        	 >
+	          	<input type="text" id="comm__content_${prog.id }" name="comm.content"
+	          	 class="erro" style="width:700px;margin:0px; margin-bottom:10px;"/>
+	          	<input type="hidden" name="stepId" value="${id }"/>
+	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
+	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>
+        	</form>
+        	</pri:showWhenMaster>
+        </div>
+        <!-- 增加批示 END  -->   
+        <c:forEach items="${comMap}" var="comEntry">
+       		<c:if test="${comEntry.key==prog.id }">
+       			<c:forEach items="${comEntry.value }" var="com">
+       				<dl class="new">
+		            	<dd>
+		              		<p>
+		              			<span class="blue">${com.userName }：</span>
+		              			<c:out value="${com.content }" escapeXml="true"></c:out><br />
+		              		</p>
+		              		<span class="gray float">(<fmt:formatDate value="${com.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/>)</span>
+		              	</dd>
+		             	<div style="clear:both;"></div>
+		          	</dl>
+       			</c:forEach>
+       		</c:if>
+       	</c:forEach>
+       
+        <p class="pack1">查看所有批示</p>
+	</div>
+	
+	
 	</c:forEach>
       
       <!--弹出层 资源-->

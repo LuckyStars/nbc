@@ -1,0 +1,41 @@
+﻿/* 新加样式 */
+
+.tabs {
+    overflow: hidden;
+    zoom: 1;
+}
+.tabs-wp .addtabs {
+    position:absolute;
+    top:1px; right:5px;
+}
+
+.tabs-wp {
+	width:780px;
+    position:relative;
+}
+
+
+#spec-list {
+    position: relative;
+    width: 760px;
+    height: 38px;
+    overflow: hidden;
+}
+
+    #spec-list .spec-control1,#spec-list .spec-control2 {
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        top:6px;
+    }
+    .spec-control1{
+    background-image: url(../img/1.png);
+    background-repeat: no-repeat;
+}
+    .spec-control2 {
+    background-image: url(../img/2.png);
+    background-repeat: no-repeat;
+    right:10px;
+}

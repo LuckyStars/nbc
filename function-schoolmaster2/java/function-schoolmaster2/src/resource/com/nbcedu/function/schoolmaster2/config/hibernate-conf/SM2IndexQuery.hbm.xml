@@ -21,12 +21,15 @@
 			SELECT PK_T_PORTAL_ACCOUNT_USERID
 			FROM t_portal_account
 			WHERE UID = :uid
-		);
+		) 
+		ORDER BY CREATETIME DESC
+		LIMIT 1
     	]]>
     </sql-query>
 
 
 	<sql-query name="index_count_dongtai">
+		<![CDATA[
 		SELECT COUNT(sub.id),sub.moduleId
 		FROM t_sm2_subject sub,
 			(
@@ -38,5 +41,6 @@
 			sub.id = subIds.subId 
 			AND (sub.status='new' OR sub.status='updated')
 		GROUP BY sub.moduleId
+		]]>
 	</sql-query>
 </hibernate-mapping>
