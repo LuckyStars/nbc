@@ -1,5 +1,8 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import static com.nbcedu.function.schoolmaster2.tags.EmotionDisplayTag.replaceEmos;
+import static org.apache.taglibs.standard.tag.common.core.Util.escapeXml;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,11 +12,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.SM2CommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
@@ -201,13 +206,75 @@ public class MasterSubjectAction extends BaseAction{
 	 */
 	public void allDiss(){
 		List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(Arrays.asList(this.id));
+		if(CollectionUtils.isEmpty(disList)){
+			return;
+		}
+		List<MsgContent> results = Lists.transform(disList, new Function<TSm2Disscus, MsgContent>() {
+			@Override
+			public MsgContent apply(TSm2Disscus in) {
+				MsgContent msg = new MsgContent();
+				msg.setTime(Utils.Dates.fullSdf.format(in.getCreateTime()));
+				msg.setUser(in.getUserName());
+				msg.setContent(replaceEmos(in.getContent(), ctxPath()));
+				return msg;
+			}
+		});
+		renderMsgJson(results);
 	}
+	
 	/**
 	 * 显示所有批示
 	 * @author xuechong
 	 */
-	public void addComm(){
+	public void allComm(){
 		List<TSm2Comment> comList = this.comBiz.findByProgIds(Arrays.asList(this.id));
+		if(CollectionUtils.isEmpty(comList)){
+			return;
+		}
+		List<MsgContent> results = Lists.transform(comList,new Function<TSm2Comment, MsgContent>() {
+			@Override
+			public MsgContent apply(TSm2Comment in) {
+				MsgContent msg = new MsgContent();
+				msg.setUser(in.getUserName());
+				msg.setTime(Utils.Dates.fullSdf.format(in.getCreatetime()));
+				msg.setContent(escapeXml(in.getContent()));
+				return msg;
+			}
+		});
+		renderMsgJson(results);
+	}
+	
+	private void renderMsgJson(List<MsgContent> contents){
+		Struts2Utils.renderJson(
+				Utils.gson.toJson(contents, new TypeToken<List<MsgContent>>(){}.getType()));
+	}
+	
+	private String ctxPath(){
+		return ServletActionContext.getServletContext().getContextPath();
+	}
+	
+	public static class MsgContent{
+		private String user;
+		private String time;
+		private String content;
+		public String getUser() {
+			return user;
+		}
+		public void setUser(String user) {
+			this.user = user;
+		}
+		public String getTime() {
+			return time;
+		}
+		public void setTime(String time) {
+			this.time = time;
+		}
+		public String getContent() {
+			return content;
+		}
+		public void setContent(String content) {
+			this.content = content;
+		}
 	}
 	///////////////////////
 	////getters&setters////

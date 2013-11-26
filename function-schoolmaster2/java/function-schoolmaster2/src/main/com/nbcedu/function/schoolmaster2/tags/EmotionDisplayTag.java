@@ -17,7 +17,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class EmotionDisplayTag extends TagSupport {
 	
 	private String content;
-	private Map<String, String> emos =  new HashMap<String, String>(){{
+	private static Map<String, String> emos =  new HashMap<String, String>(){{
 		put("[01]","01.png");	
 		put("[02]","02.png");	
 		put("[03]","03.png");	
@@ -35,11 +35,12 @@ public class EmotionDisplayTag extends TagSupport {
 		put("[0F]","0F.png");	
 	}};	
 	
-	
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			this.pageContext.getOut().write(replaceEmos());
+			this.pageContext.getOut().write(
+					replaceEmos(this.content,
+					this.pageContext.getServletContext().getContextPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,27 +48,24 @@ public class EmotionDisplayTag extends TagSupport {
 	}
 	
 	
-	private String replaceEmos(){
-		if(this.content==null||this.content.trim().length() <=0){
+	public static String replaceEmos(String input,String ctx){
+		if(input==null||input.trim().length() <=0){
 			return "";
 		}
-		this.content = escapeXml(this.content);
-		StringBuilder result = new StringBuilder(content.length());
+		input = escapeXml(input);
+		StringBuilder result = new StringBuilder(input.length());
 		int next = 0;
-		char[] origin = content.trim().toCharArray();
-		String ctx = this.pageContext.getServletContext().getContextPath();
+		char[] origin = input.trim().toCharArray();
 		for (int i = 0; i < origin.length; i++) {
 			if(i<next){
 				continue;
 			}
 			if(origin[i]=='[' && (i+3) <=origin.length){
-				String mat = new String(new char[]{origin[i],origin[i+1],origin[i+2],origin[i+3]});
+				String mat = 
+					new String(new char[]{origin[i],origin[i+1],origin[i+2],origin[i+3]});
+				
 				if(emos.containsKey(mat)){
-					result.append("<img src='");
-					result.append(ctx);
-					result.append("/function/emotion/images/");
-					result.append(emos.get(mat));
-					result.append("' />");
+					appendImgTag(result,ctx, mat);
 					next += 4;
 					continue;
 				}
@@ -76,6 +74,15 @@ public class EmotionDisplayTag extends TagSupport {
 			result.append(origin[i]);
 		}
 		return result.toString();
+	}
+
+
+	private static void appendImgTag(StringBuilder result,String ctx,String mat) {
+		result.append("<img src='");
+		result.append(ctx);
+		result.append("/function/emotion/images/");
+		result.append(emos.get(mat));
+		result.append("' />");
 	}
 
 	///////////////////////
