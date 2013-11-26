@@ -14,10 +14,8 @@
             if (div.scrollLeft() < (lis - seting.show - 1) * 113) {
                 $(self).next().removeClass(opstions.show);
                 index++;
-                console.log(div);
-                div.animate({
-                	scrollLeft: seting.number*113 * index
-                });
+                console.log(div.scrollLeft());
+                div.scrollLeft(seting.number * 113 * index);
             }
             if (div.scrollLeft() == (lis - seting.show - 2) *113) {
                 $(self).addClass(opstions.show);
@@ -28,10 +26,9 @@
             if (index >= 1) {
                 $(self).removeClass(opstions.show);
                 index--;
-                console.log(div);
-                div.animate({
-                	scrollLeft: seting.number*113 * index
-                });
+                console.log(div.scrollLeft());
+                div.scrollLeft(seting.number * 113 * index);
+
             }
             if (index == 0) {
                 $(this).addClass(opstions.show);

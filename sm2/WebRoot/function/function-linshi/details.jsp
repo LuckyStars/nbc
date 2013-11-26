@@ -261,8 +261,8 @@
 				</div>
 				<div class="tabs-wp">
 					<div id="spec-list">
-					<a href="javascript:;" class="spec-control2" id="spec-forward"></a>
-					<a href="javascript:;" class="spec-control1" id="spec-backward"></a>
+					<a href="javascript:;" class="spec-control1" id="spec-forward"></a>
+					<a href="javascript:;" class="spec-control2" id="spec-backward"></a>
        			 	<div class="spec-items" style="position: absolute; width: 680px; height:38px; overflow: hidden; left:35px;">
 				
 					<ul class="tabs">
