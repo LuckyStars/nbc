@@ -66,7 +66,14 @@
 					<dt>
 						<img src="${prc}/function/img/tu5.jpg" />
 					</dt>
-					<dd>临时11111项</dd> </a>
+					<dd>转发</dd> </a>
+			</dl>
+			<dl class="warp">
+				<a href="${prc}/scMaster2/listStatistics_data.action?matcher=bookSite">
+					<dt>
+						<img src="${prc}/function/img/tu5.jpg" />
+					</dt>
+					<dd>场馆预定</dd> </a>
 			</dl>
 <!--			<dl class="warp">-->
 <!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_3&userId=${sns_init}">-->

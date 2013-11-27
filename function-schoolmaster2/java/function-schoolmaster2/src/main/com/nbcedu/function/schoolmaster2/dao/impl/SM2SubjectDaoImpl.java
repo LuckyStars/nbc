@@ -6,10 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.sql.Types;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
 import org.hibernate.transform.ResultTransformer;
+import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import com.nbcedu.function.schoolmaster2.core.comment.Constants;
@@ -51,17 +53,35 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public PagerModel findAllTrans( String userId,String typeId) throws DBException{
-		final String sql = "select s.* from t_sm2_subject s,t_sm2_subject_trans t " +
-					"where t.sub_id=s.id and t.user_uid='"+userId+"'";
-		final String sql1 = "select count(s.id) from t_sm2_subject s,t_sm2_subject_trans t " +
-					"where t.sub_id=s.id and t.user_uid='"+userId+"'";
+	public PagerModel findAllTrans(SubjectVo subject,String curUserId) throws DBException{
+		StringBuffer buff = new StringBuffer();
+		StringBuffer buff1 = new StringBuffer();
+		buff.append(" from t_sm2_subject s,t_sm2_subject_trans t where t.sub_id=s.id ");
+		buff.append(" and t.user_uid='"+curUserId+"'");
+		if(!StringUtil.isEmpty(subject.getTitle())){
+			buff.append(" and s.title like %");
+			buff.append(subject.getTitle());
+			buff.append("%");
+		}
+		buff1 = buff;
+		buff.insert(0, "select s.id,s.createTime,s.title,s.moduleId,s.createrName,s.departmentName" );
+		buff1.insert(0, "select count(s.id) ");
+		final String sql = buff.toString();
+				
+		final String sql1 = buff1.toString();
 		List result = null;
 		result = (List) getHibernateTemplate().executeWithNativeSession(new HibernateCallback() {
 			public Object doInHibernate(Session session) throws HibernateException {
-					return session.createSQLQuery(sql).
-					setFirstResult(SystemContext.getOffset()).
-					setMaxResults(SystemContext.getPagesize()).list();
+					return session.createSQLQuery(sql)
+					 .addScalar("id", Hibernate.STRING)
+					 .addScalar("createTime", Hibernate.DATE)
+					 .addScalar("title",Hibernate.STRING)
+					 .addScalar("moduleId", Hibernate.STRING)
+					 .addScalar("createrName", Hibernate.STRING)
+					 .addScalar("departmentName", Hibernate.STRING)
+					 .setResultTransformer(Transformers.aliasToBean(TSm2Subject.class))
+					 .setFirstResult(SystemContext.getOffset())
+					 .setMaxResults(SystemContext.getPagesize()).list();
 			}
 		});
 		PagerModel pagerModel = new PagerModel();

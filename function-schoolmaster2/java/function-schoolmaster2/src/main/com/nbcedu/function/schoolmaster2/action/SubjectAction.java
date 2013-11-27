@@ -189,12 +189,12 @@ public class SubjectAction extends BaseAction{
 	//查询转发
 	public String findAllTrans(){
 		try {
-			pm = sm2SubjectBiz.findAlltrans(this.getUserId(), "");
+			pm = sm2SubjectBiz.findAlltrans(subjectVo, this.getUserId());
 		} catch (DBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "list";
+		return "transList";
 	}
 	/////////////////////////
 	/////getters&setters/////

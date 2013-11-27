@@ -59,4 +59,6 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	public SubjectZanVo findByProgId(String progId);
 	
 	public Map<String,Integer> findNewCountByModule(String uid);
+	
+	
 }
