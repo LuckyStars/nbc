@@ -106,7 +106,7 @@
 					<a class="pointer" href="${prc}/scMaster2/daiban_master.action">
 						<img src="${prc}/function/images/daiban.jpg"/>
 						<span>待办事宜</span>
-						<i id="daibanshiyi" >6</i>
+						<%-- <i id="daibanshiyi" >6</i>--%>
 					</a>
 				</div>
 

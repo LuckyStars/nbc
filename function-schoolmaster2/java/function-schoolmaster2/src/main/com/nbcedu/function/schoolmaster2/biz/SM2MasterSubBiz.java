@@ -23,6 +23,15 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 */
 	public PagerModel findByMaster(String modId,String masterUid);
 	/**
+	 * 
+	 * @param modId
+	 * @param masterUid
+	 * @param flagType
+	 * @return
+	 * @author xuechong
+	 */
+	public PagerModel findByMaster(String modId,String masterUid,Integer flagType);
+	/**
 	 * 按校长和模块类型查询前 size个内容
 	 * @param modId
 	 * @param masterUid 如果为null 或 "" 则查询所有

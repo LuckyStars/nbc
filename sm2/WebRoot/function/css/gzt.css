@@ -431,7 +431,13 @@ width:120px; height:27px; line-height:27px;background:url(../img/p-bg1.png) repe
 .work2{
 width:120px; height:27px; line-height:27px;background:url(../img/p-bg2.png) repeat-x;border:1px solid #9FE293; position:relative; margin-top:10px;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;cursor:pointer;
 }
+.work3{
+width:120px; height:27px; line-height:27px;background:url(../img/p-bg3.png) repeat-x;border:1px solid #FFCCFF; position:relative; margin-top:10px;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;cursor:pointer;
+}
 .work2 .ico2{
+    background:url(../img/ico2.png) no-repeat; margin-left:20px; padding-left:25px;
+}
+.work3 .ico2{
     background:url(../img/ico2.png) no-repeat; margin-left:20px; padding-left:25px;
 }
 .work .ico-1,.work1 .ico-1{
@@ -456,6 +462,12 @@ width:965px; height:30px; line-height:30px; background:#DCE3FF; border:1px solid
 width:965px; height:30px; line-height:30px; background:#D5FFCF; border:1px solid #9EE393; margin-left:17px; margin-top:10px;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;
 }
 .tit3 span{
+    background:url(../img/ico2.png) no-repeat; margin-left:20px; padding-left:25px;
+}
+.tit4{
+width:965px; height:30px; line-height:30px; background:#FFCCFF; border:1px solid #FF99CC; margin-left:17px; margin-top:10px;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;
+}
+.tit4 span{
     background:url(../img/ico2.png) no-repeat; margin-left:20px; padding-left:25px;
 }
 .ico3 {

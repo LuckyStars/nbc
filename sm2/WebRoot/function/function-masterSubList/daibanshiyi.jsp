@@ -21,6 +21,11 @@ table td {
 	text-align: left;
 	padding-left: 50px;
 }
+.pages{
+padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0 auto;
+}
+.pages a{ display:block; padding:0px 10px; background:#fcfcfc; border:1px solid #ccc; text-align:center; line-height:20px; float:left; height:20px;  margin-left:15px; margin-top:20px;cursor:pointer; }
+.pages a select{ width:45px;}
 </style>
 
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
@@ -80,16 +85,25 @@ table td {
 			$(".one").show();
 			$(".two").hide();
 			$(".three").hide();
+			$(".four").hide();
 		});
 		$(".work1").click(function() {
 			$(".one").hide();
 			$(".two").show();
 			$(".three").hide();
+			$(".four").hide();
 		});
 		$(".work2").click(function() {
 			$(".one").hide();
 			$(".three").show();
 			$(".two").hide();
+			$(".four").hide();
+		});
+		$(".work3").click(function() {
+			$(".one").hide();
+			$(".two").hide();
+			$(".three").hide();
+			$(".four").show();
 		});
 	});
 </script>
@@ -108,6 +122,9 @@ table td {
 			</p>
 			<p class="work2">
 				<span class="ico2">紧急重要</span>
+			</p>
+			<p class="work3">
+				<span class="ico2">临时事项</span>
 			</p>
 			<%--
 				<select>
@@ -184,6 +201,40 @@ table td {
 				</c:forEach>
 			</table>
 		</div>
+		
+		<div class="four">
+			<p class="tit4">
+				<span>临时事项<%--<a href="#">5</a>条--%></span>
+			</p>
+			<table width="100%" border="0">
+				<c:forEach items="${subList }" var="sub">
+					<c:if test="${sub.moduleId=='linshishixiang' }">
+					<tr>
+						<td width="25%"><span class="lan1">${sub.title }</span>
+						</td>
+						<td width="25%">${sub.createrName }</td>
+						<td width="10%">
+							<fmt:formatDate value="${sub.createTime }" pattern="yyyy-MM-dd HH:mm" />
+						</td>
+					</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+		</div>
+		
+		<div>
+			<div class="pages">
+				<a>上一页</a>
+				<a>下一页</a>	
+				<a style="cursor: default;">共99页&nbsp;
+					<select>
+						<option>1</option>
+						<option>15</option>
+					</select>
+				</a>
+			</div>
+		</div>
+		
 	</div>
 </body>
 </html>

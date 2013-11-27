@@ -98,6 +98,16 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 	
 	@Override
+	public PagerModel findByMaster(String modId, String masterUid,
+			Integer flagType) {
+		StringBuilder hql = new StringBuilder("");
+		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
+		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ? AND m.flag=?) ");
+		hql.append("ORDER BY sub.lastUpdateTime DESC");
+		return this.sm2SubjectDao.searchPaginated(hql.toString(), new Object[]{modId,masterUid,flagType});
+	}
+	
+	@Override
 	public List<StepVo> findAllSteps(String subId) {
 		String hql = "SELECT s.id,s.name,s.createrId FROM TSm2Step s WHERE s.subjectId=? ORDER BY s.lastUpdateTime DESC";
 		List<Object[]> resulSet = this.sm2SubjectDao.findByHQL(hql,new Object[]{subId});

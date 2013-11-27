@@ -182,9 +182,17 @@ public class MasterSubjectAction extends BaseAction{
 					add("jinjizhongyao");
 					add("qingshibaopi");
 					add("zongjiehuibao");
+					add("linshishixiang");
 				}}
 				, 5);
+		
 		this.getRequestMap().put("subList", list);
+		return "daibanshiyi";
+	}
+	
+	public String daiBanPage(){
+		
+		
 		return "daibanshiyi";
 	}
 	
