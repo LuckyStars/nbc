@@ -7,11 +7,17 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
 public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
-	public boolean findByName(String name);
 	/**
-	 * g根据主题id查询所有step
+	 * 查找重名
+	 * @param name
+	 * @param id
+	 * @return jonathan
+	 */
+	public boolean findByName(String name,String id);
+	/**
+	 * 根据主题id查询所有step
 	 * @param subjectId
-	 * @return
+	 * @return jonathan
 	 */
 	public List<StepVo> findBySubId(String subjectId);
 	
@@ -33,15 +39,21 @@ public interface Sm2StepBiz extends BaseBiz<TSm2Step>{
 	/**
 	 * 删除
 	 * @param id
-	 * @return
+	 * @return jonathan
 	 */
 	public boolean removeById1(String id);
 	/**
 	 * 修改 step同时修改审批人的查询状态flag为修改
 	 * @param name
 	 * @param subId
-	 * @return
+	 * @return jonathan
 	 */
-	boolean updateBySubId(String name, String subId);
+	boolean updateBySubId(TSm2Step step);
+	/**
+	 * 增加工作步骤同时修改flag为修改
+	 * @param step
+	 */
+	boolean addStep(TSm2Step step);
+	
 	
 }

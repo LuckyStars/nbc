@@ -80,10 +80,7 @@
              $(".bg").show();
              $(".adds5").show();
          });
-         $(".addtabs").click(function () {
-             $(".bg").show();
-             $(".adds7").show();
-         });
+       
          $(".close").click(function () {
              $("body").css("overflow", "auto");
              $(".bg").hide();
@@ -98,20 +95,32 @@
          });
        
          //步骤操作
+         $(".addtabs").click(function () {
+             $(".bg").show();
+             $(".adds7").show();
+         });
+         $(".small").click(function () {
+             $(".bg").show();
+             $.post("findById_step.action",{id:this.id},function(data){
+                $("#stepId").val(data.id);
+                $("#stepName").val(data.name);
+             	$(".updateStep").show();
+             });
+         });
          $("#stepSave").click(function(){
-        	 var name = $.trim($("input[name='step.name']").val());
+        	 var name = $.trim($(".stepName").val());
         	 if(name.length>0){
-	            $.post("isExistStep_master.action",{name:name},function(data1){
+	            $.post("isExistStep_step.action",{name:name},function(data1){
 	            	if(data1==0){
 			         	var formParams = $("#stepForm").serialize();
-			    		$.post("addStep_master.action", formParams, function(data) {
-			      				$(".tabs-wp ul").append('<li id="'+data+'" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a>'+
-					      				'<img src="${prc}/function/function-linshi/img/errotab.png" /></li>');
-			      				$("input[name='step.name']").val("");
-				   				 $(".bg").hide();
-				   				 $(".adds7").hide();
-			      				changeTab(data);
-			      				location.reload();
+			    		$.post("add_step.action", formParams, function(data) {
+			      				//$(".tabs-wp ul").append('<li id="'+data+'" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a>'+
+					      		//		'<img src="${prc}/function/function-linshi/img/errotab.png" /></li>');
+			      				//$("input[name='step.name']").val("");
+				   				// $(".bg").hide();
+				   				// $(".adds7").hide();
+			      				//changeTab(data);
+			      				parent.location.reload();
 			     			});
 	            	}else{
 						alert("存在相同步骤！");
@@ -121,6 +130,23 @@
 					alert("请填写步骤名称！");
 	          }
          	});
+      	$("#stepUpdate").click(function(){
+      		 var name = $.trim($("#stepName").val());
+      		 if(name.length>0){
+ 	            $.post("isExistStep_step.action",{name:name,id:$("#stepId").val()},function(data1){
+ 	            	if(data1==0){
+ 			         	var formParams = $("#stepFormUpdate").serialize();
+ 			    		$.post("update_step.action", formParams, function(data) {
+		      				location.reload();
+ 			     		});
+ 	            	}else{
+ 						alert("存在相同步骤！");
+ 	            	}
+ 		          });
+ 	          }else{
+ 					alert("请填写步骤名称！");
+ 	          }
+         });
       	$(".delete_step_ico").click(function(){
 			var id = $(this).attr("name");
 		 	$.post("isExist_progress.action",{stepId:id},function(data1){
@@ -128,8 +154,8 @@
 					if(confirm("确定删除此步骤吗?")){
 						$.post("delete_step.action",{id:id},function(data){
 							if(data==0){
-								
-								$("#"+id).remove();
+								location.reload();
+								//$("#"+id).remove();
 							}else{
 								alert("删除失败！");
 							}
@@ -138,9 +164,7 @@
 				}else{
 					alert("请先删除工作进展。");
 				}
-			
 		 	});
-		 	
        	});
       	//步骤结束
       	//工作进展
@@ -227,17 +251,14 @@
 					<div style="float: left; margin-top: 15px; margin-left: 20px;">
 						<p style="">
 							<label for="amount"></label> 
-							<input type="text" disabled="disabled" 
-								type="text" id="amount" 
-								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" 
-							/>
+							<input type="text" disabled="disabled" type="text" id="amount" 
+								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" />
 							
 						</p>
 						<pri:hideWhenMaster>
 						<div id="slider_pro"></div>
 						<span id="slider_num" ></span>
 						</pri:hideWhenMaster>
-						
 					</div>
 					
 					<%-- --%>
@@ -288,7 +309,7 @@
 									class="delete_step_ico small1" 
 									src="${prc}/function/function-linshi/images/icon1.png"  /><%--删除 --%>
 									
-									<img title="编辑"
+									<img title="编辑" id="${step.id}" 
 									 src="${prc}/function/function-linshi/images/icon2.png" 
 									class="small"/><%--编辑步骤 --%>
 									</c:if>
@@ -421,25 +442,45 @@
 	</div>
 	<!--弹出层7-->
     <form action="addStep_master.action" id="stepForm">
-    <input type="hidden" name="step.subjectId" value="${subject.id}" />
-    <div class="adds7">
-  		<div class="add-tops7">
-	    	<p>编辑</p>
-	    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
-	    </div>
-	  	<div class="add-downs7">
-			<div class="chen">
-	          <p>步骤名称：</p>
-	          <input type="text" name="step.name"/>
-<!--	          <img src="${prc}/function/function-linshi/images/jia.jpg" />-->
-<!--	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>-->
-	      	</div>
-	      	<div class="sure">
-	          <a id="stepSave" href="#">确定 </a>
-	          <a href="#" class="close">关闭 </a>
-	      	</div>
+    	<input type="hidden" name="step.subjectId" value="${subject.id}" />
+    	<div class="adds7">
+	  		<div class="add-tops7">
+		    	<p>编辑</p>
+		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+		    </div>
+		  	<div class="add-downs7">
+				<div class="chen">
+		          <p>步骤名称：</p>
+		          <input type="text" name="step.name" class="stepName"/>
+	<!--	          <img src="${prc}/function/function-linshi/images/jia.jpg" />-->
+	<!--	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>-->
+		      	</div>
+		      	<div class="sure">
+		          <a id="stepSave" href="#">确定 </a>
+		          <a href="#" class="close">关闭 </a>
+		      	</div>
+			</div>
 		</div>
-	</div>
+	</form>
+	<form action="update_step.action" id="stepFormUpdate">
+		<input type="hidden" name="step.subjectId" value="${subject.id}" />
+    	<input type="hidden" name="step.id" id="stepId" />
+    	<div class="updateStep">
+	  		<div class="add-tops7">
+		    	<p>编辑</p>
+		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+		    </div>
+		  	<div class="add-downs7">
+				<div class="chen">
+		          <p>步骤名称：</p>
+		          <input type="text" name="step.name" id="stepName"/>
+		      	</div>
+		      	<div class="sure">
+		          <a id="stepUpdate" href="#">确定 </a>
+		          <a href="#" class="close">关闭 </a>
+		      	</div>
+			</div>
+		</div>
 	</form>
 <script>
 	<pri:hideWhenMaster>

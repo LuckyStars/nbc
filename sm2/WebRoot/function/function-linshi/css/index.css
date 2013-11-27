@@ -521,7 +521,7 @@ width:300px; height:42px;margin:0 auto; clear:both;
     width:72px; height:21px; text-align:center;line-height:21px; color:#fff; background:url(../img/btn-bg.jpg) no-repeat; float:left; margin-top:10px;margin-left:15px;
 }
 /*--弹出层样式1--*/
-.adds1,.adds2,.adds3,.adds5,.adds6,.adds7 {
+.adds1,.adds2,.adds3,.adds5,.adds6,.adds7,.updateStep {
 	width:417px;
     height:auto !important;
     min-height:300px;
