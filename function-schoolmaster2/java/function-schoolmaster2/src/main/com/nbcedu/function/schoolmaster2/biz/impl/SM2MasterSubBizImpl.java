@@ -193,14 +193,13 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("WHERE user_uid = '");
 				sql.append(masterUid);
 				sql.append("'");
+				sql.append(" AND flag= '1' ");
 				sql.append(") masterSub ");
 			sql.append("WHERE ");
-				sql.append("sub.flag=1 ");	
-				sql.append("AND masterSub.subId = sub.id ");
+				sql.append("masterSub.subId = sub.id ");
 				sql.append("AND sub.moduleId='");
 				sql.append(modId);
 				sql.append("' ");
-				
 				
 			sql.append("LIMIT 0,");
 			sql.append(size.toString());
