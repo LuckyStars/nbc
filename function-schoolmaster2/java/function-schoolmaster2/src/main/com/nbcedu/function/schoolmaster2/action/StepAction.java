@@ -1,11 +1,13 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 
@@ -15,6 +17,7 @@ public class StepAction extends BaseAction{
 	private Sm2StepBiz stepBiz;
 	private String subjectId;
 	private String name;
+	private TSm2Step step;
 	
 	public void stepList(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -23,6 +26,24 @@ public class StepAction extends BaseAction{
 						step,
 						new TypeToken<List<StepVo>>() {}.getType())
 		);
+	}
+	public void findById(){
+		TSm2Step s = this.stepBiz.findById(id);
+		Struts2Utils.renderJson(Utils.gson.toJson(s));
+	}
+	public void add(){
+		this.step.setCreaterId(this.getUserId());
+		this.step.setCreateTime(new Date());
+		TSm2Step s = this.stepBiz.add(step);
+		Struts2Utils.renderText(s.getId(),"encoding:UTF-8");
+	}
+	public void isExistStep(){
+		boolean b = this.stepBiz.findByName(name,id);
+		if(!b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
 	}
 	/**
 	 * 删除步骤只能删除自己建的步骤
@@ -46,7 +67,7 @@ public class StepAction extends BaseAction{
 		
 	}
 	public void update(){
-		boolean b =this.stepBiz.updateBySubId(name, subjectId);
+		boolean b =this.stepBiz.updateBySubId(step);
 		if(b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{
@@ -70,6 +91,12 @@ public class StepAction extends BaseAction{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public TSm2Step getStep() {
+		return step;
+	}
+	public void setStep(TSm2Step step) {
+		this.step = step;
 	}
 	
 }

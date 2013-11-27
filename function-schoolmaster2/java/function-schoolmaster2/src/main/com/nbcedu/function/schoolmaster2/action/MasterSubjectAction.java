@@ -24,7 +24,6 @@ import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
-import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Comment;
@@ -54,7 +53,6 @@ public class MasterSubjectAction extends BaseAction{
 	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2MasterSubBiz subBiz;
-	private Sm2StepBiz stepBiz;
 	private Sm2ProgressBiz progBiz;
 	private Sm2ReadsBiz readsBiz;
 	private SM2DisscusBiz disscusBiz;
@@ -150,21 +148,7 @@ public class MasterSubjectAction extends BaseAction{
 		return "stepDetail";
 	}
 	
-	public void addStep(){
-		this.step.setCreaterId(this.getUserId());
-		this.step.setCreateTime(new Date());
-		TSm2Step s = this.stepBiz.add(step);
-		Struts2Utils.renderText(s.getId(),"encoding:UTF-8");
-	}
-	public void isExistStep(){
-		boolean b = this.stepBiz.findByName(name);
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}
-	}
-	public void deleteStep(){
-		
-	}
+	
 	
 	/**
 	 * 转发人员树
@@ -313,9 +297,6 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setProList(List<ProgressVo> proList) {
 		this.proList = proList;
-	}
-	public void setStepBiz(Sm2StepBiz stepBiz) {
-		this.stepBiz = stepBiz;
 	}
 	public void setProgBiz(Sm2ProgressBiz progBiz) {
 		this.progBiz = progBiz;
