@@ -15,10 +15,11 @@
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
+    <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
+	
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
 	<script type="text/javascript">
@@ -261,11 +262,14 @@
 				</div>
 				<div class="tabs-wp">
 					<div id="spec-list">
-					<a href="javascript:;" class="spec-control2" id="spec-forward"></a>
-					<a href="javascript:;" class="spec-control1" id="spec-backward"></a>
+					
+					<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
+					<a href="javascript:;" class="spec-control1" id="spec-forward"></a>
+					<a href="javascript:;" class="spec-control2" id="spec-backward"></a>
+					</c:if>
        			 	<div class="spec-items" style="position: absolute; width: 680px; height:38px; overflow: hidden; left:35px;">
 				
-					<ul class="tabs">
+					<ul class="tabs" style="position: absolute;  top: 0px; width:4000px;">
 						<c:forEach items="${steps }" var="step" varStatus="i">
 							
 							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
@@ -302,11 +306,11 @@
 					
 					
 					</div>
-					<a class="addtabs">
+					
+				</div><a class="addtabs">
 						<img title="增加步骤" class="ico4 cpoint"
 						 src="${prc}/function/function-linshi/images/add.png" /><%--增加步骤 --%>
 					</a>
-				</div>
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
 					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;" scrolling="no"
@@ -479,11 +483,12 @@
 		$("#" + stepId).addClass("cur");
 		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);
 	}
-    
 </script>
 
+<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
 <script type="text/javascript">
 $("#spec-backward").imgmag({ show: 5, number: 1});
 </script>
+</c:if>
 </body>
 </html>

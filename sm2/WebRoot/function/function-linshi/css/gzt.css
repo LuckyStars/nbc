@@ -223,8 +223,7 @@ a {
 	height: 38px;
 	line-height: 38px;
 	border-bottom: 1px solid #095DB3;
-	width: 750px;
-	margin: 0 auto;
+	width: 100%;
 	padding: 0;
 }
 .tabs-wp1 {
@@ -273,7 +272,6 @@ a {
 	padding: 0 25px;
 	font-size: 16px;
 	color: #939393;
-	margin-left: 10px;
 	position: relative;
 	background: url(../images/list-bg1.jpg) no-repeat;
 	font-weight: bold;

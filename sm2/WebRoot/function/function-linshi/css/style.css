@@ -10,11 +10,14 @@
 }
 
 .tabs-wp {
-	width:780px;
+	width:100%;
+	margin:0px;
     position:relative;
 }
 
-
+.tabs li, .tabs1 li{
+margin-left:0px;
+}
 #spec-list {
     position: relative;
     width: 760px;
