@@ -280,6 +280,28 @@
     				}()
     				:$(divId).slideUp('fast',resizeParent);
     	}
+    	
+    	var showAllComment = function (progId){
+    		$.post('${prc}/scMaster2/allComm_master.action?id=' + progId,function(data){
+    			if(data && data.length>0){
+    				$("#comment_content").html("");
+    				for(var i =0;i<data.length;i++){
+    					var msg = data[i];
+    					$(
+    						"<dl class='new'><dd><p><span class='blue'>"
+    						+ msg.user 
+    						+ "：</span>"
+    						+ msg.content
+    						+ "<br /></p><span class='gray float'>("
+    						+ msg.time
+    						+ ")</span></dd><div style='clear:both;'></div></dl>"
+    					).appendTo($("#comment_content"));
+    				}
+    			}
+    		});
+    		
+    		resizeParent();
+    	}
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -418,6 +440,7 @@
         	</form>
         	</pri:showWhenMaster>
         </div>
+        <div id="comment_content">
         <!-- 增加批示 END  -->   
         <c:forEach items="${comMap}" var="comEntry">
        		<c:if test="${comEntry.key==prog.id }">
@@ -435,13 +458,13 @@
        			</c:forEach>
        		</c:if>
        	</c:forEach>
-       
-        <p class="pack1">查看所有批示</p>
+		</div>
+        <p class="pack1" onclick="showAllComment('${prog.id}');">查看所有批示</p>
+        
 	</div>
 	
 	
 	</c:forEach>
-      
       <!--弹出层 资源-->
 <div class="bg"></div>
 <div class="adds" id="add-tab">
@@ -475,14 +498,6 @@
 	    	class="close" style="cursor:pointer;"/>
     	</div>
   		<div class="add-downs1" id="zanContentsDiv">
-      		<dl class="comments">
-            	<dd>
-              		<p>
-              			<span class="blue">沫儿</span><br />
-              		</p>
-              		<span class="gray">(3天前)</span>
-              	</dd>
-          	</dl>
       		<dl class="comments">
             <dt><img src="img/tu.jpg" /></dt>
             <dd>

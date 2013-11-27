@@ -94,9 +94,10 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 </head>
 <body>
 	<div class="right">
-		<h1>
-			当前位置：首页 - <span style="color: #0374C2">您的待办事宜</span>
-		</h1>
+		<h3>
+			当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a>
+			 - <a style="color: #0374C2" href="${prc}/scMaster2/daiban_master.action">您的待办事宜</a>
+		</h3>
 		<div class="right-input1">
 			<p class="work"  onclick="tabClick('zongjiehuibao');">
 				<span class="ico">总结汇报</span><%-- <span class="ico-1">1</span>--%>
@@ -203,7 +204,8 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				</c:forEach>
 			</table>
 		</div>
-		<c:if test="${not empty moduleId and not empty subList}">
+		
+		<c:if test="${not empty moduleId and not empty subList}"><%--如果指定模块才需要显示分页 --%>
 		<div>
 			<div class="pages">
 				<c:if test="${pager.offset>=1}">
