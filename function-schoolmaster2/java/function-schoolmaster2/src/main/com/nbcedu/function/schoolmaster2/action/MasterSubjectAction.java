@@ -25,6 +25,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Comment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
@@ -167,9 +168,17 @@ public class MasterSubjectAction extends BaseAction{
 					add("jinjizhongyao");
 					add("qingshibaopi");
 					add("zongjiehuibao");
+					add("linshishixiang");
 				}}
 				, 5);
+		
 		this.getRequestMap().put("subList", list);
+		return "daibanshiyi";
+	}
+	
+	public String daiBanPage(){
+		PagerModel page = this.subBiz.findByMaster(this.moduleId, getUserId(),1);
+		this.getRequestMap().put("subList", page.getDatas());
 		return "daibanshiyi";
 	}
 	

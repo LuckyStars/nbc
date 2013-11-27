@@ -98,6 +98,16 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 	
 	@Override
+	public PagerModel findByMaster(String modId, String masterUid,
+			Integer flagType) {
+		StringBuilder hql = new StringBuilder("");
+		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
+		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ? AND m.flag=?) ");
+		hql.append("ORDER BY sub.lastUpdateTime DESC");
+		return this.sm2SubjectDao.searchPaginated(hql.toString(), new Object[]{modId,masterUid,flagType});
+	}
+	
+	@Override
 	public List<StepVo> findAllSteps(String subId) {
 		String hql = "SELECT s.id,s.name,s.createrId FROM TSm2Step s WHERE s.subjectId=? ORDER BY s.lastUpdateTime DESC";
 		List<Object[]> resulSet = this.sm2SubjectDao.findByHQL(hql,new Object[]{subId});
@@ -193,14 +203,13 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("WHERE user_uid = '");
 				sql.append(masterUid);
 				sql.append("'");
+				sql.append(" AND flag= '1' ");
 				sql.append(") masterSub ");
 			sql.append("WHERE ");
-				sql.append("sub.flag=1 ");	
-				sql.append("AND masterSub.subId = sub.id ");
+				sql.append("masterSub.subId = sub.id ");
 				sql.append("AND sub.moduleId='");
 				sql.append(modId);
 				sql.append("' ");
-				
 				
 			sql.append("LIMIT 0,");
 			sql.append(size.toString());
