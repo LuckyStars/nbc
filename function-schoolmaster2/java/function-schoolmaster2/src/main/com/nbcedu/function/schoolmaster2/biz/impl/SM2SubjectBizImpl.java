@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
@@ -140,6 +141,7 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 	}
 	@Override
 	public void updateMasterFlagAll(int flag, String subId) throws DBException {
+		this.sm2SubjectDao.updateByHql("update TSm2Subject set lastUpdateTime=?",new Date());
 		this.sm2SubjectDao.updateByHql("update SM2SubjectMaster set flag=? where subId=? and flag<>1 ",flag,subId);
 	}
 	@Override

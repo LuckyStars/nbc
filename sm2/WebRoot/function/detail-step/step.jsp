@@ -130,7 +130,7 @@
             //删除工作进展
             $(".prog").click(function () {
             	if(confirm("确定要删除吗?")){
-		    		$.post("delete_progress.action", {id:this.id}, function(data) {
+		    		$.post("delete_progress.action", {id:this.id,subjectId:${subjectId}}, function(data) {
 			    		if(data==0){
 				    		alert("删除成功！");
 		      				location.reload();

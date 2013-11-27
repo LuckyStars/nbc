@@ -57,6 +57,7 @@
 	</bean>
 	<bean id="sm2ProgressAction" class="com.nbcedu.function.schoolmaster2.action.ProgressAction" scope="prototype" >
 		<property name="progBiz" ref="sm2ProgressBiz" />
+		<property name="subjectBiz" ref="sm2SubjectBiz"></property>
 	</bean>
 	
 	<bean id="sm2DisscusAction" class="com.nbcedu.function.schoolmaster2.action.DisscusAction" scope="prototype" >

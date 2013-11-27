@@ -51,6 +51,7 @@ public class MasterSubjectAction extends BaseAction{
 	private TSm2Step step;
 	private List<ProgressVo> proList = new ArrayList<ProgressVo>();
 	private String name;
+	private String subjectId;
 	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2MasterSubBiz subBiz;
@@ -322,6 +323,14 @@ public class MasterSubjectAction extends BaseAction{
 	}
 	public void setSearch(MasterSubSearchVO search) {
 		this.search = search;
+	}
+
+	public String getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
 	}
 	
 }

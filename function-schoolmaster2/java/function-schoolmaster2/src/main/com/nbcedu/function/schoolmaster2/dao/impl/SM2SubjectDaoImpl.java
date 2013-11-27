@@ -63,7 +63,7 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 			buff.append(subject.getTitle());
 			buff.append("%");
 		}
-		buff1 = buff;
+		buff1.append(buff);
 		buff.insert(0, "select s.id,s.createTime,s.title,s.moduleId,s.createrName,s.departmentName" );
 		buff1.insert(0, "select count(s.id) ");
 		final String sql = buff.toString();

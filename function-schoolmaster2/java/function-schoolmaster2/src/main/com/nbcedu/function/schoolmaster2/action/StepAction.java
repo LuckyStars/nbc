@@ -34,8 +34,12 @@ public class StepAction extends BaseAction{
 	public void add(){
 		this.step.setCreaterId(this.getUserId());
 		this.step.setCreateTime(new Date());
-		TSm2Step s = this.stepBiz.add(step);
-		Struts2Utils.renderText(s.getId(),"encoding:UTF-8");
+		boolean  b = this.stepBiz.addStep(step);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
 	}
 	public void isExistStep(){
 		boolean b = this.stepBiz.findByName(name,id);

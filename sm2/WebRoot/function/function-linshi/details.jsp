@@ -95,6 +95,11 @@
          });
        
          //步骤操作
+         $(".stepClose").click(function () {
+             $("body").css("overflow", "auto");
+             $(".bg").hide();
+         	$(".updateStep").hide();
+         });
          $(".addtabs").click(function () {
              $(".bg").show();
              $(".adds7").show();
@@ -120,7 +125,8 @@
 				   				// $(".bg").hide();
 				   				// $(".adds7").hide();
 			      				//changeTab(data);
-			      				parent.location.reload();
+			      				if(data==0){	parent.location.reload();}else{alert("增加出现错误！");}
+			      			
 			     			});
 	            	}else{
 						alert("存在相同步骤！");
@@ -171,15 +177,14 @@
       	 $("#progressSave").click(function(){
         	 var name = $.trim($("input[name='progress.name']").val());
         	 if(name.length>0){
-	            $.post("isExist_progress.action",{name:name},function(data1){
+	            $.post("isExist_progress.action",{name:name,stepId:$("#prog_step_id").val()},function(data1){
 	            	if(data1==0){
 			         	var formParams = $("#progressForm").serialize();
 			    		$.post("add_progress.action", formParams, function(data) {
 			      				$("input[name='progress.name']").val("");
 			      				$("textarea[name='progress.content']").val("");
-				   				 $(".bg").hide();
 				   				 $(".adds6").hide();
-			      				changeTab(data);
+				   				location.reload();
 			     			});
 	            	}else{
 						alert("存在相同工作进展！");
@@ -335,7 +340,7 @@
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
 					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;" scrolling="no"
-					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}" >
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" >
 					
 					</iframe>
 					</c:if>
@@ -416,15 +421,12 @@
 	<!--弹出层6-->
 	<div class="adds6">
 		<form action="" id="progressForm">
+			<input type="hidden" name="subjectId" value="${subject.id}" />
 			<div class="add-tops6">
 			    <p>增加工作进展</p>
 			    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
 			  	<div class="add-downs6">
-			  		<c:forEach items="${steps }" var="step" varStatus="i">
-						<c:if test="${i.index==0 }">
-		          		<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
-						</c:if>
-					</c:forEach>
+		          	<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
 			      	<div>
 			          	<p>工作进展：</p>
 			          	<input type="text" name="progress.name"/>
@@ -468,7 +470,7 @@
     	<div class="updateStep">
 	  		<div class="add-tops7">
 		    	<p>编辑</p>
-		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="stepClose" style="cursor:pointer;"/>
 		    </div>
 		  	<div class="add-downs7">
 				<div class="chen">
@@ -477,7 +479,7 @@
 		      	</div>
 		      	<div class="sure">
 		          <a id="stepUpdate" href="#">确定 </a>
-		          <a href="#" class="close">关闭 </a>
+		          <a href="#" class="stepClose">关闭 </a>
 		      	</div>
 			</div>
 		</div>
