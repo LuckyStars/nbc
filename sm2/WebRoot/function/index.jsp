@@ -103,7 +103,7 @@
 				</div>
 
 				<div class="office" style="width: 125px; height: 150px;">
-					<a class="pointer" href="${prc}/scMaster2/daiban_master.action">
+					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/daiban_master.action">
 						<img src="${prc}/function/images/daiban.jpg"/>
 						<span>待办事宜</span>
 						<%-- <i id="daibanshiyi" >6</i>--%>
@@ -236,7 +236,7 @@
 		<div class="module module2" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
-				<!--<div class="linshi">
+				<%--<div class="linshi">
 					<a class="pointer" href="#">
 					<img src="${prc}/function/images/tb1.png" width="80" height="80" />
 					<span style="color: #e1517e;">东兴杯课程比赛</span>
@@ -248,7 +248,7 @@
 						<img src="${prc}/function/images/tb5.png" width="80" height="80" />
 						<span style="color: #b25ebd;">迎接香港同盟</span>
 					</a>
-				</div>-->
+				</div>--%>
 			</div>
 		</div>
 		<div class="module module2" style="margin-left: 10px;">

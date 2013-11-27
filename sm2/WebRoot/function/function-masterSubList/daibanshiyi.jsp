@@ -81,32 +81,16 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 			$(".bg").hide();
 			$(".add2").hide();
 		});
-		$(".work").click(function() {
-			$(".one").show();
-			$(".two").hide();
-			$(".three").hide();
-			$(".four").hide();
-		});
-		$(".work1").click(function() {
-			$(".one").hide();
-			$(".two").show();
-			$(".three").hide();
-			$(".four").hide();
-		});
-		$(".work2").click(function() {
-			$(".one").hide();
-			$(".three").show();
-			$(".two").hide();
-			$(".four").hide();
-		});
-		$(".work3").click(function() {
-			$(".one").hide();
-			$(".two").hide();
-			$(".three").hide();
-			$(".four").show();
-		});
+		<c:if test="${not empty moduleId }">
+		$(".wtab").hide();
+		$("#tab_${moduleId}").show();
+		</c:if>
 	});
+	function tabClick(moduleId){
+		location.href="${prc}/scMaster2/daiBanPage_master.action?moduleId=" + moduleId;	
+	}
 </script>
+
 </head>
 <body>
 	<div class="right">
@@ -114,16 +98,16 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 			当前位置：首页 - <span style="color: #0374C2">您的待办事宜</span>
 		</h1>
 		<div class="right-input1">
-			<p class="work">
+			<p class="work"  onclick="tabClick('zongjiehuibao');">
 				<span class="ico">总结汇报</span><%-- <span class="ico-1">1</span>--%>
 			</p>
-			<p class="work1">
+			<p class="work1"  onclick="tabClick('qingshibaopi');">
 				<span class="ico1">请示报批</span><%-- <span class="ico-1">1</span>--%>
 			</p>
-			<p class="work2">
+			<p class="work2" onclick="tabClick('jinjizhongyao');">
 				<span class="ico2">紧急重要</span>
 			</p>
-			<p class="work3">
+			<p class="work3" onclick="tabClick('linshishixiang');">
 				<span class="ico2">临时事项</span>
 			</p>
 			<%--
@@ -134,8 +118,6 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 					<option>紧急重要</option>
 					<option>临时事项</option>
 				</select>
-			 
-			 
 			<p>
 				<label>名称:</label><select></select>
 			</p>
@@ -144,7 +126,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 			</p>
 			<a href="#">查询</a>--%>
 		</div>
-		<div class="one">
+		<div class="one wtab" id="tab_zongjiehuibao" >
 			<p class="tit1">
 				<span>总结汇报<%--<a href="#">5</a>条--%></span>
 			</p>
@@ -163,7 +145,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				</c:forEach>
 			</table>
 		</div>
-		<div class="two">
+		<div class="two wtab" id="tab_qingshibaopi">
 			<p class="tit2">
 				<span>请示报批<%--<a href="#">5</a>条--%></span>
 			</p>
@@ -182,7 +164,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				</c:forEach>
 			</table>
 		</div>
-		<div class="three">
+		<div class="three wtab" id="tab_jinjizhongyao">
 			<p class="tit3">
 				<span>紧急重要<%--<a href="#">5</a>条--%></span>
 			</p>
@@ -202,7 +184,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 			</table>
 		</div>
 		
-		<div class="four">
+		<div class="four wtab" id="tab_linshishixiang">
 			<p class="tit4">
 				<span>临时事项<%--<a href="#">5</a>条--%></span>
 			</p>
@@ -221,19 +203,31 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				</c:forEach>
 			</table>
 		</div>
-		
+		<c:if test="${not empty moduleId and not empty subList}">
 		<div>
 			<div class="pages">
-				<a>上一页</a>
-				<a>下一页</a>	
-				<a style="cursor: default;">共99页&nbsp;
-					<select>
-						<option>1</option>
-						<option>15</option>
+				<c:if test="${pager.offset>=1}">
+				<a href="${prc}/scMaster2/daiBanPage_master.action?moduleId=${moduleId }&pager.offset=${pager.offset-1}"
+				>上一页</a>
+				</c:if>
+				<c:if test="${pager.offset<pm.totalPageNo}">
+				<a href="${prc}/scMaster2/daiBanPage_master.action?moduleId=${moduleId }&pager.offset=${pager.offset+1}"
+				>下一页</a>	
+				</c:if>
+				<a style="cursor: default;">共${pm.totalPageNo}页&nbsp;
+					<select
+						onchange="function(){
+							location.href='${prc}/scMaster2/daiBanPage_master.action?moduleId=${moduleId }&pager.offset=' + this.value;
+						}();"
+					>
+						<c:forEach var="i" begin="1" end="${pm.totalPageNo}">
+						<option>${i}</option>
+						</c:forEach>
 					</select>
 				</a>
 			</div>
 		</div>
+		</c:if>
 		
 	</div>
 </body>
