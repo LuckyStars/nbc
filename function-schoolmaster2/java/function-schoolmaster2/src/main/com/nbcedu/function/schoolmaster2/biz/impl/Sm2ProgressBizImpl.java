@@ -19,10 +19,12 @@ import com.nbcedu.function.schoolmaster2.biz.SM2DisscusBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterCommentBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterReplyBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ResourceBiz;
+import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.Sm2ProgressDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
@@ -39,6 +41,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 	private SM2MasterCommentBiz masterCommentBiz;
 	private SM2DisscusBiz disscusBiz;
 	private SM2CommentBiz commentBiz;
+	private SM2SubjectBiz subjectBiz;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -48,13 +51,16 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		return cri.list();
 	}
 	@Override
-	public List<TSm2Progress> findByNameStepId(String stepId, String name) {
+	public List<TSm2Progress> findByProgressVo(ProgressVo p) {
 		Criteria cri = this.progressDao.createCriteria();
-		if(!StringUtil.isEmpty(stepId)){
-			cri.add(Restrictions.eq("stepId", stepId));
+		if(!StringUtil.isEmpty(p.getStepId())){
+			cri.add(Restrictions.eq("stepId", p.getStepId()));
 		}
-		if(!StringUtil.isEmpty(name)){
-			cri.add(Expression.eq("name",name));
+		if(!StringUtil.isEmpty(p.getName())){
+			cri.add(Expression.eq("name",p.getName().trim()));
+		}
+		if(!StringUtil.isEmpty(p.getId())){
+			cri.add(Expression.eq("name",p.getId()));
 		}
 		return cri.list();
 	}
@@ -113,7 +119,8 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		
 	}
 	@Override
-	public void removeById1(String id) {
+	public void removeById1(String id,String subjectId) {
+		try {
 		this.zanBiz.removeByProg(id);
 		this.resourceBiz.removeByProgId(id);
 		readsBiz.removeByProgId(id);
@@ -122,8 +129,22 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		disscusBiz.removeByProgId(id);
 		commentBiz.removeByProgId(id);
 		this.progressDao.removeById(id);
+			this.subjectBiz.updateMasterFlagAll(2,subjectId);
+		} catch (DBException e) {
+			e.printStackTrace();
+		}
 	}
-	
+	@Override
+	public boolean addPro(TSm2Progress pro, String subjectId) {
+		try {
+			this.progressDao.save(pro);
+			this.subjectBiz.updateMasterFlagAll(2,subjectId);
+		} catch (DBException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	private Integer objToInteger(Object obj){
 		return obj==null?0:Integer.valueOf(obj.toString());
 	}
@@ -154,6 +175,9 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 	}
 	public void setCommentBiz(SM2CommentBiz commentBiz) {
 		this.commentBiz = commentBiz;
+	}
+	public void setSubjectBiz(SM2SubjectBiz subjectBiz) {
+		this.subjectBiz = subjectBiz;
 	}
 
 }

@@ -139,7 +139,7 @@
 <input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
 <input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　<a href="${prc}/scMaster2/teacherInput_index.action">校长工作台</a>　-　</span><span class="back">${module.name }</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　</span><span class="back">${module.name }</span></h1>
         <div class="table_box fixed">
             <div class="nav">
                 <span>事项标题:</span>

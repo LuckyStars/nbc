@@ -7,6 +7,7 @@ import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
+import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 
 /**
  * 工作进展action
@@ -20,17 +21,26 @@ public class ProgressAction extends BaseAction{
 	private TSm2Progress progress = new TSm2Progress();
 	private String stepId;
 	private String name;
+	private String subjectId;
+	private ProgressVo progressVo = new ProgressVo();
 	/**
 	 * 增加工作进展
 	 */
 	public void add(){
 		progress.setCreaterId(this.getUserId());
 		progress.setCreateTime(new Date());
-		TSm2Progress progress1 = this.progBiz.add(progress);
-		Struts2Utils.renderText(progress1.getStepId(),"encoding:UTF-8");
+		boolean b = this.progBiz.addPro(progress,subjectId);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
 	}
 	public void isExist(){
-		List<TSm2Progress> p = this.progBiz.findByNameStepId(stepId, name);
+		progressVo.setName(name);
+		progressVo.setStepId(stepId);
+		progressVo.setId(id);
+		List<TSm2Progress> p = this.progBiz.findByProgressVo(progressVo);
 		if(p==null||p.size()<1){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{
@@ -45,7 +55,7 @@ public class ProgressAction extends BaseAction{
 	}
 	
 	public void delete(){
-		this.progBiz.removeById1(id);
+		this.progBiz.removeById1(id,subjectId);
 		Struts2Utils.renderText("0","encoding:UTF-8");
 	}
 	////////////////////////
@@ -72,5 +82,16 @@ public class ProgressAction extends BaseAction{
 	public void setProgBiz(Sm2ProgressBiz progBiz) {
 		this.progBiz = progBiz;
 	}
-	
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
+	}
+	public ProgressVo getProgressVo() {
+		return progressVo;
+	}
+	public void setProgressVo(ProgressVo progressVo) {
+		this.progressVo = progressVo;
+	}
 }
