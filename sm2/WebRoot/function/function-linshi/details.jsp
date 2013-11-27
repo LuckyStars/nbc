@@ -263,7 +263,7 @@
 				<div class="tabs-wp">
 					<div id="spec-list">
 					
-					<c:if test="${not empty steps and fn:length(steps)>6 }">
+					<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
 					<a href="javascript:;" class="spec-control1" id="spec-forward"></a>
 					<a href="javascript:;" class="spec-control2" id="spec-backward"></a>
 					</c:if>
@@ -483,11 +483,12 @@
 		$("#" + stepId).addClass("cur");
 		$("#postFrame").attr('src','${prc}/scMaster2/showStep_master.action?id=' + stepId);
 	}
-    
 </script>
 
+<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
 <script type="text/javascript">
 $("#spec-backward").imgmag({ show: 5, number: 1});
 </script>
+</c:if>
 </body>
 </html>
