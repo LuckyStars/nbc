@@ -146,7 +146,7 @@ table td {
 							</c:if> 
 							<c:if test="${sub.flag ne '1'}">
 								<a href="#" onclick="javascript:stick('${sub.id }',1,'qi');" id="${sub.id }">
-									<img src="${prc}/function/img/qi0.png" />
+									<img src="${prc}/function/img/qi3.png" />
 								</a>
 							</c:if>
 <!--								<img src="${prc}/fu nction/function-masterSubList/img/qi.png" class="qi" />-->

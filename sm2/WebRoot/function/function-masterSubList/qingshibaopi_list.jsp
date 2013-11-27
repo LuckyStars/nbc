@@ -17,11 +17,6 @@
     height:38px;
 	line-height:38px;
 }
-	.qi{
-		display:inline;
-		float:center;
-		margin:0;
-	}
         table td {
 	height:34px;
 	line-height:34px;
@@ -138,7 +133,7 @@
 				<a href="#" onclick="javascript:stick('${subject.id }',3,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
 			</c:if>
 			<c:if test="${subject.flag ne '1'}">
-				<a href="#" onclick="javascript:stick('${subject.id }',1,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue0.png"/></a>
+				<a href="#" onclick="javascript:stick('${subject.id }',1,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue3.png"/></a>
 			</c:if>
         </td>
       </tr>

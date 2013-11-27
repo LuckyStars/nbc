@@ -28,7 +28,6 @@
         $(function () {
             $("table tr:odd").css("background", "#fff");
             $("table tr:even").css("background", "#EDEFFE");
-    		$("td a img").addClass("qi");
         });
     $(function () {
         $(".nav-list-inner a").click(function () {

@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.biz.impl;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,9 +9,13 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.nbcedu.function.documentflow.utils.StringUtil;
+import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
+import com.nbcedu.function.schoolmaster2.dao.SM2SubjectDao;
 import com.nbcedu.function.schoolmaster2.dao.Sm2StepDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
@@ -19,10 +24,15 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 
 	private Sm2StepDao stepDao;
+	private SM2SubjectBiz subjectBiz;
 
 	public void setStepDao(Sm2StepDao stepDao) {
 		super.setDao(stepDao);
 		this.stepDao = stepDao;
+	}
+
+	public void setSubjectBiz(SM2SubjectBiz subjectBiz) {
+		this.subjectBiz = subjectBiz;
 	}
 
 	@Override
@@ -79,6 +89,29 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 				return result;
 			}
 		});
+	}
+
+	@Override
+	public boolean removeById1(String id) {
+		TSm2Step s = this.stepDao.removeById(id);
+		if(s!=null&&StringUtil.isBlank(s.getId())){
+			try {
+				this.subjectBiz.updateMasterFlagAll(2, s.getSubjectId());
+			} catch (DBException e) {
+				return false;
+			}
+		}
+		return true;
+	}
+	@Override
+	public boolean updateBySubId(String name,String subId) {
+			try {
+				this.stepDao.updateByHql("update TSm2Step set name=? and lastUpdateTime=?",name,new Date());
+				this.subjectBiz.updateMasterFlagAll(2,subId);
+			} catch (DBException e) {
+				return false;
+			}
+		return true;
 	}
 
 	

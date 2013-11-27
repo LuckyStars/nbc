@@ -14,5 +14,6 @@ public interface SM2SubjectDao extends BaseDAO<TSm2Subject>{
 	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,
 			String exceuteUserId);
 
-	PagerModel findAllTrans(String userId, String typeId) throws DBException;
+	PagerModel findAllTrans(SubjectVo subject, String curUserId)
+			throws DBException;
 }
