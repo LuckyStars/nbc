@@ -284,7 +284,8 @@
     	var showAllComment = function (progId){
     		$.post('${prc}/scMaster2/allComm_master.action?id=' + progId,function(data){
     			if(data && data.length>0){
-    				$("#comment_content").html("");
+    				var contentDiv = $("#comment_content");
+    				contentDiv.html("");
     				for(var i =0;i<data.length;i++){
     					var msg = data[i];
     					$(
@@ -295,13 +296,36 @@
     						+ "<br /></p><span class='gray float'>("
     						+ msg.time
     						+ ")</span></dd><div style='clear:both;'></div></dl>"
-    					).appendTo($("#comment_content"));
+    					).appendTo(contentDiv);
     				}
     			}
     		});
     		
     		resizeParent();
-    	}
+    	};
+    	
+    	var showAllDiscuss = function(progId){
+    		$.post('${prc}/scMaster2/allDiss_master.action?id=' + progId,function(data){
+    			if(data && data.length>0){
+    				var contentDiv =$("#diss_content"); 
+    				contentDiv("");
+    				for(var i =0;i<data.length;i++){
+    					var msg = data[i];
+    					$(
+    						"<dl class='new'><dd><p><span class='blue'>"
+    						+ msg.user 
+    						+ "：</span>"
+    						+ msg.content
+    						+ "<br /></p><span class='gray float'>("
+    						+ msg.time
+    						+ ")</span></dd><div style='clear:both;'></div></dl>"
+    					).appendTo(contentDiv);
+    				}
+    			}
+    		});
+    		
+    		resizeParent();
+    	};
     </script>
 </head>
 <body style="background-color: #f0f8fc;">
@@ -392,6 +416,8 @@
 	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
         	</pri:hideWhenMaster>
+        	
+        	<div id="diss_content">
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
         			<c:forEach items="${disEntry.value }" var="dis">
@@ -409,8 +435,9 @@
         			</c:forEach>
         		</c:if>
         	</c:forEach>
+          	</div>
           	
-          	<p class="pack"><a >查看所有评论</a></p>
+          	<p class="pack"><a href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
 		</div>
 	</div>
 	<!-- 评论 END -->
