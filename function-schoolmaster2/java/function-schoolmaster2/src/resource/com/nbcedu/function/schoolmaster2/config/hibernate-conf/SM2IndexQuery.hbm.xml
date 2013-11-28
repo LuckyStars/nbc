@@ -27,20 +27,29 @@
     	]]>
     </sql-query>
 
-
-	<sql-query name="index_count_dongtai">
+	<sql-query name="index_find_sub_by_module">
 		<![CDATA[
-		SELECT COUNT(sub.id),sub.moduleId
+		SELECT
+			sub.id,
+			sub.createrId,
+			sub.createTime,
+			sub.content,
+			sub.flag,
+			sub.departmentId,
+			sub.title,
+			sub.moduleId,
+			sub.lastUpdateTime,
+			sub.parentId,
+			sub.createrName
 		FROM t_sm2_subject sub,
 			(
-				SELECT sub_id as subId
+				SELECT sub_id,flag
 				FROM t_sm2_subject_master
 				WHERE user_uid = :uid
-			)subIds
-		WHERE 
-			sub.id = subIds.subId 
-			AND (sub.status='new' OR sub.status='updated')
-		GROUP BY sub.moduleId
+			) master 
+		WHERE sub.moduleId = :moduleId
+		ORDER BY master.flag ASC ,sub.lastUpdateTime DESC
+		LIMIT :size
 		]]>
 	</sql-query>
 </hibernate-mapping>

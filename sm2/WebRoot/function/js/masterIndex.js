@@ -75,41 +75,6 @@ var refLinshi = function (){
 };
 
 
-var daibanCount = 0;
-function refreshDaiban(){
-	daibanCount = 0;
-	var contents = [
-		                {
-					 	   url:"/countWorkbench.action?module=xxdt_1&status=new",
-					 	   name:"总结汇报关注性工作"
-					    },
-					    {
-					 	   url:"/countWorkbench.action?module=xxdt_2&status=new",
-					 	   name:"请示报批工作"
-					    },
-					    {
-					 	   url:"/countWorkbench.action?module=xxdt_3&status=new",
-					 	   name:"紧急重要事件处理"
-					    }
-			       ];
-	
-	for ( var int = 0; int < contents.length; int++) {
-		var con = contents[int];
-		$.post((ctxPath + con.url), function(data) {
-			if(data>0){
-				daibanCount = daibanCount + parseInt(data);
-			}
-			if(daibanCount>0){
-				$("#daibanshiyi").show();
-				$("#daibanshiyi").html(daibanCount);
-			}else{
-				$("#daibanshiyi").hide();
-			}
-		});
-	}
-	
-	
-}
 
 function refreshAll (){
 	for ( var i = 0; i < allNums.length; i++) {
@@ -122,7 +87,6 @@ function refreshAll (){
 	}
 	refreshDongtai();
 	refLinshi();
-	refreshDaiban();
 }
 
 $(function(){

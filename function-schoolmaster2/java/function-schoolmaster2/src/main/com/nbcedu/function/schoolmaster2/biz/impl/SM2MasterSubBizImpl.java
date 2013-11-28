@@ -39,7 +39,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	{
 		findByMasterHql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
 		findByMasterHql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ?) ");
-		findByMasterHql.append("ORDER BY sub.createTime DESC");
+		findByMasterHql.append("ORDER BY sub.lastUpdateTime DESC");
 	}
 	
 	@Override
