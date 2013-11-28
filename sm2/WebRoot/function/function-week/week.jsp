@@ -46,9 +46,9 @@ $('#managers').combotree({
 				cascadeCheck="false" ></select>
 				事件状态： 
 				<select name="search.status" >
-					<option value="" >全部</option>
-					<option value="new" >新增</option>
-					<option value="updated" >更新</option>
+					<option value="-1" >全部</option>
+					<option value="0" >新增</option>
+					<option value="2" >更新</option>
 				</select>
 				事件类型： 
 				<select name="search.subType"

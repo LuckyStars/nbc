@@ -42,7 +42,14 @@ public class WeekAction extends BaseAction{
 		}
 		
 		if(search.getStatus().size()<=0){
-			search.setStatus(new String[] { "new","updated" });
+			search.setStatus(new Integer[]{ 0,1,2,3 });
+		}else if(search.getStatus().size()==1){
+			if(search.getStatus().get(0)==-1){
+				search.setStatus(new Integer[]{ 0,1,2,3 });
+			}
+			if(search.getStatus().get(0)==2){
+				search.setStatus(new Integer[]{ 1,2,3 });
+			}
 		}
 		
 		Map<String, WeekDisplayVo> result =null;

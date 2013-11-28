@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -9,7 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.xwork.StringUtils;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -20,7 +22,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
@@ -44,57 +45,18 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	
 	@Override
 	public PagerModel findByMaster(final String modId, final String masterUid) {
-//		SQLQuery q = (SQLQuery) this.sm2SubjectDao.createSqlQuery(this.sm2SubjectDao.getNamedQuery("subject_master_module").getQueryString());
-//		q.addScalar("content", Hibernate.STRING);
-//		q.setString("uid", masterUid);
-//		q.setString("moduleId", modId);
-//		q.setFirstResult(SystemContext.getOffset());
-//		q.setMaxResults(SystemContext.getPagesize());
-//		
-//		List<TSm2Subject> resultSet = q.list();
-//		List<TSm2Subject> result = Lists.transform(resultSet, new Function<TSm2Subject, TSm2Subject>() {
-//			@Override
-//			public TSm2Subject apply(TSm2Subject input) {
-//				
-//				return null;
-//			}
-//		});
-//		
-//		Query countQ = this.sm2SubjectDao.getNamedQuery("subject_master_module_count");
-//		countQ.setString("uid", masterUid);
-//		countQ.setString("moduleId", modId);
-//		Object count = countQ.uniqueResult();
-//		
-//		PagerModel pm = new PagerModel();
-//		pm.setDatas(result);
-//		pm.setTotal(count==null?0:Integer.valueOf(count.toString()));
-//		pm.setTotalPageNo(
-//				pm.getTotal()%SystemContext.getPagesize()==0?
-//				pm.getTotal()/SystemContext.getPagesize():
-//				pm.getTotal()/SystemContext.getPagesize()+1
-//			);
-//		return pm;
-		
-		
-		return this.sm2SubjectDao.searchPaginated(findByMasterHql.toString(), new Object[]{modId,masterUid});
+		return this.sm2SubjectDao.searchPaginated(
+				findByMasterHql.toString(), new Object[]{modId,masterUid});
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<TSm2Subject> findByMasterAndCount(String modId,
 			String masterUid, Integer size) {
-		Query query = null;
-		if(StringUtils.isNotBlank(masterUid)){
-			query = this.sm2SubjectDao.createQuery(this.findByMasterHql.toString(), 
-					new Object[]{modId,masterUid});
-		}else{
-			query = this.sm2SubjectDao.createQuery(
-					"FROM TSm2Subject sub WHERE sub.moduleId =? ",new Object[]{modId});
-		}
-		if(size!=null&&size>0){
-			query.setMaxResults(size);
-		}
-		return query.list();
+		SQLQuery query = (SQLQuery) this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module");
+		query.setString("uid", masterUid);
+		query.setString("moduleId", modId);
+		query.setMaxResults(size);
+		return sqlResult(query);
 	}
 	
 	@Override
@@ -176,7 +138,6 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<TSm2Subject> findByMsterModule(String masterUid,
 			Collection<String> moduleId, Integer size) {
 		StringBuilder sql = new StringBuilder("");
@@ -194,8 +155,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				sql.append("parentId,");
 				sql.append("createrName,");
 				sql.append("progress,");
-				sql.append("departmentName,");
-				sql.append("status ");
+				sql.append("departmentName ");
 			sql.append("FROM ");
 				sql.append("t_sm2_subject sub,");
 				sql.append("(SELECT sub_id as subId ");
@@ -218,6 +178,11 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		sql.delete(sql.lastIndexOf(" UNION ALL "),sql.length());
 		
 		SQLQuery query = (SQLQuery) this.sm2SubjectDao.createSqlQuery(sql.toString());
+		return sqlResult(query);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<TSm2Subject> sqlResult(SQLQuery query){
 		query.addScalar("id",Hibernate.STRING);
 		query.addScalar("createrId",Hibernate.STRING);
 		query.addScalar("createTime",Hibernate.TIMESTAMP);
@@ -231,7 +196,6 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		query.addScalar("createrName",Hibernate.STRING);
 		query.addScalar("progress",Hibernate.INTEGER);
 		query.addScalar("departmentName",Hibernate.STRING);
-		query.addScalar("status",Hibernate.STRING);
 		
 		List<Object[]> resultSet = query.list();
 		if(CollectionUtils.isEmpty(resultSet)){
@@ -255,7 +219,6 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				result.setCreaterName(trim(in[10]));
 				result.setProgress(Integer.parseInt(in[11].toString()));
 				result.setDepartmentName(trim(in[12]));
-				result.setStatus(trim(in[13]));
 				return result;
 			}
 		});
@@ -279,7 +242,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			sql.append("sub.createrName as createrName,");
 			sql.append("subtype.name as typeName,");
 			sql.append("subtype.id as typeId,");
-			sql.append("sub.status as status ");
+			sql.append("submaster.flag as status ");
 
 		sql.append("FROM t_sm2_subject sub,");
 		
@@ -289,21 +252,22 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			sql.append(") subtype,");
 			
 			sql.append("(");
-				sql.append("SELECT sub_id ");
+				sql.append("SELECT sub_id ,flag ");
 				sql.append("FROM t_sm2_subject_master ");
 				sql.append("WHERE user_uid = '" + Utils.curUserUid() + "' ");
+				sql.append("AND flag in (");
+				if(search.getStatus().size()>0){//状态
+					for (Integer i : search.getStatus()) {
+						sql.append(i);
+						sql.append(",");
+					}
+					sql.deleteCharAt(sql.length()-1);
+				}
+				sql.append(")");
 			sql.append(") submaster ");
 	
 		sql.append("WHERE ");
 			sql.append("sub.id = submaster.sub_id ");
-			
-			if(search.getStatus().size()>0){//状态
-				StringBuilder in = new StringBuilder("");
-				for (String statu : search.getStatus()) {
-					in.append("'" + statu + "',");
-				}
-				sql.append("AND sub.status in (" + in.deleteCharAt(in.length()-1).toString() + ") ");
-			}
 			
 			if(search.getUpdateDate()!=null){//选择指定日期				
 				sql.append(
@@ -349,8 +313,28 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		if (search.getStatus().size() > 0 && search.getPublisher().size() > 0) {
 		
 			StringBuilder sql = new StringBuilder("");
+			
+			List<List<Integer>> status = new ArrayList<List<Integer>>(2){{
+				add(new ArrayList<Integer>(1));
+				add(new ArrayList<Integer>(3));
+			}};
+			
+			for (Integer sta : search.getStatus()) {
+				switch (sta) {
+					case 1:
+						status.get(0).add(sta);
+						break;
+					default:
+						status.get(1).add(sta);
+						break;
+				}
+			}
+			
 			for (String uid : search.getPublisher()) {
-				for (String statu : search.getStatus()) {
+				for (List<Integer> statu : status) {
+					if(status.size()<=0){
+						continue;
+					}
 					sql.append("SELECT id,title,createrId,createrName,typeName,typeId,status ");
 					sql.append("FROM (");
 					
@@ -361,7 +345,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 							sql.append("sub.createrName as createrName,");
 							sql.append("subtype.name as typeName,");
 							sql.append("subtype.id as typeId,");
-							sql.append("sub.status as status ");
+							sql.append("submaster.flag as status ");
 			
 						sql.append("FROM t_sm2_subject sub,");
 						
@@ -371,14 +355,20 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 							sql.append(") subtype,");
 							
 							sql.append("(");
-								sql.append("SELECT sub_id ");
+								sql.append("SELECT sub_id,flag ");
 								sql.append("FROM t_sm2_subject_master ");
 								sql.append("WHERE user_uid = '" + Utils.curUserUid() + "' ");
+								sql.append("AND flag in (");
+								for (Integer integer : statu) {
+									sql.append(integer);
+									sql.append(",");
+								}
+								sql.deleteCharAt(sql.length()-1);
+								sql.append(")");
 							sql.append(") submaster ");
 					
 						sql.append("WHERE ");
 							sql.append("sub.id = submaster.sub_id ");
-							sql.append("AND sub.status ='" + statu + "' ");
 							
 							if(search.getUpdateDate()!=null){//选择指定日期				
 								sql.append(
@@ -410,7 +400,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 							sql.append("sub.lastUpdateTime DESC ");
 						sql.append("LIMIT 5 ");
 						
-					sql.append(") "+statu + uid);
+					sql.append(") " + uid + statu.get(0));
 					sql.append(" UNION ALL ");
 				}
 			}
@@ -468,7 +458,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		query.addScalar("createrName", Hibernate.STRING);
 		query.addScalar("typeName", Hibernate.STRING);
 		query.addScalar("typeId", Hibernate.STRING);
-		query.addScalar("status", Hibernate.STRING);
+		query.addScalar("status", Hibernate.INTEGER);
 		
 		List<Object[]> resultSet = query.list();
 		if(CollectionUtils.isEmpty(resultSet)){
@@ -485,7 +475,9 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				result.setCreatorName(trim(in[3]));
 				result.setTypeName(trim(in[4]));
 				result.setTypeId(trim(in[5]));
-				result.setStatus(trim(in[6]));
+				String status = null;
+				status = Integer.parseInt(in[6].toString())==0?"new":"updated";
+				result.setStatus(status);
 				return result;
 			}
 		});

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SubWeekSearch {
 
-	private List<String> status = new LinkedList<String>();
+	private List<Integer> status = new LinkedList<Integer>();
 	private Date start;
 	private Date updateDate;
 	private List<String> publisher = new LinkedList<String>();
@@ -16,13 +16,13 @@ public class SubWeekSearch {
 	//////////////////////////
 	/////getters&setters///////
 	/////////////////////////
-	public List<String> getStatus() {
+	public List<Integer> getStatus() {
 		return status;
 	}
-	public void setStatus(List<String> status) {
+	public void setStatus(List<Integer> status) {
 		this.status = status;
 	}
-	public void setStatus(String[] status) {
+	public void setStatus(Integer[] status) {
 		this.status = Arrays.asList(status);
 	}
 	public Date getStart() {

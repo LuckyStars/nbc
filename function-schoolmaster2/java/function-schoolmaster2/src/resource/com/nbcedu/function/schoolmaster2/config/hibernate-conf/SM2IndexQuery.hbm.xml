@@ -30,17 +30,20 @@
 	<sql-query name="index_find_sub_by_module">
 		<![CDATA[
 		SELECT
-			sub.id,
-			sub.createrId,
-			sub.createTime,
-			sub.content,
-			sub.flag,
-			sub.departmentId,
-			sub.title,
-			sub.moduleId,
-			sub.lastUpdateTime,
-			sub.parentId,
-			sub.createrName
+			sub.id as id,
+			sub.createrId ad createrId,
+			sub.createTime as createTime,
+			sub.content as content,
+			sub.flag as flag,
+			sub.departmentId as departmentId,
+			sub.title as title,
+			sub.moduleId as moduleId,
+			sub.lastUpdateTime as lastUpdateTime,
+			sub.parentId as parentId,
+			sub.createrName as createrName,
+			sub.progress as progress,
+			sub.departmentName as departmentName,
+			master.flag as masterFlag
 		FROM t_sm2_subject sub,
 			(
 				SELECT sub_id,flag
@@ -49,7 +52,6 @@
 			) master 
 		WHERE sub.moduleId = :moduleId
 		ORDER BY master.flag ASC ,sub.lastUpdateTime DESC
-		LIMIT :size
 		]]>
 	</sql-query>
 </hibernate-mapping>

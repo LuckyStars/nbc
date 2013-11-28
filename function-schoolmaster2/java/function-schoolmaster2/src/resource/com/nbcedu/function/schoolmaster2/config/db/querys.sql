@@ -16,14 +16,14 @@ FROM t_sm2_subject sub,
 		FROM t_sm2_type	
 	) subtype,
 	(
-		SELECT sub_id
+		SELECT sub_id,flag
 		FROM t_sm2_subject_master
 		WHERE user_uid = '1'
+		AND flag = 0
 	) submaster
 
 WHERE
 	sub.id = submaster.sub_id
-	AND sub.status in ('new','updated')
 	AND (DATE(sub.createTime)='2013-10-25' OR DATE(sub.lastUpdateTime)='2013-10-25')
 	AND (sub.createTime > '2012-10-10' OR sub.lastUpdateTime > '2012-10-10') 
 	AND sub.typeId = subtype.id
