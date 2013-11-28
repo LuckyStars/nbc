@@ -156,7 +156,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				cri.add(Restrictions.eq("checkUsers.userUid",vo.getReceiverUid()));
 			}
 			if(vo.getFlag()!=null&&vo.getFlag()==1){
-				cri.add(Restrictions.eq("flag", vo.getFlag()));
+				cri.add(Restrictions.eq("checkUsers.flag", vo.getFlag()));
 			}
 		}
 		

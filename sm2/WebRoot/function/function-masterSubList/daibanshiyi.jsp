@@ -95,7 +95,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 <body>
 	<div class="right">
 		<h1>
-			当前位置：首页 - <span style="color: #0374C2">您的待办事宜</span>
+			当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color: #0374C2">您的待办事宜</span>
 		</h1>
 		<div class="right-input1">
 			<p class="work"  onclick="tabClick('zongjiehuibao');">

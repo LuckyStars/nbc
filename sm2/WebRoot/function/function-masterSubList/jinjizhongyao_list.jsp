@@ -77,7 +77,7 @@
 <body>
 <div class="main" style="width: 990px;">
   <div class="right1">
-    <h1>当前位置：首页 - <span style="color:#E00001">紧急重要事件处理</span></h1>
+    <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#E00001">紧急重要事件处理</span></h1>
     	<form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
 			<input type="hidden" name="search.typeId" value="${search.typeId}" />

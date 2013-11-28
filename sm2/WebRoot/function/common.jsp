@@ -6,3 +6,4 @@
 <%@ taglib prefix="pri" uri="/function/tags/privilegetag.tld" %>
 <%@ taglib prefix="emo" uri="/function/tags/Emotion.tld" %>
 <c:set var="prc" value="${pageContext.request.contextPath}"/>
+<c:set var="por" value="http://127.0.0.1:8080/schoolapp"/>

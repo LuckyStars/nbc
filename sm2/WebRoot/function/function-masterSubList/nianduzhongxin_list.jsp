@@ -83,7 +83,7 @@ table td {
 <div class="main" style="width: 990px;">
 		<div class="right1">
 			<h1>
-				当前位置：首页 - <span style="color: #002F7F">工作计划跟踪 -</span>
+				当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color: #002F7F">工作计划跟踪 -</span>
 			</h1>
 			<form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
