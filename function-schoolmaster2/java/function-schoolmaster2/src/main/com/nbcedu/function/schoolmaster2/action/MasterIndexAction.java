@@ -30,11 +30,9 @@ public class MasterIndexAction extends BaseAction{
 	
 	public void findLinshi(){
 		
-		final String uid = Utils.getDefaultMasterUids().
-			contains(this.getUserId())?null:getUserId();
+		final String uid = this.getUserId();
 		
 		final String cache_key  = LINSHI_MODULEID +  getUserId();
-		
 		
 		SearchFunction linshi = new SearchFunction() {
 			@Override

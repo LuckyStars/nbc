@@ -203,7 +203,8 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				</c:forEach>
 			</table>
 		</div>
-		<c:if test="${not empty moduleId and not empty subList}">
+		
+		<c:if test="${not empty moduleId and not empty subList}"><%--如果指定模块才需要显示分页 --%>
 		<div>
 			<div class="pages">
 				<c:if test="${pager.offset>=1}">

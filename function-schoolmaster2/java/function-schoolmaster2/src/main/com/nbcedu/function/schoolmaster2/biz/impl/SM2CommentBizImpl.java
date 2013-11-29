@@ -99,7 +99,7 @@ public class SM2CommentBizImpl extends BaseBizImpl<TSm2Comment> implements SM2Co
 			return Lists.newArrayList();
 		}
 		Criteria cri = this.comDao.createCriteria(Restrictions.in("progressId", progIds));
-		cri.addOrder(Order.desc("createTime"));
+		cri.addOrder(Order.desc("createtime"));
 		return cri.list();
 	}
 

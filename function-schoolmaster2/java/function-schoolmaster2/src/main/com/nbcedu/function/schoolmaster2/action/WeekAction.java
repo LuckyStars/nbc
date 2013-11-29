@@ -41,8 +41,12 @@ public class WeekAction extends BaseAction{
 			search.setStart(weekStart);
 		}
 		
-		if(search.getStatus().size()<=0){
-			search.setStatus(new String[] { "new","updated" });
+		if(search.getStatus().size()<=0 || search.getStatus().size()==1){
+			if(search.getStatus().get(0)==-1){//查询所有类型
+				search.setStatus(new Integer[]{ 0,1,2,3 });
+			}else if(search.getStatus().get(0)==2){//查询更新的
+				search.setStatus(new Integer[]{ 1,2,3 });
+			}
 		}
 		
 		Map<String, WeekDisplayVo> result =null;

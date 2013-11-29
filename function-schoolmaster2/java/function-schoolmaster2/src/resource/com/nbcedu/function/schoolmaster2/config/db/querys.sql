@@ -16,14 +16,14 @@ FROM t_sm2_subject sub,
 		FROM t_sm2_type	
 	) subtype,
 	(
-		SELECT sub_id
+		SELECT sub_id,flag
 		FROM t_sm2_subject_master
 		WHERE user_uid = '1'
+		AND flag = 0
 	) submaster
 
 WHERE
 	sub.id = submaster.sub_id
-	AND sub.status in ('new','updated')
 	AND (DATE(sub.createTime)='2013-10-25' OR DATE(sub.lastUpdateTime)='2013-10-25')
 	AND (sub.createTime > '2012-10-10' OR sub.lastUpdateTime > '2012-10-10') 
 	AND sub.typeId = subtype.id
@@ -124,7 +124,26 @@ FROM
 
 
 
-
+-----------------------------年度重心数量查询
+SELECT ty.id,ty.name,su.cou
+FROM t_sm2_type ty LEFT JOIN
+	(
+		SELECT  COUNT(sub.typeId) as cou,sub.typeId as tyId
+		FROM 
+			t_sm2_subject sub,
+			(
+				SELECT sub_id
+				FROM t_sm2_subject_master
+				WHERE 
+					user_uid = '1'
+					AND flag in (0,2)
+			) ma
+		WHERE 
+			sub.id = ma.sub_id
+			AND sub.moduleId = 'nianduzhongxin'
+		GROUP BY sub.typeId
+	) su
+	ON su.tyId = ty.id
 
 
 

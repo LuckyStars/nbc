@@ -146,11 +146,12 @@
 				(
 					SELECT sub_id
 					FROM t_sm2_subject_master
-					WHERE user_uid = :uid
+					WHERE 
+						user_uid = :uid
+						AND (flag=0 OR flag=2)
 				) master 
 			WHERE
-				t_sm2_subject.id = master.sub_id AND 
-			 	(t_sm2_subject.status = 'new' or t_sm2_subject.status='updated')
+				t_sm2_subject.id = master.sub_id 
 			GROUP BY moduleId
 		) sub
 		ON t_sm2_module.id = sub.moduleId   	
