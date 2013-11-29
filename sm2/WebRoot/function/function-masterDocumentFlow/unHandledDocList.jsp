@@ -7,8 +7,6 @@
 <title>待处理文件</title>
 <link href="../function/css/index.css" rel="stylesheet" type="text/css" />
 <link href="../function/css/gzt.css" rel="stylesheet"/>
-<link rel="stylesheet" type="text/css" href="../function/js/easyui/themes/default/easyui.css" />
-<link rel="stylesheet" type="text/css" href="../function/js/easyui/themes/icon.css" />
 <style>
 table th {
 	background:url(../function/img/table-bg.jpg) repeat-x;
@@ -22,8 +20,6 @@ table td {
 }
 </style>
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -57,7 +53,7 @@ $(function(){
 		  <s:form action="listUnhandledDocumentTask" method="post" namespace="/masterDocumentFlow" onsubmit="return checkDate();">
 		    <div class="right-input">
 		        <p><label>文件名称:</label>
-					<input type="text" name="queryConditionVo.documentName" onkeyup="value=value.replace(/[%_]/g,'')"  />
+					<input type="text" name="queryConditionVo.documentName" onkeyup="value=value.replace(/[%_]/g,'')"  value="${queryConditionVo.documentName }"/>
 				</p>
 		        <p class="timer"><label>发布时间:</label>
 		        <input type="text" name="queryConditionVo.starting" value="${queryConditionVo.starting }" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
@@ -111,6 +107,10 @@ $(function(){
     	<div style="text-align:center;font-size:15px;margin-top:20px;">
 			 <pg:pager url="../masterDocumentFlow/listUnhandledDocumentTask.action"
     			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
+    			<pg:param name="queryConditionVo.documentName"  value="${queryConditionVo.documentName}"/>
+    			<pg:param name="queryConditionVo.starting"  value="${queryConditionVo.starting}"/>
+    			<pg:param name="queryConditionVo.ending"  value="${queryConditionVo.ending}"/>
+    			<pg:param name="queryConditionVo.ending"  value="${queryConditionVo.ending}"/>
     			总计${pagerUtils.totalResult}条
     			<pg:first>
     				<a href="${pageUrl}">首页</a>

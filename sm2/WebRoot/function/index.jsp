@@ -141,7 +141,7 @@
 					<tr>
 						<td colspan="2">
 							<div style="width: 200px; margin: 0 auto;">
-							<a class="pointer ts" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=nianduzhongxin&search.flag=1"> 
+							<a class="pointer ts" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.flag=1"> 
 								<img src="${prc}/function/images/icon1.png" />
 								<span>我关注的核心工作</span>
 								<img src="${prc}/function/images/new.png" id="hexin" />
