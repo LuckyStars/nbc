@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
@@ -55,7 +56,18 @@ public class IndexAction extends BaseAction{
 		return "home";
 	}
 	public String login(){
-		this.rightURL = "scMaster2/list_master.action?search.typeId="+search.getTypeId()+"&moduleId="+moduleId;
+		StringBuffer buf = new StringBuffer();
+		buf.append("scMaster2/list_master.action?moduleId=");
+		buf.append(moduleId);
+		if(!StringUtil.isEmpty(search.getTypeId())){
+			buf.append("&search.typeId=");
+			buf.append(search.getTypeId());
+		}
+		if(search.getFlag()!=null){
+			buf.append("&search.flag=");
+			buf.append(search.getFlag());
+		}
+		this.rightURL = buf.toString();
 		return "home";
 	}
 	

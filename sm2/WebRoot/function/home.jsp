@@ -122,7 +122,7 @@
       <li><a href="#" class="li-blue" id="nav5">
       <img src="${prc}/function/images/nav_05.png" width="16" height="16" />工作计划跟踪<span class="cols-open"></span></a>
         <ul class="nav-list-inner" style="display:block;">
-          <li><a class="current" href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin" target="fm_right">·我关注的核心工作</a></li>
+          <li><a class="current" href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.flag=1" target="fm_right">·我关注的核心工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx" target="fm_right">·教育教研工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx" target="fm_right">·德育工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx" target="fm_right">·后勤·卫生工作</a></li>

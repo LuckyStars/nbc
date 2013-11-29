@@ -16,43 +16,81 @@ table th {
 	line-height:38px;
 }
 table td {
-	height:35px;
-	line-height:35px;
+	height:34px;
+	line-height:34px;
 	text-align:center;
-	border-bottom:1px dotted #ccc;
 }
-#aaa {border-top:1px dashed #cccccc;height: 1px;overflow:hidden;}
 </style>
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-function changepage(page){
-	window.location.href="/schoolapp/masterDocumentFlow/listAllDocumentTask.action?pagerUtils.pageIndex="+page;
-}
+$(function(){
+    $("table tr:odd").css("background", "#fff");
+    $("table tr:even").css("background", "#EDEFFE");
+});
 </script>
 </head>
 	<body>
 		<div class="right1">
-		  <h1>当前位置：首页 - <span style="color:#002F7C">公文处理</span></h1>
-	<div style="margin:0 40px 0 40px;">
+		  <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#002F7C">公文处理</span></h1>
+		  <s:form action="listUnhandledDocumentTask" method="post" namespace="/masterDocumentFlow" onsubmit="return checkDate();">
+		    <div class="right-input">
+		        <p><label>文件名称:</label>
+					<input type="text" name="queryConditionVo.documentName" onkeyup="value=value.replace(/[%_]/g,'')"  />
+				</p>
+		        <p class="timer"><label>发布时间:</label>
+		        <input type="text" name="queryConditionVo.starting" value="${queryConditionVo.starting }" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
+		        <img src="../function/img/time.jpg"  class="time"/><label>至</label>
+		        <input type="text"  name="queryConditionVo.ending" value="${queryConditionVo.ending }" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
+		        <img src="../function/img/time.jpg"  class="times"/></p>
+		        <p><label>发布单位:</label>
+		        <select name="queryConditionVo.documentSourceId" >
+					<option value="-1">--请选择--</option>
+    					<c:forEach items="${documentSourceVoList}" var="c">
+    						<c:choose>
+    							<c:when test="${c.id == queryConditionVo.documentSourceId}">
+    								<option value="${c.id}" selected="selected">${c.displayName}</option>
+    							</c:when>
+    							<c:otherwise>
+    								<option value="${c.id}">${c.displayName}</option>
+    							</c:otherwise>
+    						</c:choose>
+    					</c:forEach>	        
+		        </select></p>
+		        <a href="javascript:document.forms[0].submit();">查询</a>
+		    </div>
+		  </s:form>
        <table width="100%" border="0">
+      <tr>
+        <th width="5%" scope="col">序号</th>
+        <th width="35%" scope="col">文件名称</th>
+        <th width="10%" scope="col">发文单位</th>
+        <th width="10%" scope="col">发布者</th>
+        <th width="10%" scope="col">发布时间</th>
+        <th width="10%" scope="col">状态</th>
+<!--        <th width="10%" scope="col">过期时间</th>-->
+        <th width="10%" scope="col">操作</th>
+      </tr>
       <s:iterator value="documentTaskVoList" var="taskVo" status="st">
       <tr>
-        <td style="text-align:left;">
-        	<a style="color:red;" href="viewHandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
-			.<s:property value="#taskVo.longTitle"/></a>
+        <td><s:property value='#st.index+1'/> </td>
+        <td class="lan">
+        	<a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
+			<s:property value="#taskVo.documentTitle"/></a>
 		</td>
-        <td>.<s:property value="#taskVo.documentSourceDisplayName"/></td>
-        <td>.<s:property value="#taskVo.publishTime"/></td>
+        <td><s:property value="#taskVo.documentSourceDisplayName"/></td>
+        <td><s:property value="#taskVo.authorName"/></td>
+        <td><s:property value="#taskVo.publishTime"/></td>
+        <td><s:property value="#taskVo.status"/></td>
+<!--        <td><s:property value="#taskVo.expireTime"/></td>-->
+        <td><span class="find"><a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">查阅处理</a></span></td>
       </tr>
       </s:iterator>
     </table>
-    </div>
-    	<c:if test="${pagerUtils.totalResult>10}">
-		<div style="text-align:center;font-size:15px;margin-top:20px;">
-			 <pg:pager url="../masterDocumentFlow/listAllDocumentTask.action"
+    	<div style="text-align:center;font-size:15px;margin-top:20px;">
+			 <pg:pager url="../masterDocumentFlow/listUnhandledDocumentTask.action"
     			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
     			总计${pagerUtils.totalResult}条
     			<pg:first>
@@ -79,7 +117,6 @@ function changepage(page){
     			</pg:last>
     		</pg:pager>
 		</div>
-		</c:if>
     </div>
 </body>
 </html>

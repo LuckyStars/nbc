@@ -83,7 +83,7 @@ table td {
 <div class="main" style="width: 990px;">
 		<div class="right1">
 			<h1>
-				当前位置：首页 - <span style="color: #002F7F">工作计划跟踪 -</span>
+				当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color: #002F7F">工作计划跟踪 -</span>
 			</h1>
 			<form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
@@ -135,10 +135,9 @@ table td {
 						<td><fmt:formatDate value="${sub.createTime }" pattern="yyyy-MM-dd"/></td>
 						<td>
 							<div class="pross">
-								<img src="${prc}/function/function-masterSubList/img/pro-bg1.jpg"
-									class="pross-img" style="width:${sub.progress}%;" />
+								<img src="${prc}/function/images/percentLine/${sub.progress}.png"
+									class="pross-img"/>
 							</div>
-							<p class="pross-p">${sub.progress}%</p>
 							<c:if test="${sub.flag eq '1'}">
 								<a href="#" onclick="javascript:stick('${sub.id }',3,'qi');" id="${sub.id }">
 									<img src="${prc}/function/img/qi1.png" />

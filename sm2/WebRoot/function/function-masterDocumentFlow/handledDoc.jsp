@@ -16,7 +16,7 @@
 </head>
 <body>
   <div class="right1">
-    <h1>当前位置：首页 - <span style="color:#E00001">待处理文件 - 查阅处理</span></h1>
+    <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#E00001">待处理文件 - 查阅处理</span></h1>
     <p class="fonts"><s:property value="documentVo.title"/></p>
       <div class="right-box">
           <p><span class="box-time">发布时间：</span><span class="box-sp"><s:property value="documentVo.publishTime"/></span></p>
@@ -44,7 +44,7 @@
 		 <s:if test="documentVo.attachments.size != 0">
 	          <p><span class="box-time">附件：</span>
 	          	<s:iterator value="documentVo.attachments" var="attachment">
-	          		<a href="downloadAttachment.action?aid=<s:property value='#attachment.id'/>" style="margin-left:10px; text-decoration:underline;">
+	          		<a href="${por}/documentFlow/downloadAttachment.action?aid=<s:property value='#attachment.id'/>" style="margin-left:10px; text-decoration:underline;">
 	          	  		<span class="box-sp" style="background:url(../function/img/ico4.jpg) no-repeat left; padding-left:20px;">
 		          			<s:property value="#attachment.fileName" />
 		          		</span>

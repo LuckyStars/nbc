@@ -14,7 +14,7 @@
 <body>
      <div class="right1">
      	<form action="${prc}/scMaster2/listMasterStatistics_data.action">
-	    	<h1>当前位置：首页 - 请假代课 - <span style="color:#dd0000">统计分析</span></h1>
+	    	<h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - 请假代课 - <span style="color:#dd0000">统计分析</span></h1>
 		    <div class="content">
 		      <h3>统计时间：
 		          <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" 

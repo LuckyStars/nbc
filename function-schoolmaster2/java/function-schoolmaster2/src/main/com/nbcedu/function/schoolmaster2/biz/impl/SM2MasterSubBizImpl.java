@@ -10,8 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -104,18 +102,21 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		if(isNotBlank(vo.getTypeId())){
 			cri.add(Restrictions.eq("typeId", vo.getTypeId()));
 		}
-		if(vo.getFlag()!=null){
-			cri.add(Restrictions.eq("flag", vo.getFlag()));
-		}
+		
 		if(vo.getStart()!=null){
 			cri.add(Restrictions.ge("createTime", vo.getStart()));
 		}
 		if(vo.getEnd()!=null){
 			cri.add(Restrictions.le("createTime", vo.getEnd()));
 		}
-		if(isNotBlank(vo.getReceiverUid())){
+		if(isNotBlank(vo.getReceiverUid())||(vo.getFlag()!=null&&vo.getFlag()==1)){
 			cri.createAlias("checkUsers","checkUsers");
-			cri.add(Restrictions.eq("checkUsers.userUid",vo.getReceiverUid()));
+			if(isNotBlank(vo.getReceiverUid())){
+				cri.add(Restrictions.eq("checkUsers.userUid",vo.getReceiverUid()));
+			}
+			if(vo.getFlag()!=null&&vo.getFlag()==1){
+				cri.add(Restrictions.eq("checkUsers.flag", vo.getFlag()));
+			}
 		}
 		
 		PagerModel pm =  this.sm2SubjectDao.searchPaginated(cri);
