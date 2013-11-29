@@ -14,11 +14,11 @@ import com.nbcedu.integration.uc.client.vo.NbcUcDepartment;
 import com.nbcedu.integration.uc.client.vo.NbcUcPerson;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
 
-public class UCService {
+public class UCServiceII {
 	private static final BaseClient client = BaseClient.getInstance();
 	
 
-	private static final Logger logger = Logger.getLogger(UCService.class);
+	private static final Logger logger = Logger.getLogger(UCServiceII.class);
 
 	public static String getPersonJson(final Collection<String> checkedUids,final boolean b){
 		

@@ -10,7 +10,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import com.nbcedu.function.documentflow.utils.StringUtil;
+import org.apache.commons.lang.xwork.StringUtils;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
@@ -37,7 +37,7 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 	public boolean findByName(String name ,String id) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("select count(id) from TSm2Step where name=? ");
-		if(!StringUtil.isBlank(id)){
+		if(StringUtils.isNotBlank(id)){
 			hql.append(" and id<>'");
 			hql.append(id);
 			hql.append("'");
@@ -99,7 +99,7 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 	@Override
 	public boolean removeById1(String id) {
 		TSm2Step s = this.stepDao.removeById(id);
-		if(s!=null&&!StringUtil.isBlank(s.getId())){
+		if(s!=null&&StringUtils.isNotBlank(s.getId())){
 			try {
 				this.subjectBiz.updateMasterFlagAll(2, s.getSubjectId());
 			} catch (DBException e) {
