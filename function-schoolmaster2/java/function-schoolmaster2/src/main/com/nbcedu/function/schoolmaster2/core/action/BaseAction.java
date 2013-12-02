@@ -14,6 +14,7 @@ import org.apache.struts2.ServletActionContext;
 import com.nbcedu.function.schoolmaster2.constants.Constants;
 import com.nbcedu.function.schoolmaster2.core.pager.Pager;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -37,7 +38,7 @@ public class BaseAction extends ActionSupport {
 	
 	
 	protected String getUserId() {
-		return (String)ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY);
+		return Utils.curUserUid();
 	}
 	
 	protected Map<String,Object> getSession(){

@@ -1,6 +1,6 @@
 package com.nbcedu.function.schoolmaster2.action;
 
-import com.nbcedu.function.documentflow.utils.StringUtil;
+import org.apache.commons.lang.xwork.StringUtils;
 import com.nbcedu.function.schoolmaster2.biz.SM2TransBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
@@ -23,7 +23,7 @@ public class TransAction extends BaseAction{
 
 	
 	public void add(){
-		if(!StringUtil.isBlank(transUids) && !StringUtil.isBlank(transNames)){
+		if(StringUtils.isNotBlank(transUids) && StringUtils.isNotBlank(transNames)){
 			String[] ids = transUids.split(",");
 			String[] names = transNames.split(",");
 			SM2SubjectTrans trans1 ;

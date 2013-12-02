@@ -35,7 +35,13 @@ public class Utils {
 	
 	/***获取当前登录用户的UID**/
 	public static String curUserUid(){
-		return ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY).toString();
+		Object temp = ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY);
+		String uid = temp instanceof String ?temp.toString():"";
+		if(uid==null||uid.trim().isEmpty()){
+			temp = ActionContext.getContext().getSession().get("app_init").toString();
+			uid = temp instanceof String ?temp.toString():"";
+		}
+		return uid;
 	}
 	
 	/***获取当前登录用户的姓名**/
