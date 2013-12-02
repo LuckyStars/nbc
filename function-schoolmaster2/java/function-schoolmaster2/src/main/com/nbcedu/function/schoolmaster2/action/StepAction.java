@@ -42,7 +42,7 @@ public class StepAction extends BaseAction{
 		}
 	}
 	public void isExistStep(){
-		boolean b = this.stepBiz.findByName(name,id);
+		boolean b = this.stepBiz.findByName(name,step.getSubjectId());
 		if(!b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{

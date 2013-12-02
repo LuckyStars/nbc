@@ -38,7 +38,7 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 		StringBuilder hql = new StringBuilder();
 		hql.append("select count(id) from TSm2Step where name=? ");
 		if(!StringUtil.isBlank(id)){
-			hql.append(" and id<>'");
+			hql.append(" and subjectId<>'");
 			hql.append(id);
 			hql.append("'");
 		}
