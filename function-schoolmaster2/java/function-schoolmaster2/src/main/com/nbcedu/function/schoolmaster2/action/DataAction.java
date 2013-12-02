@@ -2,9 +2,10 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.Date;
 
+import com.nbcedu.function.documentflow.utils.StringUtil;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
+import com.nbcedu.function.schoolmaster2.constants.StatisticsEnum;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -20,6 +21,7 @@ public class DataAction extends BaseAction{
 	private SM2Datas data = new SM2Datas();
 	private String xmlContent;
 	private SM2DataBiz sm2DataBiz;
+	private String name ;
 	
 	public String listStatistics(){
 		this.data.setStartDate(start);
@@ -92,6 +94,9 @@ public class DataAction extends BaseAction{
 	}
 	public void setMatcher(String matcher) {
 		this.matcher = matcher;
+		if(!StringUtil.isBlank(matcher)){
+			this.name = StatisticsEnum.getByType(matcher).name;
+		}
 	}
 	public Date getStart() {
 		return start;
@@ -120,5 +125,12 @@ public class DataAction extends BaseAction{
 	public void setXmlContent(String xmlContent) {
 		this.xmlContent = xmlContent;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }
  

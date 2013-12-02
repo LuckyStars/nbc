@@ -43,7 +43,7 @@ $(function() {
 </head>
 <body>
 <div class="con_conent fixed">
-  <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　请假代课　-　</span><span class="back">统计分析</span></h1>
+  <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　${name }　-　</span><span class="back">统计分析</span></h1>
  <form action="${prc}/scMaster2/add_data.action">
  <input type="hidden" name="matcher" value="${matcher}" id="matcher"/>
   <div class="table_box fixed" style="background: #f0f8fc;">

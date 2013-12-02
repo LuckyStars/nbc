@@ -6,15 +6,27 @@ public enum StatisticsEnum {
 	substitute("请假代课"),
 	repair("在线报修");
 	 
-    private final String value;
-
-    //构造器默认也只能是private, 从而保证构造函数只能在内部使用
-	StatisticsEnum(String value) {
-        this.value = value;
+    public String name;
+    
+    public static StatisticsEnum getByType(String statisticsType){ 
+	    if(statisticsType.equals("bookSite")){ 
+	    	return bookSite;
+	    }else if(statisticsType.equals("documentFlow")){ 
+	    	return documentFlow;   
+	    }else if(statisticsType.equals("substitute")){ 
+	    	return substitute;
+	    }else if(statisticsType.equals("repair")){ 
+	    	return repair;
+	    }else{
+	    	throw new AssertionError("Unexpected value: " + statisticsType); 
+	    }   
+    }
+	StatisticsEnum(String name) {
+        this.name = name; 
     }
     
-    public String getValue() {
-        return value;
-    }
+    public static void main(String[] args) {
+		System.out.println(StatisticsEnum.getByType("repair").name);
+	}
 
 }

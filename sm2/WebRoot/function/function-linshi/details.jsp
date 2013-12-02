@@ -115,7 +115,7 @@
          $("#stepSave").click(function(){
         	 var name = $.trim($(".stepName").val());
         	 if(name.length>0){
-	            $.post("isExistStep_step.action",{name:name},function(data1){
+	            $.post("isExistStep_step.action",{name:name,id:$("#stepId").val()},function(data1){
 	            	if(data1==0){
 			         	var formParams = $("#stepForm").serialize();
 			    		$.post("add_step.action", formParams, function(data) {

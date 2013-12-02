@@ -15,6 +15,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.Sm2StepDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
@@ -37,12 +38,10 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 	public boolean findByName(String name ,String id) {
 		StringBuilder hql = new StringBuilder();
 		hql.append("select count(id) from TSm2Step where name=? ");
-		if(StringUtils.isNotBlank(id)){
-			hql.append(" and id<>'");
-			hql.append(id);
-			hql.append("'");
+		if(!StringUtil.isEmpty(id)){
+			hql.append(" and subjectId<>?");
 		}
-		List l = this.stepDao.find(hql.toString(), name);
+		List l = this.stepDao.find(hql.toString(), name,id);
 		return ((Long)l.get(0)).intValue()>0 ;
 	}
 
