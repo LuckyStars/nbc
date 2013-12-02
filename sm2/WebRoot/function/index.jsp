@@ -72,7 +72,8 @@
 		<div class="module module1">
 			<h1>个人信息</h1>
 			<div class="content userinfo">
-				<img class="photo" src="${photoPath}" />
+				<%-- <img class="photo" src="${photoPath}" /> --%><%--一期 --%>
+				<img class="photo" src="${prc}/scMaster2/headPhoto_index.action" /><%--二期 --%>
 				<p class="name">
 					${userName}&nbsp;<img src="${prc}/function/images/name-bg.png" />
 				</p>
