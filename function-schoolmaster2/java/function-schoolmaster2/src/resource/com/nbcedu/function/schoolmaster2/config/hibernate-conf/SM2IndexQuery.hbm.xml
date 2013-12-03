@@ -54,4 +54,28 @@
 		ORDER BY master.flag ASC ,sub.lastUpdateTime DESC
 		]]>
 	</sql-query>
+	
+	<sql-query name="new_count_by_module_type">
+	<![CDATA[
+		SELECT ty.id as id ,su.cou as cout ,ty.name as name
+		FROM t_sm2_type ty LEFT JOIN
+			(
+				SELECT  COUNT(sub.typeId) as cou,sub.typeId as tyId
+				FROM 
+					t_sm2_subject sub,
+					(
+						SELECT sub_id
+						FROM t_sm2_subject_master
+						WHERE 
+							user_uid = :uid
+							AND flag in (0,2)
+					) ma
+				WHERE 
+					sub.id = ma.sub_id
+					AND sub.moduleId = :moduleId
+				GROUP BY sub.typeId
+			) su
+			ON su.tyId = ty.id
+	]]>
+	</sql-query>
 </hibernate-mapping>

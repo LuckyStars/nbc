@@ -60,14 +60,39 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	
 	public List<TSm2Subject> findByMsterModule(String masterUid,Collection<String> moduleId,Integer size);
 
-	
+	/**
+	 * 本周工作汇总
+	 * @param search
+	 * @return
+	 * @author xuechong
+	 */
 	public List<SubjectWeekVo> findWeek(SubWeekSearch search);
-	
+	/**
+	 * 单个人的本周工作
+	 * @param search
+	 * @return
+	 * @author xuechong
+	 */
 	public List<SubjectWeekVo> findWeekSingle(SubWeekSearch search);
 	
 	public SubjectZanVo findByProgId(String progId);
 	
+	/**
+	 * 
+	 * @param uid
+	 * @return <code>Map&lt;String,Integer&gt;</code>
+	 * <br>key: moduleId | value : count
+	 * @author xuechong
+	 */
 	public Map<String,Integer> findNewCountByModule(String uid);
 	
+	/**
+	 * 查找一个moduleId下 所有type的更新数量
+	 * @param moduleId
+	 * @param uid
+	 * @return
+	 * @author xuechong
+	 */
+	public Map<String,Integer> findAttCountByModType(String moduleId,String uid);
 	
 }

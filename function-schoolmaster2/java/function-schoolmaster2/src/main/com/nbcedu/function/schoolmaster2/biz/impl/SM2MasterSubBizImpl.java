@@ -445,6 +445,26 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		}};
 	}
 	
+	
+	@Override
+	@SuppressWarnings({ "serial", "unchecked" })
+	public Map<String, Integer> findAttCountByModType(String moduleId,
+			String uid) {
+		SQLQuery q = (SQLQuery) this.sm2SubjectDao.getNamedQuery("new_count_by_module_type");
+		q.addScalar("id", Hibernate.STRING);
+		q.addScalar("cout", Hibernate.STRING);
+		final List<Object[]> resultSet = q.list();
+		return new HashMap<String, Integer>(){{
+			if(resultSet!=null&&resultSet.size()>0){
+				for (Object[] result : resultSet) {
+					int count = result[1]==null?
+							0:Integer.parseInt(result[1].toString());
+					put(result[0].toString(),count);
+				}
+			}
+		}};
+	}
+	
 	///////////////////////
 	////////privates///////
 	////////////////////

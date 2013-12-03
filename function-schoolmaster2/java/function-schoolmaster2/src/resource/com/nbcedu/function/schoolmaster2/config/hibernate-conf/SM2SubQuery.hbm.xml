@@ -137,6 +137,7 @@
     </sql-query>
     
     <sql-query name="subject_count_by_module">
+    <!-- 关注的 subject -->
    	<![CDATA[
 	SELECT t_sm2_module.id,sub.counts
 	FROM t_sm2_module LEFT JOIN

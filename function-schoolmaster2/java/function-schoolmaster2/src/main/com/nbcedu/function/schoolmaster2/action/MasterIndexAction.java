@@ -28,6 +28,10 @@ public class MasterIndexAction extends BaseAction{
 	
 	private SM2MasterSubBiz masterSubBiz;
 	
+	/**
+	 * 临时事项
+	 * @author xuechong
+	 */
 	public void findLinshi(){
 		
 		final String uid = this.getUserId();
@@ -62,7 +66,12 @@ public class MasterIndexAction extends BaseAction{
 		
 		Struts2Utils.renderJson(findData(linshi));
 	}
+
 	
+	/**
+	 * 学校动态
+	 * @author xuechong
+	 */
 	public void findDongtai(){
 		
 		final String uid = this.getUserId();
@@ -70,12 +79,11 @@ public class MasterIndexAction extends BaseAction{
 		SearchFunction dongtai = new SearchFunction(){
 			@Override
 			public String search() {
-				Map<String, Integer> results = masterSubBiz.findNewCountByModule(uid);
-				JsonObject json = new JsonObject();
-				for (Map.Entry<String, Integer> entry : results.entrySet()) {
-					json.addProperty(entry.getKey(),entry.getValue());
-				}
-				return json.toString();
+				
+				Map<String, Integer> results = 
+					masterSubBiz.findNewCountByModule(uid);
+				
+				return countMapToJson(results);
 			}
 			@Override
 			public String getId() {
@@ -84,6 +92,27 @@ public class MasterIndexAction extends BaseAction{
 		};
 		
 		Struts2Utils.renderJson(findData(dongtai));
+	}
+
+	
+	public void findZhongxin(){
+		
+		final String uid = this.getUserId();
+		
+		SearchFunction zhongxin = new SearchFunction(){
+			@Override
+			public String getId() {
+				return "find_zhongxin" + uid;
+			}
+			@Override
+			public String search() {
+				Map<String, Integer> results = 
+					masterSubBiz.findAttCountByModType("nianduzhongxin", uid);
+				return countMapToJson(results);
+			}
+		};
+		
+		Struts2Utils.renderJson(findData(zhongxin));
 	}
 
 	
@@ -119,8 +148,17 @@ public class MasterIndexAction extends BaseAction{
 		public void setStatu(String statu) {
 			this.statu = statu;
 		}
+		
 	}
 	
+	
+	private static String countMapToJson(Map<String,Integer> input ){
+		JsonObject json = new JsonObject();
+		for (Map.Entry<String, Integer> entry : input.entrySet()) {
+			json.addProperty(entry.getKey(),entry.getValue());
+		}
+		return json.toString();
+	}
 	
 	private String findData(SearchFunction function){
 		if(function!=null){
