@@ -50,7 +50,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	@Override
 	public List<TSm2Subject> findByMasterAndCount(String modId,
 			String masterUid, Integer size) {
-		SQLQuery query = (SQLQuery) this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module");
+		SQLQuery query = (SQLQuery)this.sm2SubjectDao.createSqlQuery(
+				this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module").getQueryString());
 		query.setString("uid", masterUid);
 		query.setString("moduleId", modId);
 		query.setMaxResults(size);
@@ -58,8 +59,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 	
 	@Override
-	public PagerModel findByMaster(String modId, String masterUid,
-			Integer flagType) {
+	public PagerModel findByMaster(String modId, String masterUid,Integer flagType) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
 		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ? AND m.flag=?) ");

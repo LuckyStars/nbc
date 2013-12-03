@@ -95,7 +95,6 @@ public class MasterSubjectAction extends BaseAction{
 	public String showStep(){
 		this.proList = this.progBiz.findVoByStepId(this.id);
 		this.readsBiz.addByStep(this.id, getUserId());
-		
 		if(!CollectionUtils.isEmpty(proList)){
 			Collection<String> progIds = Collections2.transform(
 					proList, new Function<TSm2Progress, String>() {

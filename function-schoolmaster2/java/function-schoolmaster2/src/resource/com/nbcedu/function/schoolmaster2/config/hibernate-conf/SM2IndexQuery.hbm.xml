@@ -31,7 +31,7 @@
 		<![CDATA[
 		SELECT
 			sub.id as id,
-			sub.createrId ad createrId,
+			sub.createrId as createrId,
 			sub.createTime as createTime,
 			sub.content as content,
 			sub.flag as flag,

@@ -155,14 +155,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
 								<img src="${prc}/function/images/icon2.png" />
 								<span>德育工作</span>
-								<img src="${prc}/function/images/new.png" id="deyugongzuo" />
+								<img src="${prc}/function/images/new.png" id="deyu_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
 							<img src="${prc}/function/images/icon3.png" />
 							<span>教育教研工作</span>
-							<img src="${prc}/function/images/new.png" id="deyujiaoyan" />
+							<img src="${prc}/function/images/new.png" id="jiaoyujiaoyan_flag" />
 						</a>
 						</td>
 					</tr>
@@ -171,14 +171,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
-								<img src="${prc}/function/images/new.png" id="xinxihua" />
+								<img src="${prc}/function/images/new.png" id="xinxihua_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
 								<img src="${prc}/function/images/icon5.png" />
 								<span>后勤卫生工作</span>
-								<img src="${prc}/function/images/new.png" id="houqinweisheng" />
+								<img src="${prc}/function/images/new.png" id="houqinweisheng_flag" />
 							</a>
 						</td>
 					</tr>
@@ -187,14 +187,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
 								<img src="${prc}/function/images/icon6.png" />
 								<span>党团工作</span>
-								<img src="${prc}/function/images/new.png" id="dangtuan" />
+								<img src="${prc}/function/images/new.png" id="dangtuan_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=caiwu">
 								<img src="${prc}/function/images/icon7.png" />
 								<span>财务工作</span>
-								<img src="${prc}/function/images/new.png" id="caiwu" />
+								<img src="${prc}/function/images/new.png" id="caiwu_flag" />
 							</a>
 						</td>
 					</tr>
