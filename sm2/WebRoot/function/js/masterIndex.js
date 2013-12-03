@@ -66,7 +66,6 @@ var refreshZhongxin= function(){
 		if(data.length<=0){
 			return;
 		}
-		console.log(data);
 		for(var i = 0;i< zhongxinTypes.length;i++){
 			var ty = zhongxinTypes[i];
 			var flag = $("#" + ty + "_flag");

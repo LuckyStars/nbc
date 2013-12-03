@@ -307,8 +307,8 @@
     	var showAllDiscuss = function(progId){
     		$.post('${prc}/scMaster2/allDiss_master.action?id=' + progId,function(data){
     			if(data && data.length>0){
-    				var contentDiv =$("#diss_content"); 
-    				contentDiv("");
+    				var contentDiv =$("#diss_content");
+    				contentDiv.html('');
     				for(var i =0;i<data.length;i++){
     					var msg = data[i];
     					$(

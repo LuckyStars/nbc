@@ -301,6 +301,7 @@
 								</div>
 								
 								<span id="step_ops_${step.id}" style="display: none;">
+									
 									<c:if test="${sessionScope.sm2_init==step.createrId}">
 									<img title="删除" name="${step.id}"
 									class="delete_step_ico small1" 

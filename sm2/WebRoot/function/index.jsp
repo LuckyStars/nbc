@@ -237,19 +237,15 @@
 		<div class="module module2" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
-				<%--<div class="linshi">
+				<%--
+				<div class="linshi">
 					<a class="pointer" href="#">
 					<img src="${prc}/function/images/tb1.png" width="80" height="80" />
 					<span style="color: #e1517e;">东兴杯课程比赛</span>
 					</a>
 					<a class="qi"></a>
 				</div>
-				<div class="linshi">
-					<a class="pointer" href="#">
-						<img src="${prc}/function/images/tb5.png" width="80" height="80" />
-						<span style="color: #b25ebd;">迎接香港同盟</span>
-					</a>
-				</div>--%>
+				--%>
 			</div>
 		</div>
 		<div class="module module2" style="margin-left: 10px;">
