@@ -18,6 +18,7 @@
 			<result name="handledDoc">/function/function-masterDocumentFlow/handledDoc.jsp</result>
 			<result name="viewMyFlowingDoc">/function/function-documentFlow/viewMyFlowingDoc.jsp</result>
 			<result name="viewHandled" type="chain">viewHandledDocument</result>
+			<result name="allDocList">/function/function-masterDocumentFlow/allDocList.jsp</result>
 		</action>
 		<action name="saveRoute" class="documentAction" method="saveRoute"></action>
 		<action name="removeRoute" class="documentAction" method="removeRoute"></action>

@@ -505,6 +505,11 @@ public class StringUtil {
 	public static boolean isEmpty(String str) {
 		return (str == null) || (str.trim().length() == 0);
 	}
+	public static void main(String[] a){
+		Integer b=11111 ;
+		b.toString();
+		System.out.print(b);
+	}
 	
 	public static String substringBefore(String str, String separator) {
 		if ((isEmpty(str)) || (separator == null)) {

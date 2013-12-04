@@ -30,12 +30,17 @@ $(function(){
     $("table tr:odd").css("background", "#fff");
     $("table tr:even").css("background", "#EDEFFE");
 });
+function changepage(page){
+	$("#listAllDocumentTask").append("<input type='hidden' name='pagerUtils.pageIndex' id='pagerUtils.pageIndex'></input>");
+	document.getElementById("pagerUtils.pageIndex").value=page;
+	document.forms[0].submit();
+}
 </script>
 </head>
 	<body>
 		<div class="right1">
 		  <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#002F7C">公文处理</span></h1>
-		  <s:form action="listUnhandledDocumentTask" method="post" namespace="/masterDocumentFlow" onsubmit="return checkDate();">
+		  <s:form action="listAllDocumentTask" method="post" namespace="/masterDocumentFlow" onsubmit="return checkDate();">
 		    <div class="right-input">
 		        <p><label>文件名称:</label>
 					<input type="text" name="queryConditionVo.documentName" onkeyup="value=value.replace(/[%_]/g,'')"  />
@@ -77,7 +82,7 @@ $(function(){
       <tr>
         <td><s:property value='#st.index+1'/> </td>
         <td class="lan">
-        	<a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
+        	<a href="viewHandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
 			<s:property value="#taskVo.documentTitle"/></a>
 		</td>
         <td><s:property value="#taskVo.documentSourceDisplayName"/></td>
@@ -85,37 +90,19 @@ $(function(){
         <td><s:property value="#taskVo.publishTime"/></td>
         <td><s:property value="#taskVo.status"/></td>
 <!--        <td><s:property value="#taskVo.expireTime"/></td>-->
-        <td><span class="find"><a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">查阅处理</a></span></td>
+        <td><span class="find"><a href="viewHandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">查阅处理</a></span></td>
       </tr>
       </s:iterator>
     </table>
     	<div style="text-align:center;font-size:15px;margin-top:20px;">
-			 <pg:pager url="../masterDocumentFlow/listUnhandledDocumentTask.action"
-    			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
-    			总计${pagerUtils.totalResult}条
-    			<pg:first>
-    				<a href="${pageUrl}">首页</a>
-    			</pg:first>
-    			<pg:prev>
-    				<a href="${pageUrl}" >上一页</a> 
-    			</pg:prev>
-    			<pg:pages>
-    				<c:choose>
-    					<c:when test="${currentPageNumber eq pageNumber}">
-    						<font color="red">${pageNumber}</font>
-    					</c:when>
-    					<c:otherwise>
-    						<a href="${pageUrl}">${pageNumber }</a>
-    					</c:otherwise>
-    				</c:choose>
-    			</pg:pages>
-    			<pg:next>
-    				<a href="${pageUrl}" >下一页</a> 
-    			</pg:next>
-    			<pg:last>
-    				<a href="${pageUrl}">尾页</a>
-    			</pg:last>
-    		</pg:pager>
+			总计<s:property value="pagerUtils.totalResult"/>条
+			<s:if test="pagerUtils.pageIndex != 1">
+				<s:a cssClass="page" href="javascript:changepage(%{pagerUtils.pageIndex - 1})">&lt;&lt;上一页</s:a>
+			</s:if>
+			<font color="red"><s:property  value="%{pagerUtils.pageIndex}" /></font>
+			<s:if test="pagerUtils.pageIndex lt pagerUtils.pageNumbers.length">
+				<s:a cssClass="page" href="javascript:changepage(%{pagerUtils.pageIndex + 1})">下一页&gt;&gt;</s:a>
+			</s:if>
 		</div>
     </div>
 </body>

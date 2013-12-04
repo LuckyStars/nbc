@@ -6,6 +6,7 @@ import com.nbcedu.function.documentflow.utils.StringUtil;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.constants.StatisticsEnum;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -33,7 +34,6 @@ public class DataAction extends BaseAction{
 	public String listMasterStatistics(){
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
-		
 		this.data.setMatcher(matcher);
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
@@ -66,7 +66,7 @@ public class DataAction extends BaseAction{
 	
 	public String listByType(){
 		this.pm = this.sm2DataBiz.findPageByMatcher(matcher);
-		return "listStatistic";
+		return "listStatistics";
 	}
 	
 	public String remove(){
@@ -102,12 +102,26 @@ public class DataAction extends BaseAction{
 		return start;
 	}
 	public void setStart(Date start) {
-		this.start = start;
+		if(start!=null)
+			try {
+				this.start = com.nbcedu.function.schoolmaster2.core.util.date.DateUtil.str2Date(DateUtil.format(start, DateUtil.YDM_DASH), "yyyy-MM-dd");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		else
+			this.start = start;
 	}
 	public Date getEnd() {
 		return end;
 	}
 	public void setEnd(Date end) {
+		if(end!=null){
+			try {
+				this.end = com.nbcedu.function.schoolmaster2.core.util.date.DateUtil.str2Date(DateUtil.format(end, DateUtil.YDM_DASH), DateUtil.YDM_DASH);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else
 		this.end = end;
 	}
 	public SM2Datas getData() {

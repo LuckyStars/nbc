@@ -55,8 +55,12 @@ public class ProgressAction extends BaseAction{
 	}
 	
 	public void delete(){
-		this.progBiz.removeById1(id,subjectId);
-		Struts2Utils.renderText("0","encoding:UTF-8");
+		boolean b = this.progBiz.removeById1(id);
+		if(b){
+			Struts2Utils.renderText("0","encoding:UTF-8");
+		}else{
+			Struts2Utils.renderText("1","encoding:UTF-8");
+		}
 	}
 	////////////////////////
 	////getters&setters////
@@ -94,4 +98,5 @@ public class ProgressAction extends BaseAction{
 	public void setProgressVo(ProgressVo progressVo) {
 		this.progressVo = progressVo;
 	}
+	
 }

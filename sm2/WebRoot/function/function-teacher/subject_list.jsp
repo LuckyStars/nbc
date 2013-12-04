@@ -61,7 +61,7 @@
     		if(doValid()){	doUpdate();}
     	}
     	function on_delete(subjectId){
-        	$.post("isExist_step.action",{sujectId:subjectId},
+        	$.post("isExistStep_step.action",{subjectId:subjectId},
 				function(data){
 					if(data==0){
 		        		if(confirm("确定要删除吗?")){

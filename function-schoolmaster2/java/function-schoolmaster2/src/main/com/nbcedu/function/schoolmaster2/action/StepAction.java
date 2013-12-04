@@ -17,7 +17,7 @@ public class StepAction extends BaseAction{
 	private Sm2StepBiz stepBiz;
 	private String subjectId;
 	private String name;
-	private TSm2Step step;
+	private TSm2Step step ;
 	
 	public void stepList(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -32,9 +32,17 @@ public class StepAction extends BaseAction{
 		Struts2Utils.renderJson(Utils.gson.toJson(s));
 	}
 	public void add(){
-		this.step.setCreaterId(this.getUserId());
-		this.step.setCreateTime(new Date());
-		boolean  b = this.stepBiz.addStep(step);
+		TSm2Step st;
+		boolean  b = false;
+		if(name!=null&&name.isEmpty()){
+			for(String n : name.split(",")){
+				st = new TSm2Step();
+				st.setCreaterId(this.getUserId());
+				st.setCreateTime(new Date());
+				st.setName(n);
+				b = this.stepBiz.addStep(st);
+			}
+		}
 		if(b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{
@@ -42,7 +50,7 @@ public class StepAction extends BaseAction{
 		}
 	}
 	public void isExistStep(){
-		boolean b = this.stepBiz.findByName(name,step.getSubjectId());
+		boolean b = this.stepBiz.findByName(name,subjectId);
 		if(!b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{
