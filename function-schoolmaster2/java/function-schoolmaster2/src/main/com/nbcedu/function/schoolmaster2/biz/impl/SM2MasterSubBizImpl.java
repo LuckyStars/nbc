@@ -50,7 +50,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	@Override
 	public List<TSm2Subject> findByMasterAndCount(String modId,
 			String masterUid, Integer size) {
-		SQLQuery query = (SQLQuery) this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module");
+		SQLQuery query = (SQLQuery)this.sm2SubjectDao.createSqlQuery(
+				this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module").getQueryString());
 		query.setString("uid", masterUid);
 		query.setString("moduleId", modId);
 		query.setMaxResults(size);
@@ -58,8 +59,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	}
 	
 	@Override
-	public PagerModel findByMaster(String modId, String masterUid,
-			Integer flagType) {
+	public PagerModel findByMaster(String modId, String masterUid,Integer flagType) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append("FROM TSm2Subject sub WHERE sub.moduleId =? ");
 		hql.append("AND sub.id in (SELECT subId FROM SM2SubjectMaster m WHERE m.userUid = ? AND m.flag=?) ");
@@ -434,6 +434,27 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		final List<Object[]> resultSet = 
 			this.sm2SubjectDao.getNamedQuery("subject_count_by_module").
 			setString("uid", uid).list();
+		
+		return new HashMap<String, Integer>(){{
+			if(resultSet!=null&&resultSet.size()>0){
+				for (Object[] result : resultSet) {
+					int count = result[1]==null?
+							0:Integer.parseInt(result[1].toString());
+					put(result[0].toString(),count);
+				}
+			}
+		}};
+	}
+	
+	
+	@Override
+	@SuppressWarnings({ "serial", "unchecked" })
+	public Map<String, Integer> findAttCountByModType(String moduleId,
+			String uid) {
+		SQLQuery q = (SQLQuery) this.sm2SubjectDao.getNamedQuery("new_count_by_module_type");
+		q.addScalar("id", Hibernate.STRING);
+		q.addScalar("cout", Hibernate.STRING);
+		final List<Object[]> resultSet = q.list();
 		
 		return new HashMap<String, Integer>(){{
 			if(resultSet!=null&&resultSet.size()>0){

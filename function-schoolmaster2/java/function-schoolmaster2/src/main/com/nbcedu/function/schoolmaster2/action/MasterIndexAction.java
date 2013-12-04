@@ -1,8 +1,11 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,14 +28,17 @@ public class MasterIndexAction extends BaseAction{
 	private static volatile Map<String, String> CACHE = new HashMap<String, String>();
 	private static final Timer timer = new Timer();
 	private static final String LINSHI_MODULEID = "linshishixiang";
+	private static final String TONGJI_MODULEID = "tjfx" ;
 	
 	private SM2MasterSubBiz masterSubBiz;
 	
+	/**
+	 * 临时事项
+	 * @author xuechong
+	 */
 	public void findLinshi(){
 		
 		final String uid = this.getUserId();
-		
-		final String cache_key  = LINSHI_MODULEID +  getUserId();
 		
 		SearchFunction linshi = new SearchFunction() {
 			@Override
@@ -57,12 +63,17 @@ public class MasterIndexAction extends BaseAction{
 				);
 			}
 			@Override
-			public String getId() {return cache_key;}
+			public String getId() {return LINSHI_MODULEID + uid;}
 		};
 		
-		Struts2Utils.renderJson(findData(linshi));
+		executeFind(linshi);
 	}
+
 	
+	/**
+	 * 学校动态
+	 * @author xuechong
+	 */
 	public void findDongtai(){
 		
 		final String uid = this.getUserId();
@@ -70,12 +81,11 @@ public class MasterIndexAction extends BaseAction{
 		SearchFunction dongtai = new SearchFunction(){
 			@Override
 			public String search() {
-				Map<String, Integer> results = masterSubBiz.findNewCountByModule(uid);
-				JsonObject json = new JsonObject();
-				for (Map.Entry<String, Integer> entry : results.entrySet()) {
-					json.addProperty(entry.getKey(),entry.getValue());
-				}
-				return json.toString();
+				
+				Map<String, Integer> results = 
+					masterSubBiz.findNewCountByModule(uid);
+				
+				return countMapToJson(results);
 			}
 			@Override
 			public String getId() {
@@ -83,18 +93,141 @@ public class MasterIndexAction extends BaseAction{
 			}
 		};
 		
-		Struts2Utils.renderJson(findData(dongtai));
+		executeFind(dongtai);
 	}
 
 	
+	/**
+	 * 重心工作
+	 * @author xuechong
+	 */
+	public void findZhongxin(){
+		
+		final String uid = this.getUserId();
+		
+		SearchFunction zhongxin = new SearchFunction(){
+			@Override
+			public String getId() {
+				return "find_zhongxin" + uid;
+			}
+			@Override
+			public String search() {
+				Map<String, Integer> results = 
+					masterSubBiz.findAttCountByModType("nianduzhongxin", uid);
+				return countMapToJson(results);
+			}
+		};
+		
+		executeFind(zhongxin);
+	}
+
+	
+	public void findTongjifenxi(){
+		final String uid = this.getUserId();
+		
+		SearchFunction tongji = new SearchFunction() {
+			@Override
+			@SuppressWarnings("unchecked")
+			public String search() {
+				
+				List<TSm2Subject> subList=
+					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,4);
+				
+				final Stack<String> color = shuffleStack(Arrays.asList("F79263","6FB3E0","F76382","846FE0"));
+				
+				final Stack<String> icon = shuffleStack(Arrays.asList("a","b","c","d"));
+				
+				return Utils.gson.toJson(
+						Lists.transform(subList, new Function<TSm2Subject, Tongji>() {
+							@Override
+							public Tongji apply(TSm2Subject input) {
+								Tongji result = new Tongji();
+								result.setTitle(input.getTitle());
+								result.setUrl("/scMaster2/detail_master.action?id=" + input.getId());
+								result.setColor(color.pop());
+								result.setIcon(icon.pop());
+								return result;
+							}
+						}),
+						new TypeToken<List<Tongji>>() {}.getType()
+				);
+			}
+			@Override
+			public String getId() {return TONGJI_MODULEID + uid;}
+		};
+		
+		executeFind(tongji);
+		
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private Stack shuffleStack(List origin){
+		Collections.shuffle(origin);
+		Stack stack = new Stack();
+		stack.addAll(origin);
+		return stack;
+	}
+	/**
+	 * 执行查询
+	 * @param function
+	 * @author xuechong
+	 */
+	private void executeFind(SearchFunction function){
+		Struts2Utils.renderJson(findData(function));
+	}
+	
+	/**
+	 * 统计分析B部分展示
+	 * @author xuechong
+	 */
+	class Tongji{
+		private String url;
+		private String title;
+		private String icon;
+		private String color;
+		///////////////////////
+		////getters&setters/////
+		////////////////////////
+		public String getUrl() {
+			return url;
+		}
+		public void setUrl(String url) {
+			this.url = url;
+		}
+		public String getTitle() {
+			return title;
+		}
+		public void setTitle(String title) {
+			this.title = title;
+		}
+		public String getIcon() {
+			return icon;
+		}
+		public void setIcon(String icon) {
+			this.icon = icon;
+		}
+		public String getColor() {
+			return color;
+		}
+		public void setColor(String color) {
+			this.color = color;
+		}
+		
+	}
+	
+	/**
+	 * 临时事项展示
+	 * @author xuechong
+	 */
 	class Linshi {
 		
 		private String url;
 		private String progress;
 		private String title;
 		private String statu;
-		//////////
-		////getters&setters
+		///////////////////////////
+		////getters&setters////////
+		/////////////////////////////
 		public String getUrl() {
 			return url;
 		}
@@ -119,6 +252,16 @@ public class MasterIndexAction extends BaseAction{
 		public void setStatu(String statu) {
 			this.statu = statu;
 		}
+		
+	}
+	
+	
+	private static String countMapToJson(Map<String,Integer> input ){
+		JsonObject json = new JsonObject();
+		for (Map.Entry<String, Integer> entry : input.entrySet()) {
+			json.addProperty(entry.getKey(),entry.getValue());
+		}
+		return json.toString();
 	}
 	
 	

@@ -30,22 +30,6 @@
 				sub.lastUpdateTime DESC
     	]]>
     </sql-query>
-    <sql-query name="subject_master_module_count">
-    	<![CDATA[
-     		SELECT 
-     			COUNT(sub.id)
-			FROM
-				t_sm2_subject AS sub,
-				(
-					SELECT sub_id as subId
-					FROM t_sm2_subject_master
-					WHERE user_uid = :uid
-				) subIds
-			WHERE 
-				sub.id = subIds.subId
-				AND sub.moduleId = :moduleId 
-    	]]>
-    </sql-query>
     
     <sql-query name="trans_query" >
     	<![CDATA[
@@ -136,6 +120,7 @@
     ]]>
     </sql-query>
     
+    <!-- 关注的 subject -->
     <sql-query name="subject_count_by_module">
    	<![CDATA[
 	SELECT t_sm2_module.id,sub.counts

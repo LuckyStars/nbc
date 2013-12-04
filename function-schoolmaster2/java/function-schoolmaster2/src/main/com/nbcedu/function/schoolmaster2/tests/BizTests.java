@@ -96,4 +96,13 @@ public class BizTests {
 		}
 		System.out.println(json.toString());
 	}
+
+	
+	@Test
+	public void findByMasterAndCountTest(){
+		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
+		biz.findByMasterAndCount("linshi", "1", 6);
+	}
 }
+
+

@@ -18,21 +18,21 @@ public class EmotionDisplayTag extends TagSupport {
 	
 	private String content;
 	private static Map<String, String> emos =  new HashMap<String, String>(){{
-		put("[01]","01.png");	
-		put("[02]","02.png");	
-		put("[03]","03.png");	
-		put("[04]","04.png");	 
-		put("[05]","05.png");	
-		put("[06]","06.png");	
-		put("[07]","07.png");	
-		put("[08]","08.png");	
-		put("[09]","09.png");	
-		put("[0A]","0A.png");	
-		put("[0B]","0B.png");	
-		put("[0C]","0C.png");	
-		put("[0D]","0D.png");	
-		put("[0E]","0E.png");	
-		put("[0F]","0F.png");	
+		put("[傲慢]","傲慢.png");	
+		put("[呲牙]","呲牙.png");	
+		put("[大笑]","大笑.png");	
+		put("[流汗]","流汗.png");	 
+		put("[惊讶]","惊讶.png");	
+		put("[可爱]","可爱.png");	
+		put("[大哭]","大哭.png");	
+		put("[酷酷]","酷酷.png");	
+		put("[困了]","困了.png");	
+		put("[难过]","难过.png");	
+		put("[亲亲]","亲亲.png");	
+		put("[挑逗]","挑逗.png");	
+		put("[微笑]","微笑.png");	
+		put("[问题]","问题.png");	
+		put("[再见]","再见.png");	
 	}};	
 	
 	@Override

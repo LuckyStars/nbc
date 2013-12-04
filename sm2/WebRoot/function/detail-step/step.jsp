@@ -11,14 +11,14 @@
     <script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
-	<script type="text/javascript" src="${prc}/function/emotion/emotion.js"></script>
-	<link rel="stylesheet" href="${prc }/function/emotion/emotion.css" type="text/css"/>
+	<script type="text/javascript" src="${prc}/function/emotion/jQuery.jEmotion.js"></script>
     <script>
     	var ctx = '${prc}';
     	function resizeParent(){
     		var height = $(document).height();
     		parent.resizeFrame(height+200);
     	}
+    	
         $(function () {
         	  $("table tr:odd").css("background", "#f0f8fc");
         	    $("table tr:even").css("background", "#d5e0ee");
@@ -307,8 +307,8 @@
     	var showAllDiscuss = function(progId){
     		$.post('${prc}/scMaster2/allDiss_master.action?id=' + progId,function(data){
     			if(data && data.length>0){
-    				var contentDiv =$("#diss_content"); 
-    				contentDiv("");
+    				var contentDiv =$("#diss_content");
+    				contentDiv.html('');
     				for(var i =0;i<data.length;i++){
     					var msg = data[i];
     					$(
@@ -390,32 +390,37 @@
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
          id="disc_content_${prog.id }" style="display: none;" >
-        	<pri:hideWhenMaster>
+        	<pri:hideWhenMaster></pri:hideWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
-        	 	<div class="emo_comment">
-			        <div class="emo_form">
-			            <div class="face_tool" id="emodiv_${prog.id }">
-			               
-			            </div>
-			            <p><span class="emotion" id="emospan_${prog.id }"></span></p>
-			            <textarea class="emo_content" name="disscus.content" id="disc__content_${prog.id}" cols="" rows=""></textarea>
-			        </div>
+        	 	<div >
+        	 			<div >
+			            <textarea
+			            style="width:700px;margin-left:10px; margin-bottom:10px;display: block;border: 1px solid #ccc;"
+			             class="error" name="disscus.content" id="disc__content_${prog.id}"
+			             ></textarea>
+			             </div>
+	          			<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
+			            <span class="emotion" id="emospan_${prog.id }" 
+			            style="cursor:pointer; float:right;display:block;margin:0px 40px 0 0;">
+			            	<img src="${prc}/function/emotion/images/xiao.png"/>
+			            </span>
 			    </div>
 			    <script type="text/javascript">
-			    	var emo_${prog.id} = new EmoFace(
-			    			'disc__content_${prog.id}',
-			    			'emodiv_${prog.id }',
-			    			'emospan_${prog.id }'
-			    			);
-			    	emo_${prog.id}.Create();
+			    $(function(){
+				    $('#disc__content_${prog.id}').jEmotion({
+				    	input:'disc__content_${prog.id}',
+						handler: 'emospan_${prog.id }', //表情按钮
+						imagePath: '${prc}/function/emotion/images/', //图片路径
+						converts: 'div' //载入页面时候这个选择器中的元素会被替换表情图片
+					});
+			    });
 			    </script>
 	          	<input type="hidden" name="stepId" value="${id }"/>
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
-	          	<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	</pri:hideWhenMaster>
+        	
         	
         	<div id="diss_content">
         	<c:forEach items="${disMap}" var="disEntry">
@@ -537,7 +542,6 @@
 	<!--弹出层 赞 END-->
 
 
-
     <!--弹出层 阅读-->
 	<div class="adds2" id="reads_div">
   		<div class="add-tops2">
@@ -559,46 +563,6 @@
 	</div>
  	<!--弹出层 阅读 END -->
  
-
-    <!--弹出层  转发-->
-    <div class="adds4">
-  <div class="add-tops4">
-    <p>转发</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs4">
-      <div class="down-left">
-          <p class="check">全选 | 取消全选 </p>
-          <p class="teacher"><input type="checkbox" /><span>史家小学教师</span></p>
-          <ul>
-              <li>
-                  <p class="bigs"><input type="checkbox" /><span>办公室</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>金强</span></p>
-                  <p class="smalls"><input type="checkbox" /><span>汪忱</span></p>
-              </li>
-          </ul>
-          <div style="clear:both"></div>
-      </div>
-       <div class="down-cen"><img src="images/cen.jpg" /></div>
-       <div class="down-right">
-           <div class="right-p">
-               <p><input type="checkbox"  checked="checked"/><span>李丽霞</span></p>
-               <p><input type="checkbox" checked="checked"/><span>李丽霞</span></p>
-               <p><input type="checkbox" checked="checked"/><span>李丽霞</span></p>
-               <p><input type="checkbox" checked="checked"/><span>李丽霞</span></p>
-               <div style="clear:both"></div>
-           </div>
-           <div class="right-up">
-               <p>填写转发内容</p>
-               <textarea></textarea>
-               <a href="#">发送</a>
-           </div>
-       </div>
-      <div style="clear:both"></div>
-</div>
-        <div style="clear:both"></div>
-</div>
-
-<!--弹出层  转发END-->
 	<!--弹出层 转移步骤-->
 	<div class="adds3" id="step_trans_div" >
   		<div class="add-tops3">
@@ -616,101 +580,13 @@
 	</div>
  	<!--弹出层 转移步骤END-->
  
- 
- 
-          <!--弹出层附件上传-->
-    <div class="adds5">
-  <div class="add-tops5">
-    <p>批示</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs5">
-      <p>附件上传：</p>
-      <textarea></textarea>
-      <div class="chico">
-          <a href="#">选择文件 </a>
-           <a href="#">开始上传 </a>
-           <a href="#">中断上传 </a>
-      </div>
-      
-</div>
-</div>
 
- <!--弹出层附件上传END-->
-
-              <!--弹出层增加工作进展-->
-    <div class="adds6">
-  <div class="add-tops6">
-    <p>增加工作进展</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs6">
-      <div>
-          <p>所属步骤：</p>
-          <select>
-
-          </select>
-      </div>
-      <div>
-          <p>工作进展：</p>
-          <input type="text" />
-      </div>
-      <div>
-          <p>具体工作内容：</p>
-          <textarea></textarea>
-      </div>
-      <div class="sure">
-          <a href="#">确定 </a>
-           <a href="#">关闭 </a>
-      </div>
-      
-</div>
-</div>
-<!--弹出层增加工作进展 END-->
-                  <!--弹出层编辑-->
-    <div class="adds7">
-  <div class="add-tops7">
-    <p>编辑</p>
-    <img src="img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
-  <div class="add-downs7">
-      <div class="chen">
-          <p>步骤名称1：</p>
-          <input type="text" />
-          <img src="images/jia.jpg" />
-          <img src="images/jian.jpg"  class="jian"/>
-      </div>
-      <div class="chen">
-          <p>步骤名称2：</p>
-          <input type="text" />
-          <img src="images/jia.jpg" />
-      </div>
-      <div class="chen">
-          <p>步骤名称3：</p>
-          <input type="text" />
-          <img src="images/jia.jpg" />
-      </div>
-      <div class="chen">
-          <p>步骤名称4：</p>
-          <input type="text" />
-          <img src="images/jia.jpg" />
-      </div>
-      <div class="chen">
-          <p>步骤名称5：</p>
-          <input type="text" />
-          <img src="images/jia.jpg" />
-      </div>
-      <div class="sure">
-          <a href="#">确定 </a>
-           <a href="#">关闭 </a>
-      </div>
-      
-</div>
-</div>
 <script type="text/javascript">
 
 	$(function(){
 		resizeParent();
 	});
 </script>
-<!--弹出层编辑END-->
 
 </body>
 </html>

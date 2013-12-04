@@ -1,18 +1,23 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.CollectionUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.FileUtil;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
@@ -105,6 +110,37 @@ public class IndexAction extends BaseAction{
 			}
 		});
 		return StringUtils.trimToEmpty(phrase);
+	}
+	
+	/**
+	 * 二期门户获取头像
+	 * @author xuechong
+	 * @throws SQLException 
+	 * @throws IOException 
+	 */
+	public void headPhoto() throws IOException, SQLException{
+		final String uid = this.getUserId();
+		Blob result = (Blob) this.dao.getHibernateTemplate().execute(new HibernateCallback() {
+			
+			@Override
+			@SuppressWarnings("unchecked")
+			public Object doInHibernate(Session session) throws HibernateException,
+					SQLException {
+				SQLQuery q = session.createSQLQuery("SELECT avatarBig FROM t_portal_account_expand WHERE uid=:uid");
+				q.setString("uid", uid);
+				q.addScalar("avatarBig", Hibernate.BLOB);
+				List<Blob> resultSet = q.list();
+				if(resultSet!=null&&!resultSet.isEmpty()){
+					return resultSet.get(0)	;
+				}
+				return null;
+			}
+		});
+		
+		if(result!=null){
+			FileUtil.copy(result.getBinaryStream(), this.getResponse().getOutputStream());
+		}
+		
 	}
 	////////////////////////////////
 	/////getters&setters//////

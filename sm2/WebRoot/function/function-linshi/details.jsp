@@ -119,14 +119,7 @@
 	            	if(data1==0){
 			         	var formParams = $("#stepForm").serialize();
 			    		$.post("add_step.action", formParams, function(data) {
-			      				//$(".tabs-wp ul").append('<li id="'+data+'" class="blocksTab cur"><a href="javascript:changeTab('+data+');">'+name+'</a>'+
-					      		//		'<img src="${prc}/function/function-linshi/img/errotab.png" /></li>');
-			      				//$("input[name='step.name']").val("");
-				   				// $(".bg").hide();
-				   				// $(".adds7").hide();
-			      				//changeTab(data);
 			      				if(data==0){	parent.location.reload();}else{alert("增加出现错误！");}
-			      			
 			     			});
 	            	}else{
 						alert("存在相同步骤！");
@@ -161,7 +154,6 @@
 						$.post("delete_step.action",{id:id},function(data){
 							if(data==0){
 								location.reload();
-								//$("#"+id).remove();
 							}else{
 								alert("删除失败！");
 							}
@@ -218,18 +210,18 @@
         	 }else{ alert("请选择转发人！");}
          	});
 	  });
-	  function select(select){
-      	if (select) {  
-        	$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox0").addClass("tree-checkbox1");
-      	} else {  
-      		$(".tree-checkbox.tree-checkbox1").removeClass("tree-checkbox1").addClass("tree-checkbox0");
-      	}  
-       }
+		function select(select){
+			if (select) {  
+			 	$(".tree-checkbox.tree-checkbox0").removeClass("tree-checkbox0").addClass("tree-checkbox1");
+			} else {  
+				$(".tree-checkbox.tree-checkbox1").removeClass("tree-checkbox1").addClass("tree-checkbox0");
+			}  
+     	}
 	  
-	  function popAddProg(stepId){
+		function popAddProg(stepId){
 		  $("#prog_step_id").val(stepId);
 		  $(".adds6").show();
-	  }
+	  	}
 	</script>
 	<script>
 		function resizeFrame(height){
@@ -309,6 +301,7 @@
 								</div>
 								
 								<span id="step_ops_${step.id}" style="display: none;">
+									
 									<c:if test="${sessionScope.sm2_init==step.createrId}">
 									<img title="删除" name="${step.id}"
 									class="delete_step_ico small1" 
@@ -392,17 +385,6 @@
 	<!--弹出层 转发-->
 	
 	
-	<!--弹出层3-->
-	<div class="adds3">
-	<div class="add-tops3">
-	 	<p>转移</p>
-	 	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
-	</div>
-	<div class="add-downs3">
-	    <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	    <p><input type="radio" /><span>步骤二：xxxxxxxxxxxx</span></p>
-	</div>
-	</div>
     <!--弹出层5-->
     <div class="adds5">
 	<div class="add-tops5">

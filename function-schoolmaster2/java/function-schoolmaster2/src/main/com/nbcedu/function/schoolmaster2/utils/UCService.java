@@ -14,8 +14,13 @@ import com.nbcedu.integration.uc.client.vo.NbcUcDepartment;
 import com.nbcedu.integration.uc.client.vo.NbcUcPerson;
 import com.nbcedu.integration.uc.client.vo.NbcUcTreeNode;
 
+/**
+ * 用户中心的查询
+ * @author xuechong
+ */
 public class UCService {
-	private static final BaseClient client = BaseClient.getInstance();
+	private static final BaseClient client = new BaseClient();
+//	private static final Map department;
 	
 
 	private static final Logger logger = Logger.getLogger(UCService.class);
@@ -66,7 +71,7 @@ public class UCService {
 			}
 
 			List<NbcUcTreeNode> getTreeNode(String pid) {
-				List<NbcUcTreeNode> list = client.queryDepartTree(pid, Boolean.TRUE);
+				List<NbcUcTreeNode> list = client.queryDepartTree(pid, 3);
 				return list;
 			}
 			
@@ -99,7 +104,7 @@ public class UCService {
 	public static String findNameByUid(String uid){
 		return uid.equals("1") ? "admin" : new Object(){
 			public String getName(String uid){
-				NbcUcPerson p = client.queryPerson(uid);
+				NbcUcPerson p = client.queryPerson(1, uid);
 				logger.info(p);
 				return p!=null?p.getName():"";
 			}
@@ -114,7 +119,7 @@ public class UCService {
 		return m;
 	}
 	public static List<DepartmentVo> findDepartment(){
-		List<NbcUcTreeNode> l = client.queryDepartTree("root", Boolean.FALSE);
+		List<NbcUcTreeNode> l = client.queryDepartTree("root", 1);
 		List<DepartmentVo> list = new ArrayList<DepartmentVo>();
 		DepartmentVo d;
 		for(NbcUcTreeNode n : l){

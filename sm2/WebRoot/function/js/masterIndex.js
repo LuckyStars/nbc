@@ -6,10 +6,6 @@
 	               }
                ];
 
-var allNews = [
-               ];
-
-
 function refreshNumber(url,numId){
 	url = ctxPath + url;
 	$.post(url, function(data) {
@@ -38,19 +34,8 @@ function refreshDongtai(){
 	});
 }
 
-function refreshNews(url,newsId){
-	url = ctxPath + url;
-	$.post(url, function(data) {
-		if(data>0){
-			$('#' + newsId).show();
-		}else{
-			$('#' + newsId).hide();
-		}
-	});
-}
 
 var refLinshi = function (){
-	
 	$.post(ctxPath + '/scMaster2/findLinshi_maIndex.action', function(data) {
 		if(data.length<=0){
 			return;
@@ -74,6 +59,25 @@ var refLinshi = function (){
 	});
 };
 
+var refreshZhongxin= function(){
+	var zhongxinTypes = new Array('caiwu','dangtuan','deyu','houqinweisheng','jiaoyujiaoyan','xinxihua');
+	
+	$.post(ctxPath + '/scMaster2/findDongtai_maIndex.action', function(data) {
+		if(data.length<=0){
+			return;
+		}
+		for(var i = 0;i< zhongxinTypes.length;i++){
+			var ty = zhongxinTypes[i];
+			var flag = $("#" + ty + "_flag");
+			if(data[ty]>0){
+				flag.show();
+			}else{
+				flag.hide();
+			}
+		}
+	});
+	
+};
 
 
 function refreshAll (){
@@ -81,12 +85,9 @@ function refreshAll (){
 		var curNum = allNums[i];
 		refreshNumber(curNum.url,curNum.numId);
 	}
-	for ( var i = 0; i < allNews.length; i++) {
-		var curNews = allNews[i];
-		refreshNews(curNews.url,curNews.newsId);
-	}
 	refreshDongtai();
 	refLinshi();
+	refreshZhongxin();
 }
 
 $(function(){

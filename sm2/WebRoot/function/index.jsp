@@ -72,7 +72,8 @@
 		<div class="module module1">
 			<h1>个人信息</h1>
 			<div class="content userinfo">
-				<img class="photo" src="${photoPath}" />
+				<%-- <img class="photo" src="${photoPath}" /> --%><%--一期 --%>
+				<img class="photo" src="${prc}/scMaster2/headPhoto_index.action" /><%--二期 --%>
 				<p class="name">
 					${userName}&nbsp;<img src="${prc}/function/images/name-bg.png" />
 				</p>
@@ -154,14 +155,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
 								<img src="${prc}/function/images/icon2.png" />
 								<span>德育工作</span>
-								<img src="${prc}/function/images/new.png" id="deyugongzuo" />
+								<img src="${prc}/function/images/new.png" id="deyu_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
 							<img src="${prc}/function/images/icon3.png" />
 							<span>教育教研工作</span>
-							<img src="${prc}/function/images/new.png" id="deyujiaoyan" />
+							<img src="${prc}/function/images/new.png" id="jiaoyujiaoyan_flag" />
 						</a>
 						</td>
 					</tr>
@@ -170,14 +171,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxi-ndzx">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
-								<img src="${prc}/function/images/new.png" id="xinxihua" />
+								<img src="${prc}/function/images/new.png" id="xinxihua_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
 								<img src="${prc}/function/images/icon5.png" />
 								<span>后勤卫生工作</span>
-								<img src="${prc}/function/images/new.png" id="houqinweisheng" />
+								<img src="${prc}/function/images/new.png" id="houqinweisheng_flag" />
 							</a>
 						</td>
 					</tr>
@@ -186,14 +187,14 @@
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
 								<img src="${prc}/function/images/icon6.png" />
 								<span>党团工作</span>
-								<img src="${prc}/function/images/new.png" id="dangtuan" />
+								<img src="${prc}/function/images/new.png" id="dangtuan_flag" />
 							</a>
 						</td>
 						<td>
 							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=caiwu">
 								<img src="${prc}/function/images/icon7.png" />
 								<span>财务工作</span>
-								<img src="${prc}/function/images/new.png" id="caiwu" />
+								<img src="${prc}/function/images/new.png" id="caiwu_flag" />
 							</a>
 						</td>
 					</tr>
@@ -236,19 +237,15 @@
 		<div class="module module2" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
-				<%--<div class="linshi">
+				<%--
+				<div class="linshi">
 					<a class="pointer" href="#">
 					<img src="${prc}/function/images/tb1.png" width="80" height="80" />
 					<span style="color: #e1517e;">东兴杯课程比赛</span>
 					</a>
 					<a class="qi"></a>
 				</div>
-				<div class="linshi">
-					<a class="pointer" href="#">
-						<img src="${prc}/function/images/tb5.png" width="80" height="80" />
-						<span style="color: #b25ebd;">迎接香港同盟</span>
-					</a>
-				</div>--%>
+				--%>
 			</div>
 		</div>
 		<div class="module module2" style="margin-left: 10px;">
