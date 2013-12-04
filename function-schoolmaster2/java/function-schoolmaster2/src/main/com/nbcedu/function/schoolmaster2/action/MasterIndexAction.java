@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.action;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -123,6 +124,7 @@ public class MasterIndexAction extends BaseAction{
 
 	
 	public void findTongjifenxi(){
+		
 		final String uid = this.getUserId();
 		
 		SearchFunction tongji = new SearchFunction() {
@@ -133,9 +135,9 @@ public class MasterIndexAction extends BaseAction{
 				List<TSm2Subject> subList=
 					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,4);
 				
-				final Stack<String> color = shuffleStack(Arrays.asList("F79263","6FB3E0","F76382","846FE0"));
+				final Iterator<String> color = shuffle(Arrays.asList("#F79263","#6FB3E0","#F76382","#846FE0")).iterator();
 				
-				final Stack<String> icon = shuffleStack(Arrays.asList("a","b","c","d"));
+				final Iterator<String> icon = shuffle(Arrays.asList("tj01","tj02","tj03","tj04")).iterator();
 				
 				return Utils.gson.toJson(
 						Lists.transform(subList, new Function<TSm2Subject, Tongji>() {
@@ -144,8 +146,8 @@ public class MasterIndexAction extends BaseAction{
 								Tongji result = new Tongji();
 								result.setTitle(input.getTitle());
 								result.setUrl("/scMaster2/detail_master.action?id=" + input.getId());
-								result.setColor(color.pop());
-								result.setIcon(icon.pop());
+								result.setColor(color.next());
+								result.setIcon(icon.next());
 								return result;
 							}
 						}),
@@ -160,12 +162,10 @@ public class MasterIndexAction extends BaseAction{
 		
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Stack shuffleStack(List origin){
+	@SuppressWarnings("rawtypes")
+	private List shuffle(List origin){
 		Collections.shuffle(origin);
-		Stack stack = new Stack();
-		stack.addAll(origin);
-		return stack;
+		return origin;
 	}
 	/**
 	 * 执行查询

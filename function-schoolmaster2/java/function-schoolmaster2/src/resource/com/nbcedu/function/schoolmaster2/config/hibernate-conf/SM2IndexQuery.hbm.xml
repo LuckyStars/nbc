@@ -50,7 +50,9 @@
 				FROM t_sm2_subject_master
 				WHERE user_uid = :uid
 			) master 
-		WHERE sub.moduleId = :moduleId
+		WHERE 
+			sub.id= master.sub_id
+			AND sub.moduleId = :moduleId
 		ORDER BY master.flag ASC ,sub.lastUpdateTime DESC
 		]]>
 	</sql-query>

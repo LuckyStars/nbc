@@ -36,8 +36,8 @@ public class SchoolMasterFilter implements Filter{
 			chain.doFilter(req, response);
 			return;
 		}
-		logger.info("serviceName = :" + serviceName);
-		logger.info("getAttributeName = :"  + getAttributeName(serviceName));
+		//logger.info("serviceName = :" + serviceName);
+		//logger.info("getAttributeName = :"  + getAttributeName(serviceName));
 		
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
 			final String uid = (String) 
