@@ -56,7 +56,7 @@ $(function() {
           <iframe id="chart" name="chart"  style="height:500px;width:800px;overflow:hidden;scrolling:no;" frameborder="0" src="${prc}/scMaster2/chart_data.action?matcher=${matcher}"></iframe>
     </div>
       <div class="fen">
-          <p><span>分析：</span><input type="text" id="title" name="data.title" class="top"/></p>
+          <p><span>分析：</span><input type="text" id="title" name="data.title" class="top" maxlength="30"/></p>
           <textarea name="data.content" class="down"></textarea>
       </div>
       <a href="javascript:commit();" class="have">生成</a>

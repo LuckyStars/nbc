@@ -167,7 +167,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxi-ndzx">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
 								<img src="${prc}/function/images/new.png" id="xinxihua" />

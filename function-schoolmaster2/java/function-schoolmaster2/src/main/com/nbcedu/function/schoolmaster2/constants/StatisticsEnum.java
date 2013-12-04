@@ -4,7 +4,8 @@ public enum StatisticsEnum {
 	bookSite("场馆预定"),
 	documentFlow("公文流转"),
 	substitute("请假代课"),
-	repair("在线报修");
+	repair("在线报修"),
+	logistics("电教服务");
 	 
     public String name;
     
@@ -17,6 +18,8 @@ public enum StatisticsEnum {
 	    	return substitute;
 	    }else if(statisticsType.equals("repair")){ 
 	    	return repair;
+	    }else if(statisticsType.equals("logistics")){
+	    	return logistics;
 	    }else{
 	    	throw new AssertionError("Unexpected value: " + statisticsType); 
 	    }   

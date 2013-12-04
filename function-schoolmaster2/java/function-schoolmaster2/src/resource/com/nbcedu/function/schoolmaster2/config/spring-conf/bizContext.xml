@@ -52,6 +52,7 @@
 		<property name="masterCommentBiz" ref="sm2MasterCommentBiz"></property>
 		<property name="disscusBiz" ref="sm2DisscusBiz"></property>
 		<property name="commentBiz" ref="sm2CommentBiz"></property>
+		<property name="stepBiz" ref="sm2StepBiz" />
 	</bean>
 	
 	<bean id="sm2ZanBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2ZanBizImpl">

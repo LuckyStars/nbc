@@ -23,11 +23,13 @@ import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ZanBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.util.strings.StringUtil;
 import com.nbcedu.function.schoolmaster2.dao.Sm2ProgressDao;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 
@@ -42,6 +44,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 	private SM2DisscusBiz disscusBiz;
 	private SM2CommentBiz commentBiz;
 	private SM2SubjectBiz subjectBiz;
+	private Sm2StepBiz stepBiz;
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -119,20 +122,24 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		
 	}
 	@Override
-	public void removeById1(String id,String subjectId) {
+	public boolean removeById1(String id) {
 		try {
-		this.zanBiz.removeByProg(id);
-		this.resourceBiz.removeByProgId(id);
-		readsBiz.removeByProgId(id);
-		masterReplyBiz.removeByProgId(id);
-		masterCommentBiz.removeByProgId(id);
-		disscusBiz.removeByProgId(id);
-		commentBiz.removeByProgId(id);
-		this.progressDao.removeById(id);
-			this.subjectBiz.updateMasterFlagAll(2,subjectId);
+			this.zanBiz.removeByProg(id);
+			this.resourceBiz.removeByProgId(id);
+			readsBiz.removeByProgId(id);
+			masterReplyBiz.removeByProgId(id);
+			masterCommentBiz.removeByProgId(id);
+			disscusBiz.removeByProgId(id);
+			commentBiz.removeByProgId(id);
+			this.progressDao.removeById(id);
+			TSm2Progress p = this.progressDao.get(id);
+			TSm2Step s  = this.stepBiz.findById(p.getStepId());
+			this.subjectBiz.updateMasterFlagAll(2,s.getSubjectId());
 		} catch (DBException e) {
 			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 	@Override
 	public boolean addPro(TSm2Progress pro, String subjectId) {
@@ -178,6 +185,9 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 	}
 	public void setSubjectBiz(SM2SubjectBiz subjectBiz) {
 		this.subjectBiz = subjectBiz;
+	}
+	public void setStepBiz(Sm2StepBiz stepBiz) {
+		this.stepBiz = stepBiz;
 	}
 
 }

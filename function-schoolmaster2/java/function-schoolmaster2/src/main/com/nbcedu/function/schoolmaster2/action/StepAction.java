@@ -17,7 +17,7 @@ public class StepAction extends BaseAction{
 	private Sm2StepBiz stepBiz;
 	private String subjectId;
 	private String name;
-	private TSm2Step step;
+	private TSm2Step step ;
 	
 	public void stepList(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -42,7 +42,7 @@ public class StepAction extends BaseAction{
 		}
 	}
 	public void isExistStep(){
-		boolean b = this.stepBiz.findByName(name,step.getSubjectId());
+		boolean b = this.stepBiz.findByName(name,subjectId);
 		if(!b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{

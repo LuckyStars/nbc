@@ -126,7 +126,7 @@
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx" target="fm_right">·教育教研工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx" target="fm_right">·德育工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx" target="fm_right">·后勤·卫生工作</a></li>
-          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxihua-ndzx" target="fm_right">·信息化工作</a></li>
+          <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxi-ndzx" target="fm_right">·信息化工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=caiwu" target="fm_right">·财务工作</a></li>
           <li><a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx" target="fm_right">·党团工作</a></li>
         </ul>

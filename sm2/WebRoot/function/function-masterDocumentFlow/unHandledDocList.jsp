@@ -45,6 +45,11 @@ $(function(){
         $("#tooltip").remove();   //移除    
     });
 });
+function changepage(page){
+	$("#listUnhandledDocumentTask").append("<input type='hidden' name='pagerUtils.pageIndex' id='pagerUtils.pageIndex'></input>");
+	document.getElementById("pagerUtils.pageIndex").value=page;
+	document.forms[0].submit();
+}
 </script>
 </head>
 	<body>
@@ -105,36 +110,14 @@ $(function(){
       </s:iterator>
     </table>
     	<div style="text-align:center;font-size:15px;margin-top:20px;">
-			 <pg:pager url="../masterDocumentFlow/listUnhandledDocumentTask.action"
-    			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
-    			<pg:param name="queryConditionVo.documentName"  value="${queryConditionVo.documentName}"/>
-    			<pg:param name="queryConditionVo.starting"  value="${queryConditionVo.starting}"/>
-    			<pg:param name="queryConditionVo.ending"  value="${queryConditionVo.ending}"/>
-    			<pg:param name="queryConditionVo.ending"  value="${queryConditionVo.ending}"/>
-    			总计${pagerUtils.totalResult}条
-    			<pg:first>
-    				<a href="${pageUrl}">首页</a>
-    			</pg:first>
-    			<pg:prev>
-    				<a href="${pageUrl}" >上一页</a> 
-    			</pg:prev>
-    			<pg:pages>
-    				<c:choose>
-    					<c:when test="${currentPageNumber eq pageNumber}">
-    						<font color="red">${pageNumber}</font>
-    					</c:when>
-    					<c:otherwise>
-    						<a href="${pageUrl}">${pageNumber }</a>
-    					</c:otherwise>
-    				</c:choose>
-    			</pg:pages>
-    			<pg:next>
-    				<a href="${pageUrl}" >下一页</a> 
-    			</pg:next>
-    			<pg:last>
-    				<a href="${pageUrl}">尾页</a>
-    			</pg:last>
-    		</pg:pager>
+			总计<s:property value="pagerUtils.totalResult"/>条
+			<s:if test="pagerUtils.pageIndex != 1">
+				<s:a cssClass="page" href="javascript:changepage(%{pagerUtils.pageIndex - 1})">&lt;&lt;上一页</s:a>
+			</s:if>
+			<font color="red"><s:property  value="%{pagerUtils.pageIndex}" /></font>
+			<s:if test="pagerUtils.pageIndex lt pagerUtils.pageNumbers.length">
+				<s:a cssClass="page" href="%{next}">下一页&gt;&gt;</s:a>
+			</s:if>
 		</div>
     </div>
 </body>

@@ -9,17 +9,19 @@
 <link href="../function/css/gzt.css" rel="stylesheet"/>
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 <div class="con_conent fixed">
-  <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　${name }　</span></h1>
+  <h1 class="title"><span class="title">当前位置： </span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　${name }　</span></h1>
   <form action="${prc}/scMaster2/listStatistics_data.action">
   <input type="hidden" name="matcher" value="${matcher}"/>
   <div class="table_box fixed">
     <div class="nav"> <span>统计时间:</span>
       <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
       <span>至</span>
-       <input class="Wdate" name="end" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
+      <input class="Wdate" name="end" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
       <a class="cx" href="javascript:document.forms[0].submit();">查询</a><a href="${prc}/scMaster2/toChart_data.action?matcher=${matcher}" style="float:left; margin-top:15px; margin-left:20px; font-size:14px;">去统计</a></div>
       <div class="list">
       	<c:forEach items="${pm.datas}" varStatus="status" var="data">
@@ -28,10 +30,10 @@
 					<p class="color">
 	          			<span class="list-sp">${status.index+1}<span style="margin-left:10px;">
 			          		<fmt:formatDate value="${data.startDate}" pattern="yyyy年MM月dd日"/>-
-							<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
+							<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/> 
 			          	</span></span>
 			          	<span class="list-ri">的统计分析</span>
-			          	<a href="${prc}/scMaster2/remove_data.action?id=${data.id}"><img src="${prc}/function/img/erro1.png" /></a>
+			          	<a href="javascript:if(confirm('确定要删除吗?')){location.href='${prc}/scMaster2/remove_data.action?id=${data.id}&matcher=${matcher}';}"><img src="${prc}/function/img/erro1.png" /></a>
           			</p>
 				</c:when>
 				<c:otherwise>
@@ -41,7 +43,7 @@
 							<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
 			          	</span></span>
 			          	<span class="list-ri">的统计分析</span>
-			          	<a href="${prc}/scMaster2/remove_data.action?id=${data.id}"><img src="${prc}/function/img/erro1.png" /></a>
+			          	<a href="javascript:if(confirm('确定要删除吗?')){location.href='${prc}/scMaster2/remove_data.action?id=${data.id}&matcher=${matcher}';}" id="remove"><img src="${prc}/function/img/erro1.png" /></a>
 			          </p>
 				</c:otherwise>	
       		</c:choose>

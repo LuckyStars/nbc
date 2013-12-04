@@ -24,12 +24,16 @@ table td {
 	line-height: 34px;
 	text-align: center;
 }
+table td a img{ 
+display: block;
+float: left;
+margin: 5px 0 0 10px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
 		$("table tr:odd").css("border", "1px solid #EDEFFF");
 		$("table tr:even").css("border", "1px solid #EDEFFF");
-		$("td a img").addClass("qi");
 	});
 </script>
 <script type="text/javascript">

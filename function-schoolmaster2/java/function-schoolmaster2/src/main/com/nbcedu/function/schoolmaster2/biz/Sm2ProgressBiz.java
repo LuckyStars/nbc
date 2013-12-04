@@ -19,10 +19,9 @@ public interface Sm2ProgressBiz extends BaseBiz<TSm2Progress> {
 	/**
 	 *删除工作进展，包括：赞；评论等下级目录；
 	 * @param id
-	 * @param subid
 	 * @jonathan
 	 */
-	public void removeById1(String id,String subId);
+	public boolean removeById1(String id);
 	/**
 	 * 增加工作进展同时修改master的flag状态为修改，如果为插红旗则不修改
 	 * @param pro

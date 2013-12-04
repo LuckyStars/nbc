@@ -37,11 +37,15 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 	@Override
 	public boolean findByName(String name ,String id) {
 		StringBuilder hql = new StringBuilder();
-		hql.append("select count(id) from TSm2Step where name=? ");
-		if(!StringUtil.isEmpty(id)){
-			hql.append(" and subjectId<>?");
+		hql.append("select count(id) from TSm2Step where subjectId= ");
+		hql.append("'").append(id).append("'");
+		if(!StringUtil.isEmpty(name)){
+			hql.append(" and name=? ");
+			List l = this.stepDao.find(hql.toString(), name);
+			return ((Long)l.get(0)).intValue()>0 ;
 		}
-		List l = this.stepDao.find(hql.toString(), name,id);
+		
+		List l = this.stepDao.find(hql.toString(), null);
 		return ((Long)l.get(0)).intValue()>0 ;
 	}
 
@@ -129,7 +133,7 @@ public class Sm2StepBizImpl extends BaseBizImpl<TSm2Step> implements Sm2StepBiz{
 			e.printStackTrace();
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	

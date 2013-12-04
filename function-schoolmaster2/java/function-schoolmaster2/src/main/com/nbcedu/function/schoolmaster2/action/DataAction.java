@@ -6,6 +6,7 @@ import com.nbcedu.function.documentflow.utils.StringUtil;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.constants.StatisticsEnum;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -17,7 +18,7 @@ public class DataAction extends BaseAction{
 	private String dataType;
 	private String matcher;
 	private Date start;
-	private Date end;
+	private Date end;DateUtil
 	private SM2Datas data = new SM2Datas();
 	private String xmlContent;
 	private SM2DataBiz sm2DataBiz;
@@ -27,14 +28,17 @@ public class DataAction extends BaseAction{
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
+		DateUtil.format(start, "YDM_DASH");
+		DateUtil.format(end, "YDM_DASH");
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listStatistics";
 	}
 	public String listMasterStatistics(){
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
-		
 		this.data.setMatcher(matcher);
+		DateUtil.format(start, "YDM_DASH");
+		DateUtil.format(end, "YDM_DASH");
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
 	}
@@ -66,7 +70,7 @@ public class DataAction extends BaseAction{
 	
 	public String listByType(){
 		this.pm = this.sm2DataBiz.findPageByMatcher(matcher);
-		return "listStatistic";
+		return "listStatistics";
 	}
 	
 	public String remove(){
