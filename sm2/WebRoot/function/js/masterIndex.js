@@ -62,7 +62,7 @@ var refLinshi = function (){
 var refreshZhongxin= function(){
 	var zhongxinTypes = new Array('caiwu','dangtuan','deyu','houqinweisheng','jiaoyujiaoyan','xinxihua');
 	
-	$.post(ctxPath + '/scMaster2/findDongtai_maIndex.action', function(data) {
+	$.post(ctxPath + '/scMaster2/findZhongxin_maIndex.action', function(data) {
 		if(data.length<=0){
 			return;
 		}
@@ -116,13 +116,14 @@ var refreshTongji = function(){
 };
 
 function refreshAll (){
-	for ( var i = 0; i < allNums.length; i++) {
-		var curNum = allNums[i];
-		refreshNumber(curNum.url,curNum.numId);
-	}
+//	for ( var i = 0; i < allNums.length; i++) {
+//		var curNum = allNums[i];
+//		refreshNumber(curNum.url,curNum.numId);
+//	}
 	refreshDongtai();
 	refLinshi();
 	refreshZhongxin();
+	refreshTongji();
 }
 
 $(function(){
