@@ -18,7 +18,7 @@ public class DataAction extends BaseAction{
 	private String dataType;
 	private String matcher;
 	private Date start;
-	private Date end;DateUtil
+	private Date end;
 	private SM2Datas data = new SM2Datas();
 	private String xmlContent;
 	private SM2DataBiz sm2DataBiz;
@@ -28,8 +28,6 @@ public class DataAction extends BaseAction{
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
-		DateUtil.format(start, "YDM_DASH");
-		DateUtil.format(end, "YDM_DASH");
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listStatistics";
 	}
@@ -37,8 +35,6 @@ public class DataAction extends BaseAction{
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
-		DateUtil.format(start, "YDM_DASH");
-		DateUtil.format(end, "YDM_DASH");
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
 	}
@@ -106,12 +102,26 @@ public class DataAction extends BaseAction{
 		return start;
 	}
 	public void setStart(Date start) {
-		this.start = start;
+		if(start!=null)
+			try {
+				this.start = com.nbcedu.function.schoolmaster2.core.util.date.DateUtil.str2Date(DateUtil.format(start, DateUtil.YDM_DASH), "yyyy-MM-dd");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		else
+			this.start = start;
 	}
 	public Date getEnd() {
 		return end;
 	}
 	public void setEnd(Date end) {
+		if(end!=null){
+			try {
+				this.end = com.nbcedu.function.schoolmaster2.core.util.date.DateUtil.str2Date(DateUtil.format(end, DateUtil.YDM_DASH), DateUtil.YDM_DASH);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else
 		this.end = end;
 	}
 	public SM2Datas getData() {

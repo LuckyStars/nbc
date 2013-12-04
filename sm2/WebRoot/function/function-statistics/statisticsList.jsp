@@ -55,8 +55,8 @@
    		<c:if test="${pm.total>0}">
         <pg:pager url="${prc}/scMaster2/listStatistics_data.action"
 			items="${pm.totalPageNo}" maxPageItems="${pm.totalPageNo}" maxIndexPages="3" export="currentPageNumber=pageNumber">
-			<pg:param name="start" value="${start}"/>
-			<pg:param name="end" value="${end}"/>
+<!--			<pg:param name="start" value="${start}"/>-->
+<!--			<pg:param name="end" value="${end}"/>-->
 			<pg:param name="matcher" value="${matcher}"/>
 			总计${pm.total}条
 			<pg:first>
