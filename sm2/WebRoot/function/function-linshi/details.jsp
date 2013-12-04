@@ -112,23 +112,12 @@
              	$(".updateStep").show();
              });
          });
-         $("#stepSave").click(function(){
-        	 var name = $.trim($(".stepName").val());
-        	 if(name.length>0){
-	            $.post("isExistStep_step.action",{name:name,subjectId: $("input[name='subjectId']").val()},function(data1){
-	            	if(data1==0){
-			         	var formParams = $("#stepForm").serialize();
-			    		$.post("add_step.action", formParams, function(data) {
-			      				if(data==0){	parent.location.reload();}else{alert("增加出现错误！");}
-			     			});
-	            	}else{
-						alert("存在相同步骤！");
-	            	}
-		          });
-	          }else{
-					alert("请填写步骤名称！");
-	          }
-         	});
+         $(".jia").click(function(){
+			$(".chen").append(' <div  style=" display: block; position: relative; height: 30px; width: 350px;">'+
+					'<input type="text" name="stepName"  maxlength="20" style="margin: 0 0 0 70px" />'+
+					'<img src="${prc}/function/function-linshi/images/jia.jpg"  onclick="jian(this)" style="right:40px"/></div>');
+         });
+
       	$("#stepUpdate").click(function(){
       		 var name = $.trim($("#stepName").val());
       		 if(name.length>0){
@@ -226,6 +215,39 @@
 	<script>
 		function resizeFrame(height){
 			$("#postFrame").css("height",height);
+		}
+		function jian(i){
+			$(i).parent().remove();
+		}
+		function stepSave(){
+			var names="";
+			var name = document.getElementsByName("step.name");
+	        	for(var i=0;i<name.length;i++){
+		        	var n = $.trim(name[i].value);
+		        	if(n.length>0 ){
+		        		if(isExistStep(n)){
+				        	if(i==name.length-1){
+				        		names += n;
+				        	}else{
+								names += n+",";
+				        	}
+		        		}else{alert("存在相同步骤！");}
+		        	}
+		     	}
+		     if(names.length>0){
+	    		$.post("add_step.action", {subjectId: $("input[name='subjectId']").val(),name:names}, function(data) {
+      				if(data==0){parent.location.reload();}else{alert("增加出现错误！");}
+     			});
+			 }
+	   }
+		function isExistStep(name){
+		   $.post("isExistStep_step.action",{name:name,subjectId: $("input[name='subjectId']").val()},function(data1){
+			   if(data1==0){
+					return true;
+			   }else{
+					return false;
+				}
+		   });
 		}
 	</script>
 </head>
@@ -426,21 +448,21 @@
 	</div>
 	<!--弹出层7-->
     <form action="addStep_master.action" id="stepForm">
-    	<input type="hidden" name="step.subjectId" value="${subject.id}" />
     	<div class="adds7">
 	  		<div class="add-tops7">
 		    	<p>编辑</p>
 		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
 		    </div>
 		  	<div class="add-downs7">
-				<div class="chen">
-		          <p>步骤名称：</p>
-		          <input type="text" name="step.name" class="stepName"/>
-	<!--	          <img src="${prc}/function/function-linshi/images/jia.jpg" />-->
-	<!--	          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jian"/>-->
+				<div class="chen" style="overflow-y:scroll;height:200px;width:405px;">
+					<div style=" display: block; position: relative; height: 30px; width:350px; ">
+			          <p>步骤名称：</p>
+			          <input type="text" name="stepName" maxlength="20"/>
+			          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jia" style="right:40px"/>
+			      	</div>
 		      	</div>
 		      	<div class="sure">
-		          <a id="stepSave" href="#">确定 </a>
+		          <a href="javascript:stepSave();">确定 </a>
 		          <a href="#" class="close">关闭 </a>
 		      	</div>
 			</div>
@@ -457,7 +479,7 @@
 		  	<div class="add-downs7">
 				<div class="chen">
 		          <p>步骤名称：</p>
-		          <input type="text" name="step.name" id="stepName"/>
+		          <input type="text" name="step.name" id="stepName" maxlength="20"/>
 		      	</div>
 		      	<div class="sure">
 		          <a id="stepUpdate" href="#">确定 </a>
