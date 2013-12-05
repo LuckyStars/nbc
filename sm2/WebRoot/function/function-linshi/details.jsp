@@ -347,8 +347,8 @@
 					</a>
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
-					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px;" scrolling="no"
-					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" >
+					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px; height:600px;" scrolling="no"
+					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" > 
 					
 					</iframe>
 					</c:if>
