@@ -451,7 +451,8 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	@SuppressWarnings({ "serial", "unchecked" })
 	public Map<String, Integer> findAttCountByModType(String moduleId,
 			String uid) {
-		SQLQuery q = (SQLQuery) this.sm2SubjectDao.getNamedQuery("new_count_by_module_type");
+		SQLQuery q = (SQLQuery) this.sm2SubjectDao.createSqlQuery(
+				this.sm2SubjectDao.getNamedQuery("new_count_by_module_type").getQueryString());
 		q.addScalar("id", Hibernate.STRING);
 		q.addScalar("cout", Hibernate.STRING);
 		final List<Object[]> resultSet = q.list();

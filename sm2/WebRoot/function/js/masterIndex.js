@@ -62,7 +62,7 @@ var refLinshi = function (){
 var refreshZhongxin= function(){
 	var zhongxinTypes = new Array('caiwu','dangtuan','deyu','houqinweisheng','jiaoyujiaoyan','xinxihua');
 	
-	$.post(ctxPath + '/scMaster2/findDongtai_maIndex.action', function(data) {
+	$.post(ctxPath + '/scMaster2/findZhongxin_maIndex.action', function(data) {
 		if(data.length<=0){
 			return;
 		}
@@ -80,14 +80,50 @@ var refreshZhongxin= function(){
 };
 
 
+var refreshTongji = function(){
+	/*
+				<a href="" >
+					<span class="tongjidiv pointer" style="background-color: #d48bde;" >
+						<img class="tongjidivImg" src="${prc}/function/images/tongji/dianjiao.png" />
+						<span class="tongjidivText">电教服务统计</span>
+					</span>
+				</a>
+	 
+	 */
+	$.post(ctxPath + '/scMaster2/findTongjifenxi_maIndex.action', function(data) {
+		
+		if(data.length<=0){
+			return;
+		}
+		
+		for(var i = 0;i<data.length;i++){
+			var cur = data[i];
+			var par = $("<a href='" + cur.url + "' ></a>");
+			var sp = $("<span class='tongjidiv pointer' style='background-color: " 
+					+ cur.color +";' >"
+					+ "</span>");
+			var img = $("<img class='tongjidivImg' src='${prc}/function/images/tongji/"+cur.icon+".png' />");
+			var tit = $("<span class='tongjidivText'>" + cur.title+ "</span>");
+			tit.appendTo(sp);
+			img.appendTo(sp);
+			sp.appendTo(par);
+			par.appendTo($("#tongjib"));
+		}
+		
+	});
+	
+	
+};
+
 function refreshAll (){
-	for ( var i = 0; i < allNums.length; i++) {
-		var curNum = allNums[i];
-		refreshNumber(curNum.url,curNum.numId);
-	}
+//	for ( var i = 0; i < allNums.length; i++) {
+//		var curNum = allNums[i];
+//		refreshNumber(curNum.url,curNum.numId);
+//	}
 	refreshDongtai();
 	refLinshi();
 	refreshZhongxin();
+	refreshTongji();
 }
 
 $(function(){

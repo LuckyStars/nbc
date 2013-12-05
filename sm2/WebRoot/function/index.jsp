@@ -145,7 +145,7 @@
 							<a class="pointer ts" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.flag=1"> 
 								<img src="${prc}/function/images/icon1.png" />
 								<span>我关注的核心工作</span>
-								<img src="${prc}/function/images/new.png" id="hexin" />
+								<img style="display: none;" src="${prc}/function/images/new.png" id="hexin" />
 							</a>
 							</div>
 						</td>
@@ -248,9 +248,80 @@
 				--%>
 			</div>
 		</div>
+		
+		<style>
+		
+			.tongjiPar{
+			width: 388px;
+			margin: 0px;
+			padding: 2px;
+			}
+			
+			.tongjidiv{
+				width: 188px;
+				height: 70px;
+				cursor: pointer;
+				text-align: center;
+				vertical-align: middle;
+				position: relative;
+				display: inline-block;
+				padding: 0px;
+				float:left;
+				border:1px solid #FFFFFF;
+			}
+			
+			.tongjidivText{
+				float: right;
+				color: #fff;
+				font-size: 14px;
+				margin: 25px 30px 0px 5px;
+				
+			}
+			
+			.tongjidivImg{
+				margin: 15px 0px 20px 15px;
+			}
+		</style>
+		
 		<div class="module module2" style="margin-left: 10px;">
 			<h1>统计分析</h1>
-			<div class="content">
+			<div class="content tongjiPar">
+			
+					<a href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=bookSite">
+					<span class="tongjidiv pointer" style="background-color: #d15b47;">
+						<img class="tongjidivImg" src="${prc}/function/images/tongji/changguan.png" />
+						<span class="tongjidivText">场馆预订统计</span>
+					</span>
+					</a>
+					
+					<a href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=substitute">
+					<span class="tongjidiv pointer" style="background-color: #ffb752;">
+						<img class="tongjidivImg" src="${prc}/function/images/tongji/qingjia.png" />
+						<span class="tongjidivText">请假代课统计</span>
+					</span>
+					</a>
+					
+					<a href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=repair">
+					<span class="tongjidiv pointer" style="background-color: #87b87f;">
+						<img class="tongjidivImg" src="${prc}/function/images/tongji/baoxiu.png" />
+						<span class="tongjidivText">在线报修统计</span>
+					</span>
+					</a>
+					
+					<a href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/listMasterStatistics_data.action?matcher=logistics" >
+					<span class="tongjidiv pointer" style="background-color: #d48bde;" >
+						<img class="tongjidivImg" src="${prc}/function/images/tongji/dianjiao.png" />
+						<span class="tongjidivText">电教服务统计</span>
+					</span>
+					</a>
+					
+					<span id="tongjib">
+					
+					</span>
+				</div>
+				
+				
+				<%--
 				<table width="382" height="301" class="tongji" cellpadding="1"
 					cellspacing="1" style="margin: 0 auto;">
 					<tr>
@@ -283,16 +354,17 @@
 							</a>
 						</td>
 					</tr>
+					
 					<tr>
 						<td bgcolor="#f79263">
 							<a class="pointer" href="#">
-								<img src="${prc}/function/images/png5.png" />
+								<img src="${prc}/function/images/tongji/tj04.png" />
 								<span>学生参赛情况</span>
 							</a>
 						</td>
 						<td bgcolor="#f79263">
 							<a class="pointer" href="#">
-							<img src="${prc}/function/images/png6.png" />
+							<img src="${prc}/function/images/tongji/tj03.png" />
 							<span>财务收支状况</span>
 						</a>
 						</td>
@@ -300,19 +372,20 @@
 					<tr>
 						<td bgcolor="#846fe0">
 							<a class="pointer" href="#">
-							<img src="${prc}/function/images/png7.png" />
+							<img src="${prc}/function/images/tongji/tj02.png" />
 							<span>教师报销统计</span>
 						</a>
 						</td>
 						<td bgcolor="#f76382">
 							<a class="pointer" href="#">
-								<img src="${prc}/function/images/png8.png" />
+								<img src="${prc}/function/images/tongji/tj01.png" />
 								<span>经费执行情况</span>
 							</a>
 						</td>
 					</tr>
-				</table>
-			</div>
+				</table> --%>
+				
+				
 		</div>
 	</div>
 </body>
