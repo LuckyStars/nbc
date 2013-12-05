@@ -221,34 +221,27 @@
 		}
 		function stepSave(){
 			var names="";
-			var name = document.getElementsByName("step.name");
-	        	for(var i=0;i<name.length;i++){
-		        	var n = $.trim(name[i].value);
-		        	if(n.length>0 ){
-		        		if(isExistStep(n)){
-				        	if(i==name.length-1){
-				        		names += n;
-				        	}else{
-								names += n+",";
-				        	}
-		        		}else{alert("存在相同步骤！");}
+			var name = document.getElementsByName("stepName");
+        	for(var i=0;i<name.length;i++){
+	        	var n = $.trim(name[i].value);
+	        	if(n.length>0 ){
+	        		if(i==(name.length-1)){
+		        		names += n;
+		        	}else{
+						names += n+",";
 		        	}
-		     	}
-		     if(names.length>0){
-	    		$.post("add_step.action", {subjectId: $("input[name='subjectId']").val(),name:names}, function(data) {
-      				if(data==0){parent.location.reload();}else{alert("增加出现错误！");}
-     			});
-			 }
+	        	}	
+	     	}
+	        if(names.length>0){
+        		$.post("isExistStep_step.action",{name:names,subjectId: $("input[name='subjectId']").val()},function(data1){
+     			  if(data1==0){
+   					$.post("add_step.action", {subjectId: $("input[name='subjectId']").val(),name:names}, function(data) {
+   	      				if(data==0){parent.location.reload();}else{alert("增加出现错误！");}
+   	     			});
+     			  }else{alert("存在相同步骤！");}
+     		  	});
+			 }else{alert("请填写步骤名称！");}
 	   }
-		function isExistStep(name){
-		   $.post("isExistStep_step.action",{name:name,subjectId: $("input[name='subjectId']").val()},function(data1){
-			   if(data1==0){
-					return true;
-			   }else{
-					return false;
-				}
-		   });
-		}
 	</script>
 </head>
 <body>
