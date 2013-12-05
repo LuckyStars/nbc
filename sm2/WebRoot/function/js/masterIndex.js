@@ -91,18 +91,18 @@ var refreshTongji = function(){
 	 
 	 */
 	$.post(ctxPath + '/scMaster2/findTongjifenxi_maIndex.action', function(data) {
-		
+		$("#tongjib").html("");
 		if(data.length<=0){
 			return;
 		}
 		
 		for(var i = 0;i<data.length;i++){
 			var cur = data[i];
-			var par = $("<a href='" + cur.url + "' ></a>");
+			var par = $("<a href='" + ctxPath + cur.url + "' ></a>");
 			var sp = $("<span class='tongjidiv pointer' style='background-color: " 
 					+ cur.color +";' >"
 					+ "</span>");
-			var img = $("<img class='tongjidivImg' src='${prc}/function/images/tongji/"+cur.icon+".png' />");
+			var img = $("<img class='tongjidivImg' src='" + ctxPath+ "/function/images/tongji/"+cur.icon+".png' />");
 			var tit = $("<span class='tongjidivText'>" + cur.title+ "</span>");
 			tit.appendTo(sp);
 			img.appendTo(sp);

@@ -453,6 +453,9 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			String uid) {
 		SQLQuery q = (SQLQuery) this.sm2SubjectDao.createSqlQuery(
 				this.sm2SubjectDao.getNamedQuery("new_count_by_module_type").getQueryString());
+		q.setString("uid",uid);
+		q.setString("moduleId", moduleId);
+		
 		q.addScalar("id", Hibernate.STRING);
 		q.addScalar("cout", Hibernate.STRING);
 		final List<Object[]> resultSet = q.list();
