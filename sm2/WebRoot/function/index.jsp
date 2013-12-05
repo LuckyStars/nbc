@@ -277,7 +277,7 @@
 				color: #fff;
 				font-size: 14px;
 				margin: 25px 30px 0px 5px;
-				width:90px;
+				width:85px;
 				overflow:hidden;
 				text-overflow:ellipsis;
 				white-space:nowrap;
