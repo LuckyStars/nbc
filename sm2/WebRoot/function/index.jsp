@@ -202,7 +202,7 @@
 			</div>
 		</div>
 		
-		<div class="module module2">
+		<div class="module module1">
 			<h1>学校动态</h1>
 			<div class="content">
 				<div class="tongtai">
@@ -234,7 +234,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="module module2" style="margin-left: 10px;">
+		<div class="module module1" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
 				<%--
@@ -257,9 +257,10 @@
 			padding: 2px;
 			}
 			
+			
 			.tongjidiv{
 				width: 188px;
-				height: 70px;
+				height: 72px;
 				cursor: pointer;
 				text-align: center;
 				vertical-align: middle;
@@ -271,11 +272,15 @@
 			}
 			
 			.tongjidivText{
+				text-align:left;
 				float: right;
 				color: #fff;
 				font-size: 14px;
 				margin: 25px 30px 0px 5px;
-				
+				width:90px;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap;
 			}
 			
 			.tongjidivImg{
@@ -283,7 +288,7 @@
 			}
 		</style>
 		
-		<div class="module module2" style="margin-left: 10px;">
+		<div class="module module1" style="margin-left: 10px;">
 			<h1>统计分析</h1>
 			<div class="content tongjiPar">
 			

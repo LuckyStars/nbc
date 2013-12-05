@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -134,6 +135,17 @@ public class MasterIndexAction extends BaseAction{
 				
 				List<TSm2Subject> subList=
 					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,4);
+				
+				test:{
+					subList = new ArrayList<TSm2Subject>();
+					for (int i = 0; i < 4; i++) {
+						TSm2Subject sub = new TSm2Subject();
+						sub.setTitle("title" + i);
+						sub.setId("id" + i);
+						subList.add(sub);
+					}
+					
+				}
 				
 				final Iterator<String> color = shuffle(Arrays.asList("#F79263","#6FB3E0","#F76382","#846FE0")).iterator();
 				
