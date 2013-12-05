@@ -6,6 +6,7 @@ import java.util.List;
 import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.Sm2StepBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
@@ -34,11 +35,12 @@ public class StepAction extends BaseAction{
 	public void add(){
 		TSm2Step st;
 		boolean  b = false;
-		if(name!=null&&name.isEmpty()){
+		if(!StringUtil.isEmpty(name)){
 			for(String n : name.split(",")){
 				st = new TSm2Step();
 				st.setCreaterId(this.getUserId());
 				st.setCreateTime(new Date());
+				st.setSubjectId(subjectId);
 				st.setName(n);
 				b = this.stepBiz.addStep(st);
 			}
@@ -50,7 +52,15 @@ public class StepAction extends BaseAction{
 		}
 	}
 	public void isExistStep(){
-		boolean b = this.stepBiz.findByName(name,subjectId);
+		boolean b = false ;
+		if(!StringUtil.isEmpty(name)){
+			for(String n : name.split(",")){
+				b = this.stepBiz.findByName(n,subjectId);
+				if(b){
+				   break;
+				}
+			}
+		}
 		if(!b){
 			Struts2Utils.renderText("0","encoding:UTF-8");
 		}else{
