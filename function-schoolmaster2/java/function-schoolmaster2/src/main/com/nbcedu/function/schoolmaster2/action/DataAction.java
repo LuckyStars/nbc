@@ -2,11 +2,11 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.Date;
 
-import com.nbcedu.function.documentflow.utils.StringUtil;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.constants.StatisticsEnum;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
@@ -94,7 +94,7 @@ public class DataAction extends BaseAction{
 	}
 	public void setMatcher(String matcher) {
 		this.matcher = matcher;
-		if(!StringUtil.isBlank(matcher)){
+		if(!StringUtil.isEmpty(matcher)){
 			this.name = StatisticsEnum.getByType(matcher).name;
 		}
 	}

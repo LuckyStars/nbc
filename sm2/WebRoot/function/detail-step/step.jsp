@@ -20,9 +20,6 @@
     	}
     	
         $(function () {
-        	  $("table tr:odd").css("background", "#f0f8fc");
-        	    $("table tr:even").css("background", "#d5e0ee");
-        	    $("table tr").css("height","27px");
             $(".img").each(function () {
                 $(this).click(function () {
                     if ($(".conshen").css("display") == "block") {
@@ -33,12 +30,6 @@
                         $(this).attr("src", "${prc }/function/detail-step/images/up1.jpg");
                     }
                 });
-            });
-            $(".answ").click(function () {
-                $(".fa").show();
-            });
-            $(".fa textarea").blur(function () {
-                $(".fa").hide();
             });
             $(".lian").click(function () {
                 $(".curs").removeClass("cur");
@@ -76,8 +67,7 @@
                // $(".resource-lists").hide().eq(index).show();
                 $(this).addClass("cur");
             });
-            $(".ico2").click(function () {
-                
+            $(".ico21").click(function () {
                 $("body").css("overflow", "hidden");
                 $("#progId").val(this.id);
                 $(".bg").show();
@@ -85,7 +75,7 @@
                 findAllResource(this.id,0);
                 resizeParent();
             });
-            function findAllResource(progId,type){
+            function findAllResource1(progId,type){
             	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
             		if(data != ''){
             			$(".resource-lists").empty();
@@ -95,25 +85,10 @@
             }
       
             //资源 end
-            $(".ico7").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds4").show();
-            });
-            $(".ico5").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds5").show();
-            });
             $(".ico4").click(function () {
                 $("body").css("overflow", "hidden");
                 $(".bg").show();
                 $(".adds6").show();
-            });
-            $(".addtabs").click(function () {
-                $("body").css("overflow", "hidden");
-                $(".bg").show();
-                $(".adds7").show();
             });
             $(".close").click(function () {
                 $("body").css("overflow", "auto");
@@ -121,10 +96,8 @@
                 $(".adds1").hide();
                 $(".adds2").hide();
                 $(".adds3").hide();
-                $(".adds4").hide();
                 $(".adds5").hide();
                 $(".adds6").hide();
-                $(".adds7").hide();
             });
 
             //删除工作进展
@@ -145,12 +118,31 @@
       	  $(".resources .doc").addClass("cur");
       	  $(".bg").hide();
       	  $(".adds").hide();
-
        }
     </script>
     
     <script type="text/javascript">
-    	
+
+   function resource(){
+        $("body").css("overflow", "hidden");
+        $("#progId").val(this.id);
+        $(".bg").show();
+        $(".adds").show();
+        findAllResource(this.id,0);
+        resizeParent();
+    }
+    function findAllResource(progId,type){
+    	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
+    		if(data != ''){
+    			$(".resource-lists").empty();
+    			$(".resource-lists").html(data);
+    			//location.href="findAll_resource.action?progId="+progId+"&typestr="+type;
+    		}
+  	   });
+    }
+
+    //资源 end
+	
     	function hideDiv(eleId){
     		$("#" + eleId).fadeOut();
     	}
@@ -379,9 +371,8 @@
        		<span> | </span>
         	<a>
         		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
-        		title="资源" width="13" height="13" class="ico2"/>
+        		title="资源" width="13" height="13" class="ico2" onclick="resource(this)"/>
         	</a>
-        	
         </div>
 	</div>
 	

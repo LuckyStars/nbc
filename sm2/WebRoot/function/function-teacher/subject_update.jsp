@@ -39,7 +39,7 @@
 	<div class="bg"></div>
       <div class="add" style="height: 450px;">
        <div class="add-top">
-           <p>添加事项</p>
+           <p>编辑事项</p>
            <img src="${prc}/sm2/function/img/erro.jpg"  class="close" style="cursor:pointer;"/>
        </div>
        <div class="add-down">
