@@ -1,56 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style type="text/css">
-
-.buttonUpload {
-   border-top: 1px solid #87a0b0;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 7.5px 15px;
-   -webkit-border-radius: 8px;
-   -moz-border-radius: 8px;
-   border-radius: 8px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: #000000;
-   font-size: 11px;
-   font-family: Georgia, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-.buttonUpload:hover {
-   border-top-color: #28597a;
-   background: #28597a;
-   color: #544554;
-   }
-.buttonUpload:active {
-   border-top-color: #51768f;
-   background: #51768f;
-   }
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link href="${prc }/function/detail-step/css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="${prc }/function/detail-step/css/gzt.css" type="text/css"/>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/handlers.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/sm2/function/js/jquery-1.8.3.min.js"></script>
-<%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
-<!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
 var prc ="${pageContext.request.contextPath}"; 
 $(function () {
-	  $("table tr").css("height","27px");
+	$("table tr").css("height","27px");
 	
 	var swfu;
 	var filePaths=new Array();
@@ -61,7 +26,7 @@ $(function () {
 	var post_url="";
 	var delCount=0;
 	var count=0;
-	 var upload;
+	var upload;
 	 
 	var settings = {
 		flash_url : "/sm2/function/swfupload/js/swfupload.swf",
@@ -77,14 +42,14 @@ $(function () {
 		},
 		debug: false,
 		// Button settings
-		button_image_url: "/sm2/function/swfupload/images/button_2.jpg",
+		button_image_url: "/sm2/function/swfupload/images/TestImageNoText_65x29.png",
 		button_width: "60",
 		button_height: "24",
 		button_placeholder_id: "spanButtonPlaceHolder",
-		button_text: '<span class="b">浏览文件</span>',
-		button_text_style: '.b{ font-size: 12;text-align:center;}',
-		button_text_top_padding: 4,
-				
+		button_text: '<span class="cx1">浏览文件：</span>',
+		//button_image_url : "swfupload/xpbutton.png",    // 按钮图标  
+		button_text_top_padding: 2,
+		
 		// The event handler functions are defined in handlers.js
 	    file_queued_handler : fileQueued,
 		file_queue_error_handler : fileQueueError,
@@ -103,24 +68,6 @@ $(function () {
 	   var error=obj.error;
 	   if(error==0){
 			filePaths.push(obj.path);
-			//var currentTime = new Date();
-			//var progress = new FileProgress(file, this.customSettings.progressTarget);
-		  //  progress.setComplete();
-			//Calculate upload time
-			//var cTime = (Math.ceil(currentTime-iTime)/1000);
-		//	var zmin = 0;
-		//	var zsec = 0;
-		//	zmin = Math.floor(cTime/60);
-		//	if (zmin < 10) {
-		//	  zmin = "0" + zmin; 
-		//	}
-		//	zsec = Math.ceil(cTime % 60);
-		//	if (zsec < 10) {
-		//	  zsec = "0" + zsec; 
-		//	}
-			//Show how long the upload took
-	//		progress.setStatus("上传完成，用时:<b><font color=red> " + zmin + "分:" + zsec + '秒</font></b>');
-	//		progress.toggleCancel(false);
 		}else{
 			alert(obj.message);
 		}
@@ -147,7 +94,6 @@ $("#upload").click(function(){
 	upload.startUpload();
 });
 
-
 });
 function findAll(){
 	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
@@ -155,7 +101,7 @@ function findAll(){
 			$(".resource-lists").empty();
 			$(".resource-lists").html(data);
 		}
-	  	});
+	});
 }
 function deleteR(id){
 	$.ajax({
@@ -174,7 +120,21 @@ function deleteR(id){
 </script>
 </head>
 <body>
-	<div><span id="spanButtonPlaceHolder" ></span></div>
+<div>
+    <input type="hidden" id="progId" />
+ 	<div class="add-downs">
+<!--    	<p>全部 | 本步骤 | 本进展</p>-->
+        <div class="resources doc" >
+        	<h5>
+          		<ul>
+            		<li class="cur" >文档</li>
+		            <li>图片</li>
+		            <li>视频</li>
+          		</ul>
+         	 	<a href="#" class="mores">更多&gt;&gt;</a>
+         	</h5>
+	        <div class="resource-lists" style="height:380px;">
+	<div><span id="spanButtonPlaceHolder" style="height:30px"></span></div>
 	<div style="height:380px;maroverflow:auto;overflow-x:hidden;">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
@@ -225,8 +185,11 @@ function deleteR(id){
 		</div>
 		</c:if>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
-      
 	</form>
 	</div>
+	 </div>
+	 <a href="#" class="return" style="margin-left:100px;" id="upload">提交</a> <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
+</div>
+</div>
 </body>
 </html>
