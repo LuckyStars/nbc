@@ -38,7 +38,7 @@ public class Utils {
 		Object temp = ActionContext.getContext().getSession().get(Constants.SESSION_UID_KEY);
 		String uid = temp instanceof String ?temp.toString():"";
 		if(uid==null||uid.trim().isEmpty()){
-			temp = ActionContext.getContext().getSession().get("app_init").toString();
+			temp = ActionContext.getContext().getSession().get("edu.yale.its.tp.cas.client.filter.user").toString();
 			uid = temp instanceof String ?temp.toString():"";
 		}
 		return uid;

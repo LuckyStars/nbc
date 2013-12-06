@@ -22,6 +22,7 @@ import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 
 /**
@@ -46,9 +47,12 @@ public class IndexAction extends BaseAction{
 	private SM2ModuleBiz sm2ModuleBiz;
 	
 	public String index(){
+		
 		this.photoPath = this.getPhoto();
 		if(logger.isInfoEnabled()){
 			logger.info(photoPath);
+			logger.info(Utils.curUserUid());
+			logger.info(Utils.curUserName());
 		}
 		this.userPhrase = this.getPhrase();
 		this.userName = (getSession().get("curUserName")!=null?
