@@ -65,24 +65,47 @@
 			<img src="${prc}/function/images/logo.png" width="314" height="51"
 				alt="校长工作台" />
 		</h1>
-		<div class="box_logo_right" style="float:right;"><span style="float:left;">欢迎您，${userName}！</span>
-					
-			<a class="la"  style="float:left; background:url(${prc}/function/images/ico__1.png) no-repeat;padding-left:20px;" href="#">教师门户</a>
+		<div class="box_logo_right" style="float:right;">
+			<a class="la" style="float:left; padding-left: 20px;" 
+				href="#">
+				<span style="
+				background:url(${prc}/function/css/icons_white.png) no-repeat;
+				width:14px;height:14px;
+				background-position:-170px 0px;
+				"
+				>&nbsp;&nbsp;</span>教师门户</a>
 		&nbsp;&nbsp;
-		<a class="tc" href="${logoutService}"><img class="png" src="${prc}/function/images/ico_exit.png"
-			title="退出"  style="float:left; margin-top: 3px;" /> 退出登录</a></div>
+		<a class="tc" href="${logoutService}">
+		<span style="
+				background:url(${prc}/function/css/icons_white.png) no-repeat;
+				width:14px;height:14px;
+				background-position:-122px -73px;
+				"
+				>&nbsp;&nbsp;</span>退出登录</a></div>
 	</div>
 	<div class="main">
-		<div class="module module1">
+		<div class="module module1" style="background-image: url('${prc}/function/img/person_bg.png');">
 			<h1>个人信息</h1>
 			<div class="content userinfo">
-				<%-- <img class="photo" src="${photoPath}" /> --%><%--一期 --%>
-				<img class="photo" src="${prc}/scMaster2/headPhoto_index.action" /><%--二期 --%>
+				<img class="photo"
+				style="width:120px;height:120px;"
+				 src="${photoPath}" onerror="$(this).attr('src','${prc}/function/img/zanwu.jpg')" /> <%--一期 --%>
+				<%--<img class="photo" src="${prc}/scMaster2/headPhoto_index.action" />二期 --%>
 				<p class="name">
-					${userName}&nbsp;<img src="${prc}/function/images/name-bg.png" />
+					欢迎您! ${userName}校长
 				</p>
-				<p class="">身 份：校长</p>
-				<p class="">所在学校：史家小学</p>
+				<p class="name" >所在学校：史家小学</p>
+				<p class="name">&nbsp;</p>
+				
+				<div style="margin-left:10px;"  class="index_avatar_parent" >
+					<a href="#" class="index_avatar_btn">
+						<span class="index_avatar_curUser">
+							&nbsp;
+						</span>
+						更换头像
+					</a>
+				</div>
+				<div style="clear: both;height:30px;"></div>
 				<div id="index_weather"></div>
 			</div>
 		</div>

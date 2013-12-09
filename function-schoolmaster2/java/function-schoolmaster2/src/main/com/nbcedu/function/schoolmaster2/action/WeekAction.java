@@ -40,8 +40,11 @@ public class WeekAction extends BaseAction{
 		if(search.getUpdateDate() == null){
 			search.setStart(weekStart);
 		}
+		if(CollectionUtils.isEmpty(search.getStatus())){
+			search.getStatus().add(-1);
+		}
 		
-		if(search.getStatus().size()<=0 || search.getStatus().size()==1){
+		if(search.getStatus().size()==1){
 			if(search.getStatus().get(0)==-1){//查询所有类型
 				search.setStatus(new Integer[]{ 0,1,2,3 });
 			}else if(search.getStatus().get(0)==2){//查询更新的
