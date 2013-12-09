@@ -7,10 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>校长工作台</title>
 	<link rel="stylesheet" href="${prc}/function/css/masterindex.css" />
+	<link rel="stylesheet" href="${prc}/function/js/weather/JQweather.css" />
+	<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 	<script type="text/javascript"
 	src="${prc}/function/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript"
 	src="${prc}/function/js/masterIndex.js"></script>
+	<script type="text/javascript"
+	src="${prc}/function/js/weather/JQweatherplugin.js"></script>
 	<script type="text/javascript">var ctxPath = '${prc}';</script>
 	<style type="text/css">
 	.flagupdated{
@@ -79,10 +83,7 @@
 				</p>
 				<p class="">身 份：校长</p>
 				<p class="">所在学校：史家小学</p>
-				<p class="state">
-					<img src="${prc}/function/images/xin.png" />&nbsp;${userPhrase }
-				</p>
-				
+				<div id="index_weather"></div>
 			</div>
 		</div>
 		
@@ -393,5 +394,8 @@
 				
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#index_weather").simpleWeather({dataUrl:'${prc}/scMaster2/showWeather_index.action'});
+	</script>
 </body>
 </html>

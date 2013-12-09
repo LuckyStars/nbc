@@ -27,6 +27,8 @@ public class BizTests {
 				"com/nbcedu/function/schoolmaster2/config/spring-conf/bizContext.xml",
 				"com/nbcedu/function/schoolmaster2/config/spring-conf/daoContext.xml"});
 	}
+	
+	
 	@Test
 	public void masterSubBizTest(){
 		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
@@ -59,7 +61,8 @@ public class BizTests {
 		}
 	}
 	
-	public static void main(String[] args) {
+	@Test
+	public void findByMsterModule() {
 		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
 		List<TSm2Subject> list = biz.findByMsterModule(
 				"1",

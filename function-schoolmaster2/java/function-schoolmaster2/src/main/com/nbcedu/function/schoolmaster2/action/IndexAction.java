@@ -19,6 +19,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.FileUtil;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
+import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Module;
 import com.nbcedu.function.schoolmaster2.data.util.HibernateDao;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
@@ -146,6 +147,16 @@ public class IndexAction extends BaseAction{
 		}
 		
 	}
+	
+	/**
+	 * 获取天气数据
+	 * @author xuechong
+	 */
+	public void showWeather(){
+		String cityId = this.getRequest().getParameter("cityId");
+		Struts2Utils.renderJson(Utils.getWeather(cityId));
+	}
+	
 	////////////////////////////////
 	/////getters&setters//////
 	/////////////////////////////
