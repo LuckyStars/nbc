@@ -338,8 +338,8 @@ float:left;
 	height:32px;
 }
 .resources {
-	width:570px;
-	height:410px;
+	width:595px;
+	height:460px;
 	margin:0 auto;
 }
 .resource h5,.resources h5 {
@@ -348,13 +348,13 @@ float:left;
 	height:32px;
 }
 .video {
-	background:#9ccd95;
+	background:#7FAA79;
 }
 .doc {
-	background:#95c9ee;
+	background:#96B7CF;
 }
 .pic {
-	background:#f07f6d;
+	background:#D18D82;
 }
 .resource .more,.resources .mores {
 	float:right;
@@ -364,18 +364,20 @@ float:left;
 	margin-right:20px;
 }
 .resource ul,.resources ul {
-	margin:3px 0px 3px 6px;
+	/*margin:3px 0px 3px 6px;*/
 	padding:0;
-	float:left;
+	text-align: center;
+	/*float:left;*/
 }
 .resource li,.resources li {
-	float:left;
+	/*float:left;*/
 	color:#fff;
 	list-style:none;
 	padding:0px 30px;
 	height:26px;
 	line-height:26px;
 	cursor:pointer;
+	display: inline;
 }
 .resource-list {
 	background:#fff;

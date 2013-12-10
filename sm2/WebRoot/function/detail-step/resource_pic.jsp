@@ -102,11 +102,12 @@ $(function () {
 		},
 		debug: false,
 		// Button settings
-		button_image_url: "/sm2/function/swfupload/images/TestImageNoText_65x29.png",
+		button_image_url: "/sm2/function/swfupload/images/button_2.jpg",
 		button_width: "60",
 		button_height: "24",
 		button_placeholder_id: "spanButtonPlaceHolder",
-		button_text: '<span class="cx1">浏览文件：</span>',
+		button_text: '<span class="b">浏览文件</span>',
+		button_text_style: '.b{ font-size: 12;text-align:center;}',
 		//button_image_url : "swfupload/xpbutton.png",    // 按钮图标  
 		button_text_top_padding: 2,
 		
@@ -190,7 +191,7 @@ $(function () {
                </div>
             </c:forEach>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
-        <span id="spanButtonPlaceHolder"></span>
+        	<div style="float:right;"><span id="spanButtonPlaceHolder"></span></div>
 	</form>
 </body>
 </html>

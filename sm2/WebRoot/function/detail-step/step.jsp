@@ -12,7 +12,7 @@
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/emotion/jQuery.jEmotion.js"></script>
-    <script>
+    <script  type="text/javascript">
     	var ctx = '${prc}';
     	function resizeParent(){
     		var height = $(document).height();
@@ -103,7 +103,7 @@
             //删除工作进展
             $(".prog").click(function () {
             	if(confirm("确定要删除吗?")){
-		    		$.post("delete_progress.action", {id:this.id,subjectId:${subjectId}}, function(data) {
+		    		$.post("delete_progress.action", {id:this.id}, function(data) {
 			    		if(data==0){
 				    		alert("删除成功！");
 		      				location.reload();
@@ -115,20 +115,18 @@
         function resourceClose(){
       	  $(".resources .cur").removeClass("cur");
       	  $(".resources").attr("class", "resources doc");
-      	  $(".resources .doc").addClass("cur");
+      	  $(".resources.doc li:first-child ").addClass("cur");
       	  $(".bg").hide();
       	  $(".adds").hide();
        }
-    </script>
-    
-    <script type="text/javascript">
+   
 
-   function resource(){
+   function resource(i){
         $("body").css("overflow", "hidden");
         $("#progId").val(this.id);
         $(".bg").show();
         $(".adds").show();
-        findAllResource(this.id,0);
+        findAllResource(i.id,0);
         resizeParent();
     }
     function findAllResource(progId,type){
@@ -491,24 +489,26 @@
       <!--弹出层 资源-->
 <div class="bg"></div>
 <div class="adds" id="add-tab">
-  <div class="add-tops">
-    <p>资源</p>
-    <img src="${prc }/function/detail-step/img/erro.jpg"  onclick="resourceClose();" style="cursor:pointer;"/> </div>
+  <div class="">
+<!--    <p>资源</p>-->
+<!--    <img src="${prc }/function/detail-step/img/erro.jpg"  onclick="resourceClose();" style="cursor:pointer;"/> </div>-->
     <input type="hidden" id="progId" />
  	<div class="add-downs">
 <!--    	<p>全部 | 本步骤 | 本进展</p>-->
         <div class="resources doc" >
         	<h5>
           		<ul>
-            		<li class="cur" >文档</li>
-		            <li>图片</li>
+            		<li class="cur" >文档</li>|
+		            <li>图片</li>|
 		            <li>视频</li>
           		</ul>
-         	 	<a href="#" class="mores">更多&gt;&gt;</a>
          	</h5>
+         	<hr style="margin:0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;"/>
 	        <div class="resource-lists" style="height:380px;"></div>
       </div>
-    <a href="#" class="return" style="margin-left:100px;" id="upload">提交</a> <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
+    <a href="#" class="return" style="margin-left:170px;" id="upload">提交</a> 
+    <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
+</div>
 </div>
 <!-- 弹出层 资源 END -->
 
