@@ -30,12 +30,15 @@
 		}
 		
 		var clearCur = function(){$("li[class='cur']").removeClass('cur');};
-		
+		function resizeParent(){
+    		var height = $(document).height();
+    		parent.resizeFrame(height+10);
+    	}
 		$(function(){
 			renderChart('${dataType}');
 			$("#${dataType}").attr('class','cur');
+			resizeParent();
 		});
-		
 		
 	</script>
 	
