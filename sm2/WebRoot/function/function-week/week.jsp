@@ -26,9 +26,7 @@ $('#managers').combotree({
 </head>
 <body>
 	<div class="right">
-		<h1>
-			当前位置：首页 - <span style="color: #dd0000">本周工作汇总</span>
-		</h1>
+	
 		<div class="content">
 			<h3>
 				<form action="${prc}/scMaster2/search_week.action" method="post" name="searchForm">
@@ -120,7 +118,7 @@ $('#managers').combotree({
 				</div>
 				</c:forEach>
 				
-					<%----%>
+					<%--
 					
 					<div class="item con1">
 						<div class="listes">
@@ -142,7 +140,7 @@ $('#managers').combotree({
 								</li>
 							</ul>
 						</div>
-					</div>
+					</div>--%>
 
 
 

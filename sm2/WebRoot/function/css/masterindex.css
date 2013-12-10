@@ -53,7 +53,8 @@ text-decoration:none;
 }
 .photo{
 	float:left;
-	border:8px solid #ededed;
+	border:6px solid #ededed;
+	margin-left: 10px;
 }
 .userinfo{
 	padding:20px 6px;
@@ -274,5 +275,76 @@ text-decoration:none;
 	-webkit-background-clip: padding-box;
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
+}
+
+.index_avatar_curUser{
+	vertical-align: middle;
+	margin-top: -1px;
+	margin-right: 6px;
+	-moz-transition: none;
+	-webkit-transition: none;
+	-o-transition: color 0 ease-in;
+	transition: none;
+	font: normal normal 16px octicons;
+	line-height: 1;
+	display: inline-block;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+	color: #333;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+	white-space: nowrap;
+	cursor: pointer;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-top: 1px;
+	line-height: 14px;
+	vertical-align: text-top;
+	background-image: url("icons.png");
+	background-repeat: no-repeat;
+	background-position: -456px -48px;
+}
+
+.index_avatar_parent{
+	position: relative;
+	display: block;
+	float: left;
+	text-shadow: none;
+	color: #333333;
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
+	line-height: 1.4;
+}
+
+.index_avatar_btn{
+	padding: 0 10px;
+	line-height: 24px;
+	box-shadow: none;
+	position: relative;
+	display: inline-block;
+	padding: 5px 12px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #333;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.9);
+	white-space: nowrap;
+	background-color: #eeeeee;
+	background-image: -moz-linear-gradient(#D8D8D8, #eee);
+	background-image: -webkit-linear-gradient(#D8D8D8, #eee);
+	background-image: linear-gradient(#D8D8D8, #eee);
+	background-repeat: repeat-x;
+	border-radius: 3px;
+	border: 1px solid #d5d5d5;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-appearance: none;
+	text-decoration: none;
+	text-shadow: none;
+	font: 13px Helvetica, arial, freesans, clean, sans-serif;
 }
 	
