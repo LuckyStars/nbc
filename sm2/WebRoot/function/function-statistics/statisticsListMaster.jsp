@@ -11,8 +11,8 @@
 	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 </head>
 <body>
-     <div class="right1">
-     	<form action="${prc}/scMaster2/listMasterStatistics_data.action">
+	<div class="right1">
+   		<form action="${prc}/scMaster2/listMasterStatistics_data.action">
      		<input type="hidden" name="matcher" value="${data.matcher}"/>
 	    	<h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - ${name } - <span style="color:#dd0000">统计分析</span></h1>
 		    <div class="content">
@@ -25,8 +25,15 @@
 		          <a class="button" id="select1" href="javascript:document.forms[0].submit();">查询</a>
 		      </h3>
 		    </div>
-	         <ul class="list">
-	         	<c:forEach items="${pm.datas}" varStatus="status" var="data">
+		    
+		    <c:if test="${empty pm.datas}"><%--无数据 --%>
+		    <div style="margin-top: 40px;text-align: center;">
+		    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+		    </div>
+		    </c:if>
+		    
+         	<ul class="list">
+         		<c:forEach items="${pm.datas}" varStatus="status" var="data">
 	         		<c:choose>
 						<c:when test="${status.index%2==0 }">
 							<li class="bg">

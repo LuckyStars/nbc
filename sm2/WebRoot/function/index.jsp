@@ -258,7 +258,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="module module1" style="margin-left: 10px;">
+		<div class="module module1" id="linshi_parent" style="margin-left: 10px;">
 			<h1>学校临时事项跟踪</h1>
 			<div class="content" id="linshiDiv">
 				<%--

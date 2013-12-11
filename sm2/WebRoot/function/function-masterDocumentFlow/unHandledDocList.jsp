@@ -109,6 +109,11 @@ function changepage(page){
       </tr>
       </s:iterator>
     </table>
+    <c:if test="${empty documentTaskVoList}"><%--无数据 --%>
+		    <div style="margin-top: 40px;text-align: center;">
+		    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+		    </div>
+    </c:if>
     	<div style="text-align:center;font-size:15px;margin-top:20px;">
 			总计<s:property value="pagerUtils.totalResult"/>条
 			<s:if test="pagerUtils.pageIndex != 1">

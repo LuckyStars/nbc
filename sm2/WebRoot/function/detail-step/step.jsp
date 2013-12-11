@@ -14,10 +14,10 @@
 	<script type="text/javascript" src="${prc}/function/emotion/jQuery.jEmotion.js"></script>
     <script  type="text/javascript">
     	var ctx = '${prc}';
-    	function resizeParent(){
+    	var resizeParent = function(){
     		var height = $(document).height();
     		parent.resizeFrame(height+200);
-    	}
+    	};
     	
         $(function () {
             $(".img").each(function () {
@@ -360,10 +360,11 @@
 	</div>
 	
 	<!-- 评论  -->
-    <div class="box" >
+	<div id="disc_content_${prog.id }" style="display: none;">
+    <div class="box" style="min-height: 0px;" >
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
-         id="disc_content_${prog.id }" style="display: none;" >
+           >
         	<pri:hideWhenMaster></pri:hideWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
@@ -418,6 +419,7 @@
           	
           	<p class="pack"><a href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
 		</div>
+	</div>
 	</div>
 	<!-- 评论 END -->
 	

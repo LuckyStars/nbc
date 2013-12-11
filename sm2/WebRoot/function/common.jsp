@@ -5,5 +5,6 @@
 <%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
 <%@ taglib prefix="pri" uri="/function/tags/privilegetag.tld" %>
 <%@ taglib prefix="emo" uri="/function/tags/Emotion.tld" %>
+<%@ taglib prefix="typ" uri="/function/tags/TypesTag.tld" %>
 <c:set var="prc" value="${pageContext.request.contextPath}"/>
 <c:set var="por" value="http://127.0.0.1:8080/schoolapp"/>

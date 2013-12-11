@@ -139,6 +139,11 @@
       </tr>
         </c:forEach>
     </table>
+    <c:if test="${empty pm.datas}"><%--无数据 --%>
+	    <div style="margin-top: 40px;text-align: center;">
+	    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+	    </div>
+    </c:if>
     <%@ include file="pager.jsp" %>
   </div>
 
