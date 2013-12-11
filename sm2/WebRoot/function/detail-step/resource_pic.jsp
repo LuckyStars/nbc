@@ -178,7 +178,14 @@ $(function () {
 </script>
 </head>
 <body>
+	 <div class="liuyan">
+	  	<a href="#">
+	  		<img src=""  id="spanButtonPlaceHolder"/>
+	  		<img src="../function/detail-step/img/tijiao.png" width="64" height="23" id="upload"/>
+	  	</a>
+     </div>
 	 <form id="saveForm" method="post">
+	 	<div  style="OVERFLOW-y:auto; height:400px;">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
             <c:forEach items="${list}" var="resource" varStatus="i">
                <div class="juti" style="border:1px solid #A4B3EE"> 
@@ -191,7 +198,8 @@ $(function () {
                </div>
             </c:forEach>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
-        	<div style="float:right;"><span id="spanButtonPlaceHolder"></span></div>
+<!--        	<div style="float:right;"><span id="spanButtonPlaceHolder"></span></div>-->
+	</div>
 	</form>
 </body>
 </html>

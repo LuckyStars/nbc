@@ -44,45 +44,26 @@
                 $(".fu").show();
             });
             //资源begin
-            $(".resources li").click(function () {
-                $(".resources .cur").removeClass("cur");
-              // $(".resource-lists").empty();
+            
+            $(".resource li").click(function () {
+                $(".resource .cur").removeClass("cur");
                 var index = $(this).index();
                 if (index == 0) {
-                    $(".resources").attr("class", "resources doc");
+                    $(".resource").attr("class", "resource doc");
                     findAllResource($("#progId").val(),index);
                 } else if (index == 1) {
-                   	$(".resources").attr("class", "resources pic");
+                   	$(".resource").attr("class", "resource pic");
                    	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index},function(data){
                    		if(data != ''){
-                       		$(".resource-lists").empty();
-                   			$(".resource-lists").html(data);
+                   			openList(data);
                    		}
                  	  	});
                 } else if (index == 2) {
-                    $(".resources").attr("class", "resources video");
+                    $(".resource").attr("class", "resource video");
                     findAllResource($("#progId").val(),index);
                 }
-              
-               // $(".resource-lists").hide().eq(index).show();
                 $(this).addClass("cur");
             });
-            $(".ico21").click(function () {
-                $("body").css("overflow", "hidden");
-                $("#progId").val(this.id);
-                $(".bg").show();
-                $(".adds").show();
-                findAllResource(this.id,0);
-                resizeParent();
-            });
-            function findAllResource1(progId,type){
-            	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
-            		if(data != ''){
-            			$(".resource-lists").empty();
-            			$(".resource-lists").html(data);
-            		}
-          	  	});
-            }
       
             //资源 end
             $(".ico4").click(function () {
@@ -113,9 +94,9 @@
             });
         });
         function resourceClose(){
-      	  $(".resources .cur").removeClass("cur");
-      	  $(".resources").attr("class", "resources doc");
-      	  $(".resources.doc li:first-child ").addClass("cur");
+      	  $(".resource .cur").removeClass("cur");
+      	  $(".resource").attr("class", "resource doc");
+      	  $(".resource.doc li:first-child ").addClass("cur");
       	  $(".bg").hide();
       	  $(".adds").hide();
        }
@@ -123,7 +104,7 @@
 
    function resource(i){
         $("body").css("overflow", "hidden");
-        $("#progId").val(this.id);
+        $("#progId").val(i.id);
         $(".bg").show();
         $(".adds").show();
         findAllResource(i.id,0);
@@ -132,13 +113,17 @@
     function findAllResource(progId,type){
     	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
     		if(data != ''){
-    			$(".resource-lists").empty();
-    			$(".resource-lists").html(data);
+    			openList(data);
     			//location.href="findAll_resource.action?progId="+progId+"&typestr="+type;
     		}
   	   });
     }
-
+    function openList(data){
+    	document.getElementById("resource-lists").innerHTML = "";
+    	$(".resource-lists").append('<div class="hengxian"><hr width="565" style=" FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15"/></div>');
+    	$(".resource-lists").append(data);
+   }
+    
     //资源 end
 	
     	function hideDiv(eleId){
@@ -532,27 +517,21 @@
 	</c:forEach>
       <!--弹出层 资源-->
 <div class="bg"></div>
-<div class="adds" id="add-tab">
-  <div class="">
-<!--    <p>资源</p>-->
-<!--    <img src="${prc }/function/detail-step/img/erro.jpg"  onclick="resourceClose();" style="cursor:pointer;"/> </div>-->
+<div class="adds" id="add-tab" style="height: auto !important;position: fixed;left: 50%;z-index: 50;margin-left: -298px;margin-top: -352px; display:none;">
     <input type="hidden" id="progId" />
- 	<div class="add-downs">
-<!--    	<p>全部 | 本步骤 | 本进展</p>-->
-        <div class="resources doc" >
+ 	<div class="wendangs">
+        <div class="resource doc" >
         	<h5>
           		<ul>
-            		<li class="cur" >文档</li>|
-		            <li>图片</li>|
+            		<li class="cur" >文档</li>
+		            <li>图片</li>
 		            <li>视频</li>
           		</ul>
+          		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" onclick="resourceClose();"/></a>
          	</h5>
-         	<hr style="margin:0px;height:1px;border:0px;background-color:#D5D5D5;color:#D5D5D5;"/>
-	        <div class="resource-lists" style="height:380px;"></div>
-      </div>
-    <a href="#" class="return" style="margin-left:170px;" id="upload">提交</a> 
-    <a href="#" class="return" onclick="resourceClose()">返回</a> </div>
-</div>
+	        <div class="resource-lists" style="height:460px;" id="resource-lists"> </div>
+		 </div>
+	</div>
 </div>
 <!-- 弹出层 资源 END -->
 

@@ -38,7 +38,8 @@ $(function () {
 		file_upload_limit : 20,
 		file_queue_limit : 100,
 		post_params: {  
-            "ASPSESSID": "<%=request.getSession().getId()%>"},  
+            "jsessionid": "<%=request.getSession().getId()%>"
+           },  
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
 		},
@@ -49,7 +50,7 @@ $(function () {
 		button_height: "24",
 		button_placeholder_id: "spanButtonPlaceHolder",
 		button_text: '<span class="b">浏览文件</span>',
-		button_text_style: '.b{ font-size: 12;text-align:center;}',
+		button_text_style: '.b{ font-size: 12;text-align:center;color:#FDFDFD}',
 		button_text_top_padding: 3,
 				
 		// The event handler functions are defined in handlers.js
@@ -68,7 +69,6 @@ $(function () {
 	   var str=$.parseJSON(JSON.stringify(serverData));
 	   var obj=$.parseJSON(str);
 	   var error=obj.error;
-	   alert(error);
 	   if(error==0){
 			filePaths.push(obj.path);
 			//var currentTime = new Date();
@@ -97,13 +97,13 @@ function queueComplete(numFilesUploaded) {
 	if(numFilesUploaded==0){
 		alert("上传文件失败！");
 	}else{
-		alert($("#progId").val()+"pppp");
     	$.ajax({
     		url:prc+"/scMaster2/add_resource.action",
     		type:'post',
     		data:{resourses:filePaths.toString(),progId:$("#progId").val()},
     		dataType:'json',
     		success:function(data){
+        		alert(11);
     			findAll();
     		},
     		error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -119,7 +119,6 @@ $("#upload").click(function(){
 
 });
 function findAll(){
-	alert($("#progId").val());
 	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
 		if(data != ''){
 			$(".resource-lists").empty();
@@ -140,19 +139,36 @@ function deleteR(id){
 			alert("删除出错!");
 		}
 	});
-	}
+}
+function changepage(page){
+	$("#listAllDocumentTask").append("<input type='hidden' name='pagerUtils.pageIndex' id='pagerUtils.pageIndex'></input>");
+	document.getElementById("pagerUtils.pageIndex").value=page;
+	document.forms[0].submit();
+}
 </script>
 </head>
 <body>
-	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>
-	<div style="height:380px;maroverflow:auto;overflow-x:hidden;">
+<!--	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>${progId}-->
+	 <div class="liuyan">
+   		  	<a href="#">
+<!--   		  		<span id="spanButtonPlaceHolder" ></span>-->
+   		  		<img src=""  id="spanButtonPlaceHolder"/>
+   		  		<img src="../function/detail-step/img/tijiao.png" width="64" height="23" id="upload"/>
+   		  	</a>
+     </div>
+     <div class="biaoge">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId}" id="progId"></input>
 	 	<input type="hidden" value="${type }" id="type"></input>
-        <table width="570px" border="1" height="100%">
+         	<table width="552px" border="0" class="table-xi">
+         	 <tr>
+                <th width="30%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">名称</th>
+                <th width="30%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">时间</th>
+                <th width="40%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">操作</th>
+            </tr>
             <c:forEach items="${pm.datas}" var="resource" varStatus="i">
 	           <tr>
-	                <td align="center">${i.index+1 }</td>
+<!--	                <td align="center">${i.index+1 }</td>-->
 	                <td align="center">${resource.fileName }</td>
 	                <td align="center"><fmt:formatDate value="${resource.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">
@@ -162,36 +178,16 @@ function deleteR(id){
 	           </tr>
             </c:forEach>
         </table>  
-       <c:if test="${pagerUtils.totalResult>10}">
+       <c:if test="${pm.total>0}">
 		<div style="text-align:center;font-size:15px;margin-top:20px;">
-			 <pg:pager url="findAll_resource.action"
-    			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
-    			<pg:param name="progId" value="${progId }"/>
-    			<pg:param name="type" value="${type }"/>
-    			总计${pagerUtils.totalResult}条
-    			<pg:first>
-    				<a href="${pageUrl}">首页</a>
-    			</pg:first>
-    			<pg:prev>
-    				<a href="${pageUrl}" >上一页</a> 
-    			</pg:prev>
-    			<pg:pages>
-    				<c:choose>
-    					<c:when test="${currentPageNumber eq pageNumber}">
-    						<font color="red">${pageNumber}</font>
-    					</c:when>
-    					<c:otherwise>
-    						<a href="${pageUrl}">${pageNumber }</a>
-    					</c:otherwise>
-    				</c:choose>
-    			</pg:pages>
-    			<pg:next>
-    				<a href="${pageUrl}" >下一页</a> 
-    			</pg:next>
-    			<pg:last>
-    				<a href="${pageUrl}">尾页</a>
-    			</pg:last>
-    		</pg:pager>
+				总计${pm.total}条
+			<c:if test="pm.pageIndex != 1">
+				<a href="javascript:changepage(%{pm.pageIndex - 1})">&lt;&lt;上一页</a>
+			</c:if>
+			第<font color="red">${pm.pageIndex}</font>页
+			<c:if test="pm.pageIndex lt pm.totalPageNo">
+				<a href="javascript:changepage(%{pm.pageIndex + 1})">下一页&gt;&gt;</a>
+			</c:if>
 		</div>
 		</c:if>
 <!--        <div class="flash" style="margin-left:15px; width:537px;height:80px;maroverflow:auto;overflow-x:hidden;display:inline;float:left;border: 1px solid #A4B3EE" id="fsUploadProgress"></div>  -->
