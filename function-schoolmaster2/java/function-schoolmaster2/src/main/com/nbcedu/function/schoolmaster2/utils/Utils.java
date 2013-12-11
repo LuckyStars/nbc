@@ -104,6 +104,14 @@ public class Utils {
 		}
 		return false;
 	}
+	public static boolean isMaster(){
+		for (PersonVo person : Utils.getAllSchoolMaster()) {
+			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){
+				return true;
+			}
+		}
+		return false;
+	}
 	/**
 	 * 从classPath文件中读取字符串
 	 * @param filePath
