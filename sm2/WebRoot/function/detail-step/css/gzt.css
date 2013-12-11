@@ -337,7 +337,7 @@ float:left;
 	cursor:pointer;
 }
 .resource {
-	width:555px;
+	width:570px;
 	height:460px;
 	margin:0 auto;
 	margin-top:10px;
@@ -399,7 +399,7 @@ float:left;
 	background: url(../img/navbg.jpg) no-repeat;
 }
 .pic .cur {
-	background: url(../img/tupian.jpg) no-repeat;
+	background: url(../img/tupian.png) no-repeat;
 }
 .video .cur {
 	background: url(../img/shiping.jpg) no-repeat;
@@ -425,9 +425,9 @@ table td select{
 }
 
 /* 文档 */
-.wendangs{ width:570px; height:535px; background: #FFF; border:1px solid #195297;}
+.wendangs{ width:585px; height:535px; background: #FFF; border:1px solid #195297;}
 .liuyan{ height:50px; margin-left:410px;}
-.liuyan img{ display:block; float: left; margin-right:8px; margin-top:14px;}
+.liuyan img{ display:block; float: left; margin-right:8px; margin-top:1px;}
 .table-xi th,.table-xi td{
     border:1px solid #3C8CBF;
 }

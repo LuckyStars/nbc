@@ -1,20 +1,15 @@
 package com.nbcedu.function.schoolmaster2.dao.impl;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.sql.Types;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Expression;
-import org.hibernate.transform.ResultTransformer;
 import org.hibernate.transform.Transformers;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
-import com.nbcedu.function.schoolmaster2.core.comment.Constants;
 import com.nbcedu.function.schoolmaster2.core.dao.impl.SimpleBaseDAOImpl;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;

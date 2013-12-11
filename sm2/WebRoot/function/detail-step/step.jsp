@@ -55,8 +55,7 @@
                    	$(".resource").attr("class", "resource pic");
                    	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index},function(data){
                    		if(data != ''){
-                       		$(".resource-lists").empty();
-                   			$(".resource-lists").html(data);
+                   			openList(data);
                    		}
                  	  	});
                 } else if (index == 2) {
@@ -95,9 +94,9 @@
             });
         });
         function resourceClose(){
-      	  $(".resources .cur").removeClass("cur");
-      	  $(".resources").attr("class", "resources doc");
-      	  $(".resources.doc li:first-child ").addClass("cur");
+      	  $(".resource .cur").removeClass("cur");
+      	  $(".resource").attr("class", "resource doc");
+      	  $(".resource.doc li:first-child ").addClass("cur");
       	  $(".bg").hide();
       	  $(".adds").hide();
        }
@@ -105,7 +104,7 @@
 
    function resource(i){
         $("body").css("overflow", "hidden");
-        $("#progId").val(this.id);
+        $("#progId").val(i.id);
         $(".bg").show();
         $(".adds").show();
         findAllResource(i.id,0);
@@ -114,15 +113,15 @@
     function findAllResource(progId,type){
     	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
     		if(data != ''){
-    			
+    			openList(data);
     			//location.href="findAll_resource.action?progId="+progId+"&typestr="+type;
     		}
   	   });
     }
     function openList(data){
-    	$(".resource-lists").empty();
-    	$(".resource-lists").append('<div class="hengxian"><img src="${prc}/function/detail-step/img/hengxian.jpg" width="555" height="6" /></div>');
-		$(".resource-lists").html(data);
+    	document.getElementById("resource-lists").innerHTML = "";
+    	$(".resource-lists").append('<div class="hengxian"><hr width="565" style=" FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15"/></div>');
+    	$(".resource-lists").append(data);
    }
     
     //资源 end
@@ -484,9 +483,9 @@
 		            <li>图片</li>
 		            <li>视频</li>
           		</ul>
-          		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" /></a>
+          		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" onclick="resourceClose();"/></a>
          	</h5>
-	        <div class="resource-lists" style="height:380px;"> </div>
+	        <div class="resource-lists" style="height:460px;" id="resource-lists"> </div>
 		 </div>
 	</div>
 </div>

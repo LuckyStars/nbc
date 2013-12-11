@@ -42,7 +42,7 @@ public class SubjectAction extends BaseAction{
 		module = this.moduleBiz.findById(moduleId);
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if(module.getFlag()==3){
-			subjects = this.sm2SubjectBiz.findBYModuleId(subjectVo.getModuleId());
+			subjects = this.getNDZX();
 		}
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
@@ -52,13 +52,18 @@ public class SubjectAction extends BaseAction{
 	public String toUpdate(){
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
-		if("lssx".equals(moduleId)|| "ndzx".equals(moduleId)){
-			subjects = this.sm2SubjectBiz.findBYModuleId("ndzx");
+		module = this.moduleBiz.findById(moduleId);
+		if(module.getFlag()==3){
+			subjects = this.getNDZX();
 		}
 		subject = this.sm2SubjectBiz.findById(id);
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
 		return "subjectUpdate";
+	}
+	private List<TSm2Subject> getNDZX(){
+		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
+		return  this.sm2SubjectBiz.findBYModuleId("nianduzhongxin");
 	}
 	public void add(){
 		subject.setCreateTime(new Date());
@@ -191,7 +196,6 @@ public class SubjectAction extends BaseAction{
 		try {
 			pm = sm2SubjectBiz.findAlltrans(subjectVo, this.getUserId());
 		} catch (DBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "transList";
