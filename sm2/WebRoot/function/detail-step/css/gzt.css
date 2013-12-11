@@ -27,12 +27,7 @@ a {
 	vertical-align:middle;
 	text-indent: 20px;
 }
-.main {
-	background:#f9f9f9;
-	width:1200px;
-	height:1200px;
-	margin:0 auto;
-}
+
 .main .left {
 	position:relative;
 	background:#efeeee;
@@ -42,12 +37,22 @@ a {
 	border:1px solid #d8d8d8;
 	margin:1px 0;
 }
+.right h1 {
+	background:url(../images/right_title.png);
+	width:983px;
+	height:30px;
+	line-height:30px;
+	margin:4px auto;
+	font-size:12px;
+	color:#6d6c6c;
+	font-weight:normal;
+	text-indent:26px;
+}
 .main .right {
 	background:#fff;
 	float:right;
 	width:990px;
 	height:1160px;
-	border:1px solid #a3b2c4;
 	margin:1px 0;
 }
 .nav-title {
@@ -156,7 +161,7 @@ a {
 	margin-right:20px;
     height:23px;
 }
- .article, .articles {
+ .article, .articless {
 	width:740px;
 	height:212px;
 	margin:10px auto;
@@ -164,7 +169,7 @@ a {
 	padding:10px;
 	overflow:auto;
 }
- .articles p {
+ .articless p {
 	line-height:26px;
 	margin:0 auto;
 	text-indent:2em;
@@ -205,7 +210,11 @@ a {
 	width:750px;
 	margin:0 auto;
 	text-align:right;
+    height:21px;
 }
+.buttons img {
+display:block;float:right; margin:2px 5px 0 5px; cursor:pointer;
+} 
 .button {
 	background:url(../images/button.png);
 	display:inline-block;
@@ -216,6 +225,7 @@ a {
 	font-size:14px;
 	text-align:center;
 	cursor:pointer;
+    float:right;
 }
 .tabs-wp {
 	height:32px;
@@ -275,15 +285,14 @@ a {
     position:relative;
 }
 .tabs li.cur,.tabs1 li.cur {
-	position: relative;
-	height: 40px;
-	line-height: 50px;
-	top: -1px;
-	border: 0px;
-	border-top: 0px;
-	border-bottom-color: none;
-	background: url(../images/list-bg.jpg) no-repeat;
-	color: #fff;
+	position:relative;
+	height:30px;
+	line-height:30px;
+	top:-1px;
+	border:1px solid #85bbe9;
+	border-top:3px solid #0070d2;
+	border-bottom-color:#f0f8fc;
+	color:#0a5eb2;
 }
 .tabs li img{
     display:block; position:absolute;
@@ -328,61 +337,57 @@ float:left;
 	cursor:pointer;
 }
 .resource {
-	width:902px;
-	height:580px;
-	margin:0 auto;
-}
-.resource h5 {
-	margin:0;
-	padding:0;
-	height:32px;
-}
-.resources {
-	width:595px;
+	width:555px;
 	height:460px;
+	margin:0 auto;
+	margin-top:10px;
+}
+
+.resources {
+	width:570px;
+	height:410px;
 	margin:0 auto;
 }
 .resource h5,.resources h5 {
 	margin:0;
 	padding:0;
-	height:32px;
+	height:54px;
 }
 .video {
-	background:#7FAA79;
+	background:#9ccd95;
 }
 .doc {
-	background:#96B7CF;
+	background:#95c9ee;
 }
 .pic {
-	background:#D18D82;
+	background:#FF99CC; height:517px;
 }
 .resource .more,.resources .mores {
 	float:right;
 	height:30px;
 	line-height:30px;
 	color:#fff;
-	margin-right:20px;
+	
 }
 .resource ul,.resources ul {
-	/*margin:3px 0px 3px 6px;*/
+	margin:12px 6px 12px 18px;
 	padding:0;
-	text-align: center;
-	/*float:left;*/
+	float:left; margin-left:150px;
 }
 .resource li,.resources li {
-	/*float:left;*/
+	float:left;
 	color:#fff;
 	list-style:none;
 	padding:0px 30px;
 	height:26px;
 	line-height:26px;
-	cursor:pointer;
-	display: inline;
+	cursor:pointer; 
+	font-size:12px;
 }
 .resource-list {
-	background:#fff;
-	width:892px;
-	height:544px;
+	background:#95C9EE;
+	width:555px;
+	height:463px;
 	margin:0 auto;
 }
 .resource-lists {
@@ -391,20 +396,56 @@ float:left;
 	margin:0 auto;
 }
 .doc .cur {
-	background:#3f8cc0;
+	background: url(../img/navbg.jpg) no-repeat;
 }
 .pic .cur {
-	background:#ca513e;
+	background: url(../img/tupian.jpg) no-repeat;
 }
 .video .cur {
-	background:#57ab49;
+	background: url(../img/shiping.jpg) no-repeat;
 }
 .juti {
 	width:102px;
 	height:140px;
 	float:left;
-	margin:10px 0 0 22px;
+	margin:5px 0 0 7px;
 }
+
+
+
+/*--表格通用样式--*/
+table{border:0;margin:0;border-collapse:collapse; background: #FFF; margin-left:8px;} 
+table th, table td{padding:0;}
+table th{height:35px;line-height:35px;background: url(../img/biaogebg.jpg) repeat-x;font-weight:100;margin:0 auto;}
+table th .sqbox{width:40px;height:30px;margin:0 auto;text-align:center;}
+table th span{display:block;line-height:30px;float:left;}
+table td{height:35px;line-height:35px;text-align:center;} 
+table td select{
+    width:115px;
+}
+
+/* 文档 */
+.wendangs{ width:570px; height:535px; background: #FFF; border:1px solid #195297;}
+.liuyan{ height:50px; margin-left:410px;}
+.liuyan img{ display:block; float: left; margin-right:8px; margin-top:14px;}
+.table-xi th,.table-xi td{
+    border:1px solid #3C8CBF;
+}
+
+.biaoge .meili{ color: #000; font-size:12px;}
+
+.biaoge .chakan a{ color:#0072D3; font-size:12px; padding-left:5px;} 
+
+.liuyans{ height:50px;}
+
+.liuyans img{ display:block; float: right; margin-right:15px; margin-top:14px;}
+
+.hebing th{height:35px;line-height:35px; background:url(../img/shipingbg.jpg) repeat-x;font-weight:100;margin:0 auto;}
+
+.table-shi th,.table-shi td{
+    border:1px solid #4EAF22;
+}
+
 /*----------待处理文件----------*/
 .right-input {
 	background:#DCE3FF;
@@ -595,14 +636,7 @@ font-size:14px; font-weight:bold;
 .box-sp {
 margin-left:8px;
 }
- .articles {
-	width:932px;
-	height:302px;
-	margin:10px auto;
-	border:1px solid #ccc;
-	padding:10px;
-	overflow:auto;
-}
+
  .articles p {
 	line-height:26px;
 	margin:0 auto;

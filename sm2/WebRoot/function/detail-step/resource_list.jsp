@@ -38,7 +38,8 @@ $(function () {
 		file_upload_limit : 20,
 		file_queue_limit : 100,
 		post_params: {  
-            "ASPSESSID": "<%=request.getSession().getId()%>"},  
+            "JSESSIONID": "<%=request.getSession().getId()%>"
+           },  
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
 		},
@@ -144,15 +145,26 @@ function deleteR(id){
 </script>
 </head>
 <body>
-	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>
-	<div style="height:380px;maroverflow:auto;overflow-x:hidden;">
+<!--	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>${progId}-->
+	 <div class="liuyan">
+   		  	<a href="#">
+   		  		<img src="../function/detail-step/img/liulan.png" width="64" height="23" />
+   		  		<img src="../function/detail-step/img/tijiao.png" width="64" height="23" />
+   		  	</a>
+     </div>
+     <div class="biaoge">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId}" id="progId"></input>
 	 	<input type="hidden" value="${type }" id="type"></input>
-        <table width="570px" border="1" height="100%">
+         	<table width="540px" border="0" class="table-xi">
+         	 <tr>
+                <th width="30%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">名称</th>
+                <th width="30%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">时间</th>
+                <th width="40%" scope="col" style="color:#004E7F; font-size:14px; font-weight:bold">操作</th>
+            </tr>
             <c:forEach items="${pm.datas}" var="resource" varStatus="i">
 	           <tr>
-	                <td align="center">${i.index+1 }</td>
+<!--	                <td align="center">${i.index+1 }</td>-->
 	                <td align="center">${resource.fileName }</td>
 	                <td align="center"><fmt:formatDate value="${resource.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">
@@ -162,7 +174,7 @@ function deleteR(id){
 	           </tr>
             </c:forEach>
         </table>  
-       <c:if test="${pagerUtils.totalResult>10}">
+       <c:if test="${pagerUtils.totalResult>0}">
 		<div style="text-align:center;font-size:15px;margin-top:20px;">
 			 <pg:pager url="findAll_resource.action"
     			items="${pagerUtils.totalResult}" maxPageItems="${pagerUtils.pageSize}" maxIndexPages="5" export="currentPageNumber=pageNumber">
