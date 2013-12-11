@@ -34,7 +34,7 @@
         	                both: '',
         	                on: '',
         	                half: ''
-        	            }
+        	            };
         	            $.extend(setings, options)
         	            var imgs = $(this).find('img'), tags = true;
         	            var index1=0;
@@ -44,15 +44,15 @@
         	                    imgs.attr('src', setings.both);
         	                	index1 = index;
         	                    for (var i = 0; i < index; i++) {
-        	                        imgs.eq(i).attr('src', setings.on)
+        	                        imgs.eq(i).attr('src', setings.on);
         	                    }
         	                    var x = e.screenX - $(this).parent().offset().left;
         	                    if (x / 24 < Number(index) + 0.5) {
         	                    } else {
-        	                        imgs.eq(index).attr('src', setings.on)
+        	                        imgs.eq(index).attr('src', setings.on);
         	                    }
         	                    if (x <= 0) {
-        	                        imgs.eq(0).attr('src', setings.both)
+        	                        imgs.eq(0).attr('src', setings.both);
         	                    }
         	                });
         	            });
@@ -72,15 +72,15 @@
         	        				window.location.href="${prc}/scMaster2/masterShow_invatition.action?tsm2Invatition.id=${tsm2Invatition.id}";
         	        			}
         	            	});
-        	            })
+        	            });
         	            $(this).mouseleave(function () {
         	                if (tags) {
-        	                    imgs.attr('src', setings.both)
+        	                    imgs.attr('src', setings.both);
         	                }
-        	            })
-        	        }
-        	    }(jQuery))
-        	    $('#star').star({ both: '${prc}/function/function-invatition/masterShow/images/star-off-big.png', on: '${prc}/function/function-invatition/masterShow/images/star-on-big.png' })
+        	            });
+        	        };
+        	    }(jQuery));
+        	    $('#star').star({ both: '${prc}/function/function-invatition/masterShow/images/star-off-big.png', on: '${prc}/function/function-invatition/masterShow/images/star-on-big.png' });
             }
             $("#comment").click(function () {
                 var _content = $.trim($("#content").val());
@@ -111,15 +111,14 @@
                         $(".conshen").css("display", "block");
                         $(this).attr("src", "${prc}/function/function-invatition/masterShow/images/up1.jpg");
                     }
-                })
-            })
-        })
+                });
+            });
+        });
         
     </script>
 </head>
 <body>
        <div class="con_conent fixed">
-  <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　校长工作台　-　</span><span class="back">我收到的邀请</span></h1>
   <div class="table_box fixed">
     <div class="content">
       <h2>${tsm2Invatition.title}</h2>

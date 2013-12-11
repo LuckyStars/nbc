@@ -317,10 +317,29 @@
     		resizeParent();
     	};
     </script>
+    <style>
+    	.prog_parent{
+    		border:1px  dashed #9FBAD6;
+    		margin-left:5px;
+    		margin-bottom: 10px;
+    	}
+    	.article{
+    		border:0px;
+    	}
+    	.box{
+    		border:0px;
+    	}
+    	
+    	.conshen{
+    		border:0px;
+    	}
+    	
+    </style>
 </head>
-<body style="background-color: #f0f8fc;">
-	<c:forEach items="${proList }" var="prog">
-		
+<body style="">
+	<c:forEach items="${proList }" var="prog" varStatus="progStatus">
+	<div class="prog_parent" >
+	
    	<div class="mids">
    		<a class="h4">
    			<span onclick="switchArticle('${prog.id}');" >·${prog.name }</span>
@@ -336,17 +355,23 @@
    			
    			</pri:hideWhenMaster>
    			
-   			<img src="${prc }/function/detail-step/images/zan.png" title="赞"
+   			<img
+   			style="height: 20px;
    			<c:if test="${prog.zand > 0}">
-   			 style="display: none;" 
+   			 display: none;
    			</c:if>
+   			"
+   			 src="${prc }/function/detail-step/images/zan2.png" title="赞"
    			id="clickZan_${prog.id}"
    			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
    			
-   			<img  src="${prc }/function/detail-step/images/zancancel.png" title="取消赞" 
+   			<img 
+   			style="height: 20px;
    			<c:if test="${prog.zand <= 0}">
-   			 style="display: none;" 
+   			 display: none;
    			</c:if>
+   			"
+   			 src="${prc }/function/detail-step/images/zancancel2.png" title="取消赞" 
    			id="cancelZan_${prog.id}"
    			onclick="cancelZan('${prog.id}');" />
    			
@@ -369,7 +394,7 @@
        		<span> | </span>
         	<a>
         		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
-        		title="资源" width="13" height="13" class="ico2" onclick="resource(this)"/>
+        		title="查看资源" width="13" height="13" class="ico2" onclick="resource(this)"/>
         	</a>
         </div>
 	</div>
@@ -394,7 +419,7 @@
 	          			<a href="javascript:subDiscForm('${prog.id }');" class="btn">发表</a>
 			            <span class="emotion" id="emospan_${prog.id }" 
 			            style="cursor:pointer; float:right;display:block;margin:0px 40px 0 0;">
-			            	<img src="${prc}/function/emotion/images/xiao.png"/>
+			            	<img src="${prc}/function/emotion/images/xiao.png" title="表情"/>
 			            </span>
 			    </div>
 			    <script type="text/javascript">
@@ -438,7 +463,10 @@
 	</div>
 	<!-- 评论 END -->
 	
-    <div class="article" style="height:inherit;" id="art_${prog.id }">
+    <div class="article" 
+    style="height:inherit;<c:if test="${not  progStatus.first}">display:none;</c:if>" 
+    id="art_${prog.id }"
+    >
         <textarea style="width:700px;height:200px;" id="content_${prog.id}"></textarea>
         <script type="text/javascript">
 	        KindEditor.ready(function(K) {
@@ -483,10 +511,9 @@
        	</c:forEach>
 		</div>
         <p class="pack1" onclick="showAllComment('${prog.id}');">查看所有批示</p>
-        
 	</div>
 	
-	
+	</div>
 	</c:forEach>
       <!--弹出层 资源-->
 <div class="bg"></div>

@@ -246,21 +246,41 @@
 </head>
 <body>
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
-	<div class="con_conent fixed">
-	
+	<div class="con_conent fixed" style="background-color: #FFF;">
 		<%--<h1 class="title">
 			<span class="title">当前位置：</span>
 			<span class="text">首页 - 校长工作台 - </span>
 		</h1> --%>
 		<style type="text/css">
+		
 			.detail_titles{
 				margin: 0;
 				padding: 0;
 				display: block;
-				font-size: 20px;
 				color: #0273c2;
 				font-weight: bold;
 				font-family: Arial, Helvetica, sans-serif;
+				font-size:22px;
+			}
+			
+			.tab_titile{
+				font-family: 微软雅黑;
+				font-size:16px;
+			}
+			
+			.tabs-wp {
+				height: 32px;
+				line-height: 38px;
+				border-bottom: 1px solid #ccc;
+				width: 100%;
+				padding: 0;
+			}
+			
+			.tabs_content_title{
+				width:70px;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap;
 			}
 			
 		</style>
@@ -275,13 +295,13 @@
 						width='60' height='60'/>
 					</pri:showWhenMaster>
 					<div style="float: left; margin-top: 15px; margin-left: 20px;">
+						<pri:hideWhenMaster>
 						<p style="">
 							<label for="amount"></label> 
 							<input type="text" disabled="disabled" type="text" id="amount" 
-								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" />
+								style="border: 0; color: #EA605E; font-weight: bold;" />
 							
 						</p>
-						<pri:hideWhenMaster>
 						<div id="slider_pro"></div>
 						<span id="slider_num" ></span>
 						</pri:hideWhenMaster>
@@ -297,7 +317,7 @@
 				</div>
 
 	
-				<h3>
+				<h3 style="font-family: 微软雅黑;font-size:16px;">
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
 					&nbsp;&nbsp;&nbsp;执行者：<span>
@@ -306,8 +326,8 @@
 					</c:forEach>
 					</span>
 					<pri:showWhenMaster>
-					<img style="float:right;cursor: pointer;" title="转发" 
-					src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
+					<img style="float:right;cursor: pointer;height: 28px;" title="转发" 
+					src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
@@ -325,12 +345,14 @@
 					<ul class="tabs" style="position: absolute;  top: 0px; width:4000px;">
 						<c:forEach items="${steps }" var="step" varStatus="i">
 							
-							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
+							<li
+								style="margin:0px;"
+							 id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
 							onmouseover="$('#step_ops_${step.id}').show();"
 							onmouseout="$('#step_ops_${step.id}').hide();"
 							 >
-								<div style="width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-								<a title="${step.name }" 
+								<div class="tabs_content_title">
+								<a title="${step.name }" class="tab_titile"
 								href="javascript:changeTab('${step.id}');"
 								>${step.name }</a>
 								</div>
@@ -338,11 +360,11 @@
 								<span id="step_ops_${step.id}" style="display: none;">
 									
 									<c:if test="${sessionScope.sm2_init==step.createrId}">
-									<img title="删除" name="${step.id}"
+									<img title="删除步骤" name="${step.id}"
 									class="delete_step_ico small1" 
 									src="${prc}/function/function-linshi/images/icon1.png"  /><%--删除 --%>
 									
-									<img title="编辑" id="${step.id}" 
+									<img title="编辑步骤" id="${step.id}" 
 									 src="${prc}/function/function-linshi/images/icon2.png" 
 									class="small"/><%--编辑步骤 --%>
 									</c:if>
