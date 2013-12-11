@@ -3,40 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style type="text/css">
-
-.buttonUpload {
-   border-top: 1px solid #87a0b0;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 7.5px 15px;
-   -webkit-border-radius: 8px;
-   -moz-border-radius: 8px;
-   border-radius: 8px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: #000000;
-   font-size: 11px;
-   font-family: Georgia, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
-.buttonUpload:hover {
-   border-top-color: #28597a;
-   background: #28597a;
-   color: #544554;
-   }
-.buttonUpload:active {
-   border-top-color: #51768f;
-   background: #51768f;
-   }
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -51,7 +17,6 @@
 var prc ="${pageContext.request.contextPath}"; 
 $(function () {
 	  $("table tr").css("height","27px");
-	
 	var swfu;
 	var filePaths=new Array();
 	var delFilePaths=new Array();
@@ -64,26 +29,28 @@ $(function () {
 	 var upload;
 	 
 	var settings = {
-		flash_url : "/sm2/function/swfupload/js/swfupload.swf",
-		upload_url: prc+"/scMaster2/resourceUpload.action",	
+		flash_url : prc+"/function/swfupload/js/swfupload.swf",
+		upload_url: "/sm2/scMaster2/resourceUpload.action",	
 		file_post_name: "filedata",   
 		file_size_limit : "20 MB",
 		file_types : "*.*",
 		file_types_description : "",
 		file_upload_limit : 20,
 		file_queue_limit : 100,
+		post_params: {  
+            "ASPSESSID": "<%=request.getSession().getId()%>"},  
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
 		},
-		debug: false,
+		debug: true,
 		// Button settings
-		button_image_url: "/sm2/function/swfupload/images/button_2.jpg",
+		button_image_url: prc+"/function/swfupload/images/button_2.jpg",
 		button_width: "60",
 		button_height: "24",
 		button_placeholder_id: "spanButtonPlaceHolder",
 		button_text: '<span class="b">浏览文件</span>',
 		button_text_style: '.b{ font-size: 12;text-align:center;}',
-		button_text_top_padding: 4,
+		button_text_top_padding: 3,
 				
 		// The event handler functions are defined in handlers.js
 	    file_queued_handler : fileQueued,
@@ -101,6 +68,7 @@ $(function () {
 	   var str=$.parseJSON(JSON.stringify(serverData));
 	   var obj=$.parseJSON(str);
 	   var error=obj.error;
+	   alert(error);
 	   if(error==0){
 			filePaths.push(obj.path);
 			//var currentTime = new Date();
@@ -129,6 +97,7 @@ function queueComplete(numFilesUploaded) {
 	if(numFilesUploaded==0){
 		alert("上传文件失败！");
 	}else{
+		alert($("#progId").val()+"pppp");
     	$.ajax({
     		url:prc+"/scMaster2/add_resource.action",
     		type:'post',
@@ -150,6 +119,7 @@ $("#upload").click(function(){
 
 });
 function findAll(){
+	alert($("#progId").val());
 	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
 		if(data != ''){
 			$(".resource-lists").empty();
@@ -174,12 +144,12 @@ function deleteR(id){
 </script>
 </head>
 <body>
-	<div><span id="spanButtonPlaceHolder" ></span></div>
+	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>
 	<div style="height:380px;maroverflow:auto;overflow-x:hidden;">
 	 <form id="saveForm" method="post">
-	 	<input type="hidden" value="${progId }" id="progId"></input>
+	 	<input type="hidden" value="${progId}" id="progId"></input>
 	 	<input type="hidden" value="${type }" id="type"></input>
-        <table width="570px" border="0" height="100%">
+        <table width="570px" border="1" height="100%">
             <c:forEach items="${pm.datas}" var="resource" varStatus="i">
 	           <tr>
 	                <td align="center">${i.index+1 }</td>
@@ -191,7 +161,7 @@ function deleteR(id){
 	                </td>
 	           </tr>
             </c:forEach>
-        </table>
+        </table>  
        <c:if test="${pagerUtils.totalResult>10}">
 		<div style="text-align:center;font-size:15px;margin-top:20px;">
 			 <pg:pager url="findAll_resource.action"

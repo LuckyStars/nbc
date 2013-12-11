@@ -10,6 +10,7 @@ import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
 import com.nbcedu.function.schoolmaster2.data.model.SM2Datas;
 import com.nbcedu.function.schoolmaster2.data.util.DataContext;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 @SuppressWarnings("serial")
 public class DataAction extends BaseAction{
@@ -50,7 +51,11 @@ public class DataAction extends BaseAction{
 		DataGenerator dataGen = 
 			DataContext.getContext().getbyMatcher(matcher);
 		this.dataType = dataGen.defaultChartType();
-		this.xmlContent = dataGen.getDataByTime(start, end,"F0F8FC");
+		if(Utils.isManager()){
+			this.xmlContent = dataGen.getDataByTime(start, end);
+		}else{
+			this.xmlContent = dataGen.getDataByTime(start, end,"F0F8FC");
+		}
 		return "chart";
 	}
 	
