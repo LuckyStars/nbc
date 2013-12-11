@@ -43,7 +43,7 @@ $(function () {
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
 		},
-		debug: true,
+		debug: false,
 		// Button settings
 		button_image_url: prc+"/function/swfupload/images/button_2.jpg",
 		button_width: "60",
