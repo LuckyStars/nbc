@@ -51,6 +51,10 @@ text-decoration:none;
 	background:url(../images/module_bg2.png) no-repeat;
 	margin-top:13px;
 }
+.module_nodata{
+	background:url(../images/module_bg_nodata.png) no-repeat;
+	margin-top:16px;
+}
 .photo{
 	float:left;
 	border:6px solid #ededed;

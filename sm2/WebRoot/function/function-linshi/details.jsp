@@ -247,19 +247,33 @@
 <body>
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
 	<div class="con_conent fixed">
-		<h1 class="title">
+	
+		<%--<h1 class="title">
 			<span class="title">当前位置：</span>
 			<span class="text">首页 - 校长工作台 - </span>
-		</h1>
+		</h1> --%>
+		<style type="text/css">
+			.detail_titles{
+				margin: 0;
+				padding: 0;
+				display: block;
+				font-size: 20px;
+				color: #0273c2;
+				font-weight: bold;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			
+		</style>
 		<div class="table_box fixed">
 			<div class="content">
-				<h2>
-					<span>${subject.title }</span>
+			
+				<div class="detail_titles">
+					<span style="margin-bottom: 20px;">${subject.title }</span>
 					<pri:showWhenMaster>
-								<img style="margin-top: 0px;"
-								src='${prc}/function/images/percent/${subject.progress }.png' 
-								width='80' height='80'/>
-							</pri:showWhenMaster>
+						<img style="margin-top: 0px;"
+						src='${prc}/function/images/percent/${subject.progress }.png' 
+						width='60' height='60'/>
+					</pri:showWhenMaster>
 					<div style="float: left; margin-top: 15px; margin-left: 20px;">
 						<p style="">
 							<label for="amount"></label> 
@@ -271,20 +285,26 @@
 						<div id="slider_pro"></div>
 						<span id="slider_num" ></span>
 						</pri:hideWhenMaster>
+						
 					</div>
 					
-					<%-- --%>
 					<pri:showWhenManager>
 					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
 					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
 					<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
 					</pri:showWhenManager>
-				</h2>
+					
+				</div>
 
+	
 				<h3>
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
-					关联重心工作： <span> </span>
-					执行者：<span><c:forEach items="${subject.excuteUsers }" var="user">${user.userName}</c:forEach></span>
+					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
+					&nbsp;&nbsp;&nbsp;执行者：<span>
+					<c:forEach items="${subject.excuteUsers }" var="user" varStatus="i">
+					${user.userName}<c:if test="${not i.last}">、</c:if>
+					</c:forEach>
+					</span>
 					<pri:showWhenMaster>
 					<img style="float:right;cursor: pointer;" title="转发" 
 					src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>

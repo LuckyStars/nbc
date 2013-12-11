@@ -109,23 +109,23 @@
 			</div>
 		</form>
     </div>
-       <table width="100%" border="0">
-      <tr>
-        <th width="5%" scope="col">序号</th>
-        <th width="25%" scope="col">名称</th>
-        <th width="10%" scope="col">部门</th>
-        <th width="20%" scope="col">发布者</th>
-        <th width="15%" scope="col">发布时间</th>
-        <th width="25%" scope="col">操作</th>
-      </tr>
-      <c:forEach items="${pm.datas }" var="subject" varStatus="i">
-	      <tr>
-	        <td align="center">${i.index+1 }</td>
-	        <td class="lan" align="center"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" target="_blank">${subject.title }</a></td>
-	        <td align="center">${subject.departmentName}</td>
-	        <td align="center">${subject.createrName}</td>
-	        <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
-	        <td align="center">
+	<table width="100%" border="0">
+  		<tr>
+	        <th width="5%" scope="col">序号</th>
+	        <th width="25%" scope="col">名称</th>
+	        <th width="10%" scope="col">部门</th>
+	        <th width="20%" scope="col">发布者</th>
+	        <th width="15%" scope="col">发布时间</th>
+	        <th width="25%" scope="col">操作</th>
+      	</tr>
+      	<c:forEach items="${pm.datas }" var="subject" varStatus="i">
+	      	<tr>
+		        <td align="center">${i.index+1 }</td>
+		        <td class="lan" align="center"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" target="_blank">${subject.title }</a></td>
+		        <td align="center">${subject.departmentName}</td>
+		        <td align="center">${subject.createrName}</td>
+		        <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+		        <td align="center">
 <!--	        	<span style="margin:20px;"><img src="${prc}/function/img/right.jpg" /></span>-->
 	        	<c:if test="${subject.flag==1}">
 					<a href="#" onclick="javascript:stick('${subject.id }',3,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue1.png"/></a>
@@ -133,10 +133,16 @@
 				<c:if test="${subject.flag !=1}">
 					<a href="#" onclick="javascript:stick('${subject.id }',1,'blue');" id="${subject.id }"><img src="${prc}/function/img/blue3.png"/></a>
 				</c:if>
-	        </td>
-	      </tr>
-      </c:forEach>
+	        	</td>
+	      	</tr>
+      	</c:forEach>
     </table>
+    <c:if test="${empty pm.datas}"><%--无数据 --%>
+	    <div style="margin-top: 40px;text-align: center;">
+	    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+	    </div>
+    </c:if>
+    
     <%@ include file="pager.jsp" %>
   </div>
 

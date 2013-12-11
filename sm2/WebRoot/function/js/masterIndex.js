@@ -37,18 +37,22 @@ function refreshDongtai(){
 
 var refLinshi = function (){
 	$.post(ctxPath + '/scMaster2/findLinshi_maIndex.action', function(data) {
+		$("#linshi_parent").removeClass('module_nodata');
 		if(data.length<=0){
+			$("#linshi_parent").addClass('module_nodata');
 			return;
 		}
+		
+		
 		$("#linshiDiv").html("");
 		var curData = data;
 		for(var i = 0;i<data.length;i++){
 			
 			var content = $("<div class='linshi'></div>");
 			var aTag = $("<a class='pointer' href='" +ctxPath+ curData[i].url + "' target=_blank></a>");
-			$("<img src='" + ctxPath +"/function/images/percent/" 
+			$("<img src='" + ctxPath +"/function/images/percent2/" 
 					+ curData[i].progress+
-					".png' width='80' height='80'>").appendTo(aTag);
+					".png' width='120' height='90'>").appendTo(aTag);
 			$("<span style='color:#e1517e;'>"+ curData[i].title +"</span>").appendTo(aTag);
 			aTag.appendTo(content);
 			

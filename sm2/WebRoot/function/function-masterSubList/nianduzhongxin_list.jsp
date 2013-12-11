@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>nianduzhongxin</title>
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
 <link rel="stylesheet" href="${prc}/function/function-masterSubList/css/gzt.css" />
@@ -158,6 +158,12 @@ margin: 5px 0 0 10px;
 				</c:forEach>
 				
 			</table>
+			
+			<c:if test="${empty pm.datas}"><%--无数据 --%>
+		    <div style="margin-top: 40px;text-align: center;">
+		    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+		    </div>
+		    </c:if>
 		</div>
 		<%@ include file="pager.jsp" %>
 	</div>

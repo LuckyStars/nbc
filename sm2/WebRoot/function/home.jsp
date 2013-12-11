@@ -76,12 +76,48 @@
 			$("#content_frame").css("height",height);
 		}
 </script>
+<style type="text/css">
+	.box_logo_right{
+	height: 20px;
+	width: auto;
+	color: #fff;
+	margin: 43px 10px 0 0;
+	line-height: 20px;
+	font-size: 12px;
+	float: right;
+	}
+	.box_logo_right a {
+		color:#FFFFFF;
+	}
+	.la{
+	}
+	.tc{
+	}
+</style>
 </head>
 <body>
 <div class="header">
-	<h1 class="logo">
+
+	<h1 class="logo" style="float:left;">
   		<img src="${prc}/function/images/logo.png" width="314" height="51" alt="校长工作台" />
 	</h1>
+	<div class="box_logo_right" style="float:right;">
+		<a class="la" style="float:left; padding-left: 20px;" 
+			href="#">
+			<span style="
+			background:url(${prc}/function/css/icons_white.png) no-repeat;
+			width:14px;height:14px;
+			background-position:-170px 0px;"
+			>&nbsp;&nbsp;&nbsp;&nbsp;</span>教师门户</a>
+		&nbsp;&nbsp;
+		<a class="tc" href="${logoutService}">
+		<span style="
+				background:url(${prc}/function/css/icons_white.png) no-repeat;
+				width:14px;height:14px;
+				background-position:-122px -73px;"
+				
+				>&nbsp;&nbsp;&nbsp;&nbsp;</span>退出登录</a>
+	</div>			
 </div>
 <div class="main">
   	<div class="left">
@@ -238,7 +274,7 @@
 			<a href="#" class="li-blue" id="nav9">
       		<img src="${prc}/function/images/nav_09.png" width="16" height="16" />个人信息设置<span class="cols"></span></a>
       		<ul class="nav-list-inner">
-          		<li><a target="fm_right" href="#">修改密码及头像</a></li>
+          		<li><a target="fm_right" href="${prc}/function/building.html">修改密码及头像</a></li>
         	</ul>
 		</li>
 	</ul>

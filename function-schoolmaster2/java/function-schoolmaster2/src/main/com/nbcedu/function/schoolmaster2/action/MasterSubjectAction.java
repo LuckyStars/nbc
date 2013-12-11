@@ -105,7 +105,7 @@ public class MasterSubjectAction extends BaseAction{
 					});
 			
 			/*disCuz map*/{
-				List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(progIds,5);
+				List<TSm2Disscus> disList = this.disscusBiz.findByProgIds(progIds,3);
 				if(!CollectionUtils.isEmpty(disList)){
 					
 					HashMap<String, List<TSm2Disscus>> disMap = 
@@ -124,7 +124,7 @@ public class MasterSubjectAction extends BaseAction{
 			}/*disCuz map*/
 			
 			/*comment map*/{
-				List<TSm2Comment> comList = this.comBiz.findByProgIds(progIds,5);
+				List<TSm2Comment> comList = this.comBiz.findByProgIds(progIds,3);
 				if(!CollectionUtils.isEmpty(comList)){
 					
 					HashMap<String, List<TSm2Comment>> comMap = 

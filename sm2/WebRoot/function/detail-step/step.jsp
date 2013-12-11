@@ -14,10 +14,10 @@
 	<script type="text/javascript" src="${prc}/function/emotion/jQuery.jEmotion.js"></script>
     <script>
     	var ctx = '${prc}';
-    	function resizeParent(){
+    	var resizeParent = function(){
     		var height = $(document).height();
     		parent.resizeFrame(height+200);
-    	}
+    	};
     	
         $(function () {
             $(".img").each(function () {
@@ -103,7 +103,7 @@
             //删除工作进展
             $(".prog").click(function () {
             	if(confirm("确定要删除吗?")){
-		    		$.post("delete_progress.action", {id:this.id,subjectId:${subjectId}}, function(data) {
+		    		$.post("delete_progress.action", {id:this.id}, function(data) {
 			    		if(data==0){
 				    		alert("删除成功！");
 		      				location.reload();
@@ -377,10 +377,11 @@
 	</div>
 	
 	<!-- 评论  -->
-    <div class="box" >
+	<div id="disc_content_${prog.id }" style="display: none;">
+    <div class="box" style="min-height: 0px;" >
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
-         id="disc_content_${prog.id }" style="display: none;" >
+           >
         	<pri:hideWhenMaster></pri:hideWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
@@ -435,6 +436,7 @@
           	
           	<p class="pack"><a href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
 		</div>
+	</div>
 	</div>
 	<!-- 评论 END -->
 	
