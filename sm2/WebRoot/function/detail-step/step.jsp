@@ -529,7 +529,7 @@
           		</ul>
           		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" onclick="resourceClose();"/></a>
          	</h5>
-	        <div class="resource-lists" style="height:460px;" id="resource-lists"> </div>
+	        <div class="resource-lists" id="resource-lists"> </div>
 		 </div>
 	</div>
 </div>

@@ -338,7 +338,7 @@ float:left;
 }
 .resource {
 	width:570px;
-	height:460px;
+	height:555px;
 	margin:0 auto;
 	margin-top:10px;
 }
@@ -360,7 +360,7 @@ float:left;
 	background:#95c9ee;
 }
 .pic {
-	background:#FF99CC; height:517px;
+	background:#FF99CC; height:557px;
 }
 .resource .more,.resources .mores {
 	float:right;
@@ -425,7 +425,7 @@ table td select{
 }
 
 /* 文档 */
-.wendangs{ width:585px; height:535px; background: #FFF; border:1px solid #195297;}
+.wendangs{ width:585px; height:575px; background: #FFF; border:1px solid #195297;  margin-top: 30px;}
 .liuyan{ height:50px; margin-left:410px;}
 .liuyan img{ display:block; float: left; margin-right:8px; margin-top:1px;}
 .table-xi th,.table-xi td{
