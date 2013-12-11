@@ -1,3 +1,4 @@
+
 var refreshTongji = function(){
 	$.post(ctxPath + '/scMaster2/findTongjifenxi_maIndex.action', function(data) {
 		$("#tongji_list").html("");
@@ -7,14 +8,14 @@ var refreshTongji = function(){
 		
 		for(var i = 0;i<data.length;i++){
 			var cur = data[i];
-			var li = $("<li><a href='${prc}" + 
-					ctxPath + curData.url + 
+			var li = $("<li><a href='" + 
+					ctxPath + cur.url + 
 					"' target='fm_right'>" +
-					curData.title + "</a></li>");
+					cur.title + "</a></li>");
 			li.appendTo($("#tongji_list"));
 		}
+		
 	});
-	
 	
 };
 
@@ -23,16 +24,15 @@ var refLinshi = function (){
 	 * linshi_list
 	 * */
 	$.post(ctxPath + '/scMaster2/findLinshi_maIndex.action', function(data) {
+		console.log(data);
 		if(data.length<=0){
 			return;
 		}
 		$("#linshi_list").html("");
-		var curData = data;
 		for(var i = 0;i<data.length;i++){
 			
 			var curData = data[i];
-			
-			var li = $("<li><a href='${prc}" + 
+			var li = $("<li><a href='" + 
 					ctxPath + curData.url + 
 					"' target='fm_right'>" +
 					curData.title + "</a></li>");
@@ -41,3 +41,8 @@ var refLinshi = function (){
 		}
 	});
 };
+
+$(function(){
+	refreshTongji();
+	refLinshi();
+});
