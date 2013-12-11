@@ -185,11 +185,11 @@ $(function () {
 	  	</a>
      </div>
 	 <form id="saveForm" method="post">
-	 	<div  style="OVERFLOW-y:auto; height:400px;">
+	 	<div  style="OVERFLOW-y:auto; height:430px;">
 	 	<input type="hidden" value="${progId }" id="progId"></input>
             <c:forEach items="${list}" var="resource" varStatus="i">
                <div class="juti" style="border:1px solid #A4B3EE"> 
-               		<img src="${resource.filePath }" width="102" height="140" />
+               		<a href="${resource.filePath}" target="_blank"><img src="${resource.filePath }" width="102" height="140" /></a>
                		<div class="file-panel" style="height: 0px; overflow: hidden;">
                			<span class="cancel" id="${resource.id}">删除</span>
 <!--               			<span class="rotateRight">向右旋转</span>-->

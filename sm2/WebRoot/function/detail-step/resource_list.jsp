@@ -16,7 +16,7 @@
 <script type="text/javascript">
 var prc ="${pageContext.request.contextPath}"; 
 $(function () {
-	  $("table tr").css("height","27px");
+	  $("table tr").css("height","20px");
 	var swfu;
 	var filePaths=new Array();
 	var delFilePaths=new Array();
@@ -103,7 +103,6 @@ function queueComplete(numFilesUploaded) {
     		data:{resourses:filePaths.toString(),progId:$("#progId").val()},
     		dataType:'json',
     		success:function(data){
-        		alert(11);
     			findAll();
     		},
     		error:function(XMLHttpRequest, textStatus, errorThrown){
@@ -172,7 +171,7 @@ function changepage(page){
 	                <td align="center">${resource.fileName }</td>
 	                <td align="center"><fmt:formatDate value="${resource.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">
-	                	<span class="space"><a href="${resource.filePath}">下载</a></span>
+	                	<span class="space"><a href="${resource.filePath}" target="_blank">下载</a></span>
 						<span class="space"><a href="javascript:deleteR('${resource.id}')">删除</a></span>
 	                </td>
 	           </tr>
