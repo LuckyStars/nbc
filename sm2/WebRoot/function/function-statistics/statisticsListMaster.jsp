@@ -9,14 +9,25 @@
     <link href="${prc}/function/function-statistics/css/index.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+	<style type="text/css">
+		.tit_boder{
+			background: #DCE3FF;
+			width: 980px;
+			height: 30px;
+			line-height: 30px;
+			margin: 4px auto;
+			font-size: 12px;
+			border: 1px solid #A4B3EE;
+		}
+	
+	</style>
 </head>
 <body>
 	<div class="right1">
    		<form action="${prc}/scMaster2/listMasterStatistics_data.action">
      		<input type="hidden" name="matcher" value="${data.matcher}"/>
-	    	<h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - ${name } - <span style="color:#dd0000">统计分析</span></h1>
-		    <div class="content">
-		      <h3>统计时间：
+		    <div class="content ">
+		      <h3 class="tit_boder" style="height: 36px;">统计时间：
 		          <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" 
 		          onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
 		         至：

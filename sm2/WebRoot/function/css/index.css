@@ -143,7 +143,7 @@ table td select {
 	height:25px;
 }
 .cx, .cx1 {
-	background:url(../img/btn-bg.jpg) no-repeat;
+	background:url(../img/btn-bg.png) no-repeat;
 	text-decoration:none;
 	margin-left:10px;
 	display:block;
@@ -327,7 +327,7 @@ width:395px; height: 233px; margin:15px auto;
 	border:1px solid #ccc;
 }
 .btn {
-	background:url(../img/btn-bg.jpg) no-repeat;
+	background:url(../img/btn-bg.png) no-repeat;
 	text-decoration:none;
 	margin-right:27px;
 	display:block;

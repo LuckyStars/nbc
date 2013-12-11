@@ -146,7 +146,7 @@ table td select {
 	height:25px;
 }
 .cx, .cx1 {
-	background:url(../img/btn-bg.jpg) no-repeat;
+	background:url(../img/btn-bg.png) no-repeat;
 	text-decoration:none;
 	margin-left:10px;
 	display:block;
@@ -318,7 +318,7 @@ h1.title span.text {
 	border:1px solid #ccc;
 }
 .btn {
-	background:url(../img/btn-bg.jpg) no-repeat;
+	background:url(../img/btn-bg.png) no-repeat;
 	text-decoration:none;
 	margin-right:27px;
 	display:block;
@@ -528,7 +528,7 @@ margin-left:15px; height:35px; line-height:35px;width:500px;
 width:300px; height:42px;margin:0 auto; clear:both;
 }
 .password p{
-    width:72px; height:21px; text-align:center;line-height:21px; color:#fff; background:url(../img/btn-bg.jpg) no-repeat; float:left; margin-top:10px;margin-left:15px;
+    width:72px; height:21px; text-align:center;line-height:21px; color:#fff; background:url(../img/btn-bg.png) no-repeat; float:left; margin-top:10px;margin-left:15px;
 }
 /*--弹出层样式1--*/
 .adds1,.adds2,.adds3,.adds5,.adds6,.adds7 {
@@ -536,7 +536,7 @@ width:300px; height:42px;margin:0 auto; clear:both;
     height:auto !important;
     min-height:300px;
 	height:300px;
-	border:1px solid #3E88CF;
+	border: 1px solid #9FBAD6;
 	background-color:#fff;
 	position:fixed;
 	left:50%;

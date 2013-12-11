@@ -146,13 +146,18 @@
     	}
     
     	function switchArticle(id){
+    		
+    		var imgPath = "${prc }/function/detail-step/images/";
     		$("#art_" + id).is(":hidden")?
     		function(){
+    			imgPath = imgPath + "up.png"; 
     			$("#art_" + id).slideDown('fast',resizeParent);
     		}():
     		function(){
+    			imgPath = imgPath + "down.png"; 
     			$("#art_" + id).slideUp('fast',resizeParent);
     		}();
+    		$("#prog_img_"+id).attr('src',imgPath);
     	}
     	
     	function zan(progId){
@@ -337,23 +342,33 @@
     </style>
 </head>
 <body style="">
+	
 	<c:forEach items="${proList }" var="prog" varStatus="progStatus">
 	<div class="prog_parent" >
 	
    	<div class="mids">
    		<a class="h4">
-   			<span onclick="switchArticle('${prog.id}');" >·${prog.name }</span>
-   			<img src="${prc }/function/detail-step/images/up.png"
-   				onclick="switchArticle('${prog.id}');"
+   			<span onclick="switchArticle('${prog.id}');" >${prog.name }</span>
+   			<img id="prog_img_${prog.id}" 
+   				<c:choose >
+					<c:when test="${progStatus.first}">
+					src="${prc }/function/detail-step/images/up.png"
+					</c:when>
+					<c:otherwise>
+					src="${prc }/function/detail-step/images/down.png"
+					</c:otherwise>
+				</c:choose>
+			onclick="switchArticle('${prog.id}');"
    			 width="13" height="13" class="mids-img"/>
+   			 
    			<pri:hideWhenMaster>
    			<img src="${prc }/function/detail-step/images/ico4.png" title="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
    			<c:if test="${sessionScope.sm2_init==prog.createrId}">
    				<img src="${prc }/function/detail-step/images/ico5.png" title="删除" class="prog" id="${prog.id}"/><%--删除进展 --%>
    			</c:if>
    			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
-   			
    			</pri:hideWhenMaster>
+   			
    			
    			<img
    			style="height: 20px;
@@ -405,7 +420,7 @@
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
            >
-        	<pri:hideWhenMaster></pri:hideWhenMaster>
+        	<pri:hideWhenMaster>
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
@@ -435,7 +450,7 @@
 	          	<input type="hidden" name="stepId" value="${id }"/>
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
         	</form>
-        	
+        	</pri:hideWhenMaster>
         	
         	<div id="diss_content">
         	<c:forEach items="${disMap}" var="disEntry">
@@ -545,9 +560,10 @@
 	<div class="adds1" id="divZan" style="position: absolute;">
   		<div class="add-tops1">
 	   		<p>赞</p>
-	    	<img src="${prc}/function/detail-step/img/erro.jpg" 
+	    	<img
+	    	 src="${prc}/function/img/close.png" 
 	    	onclick="hideDiv('divZan');"
-	    	class="close" style="cursor:pointer;"/>
+	    	class="close" style="cursor:pointer;height:18px;"/>
     	</div>
   		<div class="add-downs1" id="zanContentsDiv">
       		<dl class="comments">
@@ -566,7 +582,8 @@
 	<div class="adds2" id="reads_div">
   		<div class="add-tops2">
     		<p>阅读</p>
-    		<img src="${prc }/function/detail-step/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+    		<img src="${prc}/function/img/close.png" 
+    		 class="close" style="cursor:pointer;height:18px;"/>
     	</div>
     	
   		<div class="add-downs2" id="reads_contents">
@@ -587,15 +604,20 @@
 	<div class="adds3" id="step_trans_div" >
   		<div class="add-tops3">
     		<p>转移</p>
-    		<img src="${prc }/function/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+    		<img src="${prc}/function/img/close.png"
+    		  class="close" style="cursor:pointer;height:18px"/>
     	</div>
-    	<form action="${prc}/scMaster2/changeStep_progress.action" method="post" onsubmit="return confirm('确认转移步骤吗?');" >
+    	<form action="${prc}/scMaster2/changeStep_progress.action" method="post" 
+    	onsubmit="return confirm('确认转移步骤吗?');" name="step_trans_form">
     		<input type="hidden" id="trans_prog_id" name="id" />
     		<input type="hidden" name="originStepId" value="${id }"/>
 	  		<div class="add-downs3" id="step_radios">
 		       	<p><input type="radio" name="stepId" /><span>步骤二：xxxxxxxxxxxx</span></p>
 			</div>
-			<input type="submit" value="提交"/>
+			<div style="text-align: center;">
+			
+			<a href="javascript:document.step_trans_form.submit();" class="btn" >提交</a>
+			</div>
 		</form>
 	</div>
  	<!--弹出层 转移步骤END-->

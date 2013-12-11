@@ -49,7 +49,7 @@ var refLinshi = function (){
 		for(var i = 0;i<data.length;i++){
 			
 			var content = $("<div class='linshi'></div>");
-			var aTag = $("<a class='pointer' href='" +ctxPath+ curData[i].url + "' target=_blank></a>");
+			var aTag = $("<a class='pointer' href='" +ctxPath + "/scMaster2/home_index.action?rightURL="+ curData[i].url + "' target=_blank></a>");
 			$("<img src='" + ctxPath +"/function/images/percent2/" 
 					+ curData[i].progress+
 					".png' width='120' height='90'>").appendTo(aTag);

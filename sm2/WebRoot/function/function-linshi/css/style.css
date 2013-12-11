@@ -34,11 +34,11 @@ margin-left:0px;
         top:6px;
     }
     .spec-control1{
-    background-image: url(../img/1.png);
-    background-repeat: no-repeat;
+    background-image: url(../img/arrl.png);
+    background-repeat: round;
 }
     .spec-control2 {
-    background-image: url(../img/2.png);
-    background-repeat: no-repeat;
+    background-image: url(../img/arrr.png);
+    background-repeat: round;
     right:10px;
 }
