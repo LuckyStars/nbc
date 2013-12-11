@@ -318,7 +318,7 @@ h1.title span.text {
 	border:1px solid #ccc;
 }
 .btn {
-	background:url(../img/btn-bg.jpg) no-repeat;
+	background:url(../img/btn-bg.png) no-repeat;
 	text-decoration:none;
 	margin-right:27px;
 	display:block;
@@ -529,11 +529,11 @@ width:300px; height:42px;margin:0 auto; clear:both;
     height:auto !important;
     min-height:300px;
 	height:300px;
-	border:1px solid #3E88CF;
+	border: 1px solid #9FBAD6;
 	background-color:#fff;
 	position:fixed;
 	left:50%;
-	top:50%;
+	top:20%;
 	z-index:50;
 	margin-left:-208px;
 	margin-top:-150px;
@@ -588,7 +588,11 @@ clear:both;width:284px; height:25px; margin:0 auto
     display:block;width:72px; height:21px; text-align:center; line-height:21px; background:url(../images/button.png) no-repeat; color:#fff; float:left; margin-left:20px;
 }
 .add-downs3 p{
- height:35px; line-height:35px; text-align:center
+ 	height:35px; 
+ 	line-height:35px; 
+ 	margin: 0px 20px 0px 20px;
+	text-align: left;
+	border-bottom: 1px dashed #9FBAD6;
 }
 .add-downs3 p input{
     margin-right:15px;

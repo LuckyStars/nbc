@@ -48,7 +48,7 @@
 <!--	<div class="con_conent fixed">-->
 <!--		<div class="table_box fixed">-->
 	    	<div>
-	        	<ul class="tabs1" style="background: #f0f8fc;width:790px;" >
+	        	<ul class="tabs1" style="width:790px;" >
 	          		<li id="Pie2D"><a href="javascript:changeTab('Pie2D');">饼图</a></li>
 	          		<li id="Line"><a href="javascript:changeTab('Line');">折线图</a></li>
 	          		<li id="Bar2D"><a href="javascript:changeTab('Bar2D');">柱状图(横)</a></li>

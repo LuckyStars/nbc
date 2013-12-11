@@ -131,9 +131,9 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 			masterCommentBiz.removeByProgId(id);
 			disscusBiz.removeByProgId(id);
 			commentBiz.removeByProgId(id);
-			this.progressDao.removeById(id);
 			TSm2Progress p = this.progressDao.get(id);
 			TSm2Step s  = this.stepBiz.findById(p.getStepId());
+			this.progressDao.removeById(id);
 			this.subjectBiz.updateMasterFlagAll(2,s.getSubjectId());
 		} catch (DBException e) {
 			e.printStackTrace();

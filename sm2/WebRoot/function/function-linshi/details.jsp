@@ -30,14 +30,14 @@
 			height : 220,
 			pasteType:1,
 			filterMode:true,
-		//	uploadJson : '${prc}/cadreManual/cyclesAction!uploadImage.action',
+			uploadJson : '${prc}/scMaster2/upload.action',
 			allowFileManager : false,
 			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
 			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
 			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
 					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
 					'italic', 'underline', 'strikethrough', 'lineheight',
-					'removeformat', '|',  'table', 'hr'],
+					'removeformat', '|',  'table', 'hr','|','image', 'multiimage'],
 			filterMode : true,
 			urlType : "",
 			afterChange : function() {
@@ -113,8 +113,8 @@
              });
          });
          $(".jia").click(function(){
-			$(".chen").append(' <div  style=" display: block; position: relative; height: 30px; width: 350px;">'+
-					'<input type="text" name="stepName"  maxlength="20" style="margin: 0 0 0 70px" />'+
+			$("#add_prog_parent").append(' <div  style=" display: block; position: relative; height: 30px; width: 350px;">'+
+					'<p>步骤名称：</p><input type="text" name="stepName"  maxlength="20"  />'+
 					'<img src="${prc}/function/function-linshi/images/jia.jpg"  onclick="jian(this)" style="right:40px"/></div>');
          });
 
@@ -244,49 +244,69 @@
 	   }
 	</script>
 </head>
-<body>
+<body style="text-align: center;">
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
-	<div class="con_conent fixed">
-	
+	<div class="con_conent fixed" style="background-color: #FFF;">
 		<%--<h1 class="title">
 			<span class="title">当前位置：</span>
 			<span class="text">首页 - 校长工作台 - </span>
 		</h1> --%>
 		<style type="text/css">
+		
 			.detail_titles{
 				margin: 0;
 				padding: 0;
 				display: block;
-				font-size: 20px;
 				color: #0273c2;
 				font-weight: bold;
 				font-family: Arial, Helvetica, sans-serif;
+				font-size:22px;
+			}
+			
+			.tab_titile{
+				font-family: 微软雅黑;
+				font-size:16px;
+			}
+			
+			.tabs-wp {
+				height: 32px;
+				line-height: 38px;
+				border-bottom: 1px solid #ccc;
+				width: 100%;
+				padding: 0;
+			}
+			
+			.tabs_content_title{
+				width:70px;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				white-space:nowrap;
 			}
 			
 		</style>
 		<div class="table_box fixed">
 			<div class="content">
 			
-				<div class="detail_titles">
+				<div class="detail_titles" style="text-align: center;">
 					<span style="margin-bottom: 20px;">${subject.title }</span>
 					<pri:showWhenMaster>
 						<img style="margin-top: 0px;"
 						src='${prc}/function/images/percent/${subject.progress }.png' 
 						width='60' height='60'/>
 					</pri:showWhenMaster>
-					<div style="float: left; margin-top: 15px; margin-left: 20px;">
+					<pri:hideWhenMaster>
+					<div style="float: right; margin-top: 15px; margin-left: 20px;">
+						
 						<p style="">
 							<label for="amount"></label> 
 							<input type="text" disabled="disabled" type="text" id="amount" 
-								style="border: 0; color: #EA605E; font-weight: bold; background-color: #f0f8fc;" />
-							
+								style="border: 0; font-weight: bold;" />
 						</p>
-						<pri:hideWhenMaster>
 						<div id="slider_pro"></div>
 						<span id="slider_num" ></span>
-						</pri:hideWhenMaster>
 						
 					</div>
+					</pri:hideWhenMaster>
 					
 					<pri:showWhenManager>
 					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
@@ -297,7 +317,7 @@
 				</div>
 
 	
-				<h3>
+				<h3 style="font-family: 微软雅黑;font-size:16px;text-align: center;">
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
 					&nbsp;&nbsp;&nbsp;执行者：<span>
@@ -306,8 +326,8 @@
 					</c:forEach>
 					</span>
 					<pri:showWhenMaster>
-					<img style="float:right;cursor: pointer;" title="转发" 
-					src="${prc}/function/function-linshi/images/fenxiang.png" class="ico7 cpoint" /><%--转发 --%>
+					<img style="float:right;cursor: pointer;height: 28px;" title="转发" 
+					src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
@@ -325,12 +345,13 @@
 					<ul class="tabs" style="position: absolute;  top: 0px; width:4000px;">
 						<c:forEach items="${steps }" var="step" varStatus="i">
 							
-							<li id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
+							<li style="margin:0px;"
+							 id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
 							onmouseover="$('#step_ops_${step.id}').show();"
 							onmouseout="$('#step_ops_${step.id}').hide();"
 							 >
-								<div style="width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
-								<a title="${step.name }" 
+								<div class="tabs_content_title">
+								<a title="${step.name }" class="tab_titile"
 								href="javascript:changeTab('${step.id}');"
 								>${step.name }</a>
 								</div>
@@ -338,11 +359,11 @@
 								<span id="step_ops_${step.id}" style="display: none;">
 									
 									<c:if test="${sessionScope.sm2_init==step.createrId}">
-									<img title="删除" name="${step.id}"
+									<img title="删除步骤" name="${step.id}"
 									class="delete_step_ico small1" 
 									src="${prc}/function/function-linshi/images/icon1.png"  /><%--删除 --%>
 									
-									<img title="编辑" id="${step.id}" 
+									<img title="编辑步骤" id="${step.id}" 
 									 src="${prc}/function/function-linshi/images/icon2.png" 
 									class="small"/><%--编辑步骤 --%>
 									</c:if>
@@ -362,8 +383,11 @@
 					</div>
 					
 				</div><a class="addtabs">
-						<img title="增加步骤" class="ico4 cpoint"
-						 src="${prc}/function/function-linshi/images/add.png" /><%--增加步骤 --%>
+				
+						<img title="增加步骤" 
+						style="height: 25px;margin-top: 5px;"
+						class="ico4 cpoint"
+						 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
 					</a>
 				<c:forEach items="${steps }" var="step" varStatus="i">
 					<c:if test="${i.index==0 }">
@@ -383,13 +407,14 @@
 	<div class="adds4">
 		<div class="add-tops4">
 			<p>转发</p>
-			<img src="${prc}/function/function-linshi/img/erro.jpg" class="close" style="cursor: pointer;" />
+			<img src="${prc}/function/img/close.png" 
+			 class="close" style="cursor: pointer;height:18px;" />
 		</div>
 		<div class="add-downs4">
 			<div class="down-left">
 				<p class="check"><a href="#" onclick="select('true');">全选</a> | <a href="#" onclick="select('false');">取消全选</a></p>
 				<p class="teacher">
-					<span>史家小学教师</span>
+					<span style="color: #006FD1;">史家小学教师</span>
 				</p>
 				<div style="width:200px;height:350px;overflow:auto;;margin-left:10px;">
 					<ul id="trans" class="easyui-tree" animate="true" />
@@ -399,14 +424,8 @@
 			<div class="down-cen">
 				<img src="${prc}/function/function-linshi/images/cen.jpg" />
 			</div>
+			
 			<div class="down-right">
-				<div class="right-p">
-					<p>
-<!--						<input type="checkbox" checked="checked" />-->
-<!--						<span>李丽霞</span>-->
-					</p>
-					<div style="clear: both"></div>
-				</div>
 				<div class="right-up">
 					<p>填写转发内容</p>
 					<textarea name="trans.content"></textarea>
@@ -424,7 +443,9 @@
     <div class="adds5">
 	<div class="add-tops5">
     	<p>批示</p>
-    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+    	<img src="${prc}/function/img/close.png" 
+    	class="close" style="cursor:pointer;height: 18px;"/>
+    </div>
 	  	<div class="add-downs5">
       		<p>附件上传：</p>
 	      	<textarea></textarea>
@@ -441,7 +462,8 @@
 			<input type="hidden" name="subjectId" value="${subject.id}" />
 			<div class="add-tops6">
 			    <p>增加工作进展</p>
-			    <img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/> </div>
+			    <img src="${prc}/function/img/close.png"
+			      class="close" style="cursor:pointer;height: 18px;"/> </div>
 			  	<div class="add-downs6">
 		          	<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
 			      	<div>
@@ -459,15 +481,16 @@
 			</div>
 		</form>
 	</div>
-	<!--弹出层7-->
+	<%--弹出层7步骤 增加--%>
     <form action="addStep_master.action" id="stepForm">
     	<div class="adds7">
 	  		<div class="add-tops7">
-		    	<p>编辑</p>
-		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="close" style="cursor:pointer;"/>
+		    	<p>增加</p>
+		    	<img src="${prc}/function/img/close.png"
+		    	 class="close" style="cursor:pointer;height:18px;"/>
 		    </div>
 		  	<div class="add-downs7">
-				<div class="chen" style="overflow-y:scroll;height:200px;width:405px;">
+				<div class="chen" id="add_prog_parent" style="overflow-y:scroll;height:200px;width:405px;">
 					<div style=" display: block; position: relative; height: 30px; width:350px; ">
 			          <p>步骤名称：</p>
 			          <input type="text" name="stepName" maxlength="20"/>
@@ -481,13 +504,15 @@
 			</div>
 		</div>
 	</form>
+	<%--弹出层7 增加步骤 END--%>
 	<form action="update_step.action" id="stepFormUpdate">
 		<input type="hidden" name="step.subjectId" value="${subject.id}" />
     	<input type="hidden" name="step.id" id="stepId" />
     	<div class="updateStep">
 	  		<div class="add-tops7">
 		    	<p>编辑</p>
-		    	<img src="${prc}/function/function-linshi/img/erro.jpg"  class="stepClose" style="cursor:pointer;"/>
+		    	<img src="${prc}/function/img/close.png"
+		    	 class="stepClose" style="cursor:pointer;height: 18px;"/>
 		    </div>
 		  	<div class="add-downs7">
 				<div class="chen">
@@ -502,7 +527,7 @@
 		</div>
 	</form>
 <script>
-	<pri:hideWhenMaster>
+	<pri:hideWhenMaster><%-- 校长不显示进度条 --%>
  	$(function(){
 		
 		$("#slider_pro").slider({

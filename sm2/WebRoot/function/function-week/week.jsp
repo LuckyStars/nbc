@@ -23,12 +23,24 @@ $('#managers').combotree({
  	 required: true  
  	}); 
 </script>
+<style type="text/css">
+.tit_boder{
+			background: #DCE3FF;
+			width: 980px;
+			height: 30px;
+			line-height: 30px;
+			margin: 4px auto;
+			font-size: 12px;
+			border: 1px solid #A4B3EE;
+		}
+
+</style>
 </head>
 <body>
 	<div class="right">
 	
 		<div class="content">
-			<h3>
+			<h3 class="tit_boder" style="height:36px;" >
 				<form action="${prc}/scMaster2/search_week.action" method="post" name="searchForm">
 				发布时间： 
 				<input class="Wdate" 

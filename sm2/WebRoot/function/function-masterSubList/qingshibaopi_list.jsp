@@ -79,7 +79,6 @@
 <body>
 <div class="main" style="width: 990px;">
   <div class="right1">
-    <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#0374C2">请示·报批性工作</span></h1>
       <form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
 			<input type="hidden" name="search.typeId" value="${search.typeId}" />

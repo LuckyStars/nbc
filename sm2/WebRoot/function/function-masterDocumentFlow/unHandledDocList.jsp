@@ -54,7 +54,6 @@ function changepage(page){
 </head>
 	<body>
 		<div class="right1">
-		  <h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - <span style="color:#002F7C">待处理文件</span></h1>
 		  <s:form action="listUnhandledDocumentTask" method="post" namespace="/masterDocumentFlow" onsubmit="return checkDate();">
 		    <div class="right-input">
 		        <p><label>文件名称:</label>

@@ -45,7 +45,6 @@
 <body>
      <div class="right1" style="text-align: center;">
      	<form action="${prc}/scMaster2/listMasterStatistics_data.action">
-	    	<h1>当前位置：<a href="javascript:parent.location.href='${prc}/scMaster2/index_index.action';">首页</a> - ${name } - <span style="color:#dd0000">统计分析</span></h1>
 		    <div class="content">
 		      <h3>统计时间：
 		          <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" 

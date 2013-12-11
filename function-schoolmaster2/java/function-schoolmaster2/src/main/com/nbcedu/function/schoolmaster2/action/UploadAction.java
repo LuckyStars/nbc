@@ -43,7 +43,7 @@ public class UploadAction extends BaseAction{
 		}};
 		
 		// 最大文件大小
-		long maxSize = 1000000;
+		long maxSize = 1024L*1024L*50L;
 
 		if (!ServletFileUpload.isMultipartContent(getRequest())) {
 			Struts2Utils.renderJson(getError("请选择文件。"));
