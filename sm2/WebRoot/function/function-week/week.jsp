@@ -22,6 +22,9 @@ $('#managers').combotree({
  	 url: 'findAllManager_user.action',
  	 required: true  
  	}); 
+ 	$(function(){
+ 		window.parent.selectTab('tab_week');
+ 	});
 </script>
 <style type="text/css">
 .tit_boder{

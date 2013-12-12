@@ -73,6 +73,7 @@
             $(".bg").hide();
             $(".add2").hide();
         });
+        window.parent.selectTab('tab_qingshibaopi');
     });
 </script>
 </head>

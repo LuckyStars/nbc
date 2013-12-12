@@ -37,6 +37,7 @@ margin: 5px 0 0 10px;
 </script>
 <script type="text/javascript">
 	$(function() {
+		window.parent.selectTab('tab_yaoqingchakan');
 		$(".nav-list-inner a").click(function() {
 			$(".current").removeClass("current");
 			$(this).addClass("current");

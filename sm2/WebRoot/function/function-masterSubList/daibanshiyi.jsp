@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>tab_daibanshiyi</title>
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${prc}/function/css/gzt.css" />
 <style type="text/css">
@@ -85,6 +85,7 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 		$(".wtab").hide();
 		$("#tab_${moduleId}").show();
 		</c:if>
+		window.parent.selectTab('tab_daibanshiyi');
 	});
 	function tabClick(moduleId){
 		location.href="${prc}/scMaster2/daiBanPage_master.action?moduleId=" + moduleId;	

@@ -69,6 +69,7 @@
             $(".bg").hide();
             $(".add2").hide();
         });
+        window.parent.selectTab('tab_jinjizhongyao');
     });
 </script>
 <script type="text/javascript">

@@ -72,6 +72,7 @@ table td {
 			$(".bg").hide();
 			$(".add2").hide();
 		});
+		window.parent.selectTab('tab_zongjiehuibao');
 	});
 </script>
 </head>

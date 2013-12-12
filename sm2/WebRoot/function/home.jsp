@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>校长工作台</title>
 <script type="text/javascript">var ctxPath = '${prc}';</script>
+<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/home.js"></script>
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${prc}/function/css/gzt.css" />
     <style>
@@ -20,7 +22,7 @@
 		text-align:center;
 	}
     </style>
-	<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
+	
     <script type="text/javascript">
         $(function () {
             $("table tr:odd").css("background", "#fff");
@@ -68,10 +70,18 @@
             $(".bg").hide();
             $(".add2").hide();
         });
+        
     });
     
 	</script>
 <script>
+
+		function selectTab(id){
+			var a = $("#"+id);
+			a.addClass('current');
+			a.parent().parent().parent().children('a').children('span').click();
+		}
+		
 		function resizeFrame(height){
 			$("#content_frame").css("height",height);
 		}
@@ -146,16 +156,16 @@
 			          <li><a href="#">·我要看的学校动态</a></li>--%>
           		<li>
           			<a href="${prc}/scMaster2/daiban_master.action"
-          			target="fm_right">待办事宜</a>
+          			target="fm_right" id="tab_daibanshiyi">待办事宜</a>
        			</li>
 				<li>
 	          		<a href="${prc}/scMaster2/masterList_invatition.action" 
-	          		target="fm_right">我收到的邀请</a>
+	          		target="fm_right" id="tab_yaoqingchakan">我收到的邀请</a>
 	          	</li>
 	          
 	          	<li>
 		          	<a href="${prc}/scMaster2/search_week.action"
-	          		target="fm_right">本周工作汇总</a>
+	          		target="fm_right" id="tab_week">本周工作汇总</a>
 	          	</li>
 <%--          <li><a href="#">·我的邮件</a></li>--%>
         	</ul>
@@ -166,11 +176,11 @@
 		<li>
 			<a href="#" class="li-blue" id="nav5">
 	      		<img src="${prc}/function/images/nav_05.png" width="16" height="16" />
-	      		工作计划跟踪<span class="cols-open"></span>
+	      		工作计划跟踪<span class="cols" ></span>
       		</a>
-        	<ul class="nav-list-inner" style="display:block;">
+        	<ul class="nav-list-inner" style="display: none;">
           		<li>
-		          	<a class="current" style="font-weight: bold;"
+		          	<a style="font-weight: bold;"
 		           		href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.flag=1" 
 		           		target="fm_right">我关注的核心工作
 		           		<img style="height: 11px;width:11px;display: inline;padding: 0px;margin: 0px;float: none;"
@@ -214,19 +224,19 @@
 		 	<ul class="nav-list-inner">
 		   		<li>
 		   			<a href="${prc}/masterDocumentFlow/listAllDocumentTask.action" 
-		   			target="fm_right">公文处理</a>
+		   			target="fm_right" >公文处理</a>
 		   		</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=zongjiehuibao"
-		    		target="fm_right">总结·汇报·关注性工作</a>
+		    		target="fm_right" id="tab_zongjiehuibao">总结·汇报·关注性工作</a>
 		    	</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=qingshibaopi"
-		    		target="fm_right">请示·报批性工作</a>
+		    		target="fm_right" id="tab_qingshibaopi">请示·报批性工作</a>
 		    	</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=jinjizhongyao"
-		    		target="fm_right">紧急重要事件处理</a>
+		    		target="fm_right" id="tab_jinjizhongyao">紧急重要事件处理</a>
 		    	</li>
 		  	</ul>
 		</li>
@@ -251,7 +261,7 @@
 			<ul class="nav-list-inner">
 		  		<li>
 		  			<a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=bookSite" 
-		  			target="fm_right">场馆预定统计</a>
+		  			target="fm_right" >场馆预定统计</a>
 		  		</li>
 				<li>
 					<a href="${prc}/scMaster2/listMasterStatistics_data.action?matcher=substitute" 
