@@ -76,6 +76,7 @@ public class InvatitionAction extends BaseAction{
 				tr.setFileName(resourse.substring(resourse.lastIndexOf(File.separatorChar)+1));
 				tr.setFilePath(resourse);
 				tr.setProgressId(tsm2Invatition.getId());
+				tr.setType(4);
 				sm2ResourceBiz.add(tr);
 			}
 		}
@@ -100,6 +101,7 @@ public class InvatitionAction extends BaseAction{
 				tr.setCreateTime(date);
 				tr.setFileName(resourse.substring(resourse.lastIndexOf(File.separatorChar)+1));
 				tr.setFilePath(resourse);
+				tr.setType(4);
 				tr.setProgressId(tsm2Invatition.getId());
 				sm2ResourceBiz.add(tr);
 			}
@@ -117,6 +119,7 @@ public class InvatitionAction extends BaseAction{
 					tr.setFileName(resourse.substring(resourse.lastIndexOf(File.separatorChar)+1));
 					tr.setFilePath(resourse);
 					tr.setProgressId(tsm2Invatition.getId());
+					tr.setType(4);
 					sm2ResourceBiz.add(tr);
 				}
 			}

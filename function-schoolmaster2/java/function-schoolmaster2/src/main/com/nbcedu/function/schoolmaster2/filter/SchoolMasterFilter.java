@@ -80,14 +80,14 @@ public class SchoolMasterFilter implements Filter{
 		String functionName = null;
 
 		if (request.getContextPath().contains("schoolapp")) {
-			
 			functionName = request.getRequestURI().
 				replaceFirst(request.getContextPath() + "/", "");
-			
 		} else if (request.getRequestURI().contains("masterDocumentFlow")) {
-			
 			return "documentFlow";
 		} else {
+			if(request.getRequestURI().contains("Upload")){
+				return "exclusive";
+			}
 			return ctxName;
 		}
 
