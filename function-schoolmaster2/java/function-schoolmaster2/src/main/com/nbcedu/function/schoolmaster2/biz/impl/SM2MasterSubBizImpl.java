@@ -197,7 +197,6 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		query.addScalar("createrName",Hibernate.STRING);
 		query.addScalar("progress",Hibernate.INTEGER);
 		query.addScalar("departmentName",Hibernate.STRING);
-		query.addScalar("masterFlag",Hibernate.STRING);
 		
 		List<Object[]> resultSet = query.list();
 		if(CollectionUtils.isEmpty(resultSet)){
