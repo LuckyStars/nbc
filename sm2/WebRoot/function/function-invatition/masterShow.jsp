@@ -118,7 +118,7 @@
     </script>
 </head>
 <body>
-       <div class="con_conent fixed">
+       <div class="con_conent fixed" style="background: #FFF;">
   <div class="table_box fixed">
     <div class="content">
       <h2>${tsm2Invatition.title}</h2>
@@ -158,7 +158,7 @@
           <a href="javascript:void(0);" class="btn" id="comment">发表</a>
           <s:iterator value="tsm2MasterComments">
           <dl class="new">
-            <dt><img src="${prc}/function/function-invatition/masterShow/img/tu.jpg" /></dt>
+            <dt></dt>
             <dd>
               <p><span class="blue">${createrName}：</span>${content}<br />
               </p>

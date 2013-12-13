@@ -136,16 +136,16 @@ public class MasterIndexAction extends BaseAction{
 				List<TSm2Subject> subList=
 					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,4);
 				
-				test:{
-					subList = new ArrayList<TSm2Subject>();
-					for (int i = 0; i < 4; i++) {
-						TSm2Subject sub = new TSm2Subject();
-						sub.setTitle("title" + i);
-						sub.setId("id" + i);
-						subList.add(sub);
-					}
-					
-				}
+//				test:{
+//					subList = new ArrayList<TSm2Subject>();
+//					for (int i = 0; i < 4; i++) {
+//						TSm2Subject sub = new TSm2Subject();
+//						sub.setTitle("title" + i);
+//						sub.setId("id" + i);
+//						subList.add(sub);
+//					}
+//					
+//				}
 				
 				final Iterator<String> color = shuffle(Arrays.asList("#F79263","#6FB3E0","#F76382","#846FE0")).iterator();
 				

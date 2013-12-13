@@ -132,7 +132,10 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				<c:forEach items="${subList }" var="sub">
 					<c:if test="${sub.moduleId=='zongjiehuibao' }">
 					<tr>
-						<td width="25%"><span class="lan1">${sub.title }</span>
+						<td width="25%">
+						<a href="${prc}/scMaster2/detail_master.action?id=${sub.id}">
+							<span class="lan1">${sub.title }</span>
+						</a>
 						</td>
 						<td width="25%">${sub.createrName }</td>
 						<td width="10%">
@@ -151,7 +154,10 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				<c:forEach items="${subList }" var="sub">
 					<c:if test="${sub.moduleId=='qingshibaopi' }">
 					<tr>
-						<td width="25%"><span class="lan1">${sub.title }</span>
+						<td width="25%">
+							<a href="${prc}/scMaster2/detail_master.action?id=${sub.id}">
+							<span class="lan1">${sub.title }</span>
+						</a>
 						</td>
 						<td width="25%">${sub.createrName }</td>
 						<td width="10%">
@@ -170,7 +176,10 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				<c:forEach items="${subList }" var="sub">
 					<c:if test="${sub.moduleId=='jinjizhongyao' }">
 					<tr>
-						<td width="25%"><span class="lan1">${sub.title }</span>
+						<td width="25%">
+						<a href="${prc}/scMaster2/detail_master.action?id=${sub.id}">
+							<span class="lan1">${sub.title }</span>
+						</a>
 						</td>
 						<td width="25%">${sub.createrName }</td>
 						<td width="10%">
@@ -190,7 +199,10 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 				<c:forEach items="${subList }" var="sub">
 					<c:if test="${sub.moduleId=='linshishixiang' }">
 					<tr>
-						<td width="25%"><span class="lan1">${sub.title }</span>
+						<td width="25%">
+						<a href="${prc}/scMaster2/detail_master.action?id=${sub.id}">
+							<span class="lan1">${sub.title }</span>
+						</a>
 						</td>
 						<td width="25%">${sub.createrName }</td>
 						<td width="10%">
