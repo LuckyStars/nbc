@@ -182,6 +182,8 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 		pm.setDatas(datas);
 		pm.setTotal(total);
 		pm.setTotalPageNo(total % pagesize == 0 ? total / pagesize : total/pagesize+1);
+		pm.setPageIndex(offset == 0 ? 1 :  offset / pagesize+1 );
+		pm.setPagesize(pagesize);
 		return pm;
 	}
 
@@ -205,6 +207,7 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 		pm.setDatas(datas);
 		pm.setTotal(totalCount.intValue());
 		pm.setTotalPageNo(totalCount % pagesize == 0 ? totalCount / pagesize : totalCount/pagesize+1);
+		pm.setPagesize(pagesize);
 		return pm;
 	}
 
@@ -244,6 +247,7 @@ public class SimpleBaseDAOImpl<T extends Serializable> extends BaseDAOImpl<T> {
 
 			pagerModel.setTotal(total);
 			pagerModel.setDatas(l);
+			pagerModel.setPagesize(pagesize);
 		}
 
 		return pagerModel;

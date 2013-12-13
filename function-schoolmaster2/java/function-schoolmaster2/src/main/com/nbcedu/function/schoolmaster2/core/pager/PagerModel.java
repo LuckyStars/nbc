@@ -8,7 +8,8 @@ public class PagerModel {
 	private List datas;//当前页显示的数据列表
 	private int total;//分页显示的所有数据总数
 	private int totalPageNo;//总的页面数
-	private int pageIndex =SystemContext.getOffset()+1;
+	private int pagesize;//每页显示数
+	private int pageIndex ;//不用pg标签 当前页
 	
 	public List getDatas() {
 		return datas;
@@ -39,6 +40,12 @@ public class PagerModel {
 	}
 	public void setPageIndex(int pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+	public int getPagesize() {
+		return pagesize;
+	}
+	public void setPagesize(int pagesize) {
+		this.pagesize = pagesize;
 	}
 	
 	

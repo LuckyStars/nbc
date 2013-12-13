@@ -11,6 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
+
 public class PagerFilter implements Filter {
 	public static final String PAGE_SIZE_NAME = "ps";
 	public void destroy() {
@@ -34,7 +36,12 @@ public class PagerFilter implements Filter {
 	private int getOffset(HttpServletRequest request){
 		int offset = 0;
 		try {
-			offset = Integer.parseInt(request.getParameter("pager.offset"));
+			String offset1 = request.getParameter("offset");
+			if(!StringUtil.isEmpty(offset1)){
+				offset = Integer.parseInt(offset1);
+			}else{
+				offset = Integer.parseInt(request.getParameter("pager.offset"));
+			}
 		} catch (Exception ignore) {
 		}
 		return offset;
