@@ -188,19 +188,19 @@
 	           		</a>
 				</li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan" 
 					target="fm_right">教育教研工作</a>
 				</li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=deyu" 
 					target="fm_right">德育工作</a>
 				</li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=houqin" 
 					target="fm_right">后勤·卫生工作</a>
 				</li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxi-ndzx" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=xinxi" 
 					target="fm_right">信息化工作</a>
 				</li>
 				<li>
@@ -208,7 +208,7 @@
 					 target="fm_right">财务工作</a>
 				 </li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan" 
 					target="fm_right">党团工作</a>
 				</li>
         	</ul>

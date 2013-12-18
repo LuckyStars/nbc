@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="pri" uri="/function/tags/privilegetag.tld" %>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/handlers.js"></script>
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/sm2/function/js/jquery-1.8.3.min.js"></script>
 <%@ taglib prefix="pg" uri="http://jsptags.com/tags/navigation/pager" %>
-<!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
 var prc ="${pageContext.request.contextPath}"; 
 $(function () {
@@ -37,19 +37,18 @@ $(function () {
 		file_types_description : "",
 		file_upload_limit : 20,
 		file_queue_limit : 100,
-		post_params: {  
-           },  
+		
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
 		},
 		debug: false,
 		// Button settings
 		button_image_url: prc+"/function/swfupload/images/button_2.jpg",
-		button_width: "60",
-		button_height: "24",
+		button_width: "61",
+		button_height: "23.5",
 		button_placeholder_id: "spanButtonPlaceHolder",
 		button_text: '<span class="b">浏览文件</span>',
-		button_text_style: '.b{ font-size: 12;text-align:center;color:#FDFDFD}',
+		button_text_style: '.b{ font-size: 12;text-align:center;}',
 		button_text_top_padding: 3,
 				
 		// The event handler functions are defined in handlers.js
@@ -99,7 +98,7 @@ function queueComplete(numFilesUploaded) {
     	$.ajax({
     		url:prc+"/scMaster2/add_resource.action",
     		type:'post',
-    		data:{resourses:filePaths.toString(),progId:$("#progId").val()},
+    		data:{resourses:filePaths,progId:$("#progId").val()},
     		dataType:'json',
     		success:function(data){
     			findAll();
@@ -145,13 +144,15 @@ function changepage(page){
 </head>
 <body>
 <!--	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>${progId}-->
+	<pri:hideWhenMaster>
 	 <div class="liuyan">
    		  	<a href="#">
-<!--   		  		<span id="spanButtonPlaceHolder" ></span>-->
-   		  		<img src=""  id="spanButtonPlaceHolder"/>
-   		  		<img src="../function/detail-step/img/tijiao.png" width="64" height="23" id="upload"/>
+   		  		<img id="spanButtonPlaceHolder"/>
+<!--   		  		<img src="../function/detail-step/img/filecommit.png" width="64" height="24" id="upload"/>-->
+   		  		<span id="upload"></span>
    		  	</a>
      </div>
+     </pri:hideWhenMaster>
      <div class="biaoge">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId}" id="progId"></input>

@@ -3,6 +3,9 @@ package com.nbcedu.function.schoolmaster2.action;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
@@ -15,6 +18,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.CollectionUtils;
 
+import com.google.common.collect.ComparisonChain;
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.FileUtil;
@@ -83,6 +87,13 @@ public class IndexAction extends BaseAction{
 	
 	public String teacherInput(){
 		List<TSm2Module> modules = this.sm2ModuleBiz.findAll();
+		Collections.sort(modules, new Comparator<TSm2Module>(){
+			@Override
+			public int compare(TSm2Module arg0, TSm2Module arg1) {
+				return arg0.getCreatetime().compareTo(arg1.getCreatetime());
+			}
+			
+		});
 		this.getRequest().setAttribute("modules", modules);
 		return "teacherInput";
 	}

@@ -7,16 +7,14 @@
                 $(".bg").css("display", "none");
                 $(".add").css("display", "none");
             });
-            $(".return").click(function () {
-                $(".bg").css("display", "none");
-                $(".add").css("display", "none");
-            });
             $('#cc').combotree({  
            	 url: 'tree_user.action',
+           	 multiple:true
            	// required: true  
            	});  
             $('#master').combotree({  
              	 url: 'findAllMaster_user.action',
+             	 multiple:true
              //	 required: true  
             }); 
             var a = new Array();
@@ -30,13 +28,11 @@
    				b.push('${type.userUid }');
       		 </c:forEach>
       	    $('#master').combotree('setValues', b);
-            
         });
  </script>
  <form id="saveForm" method="post">
  	<input type="hidden" name="subject.id" value="${id}"/>
- 		<input type="hidden" name="subject.moduleId" value="${moduleId }"/>
-	<div class="bg"></div>
+ 	<input type="hidden" name="subject.moduleId" value="${moduleId }"/>
       <div class="add" style="height: 450px;">
        <div class="add-top">
            <p>编辑事项</p>
@@ -46,14 +42,14 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p style="margin:5px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<select name="subject.typeId">
+               		<p style="margin:5px 5px 5px 25px; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<select name="subject.typeId">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
                    </select></p>
 				</c:if>
-                <p style="margin:5px;">事项名称：
-                	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}"/></p>
+                <p style="margin:5px 5px 5px 22px; ">事项标题：
+                	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}" maxlength="20"/></p>
  					<c:if test="${not empty subjects}">
 	                  <p>关联重心工作：<select name="subject.parentId">
 	                   <c:forEach items="${subjects}" var="obj">
@@ -62,8 +58,8 @@
 	                   </select>
 	             	  </p>
                    </c:if>
-					<p style="margin:5px;">执行者：<select id="cc" class="easyui-combotree" data-options="url:'tree_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
-                    <p style="margin:5px;">审批者：<select id="master" class="easyui-combotree" data-options="url:'findAllMaster_user.action'" multiple="true" cascadeCheck="false" style="width:200px;"></select></p>
+					<p style="margin:5px 5px 5px 35px; ">执行者：<select id="cc" class="easyui-combotree" cascadeCheck="false" style="width:200px;"></select></p>
+                    <p style="margin:5px 5px 5px 35px; ">审批者：<select id="master" class="easyui-combotree"  cascadeCheck="false" style="width:200px;"></select></p>
                    <div class="more1">
                        <span>事件详情：</span>
                        <textarea id="textContent"  class="big" name="subject.content" >${subject.content}</textarea>
@@ -71,7 +67,7 @@
                </div>
            </div>
            <a href="javascript:updateSubmit();" class="return" style="margin-left:100px;">提交</a>
-           <a href="#" class="return">返回</a>
+           <a href="javascript:back();" class="return">返回</a>
        </div>
           </div>
 </form>

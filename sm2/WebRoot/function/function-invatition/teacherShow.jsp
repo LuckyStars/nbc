@@ -9,6 +9,7 @@
 <link href="${prc}/function/function-invatition/masterShow/css/index.css" rel="stylesheet" type="text/css" />
 <link href="${prc}/function/function-invatition/masterShow/css/gzt.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${por}/common/agent.js"></script>
 <script>
 		var prc ="${pageContext.request.contextPath}";
 		var id="${tsm2Invatition.id}";
@@ -68,8 +69,8 @@
     </script>
 </head>
 <body>
-       <div class="con_conent fixed">
-  <h1 class="title"><span class="title">当前位置：</span><span class="text">首页　-　校长工作台　-　</span><span class="back">给校长发出的邀请</span></h1>
+  <div class="con_conent fixed">
+  <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　</span><span class="back">给校长发出的邀请</span></h1>
   <div class="table_box fixed">
     <div class="content">
       <h2>${tsm2Invatition.title}</h2>
@@ -133,5 +134,8 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+sethash();
+</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 package com.nbcedu.function.schoolmaster2.constants;
 
 public enum StatisticsEnum {
-	bookSite("场馆预定"),
+	bookSite("场馆预订"),
 	documentFlow("公文流转"),
 	substitute("请假代课"),
 	repair("在线报修"),

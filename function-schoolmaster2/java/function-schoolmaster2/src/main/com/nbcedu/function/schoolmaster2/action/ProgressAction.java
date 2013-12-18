@@ -8,6 +8,7 @@ import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
+import com.nbcedu.function.schoolmaster2.utils.Utils;
 
 /**
  * 工作进展action
@@ -53,7 +54,15 @@ public class ProgressAction extends BaseAction{
 		this.stepId = this.getRequest().getParameter("originStepId").toString();
 		return "refreshStep";
 	}
-	
+	public String update(){
+		TSm2Progress progress1  = this.progBiz.findById(progress.getId());
+		progress1.setName(progress.getName());
+		progress1.setContent(progress.getContent());
+		progress1.setLastUpdateTime(new Date());
+		this.progBiz.modify(progress1);
+		this.stepId = progress1.getStepId();
+		return "refreshStep";
+	}
 	public void delete(){
 		boolean b = this.progBiz.removeById1(id);
 		if(b){
@@ -61,6 +70,10 @@ public class ProgressAction extends BaseAction{
 		}else{
 			Struts2Utils.renderText("1","encoding:UTF-8");
 		}
+	}
+	public void find(){
+		progress = this.progBiz.findById(id);
+		Struts2Utils.renderJson(Utils.gson.toJson(progress),"encoding:UTF-8");
 	}
 	////////////////////////
 	////getters&setters////

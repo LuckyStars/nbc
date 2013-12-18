@@ -53,6 +53,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 		cri.add(Restrictions.eq("stepId", stepId));
 		return cri.list();
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TSm2Progress> findByProgressVo(ProgressVo p) {
 		Criteria cri = this.progressDao.createCriteria();
@@ -63,7 +64,7 @@ public class Sm2ProgressBizImpl extends BaseBizImpl<TSm2Progress> implements Sm2
 			cri.add(Expression.eq("name",p.getName().trim()));
 		}
 		if(!StringUtil.isEmpty(p.getId())){
-			cri.add(Expression.eq("name",p.getId()));
+			cri.add(Expression.ne("id",p.getId()));
 		}
 		return cri.list();
 	}

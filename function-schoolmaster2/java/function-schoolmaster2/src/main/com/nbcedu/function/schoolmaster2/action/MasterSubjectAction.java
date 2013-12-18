@@ -26,6 +26,7 @@ import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
+import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Comment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
@@ -82,6 +83,19 @@ public class MasterSubjectAction extends BaseAction{
 	 */
 	public String detail(){
 		this.subject = this.subBiz.findById(this.id);
+		if(this.subject!=null&&subject.getCheckUsers().size()>0){
+			if(Utils.isManager()){
+				this.getRequest().setAttribute("checkUser", true);
+			}
+			if(Utils.isMaster()){
+				for(SM2SubjectMaster m : subject.getCheckUsers()){
+					if(m.getUserUid().equals(this.getUserId())){
+						this.getRequest().setAttribute("master", true);
+					}
+				}
+			}
+		}
+		
 		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
 		this.getRequestMap().put("steps", steps);
 		return "detail";

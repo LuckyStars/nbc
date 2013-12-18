@@ -29,7 +29,10 @@
 			<result name="subjectAdd">/function/function-teacher/subject_add.jsp</result>
 			<result name="subjectUpdate">/function/function-teacher/subject_update.jsp</result>
 			<result name="teacherInput">/function/teacherInputIndex.jsp</result>
-			<result name="reload" type="redirectAction">find_subject</result>
+			<result name="reload" type="redirectAction">
+				<param name="actionName">find_subject</param>
+				<param name="subjectVo.moduleId">subject.moduleId</param>
+			</result>
 		</action>
 		
 		<action name="upload" method="upload" class="sm2UploadAction">

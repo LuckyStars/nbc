@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="pri" uri="/function/tags/privilegetag.tld" %>
 <style type="text/css">
  div.file-panel {
     -moz-user-select: none;
@@ -37,11 +38,9 @@ div.file-panel span {
 <script type="text/javascript" src="/sm2/function/swfupload/js/swfupload.queue.js"></script>
 <script type="text/javascript" src="/sm2/function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/sm2/function/js/jquery.lazyload.js"></script>
-<!--<script type="text/javascript" src="/sm2/function/detail-step/js/upload.js"></script>-->
 <script type="text/javascript">
 $(function () {
 	$("img.lazy").lazyload();
-	$("table tr").css("height","27px");
 	$(".juti").bind({
 		  mouseenter:function(){
 						$(this).children(".file-panel").slideDown("slow",function(){
@@ -158,7 +157,7 @@ $(function () {
 	    	$.ajax({
 	    		url:prc+"/scMaster2/add_resource.action",
 	    		type:'post',
-	    		data:{resourses:filePaths.toString(),progId:$("#progId").val(),type:1},
+	    		data:{resourses:filePaths,progId:$("#progId").val(),type:1},
 	    		dataType:'json',
 	    		success:function(data){
 	    			findAll();
@@ -178,12 +177,14 @@ $(function () {
 </script>
 </head>
 <body>
+	<pri:hideWhenMaster>
 	 <div class="liuyan">
 	  	<a href="#">
-	  		<img src=""  id="spanButtonPlaceHolder"/>
-	  		<img src="../function/detail-step/img/tijiao.png" width="64" height="23" id="upload"/>
+	  		<img id="spanButtonPlaceHolder"/>
+	  		<span id="upload"></span>
 	  	</a>
      </div>
+     </pri:hideWhenMaster>
 	 <form id="saveForm" method="post">
 	 	<div  style="OVERFLOW-y:auto; height:430px;">
 	 	<input type="hidden" value="${progId }" id="progId"></input>

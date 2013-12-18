@@ -9,13 +9,13 @@
 	
 	<title>邀请查看 教师列表</title>
 	
-	<link href="${prc}/function/function-invatition/teacherList/css/index.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
-	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
-	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
-	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
-	<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
+<link href="${prc}/function/function-invatition/teacherList/css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
+<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
+<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
 <script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/handlers.js"></script>
@@ -45,9 +45,9 @@
 			},
 			debug: false,
 			// Button settings
-			button_image_url: "${prc}/function/swfupload/images/TestImageNoText_65x29.png",
+			button_image_url: "${prc}/function/swfupload/images/button_2.jpg",
 			button_width: "60",
-			button_height: "24",
+			button_height: "23",
 			button_placeholder_id: "spanButtonPlaceHolder",
 			button_text: '<span class="">浏览文件：</span>',
 			button_text_style: ".theFont { font-size: 12;text-align:center;color:#ffffff;}",
@@ -206,7 +206,7 @@
             }
         });
         
-        $(".add-top1 img").click(function () {
+        $(".add-top1 img,#return").click(function () {
         	window.location.href=prc+"/scMaster2/teacherList_invatition.action";
         });
         $("#search").click(function () {
@@ -325,7 +325,6 @@
 			}
         });
     });
-    
 </script>
 
 <script type="text/javascript">
@@ -446,7 +445,7 @@
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
-				<textarea id="t_content" name="detailContent" style="width:500px;height: 200px;"></textarea>
+				<textarea id="t_content" name="detailContent" style="width:500px;height: 150px;"></textarea>
 			</div>
 			<p class="tit2">
 				附件/链接：
@@ -477,7 +476,7 @@
 			</div>
 			
 			<a href="javascript:void(0);" class="return" id="btnUpload1" style="margin-left: 200px;">提交</a> 
-			<a href="javascript:void(0);" class="return">返回</a>
+			<a href="javascript:void(0);" class="return" id="return">返回</a>
 		</div>
 	</div>
 	<!--新增 END-->

@@ -54,9 +54,9 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 		buff.append(" from t_sm2_subject s,t_sm2_subject_trans t where t.sub_id=s.id ");
 		buff.append(" and t.user_uid='"+curUserId+"'");
 		if(!StringUtil.isEmpty(subject.getTitle())){
-			buff.append(" and s.title like %");
+			buff.append(" and s.title like '%");
 			buff.append(subject.getTitle());
-			buff.append("%");
+			buff.append("%'");
 		}
 		buff1.append(buff);
 		buff.insert(0, "select s.id,s.createTime,s.title,s.moduleId,s.createrName,s.departmentName" );
@@ -85,6 +85,9 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 		// 显示结果
 		pagerModel.setTotal(total);
 		pagerModel.setDatas(result);
+		pagerModel.setTotalPageNo(total % SystemContext.getPagesize() == 0 ? total / SystemContext.getPagesize() : total/SystemContext.getPagesize()+1);
+		pagerModel.setPageIndex(SystemContext.getOffset() == 0 ? 1 :  SystemContext.getOffset() / SystemContext.getPagesize()+1 );
+		pagerModel.setPagesize(SystemContext.getPagesize());
 
 		return pagerModel;
 	}

@@ -19,11 +19,10 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
-	
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
 	<script type="text/javascript">
-	KindEditor.ready(function(K) {
+	content = KindEditor.ready(function(K) {
 		var contentOptions = {
 			resizeType : 1,
 			width: 416,
@@ -163,7 +162,7 @@
 			         	var formParams = $("#progressForm").serialize();
 			    		$.post("add_progress.action", formParams, function(data) {
 			      				$("input[name='progress.name']").val("");
-			      				$("textarea[name='progress.content']").val("");
+			      				conten.html("");
 				   				 $(".adds6").hide();
 				   				location.reload();
 			     			});
@@ -209,6 +208,7 @@
 	  
 		function popAddProg(stepId){
 		  $("#prog_step_id").val(stepId);
+		  $(".bg").show();
 		  $(".adds6").show();
 	  	}
 	</script>
@@ -236,7 +236,7 @@
         		$.post("isExistStep_step.action",{name:names,subjectId: $("input[name='subjectId']").val()},function(data1){
      			  if(data1==0){
    					$.post("add_step.action", {subjectId: $("input[name='subjectId']").val(),name:names}, function(data) {
-   	      				if(data==0){parent.location.reload();}else{alert("增加出现错误！");}
+   	      				if(data==0){location.reload();}else{alert("增加出现错误！");}
    	     			});
      			  }else{alert("存在相同步骤！");}
      		  	});
@@ -296,7 +296,6 @@
 					</pri:showWhenMaster>
 					<pri:hideWhenMaster>
 					<div style="float: right; margin-top: 15px; margin-left: 20px;">
-						
 						<p style="">
 							<label for="amount"></label> 
 							<input type="text" disabled="disabled" type="text" id="amount" 
@@ -308,12 +307,22 @@
 					</div>
 					</pri:hideWhenMaster>
 					
-					<pri:showWhenManager>
-					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
-					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
-					<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
+					<pri:showWhenManager> 
+					<c:if test="${checkUser==true}">
+						<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" 
+							title="<c:forEach items='${subject.checkUsers}' 
+							var='user' ><c:if test='${user.flag==1}'>${user.userName};</c:if></c:forEach>"/>
+						<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
+					</c:if>
 					</pri:showWhenManager>
-					
+					<pri:showWhenMaster>
+						<c:if test="${master==true}">
+							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30"/>
+						</c:if>
+						<c:if test="${master!=true}">
+							<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
+						</c:if>
+					</pri:showWhenMaster>
 				</div>
 
 	
@@ -468,7 +477,7 @@
 		          	<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
 			      	<div>
 			          	<p>工作进展：</p>
-			          	<input type="text" name="progress.name"/>
+			          	<input type="text" name="progress.name" maxlength="20"/>
 			      	</div>
 		      		<div>
 		          		<p>具体工作内容：</p>
