@@ -16,7 +16,7 @@
 <script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:8080/schoolapp/common/agent.js"></script>
+<script type="text/javascript" src="${por}/common/agent.js"></script>
 <script type="text/javascript">
         $(function () {
             $("table tr:odd").css("background", "#f0f8fc");
@@ -188,7 +188,7 @@
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
         		<pg:pager url="${prc}/scMaster2/find_subject.action"
-					items="${pm.totalPageNo}" maxPageItems="${pm.total}" maxIndexPages="7" export="currentPageNumber=pageNumber">
+					items="${pm.total}" maxPageItems="${pm.pagesize}" maxIndexPages="3" export="currentPageNumber=pageNumber">
 				<pg:param name="subjectVo.moduleId" value="${subjectVo.moduleId}"/>
 				<pg:param name="subjectVo.moduleName" value="${subjectVo.moduleName}"/>
 				总计${pm.total}条

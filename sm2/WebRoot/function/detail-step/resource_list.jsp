@@ -38,7 +38,6 @@ $(function () {
 		file_upload_limit : 20,
 		file_queue_limit : 100,
 		post_params: {  
-            "jsessionid": "<%=request.getSession().getId()%>"
            },  
 		custom_settings : {
 			progressTarget : "fsUploadProgress"
@@ -117,8 +116,8 @@ $("#upload").click(function(){
 
 
 });
-function findAll(){
-	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val()},function(data){
+function findAll(page){
+	$.post("findAll_resource.action",{progId : $("#progId").val() ,type:$("#type").val(),offset:page},function(data){
 		if(data != ''){
 			$(".resource-lists").empty();
 			$(".resource-lists").html(data);
@@ -140,9 +139,7 @@ function deleteR(id){
 	});
 }
 function changepage(page){
-	$("#listAllDocumentTask").append("<input type='hidden' name='pagerUtils.pageIndex' id='pagerUtils.pageIndex'></input>");
-	document.getElementById("pagerUtils.pageIndex").value=page;
-	document.forms[0].submit();
+	findAll((page-1)*10);
 }
 </script>
 </head>
@@ -180,12 +177,12 @@ function changepage(page){
        <c:if test="${pm.total>0}">
 		<div style="text-align:center;font-size:15px;margin-top:20px;">
 				总计${pm.total}条
-			<c:if test="pm.pageIndex != 1">
-				<a href="javascript:changepage(%{pm.pageIndex - 1})">&lt;&lt;上一页</a>
+			<c:if test="${pm.pageIndex != 1}">
+				<a href="javascript:changepage(${pm.pageIndex} - 1)">&lt;&lt;上一页</a>
 			</c:if>
 			第<font color="red">${pm.pageIndex}</font>页
-			<c:if test="pm.pageIndex lt pm.totalPageNo">
-				<a href="javascript:changepage(%{pm.pageIndex + 1})">下一页&gt;&gt;</a>
+			<c:if test="${pm.pageIndex < pm.totalPageNo }">
+				<a href="javascript:changepage(${pm.pageIndex} + 1)">下一页&gt;&gt;</a>
 			</c:if>
 		</div>
 		</c:if>
