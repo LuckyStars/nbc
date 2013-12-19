@@ -295,15 +295,8 @@
 						width='60' height='60'/>
 					</pri:showWhenMaster>
 					<pri:hideWhenMaster>
-					<div style="float: right; margin-top: 15px; margin-left: 20px;">
-						<p style="">
-							<label for="amount"></label> 
-							<input type="text" disabled="disabled" type="text" id="amount" 
-								style="border: 0; font-weight: bold;" />
-						</p>
-						<div id="slider_pro"></div>
-						<span id="slider_num" ></span>
-						
+					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
+						<div id="slider_pro" style="width:200px;"></div>
 					</div>
 					</pri:hideWhenMaster>
 					
@@ -538,19 +531,15 @@
 <script>
 	<pri:hideWhenMaster><%-- 校长不显示进度条 --%>
  	$(function(){
-		
 		$("#slider_pro").slider({
 			value:${subject.progress},
-			
 			onSlideEnd : function(newVal){
 				var origin = ${subject.progress};
+				var sl = $("#slider_pro");
 				if(newVal<origin){
-					var sl = $("#slider_pro");
 					alert("不能小于原先进度");
 					sl.slider('setValue',${subject.progress});
 				}
-				
-				
 				if(newVal>origin){
 					if(confirm('确定修改进度吗?')){
 						var newPercent = $("#slider_pro").slider('getValue');
@@ -563,10 +552,16 @@
 			},
 			onChange:function(newVal,oldVal){
 				$("#amount").val(newVal + "%");
+				$(".slider-handle").text(newVal + "%");
+				$("#red").css({"margin-right":(100-newVal)+"%"});
 			},
 			step:5
 		});
-		$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
+		$(".slider-handle").text(${subject.progress}+ "%");
+		var l = 100-${subject.progress};
+		var div = "<div style='margin-right:"+l+"%;background-color: #FF0000;height:6px;' id='red'></div>";
+		$(".slider-inner").append(div);
+		//$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
 		
 	}); 
  	</pri:hideWhenMaster>

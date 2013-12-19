@@ -71,7 +71,7 @@
 		   we can do is say we are uploading.
 		   */
 		   //Capture start time
-		   var currentTime = new Date()
+		   var currentTime = new Date();
 		   iTime = currentTime;
 		   //Set Timeleft to estimating
 		   Timeleft = "计算中...";
@@ -213,9 +213,10 @@
         	window.location.href=prc+"/scMaster2/teacherList_invatition.action?searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".push").click(function () {
+            var s = $(this).attr("id");
         	var obj = $(this).parents("tr");
     		var id = obj.attr("id");
-    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id+"&searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
+    		window.location.href=prc+"/scMaster2/push_invatition.action?tsm2Invatition.id="+id+"&tsm2Invatition.status="+s+"&searchDate="+$.trim($("#searchDate").val())+"&searchTitle="+$.trim($("#searchTitle").val())+"&searchUser="+$.trim($("#searchUser").val());
         });
         $(".del").click(function () {
         	var obj = $(this).parents("tr");
@@ -376,12 +377,13 @@
 							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />
 						</td>
 						<td><invStatus:showStatus statusId="${subject.status}" /></td>
-						<td><c:if test="${subject.status ==0}"><span class="space push"><a href="javascript:void(0);">发布</a></span>
+						<td><c:if test="${subject.status ==0}"><span class="space push" id="1"><a href="javascript:void(0);" >发布</a></span>
 								<span class="space modify"><a href="javascript:void(0);">编辑</a></span>
 								<span class="space del"><a href="javascript:void(0);">删除</a></span>
 							</c:if>
 							<c:if test="${subject.status ==1}"><span class="space">
 								<a href="${prc}/scMaster2/teacherShow_invatition.action?tsm2Invatition.id=${subject.id}">查看</a></span>
+								<span class="space push" id="0"><a href="javascript:void(0); " >取消发布</a></span>
 							</c:if>
 							<c:if test="${subject.flag ==0}"><span class="space download">
 								<a href="javascript:void(0);">附件</a></span>

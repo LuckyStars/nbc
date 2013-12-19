@@ -106,6 +106,7 @@
           </ul>
         </div>
         <div class="conshen box-down">
+        <s:if test="tsm2MasterComments.size()>0">
           <s:iterator value="tsm2MasterComments">
           <dl class="new">
             <dt><img src="${prc}/function/function-invatition/masterShow/img/tu.jpg" /></dt>
@@ -129,6 +130,8 @@
           	 <div style="clear:both;"></div>
           </dl>
           </s:iterator>
+		</s:if>
+		<s:else> &nbsp;&nbsp;&nbsp;没有评论</s:else>
         </div>
       </div>
     </div>

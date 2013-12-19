@@ -161,9 +161,9 @@ public class InvatitionAction extends BaseAction{
 		return "masterList";
 	}
 	public String push() throws ParseException{
-		tsm2Invatition = sm2InvatitionBiz.findById(tsm2Invatition.getId());
-		tsm2Invatition.setStatus("1");
-		sm2InvatitionBiz.modify(tsm2Invatition);
+		TSm2Invatition tsm2Invatition1 = sm2InvatitionBiz.findById(tsm2Invatition.getId());
+		tsm2Invatition1.setStatus(tsm2Invatition.getStatus());
+		sm2InvatitionBiz.modify(tsm2Invatition1);
 		return this.teacherList();
 	}
 	public String comment(){

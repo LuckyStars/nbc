@@ -416,7 +416,7 @@ float:left;
 /*--表格通用样式--*/
 table{border:0;margin:0;border-collapse:collapse; background: #FFF; margin-left:8px;} 
 table th, table td{padding:0;}
-table th{height:35px;line-height:35px;background: url(../img/biaogebg.jpg) repeat-x;font-weight:100;margin:0 auto;}
+table th{height:35px;line-height:35px;background: url() repeat-x;font-weight:100;margin:0 auto;}
 table th .sqbox{width:40px;height:30px;margin:0 auto;text-align:center;}
 table th span{display:block;line-height:30px;float:left;}
 table td{height:35px;line-height:35px;text-align:center;} 

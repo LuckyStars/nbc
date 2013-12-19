@@ -98,7 +98,7 @@ function queueComplete(numFilesUploaded) {
     	$.ajax({
     		url:prc+"/scMaster2/add_resource.action",
     		type:'post',
-    		data:{resourses:filePaths,progId:$("#progId").val()},
+    		data:{resourses:filePaths.toString(),progId:$("#progId").val()},
     		dataType:'json',
     		success:function(data){
     			findAll();
