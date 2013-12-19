@@ -82,7 +82,7 @@
         <div class="table_box fixed">
             <div class="nav">
                 <span>事项标题:</span>
-                <input type="text"  name="subjectVo.title" />
+                <input type="text"  name="subjectVo.title" value="${ subjectVo.title}"/>
                 <a class="cx" href="javascript:matterQuery();">查询</a>
             </div>
         <table width="100%" border="0">
@@ -104,8 +104,6 @@
 	                <td align="center">${sub.departmentName}</td>
 	                <td align="center">
 	                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
-<!--	               	<span class="space" id="cx2"><a href="javascript:matteredit('${sub.id }','${subjectVo.moduleId}')">编辑</a>-->
-<!--	               	</span><span class="space"><a href="javascript:void(0);" onclick="on_delete('${sub.id}')">删除</a></span>-->
 	                </td>
             </tr>
             </c:forEach>
@@ -113,9 +111,10 @@
     	<c:if test="${pm.total>0}">
     		   <div  style="text-align:center;font-size:15px;margin-top:20px;">
         		<pg:pager url="${prc}/scMaster2/findAllTrans_subject.action"
-					items="${pm.totalPageNo}" maxPageItems="${pm.total}" maxIndexPages="7" export="currentPageNumber=pageNumber">
+					items="${pm.totalPageNo}" maxPageItems="${pm.pagesize}" maxIndexPages="3" export="currentPageNumber=pageNumber">
 				<pg:param name="subjectVo.moduleId" value="${subjectVo.moduleId}"/>
 				<pg:param name="subjectVo.moduleName" value="${subjectVo.moduleName}"/>
+				<pg:param name="subjectVo.title" value="${subjectVo.title}"/>
 				总计${pm.total}条
 				<pg:first>
 					<a href="${pageUrl}">首页</a>

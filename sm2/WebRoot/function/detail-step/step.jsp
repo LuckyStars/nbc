@@ -16,9 +16,32 @@
     	var ctx = '${prc}';
     	var resizeParent = function(){
     		var height = $(document).height();
-    		parent.resizeFrame(height+200);
+    		parent.resizeFrame(height);
     	};
-    	
+    	content=KindEditor.ready(function(K) {
+    		var contentOptions = {
+    			resizeType : 1,
+    			width: 416,
+    			height : 220,
+    			pasteType:1,
+    			filterMode:true,
+    			uploadJson : '${prc}/scMaster2/upload.action',
+    			allowFileManager : false,
+    			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
+    			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
+    			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
+    					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+    					'italic', 'underline', 'strikethrough', 'lineheight',
+    					'removeformat', '|',  'table', 'hr','|','image', 'multiimage'],
+    			filterMode : true,
+    			urlType : "",
+    			afterChange : function() {
+    				var self = this;
+    				self.sync();
+    			}
+    		};
+    		K.create('textarea[name="progress.content"]', contentOptions);
+     	 });
         $(function () {
             $(".img").each(function () {
                 $(this).click(function () {
@@ -100,8 +123,29 @@
       	  $(".bg").hide();
       	  $(".adds").hide();
        }
-   
+   function updatePro(){
+	  var id=$('#progressId').val();
+	  var name=$('input[name="progress.name"]').val();
+	   $.post("isExist_progress.action", {id:id,name:name}, function(data) {
+			if(data==0){
+				$("#upprogressForm").submit();
+			}else{
+				alert("存在同名工作进展！");
+			}
+	   });
+   }
+   function showPro(id){
+	$.post("find_progress.action",{id:id},function(data){
+		if(data){
+			$('input[name="progress.id"]').val(id);
+			content.html(data.content);
+			$('input[name="progress.name"]').val(data.name);
+			$(".bg").show();
+			$(".adds6").show();
+		}else{alert("工作进展不存在");}
 
+	});
+	}
    function resource(i){
         $("body").css("overflow", "hidden");
         $("#progId").val(i.id);
@@ -327,77 +371,96 @@
     </style>
 </head>
 <body style="">
-	
+	<input type="hidden" value="${id }" name="step_Id"/>
+	   <!--弹出层 资源-->
+	<div class="bg"></div>
+	<div class="adds" id="add-tab" style="height: auto !important;position: fixed;left: 50%;z-index: 50;margin-left: -298px; display:none;">
+	    <input type="hidden" id="progId" />
+	 	<div class="wendangs">
+	        <div class="resource doc" >
+	        	<h5>
+	          		<ul>
+	            		<li class="cur" >文档</li>
+			            <li>图片</li>
+			            <li>视频</li>
+	          		</ul>
+	          		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" onclick="resourceClose();"/></a>
+	         	</h5>
+		        <div class="resource-lists" id="resource-lists"> </div>
+			 </div>
+		</div>
+	</div>
+<!-- 弹出层 资源 END -->
 	<c:forEach items="${proList }" var="prog" varStatus="progStatus">
 	<div class="prog_parent" >
-	
-   	<div class="mids">
-   		<a class="h4">
-   			<span onclick="switchArticle('${prog.id}');" >${prog.name }</span>
-   			<img id="prog_img_${prog.id}" 
-   				<c:choose >
-					<c:when test="${progStatus.first}">
-					src="${prc }/function/detail-step/images/up.png"
-					</c:when>
-					<c:otherwise>
-					src="${prc }/function/detail-step/images/down.png"
-					</c:otherwise>
-				</c:choose>
-			onclick="switchArticle('${prog.id}');"
-   			 width="13" height="13" class="mids-img"/>
-   			 
-   			<pri:hideWhenMaster>
-   			<img src="${prc }/function/detail-step/images/ico4.png" title="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
-   			<c:if test="${sessionScope.sm2_init==prog.createrId}">
-   				<img src="${prc }/function/detail-step/images/ico5.png" title="删除" class="prog" id="${prog.id}"/><%--删除进展 --%>
-   			</c:if>
-   			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
-   			</pri:hideWhenMaster>
-   			
-   			
-   			<img
-   			style="height: 20px;
-   			<c:if test="${prog.zand > 0}">
-   			 display: none;
-   			</c:if>
-   			"
-   			 src="${prc }/function/detail-step/images/zan2.png" title="赞"
-   			id="clickZan_${prog.id}"
-   			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
-   			
-   			<img 
-   			style="height: 20px;
-   			<c:if test="${prog.zand <= 0}">
-   			 display: none;
-   			</c:if>
-   			"
-   			 src="${prc }/function/detail-step/images/zancancel2.png" title="取消赞" 
-   			id="cancelZan_${prog.id}"
-   			onclick="cancelZan('${prog.id}');" />
-   			
-   			<img src="${prc }/function/detail-step/images/icon4.png" 
-   			title="查看评论" onclick="javascript:showDiscusContent('${prog.id}');"/>
-   			
-   		</a>
-        <div class="conls"> 
-        	<a>
-        		<img src="${prc }/function/detail-step/images/shou.png" 
-        		onclick="showZans('${prog.id}');" title="赞"
-        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
-        	</a>
-        	<span> | </span>
-        	<a>
-        		<img src="${prc }/function/detail-step/images/ico1.png" 
-        		onclick="showReads('${prog.id}')" title="阅读"
-        		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
-        	</a>
-       		<span> | </span>
-        	<a>
-        		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
-        		title="查看资源" width="13" height="13" class="ico2" onclick="resource(this)"/>
-        	</a>
-        </div>
-	</div>
+	   	<div class="mids">
+	   		<a class="h4">
+	   			<span onclick="switchArticle('${prog.id}');" >${prog.name }</span>
+	   			<img id="prog_img_${prog.id}" 
+	   				<c:choose >
+						<c:when test="${progStatus.first}">
+						src="${prc }/function/detail-step/images/up.png"
+						</c:when>
+						<c:otherwise>
+						src="${prc }/function/detail-step/images/down.png"
+						</c:otherwise>
+					</c:choose>
+				onclick="switchArticle('${prog.id}');"
+	   			 width="13" height="13" class="mids-img"/>
+	   			 
+	   			<pri:hideWhenMaster>
+	   			<img src="${prc }/function/detail-step/images/ico4.png" title="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
+	   			<c:if test="${sessionScope.sm2_init==prog.createrId}">
+	   				<img src="${prc }/function/detail-step/images/ico5.png" title="删除" class="prog" id="${prog.id}"/><%--删除进展 --%>
+	   				<img src="${prc }/function/function-linshi/images/proUpdate.png" title="修改" onclick="showPro('${prog.id}');"/>
+	   			</c:if>
+	   			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
+	   			</pri:hideWhenMaster>
+	   			
+	   			
+	   			<img
+	   			style="height: 20px;
+	   			<c:if test="${prog.zand > 0}">
+	   			 display: none;
+	   			</c:if>
+	   			"
+	   			 src="${prc }/function/detail-step/images/zan2.png" title="赞"
+	   			id="clickZan_${prog.id}"
+	   			onclick="zan('${prog.id}');" /><%--点赞狂魔 --%>
+	   			
+	   			<img 
+	   			style="height: 20px;
+	   			<c:if test="${prog.zand <= 0}">
+	   			 display: none;
+	   			</c:if>
+	   			"
+	   			 src="${prc }/function/detail-step/images/zancancel2.png" title="取消赞" 
+	   			id="cancelZan_${prog.id}"
+	   			onclick="cancelZan('${prog.id}');" />
+	   			
+	   			<img src="${prc }/function/detail-step/images/icon4.png" 
+	   			title="查看评论" onclick="javascript:showDiscusContent('${prog.id}');"/>
+	   			
+	   		</a>
+	        <div class="conls"> 
+	        	<a>
+	        		<img src="${prc }/function/detail-step/images/shou.png" 
+	        		onclick="showZans('${prog.id}');" title="赞"
+	        		width="13" height="13" class="shou"/>(<span id="zan_${prog.id }">${prog.zanCount }</span>)<%--赞 --%>
+	        	</a>
+	        	<span> | </span>
+	        	<a>
+	        		<img src="${prc }/function/detail-step/images/ico1.png" 
+	        		onclick="showReads('${prog.id}')" title="阅读"
+	        		width="13" height="13" class="ico1"/>（${prog.readCount}）<%--阅读 --%>
+	        	</a>
+	       		<span> | </span>
+	        	<a>
+	        		<img src="${prc }/function/detail-step/images/ico2.png" id="${prog.id}" 
+	        		title="查看资源" width="13" height="13" class="ico2" onclick="resource(this)"/>
+	        	</a>
+	        </div>
+		</div>
 	
 	<!-- 评论  -->
 	<div id="disc_content_${prog.id }" style="display: none;">
@@ -515,26 +578,6 @@
 	
 	</div>
 	</c:forEach>
-      <!--弹出层 资源-->
-<div class="bg"></div>
-<div class="adds" id="add-tab" style="height: auto !important;position: fixed;left: 50%;z-index: 50;margin-left: -298px;margin-top: -352px; display:none;">
-    <input type="hidden" id="progId" />
- 	<div class="wendangs">
-        <div class="resource doc" >
-        	<h5>
-          		<ul>
-            		<li class="cur" >文档</li>
-		            <li>图片</li>
-		            <li>视频</li>
-          		</ul>
-          		<a href="#" class="more"><img src="${prc}/function/detail-step/img/curr.png" width="24" height="24" onclick="resourceClose();"/></a>
-         	</h5>
-	        <div class="resource-lists" id="resource-lists"> </div>
-		 </div>
-	</div>
-</div>
-<!-- 弹出层 资源 END -->
-
     <!--弹出层 赞-->
 	<div class="adds1" id="divZan" style="position: absolute;">
   		<div class="add-tops1">
@@ -546,9 +589,9 @@
     	</div>
   		<div class="add-downs1" id="zanContentsDiv">
       		<dl class="comments">
-            <dt><img src="img/tu.jpg" /></dt>
+            <dt><img src="${prc}/function/img/tu.jpg" /></dt>
             <dd>
-              <p><span class="blue">沫儿</span><img src="img/tu3.jpg" /><br />
+              <p><span class="blue">沫儿</span><img src="${prc}/function/img/tu3.jpg" /><br />
               </p>
               <span class="gray">(3天前)</span> </dd>
           	</dl>
@@ -600,7 +643,29 @@
 		</form>
 	</div>
  	<!--弹出层 转移步骤END-->
- 
+ <div class="adds6">
+		<form action="update_progress.action" id="upprogressForm">
+			<input name="progress.id" type="hidden" id="progressId" />
+			<div class="add-tops6">
+			    <p>编辑工作进展</p>
+			    <img src="${prc}/function/img/close.png"
+			      class="close" style="cursor:pointer;height: 18px;"/> </div>
+		  	<div class="add-downs6">
+		      	<div>
+		          	<p>工作进展：</p>
+		          	<input type="text" name="progress.name" maxlength="20"/>
+		      	</div>
+	      		<div>
+	          		<p>具体工作内容：</p>
+	          		<textarea name="progress.content"></textarea>
+	      		</div>
+	      		<div class="sure">
+	          		<a id="progressSave" href="javascript:updatePro();">确定 </a>
+	           		<a href="#" class="close">关闭 </a>
+	      		</div>
+			</div>
+		</form>
+	</div>
 
 <script type="text/javascript">
 

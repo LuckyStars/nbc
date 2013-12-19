@@ -172,17 +172,18 @@ h1.title {
 	line-height:36px;
 	font-size:12px;
 	background:#f0f8fc;
+	border-bottom: 1px solid #BCD9EA;
 }
 h1.title span.title {
 	padding-left:15px;
 	color:#075DB0;
 	float:left;
-	background:url(../img/tit.jpg) no-repeat 6px 8px;
+	/*background:url(../img/tit.jpg) no-repeat 6px 8px;*/
 }
 h1.title span.text {
 	padding-left:10px;
 	color:#095FB2;
-	font-weight:100;
+	font-weight:900;
 	float:left;
 	background:none
 }
@@ -423,7 +424,7 @@ width:395px; height: 233px; margin:15px auto;
 	width:98px;
 }
 .warp dd:hover {
-	color:#f00;
+	text-decoration:underline;
 }
 /*--弹出层3--*/
 .add2 {width:398px; border:1px solid #3E88CF; background-color:#fff; position:absolute;left:50%; top:50%;z-index:50;margin-left:-199px; margin-top:-155px;display:none;}

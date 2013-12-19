@@ -132,6 +132,10 @@
     	document.location.href="${prc}/scMaster2/detail_master.action?id="+id;
     	sethash();
     }
+    function back() {
+        $(".bg").css("display", "none");
+        $(".add").css("display", "none");
+    }
 </script>
 </head>
 <body>
@@ -143,7 +147,7 @@
         <div class="table_box fixed">
             <div class="nav">
                 <span>事项标题:</span>
-                <input type="text"  name="subjectVo.title" />
+                <input type="text"  name="subjectVo.title" value="${subjectVo.title }"/>
                 <a class="cx" href="javascript:matterQuery();">查询</a>
                 <pri:showWhenManager>
                 	<a class="cx1" href="javascript:void(0);">增加</a>

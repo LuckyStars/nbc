@@ -9,7 +9,6 @@
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<c:set var="ctxPath" value="http://localhost/sm2"></c:set>
 	<div class="con_conent fixed">
 		<div class="table_box fixed">
 			<c:forEach items="${modules}" var="module">
@@ -19,7 +18,7 @@
 							<dt>
 								<img src="${prc}/function/img/${module.icon}" />
 							</dt>
-							<dd>${module.name}</dd> </a>
+							<dd><b>${module.name}</b></dd> </a>
 					</dl>
 				</c:if>
 				<c:if test="${module.flag==1}">
@@ -29,7 +28,7 @@
 								<dt>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
-								<dd>${module.name}</dd> </a>
+								<dd><b>${module.name}</b></dd> </a>
 						</dl>
 					</pri:showWhenManager>
 				</c:if>
@@ -40,7 +39,7 @@
 								<dt>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
-								<dd>${module.name}</dd> </a>
+								<dd><b>${module.name}</b></dd> </a>
 						</dl>
 					</pri:hideWhenManager>
 				</c:if>
@@ -50,7 +49,7 @@
 								<dt>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
-								<dd>${module.name}</dd> </a>
+								<dd><b>${module.name}</b></dd> </a>
 						</dl>
 				</c:if>
 			</c:forEach>	
@@ -59,63 +58,22 @@
 					<dt>
 						<img src="${prc}/function/img/tu9.jpg" />
 					</dt>
-					<dd>邀请查看</dd> </a>
+					<dd><b>邀请查看</b></dd> </a>
 			</dl>	
 			<dl class="warp">
 				<a href="${prc}/scMaster2/findAllTrans_subject.action">
 					<dt>
 						<img src="${prc}/function/img/tu5.jpg" />
 					</dt>
-					<dd>转发</dd> </a>
+					<dd><b>查看转发事项</dd></b> </a>
 			</dl>
 			<dl class="warp">
 				<a href="${prc}/scMaster2/listStatistics_data.action?matcher=bookSite">
 					<dt>
 						<img src="${prc}/function/img/tu5.jpg" />
 					</dt>
-					<dd>场馆预定</dd> </a>
+					<dd><b>场馆预定</dd></b></a>
 			</dl>
-<!--			<dl class="warp">-->
-<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_3&userId=${sns_init}">-->
-<!--					<dt>-->
-<!--						<img src="${prc}/function/img/tu6.jpg" />-->
-<!--					</dt>-->
-<!--					<dd>紧急重要事件</dd> </a>-->
-<!--			</dl>-->
-<!--			<dl class="warp">-->
-<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_2&userId=${sns_init}">-->
-<!--					<dt>-->
-<!--						<img src="${prc}/function/img/tu7.jpg" />-->
-<!--					</dt>-->
-<!--					<dd>请示报批事项</dd> </a>-->
-<!--			</dl>-->
-<!--			<dl class="warp">-->
-<!--				<a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">-->
-<!--					<dt>-->
-<!--						<img src="${prc}/function/img/tu8.jpg" />-->
-<!--					</dt>-->
-<!--					<dd>让校长关注的事项</dd>-->
-<!--				</a>-->
-<!--			</dl>-->
-<!--			-->
-<!--			 <dl class="warp">-->
-<!--			 <a href="${ctxPath }/showSubjectWorkbench.action?module=xxdt_1&userId=${sns_init}">-->
-<!--     		 <dt><img src="${prc}/function/img/tu9.jpg" /></dt>-->
-<!--	      	<dd>邀请您参与的工作</dd>-->
-<!--	     </a>-->
-<!--	    </dl>-->
-<!--	     -->
-<!--	      <dl class="warp">-->
-<!--	       <a href="${ctxPath }/findAllModule.action?module.parentId=tjfx">-->
-<!--		      <dt><img src="${prc}/function/img/tu10.jpg" /></dt>-->
-<!--		      <dd>统计分析B部分管理</dd>-->
-<!--	      	</a>-->
-<!--	    </dl>-->
-<!--	      <dl class="warp">-->
-<!--	      <dt><img src="${prc}/function/img/tu11.jpg" /></dt>-->
-<!--	      <dd>统计分析B部分</dd>-->
-<!--    </dl>-->
-			
 		</div>
 	</div>
 </body>

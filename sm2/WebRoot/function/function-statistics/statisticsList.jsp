@@ -22,7 +22,7 @@
       <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
       <span>至</span>
       <input class="Wdate" name="end" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
-      <a class="cx" href="javascript:document.forms[0].submit();">查询</a><a href="${prc}/scMaster2/toChart_data.action?matcher=${matcher}" style="float:left; margin-top:15px; margin-left:20px; font-size:14px;">去统计</a></div>
+      <a class="cx" href="javascript:document.forms[0].submit();">查询</a><a class="cx" href="${prc}/scMaster2/toChart_data.action?matcher=${matcher}" >统计分析</a></div>
       <div class="list">
       	<c:forEach items="${pm.datas}" varStatus="status" var="data">
       		<c:choose>

@@ -176,14 +176,14 @@
 					</tr>
 					<tr>
 						<td width="177">
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=deyu-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=deyu">
 								<img src="${prc}/function/images/icon2.png" />
 								<span>德育工作</span>
 								<img src="${prc}/function/images/new.png" id="deyu_flag" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan">
 							<img src="${prc}/function/images/icon3.png" />
 							<span>教育教研工作</span>
 							<img src="${prc}/function/images/new.png" id="jiaoyujiaoyan_flag" />
@@ -192,14 +192,14 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxi-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=xinxi">
 								<img src="${prc}/function/images/icon4.png" />
 								<span>信息化工作</span>
 								<img src="${prc}/function/images/new.png" id="xinxihua_flag" />
 							</a>
 						</td>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=houqin">
 								<img src="${prc}/function/images/icon5.png" />
 								<span>后勤卫生工作</span>
 								<img src="${prc}/function/images/new.png" id="houqinweisheng_flag" />
@@ -208,7 +208,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan-ndzx">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan">
 								<img src="${prc}/function/images/icon6.png" />
 								<span>党团工作</span>
 								<img src="${prc}/function/images/new.png" id="dangtuan_flag" />

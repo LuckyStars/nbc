@@ -118,7 +118,7 @@ function changepage(page){
 			<s:if test="pagerUtils.pageIndex != 1">
 				<s:a cssClass="page" href="javascript:changepage(%{pagerUtils.pageIndex - 1})">&lt;&lt;上一页</s:a>
 			</s:if>
-			<font color="red"><s:property  value="%{pagerUtils.pageIndex}" /></font>
+			第<font color="red"><s:property  value="%{pagerUtils.pageIndex}" /></font>页
 			<s:if test="pagerUtils.pageIndex lt pagerUtils.pageNumbers.length">
 				<s:a cssClass="page" href="%{next}">下一页&gt;&gt;</s:a>
 			</s:if>

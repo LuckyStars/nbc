@@ -416,7 +416,7 @@ float:left;
 /*--表格通用样式--*/
 table{border:0;margin:0;border-collapse:collapse; background: #FFF; margin-left:8px;} 
 table th, table td{padding:0;}
-table th{height:35px;line-height:35px;background: url(../img/biaogebg.jpg) repeat-x;font-weight:100;margin:0 auto;}
+table th{height:35px;line-height:35px;background: url() repeat-x;font-weight:100;margin:0 auto;}
 table th .sqbox{width:40px;height:30px;margin:0 auto;text-align:center;}
 table th span{display:block;line-height:30px;float:left;}
 table td{height:35px;line-height:35px;text-align:center;} 
@@ -428,6 +428,11 @@ table td select{
 .wendangs{ width:585px; height:575px; background: #FFF; border:1px solid #195297;  margin-top: 30px;}
 .liuyan{ height:50px; margin-left:410px;}
 .liuyan img{ display:block; float: left; margin-right:8px; margin-top:1px;}
+.liuyan span{ display:block; float: left; margin-right:8px; height:23px;width:60px; background:url(../img/filecommit.png) no-repeat;background-position:0px 0px;
+}
+.liuyan span:active, .liuyan span:hover {
+	background: url("../img/filecommit.png") no-repeat scroll 0 -23px rgba(0, 0, 0, 0);
+	}
 .table-xi th,.table-xi td{
     border:1px solid #3C8CBF;
 }

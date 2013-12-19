@@ -19,11 +19,10 @@
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
-	
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
 	<script type="text/javascript">
-	KindEditor.ready(function(K) {
+	content = KindEditor.ready(function(K) {
 		var contentOptions = {
 			resizeType : 1,
 			width: 416,
@@ -163,7 +162,7 @@
 			         	var formParams = $("#progressForm").serialize();
 			    		$.post("add_progress.action", formParams, function(data) {
 			      				$("input[name='progress.name']").val("");
-			      				$("textarea[name='progress.content']").val("");
+			      				conten.html("");
 				   				 $(".adds6").hide();
 				   				location.reload();
 			     			});
@@ -209,6 +208,7 @@
 	  
 		function popAddProg(stepId){
 		  $("#prog_step_id").val(stepId);
+		  $(".bg").show();
 		  $(".adds6").show();
 	  	}
 	</script>
@@ -236,7 +236,7 @@
         		$.post("isExistStep_step.action",{name:names,subjectId: $("input[name='subjectId']").val()},function(data1){
      			  if(data1==0){
    					$.post("add_step.action", {subjectId: $("input[name='subjectId']").val(),name:names}, function(data) {
-   	      				if(data==0){parent.location.reload();}else{alert("增加出现错误！");}
+   	      				if(data==0){location.reload();}else{alert("增加出现错误！");}
    	     			});
      			  }else{alert("存在相同步骤！");}
      		  	});
@@ -295,25 +295,27 @@
 						width='60' height='60'/>
 					</pri:showWhenMaster>
 					<pri:hideWhenMaster>
-					<div style="float: right; margin-top: 15px; margin-left: 20px;">
-						
-						<p style="">
-							<label for="amount"></label> 
-							<input type="text" disabled="disabled" type="text" id="amount" 
-								style="border: 0; font-weight: bold;" />
-						</p>
-						<div id="slider_pro"></div>
-						<span id="slider_num" ></span>
-						
+					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
+						<div id="slider_pro" style="width:200px;"></div>
 					</div>
 					</pri:hideWhenMaster>
 					
-					<pri:showWhenManager>
-					<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" title="
-					<c:forEach items='${subject.checkUsers}' var='user' ><c:if test='${user.flag==1}'>${user.userName}&#13;</c:if></c:forEach>"/>
-					<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
+					<pri:showWhenManager> 
+					<c:if test="${checkUser==true}">
+						<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" 
+							title="<c:forEach items='${subject.checkUsers}' 
+							var='user' ><c:if test='${user.flag==1}'>${user.userName};</c:if></c:forEach>"/>
+						<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
+					</c:if>
 					</pri:showWhenManager>
-					
+					<pri:showWhenMaster>
+						<c:if test="${master==true}">
+							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30"/>
+						</c:if>
+						<c:if test="${master!=true}">
+							<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
+						</c:if>
+					</pri:showWhenMaster>
 				</div>
 
 	
@@ -468,7 +470,7 @@
 		          	<input name="progress.stepId" type="hidden" id="prog_step_id" value="${step.id}" />
 			      	<div>
 			          	<p>工作进展：</p>
-			          	<input type="text" name="progress.name"/>
+			          	<input type="text" name="progress.name" maxlength="20"/>
 			      	</div>
 		      		<div>
 		          		<p>具体工作内容：</p>
@@ -529,19 +531,15 @@
 <script>
 	<pri:hideWhenMaster><%-- 校长不显示进度条 --%>
  	$(function(){
-		
 		$("#slider_pro").slider({
 			value:${subject.progress},
-			
 			onSlideEnd : function(newVal){
 				var origin = ${subject.progress};
+				var sl = $("#slider_pro");
 				if(newVal<origin){
-					var sl = $("#slider_pro");
 					alert("不能小于原先进度");
 					sl.slider('setValue',${subject.progress});
 				}
-				
-				
 				if(newVal>origin){
 					if(confirm('确定修改进度吗?')){
 						var newPercent = $("#slider_pro").slider('getValue');
@@ -554,10 +552,16 @@
 			},
 			onChange:function(newVal,oldVal){
 				$("#amount").val(newVal + "%");
+				$(".slider-handle").text(newVal + "%");
+				$("#red").css({"margin-right":(100-newVal)+"%"});
 			},
 			step:5
 		});
-		$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
+		$(".slider-handle").text(${subject.progress}+ "%");
+		var l = 100-${subject.progress};
+		var div = "<div style='margin-right:"+l+"%;background-color: #FF0000;height:6px;' id='red'></div>";
+		$(".slider-inner").append(div);
+		//$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
 		
 	}); 
  	</pri:hideWhenMaster>

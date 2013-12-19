@@ -51,10 +51,11 @@ public class DataAction extends BaseAction{
 		DataGenerator dataGen = 
 			DataContext.getContext().getbyMatcher(matcher);
 		this.dataType = dataGen.defaultChartType();
-		if(Utils.isManager()||Utils.isMaster()){
+		if(Utils.isMaster()){
 			this.xmlContent = dataGen.getDataByTime(start, end);
 		}else{
 			this.xmlContent = dataGen.getDataByTime(start, end,"F0F8FC");
+			this.getRequest().setAttribute("color", "#F0F8FC");
 		}
 		return "chart";
 	}
