@@ -102,5 +102,8 @@
 		<action name="*_week" method="{1}" class="sm2WeekAction">
 			<result name="weekList" >/function/function-week/week.jsp</result>		
 		</action>
+		
+		<action name="*_note" method="{1}" class="sm2NotesAction" >
+		</action>
 	</package>
 </struts>

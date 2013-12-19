@@ -79,4 +79,8 @@
 	<bean id="sm2WeekAction" class="com.nbcedu.function.schoolmaster2.action.WeekAction" scope="prototype">
 		<property name="subBiz" ref="masterSubBiz" ></property>
 	</bean>
+	
+	<bean id="sm2NotesAction" class="com.nbcedu.function.schoolmaster2.action.NotesAction">
+		<property name="notesBiz" ref="sm2NotesBiz"></property>
+	</bean>
 </beans>

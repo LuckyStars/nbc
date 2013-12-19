@@ -73,4 +73,7 @@
 	<bean id="sm2CommentBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.SM2CommentBizImpl">
 		<property name="comDao" ref="sm2CommentDao" />
 	</bean>
+	<bean id="sm2NotesBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2NotesBizImpl">
+		<property name="notesDao" ref="sm2NotesDao"></property>
+	</bean>
 </beans>
