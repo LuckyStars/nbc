@@ -245,6 +245,7 @@
 	</script>
 </head>
 <body style="text-align: center;">
+	<div id="master_notes"></div>
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
 	<div class="con_conent fixed" style="background-color: #FFF;">
 		<%--<h1 class="title">

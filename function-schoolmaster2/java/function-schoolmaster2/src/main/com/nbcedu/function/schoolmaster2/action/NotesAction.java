@@ -10,9 +10,10 @@ import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Notes;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.opensymphony.xwork2.ModelDriven;
 
 @SuppressWarnings("serial")
-public class NotesAction extends BaseAction{
+public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	
 	private static final Logger logger = Logger.getLogger(NotesAction.class);
 	
@@ -25,9 +26,13 @@ public class NotesAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public void getNotesBySubjectId(){
-		List<Sm2Notes> results = this.notesBiz.findNoteBySubId(this.id);
-		Struts2Utils.renderJson(Utils.gson.toJson(results, new TypeToken<List<Sm2Notes>>() {
-		}.getType()));
+		List<Sm2Notes> results = 
+			this.notesBiz.findNoteBySubUser(this.id, Utils.curUserUid());
+		
+		Struts2Utils.renderJson(
+				Utils.gson.toJson(
+						results, 
+						new TypeToken<List<Sm2Notes>>(){}.getType()));
 	}
 	
 	/**
@@ -35,6 +40,8 @@ public class NotesAction extends BaseAction{
 	 * @author xuechong
 	 */
 	public void update(){
+		this.note.setUserName(Utils.curUserName());
+		this.note.setUserUid(Utils.curUserUid());
 		Boolean result = this.notesBiz.addOrUpdate(note)!=null;
 		Struts2Utils.renderText(result.toString());
 	}
@@ -59,6 +66,10 @@ public class NotesAction extends BaseAction{
 	///////////////////////////
 	public void setNotesBiz(Sm2NotesBiz notesBiz) {
 		this.notesBiz = notesBiz;
+	}
+	@Override
+	public Sm2Notes getModel() {
+		return this.note;
 	}
 	
 }
