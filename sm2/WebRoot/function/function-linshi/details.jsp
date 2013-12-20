@@ -8,20 +8,37 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<title></title>
+	
+	<script type="text/javascript">
+		var ctxPath = '${prc}';
+	</script>
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
+	<%-- 
 	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
+	--%>
 	<link href="${prc}/function/function-linshi/css/style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
 	<link href="${prc}/function/function-linshi/css/gzt.css" rel="stylesheet" />
-	<script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 	<script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css"/>
+	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
+	
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+	<script type="text/javascript" src="${prc}/function/js/stickynote/uuid.core.js" ></script>
+	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
+	<script type="text/javascript" src="${prc}/function/js/stickynote/masternote.js" ></script>
+    
 	<script type="text/javascript">
+	$(function(){
+		initNotes('${subject.id}');
+	});
 	content = KindEditor.ready(function(K) {
 		var contentOptions = {
 			resizeType : 1,
@@ -245,6 +262,7 @@
 	</script>
 </head>
 <body style="text-align: center;">
+	<input type="button" value="新增便条" onclick="newNote('${subject.id}');" />
 	<div id="master_notes"></div>
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
 	<div class="con_conent fixed" style="background-color: #FFF;">

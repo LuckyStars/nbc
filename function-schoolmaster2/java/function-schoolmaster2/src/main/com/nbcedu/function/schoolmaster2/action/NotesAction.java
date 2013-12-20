@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.action;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -19,7 +20,8 @@ public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	
 	private Sm2NotesBiz notesBiz;
 
-	private Sm2Notes note;
+	private Sm2Notes note = new Sm2Notes();
+	private String subjectId;
 	
 	/***
 	 * 获取相关
@@ -27,7 +29,7 @@ public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	 */
 	public void getNotesBySubjectId(){
 		List<Sm2Notes> results = 
-			this.notesBiz.findNoteBySubUser(this.id, Utils.curUserUid());
+			this.notesBiz.findNoteBySubUser(this.subjectId, Utils.curUserUid());
 		
 		Struts2Utils.renderJson(
 				Utils.gson.toJson(
@@ -40,6 +42,7 @@ public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	 * @author xuechong
 	 */
 	public void update(){
+		this.note.setCreateTime(new Date());
 		this.note.setUserName(Utils.curUserName());
 		this.note.setUserUid(Utils.curUserUid());
 		Boolean result = this.notesBiz.addOrUpdate(note)!=null;
@@ -53,7 +56,7 @@ public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	public void remove(){
 		Boolean result = Boolean.TRUE;
 		try {
-			this.notesBiz.removeById(id);
+			this.notesBiz.removeById(this.note.getId());
 		} catch (Exception e) {
 			logger.error("删除便条时出现错误", e);
 			result = Boolean.FALSE;
@@ -70,6 +73,12 @@ public class NotesAction  extends BaseAction implements ModelDriven<Sm2Notes>{
 	@Override
 	public Sm2Notes getModel() {
 		return this.note;
+	}
+	public String getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(String subjectId) {
+		this.subjectId = subjectId;
 	}
 	
 }

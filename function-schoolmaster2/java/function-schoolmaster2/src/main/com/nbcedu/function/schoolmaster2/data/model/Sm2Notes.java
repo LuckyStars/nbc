@@ -15,27 +15,34 @@ public class Sm2Notes implements Serializable{
 	private String userUid;
 	private String userName;
 	private Date createTime;
+	private String top;
+	private String left;
+	
 	
 	/////////////////////////
 	////get/set///////////
 	////////////////////
 	/**for parse json**/
-	public String getTop() {
-		return toppx;
-	}
-	public void setTop(String top) {
-		this.toppx = top;
-	}
-	public String getLeft() {
-		return leftpx;
-	}
-	public void setLeft(String left) {
-		this.leftpx = left;
-	}
+	
+	
 	/**for parse json**/
 	
 	public String getId() {
 		return id;
+	}
+	public String getTop() {
+		return top;
+	}
+	public void setTop(String top) {
+		this.toppx = top;
+		this.top = top;
+	}
+	public String getLeft() {
+		return left;
+	}
+	public void setLeft(String left) {
+		this.leftpx = left;this.top = toppx;
+		this.left = left;
 	}
 	public void setId(String id) {
 		this.id = id;
@@ -50,12 +57,14 @@ public class Sm2Notes implements Serializable{
 		return toppx;
 	}
 	public void setToppx(String toppx) {
+		this.top = toppx;
 		this.toppx = toppx;
 	}
 	public String getLeftpx() {
 		return leftpx;
 	}
 	public void setLeftpx(String leftpx) {
+		this.left = leftpx;
 		this.leftpx = leftpx;
 	}
 	public String getColor() {

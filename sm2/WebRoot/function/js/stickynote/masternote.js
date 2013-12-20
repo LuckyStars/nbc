@@ -1,11 +1,12 @@
 /**容器**/
-var parentDiv = "#master_notes";
+var parentDiv = "body";
 
 var initNotes = function(subjectId){
-	$.post(ctxPath + '/scMaster2/getNotesBySubjectId_note.action?id='+subjectId,function(data){
+	$.post(ctxPath + '/scMaster2/getNotesBySubjectId_note.action?subjectId='+subjectId,function(data){
 		if(data && data.length>0){
 			for(var i = 0;i < data.length;i++){
 				var option = data[i];
+				console.log(option.left + option.top);
 				option.zIndex = i*10 + 100;
 				option.saveOnCreate = false;
 				createNote(option);
@@ -14,13 +15,14 @@ var initNotes = function(subjectId){
 	});	
 };
 
-var newNote = function(){
+var newNote = function(subjectId){
 	var option = new Object();
 	option.saveOnCreate = true;
-	option.top = '200px';
-	option.left = '200px';
+	option.top = '276px';
+	option.left = '741px';
+	option.parentId = subjectId;
 	createNote(option);
-}
+};
 
 var createNote = function(options){
 
@@ -40,7 +42,9 @@ var createNote = function(options){
 	};
 
 	options.save = function(notesData){
+
 		var result = false;
+		notesData.parentId = options.parentId;
 		$.ajax({
 			url:ctxPath + '/scMaster2/update_note.action',
 			async:false,
@@ -49,10 +53,7 @@ var createNote = function(options){
 		return result;
 	};
 
-	$("<div id='" + options.id +"' ></div>").appendTo($(parentDiv));
-	$("#" + options.id).StickyNotes(options);
+	$("<div class='sticky_notes' id='" + options.id +"' ></div>").appendTo($(parentDiv));
+	$("#" + options.id).StickyNotes(options).mousedown();
 };
 
-$(function(){
-	initNotes();
-});
