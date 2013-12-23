@@ -67,6 +67,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		var _this = $(this);
 		_this.attr('sticky_id',settings.id);
 
+		_this.addClass('sticky_notes');
+		
 		var regPx = /^\d+px$/;
 
 		if(!regPx.test(_this.css('top'))){
