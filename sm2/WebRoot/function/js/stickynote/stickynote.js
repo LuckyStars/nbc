@@ -125,7 +125,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			.resizable({
 				handles: 'all', 
 				minHeight: settings.minHeight, 
-				minWidth: settings.minWidth });
+				minWidth: settings.minWidth});
 
 		////the close 
 		var removeButton;

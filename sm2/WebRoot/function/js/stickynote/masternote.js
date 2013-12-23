@@ -18,8 +18,8 @@ var initNotes = function(subjectId){
 var newNote = function(subjectId){
 	var option = new Object();
 	option.saveOnCreate = true;
-	option.top = '276px';
-	option.left = '741px';
+	option.top = '109px';
+	option.left = '792px';
 	option.parentId = subjectId;
 	createNote(option);
 };

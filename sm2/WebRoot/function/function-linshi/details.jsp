@@ -262,7 +262,6 @@
 	</script>
 </head>
 <body style="text-align: center;">
-	<input type="button" value="新增便条" onclick="newNote('${subject.id}');" />
 	<div id="master_notes"></div>
 	<input type="hidden" name="subjectId" value="${subject.id}"/>
 	<div class="con_conent fixed" style="background-color: #FFF;">
@@ -313,6 +312,7 @@
 						src='${prc}/function/images/percent/${subject.progress }.png' 
 						width='60' height='60'/>
 					</pri:showWhenMaster>
+					
 					<pri:hideWhenMaster>
 					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
 						<div id="slider_pro" style="width:200px;"></div>
@@ -327,6 +327,7 @@
 						<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
 					</c:if>
 					</pri:showWhenManager>
+					
 					<pri:showWhenMaster>
 						<c:if test="${master==true}">
 							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30"/>
@@ -346,9 +347,16 @@
 					${user.userName}<c:if test="${not i.last}">、</c:if>
 					</c:forEach>
 					</span>
+					
 					<pri:showWhenMaster>
-					<img style="float:right;cursor: pointer;height: 28px;" title="转发" 
+					
+					<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
 					src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
+					
+					<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 
+					src="${prc}/function/js/stickynote/createNote.png"
+					  onclick="newNote('${subject.id}');" /><%--便签 --%>
+					
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
@@ -400,13 +408,13 @@
 						</c:forEach>
 					</ul>
 					
-					
 					</div>
 					
-				</div><a class="addtabs">
+				</div>
+					<a class="addtabs">
 				
 						<img title="增加步骤" 
-						style="height: 25px;margin-top: 5px;"
+						style="height: 20px;margin-top: 5px;"
 						class="ico4 cpoint"
 						 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
 					</a>
