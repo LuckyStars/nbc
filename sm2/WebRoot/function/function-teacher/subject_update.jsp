@@ -42,7 +42,8 @@
            <div id="choice">
                <div class="nav11">
                <c:if test="${not empty types}">
-               		<p style="margin:5px 5px 5px 25px; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：<select name="subject.typeId">
+               		<p style="margin:5px 5px 5px 25px; ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               			类型：<select name="subject.typeId" onchange="search(this)">
                		<c:forEach items="${types}" var="type">
                			<option value="${type.id}">${type.name}</option>
                    </c:forEach>
@@ -51,7 +52,7 @@
                 <p style="margin:5px 5px 5px 22px; ">事项标题：
                 	<input type="text" id="addSubjectInput" class="input" name="subject.title" value="${subject.title}" maxlength="20"/></p>
  					<c:if test="${not empty subjects}">
-	                  <p>关联重心工作：<select name="subject.parentId">
+	                  <p>关联重心工作：<select name="subject.parentId" id="parent" >
 	                   <c:forEach items="${subjects}" var="obj">
 	                   	<option value="${obj.id }">${obj.title}</option>
 	                   	</c:forEach>

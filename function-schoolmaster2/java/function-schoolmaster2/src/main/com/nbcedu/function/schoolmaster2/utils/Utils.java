@@ -84,9 +84,9 @@ public class Utils {
 	 * @author xuechong
 	 */
 	@SuppressWarnings("serial")
-	public static Collection<PersonVo> getAllManager(){
+	public static List<PersonVo> getAllManager(){
 		String masterJson = loadFileToString("zhuguan.json");
-		return gson.fromJson(masterJson,new TypeToken<Collection<PersonVo>>(){}.getType());
+		return gson.fromJson(masterJson,new TypeToken<List<PersonVo>>(){}.getType());
 	}
 	public static List<String> getAllManagerUids(){
 		return Lists.transform(Lists.newArrayList(getAllManager()), new Function<PersonVo, String>() {

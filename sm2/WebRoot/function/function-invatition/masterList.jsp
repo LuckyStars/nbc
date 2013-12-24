@@ -125,9 +125,9 @@ margin: 5px 0 0 10px;
 				</p>
 				<p>
 					<label>创建人:</label>
-					<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:90px;height:29px;"></s:select>
+					<s:select list="persons" name="searchUser" listKey="uid" listValue="name" headerKey="" headerValue="" id="searchUser" cssStyle="width:90px;"></s:select>
 				</p>
-				<p>
+				<p> 
 					<label>标题:</label>
 					<input type="text" name="searchTitle" value="${searchTitle}" id="searchTitle"/>
 				</p>

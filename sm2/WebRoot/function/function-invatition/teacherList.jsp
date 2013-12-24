@@ -10,12 +10,16 @@
 	<title>邀请查看 教师列表</title>
 	
 <link href="${prc}/function/function-invatition/teacherList/css/index.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
+<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
 <script type="text/javascript" src="${prc}/function/js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>
+<!--<script type="text/javascript" src="${prc}/function/js/jqui.js"></script>-->
 <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/kindeditor-min.js" ></script>
 <script type="text/javascript" src="${prc}/function/kindeditor-4.1.5/lang/zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
-<link type="text/css" href="${prc}/function/swfupload/css/default.css" rel="stylesheet"/>
+<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/swfupload.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/fileprogress.js"></script>
 <script type="text/javascript" src="${prc}/function/swfupload/js/handlers.js"></script>
@@ -65,11 +69,6 @@
 		};
 	function uploadStart(file) {
 		try {
-		   /* I don't want to do any file validation or anything, I'll just update the UI and
-		   return true to indicate that the upload should start.
-		   It's important to update the UI here because in Linux no uploadProgress events are called. The best
-		   we can do is say we are uploading.
-		   */
 		   //Capture start time
 		   var currentTime = new Date();
 		   iTime = currentTime;
@@ -143,12 +142,18 @@
     		delFilePaths.push(id);
     		$("#"+id).remove();
     	};
+
+    	//增加与修改
         $(".cx1,.modify").click(function () {
         	var id= $(this).attr("id");
     	    if(!swfu){
     			swfu = new SWFUpload(settings);
     	    }
             var id= $(this).attr("id");
+            $('#master').combotree({  
+              	 url: 'findAllMaster_user.action',
+              	 multiple:true
+            }); 
             if(id=="add"){
             	addUpdate="add";
             	vid="";
@@ -169,14 +174,14 @@
     				data:{"tsm2Invatition.id":vid,"t":Math.random()},
     				dataType:'json',
     				success:function(data){
-    		        $("#t_name").val(data.name);
-    		        $("#t_user").val(data.invatId);
-    		        editorCourseContent.html(data.content);
-					$("input[name='a2']").each(function(){
-						if(data.flag ==$(this).val()){
-							$(this).attr("checked","checked");
-						}
-					});
+	    		        $("#t_name").val(data.name);
+    		        	editorCourseContent.html(data.content);
+						$("input[name='a2']").each(function(){
+							if(data.flag ==$(this).val()){
+								$(this).attr("checked","checked");
+							}
+						});
+				      	$('#master').combotree('setValues',data.users);
 					if("0"==data.flag){
 						var coursewares = eval('('+data.resources+')');
 						var cwsHtml = "";
@@ -275,7 +280,7 @@
         });
         $("#btnUpload1").click(function () {
             var _name = $.trim($("#t_name").val());
-            var _user = $.trim($("#t_user").val());
+            var _user = $("#master").combotree('getValues').toString();
             editorCourseContent.sync();
             var _content = $.trim($("#t_content").val());
             var _div = $("input[name='a2'][type='radio']:checked").val();
@@ -300,7 +305,7 @@
 			uploadData = {
 					"tsm2Invatition.id":vid,
 					"tsm2Invatition.title":_name,
-					"tsm2Invatition.invatId":_user,
+					"searchUser":_user,
 					"tsm2Invatition.content":_content,
 					"tsm2Invatition.flag":_div,
 					"tsm2Invatition.link":_link,
@@ -348,14 +353,14 @@
 		<h1 class="title">
 			<span class="title">当前位置：</span>
 			<span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a> - </span>
-			<span class="back">给校长发出的邀请</span>
+			<span class="back"> 给校长发出的邀请</span>
 		</h1>
 		<div class="table_box fixed">
 			<div class="nav">
 				<span>提交日期:</span>
 				<input type="text" name="searchDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${searchDate}" id="searchDate" style="width:110px;"/>
-				<span>邀请人:</span>
-				<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:80px;height:29px;"></s:select>
+<!--				<span>邀请人:</span>-->
+<!--				<s:select list="persons" name="searchUser" listKey="uid" listValue="name" headerKey="" headerValue="" id="searchUser" cssStyle="width:80px;height:29px;"></s:select>-->
 				<span>标题:</span> 
 				<input type="text" name="searchTitle" value="${searchTitle}" id="searchTitle"/>
 				<a class="cx" href="javascript:void(0);" id="search">查询</a>
@@ -443,7 +448,8 @@
 			</p>
 			 <p class="tit">
 				<span>邀&nbsp;&nbsp;请&nbsp;&nbsp;人：</span>
-				<s:select list="persons" listKey="uid" listValue="name" id="t_user" cssStyle="width:218px;height:29px;"></s:select>
+				<select id="master"  style="width:218px;height:27px;"></select>
+<!--				<s:select list="persons" listKey="uid" listValue="name" id="t_user" cssStyle="width:218px;height:29px;"></s:select>-->
 			</p>
 			<div class="tit1">
 				<p>事件详情：</p>
@@ -482,9 +488,7 @@
 		</div>
 	</div>
 	<!--新增 END-->
-	
 	<!--弹出层1-->
-	<div class="bg"></div>
 	<div class="add-load">
 		<div class="add-loadtop1">
 			<p>附件列表</p>

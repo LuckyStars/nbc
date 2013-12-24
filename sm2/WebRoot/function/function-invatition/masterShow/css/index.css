@@ -175,6 +175,7 @@ h1.title {
 	line-height:36px;
 	font-size:12px;
 	background:#f0f8fc;
+	 border-bottom: 1px solid #BCD9EA;
 }
 h1.title span.title {
 	padding-left:15px;
@@ -187,7 +188,8 @@ h1.title span.text {
 	color:#095FB2;
 	font-weight:100;
 	float:left;
-	background:none
+	background:none;
+	font-weight: 900;
 }
 .back {
 	font-weight:normal;
