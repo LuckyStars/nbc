@@ -18,6 +18,13 @@ public class Sm2NotesBizImpl extends BaseBizImpl<Sm2Notes> implements Sm2NotesBi
 		createQuery("FROM Sm2Notes t WHERE t.parentId = ?",subjectId).list();
 	}
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Sm2Notes> findNoteBySubUser(String subjectId, String uid) {
+		return this.notesDao.
+		createQuery("FROM Sm2Notes t WHERE t.parentId = ? AND t.userUid=?",subjectId,uid).list();
+	}
+	
 	////////////////////////
 	////getters&setters/////
 	////////////////////////

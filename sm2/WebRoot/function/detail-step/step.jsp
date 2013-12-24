@@ -463,7 +463,7 @@
 		</div>
 	
 	<!-- 评论  -->
-	<div id="disc_content_${prog.id }" style="display: none;">
+	<div id="disc_content_${prog.id }" style="display: none; ">
     <div class="box" style="min-height: 0px;" >
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
@@ -500,7 +500,11 @@
         	</form>
         	</pri:hideWhenMaster>
         	
-        	<div id="diss_content">
+        	<div style="clear: both;height: 5px;"></div>
+        	
+        	<div id="diss_content"
+        	style="background-color:#F5F5F5;width: 705px;margin-left: 10px;"
+        	>
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
         			<c:forEach items="${disEntry.value }" var="dis">
@@ -520,7 +524,7 @@
         	</c:forEach>
           	</div>
           	
-          	<p class="pack"><a href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
+          	<p class="pack1"><a style="color: #0A5FB2;" href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
 		</div>
 	</div>
 	</div>
@@ -554,7 +558,8 @@
         	</form>
         	</pri:showWhenMaster>
         </div>
-        <div id="comment_content">
+        <div style="clear: both;height: 5px;"></div>
+        <div id="comment_content" style=" background-color: #F5F5F5;width: 705px;">
         <!-- 增加批示 END  -->   
         <c:forEach items="${comMap}" var="comEntry">
        		<c:if test="${comEntry.key==prog.id }">

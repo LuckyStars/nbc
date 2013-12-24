@@ -13,7 +13,7 @@
 		
 		<property name="leftpx" column="leftpx" type="string" length="32"  />
 		
-		<property name="color" column="color" type="string" length="8"  />
+		<property name="color" column="color" type="string" length="16"  />
 		
 		<property name="parentId" column="parent_id" type="string" length="32" not-null="true" />
 		

@@ -336,17 +336,17 @@ h1.title span.text {
 	color:#0A5FB2;
 	padding:10px 0 10px 0;
 	clear:both;
+	text-align: right;
 }
 .pack img {
 	margin:3px 0 0 5px;
 }
 .new {
-	width:745px;
     height:auto !important;
     min-height:41px;
 	height:41px;
-	margin:15px auto 0;
-	border-bottom:1px solid #cecece;
+	/*margin:15px auto 0;*/
+	border-bottom:1px dashed #D8D8D8;
 }
 .none {
 	border:none;
