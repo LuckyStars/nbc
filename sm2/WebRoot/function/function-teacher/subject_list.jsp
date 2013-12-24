@@ -136,13 +136,25 @@
         $(".bg").css("display", "none");
         $(".add").css("display", "none");
     }
+    function search(t){
+     	$.get("findGuanLian_subject.action",{"typeId":t.value,"moduleId":$("input[name='subject.moduleId']").val()}, function(data){
+     		if(data.length>0){
+     			$("#parent").empty();
+     			$.each(data ,function(index ,value){
+     				$("#parent").append("<option value="+value.id+">"+value.title+"</option>");
+     			});
+     		}else{
+         		
+     		}
+     	},"json");
+     }
 </script>
 </head>
 <body>
 <form action="${prc}/scMaster2/find_subject.action" id="form" method="post">
-<input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
-<input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
-<div class="con_conent fixed">
+	<input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
+	<input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
+	<div class="con_conent fixed">
      <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　</span><span class="back">${module.name }</span></h1>
         <div class="table_box fixed">
             <div class="nav">

@@ -95,9 +95,11 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		return this.sm2SubjectDao.searchPaginated(hql,moduleId);
 	}
 	@Override
-	public List<TSm2Subject> findBYModuleId(String moduleId) {
-		String hql = "FROM TSm2Subject t WHERE t.moduleId = ? ORDER BY createTime DESC";
-		return this.sm2SubjectDao.find(hql,moduleId );
+	public List<TSm2Subject> findByTypeUser(String userId,String typeId,String moduleId) {
+		String hql = "select new TSm2Subject(id ,title) FROM TSm2Subject s WHERE s.moduleId = ? and s.typeId=? and s.typeId in " +
+				"(select t.id from TSm2Type t inner join t.typeUsers u where u.userId=? " +
+				") ORDER BY createTime DESC";
+		return this.sm2SubjectDao.find(hql,moduleId ,typeId,userId);
 	}
 	@Override
 	public void update(TSm2Subject subject) {

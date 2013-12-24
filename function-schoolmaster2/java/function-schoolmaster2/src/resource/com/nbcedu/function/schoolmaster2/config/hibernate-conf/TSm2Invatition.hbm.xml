@@ -31,11 +31,15 @@
         <property name="link" type="java.lang.String">
             <column name="link" length="500" />
         </property>
-        <property name="invatId" type="java.lang.String">
-            <column name="invatId" length="32" />
-        </property>
         <property name="score" type="java.lang.Integer">
             <column name="score" />
         </property>
+        <idbag name="usersId" table="t_sm2_invatition_user">
+			<collection-id type="string" column="id" length="32">
+				<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+			</collection-id>
+			<key column="invatitionId" />
+			<element column="userId" type="string" length="32" />
+		</idbag>
     </class>
 </hibernate-mapping>

@@ -1,12 +1,11 @@
-package com.nbcedu.function.schoolmaster2.data.model;
+package com.nbcedu.function.schoolmaster2.vo;
 
 import java.util.Date;
-import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 
 
-public class TSm2Invatition implements java.io.Serializable {
+public class InvatitionVo implements java.io.Serializable {
 
 	// Fields
 	private static final long serialVersionUID = 1L;
@@ -20,30 +19,15 @@ public class TSm2Invatition implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private String link;
 	private Integer score = -1;
-	private List<String> usersId;
 
 	// Constructors
 
 	/** default constructor */
-	public TSm2Invatition() {
+	public InvatitionVo() {
 	}
 
-	public TSm2Invatition(String createrId) {
+	public InvatitionVo(String createrId) {
 		this.createrId=createrId;
-	}
-
-	/** full constructor */
-	public TSm2Invatition(String id,String createrId,Date createTime,String content,String flag,String title,String status,Date lastUpdateTime,String link,String invatId,Integer score){
-		this.id=id;
-		this.createrId=createrId;
-		this.createTime=createTime;
-		this.content=content;
-		this.flag=flag;
-		this.title=title;
-		this.status=status;
-		this.lastUpdateTime=lastUpdateTime;
-		this.link=link;
-		this.score=score;
 	}
 
 	/**
@@ -209,13 +193,4 @@ public class TSm2Invatition implements java.io.Serializable {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
-
-	public List<String> getUsersId() {
-		return usersId;
-	}
-
-	public void setUsersId(List<String> usersId) {
-		this.usersId = usersId;
-	}
-	
 }

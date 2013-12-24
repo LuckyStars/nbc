@@ -35,7 +35,10 @@ public class TSm2Subject implements java.io.Serializable {
 	/** default constructor */
 	public TSm2Subject() {
 	}
-
+	public TSm2Subject(String id,String title) {
+		this.id = id;
+		this.title=title;
+	}
 
 	// Property accessors
 

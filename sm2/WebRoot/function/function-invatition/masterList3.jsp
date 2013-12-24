@@ -98,7 +98,7 @@ table td select {
 				<span>提交日期:</span>
 				<input type="text" name="searchDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="${searchDate}" id="searchDate" style="width:180px;"/>
 				<span>创建人:</span>
-				<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:90px;height:29px;"></s:select>
+<!--				<s:select list="users" name="searchUser" listKey="createrId" listValue="createrName" headerKey="" headerValue="" id="searchUser" cssStyle="width:90px;height:29px;"></s:select>-->
 				<span>标题:</span> 
 				<input type="text" name="searchTitle" value="${searchTitle}" id="searchTitle"/>
 				<a class="cx" href="javascript:void(0);" id="search">查询</a>

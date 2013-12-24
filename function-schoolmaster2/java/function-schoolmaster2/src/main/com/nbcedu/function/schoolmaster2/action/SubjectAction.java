@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.nbcedu.function.schoolmaster2.action.MasterSubjectAction.MsgContent;
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
@@ -32,6 +35,7 @@ public class SubjectAction extends BaseAction{
 	private TSm2Module module = new TSm2Module();
 	
 	private String moduleId;
+	private String typeId;
 	
 	private SM2SubjectBiz sm2SubjectBiz;
 	private Sm2TypeBiz sm2TypeBiz;
@@ -42,7 +46,11 @@ public class SubjectAction extends BaseAction{
 		module = this.moduleBiz.findById(moduleId);
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		if(module.getFlag()==3){
-			subjects = this.getNDZX();
+			if(StringUtil.isEmpty(typeId)){
+				subjects = this.getNDZX(types.get(0).getId(),module.getId());
+			}else{
+				subjects = this.getNDZX(typeId,module.getId());
+			}
 		}
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
@@ -54,16 +62,22 @@ public class SubjectAction extends BaseAction{
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		module = this.moduleBiz.findById(moduleId);
 		if(module.getFlag()==3){
-			subjects = this.getNDZX();
+			if(StringUtil.isEmpty(typeId)){
+				subjects = this.getNDZX(types.get(0).getId(),module.getId());
+			}else{
+				subjects = this.getNDZX(typeId,module.getId());
+			}
 		}
 		subject = this.sm2SubjectBiz.findById(id);
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
 		return "subjectUpdate";
 	}
-	private List<TSm2Subject> getNDZX(){
-		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
-		return  this.sm2SubjectBiz.findBYModuleId("nianduzhongxin");
+	private List<TSm2Subject> getNDZX(String typeId,String moduleId){
+		return  this.sm2SubjectBiz.findByTypeUser(this.getUserId(),typeId, "nianduzhongxin");
+	}
+	public void findGuanLian(){
+		Struts2Util.renderJson(Utils.gson.toJson(getNDZX(typeId,moduleId), new TypeToken<List<TSm2Subject>>(){}.getType()), "encoding:UTF-8");
 	}
 	public void add(){
 		subject.setCreateTime(new Date());
@@ -246,6 +260,14 @@ public class SubjectAction extends BaseAction{
 
 	public void setModuleId(String moduleId) {
 		this.moduleId = moduleId;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
 	}
 	
 }

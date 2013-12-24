@@ -4,9 +4,11 @@ package com.nbcedu.function.schoolmaster2.action;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
@@ -59,7 +61,7 @@ public class InvatitionAction extends BaseAction{
 	
 	private String searchUser;
 
-	private List<TSm2Invatition> users;
+//	private List<PersonVo> users;
 
 
 	public String add(){
@@ -67,6 +69,7 @@ public class InvatitionAction extends BaseAction{
 		Date date = new Date();
 		tsm2Invatition.setCreaterId(this.getUserId());
 		tsm2Invatition.setCreateTime(date);
+		tsm2Invatition.setUsersId(Arrays.asList(searchUser.split(",")));
 		sm2InvatitionBiz.add(tsm2Invatition);
 		if ("0".equals(tsm2Invatition.getFlag())) {
 			for (String resourse : resourses) {
@@ -127,7 +130,7 @@ public class InvatitionAction extends BaseAction{
 		tsm.setLastUpdateTime(date);
 		tsm.setContent(tsm2Invatition.getContent());
 		tsm.setFlag(tsm2Invatition.getFlag());
-		tsm.setInvatId(tsm2Invatition.getInvatId());
+		tsm.setUsersId(Arrays.asList(searchUser.split(",")));
 		tsm.setLink(tsm2Invatition.getLink());
 		tsm.setTitle(tsm2Invatition.getTitle());
 		sm2InvatitionBiz.modify(tsm);
@@ -151,13 +154,13 @@ public class InvatitionAction extends BaseAction{
 	public String teacherList() throws ParseException{
         this.pm = sm2InvatitionBiz.findByCreaterId(this.getUserId(),searchDate,searchTitle,searchUser);
         persons = Utils.getAllSchoolMaster();
-        users = sm2InvatitionBiz.findInvatIds(this.getUserId());
+       // users = Utils.getAllSchoolMaster();//sm2InvatitionBiz.findInvatIds(this.getUserId());
 		return "teacherList";
 	}
 	
 	public String masterList() throws ParseException{
         this.pm = sm2InvatitionBiz.findByInvatId(this.getUserId(),searchDate,searchTitle,searchUser);
-        users = sm2InvatitionBiz.findCreaterIds(this.getUserId());
+        persons = Utils.getAllManager();
 		return "masterList";
 	}
 	public String push() throws ParseException{
@@ -220,11 +223,15 @@ public class InvatitionAction extends BaseAction{
 	}
 	public String detail(){
 		JSONObject jo = new JSONObject();
+		JSONArray a = new JSONArray();
 		tsm2Invatition = sm2InvatitionBiz.findById(tsm2Invatition.getId());
 		jo.put("name", tsm2Invatition.getTitle());
-		jo.put("invatId", tsm2Invatition.getInvatId());
 		jo.put("content", tsm2Invatition.getContent());
 		jo.put("flag", tsm2Invatition.getFlag());
+		for(String user : tsm2Invatition.getUsersId()){
+			a.add(user);
+		}
+		jo.put("users", a);
 		Gson gson = new Gson();
 		if("0".equals(tsm2Invatition.getFlag())){
 			List<TSm2Resource> tsr = sm2ResourceBiz.findByInvatitionId(tsm2Invatition.getId());
@@ -404,15 +411,15 @@ public class InvatitionAction extends BaseAction{
 		this.searchUser = searchUser;
 	}
 	/**
-	 * @return the users
-	 */
-	public List<TSm2Invatition> getUsers() {
-		return users;
-	}
-	/**
-	 * @param users the users to set
-	 */
-	public void setUsers(List<TSm2Invatition> users) {
-		this.users = users;
-	}
+//	 * @return the users
+//	 */
+//	public List<TSm2Invatition> getUsers() {
+//		return users;
+//	}
+//	/**
+//	 * @param users the users to set
+//	 */
+//	public void setUsers(List<TSm2Invatition> users) {
+//		this.users = users;
+//	}
 }

@@ -22,7 +22,7 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	
 	public PagerModel findByModule(String moduleId);
 	
-	public List<TSm2Subject> findBYModuleId(String moduleId);
+	public List<TSm2Subject> findByTypeUser(String userId,String typeId,String moduleId);
 	
 	public List<TSm2Subject> findByModuleIdExceuteUserId(String moduleId,String exceuteUserId);
 	
