@@ -1,6 +1,8 @@
 /**容器**/
 var parentDiv = "body";
 
+var noteCount = 0;
+
 var initNotes = function(subjectId){
 	$.post(ctxPath + '/scMaster2/getNotesBySubjectId_note.action?subjectId='+subjectId,function(data){
 		if(data && data.length>0){
@@ -18,8 +20,8 @@ var initNotes = function(subjectId){
 var newNote = function(subjectId){
 	var option = new Object();
 	option.saveOnCreate = true;
-	option.top = '109px';
-	option.left = '792px';
+	option.top = (109 + 5*noteCount) + 'px';
+	option.left = (792 - 5*noteCount) + 'px';
 	option.parentId = subjectId;
 	createNote(option);
 };
@@ -55,5 +57,6 @@ var createNote = function(options){
 
 	$("<div class='sticky_notes' id='" + options.id +"' ></div>").appendTo($(parentDiv));
 	$("#" + options.id).StickyNotes(options).mousedown();
+	noteCount ++;
 };
 
