@@ -116,7 +116,6 @@ var refreshTongji = function(){
 		
 	});
 	
-	
 };
 
 function refreshAll (){

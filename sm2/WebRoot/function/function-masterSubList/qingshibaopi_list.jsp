@@ -123,7 +123,7 @@
       <c:forEach items="${pm.datas }" var="subject" varStatus="i"> 
       <tr>
         <td align="center">${i.index+1 }</td>
-        <td class="lan" align="center"><span class="words"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" target="_blank">${subject.title }</a></span></td>
+        <td class="lan" align="center"><span class="words"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" >${subject.title }</a></span></td>
         <td align="center">${subject.departmentName }</td>
         <td align="center">${subject.createrName}</td>
         <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>

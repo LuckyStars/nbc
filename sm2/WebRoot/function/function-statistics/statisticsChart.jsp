@@ -26,6 +26,7 @@ function commit(){
 	document.forms[0].submit();
 }
 function aaa(){
+	
 	var begin = $("#begin").val();
 	var end = $("#end").val();
 	var matcher =  $("#matcher").val();
@@ -53,7 +54,7 @@ $(function() {
       <input class="Wdate" name="data.endDate" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begin\')}'})" id="end" />
       <a class="cx" id="s" target="chart" href="#" onclick="aaa();">统计</a><a href="${prc}/scMaster2/listStatistics_data.action?matcher=${matcher}" style="float:left; margin-top:15px; margin-left:20px; font-size:14px;">查看全部列表</a> </div>
 	<div >
-          <iframe id="chart" name="chart"  style="height:500px;width:800px;overflow:hidden;scrolling:no;" frameborder="0" src="${prc}/scMaster2/chart_data.action?matcher=${matcher}"></iframe>
+          <iframe id="chart" name="chart"  style="height:500px;width:800px;overflow:hidden;scrolling:no;" frameborder="0" src="${prc}/scMaster2/chart_data.action?matcher=${matcher}&start=<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>&end=<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>"></iframe>
     </div>
       <div class="fen">
           <p><span>分析：</span><input type="text" id="title" name="data.title" class="top" maxlength="30"/></p>

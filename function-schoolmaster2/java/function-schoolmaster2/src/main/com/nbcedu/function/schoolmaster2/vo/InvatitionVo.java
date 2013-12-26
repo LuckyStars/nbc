@@ -19,6 +19,7 @@ public class InvatitionVo implements java.io.Serializable {
 	private Date lastUpdateTime;
 	private String link;
 	private Integer score = -1;
+	private String name;
 
 	// Constructors
 
@@ -193,4 +194,13 @@ public class InvatitionVo implements java.io.Serializable {
 	public void setScore(Integer score) {
 		this.score = score;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

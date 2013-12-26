@@ -127,7 +127,7 @@ margin: 5px 0 0 10px;
 				<c:forEach items="${pm.datas}" var="sub">
 					<tr>
 						<td class="other">
-							<a href="${prc}/scMaster2/detail_master.action?id=${sub.id }" target="_blank">
+							<a href="${prc}/scMaster2/detail_master.action?id=${sub.id }" >
 								<c:out value="${sub.title}" escapeXml="true"></c:out>
 							</a>
 						</td>

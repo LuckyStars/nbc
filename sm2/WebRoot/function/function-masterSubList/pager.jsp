@@ -9,7 +9,6 @@
 			<pg:param name="search.typeId" value="${search.typeId}"/>
 			<pg:param name="search.departId" value="${search.departId}"/>
 			<pg:param name="search.createrName" value="${search.createrName}"/>
-			<pg:param name="search.departId" value="${search.departId}"/>
 			<pg:param name="search.start" value="${search.start}"/>
 			<pg:param name="search.end" value="${search.end}"/>
 

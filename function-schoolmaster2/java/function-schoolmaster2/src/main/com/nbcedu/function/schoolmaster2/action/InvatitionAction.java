@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.BeanUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,12 +25,16 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterComment;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2MasterReply;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
 import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
+import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
+import com.nbcedu.function.schoolmaster2.vo.InvatitionVo;
 
 @SuppressWarnings("serial")
 public class InvatitionAction extends BaseAction{
 
 	private TSm2Invatition tsm2Invatition;
+	
+	private InvatitionVo invatitionVo;
 
 	private SM2InvatitionBiz sm2InvatitionBiz;
 	
@@ -60,8 +65,6 @@ public class InvatitionAction extends BaseAction{
 	private String searchTitle;
 	
 	private String searchUser;
-
-//	private List<PersonVo> users;
 
 
 	public String add(){
@@ -199,6 +202,7 @@ public class InvatitionAction extends BaseAction{
 	}
 	public String teacherShow(){
 		tsm2Invatition = sm2InvatitionBiz.findById(tsm2Invatition.getId());
+		invatitionVo = toVo(tsm2Invatition);
 		tsm2MasterComments = sm2MasterCommentBiz.findByInvatitionId(tsm2Invatition.getId());
 		for (TSm2MasterComment tsm: tsm2MasterComments) {
 			List<TSm2MasterReply> rpList = sm2MasterReplyBiz.findByCommentId(tsm.getId());
@@ -209,8 +213,22 @@ public class InvatitionAction extends BaseAction{
 		}
 		return "teacherShow";
 	}
+	private InvatitionVo toVo(TSm2Invatition tsm2Invatition){
+		InvatitionVo i =new InvatitionVo();
+		 BeanUtils.copyProperties(tsm2Invatition, i);
+		 String names = "";
+		 for(String s : tsm2Invatition.getUsersId()){
+			 String name = UCService.findNameByUid(s);
+				if (name!=null && name.trim().length()>0) {
+					names+=name+" ";
+				}
+		 }
+		 i.setName(names);
+		 return i;
+	}
 	public String masterShow(){
 		tsm2Invatition = sm2InvatitionBiz.findById(tsm2Invatition.getId());
+//		invatitionVo = toVo(tsm2Invatition);
 		tsm2MasterComments = sm2MasterCommentBiz.findByInvatitionId(tsm2Invatition.getId());
 		for (TSm2MasterComment tsm: tsm2MasterComments) {
 			List<TSm2MasterReply> rpList = sm2MasterReplyBiz.findByCommentId(tsm.getId());
@@ -229,7 +247,10 @@ public class InvatitionAction extends BaseAction{
 		jo.put("content", tsm2Invatition.getContent());
 		jo.put("flag", tsm2Invatition.getFlag());
 		for(String user : tsm2Invatition.getUsersId()){
-			a.add(user);
+			String name = UCService.findNameByUid(user);
+			if (name!=null && name.trim().length()>0) {
+				a.add(name);
+			}
 		}
 		jo.put("users", a);
 		Gson gson = new Gson();
@@ -410,16 +431,11 @@ public class InvatitionAction extends BaseAction{
 	public void setSearchUser(String searchUser) {
 		this.searchUser = searchUser;
 	}
-	/**
-//	 * @return the users
-//	 */
-//	public List<TSm2Invatition> getUsers() {
-//		return users;
-//	}
-//	/**
-//	 * @param users the users to set
-//	 */
-//	public void setUsers(List<TSm2Invatition> users) {
-//		this.users = users;
-//	}
+	public InvatitionVo getInvatitionVo() {
+		return invatitionVo;
+	}
+	public void setInvatitionVo(InvatitionVo invatitionVo) {
+		this.invatitionVo = invatitionVo;
+	}
+	
 }

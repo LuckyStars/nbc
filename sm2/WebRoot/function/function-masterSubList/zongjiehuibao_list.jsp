@@ -125,7 +125,7 @@ table td {
 						<td class="lan" align="center">
 							<span class="words">
 								<a href="${prc}/scMaster2/detail_master.action?id=${subject.id }"
-									target="_blank">${subject.title }</a>
+									>${subject.title }</a>
 							</span>
 						</td>
 						<td align="center">${subject.departmentName }</td>

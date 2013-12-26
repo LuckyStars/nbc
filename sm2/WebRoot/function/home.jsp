@@ -21,6 +21,16 @@
 		line-height:34px;
 		text-align:center;
 	}
+	
+.linshi	{background: url("${prc}/function/images/li_blue.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #0273C2;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    width: 190px;
+    }
     </style>
 	
     <script type="text/javascript">
@@ -40,6 +50,18 @@
             $(".li-blue .cols-open").attr("class", "cols");
             $(this).parent().next().show();
             $(this).attr("class", "cols-open");
+            e.stopPropagation();
+        });
+        $("#cols").on("click",".cols", function (e) {
+            $(".nav-list-inner").hide();
+            $(".li-blue .cols-open").attr("class", "cols");
+            $(this).parent().next().show();
+            $(this).attr("class", "cols-open");
+            e.stopPropagation();
+        });
+        $("#cols").on("click", ".cols-open", function (e) {
+            $(this).parent().next().hide();
+            $(this).attr("class", "cols");
             e.stopPropagation();
         });
         $(".li-blue").on("click", ".cols-open", function (e) {
@@ -244,10 +266,11 @@
       
 		<%-- 临时事项  --%>
 		<li>
-			<a href="#" class="li-blue" id="nav4">
+			<a href="${prc}/scMaster2/list_master.action?moduleId=linshishixiang" class="linshi" id="nav4" target="fm_right" >
 				<img src="${prc}/function/images/nav_04.png" width="16" height="16" />
-				学校临时事项处理<span class="cols"></span>
+				学校临时事项处理
 			</a>
+			<span id="cols"><span class="cols" style="position:absolute;left:164px" ></span></span>
 		  	<ul class="nav-list-inner" id="linshi_list">
 		  	
 		  	</ul>

@@ -15,7 +15,7 @@
 				<dl class="warp">
 					<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}&subjectVo.moduleName=${module.name}">
 						<dt>
-							<img src="${prc}/function/img/tu4.jpg" />
+							<img src="${prc}/function/img/${fn:substring(subject.id, 7, 8) }.png" />
 						</dt>
 						<dd>${subject.title}</dd> </a>
 				</dl>

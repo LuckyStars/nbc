@@ -40,6 +40,8 @@ public class DataAction extends BaseAction{
 		return "listMasterStatistics";
 	}
 	public String toChart(){
+		start = DateUtil.firstDay(new Date());
+		end = DateUtil.lastDay(new Date());
 		return "toChart";
 	}
 	public String toMasterChart(){

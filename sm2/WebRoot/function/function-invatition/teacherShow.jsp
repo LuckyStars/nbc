@@ -75,7 +75,7 @@
     <div class="content">
       <h2>${tsm2Invatition.title}</h2>
         <div class="on">
-      <h3><span>发布日期：</span><a class="ongray"><s:date name="tsm2Invatition.createTime" format="yyyy年MM月dd日"/></a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邀请人：</span><a class="ongray">${tsm2Invatition.invatName}</a>
+      <h3><span>发布日期：</span><a class="ongray"><s:date name="tsm2Invatition.createTime" format="yyyy年MM月dd日"/></a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邀请人：</span><a class="ongray">${invatitionVo.name}</a>
       </h3>
         <div id="star" style="width: 184px; height: 24px;float:right">
         <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
