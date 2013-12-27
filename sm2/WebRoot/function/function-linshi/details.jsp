@@ -29,12 +29,13 @@
     
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css"/>
 	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
+	<link href="${prc}/function/js/tabs/css/tabs.css" rel="stylesheet" />
 	
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/uuid.core.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/masternote.js" ></script>
-    
+    <script type="text/javascript" src="${prc }/function/js/tabs/js/tabs.js"></script>
 	<script type="text/javascript"> 
 	$(function(){
 		initNotes('${subject.id}');
@@ -363,10 +364,13 @@
 				<div class="articles">
 					<p>${subject.content }</p>
 				</div>
-				<div class="tabs-wp">
+				
+				
+				<div >
+					<%--
 					<div id="spec-list">
 					
-					<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
+					<c:if test="${not empty steps and fn:length(steps)>6 }"><!--少于6个内容不需显示移动的箭头 --!>
 					<a href="javascript:;" class="spec-control1" id="spec-forward"></a>
 					<a href="javascript:;" class="spec-control2" id="spec-backward"></a>
 					</c:if>
@@ -391,18 +395,18 @@
 									<c:if test="${sessionScope.sm2_init==step.createrId}">
 									<img title="删除步骤" name="${step.id}"
 									class="delete_step_ico small1" 
-									src="${prc}/function/function-linshi/images/icon1.png"  /><%--删除 --%>
+									src="${prc}/function/function-linshi/images/icon1.png"  /><!--删除 --!>
 									
 									<img title="编辑步骤" id="${step.id}" 
 									 src="${prc}/function/function-linshi/images/icon2.png" 
-									class="small"/><%--编辑步骤 --%>
+									class="small"/><!--编辑步骤 --!>
 									</c:if>
 									
 									<pri:showWhenManager>
 									<img title="增加工作进展"
 									 onclick="popAddProg('${step.id}');"
 									src="${prc}/function/function-linshi/images/icon3.png" 
-									class="small2 ico4"/><%--增加工作进展 --%>
+									class="small2 ico4"/><!--增加工作进展 --!>
 									</pri:showWhenManager>
 								</span>
 							</li>
@@ -412,21 +416,82 @@
 					</div>
 					
 				</div>
-					<a class="addtabs">
+				 --%>
+				 <script type="text/javascript">
+				 var initTabs = function(){
+
+						showIcoOnHover();
+						initWidths();
+						initMoves();
+						initHovers();
 				
-						<img title="增加步骤" 
-						style="height: 20px;margin-top: 5px;"
-						class="ico4 cpoint"
-						 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
-					</a>
-				<c:forEach items="${steps }" var="step" varStatus="i">
-					<c:if test="${i.index==0 }">
-					<iframe id="postFrame" name="postFrame" style="border:0px;width:780px; height:600px;" scrolling="no"
-					 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" > 
-					
-					</iframe>
-					</c:if>
-				</c:forEach>
+						$(".tab_text").each(function(){//点击字的事件
+							$(this).click(function(){
+								$(this).parent().removeClass("tabs_hover");
+								$(".tabs_tab").removeClass("tabs_selected");
+								$(this).parent().addClass("tabs_selected");
+								var stepId = $(this).parent().attr('stepId');
+								changeTab(stepId);
+							});
+						});
+					};		
+
+					$(function(){
+						
+						initTabs();
+
+					});
+				 </script>
+				 
+				<div class="tabs_warp" style="text-align: left;">
+				<div class="tabs_arrow tabs_arrow_left"></div>
+				<div class="tabs_arrow tabs_arrow_right"></div>
+				
+				<div id="tabs_container" class="tabs_container" >
+					<ul class="tabs_tab_parent" id="tabs_tab_parent" >
+						<c:forEach items="${steps }" var="step" varStatus="i">
+						<li stepId="${step.id }" class="tabs_tab <c:if test="${i.index==0 }">tabs_selected</c:if>">
+							<span class="tabs_icon_container">
+								<pri:showWhenManager>
+								<div class="tabs_icon tabs_new_children" onclick="popAddProg('${step.id}');" ></div>
+								</pri:showWhenManager>
+								<c:if test="${sessionScope.sm2_init==step.createrId}">
+								<div class="tabs_icon tabs_edit"></div>
+								<div class="tabs_icon tabs_remove"  ></div>
+								</c:if>
+							</span>
+							<div class="tabs_icon"><!--用于往下挤高度= =|| --></div>
+							<div class="tab_text" title="${step.name }">	
+								${step.name }
+							</div>
+						</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+				
+				
+				<img title="增加步骤" 
+				style="height: 20px;
+					margin-top: 5px;
+					float: right;
+					position: relative;
+					left: 50px;
+					top: 10px;
+					cursor: pointer;"
+				class="ico4 cpoint addtabs"
+				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
+			
+			
+			
+			<c:forEach items="${steps }" var="step" varStatus="i">
+				<c:if test="${i.index==0 }">
+				<iframe id="postFrame" name="postFrame" style="border:0px;width:780px; height:600px;" scrolling="no"
+				 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" > 
+				
+				</iframe>
+				</c:if>
+			</c:forEach>
 				
 			</div>
 		</div>

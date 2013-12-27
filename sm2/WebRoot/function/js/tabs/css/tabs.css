@@ -139,5 +139,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 }
 
 .tabs_warp{
-	width: 760px;
+	width: 740px;
+	margin-left: 10px;
 }
