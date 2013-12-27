@@ -1,0 +1,143 @@
+/**
+The MIT License (MIT)
+
+Copyright (c) 2013 宇宙総姐夫 xuechong87@gmail.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**/
+
+.tabs_tab{
+	height: 34px; 
+	font-size: 18px;
+	font-weight: bold;
+	color: #009933;
+	max-width: 240px;
+	min-width: 120px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background-image: linear-gradient(#FFFFFF, #F7F7F7);
+	background-repeat: repeat-x;
+	display: block;	
+	border: 1px solid #d5d5d5;
+	background-color: #FAFAFA;
+	margin-left: 3px;
+	float: left;	
+
+	display: inline;
+}
+
+.tabs_selected{
+	background-image: linear-gradient(#f4f4f4, #eaeaea);
+	background-color: #eaeaea;
+}
+
+.tabs_icon{
+	cursor: pointer;
+	margin: 2px;
+	height: 10px;
+	width: 10px;
+	display: inline;
+	float: left;
+}
+
+
+.tabs_new_children{
+	display: block;
+	background-image: url('add.png');
+}
+
+
+.tabs_edit{
+	display: block;
+	background-image: url('edit.png');
+}
+
+
+.tabs_remove{
+	float: right;
+	display: block;
+	background-image: url('remove.png');
+}
+
+
+.tab_text{
+	clear: both;
+	cursor: pointer;
+	margin: 10px;
+	margin-top: 0px;
+	text-align: center;
+	max-width: 240px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+
+.tabs_icon_container{
+	display:none;
+}
+
+.tabs_container{
+	position: absolute;
+	display: inline;
+	height: 36px;
+	overflow:hidden;
+}
+
+
+.tabs_tab_parent{
+	padding: 0px;
+	margin: 0px;
+	height: 36px;
+	float: left;
+}
+
+.tabs_arrow{
+	border: 1px solid #d5d5d5;
+	background-color: #fafafa;
+	width: 20PX;
+	height: 34PX;
+	cursor: pointer;
+	display: none;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+
+.tabs_arrow_left{
+	float: left;
+	background-image: url('arr_l.png');
+}
+
+.tabs_arrow_right{
+	float: right;
+	background-image: url('arr_r.png');
+}
+
+.tabs_arrow_hover{
+	background-color: #FFFFFF;
+}
+
+.tabs_hover{
+	background-color: #FFFFFF;
+	background-image: none;
+}
+
+.tabs_warp{
+	width: 760px;
+}
