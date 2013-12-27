@@ -8,6 +8,7 @@ public class TSm2SubjectUser implements java.io.Serializable {
 	private String subjectId;
 	private String userId;
 	private String userName;
+	private Integer status;//阅读状态0:未阅;1:已阅
 
 	// Constructors
 
@@ -54,6 +55,14 @@ public class TSm2SubjectUser implements java.io.Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getStatus() {
+		return status;
 	}
 
 }

@@ -57,7 +57,11 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		query.setMaxResults(size);
 		return sqlResult(query);
 	}
-	
+	@Override
+	public void updateMasterUserStatus(String userId,String subjectId){
+		String hql = "update TSm2SubjectUser set status=1 where userId=? and subjectId=?";
+		this.sm2SubjectDao.updateByHql(hql,userId,subjectId);
+	}
 	@Override
 	public PagerModel findByMaster(String modId, String masterUid,Integer flagType) {
 		StringBuilder hql = new StringBuilder("");

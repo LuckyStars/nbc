@@ -3,7 +3,7 @@
 	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectTrans" table="t_sm2_subject_trans">
+	<class name="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectTrans" table="t_sm2_subject_trans" dynamic-insert="true">
 		
 		<id name="id" column="ID" type="string" length="32">
 			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
@@ -16,5 +16,9 @@
 		<property name="subId" column="sub_id" type="string" length="32" not-null="true" />
 		
 		<property name="content" column="content" type="string" length="65535" />
+		
+		<property name="status" type="java.lang.Integer">
+            <column name="status" default="0"/>
+        </property>
 	</class>
 </hibernate-mapping>

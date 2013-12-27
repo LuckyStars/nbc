@@ -94,5 +94,9 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public Map<String,Integer> findAttCountByModType(String moduleId,String uid);
+	/**
+	 * 更改执行者阅读状态；
+	 */
+	void updateMasterUserStatus(String userId,String subjectId);
 	
 }

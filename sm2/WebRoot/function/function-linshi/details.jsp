@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/masternote.js" ></script>
     
-	<script type="text/javascript">
+	<script type="text/javascript"> 
 	$(function(){
 		initNotes('${subject.id}');
 	});
@@ -316,6 +316,7 @@
 					<pri:hideWhenMaster>
 					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
 						<div id="slider_pro" style="width:200px;"></div>
+						<span id="slider_num" ></span>
 					</div>
 					</pri:hideWhenMaster>
 					
