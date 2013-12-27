@@ -32,6 +32,7 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Step;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.data.vo.ProgressVo;
 import com.nbcedu.function.schoolmaster2.utils.UCService;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
@@ -83,21 +84,25 @@ public class MasterSubjectAction extends BaseAction{
 	 */
 	public String detail(){
 		this.subject = this.subBiz.findById(this.id);
+		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
+		this.getRequestMap().put("steps", steps);
 		if(this.subject!=null&&subject.getCheckUsers().size()>0){
-			if(Utils.isManager()){
-				this.getRequest().setAttribute("checkUser", true);
-			}
 			if(Utils.isMaster()){
 				for(SM2SubjectMaster m : subject.getCheckUsers()){
 					if(m.getUserUid().equals(this.getUserId())){
 						this.getRequest().setAttribute("master", true);
 					}
 				}
+			}else if(Utils.isManager()){
+				this.getRequest().setAttribute("checkUser", true);
+			}else{
+				for(TSm2SubjectUser u : subject.getExcuteUsers()){
+					if(u.getUserId().equals(this.getUserId()) && u.getStatus()==0){
+						this.subBiz.updateMasterUserStatus(this.getUserId(), subject.getId());
+					}
+				}
 			}
 		}
-		
-		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
-		this.getRequestMap().put("steps", steps);
 		return "detail";
 	}
 	

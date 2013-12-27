@@ -6,11 +6,13 @@ package com.nbcedu.function.schoolmaster2.data.model;
  */
 public class SM2SubjectTrans  implements java.io.Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String userUid;
 	private String userName;
 	private String subId;
 	private String content;
+	private Integer status;//阅读状态0:未阅;1:已阅
 	
 	//////////////////////
 	////getters&setters///
@@ -44,6 +46,12 @@ public class SM2SubjectTrans  implements java.io.Serializable{
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	
 }

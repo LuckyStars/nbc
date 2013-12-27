@@ -85,8 +85,8 @@ function changepage(page){
       <tr>
         <th width="5%" scope="col">序号</th>
         <th width="35%" scope="col">文件名称</th>
-        <th width="10%" scope="col">发文单位</th>
-        <th width="10%" scope="col">发布者</th>
+        <th width="10%" scope="col" style="text-align:left;">发文单位</th>
+        <th width="10%" scope="col" style="text-align:left;">发布者</th>
         <th width="10%" scope="col">发布时间</th>
         <th width="10%" scope="col">状态</th>
         <th width="10%" scope="col">过期时间</th>
@@ -95,12 +95,12 @@ function changepage(page){
       <s:iterator value="documentTaskVoList" var="taskVo" status="st">
       <tr>
         <td><s:property value='#st.index+1'/> </td>
-        <td class="lan">
+        <td class="lan" style="text-align:left;">
         	<a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">
 			<s:property value="#taskVo.documentTitle"/></a>
 		</td>
-        <td><s:property value="#taskVo.documentSourceDisplayName"/></td>
-        <td><s:property value="#taskVo.authorName"/></td>
+        <td style="text-align:left;"><s:property value="#taskVo.documentSourceDisplayName"/></td>
+        <td style="text-align:left;"><s:property value="#taskVo.authorName"/></td>
         <td><s:property value="#taskVo.publishTime"/></td>
         <td><s:property value="#taskVo.status"/></td>
         <td><s:property value="#taskVo.expireTime"/></td>

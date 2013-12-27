@@ -27,6 +27,7 @@
             $("table tr").mouseleave(function () {
                 $(this).css("color", "#000");
             });
+            
             $(".cx1").click(function(){
             	$.post("toAdd_subject.action",{moduleId : "${subjectVo.moduleId}" },function(data){
             		if(data != ''){
@@ -177,14 +178,20 @@
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
             	<pri:hideWhenManager>
-	                <td align="center">${i.index+1 }</td>
-	                <td align="center">${sub[1].title }</td>
-	                <td align="center"><fmt:formatDate value="${sub[1].createTime}" pattern="yyyy-MM-dd"/></td>
-	                <td align="center">${sub[1].createrName}</td>
-	                <td align="center">${sub[1].departmentName}</td>
-	                <td align="center">
-	                	<span class="space"><a href="javascript:look('${sub[1].id}');">查看</a></span>
-	                </td>
+            		<c:if test="sub[1].status==0">
+            			<script>
+            			 $("table tr").css("font", "99");            			
+            			</script>
+            		</c:if>
+		                <td align="center">${i.index+1 }</td>
+		                <td align="center">${sub[1].title }</td>
+		                <td align="center"><fmt:formatDate value="${sub[1].createTime}" pattern="yyyy-MM-dd"/></td>
+		                <td align="center">${sub[1].createrName}</td>
+		                <td align="center">${sub[1].departmentName}</td>
+		                <td align="center">
+		                	<span class="space"><a href="javascript:look('${sub[1].id}');">查看</a></span>
+		                </td>
+	                
                 </pri:hideWhenManager>
                 <pri:showWhenManager>
 	                <td align="center">${i.index+1 }</td>
