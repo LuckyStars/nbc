@@ -38,13 +38,14 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	background-color: #FAFAFA;
 	margin-left: 3px;
 	float: left;	
-
 	display: inline;
+	border-bottom: 0px;
 }
 
 .tabs_selected{
 	background-image: linear-gradient(#f4f4f4, #eaeaea);
 	background-color: #eaeaea;
+	border-bottom: 1px solid #FFFFFF;
 }
 
 .tabs_icon{
@@ -117,6 +118,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	display: none;
 	margin-left: 1px;
 	margin-right: 1px;
+	border-bottom: 0px;
 }
 
 .tabs_arrow_left{

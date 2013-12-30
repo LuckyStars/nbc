@@ -482,7 +482,9 @@
 				class="ico4 cpoint addtabs"
 				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
 			
+			<div style="z-index:-999999;clear: both;width:790px;border-top: 1px solid #d5d5d5;height: 10px;margin-top:-1px;">
 			
+			</div>
 			
 			<c:forEach items="${steps }" var="step" varStatus="i">
 				<c:if test="${i.index==0 }">
