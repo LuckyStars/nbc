@@ -145,7 +145,9 @@ public class MasterIndexAction extends BaseAction{
 //					
 //				}
 				
-				final Iterator<String> color = shuffle(Arrays.asList("#F79263","#6FB3E0","#F76382","#846FE0")).iterator();
+				
+				
+				
 				
 				final Iterator<String> icon = shuffle(Arrays.asList("tj01","tj02","tj03","tj04")).iterator();
 				
@@ -156,7 +158,7 @@ public class MasterIndexAction extends BaseAction{
 								Tongji result = new Tongji();
 								result.setTitle(input.getTitle());
 								result.setUrl("/scMaster2/detail_master.action?id=" + input.getId());
-								result.setColor(color.next());
+								result.setColor(colorByUid(input.getId()));
 								result.setIcon(icon.next());
 								return result;
 							}
@@ -171,6 +173,44 @@ public class MasterIndexAction extends BaseAction{
 		executeFind(tongji);
 		
 	}
+	
+	private static String colorByUid(String id){
+		
+		Map<String, String> colors = new HashMap<String, String>(){{
+			put("0", "#F79263");
+			put("1", "#6FB3E0");
+			put("2", "#F76382");
+			put("3", "#846FE0");
+			
+			put("4", "#339966");
+			put("5", "#58a6e9");
+			put("6", "#58e9a6");
+			put("7", "#58e9e7");
+			
+			put("8", "#5548f9");
+			put("9", "#5876e9");
+			put("A", "#a358e9");
+			put("B", "#d26939");
+			
+			put("C", "#e9dd58");
+			put("D", "#e058e9");
+			put("E", "#e95858");
+			put("F", "#f948a0");
+			
+			put("X","#669966");
+		}};
+		
+		String k = "X";
+		if(id!=null&&id.length()>16){
+			k = id.charAt(16) + "";
+		}else if( id!=null && id.length()>=1){
+			k = id.charAt(id.length()/2) + "";
+		}
+		String result = colors.get(k.toUpperCase());
+		
+		return result==null?colors.get("X"):result;
+	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	private List shuffle(List origin){
