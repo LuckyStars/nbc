@@ -8,7 +8,6 @@
 <title>校长工作台</title>
 	<link rel="stylesheet" href="${prc}/function/css/masterindex.css" />
 	<link rel="stylesheet" href="${prc}/function/js/weather/JQweather.css" />
-	<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js"></script>
 	<script type="text/javascript"
 	src="${prc}/function/js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript"
@@ -418,7 +417,18 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		$("#index_weather").simpleWeather({dataUrl:'${prc}/scMaster2/showWeather_index.action'});
+		var id_callback = function(){
+			$("#index_weather").simpleWeather({cityId:id,dataUrl:'${prc}/weather.service?jsoncallback=?'});
+		};
+	</script>
+	<script type="text/javascript" src="http://61.4.185.48:81/g/"></script>
+	<script type="text/javascript" >
+		if(typeof(id)=='undefined'){
+			(function(){
+				var img = $("<img src='${prc}/function/js/weather/noconnection.png' style='margin-left:20px;'></img>");
+				img.appendTo($("#index_weather"));
+			})();	
+		}
 	</script>
 </body>
 </html>
