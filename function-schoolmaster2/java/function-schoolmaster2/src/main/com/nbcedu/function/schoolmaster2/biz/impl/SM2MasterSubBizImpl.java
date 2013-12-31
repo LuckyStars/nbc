@@ -21,6 +21,7 @@ import org.springframework.util.CollectionUtils;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
@@ -58,7 +59,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 		return sqlResult(query);
 	}
 	@Override
-	public void updateMasterUserStatus(String userId,String subjectId){
+	public void updateMasterUserStatus(String userId,String subjectId) throws DBException{
 		String hql = "update TSm2SubjectUser set status=1 where userId=? and subjectId=?";
 		this.sm2SubjectDao.updateByHql(hql,userId,subjectId);
 	}

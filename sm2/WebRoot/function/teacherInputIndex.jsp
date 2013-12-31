@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/jquery.json-2.4.min.js"></script>
 <style type="">
-#num {
+.warp span {
 	background: url("${prc}/function/images/new1.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #FFFFFF;
     font-size: 12px;
@@ -20,6 +22,7 @@
     position: absolute;
     text-align: center;
     width: 17px;
+    display:none;
 }
 </style>
 </head>
@@ -31,7 +34,7 @@
 					<dl class="warp">
 						<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 							<dt>
-								<span id="num">12</span>
+								<span id="${module.id}"></span>
 								<img src="${prc}/function/img/${module.icon}"></img>
 							</dt>
 							<dd><b>${module.name}</b></dd> </a>
@@ -42,6 +45,7 @@
 						<dl class="warp">
 							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
+									<span id="${module.id}"></span>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd><b>${module.name}</b></dd> </a>
@@ -53,6 +57,7 @@
 						<dl class="warp">
 							<a href="${prc}/scMaster2/findB_subject.action?subjectVo.moduleId=${module.id}">
 								<dt>
+									<span id="${module.id}b"></span>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd><b>${module.name}</b></dd> </a>
@@ -62,7 +67,8 @@
 				<c:if test="${module.flag==3}">
 						<dl class="warp">
 							<a href="${prc}/scMaster2/find_subject.action?subjectVo.moduleId=${module.id}">
-								<dt>
+								<dt>	
+									<span id="${module.id}"></span>
 									<img src="${prc}/function/img/${module.icon}" />
 								</dt>
 								<dd><b>${module.name}</b></dd> </a>
@@ -79,6 +85,7 @@
 			<dl class="warp" >
 				<a href="${prc}/scMaster2/findAllTrans_subject.action">
 					<dt>
+						<span id="zhuanfa"></span>
 						<img src="${prc}/function/img/zhuanfa.png" style="height:97px;"/>
 					</dt>
 					<dd><b>查看转发事项</dd></b> </a>
@@ -93,4 +100,5 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="${prc}/function/js/teacherIndex.js"></script>
 </html>

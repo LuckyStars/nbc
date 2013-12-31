@@ -59,7 +59,7 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 			buff.append("%'");
 		}
 		buff1.append(buff);
-		buff.insert(0, "select s.id,s.createTime,s.title,s.moduleId,s.createrName,s.departmentName" );
+		buff.insert(0, "select s.id,s.createTime,s.title,s.moduleId,s.createrName,s.departmentName,t.status status " );
 		buff1.insert(0, "select count(s.id) ");
 		final String sql = buff.toString();
 				
@@ -74,7 +74,8 @@ public class SM2SubjectDaoImpl extends SimpleBaseDAOImpl<TSm2Subject> implements
 					 .addScalar("moduleId", Hibernate.STRING)
 					 .addScalar("createrName", Hibernate.STRING)
 					 .addScalar("departmentName", Hibernate.STRING)
-					 .setResultTransformer(Transformers.aliasToBean(TSm2Subject.class))
+					 .addScalar("status",Hibernate.INTEGER)
+					 .setResultTransformer(Transformers.aliasToBean(SubjectVo.class))
 					 .setFirstResult(SystemContext.getOffset())
 					 .setMaxResults(SystemContext.getPagesize()).list();
 			}

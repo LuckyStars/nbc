@@ -174,6 +174,10 @@ public class SubjectAction extends BaseAction{
 		this.sm2SubjectBiz.removeById(id);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
+	public void findStatusCount(){
+		List<Map<String, String>> list = this.sm2SubjectBiz.findStatusCount(this.getUserId());
+		Struts2Util.renderJson(Utils.gson.toJson(list), "encoding:UTF-8");
+	}
 	/**
 	 * 插旗异步方法
 	 */

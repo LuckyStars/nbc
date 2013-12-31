@@ -13,6 +13,10 @@ public class SubjectVo{
 	private String moduleName;
 	private Date beginDate;
 	private Date endDate;
+	private Date createTime;
+	private String createrName;
+	private String departmentName;
+	private Integer status;
 	
 	/*
 	 * 执行者
@@ -98,6 +102,38 @@ public class SubjectVo{
 
 	public void setModuleName(String moduleName) {
 		this.moduleName = moduleName;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCreaterName() {
+		return createrName;
+	}
+
+	public void setCreaterName(String createrName) {
+		this.createrName = createrName;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

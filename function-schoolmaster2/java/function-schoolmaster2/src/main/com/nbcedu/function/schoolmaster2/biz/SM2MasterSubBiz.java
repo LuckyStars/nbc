@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
@@ -97,6 +98,6 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	/**
 	 * 更改执行者阅读状态；
 	 */
-	void updateMasterUserStatus(String userId,String subjectId);
+	void updateMasterUserStatus(String userId,String subjectId)  throws DBException;
 	
 }
