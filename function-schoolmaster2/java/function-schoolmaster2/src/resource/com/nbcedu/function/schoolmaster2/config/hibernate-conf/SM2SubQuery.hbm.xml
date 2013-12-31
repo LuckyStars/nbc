@@ -142,4 +142,21 @@
 		ON t_sm2_module.id = sub.moduleId   	
    	]]>
     </sql-query>
+     <sql-query name="subject_stauts_count_by_userId">
+   	<![CDATA[
+	  select s.moduleId ,COUNT(s.id) num 
+	  	FROM t_sm2_subject s ,t_sm2_subject_user u
+ 		where s.id=u.subjectId 
+ 		AND u.userId=:userId 
+ 		AND u.`status`=0 
+ 		GROUP BY s.moduleId
+ 	UNION 
+ 	   select "zhuanfa" as moduleId,COUNT(s.id) num 
+ 	   FROM t_sm2_subject s ,t_sm2_subject_trans t
+ 		where s.id=t.sub_id 
+ 		AND t.user_uid=:uid
+ 		AND t.`status`=0
+   	]]>
+    </sql-query>
+  
 </hibernate-mapping>

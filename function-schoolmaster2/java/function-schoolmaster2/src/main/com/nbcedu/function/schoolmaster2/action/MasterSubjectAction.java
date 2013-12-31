@@ -24,6 +24,7 @@ import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ReadsBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
@@ -98,7 +99,11 @@ public class MasterSubjectAction extends BaseAction{
 			}else{
 				for(TSm2SubjectUser u : subject.getExcuteUsers()){
 					if(u.getUserId().equals(this.getUserId()) && u.getStatus()==0){
-						this.subBiz.updateMasterUserStatus(this.getUserId(), subject.getId());
+						try {
+							this.subBiz.updateMasterUserStatus(this.getUserId(), subject.getId());
+						} catch (DBException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}

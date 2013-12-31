@@ -3,9 +3,12 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.xwork.StringUtils;
+import org.hibernate.Query;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
@@ -149,5 +152,23 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 	@Override
 	public PagerModel findAlltrans(SubjectVo subject,String curUserId) throws DBException{
 		return sm2SubjectDao.findAllTrans(subject,curUserId);
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String,String>> findStatusCount(String userId) {
+		Query q = this.sm2SubjectDao.getNamedQuery("subject_stauts_count_by_userId");
+		q.setString("userId",userId);
+		q.setString("uid",userId);
+		List<Object[]> resultSet = q.list();
+		List<Map<String,String>> result = new ArrayList<Map<String,String>>();
+		if(resultSet!=null&& resultSet.size() >0){
+			for (Object[] obj : resultSet) {
+				Map<String,String> map = new HashMap<String,String>();
+				map.put("moduleId", obj[0].toString());
+				map.put("num", obj[1].toString());
+				result.add(map);
+			}
+		}
+		return result;
 	}
 }

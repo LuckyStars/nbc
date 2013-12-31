@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.biz;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nbcedu.function.schoolmaster2.core.biz.BaseBiz;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
@@ -50,4 +51,6 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	 * @throws DBException
 	 */
 	void updateMasterFlagAll(int flag, String subId) throws DBException;
+	
+	public List<Map<String,String>> findStatusCount(String userId);
 }

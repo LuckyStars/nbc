@@ -78,7 +78,7 @@
 <input type="hidden" name="subjectVo.moduleId" value="${subjectVo.moduleId}">
 <input type="hidden" name="subjectVo.moduleName" value="${subjectVo.moduleName}">
 <div class="con_conent fixed">
-     <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　</span><span class="back">转发</span></h1>
+     <h1 class="title"><span class="title">当前位置：</span><span class="text"><a href="${prc}/scMaster2/teacherInput_index.action">首页</a>　-　</span><span class="back">转发事项</span></h1>
         <div class="table_box fixed">
             <div class="nav">
                 <span>事项标题:</span>
@@ -96,15 +96,14 @@
             </tr>
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
-           
-	                <td align="center">${i.index+1 }</td>
-	                <td align="center">${sub.title }</td>
-	                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
-	                <td align="center">${sub.createrName}</td>
-	                <td align="center">${sub.departmentName}</td>
-	                <td align="center">
-	                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
-	                </td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${i.index+1 }</td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${sub.title }</td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>> ${sub.createrName}</td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${sub.departmentName}</td>
+                <td align="center">
+                <span class="space"><a href="javascript:look('${sub.id }');">查看</a></span>
+                </td>
             </tr>
             </c:forEach>
         </table>
