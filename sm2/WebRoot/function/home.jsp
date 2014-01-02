@@ -265,12 +265,12 @@
         <%--学校动态 END--%>
       
 		<%-- 临时事项  --%>
-		<li>
-			<a href="${prc}/scMaster2/list_master.action?moduleId=linshishixiang" class="linshi" id="nav4" target="fm_right" >
+		<li style="background: url(../function/images/li_blue.png) repeat-x;background-size:100% 28px;">
+			<a href="${prc}/scMaster2/list_master.action?moduleId=linshishixiang" class="linshi" id="nav4" target="fm_right" style="display:inline;background:aliceblue;" >
 				<img src="${prc}/function/images/nav_04.png" width="16" height="16" />
 				学校临时事项处理
 			</a>
-			<span id="cols"><span class="cols" style="position:absolute;left:164px" ></span></span>
+			<span id="cols"><span class="cols" style="position:absolute;left:164px" id="cols"></span></span>
 		  	<ul class="nav-list-inner" id="linshi_list">
 		  	
 		  	</ul>
