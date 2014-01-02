@@ -31,6 +31,7 @@
 	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
 	<link href="${prc}/function/js/tabs/css/tabs.css" rel="stylesheet" />
 	
+	
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/uuid.core.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
@@ -356,8 +357,9 @@
 					
 					<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 
 					src="${prc}/function/js/stickynote/createNote.png"
+					id="stknote"
 					  onclick="newNote('${subject.id}');" /><%--便签 --%>
-					
+					<span id="stknote">test?</span>
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">

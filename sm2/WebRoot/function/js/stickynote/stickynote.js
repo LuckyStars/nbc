@@ -66,18 +66,31 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		
 		var _this = $(this);
 		_this.attr('sticky_id',settings.id);
-
 		_this.addClass('sticky_notes');
-		
-		var regPx = /^\d+px$/;
 
+		var regPx = /^\d+px$/;
 		if(!regPx.test(_this.css('top'))){
 			_this.css('top',settings.top);
 		}
-
 		if(!regPx.test(_this.css('left')) ){
 			_this.css('left',settings.left);
 		}
+
+		///the warnbox
+		var showWarn = function(content){
+			var _warnbox = $("<div class='stiky_warn' ></div>")
+					.appendTo($(settings.containment));;
+			_warnbox.html(content);
+			var plus = function (origin){
+				return (parseInt(origin.replace('px','')) + 40) + 'px';
+			};
+			_warnbox.css('left',plus(_this.css('left')));
+			_warnbox.css('top',plus(_this.css('top')));	
+			_warnbox.fadeIn(200);
+			_warnbox.fadeOut(2500,function(){_warnbox.remove();});
+			
+		};
+		///the warnbox
 
 		var saveData = function(){
 			if(settings.save(getData())){
@@ -85,21 +98,18 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 				refreshButton.hide();
 			}else{
 				//something wrong
-				alert('保存失败');//TODO
 				if(refreshButton){
 					refreshButton.show();
 				}
-				
-				// /alert('somethin goes wrong try again later');
+				showWarn('保存失败<br/>请稍后点击左上角<br/>重新尝试');
 			}
 		};
-
 		
 		var doClose = function (){
 			if(settings.beforeClose(getData())){
-				_this.fadeOut();
+				_this.fadeOut(400,function(){_this.remove();});
 			}else{
-				alert('删除失败');//TODO
+				showWarn('删除失败<br/>请稍后再试');
 			}
 		};
 
@@ -116,7 +126,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			return datas;
 		};
 
-
 		_this.draggable({
 						zIndex: settings.draggableIndex, 
 						containment: settings.containment,
@@ -125,7 +134,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			.resizable({
 				handles: 'all', 
 				minHeight: settings.minHeight, 
-				minWidth: settings.minWidth});
+				minWidth: settings.minWidth });
 
 		////the close 
 		var removeButton;
@@ -189,11 +198,11 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			var contentHeight = contentProxy.height();
 			
 			// auto-expand, leaving room for a blank line at the bottom
-			if ( contentHeight + 20 > _this.height() ) {
-				_this.height(contentHeight + 20);
+			if ( contentHeight + 60 > _this.height() ) {
+				_this.height(contentHeight + 60);
 			}
 			// IE doesn't respect height: 100% on textareas 
-			if ( jQuery.browser.msie ) _this.height( contentHeight + 20 );
+			if ( jQuery.browser.msie ) _this.height( contentHeight + 60 );
 		};
 
         _textarea
@@ -202,7 +211,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 		if ( jQuery.browser.msie ) {
-			_textarea.height( _this.height() );
+			//_textarea.height( _this.height());
 			_this.bind('resize', function() {
 				_textarea.height( _this.height() - 10);
 			});
@@ -250,7 +259,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 		if(settings.saveOnCreate){
 			saveData();
 		}
-
+		
 		return $(this);
 		
 	}
