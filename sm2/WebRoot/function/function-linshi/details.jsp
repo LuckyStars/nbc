@@ -485,14 +485,15 @@
 				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
 			
 			<div style="z-index:-999999;clear: both;width:790px;border-top: 1px solid #d5d5d5;height: 10px;margin-top:-1px;">
-			
 			</div>
 			
 			<c:forEach items="${steps }" var="step" varStatus="i">
 				<c:if test="${i.index==0 }">
-				<iframe id="postFrame" name="postFrame" style="border:0px;width:780px; height:600px;" scrolling="no"
-				 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" > 
+				<iframe id="postFrame" name="postFrame" 
 				
+				frameborder="0" allowtransparency="true" scrolling="no"
+				style="border:none;width:780px; height:600px;"
+				 src="${prc}/scMaster2/showStep_master.action?id=${step.id}&subjectId=${subject.id}" > 
 				</iframe>
 				</c:if>
 			</c:forEach>

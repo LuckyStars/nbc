@@ -8,7 +8,6 @@ var initNotes = function(subjectId){
 		if(data && data.length>0){
 			for(var i = 0;i < data.length;i++){
 				var option = data[i];
-				console.log(option.left + option.top);
 				option.zIndex = i*10 + 100;
 				option.saveOnCreate = false;
 				createNote(option);
