@@ -27,12 +27,16 @@
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
     
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" type="text/css" 
+    <%-- 这里不要换1.10.3的样式...会有问题(╯‵□′)╯︵┻━┻ --%>
+    href="${prc}/function/js/jqueryui/jquery-ui-themes-1.10.1/themes/base/minified/jquery-ui.min.css"/>
+	
+	
 	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
 	<link href="${prc}/function/js/tabs/css/tabs.css" rel="stylesheet" />
 	
 	
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="${prc}/function/js/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/uuid.core.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/masternote.js" ></script>
@@ -367,58 +371,8 @@
 					<p>${subject.content }</p>
 				</div>
 				
-				
 				<div >
-					<%--
-					<div id="spec-list">
-					
-					<c:if test="${not empty steps and fn:length(steps)>6 }"><!--少于6个内容不需显示移动的箭头 --!>
-					<a href="javascript:;" class="spec-control1" id="spec-forward"></a>
-					<a href="javascript:;" class="spec-control2" id="spec-backward"></a>
-					</c:if>
-       			 	<div class="spec-items" style="position: absolute; width: 680px; height:38px; overflow: hidden; left:35px;">
 				
-					<ul class="tabs" style="position: absolute;  top: 0px; width:4000px;">
-						<c:forEach items="${steps }" var="step" varStatus="i">
-							
-							<li style="margin:0px;"
-							 id="${step.id}" class="blocksTab <c:if test="${i.index==0 }">cur</c:if>"
-							onmouseover="$('#step_ops_${step.id}').show();"
-							onmouseout="$('#step_ops_${step.id}').hide();"
-							 >
-								<div class="tabs_content_title">
-								<a title="${step.name }" class="tab_titile"
-								href="javascript:changeTab('${step.id}');"
-								>${step.name }</a>
-								</div>
-								
-								<span id="step_ops_${step.id}" style="display: none;">
-									
-									<c:if test="${sessionScope.sm2_init==step.createrId}">
-									<img title="删除步骤" name="${step.id}"
-									class="delete_step_ico small1" 
-									src="${prc}/function/function-linshi/images/icon1.png"  /><!--删除 --!>
-									
-									<img title="编辑步骤" id="${step.id}" 
-									 src="${prc}/function/function-linshi/images/icon2.png" 
-									class="small"/><!--编辑步骤 --!>
-									</c:if>
-									
-									<pri:showWhenManager>
-									<img title="增加工作进展"
-									 onclick="popAddProg('${step.id}');"
-									src="${prc}/function/function-linshi/images/icon3.png" 
-									class="small2 ico4"/><!--增加工作进展 --!>
-									</pri:showWhenManager>
-								</span>
-							</li>
-						</c:forEach>
-					</ul>
-					
-					</div>
-					
-				</div>
-				 --%>
 				 <script type="text/javascript">
 				 var initTabs = function(){
 
