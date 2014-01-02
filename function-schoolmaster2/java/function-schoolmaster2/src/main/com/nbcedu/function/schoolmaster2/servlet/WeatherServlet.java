@@ -77,7 +77,7 @@ public class WeatherServlet extends HttpServlet{
 						responseStr.append(line);
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error(e);
 				} finally {
 					if (reader != null)
 						reader.close();
@@ -85,10 +85,10 @@ public class WeatherServlet extends HttpServlet{
 				connection.disconnect();
 				result = responseStr.toString();
 			}
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		} catch (MalformedURLException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
 		} finally {
 			if (connection != null) {
 				connection.disconnect();

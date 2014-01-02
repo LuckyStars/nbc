@@ -30,6 +30,7 @@
 	border: none;
 	font-family: HandEN, HandZH;
 	font-size: 20px;
+	color: black;
 }
 
 /* colorful! */
@@ -48,8 +49,8 @@
 .sticky-pink { background-color: #FF99CC; }
 .sticky-pink textarea { background-color: #FF99CC; }
 
-.sticky-red { background-color: #6666FF; }
-.sticky-red textarea { background-color: #6666FF; }
+.sticky-red { background-color: #CC6666; }
+.sticky-red textarea { background-color: #CC6666; }
 
 #sticky_notes_content_proxy {
 	position: absolute;

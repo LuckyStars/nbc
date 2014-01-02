@@ -65,22 +65,24 @@
 				alt="校长工作台" />
 		</h1>
 		<div class="box_logo_right" style="float:right;">
-			<a class="la" style="float:left; padding-left: 20px;" 
+			<a class="la" style="float:left;" 
 				href="#">
 				<span style="
 				background:url(${prc}/function/css/icons_white.png) no-repeat;
 				width:14px;height:14px;
 				background-position:-170px 0px;
+				padding-right:8px;
 				"
-				>&nbsp;&nbsp;</span>教师门户</a>
+				>&nbsp;</span>教师门户</a>
 		&nbsp;&nbsp;
 		<a class="tc" href="${logoutService}">
 		<span style="
 				background:url(${prc}/function/css/icons_white.png) no-repeat;
 				width:14px;height:14px;
 				background-position:-122px -73px;
+				padding-right:8px;
 				"
-				>&nbsp;&nbsp;</span>退出登录</a></div>
+				>&nbsp;</span>退出登录</a></div>
 	</div>
 	<div class="main">
 		<div class="module module1" style="background-image: url('${prc}/function/img/person_bg.png');">
@@ -233,7 +235,7 @@
 						<img src="${prc}/function/images/pic1.png" width="179" height="140" />
 						<span style="color: #0273c2;">总结·汇报·关注性工作</span>
 					</a>
-					<i id="zongjie">6</i>
+					<i id="zongjie" style="display: none;" >6</i>
 				</div>
 				<div class="tongtai">
 					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=masterDocumentFlow/listAllDocumentTask.action">
@@ -246,14 +248,14 @@
 						<img src="${prc}/function/images/pic3.png" width="179" height="140" />
 						<span style="color: #ff7200;">请示·报批性工作</span>
 					</a>
-					<i id="qingshi">6</i>
+					<i id="qingshi" style="display: none;" >6</i>
 				</div>
 				<div class="tongtai">
 					<a class="pointer" href="${prc}/scMaster2/home_index.action?rightURL=scMaster2/list_master.action?moduleId=jinjizhongyao">
 						<img src="${prc}/function/images/pic4.png" width="179" height="140" />
 						<span style="color: #9910ac;">紧急重要事件处理</span>
 					</a>
-					<i id="jinji">6</i>
+					<i id="jinji" style="display: none;" >6</i>
 				</div>
 			</div>
 		</div>
