@@ -126,7 +126,7 @@
              $(".bg").show();
              $(".adds7").show();
          });
-         $(".small").click(function () {
+         $(".tabs_edit").click(function () {
              $(".bg").show();
              $.post("findById_step.action",{id:this.id},function(data){
                 $("#stepId").val(data.id);
@@ -310,7 +310,6 @@
 		</style>
 		<div class="table_box fixed">
 			<div class="content">
-			
 				<div class="detail_titles" style="text-align: center;">
 					<span style="margin-bottom: 20px;">${subject.title }</span>
 					<pri:showWhenMaster>
@@ -398,7 +397,51 @@
 
 					});
 				 </script>
-				 
+				 	<%--弹出层7步骤 增加--%>
+    <form action="addStep_master.action" id="stepForm">
+    	<div class="adds7">
+	  		<div class="add-tops7">
+		    	<p>增加</p>
+		    	<img src="${prc}/function/img/close.png"
+		    	 class="close" style="cursor:pointer;height:18px;"/>
+		    </div>
+		  	<div class="add-downs7">
+				<div class="chen" id="add_prog_parent" style="overflow-y:scroll;height:200px;width:405px;">
+					<div style=" display: block; position: relative; height: 30px; width:350px; ">
+			          <p>步骤名称：</p>
+			          <input type="text" name="stepName" maxlength="20"/>
+			          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jia" style="right:40px"/>
+			      	</div>
+		      	</div>
+		      	<div class="sure">
+		          <a href="javascript:stepSave();">确定 </a>
+		          <a href="#" class="close">关闭 </a>
+		      	</div>
+			</div>
+		</div>
+	</form>
+	<%--弹出层7 增加步骤 END--%>
+	<form action="update_step.action" id="stepFormUpdate">
+		<input type="hidden" name="step.subjectId" value="${subject.id}" />
+    	<input type="hidden" name="step.id" id="stepId" />
+    	<div class="updateStep">
+	  		<div class="add-tops7">
+		    	<p>编辑</p>
+		    	<img src="${prc}/function/img/close.png"
+		    	 class="stepClose" style="cursor:pointer;height: 18px;"/>
+		    </div>
+		  	<div class="add-downs7">
+				<div class="chen">
+		          <p>步骤名称：</p>
+		          <input type="text" name="step.name" id="stepName" maxlength="20"/>
+		      	</div>
+		      	<div class="sure">
+		          <a id="stepUpdate" href="#">确定 </a>
+		          <a href="#" class="stepClose">关闭 </a>
+		      	</div>
+			</div>
+		</div>
+	</form>
 				<div class="tabs_warp" style="text-align: left;">
 				<div class="tabs_arrow tabs_arrow_left"></div>
 				<div class="tabs_arrow tabs_arrow_right"></div>
@@ -412,7 +455,7 @@
 								<div class="tabs_icon tabs_new_children" onclick="popAddProg('${step.id}');" ></div>
 								</pri:showWhenManager>
 								<c:if test="${sessionScope.sm2_init==step.createrId}">
-								<div class="tabs_icon tabs_edit"></div>
+								<div class="tabs_icon tabs_edit" id="${step.id}" ></div>
 								<div class="tabs_icon tabs_remove"  ></div>
 								</c:if>
 							</span>
@@ -535,51 +578,7 @@
 			</div>
 		</form>
 	</div>
-	<%--弹出层7步骤 增加--%>
-    <form action="addStep_master.action" id="stepForm">
-    	<div class="adds7">
-	  		<div class="add-tops7">
-		    	<p>增加</p>
-		    	<img src="${prc}/function/img/close.png"
-		    	 class="close" style="cursor:pointer;height:18px;"/>
-		    </div>
-		  	<div class="add-downs7">
-				<div class="chen" id="add_prog_parent" style="overflow-y:scroll;height:200px;width:405px;">
-					<div style=" display: block; position: relative; height: 30px; width:350px; ">
-			          <p>步骤名称：</p>
-			          <input type="text" name="stepName" maxlength="20"/>
-			          <img src="${prc}/function/function-linshi/images/jian.jpg"  class="jia" style="right:40px"/>
-			      	</div>
-		      	</div>
-		      	<div class="sure">
-		          <a href="javascript:stepSave();">确定 </a>
-		          <a href="#" class="close">关闭 </a>
-		      	</div>
-			</div>
-		</div>
-	</form>
-	<%--弹出层7 增加步骤 END--%>
-	<form action="update_step.action" id="stepFormUpdate">
-		<input type="hidden" name="step.subjectId" value="${subject.id}" />
-    	<input type="hidden" name="step.id" id="stepId" />
-    	<div class="updateStep">
-	  		<div class="add-tops7">
-		    	<p>编辑</p>
-		    	<img src="${prc}/function/img/close.png"
-		    	 class="stepClose" style="cursor:pointer;height: 18px;"/>
-		    </div>
-		  	<div class="add-downs7">
-				<div class="chen">
-		          <p>步骤名称：</p>
-		          <input type="text" name="step.name" id="stepName" maxlength="20"/>
-		      	</div>
-		      	<div class="sure">
-		          <a id="stepUpdate" href="#">确定 </a>
-		          <a href="#" class="stepClose">关闭 </a>
-		      	</div>
-			</div>
-		</div>
-	</form>
+
 <script>
 	<pri:hideWhenMaster><%-- 校长不显示进度条 --%>
  	$(function(){

@@ -18,30 +18,6 @@
     		var height = $(document).height();
     		parent.resizeFrame(height);
     	};
-    	content=KindEditor.ready(function(K) {
-    		var contentOptions = {
-    			resizeType : 1,
-    			width: 416,
-    			height : 220,
-    			pasteType:1,
-    			filterMode:true,
-    			uploadJson : '${prc}/scMaster2/upload.action',
-    			allowFileManager : false,
-    			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
-    			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
-    			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
-    					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
-    					'italic', 'underline', 'strikethrough', 'lineheight',
-    					'removeformat', '|',  'table', 'hr','|','image', 'multiimage'],
-    			filterMode : true,
-    			urlType : "",
-    			afterChange : function() {
-    				var self = this;
-    				self.sync();
-    			}
-    		};
-    		K.create('textarea[name="progress.content"]', contentOptions);
-     	 });
         $(function () {
             $(".img").each(function () {
                 $(this).click(function () {
@@ -134,11 +110,36 @@
 			}
 	   });
    }
+  var contentU ;
+	 KindEditor.ready(function(K) {
+		var contentOptions = {
+			resizeType : 1,
+			width: 416,
+			height : 220,
+			pasteType:1,
+			filterMode:true,
+			uploadJson : '${prc}/scMaster2/upload.action',
+			allowFileManager : false,
+			items : ['preview','print', 'cut', 'copy', 'paste', 'selectall',
+			         '|', 'justifyleft', 'justifycenter','justifyright', 'justifyfull', 
+			         'insertorderedlist','insertunorderedlist', '|', 'formatblock', 'fontname',
+					'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+					'italic', 'underline', 'strikethrough', 'lineheight',
+					'removeformat', '|',  'table', 'hr','|','image', 'multiimage'],
+			filterMode : true,
+			urlType : "",
+			afterChange : function() {
+				var self = this;
+				self.sync();
+			}
+		};
+		contentU = K.create('textarea[name="progress.content"]', contentOptions);
+	 });
    function showPro(id){
 	$.post("find_progress.action",{id:id},function(data){
 		if(data){
 			$('input[name="progress.id"]').val(id);
-			content.html(data.content);
+			contentU.html(data.content);
 			$('input[name="progress.name"]').val(data.name);
 			$(".bg").show();
 			$(".adds6").show();
