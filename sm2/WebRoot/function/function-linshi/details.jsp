@@ -31,7 +31,6 @@
     <%-- 这里不要换1.10.3的样式...会有问题(╯‵□′)╯︵┻━┻ --%>
     href="${prc}/function/js/jqueryui/jquery-ui-themes-1.10.1/themes/base/minified/jquery-ui.min.css"/>
 	
-	
 	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
 	<link href="${prc}/function/js/tabs/css/tabs.css" rel="stylesheet" />
 	
@@ -285,26 +284,6 @@
 				font-weight: bold;
 				font-family: Arial, Helvetica, sans-serif;
 				font-size:22px;
-			}
-			
-			.tab_titile{
-				font-family: 微软雅黑;
-				font-size:16px;
-			}
-			
-			.tabs-wp {
-				height: 32px;
-				line-height: 38px;
-				border-bottom: 1px solid #ccc;
-				width: 100%;
-				padding: 0;
-			}
-			
-			.tabs_content_title{
-				width:70px;
-				overflow:hidden;
-				text-overflow:ellipsis;
-				white-space:nowrap;
 			}
 			
 		</style>
