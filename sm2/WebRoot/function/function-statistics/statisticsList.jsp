@@ -7,9 +7,27 @@
 <title>统计列表</title>
 <link href="../function/css/index.css" rel="stylesheet" type="text/css" />
 <link href="../function/css/gzt.css" rel="stylesheet"/>
+<style type="text/css">
+.head {
+	height: 30px;
+	line-height: 30px;
+	background: url(../function/img/tab_h.gif) repeat-x;
+	font-weight: 100;
+	margin: 0 auto;}
+</style>
 <script type="text/javascript" src="../function/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
 <script type="text/javascript">
+$(function () {
+    $("table tr:odd").css("background", "#f0f8fc");
+    $("table tr:even").css("background", "#d5e0ee");
+    $("table tr").mouseover(function () {
+        $(this).css("color","#f00");
+    });
+    $("table tr").mouseleave(function () {
+        $(this).css("color", "#000");
+    });
+});
 </script>
 </head>
 <body>
@@ -23,32 +41,28 @@
       <span>至</span>
       <input class="Wdate" name="end" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
       <a class="cx" href="javascript:document.forms[0].submit();">查询</a><a class="cx" href="${prc}/scMaster2/toChart_data.action?matcher=${matcher}" >统计分析</a></div>
-      <div class="list">
-      	<c:forEach items="${pm.datas}" varStatus="status" var="data">
-      		<c:choose>
-				<c:when test="${status.index%2==0 }">
-					<p class="color">
-	          			<span class="list-sp">${status.index+1}<span style="margin-left:10px;">
-			          		<fmt:formatDate value="${data.startDate}" pattern="yyyy年MM月dd日"/>-
-							<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/> 
-			          	</span></span>
-			          	<span class="list-ri">的统计分析</span>
-			          	<a href="javascript:if(confirm('确定要删除吗?')){location.href='${prc}/scMaster2/remove_data.action?id=${data.id}&matcher=${matcher}';}"><img src="${prc}/function/img/erro1.png" /></a>
-          			</p>
-				</c:when>
-				<c:otherwise>
-					<p>
-			          	<span class="list-sp">${status.index+1}<span style="margin-left:10px;">
-			          		<fmt:formatDate value="${data.startDate}" pattern="yyyy年MM月dd日"/>-
-							<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
-			          	</span></span>
-			          	<span class="list-ri">的统计分析</span>
-			          	<a href="javascript:if(confirm('确定要删除吗?')){location.href='${prc}/scMaster2/remove_data.action?id=${data.id}&matcher=${matcher}';}" id="remove"><img src="${prc}/function/img/erro1.png" /></a>
-			          </p>
-				</c:otherwise>	
-      		</c:choose>
-      	</c:forEach>
-      </div>
+     	<table width="100%" border="0">
+            <tr>
+                <th width="5%" scope="col">序号</th>
+                <th width="35%" scope="col">标题</th>
+                <th width="35%" scope="col">创建时间</th>
+                <th width="20%" scope="col">操作</th>
+            </tr>
+         	<c:forEach items="${pm.datas}" varStatus="status" var="data">
+            <tr>
+                <td align="center">${status.index+1}</td>
+                <td align="center">${data.title }</td>
+                <td align="center"><fmt:formatDate value="${data.createDate}" pattern="yyyy年MM月dd日"/></td>
+                <td align="center">
+                <span class="space">
+                	<a href="javascript:if(confirm('确定要删除吗?')){location.href='${prc}/scMaster2/remove_data.action?id=${data.id}&matcher=${matcher}';}" id="remove">
+                	<img src="${prc}/function/img/erro1.png" />
+                	</a>
+                </span>
+                </td>
+            </tr>
+            </c:forEach>
+        </table>
   </div>
   </form>
    <div  style="text-align:center;font-size:15px;margin-top:20px;">

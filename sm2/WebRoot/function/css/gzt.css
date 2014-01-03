@@ -492,7 +492,7 @@ color:#0A5FB0;margin-left:20px;
 width:320px; height:24px;
 }
 .down {
-width:580px; height:187px;margin-left:55px; margin-top:20px;
+width:580px; height:187px; margin-top:20px;float:left;
 }
 .have {
 display:block;width:91px; height:28px; line-height:28px; text-align:center;color:#fff;margin:50px auto; background:url(../img/btnbg.jpg) no-repeat;
