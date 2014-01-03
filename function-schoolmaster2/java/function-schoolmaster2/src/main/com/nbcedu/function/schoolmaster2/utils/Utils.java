@@ -28,6 +28,7 @@ import com.nbcedu.function.functionsupport.core.SupportManager;
 import com.nbcedu.function.functionsupport.mapping.PortalMessage;
 import com.nbcedu.function.functionsupport.util.PropertiesUtil;
 import com.nbcedu.function.schoolmaster2.constants.Constants;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.model.Sm2Zan;
 import com.nbcedu.function.schoolmaster2.data.vo.PersonVo;
 import com.opensymphony.xwork2.ActionContext;
@@ -57,7 +58,15 @@ public class Utils {
 		}
 		return userName;
 	}
-	
+	/**
+	 * 获得用户名
+	 * @param uid
+	 * @return
+	 */
+	public static String getUserName(String userUid){
+		String name = UCService.findNameByUid(userUid);
+		return 	StringUtil.isEmpty(name)==true ? name: "";
+	}
 	/**
 	 * 默认接受者的uid
 	 * @return
