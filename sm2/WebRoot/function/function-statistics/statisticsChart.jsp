@@ -19,7 +19,10 @@ function commit(){
 			return;
 		}
 	}
-	if($.trim($("title")).length<=0){
+	if($.trim($("#title").val()).length<=0){
+		alert("标题不能为空！");
+		return ;
+	}if($.trim($(".down").val()).length<=0){
 		alert("分析不能为空！");
 		return ;
 	}
@@ -52,13 +55,17 @@ $(function() {
       <input class="Wdate"  name="data.startDate" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'end\')}'})" id="begin"/>
       <span>至:</span>
       <input class="Wdate" name="data.endDate" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begin\')}'})" id="end" />
-      <a class="cx" id="s" target="chart" href="#" onclick="aaa();">统计</a><a href="${prc}/scMaster2/listStatistics_data.action?matcher=${matcher}" style="float:left; margin-top:15px; margin-left:20px; font-size:14px;">查看全部列表</a> </div>
+      <a class="cx" id="s" target="chart" href="#" onclick="aaa();">统计</a><a href="${prc}/scMaster2/listStatistics_data.action?matcher=${matcher}" class="cx" >查看全部</a> </div>
 	<div >
           <iframe id="chart" name="chart"  style="height:500px;width:800px;overflow:hidden;scrolling:no;" frameborder="0" src="${prc}/scMaster2/chart_data.action?matcher=${matcher}&start=<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>&end=<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>"></iframe>
     </div>
       <div class="fen">
-          <p><span>分析：</span><input type="text" id="title" name="data.title" class="top" maxlength="30"/></p>
-          <textarea name="data.content" class="down"></textarea>
+          <p style="margin-top:20px;">
+          	<span>标题：</span>
+          	<input type="text" id="title" name="data.title" class="top" maxlength="30" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>至<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>"/><span>的统计分析</span>
+          </p>
+          <p style="display:block;"><span style="float:left;margin-top:20px;">分析：</span><textarea name="data.content" class="down"></textarea>
+         </p>
       </div>
       <a href="javascript:commit();" class="have">生成</a>
   </div>
