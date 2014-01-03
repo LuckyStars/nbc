@@ -85,20 +85,22 @@ public class MasterSubjectAction extends BaseAction{
 	 */
 	public String detail(){
 		this.subject = this.subBiz.findById(this.id);
+		
 		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
 		this.getRequestMap().put("steps", steps);
-		if(this.subject!=null&&subject.getCheckUsers().size()>0){
+		
+		if(this.subject!=null&&subject.getCheckUsers().size()>0){////已读状态
 			if(Utils.isMaster()){
-				for(SM2SubjectMaster m : subject.getCheckUsers()){
-					if(m.getUserUid().equals(this.getUserId())){
+				for(SM2SubjectMaster master : subject.getCheckUsers()){
+					if(master.getUserUid().equals(this.getUserId())){
 						this.getRequest().setAttribute("master", true);
 					}
 				}
 			}else if(Utils.isManager()){
 				this.getRequest().setAttribute("checkUser", true);
-			}else{
-				for(TSm2SubjectUser u : subject.getExcuteUsers()){
-					if(u.getUserId().equals(this.getUserId()) && u.getStatus()==0){
+			}else{//被转发的已读
+				for(TSm2SubjectUser usr : subject.getExcuteUsers()){
+					if(usr.getUserId().equals(this.getUserId()) && usr.getStatus()==0){
 						try {
 							this.subBiz.updateMasterUserStatus(this.getUserId(), subject.getId());
 						} catch (DBException e) {
@@ -164,7 +166,6 @@ public class MasterSubjectAction extends BaseAction{
 					this.getRequestMap().put("comMap", comMap);
 				}
 			}/*comment map*/
-			
 			
 		}
 		

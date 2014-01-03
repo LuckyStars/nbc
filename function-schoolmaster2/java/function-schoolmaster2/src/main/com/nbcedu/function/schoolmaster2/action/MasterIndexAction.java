@@ -81,10 +81,8 @@ public class MasterIndexAction extends BaseAction{
 		SearchFunction dongtai = new SearchFunction(){
 			@Override
 			public String search() {
-				
 				Map<String, Integer> results = 
 					masterSubBiz.findNewCountByModule(uid);
-				
 				return countMapToJson(results);
 			}
 			@Override

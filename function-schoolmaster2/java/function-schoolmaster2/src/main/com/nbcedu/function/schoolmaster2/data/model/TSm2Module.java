@@ -4,7 +4,11 @@ import java.util.Date;
 
 
 public class TSm2Module implements java.io.Serializable {
-
+	/***有关联重心工作***/
+	public static final int FLAG_YOUGUANLIAN = 3;
+	/***主管显示***/
+	public static final int FLAG_ZHUGUAN_XIANSHI = 3;
+	
 	// Fields
 	private static final long serialVersionUID = 1L;
 	private String id;

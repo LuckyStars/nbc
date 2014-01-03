@@ -26,6 +26,7 @@ public class UserAction extends BaseAction{
 		String result = UCService.getPersonJson(checkedUids,true);
 		Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
+	
 	public void findAllMaster() {
 		Collection<PersonVo> ps = Utils.getAllSchoolMaster();
 		StringBuilder s = new StringBuilder("[");

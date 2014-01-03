@@ -17,8 +17,9 @@ public class CommentAction extends BaseAction{
 	
 	public String add(){
 		this.comm.setCreaterId(this.getUserId());
-		this.comm.setLastUpdateTime(new Date());
-		this.comm.setCreatetime(new Date());
+		Date date = new Date();
+		this.comm.setLastUpdateTime(date);
+		this.comm.setCreatetime(date);
 		this.comm.setUserName(Utils.curUserName());
 		this.comBiz.add(comm);
 		return "refreshStep";
