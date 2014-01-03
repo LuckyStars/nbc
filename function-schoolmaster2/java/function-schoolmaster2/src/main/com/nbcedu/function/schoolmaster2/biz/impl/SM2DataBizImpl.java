@@ -31,7 +31,7 @@ public class SM2DataBizImpl extends BaseBizImpl<SM2Datas> implements SM2DataBiz{
 	}
 	@Override
 	public PagerModel findPageByModel(SM2Datas m) {
-		StringBuffer hql = new StringBuffer("from SM2Datas where matcher=? ");
+		StringBuilder hql = new StringBuilder("from SM2Datas where matcher=? ");
 		List<Object> list = new ArrayList<Object>();
 		list.add(m.getMatcher());
 		if(m.getStartDate()!=null&&StringUtils.isNotBlank(m.getStartDate().toString())){
