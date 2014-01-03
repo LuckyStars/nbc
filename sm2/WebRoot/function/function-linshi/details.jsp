@@ -290,14 +290,17 @@
 		<div class="table_box fixed">
 			<div class="content">
 				<div class="detail_titles" style="text-align: center;">
-					<span style="margin-bottom: 20px;">${subject.title }</span>
+				
 					<pri:showWhenMaster>
-						<img style="margin-top: 0px;"
+						<div>
+						<img style="margin-top: 0px;position: absolute;left: 20px;"
 						src='${prc}/function/images/percent/${subject.progress }.png' 
 						width='60' height='60'/>
+						</div>
 					</pri:showWhenMaster>
-					
+					<span style="margin-bottom: 20px;">${subject.title }</span>
 					<pri:hideWhenMaster>
+					
 					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
 						<div id="slider_pro" style="width:200px;"></div>
 						<span id="slider_num" ></span>
@@ -313,18 +316,10 @@
 					</c:if>
 					</pri:showWhenManager>
 					
-					<pri:showWhenMaster>
-						<c:if test="${master==true}">
-							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30"/>
-						</c:if>
-						<c:if test="${master!=true}">
-							<img src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" />
-						</c:if>
-					</pri:showWhenMaster>
 				</div>
 
 	
-				<h3 style="font-family: 微软雅黑;font-size:16px;text-align: center;">
+				<h3 style="font-family: 微软雅黑;font-size:14px;text-align: center;padding-left: 70px;width: 690px;">
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
 					&nbsp;&nbsp;&nbsp;执行者：<span>
@@ -334,19 +329,28 @@
 					</span>
 					
 					<pri:showWhenMaster>
-					
-					<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
-					src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
-					
-					<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 
-					src="${prc}/function/js/stickynote/createNote.png"
-					id="stknote"
-					  onclick="newNote('${subject.id}');" /><%--便签 --%>
-					<span id="stknote">test?</span>
+						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
+						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
+						
+						<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 
+						src="${prc}/function/js/stickynote/createNote.png"
+						id="stknote"
+						  onclick="newNote('${subject.id}');" /><%--便签 --%>
+						  
+						<c:if test="${master==true}">
+							<img id="flagImg"
+							style="float:right;height:20px;margin: 2px;"
+							 src="${prc}/function/function-linshi/img/qi2.png" />
+						</c:if>
+						<c:if test="${master!=true}">
+							<img 
+							style="float:right;height:20px;margin: 2px;"
+							src="${prc}/function/function-linshi/img/qi2.png" />
+						</c:if>
 					</pri:showWhenMaster>
 				</h3>
 				<div class="articles">
-					<p>${subject.content }</p>
+					<p style="text-align: left;">${subject.content }</p>
 				</div>
 				
 				<div >
