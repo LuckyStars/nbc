@@ -2,11 +2,9 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.Date;
 
-import com.mysql.jdbc.Util;
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.constants.StatisticsEnum;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.data.interfaces.DataGenerator;
@@ -38,6 +36,7 @@ public class DataAction extends BaseAction{
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
+		this.data.setCreatorUid(this.getUserId());
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
 	}

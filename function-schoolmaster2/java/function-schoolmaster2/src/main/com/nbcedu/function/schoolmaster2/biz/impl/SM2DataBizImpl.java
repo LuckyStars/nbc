@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.BeanUtils;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2DataBiz;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
@@ -52,11 +53,18 @@ public class SM2DataBizImpl extends BaseBizImpl<SM2Datas> implements SM2DataBiz{
 		hql.append(" order by createDate desc");
 		Object[] params = new Object[list.size()];
 		list.toArray(params);
-		return this.sm2DataDao.searchPaginated(hql.toString(),params);
+		PagerModel pm = this.sm2DataDao.searchPaginated(hql.toString(),params);
+		pm.setDatas(poToVo(pm.getDatas()));
+		return pm;
 	}
-	private List<DatasVo> getUsersName(PagerModel pm){
-		for(Object d : pm.getDatas()){
-			Utils.getUserName(((SM2Datas)d).getCreatorUid());
+	private List<DatasVo> poToVo(List<SM2Datas> list){
+		List<DatasVo> voList = new ArrayList<DatasVo>();
+		for (int i = 0; i < list.size(); i++) {
+			DatasVo d = new DatasVo();
+			BeanUtils.copyProperties(list.get(i), d);
+			d.setName(Utils.getUserName(d.getCreatorUid()));
+			voList.add(d);
 		}
+		return voList;
 	}
 }
