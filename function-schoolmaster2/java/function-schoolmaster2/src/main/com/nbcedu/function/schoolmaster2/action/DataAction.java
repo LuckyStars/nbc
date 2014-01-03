@@ -32,6 +32,7 @@ public class DataAction extends BaseAction{
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listStatistics";
 	}
+	
 	public String listMasterStatistics(){
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
@@ -40,11 +41,13 @@ public class DataAction extends BaseAction{
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
 	}
+	
 	public String toChart(){
 		start = DateUtil.firstDay(new Date());
 		end = DateUtil.lastDay(new Date());
 		return "toChart";
 	}
+	
 	public String toMasterChart(){
 		this.data = this.sm2DataBiz.findById(id);
 		return "toMasterChart";
@@ -54,7 +57,7 @@ public class DataAction extends BaseAction{
 		DataGenerator dataGen = 
 			DataContext.getContext().getbyMatcher(matcher);
 		this.dataType = dataGen.defaultChartType();
-		if(Utils.isMaster()){
+		if(Utils.isMaster()){//校长白色 教师蓝色
 			this.xmlContent = dataGen.getDataByTime(start, end);
 		}else{
 			this.xmlContent = dataGen.getDataByTime(start, end,"F0F8FC");

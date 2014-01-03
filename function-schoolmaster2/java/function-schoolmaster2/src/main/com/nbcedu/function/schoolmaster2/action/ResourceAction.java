@@ -13,46 +13,51 @@ import com.nbcedu.function.schoolmaster2.data.model.TSm2Resource;
 
 @SuppressWarnings("serial")
 public class ResourceAction extends BaseAction{
-	SM2ResourceBiz resourceBiz;
+	
 	String progId;
 	private int type;
 
+	SM2ResourceBiz resourceBiz;
+
 	public String findAll(){
-		pm = this.resourceBiz.findResource(progId,type);
+		this.pm = this.resourceBiz.findResource(progId,type);
 		return LIST;
 	}
-//	public String findPic(){
-//		pm = this.resourceBiz.findResource(progId,type);
-//		return "resource_pic";
-//	}
+
 	public String findPic(){
 		List<TSm2Resource> list = this.resourceBiz.findAllResource(progId,type);
 		this.getRequest().setAttribute("list", list);
 		return "resource_pic";
 	} 
+	
+	@SuppressWarnings("unchecked")
 	public void add(){
-		TSm2Resource r;
+		TSm2Resource res;
 		String paths = this.getRequest().getParameter("resourses");
 		List<TSm2Resource> list = new ArrayList<TSm2Resource>();
 		for(String p : paths.split(",")){
-			r = new TSm2Resource();
-			r.setCreaterId(this.getUserId());
-			r.setCreateTime(new Date());
-			r.setFilePath(p);
-			r.setFileName(p.substring(p.lastIndexOf("/")+1));
-			r.setProgressId(progId);
-			r.setType(type);
-			list.add(r);
+			res = new TSm2Resource();
+			res.setCreaterId(this.getUserId());
+			res.setCreateTime(new Date());
+			res.setFilePath(p);
+			res.setFileName(p.substring(p.lastIndexOf("/")+1));
+			res.setProgressId(progId);
+			res.setType(type);
+			list.add(res);
 		}
 		this.resourceBiz.addAll(list);
 		JSONObject jo = new JSONObject();
 		jo.put("error", "OK");
 		Struts2Utils.renderJson(jo.toJSONString());
 	}
+	
 	public void delete(){
 		this.resourceBiz.removeById(id);
 	}
+	
+	/////////////////////
 	//getter setter
+	//////////////////
 	public void setResourceBiz(SM2ResourceBiz resourceBiz) {
 		this.resourceBiz = resourceBiz;
 	}

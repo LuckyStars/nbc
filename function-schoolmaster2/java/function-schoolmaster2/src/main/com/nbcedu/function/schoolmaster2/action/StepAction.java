@@ -15,10 +15,11 @@ import com.nbcedu.function.schoolmaster2.vo.StepVo;
 @SuppressWarnings("serial")
 public class StepAction extends BaseAction{
 
-	private Sm2StepBiz stepBiz;
 	private String subjectId;
 	private String name;
 	private TSm2Step step ;
+
+	private Sm2StepBiz stepBiz;
 	
 	public void stepList(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
@@ -28,10 +29,12 @@ public class StepAction extends BaseAction{
 						new TypeToken<List<StepVo>>() {}.getType())
 		);
 	}
+	
 	public void findById(){
 		TSm2Step s = this.stepBiz.findById(id);
 		Struts2Utils.renderJson(Utils.gson.toJson(s));
 	}
+	
 	public void add(){
 		TSm2Step st;
 		boolean  b = false;
@@ -45,12 +48,9 @@ public class StepAction extends BaseAction{
 				b = this.stepBiz.addStep(st);
 			}
 		}
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
 	}
+	
 	public void isExistStep(){
 		boolean b = false ;
 		if(!StringUtil.isEmpty(name)){
@@ -61,11 +61,7 @@ public class StepAction extends BaseAction{
 				}
 			}
 		}
-		if(!b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
 	}
 	/**
 	 * 删除步骤只能删除自己建的步骤
@@ -73,29 +69,20 @@ public class StepAction extends BaseAction{
 	 */
 	public void delete(){
 		boolean b = this.stepBiz.removeById1(id);
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
 	}
+	
 	public void isExist(){
 		List<StepVo> step = this.stepBiz.findByProgId(this.id);
-		if(step != null && step.size()>0){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText((step != null && step.size()>0)?"0":"1","encoding:UTF-8");
 		
 	}
+	
 	public void update(){
 		boolean b =this.stepBiz.updateBySubId(step);
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
 	}
+	
 	//////////////////////////
 	/////getters&setters/////
 	/////////////////////////

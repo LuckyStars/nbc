@@ -20,7 +20,6 @@ public class TransAction extends BaseAction{
 	private String transNames;
 	private String content;
 	private String subjectId;
-
 	
 	public void add(){
 		if(StringUtils.isNotBlank(transUids) && StringUtils.isNotBlank(transNames)){
@@ -46,45 +45,33 @@ public class TransAction extends BaseAction{
 	public SM2SubjectTrans getTrans() {
 		return trans;
 	}
-
 	public void setTrans(SM2SubjectTrans trans) {
 		this.trans = trans;
 	}
-
 	public String getTransUids() {
 		return transUids;
 	}
-
 	public void setTransUids(String transUids) {
 		this.transUids = transUids;
 	}
-
 	public String getTransNames() {
 		return transNames;
 	}
-
 	public void setTransNames(String transNames) {
 		this.transNames = transNames;
 	}
-
 	public String getContent() {
 		return content;
 	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public void setTransBiz(SM2TransBiz transBiz) {
 		this.transBiz = transBiz;
 	}
-
-
 	public String getSubjectId() {
 		return subjectId;
 	}
-
-
 	public void setSubjectId(String subjectId) {
 		this.subjectId = subjectId;
 	}

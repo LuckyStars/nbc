@@ -34,7 +34,10 @@ public class SWFUploadAction extends BaseAction {
 			Struts2Utils.renderJson(jo.toString());
 			return null;
 		}
-		String upload_path = this.getRequest().getSession().getServletContext().getRealPath("/") + Constants.COMMON_UPLOAD;
+		String upload_path = 
+			this.getRequest().getSession().getServletContext().getRealPath("/") 
+			+ Constants.COMMON_UPLOAD;
+		
 		Calendar calendar = Calendar.getInstance();
 		long time = calendar.getTime().getTime();
 		String path = upload_path + "\\" + Long.toString(time);

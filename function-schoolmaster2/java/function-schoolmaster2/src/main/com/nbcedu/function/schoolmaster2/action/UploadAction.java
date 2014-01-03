@@ -13,25 +13,32 @@ import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 import org.json.simple.JSONObject;
 
 import com.nbcedu.function.schoolmaster2.constants.Constants;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
+import com.nbcedu.function.schoolmaster2.core.util.FileUtil;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
 
 @SuppressWarnings("serial")
 public class UploadAction extends BaseAction{
+	
+	private static final Logger logger = Logger.getLogger(UploadAction.class);
+	
 	/**
 	 * 文件上传
-	 * 
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	public String upload() {
-		String savePath = (getRequest().getSession().getServletContext().getRealPath("/") + Constants.COMMON_UPLOAD + "/");
+		String savePath = 
+					getRequest().getSession().getServletContext().getRealPath("/") 
+					+ Constants.COMMON_UPLOAD + "/";
+		
 		String saveUrl = getRequest().getContextPath() + "/" + Constants.COMMON_UPLOAD + "/";
 
 		// 定义允许上传的文件扩展名
@@ -49,6 +56,7 @@ public class UploadAction extends BaseAction{
 			Struts2Utils.renderJson(getError("请选择文件。"));
 			return null;
 		}
+		
 		// 检查目录
 		File uploadDir = new File(savePath);
 		if (!uploadDir.isDirectory()) {
@@ -73,17 +81,14 @@ public class UploadAction extends BaseAction{
 		savePath += dirName + "/";
 		saveUrl += dirName + "/";
 		File saveDirFile = new File(savePath);
-		if (!saveDirFile.exists()) {
-			saveDirFile.mkdirs();
-		}
+		saveDirFile.mkdirs();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String ymd = sdf.format(new Date());
 		savePath += ymd + "/";
 		saveUrl += ymd + "/";
 		File dirFile = new File(savePath);
-		if (!dirFile.exists()) {
-			dirFile.mkdirs();
-		}
+		dirFile.mkdirs();
 
 		// Struts2 请求 包装过滤器
 		MultiPartRequestWrapper wrapper = (MultiPartRequestWrapper) ServletActionContext.getRequest();
@@ -107,7 +112,6 @@ public class UploadAction extends BaseAction{
 		// 重构上传图片的名称
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
 		String newImgName = df.format(new Date()) + "_" + new Random().nextInt(1000) + "." + fileExt;
-		byte[] buffer = new byte[1024];
 		// 获取文件输出流
 		FileOutputStream fos = null;
 		// 获取内存中当前文件输入流
@@ -115,14 +119,10 @@ public class UploadAction extends BaseAction{
 		try {
 			fos = new FileOutputStream(savePath + "/" + newImgName);
 			in = new FileInputStream(file);
-			
-			int num = 0;
-			while ((num = in.read(buffer)) > 0) {
-				fos.write(buffer, 0, num);
-			}
+			FileUtil.copy(in, fos);
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
-			
+			logger.error("上传出错。",e);
 			Struts2Utils.renderJson(getError("上传出错。"));
 			return null;
 		} finally {

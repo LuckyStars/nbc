@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
@@ -28,6 +30,8 @@ import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
 @SuppressWarnings("serial")
 public class SubjectAction extends BaseAction{
 	
+	private static final Logger logger = Logger.getLogger(SubjectAction.class);
+	
 	private TSm2Subject subject = new TSm2Subject(); 
 	private SubjectVo subjectVo = new SubjectVo();
 	private TSm2Module module = new TSm2Module();
@@ -43,40 +47,48 @@ public class SubjectAction extends BaseAction{
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		module = this.moduleBiz.findById(moduleId);
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
-		if(module.getFlag()==3){
+		
+		if(module.getFlag()==TSm2Module.FLAG_YOUGUANLIAN){
 			if(StringUtil.isEmpty(typeId)){
 				subjects = this.getNDZX(types.get(0).getId(),module.getId());
 			}else{
 				subjects = this.getNDZX(typeId,module.getId());
 			}
 		}
+		
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
 		return "subjectAdd";
 	}
 	
 	public String toUpdate(){
+		
 		List<TSm2Type> types = this.sm2TypeBiz.findByUserId(this.getUserId());
 		List<TSm2Subject> subjects = new ArrayList<TSm2Subject>();
 		module = this.moduleBiz.findById(moduleId);
-		if(module.getFlag()==3){
+		
+		if(module.getFlag()==TSm2Module.FLAG_YOUGUANLIAN){
 			if(StringUtil.isEmpty(typeId)){
 				subjects = this.getNDZX(types.get(0).getId(),module.getId());
 			}else{
 				subjects = this.getNDZX(typeId,module.getId());
 			}
 		}
+		
 		subject = this.sm2SubjectBiz.findById(id);
 		this.getRequest().setAttribute("types", types);
 		this.getRequest().setAttribute("subjects", subjects);
 		return "subjectUpdate";
 	}
+	
 	private List<TSm2Subject> getNDZX(String typeId,String moduleId){
 		return  this.sm2SubjectBiz.findByTypeUser(this.getUserId(),typeId, "nianduzhongxin");
 	}
+	
 	public void findGuanLian(){
 		Struts2Util.renderJson(Utils.gson.toJson(getNDZX(typeId,moduleId), new TypeToken<List<TSm2Subject>>(){}.getType()), "encoding:UTF-8");
 	}
+	
 	public void add(){
 		subject.setCreateTime(new Date());
 		
@@ -88,6 +100,7 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
+		
 		Map<String,String> m =  UCService.findDepartmentByUid(this.getUserId());
 		subject.setDepartmentName(m.get("name"));
 		subject.setDepartmentId(m.get("id"));
@@ -160,6 +173,7 @@ public class SubjectAction extends BaseAction{
 		}
 		return "list";
 	}
+	
 	public String findB(){
 		//判断模块是否为子模块，如果为子则查询父模块所有并跳转模块列表
 		module = this.moduleBiz.findById(subjectVo.getModuleId());
@@ -170,14 +184,17 @@ public class SubjectAction extends BaseAction{
 		}
 		return "listB";
 	}
+	
 	public void delete(){
 		this.sm2SubjectBiz.removeById(id);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
+	
 	public void findStatusCount(){
 		List<Map<String, String>> list = this.sm2SubjectBiz.findStatusCount(this.getUserId());
 		Struts2Util.renderJson(Utils.gson.toJson(list), "encoding:UTF-8");
 	}
+	
 	/**
 	 * 插旗异步方法
 	 */
@@ -188,10 +205,11 @@ public class SubjectAction extends BaseAction{
 			this.sm2SubjectBiz.updateMasterFlag(Integer.parseInt(flag),subjectId,this.getUserId());
 		} catch (Exception e) {
 			Struts2Util.renderText("false", "encoding:UTF-8");
-			e.printStackTrace();
+			logger.error("插旗", e);
 		}
 		Struts2Util.renderText("success", "encoding:UTF-8");
 	}
+	
 	/**
 	 * 判断重名
 	 * 
@@ -212,7 +230,7 @@ public class SubjectAction extends BaseAction{
 		try {
 			pm = sm2SubjectBiz.findAlltrans(subjectVo, this.getUserId());
 		} catch (DBException e) {
-			e.printStackTrace();
+			logger.error("查询转发出错",e);
 		}
 		return "transList";
 	}

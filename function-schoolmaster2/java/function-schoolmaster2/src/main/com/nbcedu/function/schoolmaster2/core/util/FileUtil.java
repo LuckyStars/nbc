@@ -10,6 +10,8 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+import org.apache.log4j.Logger;
+
 /**
  * 
  * <p>
@@ -18,6 +20,7 @@ import java.nio.channels.FileChannel;
  * @author 黎青春 Create at:2012-4-6 下午03:51:37
  */
 public class FileUtil {
+	private static final Logger logger = Logger.getLogger(FileUtil.class);
 
 	static final int BUFFERSIZE = 4*1024;
 
@@ -63,6 +66,37 @@ public class FileUtil {
 		}
 	}
 
+	public static void safeCopyAndClose(InputStream in, OutputStream out){
+		try {
+			if(in!=null&&out!=null){
+				byte[] buffer = new byte[1024];
+				while (true) {
+					int bytesRead = in.read(buffer);
+					if (bytesRead == -1) {
+						break;
+					}
+					out.write(buffer, 0, bytesRead);
+				}
+			}
+		} catch (IOException e) {
+			logger.error(e);
+		}finally{
+			if(in!=null){
+				try {
+					in.close();
+				} catch (IOException e) {
+					logger.error(e);
+				}
+			}
+			if(out!=null){
+				try {
+					out.close();
+				} catch (IOException e) {
+					logger.error(e);
+				}
+			}
+		}
+	}
 	public static void copy(InputStream in, OutputStream out)
 			throws IOException {
 		byte[] buffer = new byte[1024];

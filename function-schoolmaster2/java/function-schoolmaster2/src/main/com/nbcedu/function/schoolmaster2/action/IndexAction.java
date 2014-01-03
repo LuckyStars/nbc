@@ -5,7 +5,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
@@ -18,7 +17,6 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.util.CollectionUtils;
 
-import com.google.common.collect.ComparisonChain;
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.FileUtil;
@@ -42,7 +40,6 @@ public class IndexAction extends BaseAction{
 	private String photoPath ;
 	private String userName;
 	private String userPhrase;
-	private HibernateDao dao;
 	private String start;
 	private String end;
 	private String moduleId;
@@ -50,15 +47,17 @@ public class IndexAction extends BaseAction{
 	private MasterSubSearchVO search = new MasterSubSearchVO();
 	
 	private SM2ModuleBiz sm2ModuleBiz;
+	private HibernateDao dao;
 	
 	public String index(){
 		
 		this.photoPath = this.getPhoto();
 		if(logger.isInfoEnabled()){
-			logger.info(photoPath);
+			//logger.info(photoPath);
 			logger.info(Utils.curUserUid());
 			logger.info(Utils.curUserName());
 		}
+		
 		this.userPhrase = this.getPhrase();
 		this.userName = (getSession().get("curUserName")!=null?
 				getSession().get("curUserName").toString():
@@ -69,8 +68,9 @@ public class IndexAction extends BaseAction{
 	public String home(){
 		return "home";
 	}
+	
 	public String login(){
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("scMaster2/list_master.action?moduleId=");
 		buf.append(moduleId);
 		if(!StringUtil.isEmpty(search.getTypeId())){
@@ -92,12 +92,11 @@ public class IndexAction extends BaseAction{
 			public int compare(TSm2Module arg0, TSm2Module arg1) {
 				return arg0.getCreatetime().compareTo(arg1.getCreatetime());
 			}
-			
 		});
 		this.getRequest().setAttribute("modules", modules);
 		return "teacherInput";
 	}
-	
+	@SuppressWarnings("rawtypes")
 	private String getPhoto(){
 		final String uid = this.getUserId();
 		String photo = (String) dao.getHibernateTemplate().execute(new HibernateCallback() {
@@ -113,6 +112,7 @@ public class IndexAction extends BaseAction{
 		return StringUtils.trimToEmpty(photo);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private String getPhrase(){
 		final String uid = this.getUserId();
 		String phrase = (String) dao.getHibernateTemplate().execute(new HibernateCallback() {
@@ -137,26 +137,24 @@ public class IndexAction extends BaseAction{
 	public void headPhoto() throws IOException, SQLException{
 		final String uid = this.getUserId();
 		Blob result = (Blob) this.dao.getHibernateTemplate().execute(new HibernateCallback() {
-			
 			@Override
 			@SuppressWarnings("unchecked")
 			public Object doInHibernate(Session session) throws HibernateException,
 					SQLException {
-				SQLQuery q = session.createSQLQuery("SELECT avatarBig FROM t_portal_account_expand WHERE uid=:uid");
+				SQLQuery q = session.
+					createSQLQuery("SELECT avatarBig FROM t_portal_account_expand WHERE uid=:uid");
 				q.setString("uid", uid);
 				q.addScalar("avatarBig", Hibernate.BLOB);
 				List<Blob> resultSet = q.list();
-				if(resultSet!=null&&!resultSet.isEmpty()){
-					return resultSet.get(0)	;
+				if (resultSet != null && !resultSet.isEmpty()) {
+					return resultSet.get(0);
 				}
 				return null;
 			}
 		});
-		
 		if(result!=null){
 			FileUtil.copy(result.getBinaryStream(), this.getResponse().getOutputStream());
 		}
-		
 	}
 	
 	/**

@@ -30,23 +30,16 @@ public class ProgressAction extends BaseAction{
 	public void add(){
 		progress.setCreaterId(this.getUserId());
 		progress.setCreateTime(new Date());
-		boolean b = this.progBiz.addPro(progress,subjectId);
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		boolean suc = this.progBiz.addPro(progress,subjectId);
+		Struts2Utils.renderText(suc?"0":"1","encoding:UTF-8");
 	}
+	
 	public void isExist(){
 		progressVo.setName(name);
 		progressVo.setStepId(stepId);
 		progressVo.setId(id);
 		List<TSm2Progress> p = this.progBiz.findByProgressVo(progressVo);
-		if(p==null||p.size()<1){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText((p==null||p.size()<1)?"0":"1","encoding:UTF-8");
 	}
 	
 	public String changeStep(){
@@ -54,23 +47,22 @@ public class ProgressAction extends BaseAction{
 		this.stepId = this.getRequest().getParameter("originStepId").toString();
 		return "refreshStep";
 	}
+	
 	public String update(){
-		TSm2Progress progress1  = this.progBiz.findById(progress.getId());
-		progress1.setName(progress.getName());
-		progress1.setContent(progress.getContent());
-		progress1.setLastUpdateTime(new Date());
-		this.progBiz.modify(progress1);
-		this.stepId = progress1.getStepId();
+		TSm2Progress prog  = this.progBiz.findById(progress.getId());
+		prog.setName(progress.getName());
+		prog.setContent(progress.getContent());
+		prog.setLastUpdateTime(new Date());
+		this.progBiz.modify(prog);
+		this.stepId = prog.getStepId();
 		return "refreshStep";
 	}
+	
 	public void delete(){
 		boolean b = this.progBiz.removeById1(id);
-		if(b){
-			Struts2Utils.renderText("0","encoding:UTF-8");
-		}else{
-			Struts2Utils.renderText("1","encoding:UTF-8");
-		}
+		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
 	}
+	
 	public void find(){
 		progress = this.progBiz.findById(id);
 		Struts2Utils.renderJson(Utils.gson.toJson(progress),"encoding:UTF-8");

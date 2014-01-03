@@ -52,60 +52,75 @@ public class WeekAction extends BaseAction{
 			}
 		}
 		
-		Map<String, WeekDisplayVo> result =null;
+		Map<String, WeekDisplayVo> result =
+			(search.getPublisher().size()>1)?findPluMap():findSingleMap();
 		
-		if(search.getPublisher().size()>1){//多个人
+		this.getRequestMap().put("view",
+				result == null ? Collections.EMPTY_MAP : result);
+		
+		this.getRequestMap().put("weekStart", weekStart);
+		return "weekList";
+	}
+
+	/**
+	 * 查找单个人
+	 * @return
+	 * @author xuechong
+	 */
+	private Map<String, WeekDisplayVo> findSingleMap() {
+		Map<String, WeekDisplayVo> result = new HashMap<String, WeekAction.WeekDisplayVo>();
+		List<SubjectWeekVo> list = this.subBiz.findWeekSingle(search);
+		
+		String userName = UCService.findNameByUid(search.getPublisher().get(0));
+		this.getRequestMap().put("personTitle", userName+"的本周工作");
+		
+		if(!CollectionUtils.isEmpty(list)){
 			
-			List<SubjectWeekVo> list = this.subBiz.findWeek(search);
+			result = new HashMap<String, WeekAction.WeekDisplayVo>(list.size());
 			
-			if(!CollectionUtils.isEmpty(list)){
-				result = new HashMap<String, WeekAction.WeekDisplayVo>(list.size());
+			for (SubjectWeekVo sub : list) {
 				
-				for (SubjectWeekVo sub : list) {
-					
-					if(!result.containsKey(sub.getCreatorUid())){
-						
-						result.put(sub.getCreatorUid(), 
-								new WeekDisplayVo(sub.getCreatorUid(), 
-										sub.getCreatorName()+"的本周工作"));
-						
-					}
-					
-					result.get(sub.getCreatorUid()).getSubs().add(sub);
-					
+				if(!result.containsKey(sub.getTypeId())){
+					result.put(sub.getTypeId(), 
+							new WeekDisplayVo(sub.getTypeId(), sub.getTypeName()));
 				}
 				
+				result.get(sub.getTypeId()).getSubs().add(sub);
 			}
 			
-		}else{//单个人
+		}
+		return result;
+	}
+
+
+	/**
+	 * 查找多个人
+	 * @return
+	 * @author xuechong
+	 */
+	private Map<String, WeekDisplayVo> findPluMap() {
+		Map<String, WeekDisplayVo> result = new HashMap<String, WeekAction.WeekDisplayVo>();
+		List<SubjectWeekVo> list = this.subBiz.findWeek(search);
+		
+		if(!CollectionUtils.isEmpty(list)){
+			result = new HashMap<String, WeekAction.WeekDisplayVo>(list.size());
 			
-			List<SubjectWeekVo> list = this.subBiz.findWeekSingle(search);
-			
-			String userName = UCService.findNameByUid(search.getPublisher().get(0));
-			this.getRequestMap().put("personTitle", userName+"的本周工作");
-			
-			if(!CollectionUtils.isEmpty(list)){
+			for (SubjectWeekVo sub : list) {
 				
-				result = new HashMap<String, WeekAction.WeekDisplayVo>(list.size());
-				
-				for (SubjectWeekVo sub : list) {
+				if(!result.containsKey(sub.getCreatorUid())){
 					
-					if(!result.containsKey(sub.getTypeId())){
-						result.put(sub.getTypeId(), 
-								new WeekDisplayVo(sub.getTypeId(), sub.getTypeName()));
-					}
+					result.put(sub.getCreatorUid(), 
+							new WeekDisplayVo(sub.getCreatorUid(), 
+									sub.getCreatorName()+"的本周工作"));
 					
-					result.get(sub.getTypeId()).getSubs().add(sub);
 				}
+				
+				result.get(sub.getCreatorUid()).getSubs().add(sub);
 				
 			}
 			
 		}
-		
-		this.getRequestMap().put("view",
-				result == null ? Collections.EMPTY_MAP : result);
-		this.getRequestMap().put("weekStart", weekStart);
-		return "weekList";
+		return result;
 	}
 	
 	public static class WeekDisplayVo{
@@ -153,7 +168,7 @@ public class WeekAction extends BaseAction{
 		try {
 			result = sdf.parse(sdf.format(firstDayOfWeek));
 		} catch (ParseException e) {
-			e.printStackTrace();
+			logger.error("获取本周日期格式化失败",e);
 		}
 		
 		return result;
