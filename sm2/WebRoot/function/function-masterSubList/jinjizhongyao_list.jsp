@@ -112,7 +112,7 @@
 	<table width="100%" border="0">
   		<tr>
 	        <th width="5%" scope="col">序号</th>
-	        <th width="25%" scope="col">名称</th>
+	        <th width="30%" scope="col">名称</th>
 	        <th width="10%" scope="col">部门</th>
 	        <th width="20%" scope="col">发布者</th>
 	        <th width="15%" scope="col">发布时间</th>
@@ -121,7 +121,7 @@
       	<c:forEach items="${pm.datas }" var="subject" varStatus="i">
 	      	<tr>
 		        <td align="center">${i.index+1 }</td>
-		        <td class="lan" align="center"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" >${subject.title }</a></td>
+		        <td class="other"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" >${subject.title }</a></td>
 		        <td align="center">${subject.departmentName}</td>
 		        <td align="center">${subject.createrName}</td>
 		        <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>

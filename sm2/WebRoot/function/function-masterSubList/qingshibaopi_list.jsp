@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>请示·报批性工作</title>
 <link rel="stylesheet" href="${prc}/function/css/index.css" type="text/css"></link>
-<link rel="stylesheet" href="${prc}/function/css/gzt.css" type="text/css"></link>
+<link rel="stylesheet" href="${prc}/function/function-masterSubList/css/gzt.css" />
 <script type="text/javascript" src="${prc}/function/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="${prc}/function/function-masterSubList/js/schoolMaster.js"></script>
 <script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
@@ -123,7 +123,7 @@
       <c:forEach items="${pm.datas }" var="subject" varStatus="i"> 
       <tr>
         <td align="center">${i.index+1 }</td>
-        <td class="lan" align="center"><span class="words"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" >${subject.title }</a></span></td>
+        <td class="other"><span class="words"><a href="${prc}/scMaster2/detail_master.action?id=${subject.id }" >${subject.title }</a></span></td>
         <td align="center">${subject.departmentName }</td>
         <td align="center">${subject.createrName}</td>
         <td align="center"><fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd"></fmt:formatDate></td>

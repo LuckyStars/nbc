@@ -84,12 +84,12 @@ margin: 5px 0 0 10px;
 </script>
 </head>
 <body>
-<div class="main" style="width: 990px;">
+<div class="main" style="width: 972px;">
 		<div class="right1">
 			<form action="${prc}/scMaster2/list_master.action" method="post">
     		<input type="hidden" name="moduleId" value="${moduleId}" />
 			<input type="hidden" name="search.typeId" value="${search.typeId}" />
-			<div class="right-input">
+			<div class="right-input" style="width:960px;">
 				<p>
 					<label>部门:</label>
 					<select name="search.departId" >
@@ -118,15 +118,15 @@ margin: 5px 0 0 10px;
 			</form>
 			<table width="100%" border="0">
 				<tr>
-					<th width="20%" scope="col">名称</th>
-					<th width="10%" scope="col">部门</th>
+					<th width="30%" scope="col">名称</th>
+					<th width="15%" scope="col">部门</th>
 					<th width="10%" scope="col">发布者</th>
 					<th width="10%" scope="col">发布时间</th>
-					<th width="50%" scope="col">进度</th>
+					<th width="35%" scope="col">进度</th>
 				</tr>
 				<c:forEach items="${pm.datas}" var="sub">
 					<tr>
-						<td class="other">
+						<td class="other" >
 							<a href="${prc}/scMaster2/detail_master.action?id=${sub.id }" >
 								<c:out value="${sub.title}" escapeXml="true"></c:out>
 							</a>

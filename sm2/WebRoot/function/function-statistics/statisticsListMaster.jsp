@@ -6,82 +6,74 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="${prc}/function/css/gzt.css" rel="stylesheet"/>
-    <link href="${prc}/function/function-statistics/css/index.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
-	<style type="text/css">
-		.tit_boder{
-			background: #DCE3FF;
-			width: 980px;
-			height: 30px;
-			line-height: 30px;
-			margin: 4px auto;
-			font-size: 12px;
-			border: 1px solid #A4B3EE;
-		}
-	
-	</style>
+    <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
+<style>
+table th {
+	background:url(../function/img/table-bg.jpg) repeat-x;
+    height:38px;
+	line-height:38px;
+}
+table td {
+	height:34px;
+	line-height:34px;
+	text-align:center;
+}
+</style>
+<script type="text/javascript" src="${prc}/function/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${prc}/function/js/datePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+$(function(){
+    $("table tr:odd").css("background", "#fff");
+    $("table tr:even").css("background", "#EDEFFE");
+});
+</script>
 </head>
-<body>
-	<div class="right1">
-   		<form action="${prc}/scMaster2/listMasterStatistics_data.action">
-     		<input type="hidden" name="matcher" value="${data.matcher}"/>
-		    <div class="content ">
-		      <h3 class="tit_boder" style="height: 36px;">统计时间：
-		          <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" 
+	<body>
+		<div class="right1">
+		  	<form action="${prc}/scMaster2/listMasterStatistics_data.action">
+			<input type="hidden" name="matcher" value="${data.matcher}"/>
+		    <div class="right-input">		      
+		        <p class="timer"><label>统计时间:</label>
+		         <input class="Wdate"  name="start" value="<fmt:formatDate value='${start}' pattern='yyyy-MM-dd'/>" type="text" 
 		          onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'d4312\')}'})" id="d4311"/>
 		         至：
 			       <input class="Wdate" name="end" value="<fmt:formatDate value='${end}' pattern='yyyy-MM-dd'/>" type="text" readonly="readonly" 
-			       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" />
-		          <a class="button" id="select1" href="javascript:document.forms[0].submit();">查询</a>
-		      </h3>
+			       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'d4311\')}'})" id="d4312" /></p>
+		       <a id="select1" href="javascript:document.forms[0].submit();">查询</a>
 		    </div>
-		    
-		    <c:if test="${empty pm.datas}"><%--无数据 --%>
-		    <div style="margin-top: 40px;text-align: center;">
-		    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
-		    </div>
+		   <table width="100%" border="0">
+		      <tr>
+		        <th width="5%"  scope="col">序号</th>
+		        <th width="35%" scope="col">标题</th>
+		        <th width="10%" scope="col">发布人</th>
+		        <th width="10%" scope="col">发布时间</th>
+		        <th width="35%" scope="col">统计时间段</th>
+		      </tr>
+			     <c:forEach items="${pm.datas}" varStatus="status" var="data">
+			      <tr>
+			        <td class="lan" >${status.index+1}</td>
+					 <td>
+			        	<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}">
+							<c:out value="${data.title}"/>
+						</a>
+					</td>
+			     
+			        <td><c:out value="${data.name}"/></td>
+			        <td><fmt:formatDate value="${data.createDate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+			        <td>
+			        	<fmt:formatDate value="${data.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>至
+			        	<fmt:formatDate value="${data.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate>的分析
+			        </td>
+			      </tr>
+			    </c:forEach>
+   			</table>
+   			 <c:if test="${empty pm.datas}"><%--无数据 --%>
+			    <div style="margin-top: 40px;text-align: center;">
+			    	<img src="${prc }/function/img/no_data.png" alt="暂无上报数据" />
+			    </div>
 		    </c:if>
-		    
-         	<ul class="list">
-         		<c:forEach items="${pm.datas}" varStatus="status" var="data">
-	         		<c:choose>
-						<c:when test="${status.index%2==0 }">
-							<li class="bg">
-								<a
-								href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}"
-								>${status.index+1}　
-									<fmt:formatDate value="${data.startDate}" pattern="yyyy年MM月dd日"/>-
-									<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
-									<span>的统计分析</span>
-								</a>
-								<a title="查看"
-								href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}" style="float:right;">
-									<img src="${prc}/function/function-statistics/images/ico.png" />
-								</a>
-							</li>
-		            	</c:when>	
-			            <c:otherwise>
-			            	<li>
-								<a
-								href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}"
-								>${status.index+1}　
-									<fmt:formatDate value="${data.startDate}" pattern="yyyy年MM月dd日"/>-
-									<fmt:formatDate value="${data.endDate}"  pattern="yyyy年MM月dd日"/>
-									<span>的统计分析</span>
-								</a>
-								
-								<a title="查看"
-							 	href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}" style="float:right;">
-									<img src="${prc}/function/function-statistics/images/ico.png" />
-								</a>
-							</li>
-			            </c:otherwise>	
-		           	</c:choose>
-             	</c:forEach>
-         	</ul>
-         </form>
-      </div>
+      </form>
+   </div>
   
     <div  style="text-align:center;font-size:15px;margin-top:20px;">
    		<c:if test="${pm.total>0}">

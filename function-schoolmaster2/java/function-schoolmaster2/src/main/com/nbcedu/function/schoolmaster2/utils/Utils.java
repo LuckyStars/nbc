@@ -65,7 +65,7 @@ public class Utils {
 	 */
 	public static String getUserName(String userUid){
 		String name = UCService.findNameByUid(userUid);
-		return 	StringUtil.isEmpty(name)==true ? name: "";
+		return 	StringUtil.isEmpty(name)==true ? "" : name;
 	}
 	/**
 	 * 默认接受者的uid

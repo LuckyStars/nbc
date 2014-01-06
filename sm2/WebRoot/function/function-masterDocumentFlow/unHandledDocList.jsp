@@ -85,12 +85,12 @@ function changepage(page){
       <tr>
         <th width="5%" scope="col">序号</th>
         <th width="35%" scope="col">文件名称</th>
-        <th width="10%" scope="col" style="text-align:left;">发文单位</th>
+        <th width="20%" scope="col" style="text-align:left;">发文单位</th>
         <th width="10%" scope="col" style="text-align:left;">发布者</th>
         <th width="10%" scope="col">发布时间</th>
         <th width="10%" scope="col">状态</th>
         <th width="10%" scope="col">过期时间</th>
-        <th width="10%" scope="col">操作</th>
+<!--        <th width="10%" scope="col">操作</th>-->
       </tr>
       <s:iterator value="documentTaskVoList" var="taskVo" status="st">
       <tr>
@@ -104,7 +104,7 @@ function changepage(page){
         <td><s:property value="#taskVo.publishTime"/></td>
         <td><s:property value="#taskVo.status"/></td>
         <td><s:property value="#taskVo.expireTime"/></td>
-        <td><span class="find"><a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">查阅处理</a></span></td>
+<!--        <td><span class="find"><a href="viewUnhandledDocument.action?docId=<s:property value='#taskVo.id'/>&taskType=<s:property value='#taskVo.type'/>">查阅处理</a></span></td>-->
       </tr>
       </s:iterator>
     </table>
