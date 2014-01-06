@@ -65,6 +65,7 @@ public class SM2DisscusBizImpl extends BaseBizImpl<TSm2Disscus> implements SM2Di
 		}
 		sql.delete(sql.lastIndexOf("UNION ALL"),sql.length());
 		String sqltoRun = sql.toString().replace("${size}", size.toString());
+		
 		SQLQuery q = (SQLQuery) this.disDao.createSqlQuery(sqltoRun);
 		q.addScalar("id",Hibernate.STRING);
 		q.addScalar("createrId",Hibernate.STRING);

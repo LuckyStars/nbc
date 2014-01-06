@@ -326,19 +326,12 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			}};
 			
 			for (Integer sta : search.getStatus()) {
-				switch (sta) {
-					case 1:
-						status.get(0).add(sta);
-						break;
-					default:
-						status.get(1).add(sta);
-						break;
-				}
+				status.get(sta==1?0:1).add(sta);
 			}
 			
 			for (String uid : search.getPublisher()) {
 				for (List<Integer> statu : status) {
-					if(status.size()<=0){
+					if(statu.size()<=0){
 						continue;
 					}
 					sql.append("SELECT id,title,createrId,createrName,typeName,typeId,status ");
