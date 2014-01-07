@@ -16,7 +16,7 @@ function stick(id,flag,banner){
 						flag1=3;
  	 		   		}
  	 		   		var a = '<a href="#" onclick="javascript:stick(\''+id+'\','+flag1+',\''+banner+'\');" id="'+id+'">';
- 	 		   		var img1 = '<img src="../function/img/'+banner+flag+suff+'"/></a>';
+ 	 		   		var img1 = '<img src="../function/img/'+banner+flag+suff+'" class="img"/></a>';
  	 		   		var img = a+img1;
 					$("#"+id).replaceWith(img);
  		   		}
