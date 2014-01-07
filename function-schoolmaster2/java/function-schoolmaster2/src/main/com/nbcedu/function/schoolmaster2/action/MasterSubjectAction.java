@@ -91,10 +91,16 @@ public class MasterSubjectAction extends BaseAction{
 		
 		if(this.subject!=null&&subject.getCheckUsers().size()>0){////已读状态
 			if(Utils.isMaster()){
+				boolean b = false;
 				for(SM2SubjectMaster master : subject.getCheckUsers()){
 					if(master.getUserUid().equals(this.getUserId())){
-						this.getRequest().setAttribute("master", true);
+						b=true;
 					}
+				}
+				if(b){
+					this.getRequest().setAttribute("master", true);
+				}else{
+					this.getRequest().setAttribute("master", false);
 				}
 			}else if(Utils.isManager()){
 				this.getRequest().setAttribute("checkUser", true);

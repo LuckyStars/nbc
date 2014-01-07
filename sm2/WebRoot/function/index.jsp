@@ -209,9 +209,9 @@
 					</tr>
 					<tr>
 						<td>
-							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=dangtuan">
+							<a class="pointer" href="${prc}/scMaster2/login_index.action?moduleId=nianduzhongxin&search.typeId=bangongshi">
 								<img src="${prc}/function/images/icon6.png" />
-								<span>党团工作</span>
+								<span>办公室</span>
 								<img src="${prc}/function/images/new.png" id="dangtuan_flag" />
 							</a>
 						</td>

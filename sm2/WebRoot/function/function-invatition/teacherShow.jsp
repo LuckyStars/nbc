@@ -91,7 +91,7 @@
           </s:else>
         </ul> </div>
       <div class="article" style="height:20px;">
-        <p><a href="${tsm2Invatition.link}" target="_blank">链接地址点击查看</a></p>
+        <p><a href="${tsm2Invatition.link}"  >链接地址点击查看</a></p>
       </div>
          <ul class="fu">
          <s:iterator value="tsm2Resources">
@@ -131,7 +131,7 @@
           </dl>
           </s:iterator>
 		</s:if>
-		<s:else> &nbsp;&nbsp;&nbsp;没有评论</s:else>
+		<s:else> &nbsp;&nbsp;&nbsp;暂无评论</s:else>
         </div>
       </div>
     </div>

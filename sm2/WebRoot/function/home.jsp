@@ -233,6 +233,10 @@
 					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan" 
 					target="fm_right">党团工作</a>
 				</li>
+				<li>
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=bangonshi" 
+					target="fm_right">办公室</a>
+				</li>
         	</ul>
       	</li>
       	<%--工作计划追踪 END--%>
