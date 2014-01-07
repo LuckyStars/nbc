@@ -428,7 +428,6 @@
 				<div class="tabs_warp" style="text-align: left;">
 				<div class="tabs_arrow tabs_arrow_left"></div>
 				<div class="tabs_arrow tabs_arrow_right"></div>
-				
 				<div id="tabs_container" class="tabs_container" >
 					<ul class="tabs_tab_parent" id="tabs_tab_parent" >
 						<c:forEach items="${steps }" var="step" varStatus="i">
@@ -457,9 +456,9 @@
 				style="height: 20px;
 					margin-top: 5px;
 					float: right;
-					position: relative;
 					left: 50px;
 					top: 10px;
+					position:relative;
 					cursor: pointer;"
 				class="ico4 cpoint addtabs"
 				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>

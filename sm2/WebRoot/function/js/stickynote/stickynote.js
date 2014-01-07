@@ -82,7 +82,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 					.appendTo($(settings.containment));;
 			_warnbox.html(content);
 			var plus = function (origin){
-				return (parseInt(origin.replace('px','')) + 40) + 'px';
+				return (parseInt(origin.replace('px','')) + 25) + 'px';
 			};
 			_warnbox.css('left',plus(_this.css('left')));
 			_warnbox.css('top',plus(_this.css('top')));	

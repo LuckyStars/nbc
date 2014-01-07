@@ -32,13 +32,6 @@ padding:0 15px; position:relative; right:0px; height:40px; width:300px; margin:0
 
 <script type="text/javascript">
 	$(function() {
-		$("table tr:even").css("background", "#fff");
-		$("table tr:odd").css("background", "#EDEFFE");
-	});
-</script>
-
-<script type="text/javascript">
-	$(function() {
 		$(".nav-list-inner a").click(function() {
 			$(".current").removeClass("current");
 			$(this).addClass("current");

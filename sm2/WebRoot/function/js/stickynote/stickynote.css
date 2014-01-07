@@ -11,8 +11,8 @@
 /* The fun part: making it look like a sticky note! .*/
 .sticky_notes {
 	position: absolute;
-	width: 200px;
-	height: 180px;
+	width: 170px;
+	height: 155px;
 	padding: 1em;
 	cursor: move;
 	background-color: #FFFFCC; /* light-yellow default */

@@ -115,7 +115,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	width: 20PX;
 	height: 34PX;
 	cursor: pointer;
-	display: none;
+	visibility: hidden;
 	margin-left: 1px;
 	margin-right: 1px;
 	border-bottom: 0px;

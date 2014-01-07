@@ -107,7 +107,7 @@ $('#managers').combotree({
 								<li>
 									<span class="blue">
 									<a href="${prc}/scMaster2/detail_master.action?id=${sub.subId}">
-									<c:out value="${sub.title}" escapeXml="true"/>
+									<c:out value="${sub.subTitle}" escapeXml="true"/>
 									</a>
 									</span>
 									<span class="gary">${sub.typeName }</span>
