@@ -23,6 +23,7 @@
 	<script type="text/javascript" src="${prc}/function/js/easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="${prc}/function/js/easyui/easyui-lang-zh_CN.js"></script>
 	<script type="text/javascript" src="${prc}/function/function-linshi/js/imgmag.js" ></script>
+	<script type="text/javascript" src="${prc}/function/function-masterSubList/js/schoolMaster.js"></script>
     
     <link rel="stylesheet" type="text/css" 
     <%-- 这里不要换1.10.3的样式...会有问题(╯‵□′)╯︵┻━┻ --%>
@@ -31,17 +32,24 @@
 	<link href="${prc}/function/js/stickynote/stickynote.css" rel="stylesheet" />
 	<link href="${prc}/function/js/tabs/css/tabs.css" rel="stylesheet" />
 	
-	
+	<pri:showWhenMaster>
     <script type="text/javascript" src="${prc}/function/js/jqueryui/js/jquery-ui-1.10.3.custom.min.js"></script>
+    </pri:showWhenMaster>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/uuid.core.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/stickynote.js" ></script>
 	<script type="text/javascript" src="${prc}/function/js/stickynote/masternote.js" ></script>
     <script type="text/javascript" src="${prc }/function/js/tabs/js/tabs.js"></script>
+    <style type="text/css">
+    	.img {
+    	float:right;height:20px;margin: 2px;
+    	}
+    </style>
 	<script type="text/javascript"> 
 	$(function(){
 		initNotes('${subject.id}');
 	});
-	content = KindEditor.ready(function(K) {
+	var content;
+	KindEditor.ready(function(K) {
 		var contentOptions = {
 			resizeType : 1,
 			width: 416,
@@ -63,7 +71,7 @@
 				self.sync();
 			}
 		};
-		K.create('textarea[name="progress.content"]', contentOptions);
+	content = K.create('textarea[name="progress.content"]', contentOptions);
  	 });
 	 $(function () {
          $(".shou").click(function () {//赞
@@ -153,7 +161,7 @@
  					alert("请填写步骤名称！");
  	          }
          });
-      	$(".delete_step_ico").click(function(){
+      	$(".tabs_remove").click(function(){
 			var id = $(this).attr("name");
 		 	$.post("isExist_progress.action",{stepId:id},function(data1){
 				if(data1==0){
@@ -181,8 +189,9 @@
 			         	var formParams = $("#progressForm").serialize();
 			    		$.post("add_progress.action", formParams, function(data) {
 			      				$("input[name='progress.name']").val("");
-			      				conten.html("");
-				   				 $(".adds6").hide();
+			      				content.html("");
+				   				$(".adds6").hide();
+				   				alert("保存成功！");
 				   				location.reload();
 			     			});
 	            	}else{
@@ -296,26 +305,15 @@
 						</div>
 					</pri:showWhenMaster>
 					<span style="margin-bottom: 20px;">${subject.title }</span>
-					<pri:hideWhenMaster>
-					
-					<div style="float: right; margin-top: 15px; margin-right: 20px;margin-bottom:20px;font-size:12px;">
+					<img src="${prc }/function/function-linshi/img/back.jpg" alt="返回" onclick="history.back();"
+						style="float:right;cursor: pointer;height:20px;margin-right: 15px;"/>
+				</div>
+					<pri:showWhenManager>
+						<div style="font-size:12px; position: absolute;left:5px;">
 						<div id="slider_pro" style="width:200px;"></div>
 						<span id="slider_num" ></span>
 					</div>
-					</pri:hideWhenMaster>
-					
-					<pri:showWhenManager> 
-					<c:if test="${checkUser==true}">
-						<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" width="23" height="30" 
-							title="<c:forEach items='${subject.checkUsers}' 
-							var='user' ><c:if test='${user.flag==1}'>${user.userName};</c:if></c:forEach>"/>
-						<%--<img src="${prc}/function/function-linshi/img/qi3.png" width="23" height="30" />--%>
-					</c:if>
 					</pri:showWhenManager>
-					
-				</div>
-
-	
 				<h3 style="font-family: 微软雅黑;font-size:14px;text-align: center;padding-left: 70px;width: 690px;">
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
@@ -335,16 +333,28 @@
 						  onclick="newNote('${subject.id}');" /><%--便签 --%>
 						  
 						<c:if test="${master==true}">
-							<img id="flagImg"
+							<img id="${subject.id}" onclick="javascript:stick('${subject.id }',3,'qi');"
 							style="float:right;height:20px;margin: 2px;"
-							 src="${prc}/function/function-linshi/img/qi2.png" />
+							 src="${prc}/function/img/qi1.png" />
 						</c:if>
-						<c:if test="${master!=true}">
-							<img 
+						<c:if test="${master==false}">
+							<img id="${subject.id}" onclick="javascript:stick('${subject.id }',1,'qi');"
 							style="float:right;height:20px;margin: 2px;"
-							src="${prc}/function/function-linshi/img/qi2.png" />
+							src="${prc}/function/img/qi3.png" />
 						</c:if>
 					</pri:showWhenMaster>
+					<pri:showWhenManager>
+						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
+						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
+					</pri:showWhenManager>
+					<pri:showWhenManager> 
+						<c:if test="${checkUser==true}">
+							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" 
+								style="float:right;height:20px;margin: 2px;"
+								title="<c:forEach items='${subject.checkUsers}' 
+								var='user' ><c:if test='${user.flag==1}'>${user.userName};</c:if></c:forEach>"/>
+						</c:if>
+					</pri:showWhenManager>
 				</h3>
 				<div class="articles">
 					<p style="text-align: left;">${subject.content }</p>
@@ -435,7 +445,7 @@
 								</pri:showWhenManager>
 								<c:if test="${sessionScope.sm2_init==step.createrId}">
 								<div class="tabs_icon tabs_edit" id="${step.id}" ></div>
-								<div class="tabs_icon tabs_remove"  ></div>
+								<div class="tabs_icon tabs_remove"  name="${step.id}"></div>
 								</c:if>
 							</span>
 							<div class="tabs_icon"><!--用于往下挤高度= =|| --></div>
@@ -448,7 +458,7 @@
 				</div>
 			</div>
 				
-				
+				<pri:showWhenManager>
 				<img title="增加步骤" 
 				style="height: 20px;
 					margin-top: 5px;
@@ -459,7 +469,7 @@
 					cursor: pointer;"
 				class="ico4 cpoint addtabs"
 				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
-			
+			</pri:showWhenManager>
 			<div style="z-index:-999999;clear: both;width:790px;border-top: 1px solid #d5d5d5;height: 10px;margin-top:-1px;">
 			</div>
 			

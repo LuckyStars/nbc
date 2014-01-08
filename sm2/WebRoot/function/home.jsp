@@ -11,17 +11,6 @@
 <link href="${prc}/function/css/index.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${prc}/function/css/gzt.css" />
     <style>
-    table th {
-		background:url(${prc}/function/img/table-bg.jpg) repeat-x;
-	    height:38px;
-		line-height:38px;
-	}
-    table td {
-		height:34px;
-		line-height:34px;
-		text-align:center;
-	}
-	
 .linshi	{background: url("${prc}/function/images/li_blue.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #0273C2;
     display: inline-block;
@@ -34,12 +23,12 @@
     </style>
 	
     <script type="text/javascript">
-        $(function () {
-            $("table tr:odd").css("background", "#fff");
-            $("table tr:even").css("background", "#EDEFFE");
-        });
-	</script>
-	<script type="text/javascript">
+    function open1(t){
+    	 $(".nav-list-inner").hide();
+         $(".li-blue .cols-open").attr("class", "cols");
+         $(t).parent().next().show();
+         $(t).attr("class", "cols-open");
+    }
     $(function () {
         $(".nav-list-inner a").click(function () {
             $(".current").removeClass("current");
@@ -178,16 +167,16 @@
 			          <li><a href="#">·我要看的学校动态</a></li>--%>
           		<li>
           			<a href="${prc}/scMaster2/daiban_master.action"
-          			target="fm_right" id="tab_daibanshiyi">待办事宜</a>
+          			target="fm_right" >待办事宜</a>
        			</li>
 				<li>
 	          		<a href="${prc}/scMaster2/masterList_invatition.action" 
-	          		target="fm_right" id="tab_yaoqingchakan">我收到的邀请</a>
+	          		target="fm_right">我收到的邀请</a>
 	          	</li>
 	          
 	          	<li>
 		          	<a href="${prc}/scMaster2/search_week.action"
-	          		target="fm_right" id="tab_week">本周工作汇总</a>
+	          		target="fm_right">本周工作汇总</a>
 	          	</li>
 <%--          <li><a href="#">·我的邮件</a></li>--%>
         	</ul>
@@ -233,6 +222,10 @@
 					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=dangtuan" 
 					target="fm_right">党团工作</a>
 				</li>
+				<li>
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=bangonshi" 
+					target="fm_right">办公室工作</a>
+				</li>
         	</ul>
       	</li>
       	<%--工作计划追踪 END--%>
@@ -250,15 +243,15 @@
 		   		</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=zongjiehuibao"
-		    		target="fm_right" id="tab_zongjiehuibao">总结·汇报·关注性工作</a>
+		    		target="fm_right" >总结·汇报·关注性工作</a>
 		    	</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=qingshibaopi"
-		    		target="fm_right" id="tab_qingshibaopi">请示·报批性工作</a>
+		    		target="fm_right" >请示·报批性工作</a>
 		    	</li>
 		    	<li>
 		    		<a href="${prc}/scMaster2/list_master.action?moduleId=jinjizhongyao"
-		    		target="fm_right" id="tab_jinjizhongyao">紧急重要事件处理</a>
+		    		target="fm_right">紧急重要事件处理</a>
 		    	</li>
 		  	</ul>
 		</li>
@@ -266,11 +259,11 @@
       
 		<%-- 临时事项  --%>
 		<li style="background: url(../function/images/li_blue.png) repeat-x;background-size:100% 28px;">
-			<a href="${prc}/scMaster2/list_master.action?moduleId=linshishixiang" class="linshi" id="nav4" target="fm_right" style="display:inline;background:aliceblue;" >
+			<a href="${prc}/scMaster2/list_master.action?moduleId=linshishixiang"  class="linshi" id="nav4" target="fm_right" style="display:inline;background:aliceblue;" >
 				<img src="${prc}/function/images/nav_04.png" width="16" height="16" />
 				学校临时事项处理
 			</a>
-			<span id="cols"><span class="cols" style="position:absolute;left:164px" id="cols"></span></span>
+			<span id="cols"><span class="cols" style="position:absolute;left:164px" ></span></span>
 		  	<ul class="nav-list-inner" id="linshi_list">
 		  	
 		  	</ul>

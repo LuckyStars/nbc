@@ -117,20 +117,29 @@
         
     </script>
 </head>
-<body>
-       <div class="con_conent fixed" style="background: #FFF;">
+<body style="background:#F9F9F9;"> 
+       <div class="con_conent fixed" style="width:99%;background:#F9F9F9;">
   <div class="table_box fixed">
-    <div class="content">
+    <div class="content" style="margin-left:10px;">
       <h2>${tsm2Invatition.title}</h2>
-        <div class="on">
-      <h3><span>发布日期：</span><a class="ongray"><s:date name="tsm2Invatition.createTime" format="yyyy年MM月dd日"/></a><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邀请人：</span><a class="ongray">${tsm2Invatition.createrName}</a>
-      </h3>
-        <div id="star" style="width: 184px; height: 24px;float:right">
-        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" /><img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
-    </div>
-            </div>
-      <div class="articles">${tsm2Invatition.content}</div>
-      <div class="tabs-wp">
+      <div class="on" style="width:99%">
+	      <h3><span>发布日期：</span>
+      		<a class="ongray"><s:date name="tsm2Invatition.createTime" format="yyyy年MM月dd日"/></a>
+      		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邀请人：</span><a class="ongray">${tsm2Invatition.createrName}</a>
+	      </h3>
+	      <div id="star" style="width: 25%; height: 24px;float:right;margin-right:15px">
+	        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
+	        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
+	        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
+	        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
+	        <img src="${prc}/function/function-invatition/masterShow/images/star-off-big.png" />
+	        <img src="${prc }/function/function-linshi/img/back.png" alt="返回" onclick="history.back();"
+						style="height:20px;margin-left:1px;float:right;"/>
+	    	</div>
+       </div>
+      
+      <div class="articles" style="width:95%;">${tsm2Invatition.content}</div>
+      <div class="tabs-wp" style="width:99%">
         <ul class="tabs">
           <s:if test="tsm2Invatition.flag==0">
           	<li class="curs cur">附件</li>
@@ -138,7 +147,7 @@
             <li class="lian cur">链接</li>
           </s:else>
         </ul> </div>
-      <div class="article" style="height:20px;">
+      <div class="article" style="height:20px;width:97%">
         <p><a href="${tsm2Invatition.link}" target="_blank">链接地址点击查看</a></p>
       </div>
          <ul class="fu">
@@ -147,14 +156,14 @@
          </s:iterator>
         </ul>
      
-      <div class="box">
-        <div class="box-top">
+      <div class="box" style="width:99%;">
+        <div class="box-top" style="width:100%;">
           <ul>
             <li class="two"><a href="javascript:void(0);">校长评论</a><img src="${prc}/function/function-invatition/masterShow/images/up1.jpg"  id="img" style="margin-top:10px; display:block; float:left; cursor:pointer;"/></li>
           </ul>
         </div>
         <div class="conshen box-down">
-          <input type="text"  class="erro" id="content"/>
+          <input type="text"  class="erro" id="content" style="width:99%"/>
           <a href="javascript:void(0);" class="btn" id="comment">发表</a>
           <s:iterator value="tsm2MasterComments">
           <dl class="new">

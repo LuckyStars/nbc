@@ -286,6 +286,11 @@
             var _div = $("input[name='a2'][type='radio']:checked").val();
             var _link=$.trim($("#t_link").val());
             filePaths=new Array();
+            var vlink = _link.substring(0,3);
+            if(vlink!="http"){
+                alert("链接地址必须以'http'或'https'为开始！");
+                return false;
+            }
             if(_name ==""){
                 alert("标题名称不能为空！");
                 return false;
@@ -376,7 +381,9 @@
 				<c:forEach items="${pm.datas }" var="subject">
 					<tr id="${subject.id}">
 						<td>
+							<a href="${prc}/scMaster2/teacherShow_invatition.action?tsm2Invatition.id=${subject.id}">
 							<c:out value="${subject.title}" escapeXml="true"></c:out>
+							</a>
 						</td>
 						<td>
 							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />

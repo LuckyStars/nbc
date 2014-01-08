@@ -76,7 +76,7 @@ $('#managers').combotree({
 			</h3>
 
 			
-			<h2>${personTitle}</h2>
+			<h2><c:if test="${empty  personTitle}">本周工作汇报</c:if>${personTitle}</h2>
 			
 			
 			<c:if test="${empty view}"><%--无数据 --%>

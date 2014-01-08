@@ -97,7 +97,8 @@
             <c:forEach items="${pm.datas}" var="sub" varStatus="i">
             <tr>
                 <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${i.index+1 }</td>
-                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${sub.title }</td>
+                <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>
+                	<a href="javascript:look('${sub.id }');">${sub.title }</a></td>
                 <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
                 <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>> ${sub.createrName}</td>
                 <td align="center" <c:if test="${sub.status==0}">style="font-weight: bold;"</c:if>>${sub.departmentName}</td>

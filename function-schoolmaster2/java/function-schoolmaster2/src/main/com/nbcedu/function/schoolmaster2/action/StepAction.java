@@ -61,7 +61,7 @@ public class StepAction extends BaseAction{
 				}
 			}
 		}
-		Struts2Utils.renderText(b?"0":"1","encoding:UTF-8");
+		Struts2Utils.renderText(b?"1":"0","encoding:UTF-8");
 	}
 	/**
 	 * 删除步骤只能删除自己建的步骤
