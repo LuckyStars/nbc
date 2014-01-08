@@ -13,9 +13,6 @@
 		var ctxPath = '${prc}';
 	</script>
 	<link href="${prc}/function/function-linshi/css/index.css" rel="stylesheet" type="text/css" />
-	<%-- 
-	<link href="${prc}/function/function-linshi/css/jqui.css" rel="stylesheet" type="text/css" />
-	--%>
 	<link href="${prc}/function/function-linshi/css/style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/default/easyui.css" />
 	<link rel="stylesheet" type="text/css" href="${prc}/function/js/easyui/themes/icon.css" />
@@ -607,10 +604,5 @@
 	}
 </script>
 
-<c:if test="${not empty steps and fn:length(steps)>6 }"><%--少于6个内容不需显示移动的箭头 --%>
-<script type="text/javascript">
-$("#spec-backward").imgmag({ show: 5, number: 1});
-</script>
-</c:if>
 </body>
 </html>

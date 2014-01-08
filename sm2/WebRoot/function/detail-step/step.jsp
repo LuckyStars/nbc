@@ -506,8 +506,10 @@
         	<div id="diss_content"
         	style="background-color:#F5F5F5;width: 705px;margin-left: 10px;"
         	>
+        	<c:set var="hasDis" value="${false}" ></c:set>
         	<c:forEach items="${disMap}" var="disEntry">
         		<c:if test="${disEntry.key==prog.id }">
+        		<c:set var="hasDis" value="${true}" ></c:set>
         			<c:forEach items="${disEntry.value }" var="dis">
         				<dl class="new">
 			            	<dd>
@@ -524,8 +526,14 @@
         		</c:if>
         	</c:forEach>
           	</div>
-          	
-          	<p class="pack1"><a style="color: #0A5FB2;" href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
+          	<c:choose>
+	          	<c:when test="${hasDis }">
+		          	<p class="pack1"><a style="color: #0A5FB2;" href="javascript:showAllDiscuss('${prog.id}');">查看所有评论</a></p>
+	          	</c:when>
+	          	<c:otherwise>
+		        	<img src='${prc}/function/detail-step/img/no_dis.png' />
+	          	</c:otherwise>
+          	</c:choose>
 		</div>
 	</div>
 	</div>
@@ -561,9 +569,11 @@
         </div>
         <div style="clear: both;height: 5px;"></div>
         <div id="comment_content" style=" background-color: #F5F5F5;width: 705px;">
-        <!-- 增加批示 END  -->   
+        <!-- 增加批示 END  -->
+        <c:set var="hasComm" value="${false}"></c:set>
         <c:forEach items="${comMap}" var="comEntry">
        		<c:if test="${comEntry.key==prog.id }">
+       			<c:set var="hasComm" value="${true}"></c:set>
        			<c:forEach items="${comEntry.value }" var="com">
        				<dl class="new">
 		            	<dd>
@@ -579,7 +589,14 @@
        		</c:if>
        	</c:forEach>
 		</div>
-        <p class="pack1" onclick="showAllComment('${prog.id}');">查看所有批示</p>
+		<c:choose>
+          	<c:when test="${hasComm }">
+		        <p class="pack1" onclick="showAllComment('${prog.id}');">查看所有批示</p>
+          	</c:when>
+          	<c:otherwise>
+	        	<img src='${prc}/function/detail-step/img/no_comm.png' />
+          	</c:otherwise>
+       	</c:choose>
 	</div>
 	
 	</div>
