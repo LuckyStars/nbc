@@ -179,7 +179,8 @@
             <tr>
             	<pri:hideWhenManager>
 		                <td align="center" <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>>${i.index+1 }11</td>
-		                <td align="center"  <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>>${sub[1].title }</td>
+		                	<td align="center"  <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>>
+		                	<a href="javascript:look('${sub[1].id }');">${sub[1].title }</a></td>
 		                <td align="center"  <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>><fmt:formatDate value="${sub[1].createTime}" pattern="yyyy-MM-dd"/></td>
 		                <td align="center"  <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>>${sub[1].createrName}</td>
 		                <td align="center"  <c:if test="${sub[0].status==0}">style="font-weight: bold;"</c:if>>${sub[1].departmentName}</td>
@@ -189,7 +190,7 @@
                 </pri:hideWhenManager>
                 <pri:showWhenManager>
 	                <td align="center">${i.index+1 }</td>
-	                <td align="center">${sub.title }</td>
+	                <td align="center"><a href="javascript:look('${sub.id }');">${sub.title }</a></td>
 	                <td align="center"><fmt:formatDate value="${sub.createTime}" pattern="yyyy-MM-dd"/></td>
 	                <td align="center">${sub.createrName}</td>
 	                <td align="center">${sub.departmentName}</td>

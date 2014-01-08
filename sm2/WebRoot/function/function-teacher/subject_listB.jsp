@@ -13,7 +13,7 @@
 		<div class="table_box fixed">
 			<c:forEach items="${list}" var="subject">
 				<dl class="warp">
-					<a href="${prc}/scMaster2/detail_master.action?id=${subject.id}";">
+					<a href="${prc}/scMaster2/detail_master.action?id=${subject.id}">
 						<dt>
 							<img src="${prc}/function/img/${fn:substring(subject.id, 7, 8) }.png" />
 						</dt>

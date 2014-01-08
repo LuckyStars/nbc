@@ -137,8 +137,8 @@ margin: 5px 0 0 10px;
 			
 			<table width="100%" border="0">
 				<tr>
-					<th width="30%" scope="col">标题</th>
-					<th width="20%" scope="col">创建人</th>
+					<th width="30%" scope="col">邀请内容</th>
+					<th width="20%" scope="col">邀请人</th>
 					<th width="20%" scope="col">提交时间</th>
 					<th width="30%" scope="col">操作</th>
 				</tr>
@@ -146,7 +146,9 @@ margin: 5px 0 0 10px;
 				<c:forEach items="${pm.datas }" var="subject">
 					<tr id="${subject.id}" >
 						<td class="other">
-							<c:out value="${subject.title}" escapeXml="true"></c:out>
+							<a href="${prc}/scMaster2/masterShow_invatition.action?tsm2Invatition.id=${subject.id}">
+								<c:out value="${subject.title}" escapeXml="true"></c:out>
+							</a>
 						</td>
 						<td>${subject.createrName}</td>
 						<td>

@@ -308,6 +308,8 @@
 						</div>
 					</pri:showWhenMaster>
 					<span style="margin-bottom: 20px;">${subject.title }</span>
+					<img src="${prc }/function/function-linshi/img/back.jpg" alt="返回" onclick="history.back();"
+						style="float:right;cursor: pointer;height:20px;margin-right: 15px;"/>
 				</div>
 					<pri:showWhenManager>
 						<div style="font-size:12px; position: absolute;left:5px;">
@@ -344,6 +346,10 @@
 							src="${prc}/function/img/qi3.png" />
 						</c:if>
 					</pri:showWhenMaster>
+					<pri:showWhenManager>
+						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
+						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
+					</pri:showWhenManager>
 					<pri:showWhenManager> 
 						<c:if test="${checkUser==true}">
 							<img id="flagImg" src="${prc}/function/function-linshi/img/qi2.png" 
@@ -442,7 +448,7 @@
 								</pri:showWhenManager>
 								<c:if test="${sessionScope.sm2_init==step.createrId}">
 								<div class="tabs_icon tabs_edit" id="${step.id}" ></div>
-								<div class="tabs_icon tabs_remove"  ></div>
+								<div class="tabs_icon tabs_remove"  name="${step.id}"></div>
 								</c:if>
 							</span>
 							<div class="tabs_icon"><!--用于往下挤高度= =|| --></div>

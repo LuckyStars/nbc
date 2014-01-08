@@ -381,7 +381,9 @@
 				<c:forEach items="${pm.datas }" var="subject">
 					<tr id="${subject.id}">
 						<td>
+							<a href="${prc}/scMaster2/teacherShow_invatition.action?tsm2Invatition.id=${subject.id}">
 							<c:out value="${subject.title}" escapeXml="true"></c:out>
+							</a>
 						</td>
 						<td>
 							<fmt:formatDate value="${subject.createTime}" pattern="yyyy-MM-dd" />
