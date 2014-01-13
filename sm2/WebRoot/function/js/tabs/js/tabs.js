@@ -62,7 +62,7 @@ var initMoves = function(){
 	}
 
 	if(_tabParent.width() > _container.width()){
-		$(".tabs_arrow").show();
+		$(".tabs_arrow").show().css("visibility", "visible");
 	}
 
 	$(".tabs_arrow_right").click(function(){

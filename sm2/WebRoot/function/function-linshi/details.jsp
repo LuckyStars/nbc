@@ -305,7 +305,7 @@
 						</div>
 					</pri:showWhenMaster>
 					<span style="margin-bottom: 20px;">${subject.title }</span>
-					<img src="${prc }/function/function-linshi/img/back.jpg" alt="返回" onclick="history.back();"
+					<img src="${prc }/function/function-linshi/img/go_back.png" alt="返回" onclick="history.back();"
 						style="float:right;cursor: pointer;height:20px;margin-right: 15px;"/>
 				</div>
 					<pri:showWhenManager>
@@ -432,7 +432,13 @@
 			</div>
 		</div>
 	</form>
-				<div class="tabs_warp" style="text-align: left;">
+				<c:if test="${empty steps }">
+				<div style="text-align: center;">
+				<img src="${prc}/function/img/no_data.png"/>
+				</div>
+				</c:if>
+				<div class="tabs_warp" 
+				style="text-align: left;<pri:showWhenMaster>width:770px;</pri:showWhenMaster>">
 				<div class="tabs_arrow tabs_arrow_left"></div>
 				<div class="tabs_arrow tabs_arrow_right"></div>
 				<div id="tabs_container" class="tabs_container" >

@@ -391,7 +391,12 @@
 			 </div>
 		</div>
 	</div>
-<!-- 弹出层 资源 END -->
+	<!-- 弹出层 资源 END -->
+	<c:if test="${empty proList}">
+		<div style="text-align: center;">
+		<img src="${prc}/function/img/no_data.png"/>
+		</div>
+	</c:if>
 	<c:forEach items="${proList }" var="prog" varStatus="progStatus">
 	<div class="prog_parent" >
 	   	<div class="mids">

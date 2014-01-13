@@ -48,12 +48,13 @@ var refLinshi = function (){
 		var curData = data;
 		for(var i = 0;i<data.length;i++){
 			
-			var content = $("<div class='linshi'></div>");
+			var content = $("<div class='linshi' title='" + curData[i].title + "'></div>");
 			var aTag = $("<a class='pointer' href='" +ctxPath + "/scMaster2/home_index.action?rightURL="+ curData[i].url + "' target=_blank></a>");
 			$("<img src='" + ctxPath +"/function/images/percent2/" 
 					+ curData[i].progress+
-					".png' width='120' height='90'>").appendTo(aTag);
-			$("<span style='color:#e1517e;'>"+ curData[i].title +"</span>").appendTo(aTag);
+					".png' width='100' height='75'>").appendTo(aTag);
+			$("<span style='color:#0273c2;width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;'>"
+					+ curData[i].title +"</span>").appendTo(aTag);
 			aTag.appendTo(content);
 			
 			var flag = $("<a class='flag" + curData[i].statu + "'></a>");
