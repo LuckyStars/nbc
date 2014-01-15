@@ -441,7 +441,13 @@
 			</div>
 		</div>
 	</form>
-				<div class="tabs_warp" style="text-align: left;">
+				<c:if test="${empty steps }">
+				<div style="text-align: center;">
+				<img src="${prc}/function/img/no_data.png"/>
+				</div>
+				</c:if>
+				<div class="tabs_warp" 
+				style="text-align: left;<pri:showWhenMaster>width:770px;</pri:showWhenMaster>">
 				<div class="tabs_arrow tabs_arrow_left"></div>
 				<div class="tabs_arrow tabs_arrow_right"></div>
 				<div id="tabs_container" class="tabs_container" >
