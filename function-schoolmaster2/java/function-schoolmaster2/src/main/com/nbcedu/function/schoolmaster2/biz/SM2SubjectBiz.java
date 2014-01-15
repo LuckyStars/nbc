@@ -53,4 +53,7 @@ public interface SM2SubjectBiz extends BaseBiz<TSm2Subject>{
 	void updateMasterFlagAll(int flag, String subId) throws DBException;
 	
 	public List<Map<String,String>> findStatusCount(String userId);
+	
+	TSm2Subject findSubByStepId(String stepId);
+	
 }

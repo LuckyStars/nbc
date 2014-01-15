@@ -171,4 +171,10 @@ public class SM2SubjectBizImpl extends BaseBizImpl<TSm2Subject> implements SM2Su
 		}
 		return result;
 	}
+	
+	@Override
+	public TSm2Subject findSubByStepId(String stepId) {
+		String hql = "FROM TSm2Subject sub WHERE sub.id = (SELECT st.subjectId FROM TSm2Step st WHERE st.id=?)";
+		return (TSm2Subject) this.sm2SubjectDao.createQuery(hql, stepId).uniqueResult();
+	}
 }
