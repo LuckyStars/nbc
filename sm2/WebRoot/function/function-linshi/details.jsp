@@ -296,24 +296,33 @@
 		<div class="table_box fixed">
 			<div class="content">
 				<div class="detail_titles" style="text-align: center;">
-				
-					<pri:showWhenMaster>
-						<div>
-						<img style="margin-top: 0px;position: absolute;left: 20px;"
+				<span >${subject.title }</span>
+				<pri:showWhenMaster>
+					<img src="${prc }/function/function-linshi/img/go_back.png" alt="返回" onclick="history.back();"
+						style="float:right;cursor: pointer;height:20px;margin-right: 15px; margin-top: 40px;"/>
+					<div style="float:right;">
+						<img 
 						src='${prc}/function/images/percent/${subject.progress }.png' 
 						width='60' height='60'/>
-						</div>
-					</pri:showWhenMaster>
-					<span style="margin-bottom: 20px;">${subject.title }</span>
-					<img src="${prc }/function/function-linshi/img/back.jpg" alt="返回" onclick="history.back();"
-						style="float:right;cursor: pointer;height:20px;margin-right: 15px;"/>
+					</div>
+				</pri:showWhenMaster>
 				</div>
-					<pri:showWhenManager>
-						<div style="font-size:12px; position: absolute;left:5px;">
+				<div style="height:20px;">
+					<pri:hideWhenMaster>	
+						<img src="${prc }/function/function-linshi/img/go_back.png" alt="返回" onclick="history.back();"
+						style="float:right;cursor: pointer;height:20px;margin-right: 15px;"/>
+						<div style="float: right;  margin-right: 20px;font-size:12px;">
 						<div id="slider_pro" style="width:200px;"></div>
 						<span id="slider_num" ></span>
-					</div>
-					</pri:showWhenManager>
+						</div>
+					</pri:hideWhenMaster>	
+				</div>
+<!--					<pri:showWhenManager>-->
+<!--						<div style="font-size:12px; position: absolute;left:5px;">-->
+<!--						<div id="slider_pro" style="width:200px;"></div>-->
+<!--						<span id="slider_num" ></span>-->
+<!--					</div>-->
+<!--					</pri:showWhenManager>-->
 				<h3 style="font-family: 微软雅黑;font-size:14px;text-align: center;padding-left: 70px;width: 690px;">
 					发布日期： <span><fmt:formatDate value="${subject.lastUpdateTime }" pattern="yyyy年MM月dd日" /></span>
 					&nbsp;&nbsp;&nbsp;关联重心工作： <span><typ:show id="${subject.typeId}"/></span>
