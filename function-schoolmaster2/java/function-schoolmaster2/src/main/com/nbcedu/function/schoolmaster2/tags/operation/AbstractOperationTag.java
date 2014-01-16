@@ -3,7 +3,6 @@ package com.nbcedu.function.schoolmaster2.tags.operation;
 import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 import static org.apache.commons.lang.xwork.StringUtils.trimToEmpty;
 
-import javax.servlet.jsp.JspException;
 
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
@@ -17,6 +16,7 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 	
 	protected String subjectId;
 	protected String stepId;
+	protected static final String CTX_KEY = "OperationContext";
 	
 	abstract boolean show(OperationContext opCtx) ;
 
@@ -27,12 +27,14 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 		return showResult;
 	}
 	
+	
 	protected final OperationContext getOpCtx(){
 		OperationContext ctx = 
-			(OperationContext) pageContext.getAttribute("OperationContext");
+			(OperationContext) pageContext.getAttribute(CTX_KEY);
 		
-		if(pageContext.getAttribute("OperationContext")==null){
+		if(pageContext.getAttribute(CTX_KEY)==null){
 			ctx = new OperationContext(subjectId,stepId);
+			pageContext.setAttribute(CTX_KEY, ctx);
 		}
 		return ctx;
 	}
@@ -45,7 +47,7 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 	}
 
 
-	protected static final class OperationContext{
+	public static final class OperationContext{
 		
 		/***自己是否是执行者***/
 		private Boolean selfIsOperator = null;
@@ -61,18 +63,21 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 		private Boolean senderIsMaster = null;
 		/***发送人是否是主任***/
 		private Boolean senderIsManager = null;
+		/**自己是否是大校长-.-**/
+		private Boolean selfIsBigBoss = null;
 		
 		private TSm2Subject sub = null;
 		private String selfUid = Utils.curUserUid();
 		private String subId = null;
 		private String stepId = null;
 		
-		protected SM2MasterSubBiz subBiz = 
+		private SM2MasterSubBiz subBiz = 
 			(SM2MasterSubBiz) Utils.Beans.getSpringBeanByName("masterSubBiz");
 	
 		private OperationContext(String subId,String stepId){
 			this.selfIsMaster = Utils.isMaster();
 			this.selfIsManager = Utils.isManager();
+			this.selfIsBigBoss = Utils.getDefaultMasterUids().contains(Utils.curUserUid());
 			this.subId = subId;
 			this.stepId = stepId;
 		}
@@ -123,26 +128,34 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 		////////////////////////
 		/////getters&setters////
 		////////////////////////
-		public Boolean selfIsSender(){
-			return getResult(selfIsSender);
+		public Boolean getSelfIsOperator() {
+			if(selfIsOperator==null){findResults();}
+			return selfIsOperator;
 		}
-		public Boolean selfIsOperator() {
-			return getResult(selfIsOperator);
+		public Boolean getSelfIsSender() {
+			if(selfIsSender==null){findResults();}
+			return selfIsSender;
 		}
-		public Boolean selfIsReceiver() {
-			return getResult(selfIsReceiver);
+		public Boolean getSelfIsReceiver() {
+			if(selfIsReceiver==null){findResults();}
+			return selfIsReceiver;
 		}
-		public Boolean senderIsMaster() {
-			return getResult(senderIsMaster);
+		public Boolean getSenderIsMaster() {
+			if(senderIsMaster==null){findResults();}
+			return senderIsMaster;
 		}
-		public Boolean senderIsManager() {
-			return getResult(senderIsManager);
+		public Boolean getSenderIsManager() {
+			if(senderIsManager==null){findResults();}
+			return senderIsManager;
 		}
-		public Boolean selfIsManager() {
+		public Boolean getSelfIsManager() {
 			return selfIsManager;
 		}
-		public Boolean selfIsMaster() {
+		public Boolean getSelfIsMaster() {
 			return selfIsMaster;
+		}
+		public Boolean getSelfIsBigBoss() {
+			return selfIsBigBoss;
 		}
 		
 	}

@@ -332,15 +332,16 @@
 					</c:forEach>
 					</span>
 					
-					<pri:showWhenMaster>
+					
 						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
 						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
-						
+						<pri:showWithOptExp subjectId="${subject.id }"
+							exp="ctx.selfIsBigBoss or (ctx.selfIsMaster and ctx.selfIsReceiver)">
 						<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 
 						src="${prc}/function/js/stickynote/createNote.png"
 						id="stknote"
 						  onclick="newNote('${subject.id}');" /><%--便签 --%>
-						  
+					  </pri:showWithOptExp>
 						<c:if test="${master==true}">
 							<img id="${subject.id}" onclick="javascript:stick('${subject.id }',3,'qi');"
 							style="float:right;height:20px;margin: 2px;"
@@ -351,7 +352,8 @@
 							style="float:right;height:20px;margin: 2px;"
 							src="${prc}/function/img/qi3.png" />
 						</c:if>
-					</pri:showWhenMaster>
+					
+					
 					<pri:showWhenManager>
 						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
 						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
