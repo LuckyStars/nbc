@@ -341,7 +341,8 @@
 						src="${prc}/function/js/stickynote/createNote.png"
 						id="stknote"
 						  onclick="newNote('${subject.id}');" /><%--便签 --%>
-					  </pri:showWithOptExp>
+					  	</pri:showWithOptExp>
+					  
 						<c:if test="${master==true}">
 							<img id="${subject.id}" onclick="javascript:stick('${subject.id }',3,'qi');"
 							style="float:right;height:20px;margin: 2px;"
@@ -457,9 +458,12 @@
 						<c:forEach items="${steps }" var="step" varStatus="i">
 						<li stepId="${step.id }" class="tabs_tab <c:if test="${i.index==0 }">tabs_selected</c:if>">
 							<span class="tabs_icon_container">
-								<pri:showWhenManager>
-								<div class="tabs_icon tabs_new_children" onclick="popAddProg('${step.id}');" ></div>
-								</pri:showWhenManager>
+								<pri:showWithOptExp 
+									exp="ctx.selfIsOperator or ctx.selfIsSender"
+								 	subjectId="${subject.id }">
+									<div class="tabs_icon tabs_new_children" onclick="popAddProg('${step.id}');" ></div>
+								</pri:showWithOptExp>
+								
 								<c:if test="${sessionScope.sm2_init==step.createrId}">
 								<div class="tabs_icon tabs_edit" id="${step.id}" ></div>
 								<div class="tabs_icon tabs_remove"  name="${step.id}"></div>
@@ -475,7 +479,9 @@
 				</div>
 			</div>
 				
-				<pri:showWhenManager>
+				<pri:showWithOptExp 
+					exp="ctx.selfIsSender"
+				 	subjectId="${subject.id }">
 				<img title="增加步骤" 
 				style="height: 20px;
 					margin-top: 5px;
@@ -486,7 +492,7 @@
 					cursor: pointer;"
 				class="ico4 cpoint addtabs"
 				 src="${prc}/function/function-linshi/images/prog_add.png" /><%--增加步骤 --%>
-			</pri:showWhenManager>
+			</pri:showWithOptExp>
 			<div style="z-index:-999999;clear: both;width:790px;border-top: 1px solid #d5d5d5;height: 10px;margin-top:-1px;">
 			</div>
 			
@@ -586,7 +592,9 @@
 	</div>
 
 <script>
-	<pri:hideWhenMaster><%-- 校长不显示进度条 --%>
+	<pri:showWithOptExp 
+	exp="ctx.selfIsOperator or ctx.selfIsSender"
+		subjectId="${subject.id }"><%-- 校长不显示进度条 --%>
  	$(function(){
 		$("#slider_pro").slider({
 			value:${subject.progress},
@@ -621,7 +629,7 @@
 		//$("#amount").val($("#slider_pro").slider('getValue') + "%"); 
 		
 	}); 
- 	</pri:hideWhenMaster>
+ 	</pri:showWithOptExp>
 	
 	function changeTab(stepId){
 		$("#prog_step_id").val(stepId);

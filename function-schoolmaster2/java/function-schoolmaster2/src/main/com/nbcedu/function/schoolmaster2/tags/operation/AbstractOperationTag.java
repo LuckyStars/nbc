@@ -128,6 +128,10 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 		////////////////////////
 		/////getters&setters////
 		////////////////////////
+		
+		public Boolean getSameLv(){
+			return (getSelfIsMaster()&&getSenderIsMaster())||(getSelfIsManager()&&getSelfIsManager());
+		}
 		public Boolean getSelfIsOperator() {
 			if(selfIsOperator==null){findResults();}
 			return selfIsOperator;
