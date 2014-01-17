@@ -561,7 +561,7 @@
     
     	<!-- 增加批示 -->    
         <div class="conshen" style="border:0px;">
-        	<pri:showWhenMaster>
+        	<pri:showWithOptExp exp="ctx.selfIsReceiver and ctx.selfIsMaster and (not ctx.sameLv)" stepId="${id}">
         	<form action="${prc}/scMaster2/add_comment.action" method="post"
         	id="comm_form_${prog.id }"
         	 >
@@ -571,7 +571,7 @@
 	          	<input type="hidden" name="comm.progressId" value="${prog.id }"/>
 	          	<a href="javascript:subCommForm('${prog.id }');" class="btn">发表</a>
         	</form>
-        	</pri:showWhenMaster>
+        	</pri:showWithOptExp>
         </div>
         <div style="clear: both;height: 5px;"></div>
         <div id="comment_content" style=" background-color: #F5F5F5;width: 705px;">

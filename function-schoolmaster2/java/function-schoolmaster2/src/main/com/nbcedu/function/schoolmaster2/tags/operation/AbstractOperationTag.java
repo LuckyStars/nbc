@@ -119,12 +119,6 @@ public abstract class AbstractOperationTag extends AbstractDisplayTag{
 			
 		}
 		
-		private Boolean getResult(Boolean bool){
-			if(bool==null){
-				findResults();
-			}
-			return bool;
-		}
 		////////////////////////
 		/////getters&setters////
 		////////////////////////
