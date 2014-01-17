@@ -394,7 +394,7 @@
 	<!-- 弹出层 资源 END -->
 	<c:if test="${empty proList}">
 		<div style="text-align: center;">
-		<img src="${prc}/function/img/no_data.png"/>
+		<img src="${prc}/function/detail-step/no_prog.png"/>
 		</div>
 	</c:if>
 	<c:forEach items="${proList }" var="prog" varStatus="progStatus">

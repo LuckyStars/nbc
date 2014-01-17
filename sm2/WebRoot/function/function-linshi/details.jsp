@@ -446,7 +446,7 @@
 	</form>
 				<c:if test="${empty steps }">
 				<div style="text-align: center;">
-				<img src="${prc}/function/img/no_data.png"/>
+				<img src="${prc}/function/function-linshi/no_step.png"/>
 				</div>
 				</c:if>
 				<div class="tabs_warp" 
