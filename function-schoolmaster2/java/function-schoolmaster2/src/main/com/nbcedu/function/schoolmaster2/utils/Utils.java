@@ -105,6 +105,15 @@ public class Utils {
 			}
 		});
 	}
+	
+	public static List<String> getAllMasterUids(){
+		return Lists.transform(Lists.newArrayList(getAllSchoolMaster()), new Function<PersonVo, String>() {
+			@Override
+			public String apply(PersonVo input) {
+				return input.getUid();
+			}
+		});
+	}
 	public static boolean isManager(){
 		for (PersonVo person : Utils.getAllManager()) {
 			if(person.getUid().equalsIgnoreCase(Utils.curUserUid())){

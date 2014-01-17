@@ -26,4 +26,24 @@
 		<tag-class>com.nbcedu.function.schoolmaster2.tags.HideWhenManager</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
+	<tag>
+		<name>showWithOptExp</name>
+		<tag-class>com.nbcedu.function.schoolmaster2.tags.operation.OptExpTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>subjectId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>stepId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>exp</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 </taglib>

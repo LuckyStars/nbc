@@ -312,7 +312,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	 * 原语句见 config/db/querys.sql
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "serial" })
 	public List<SubjectWeekVo> findWeek(SubWeekSearch search) {
 		
 		if(search==null){ return Collections.EMPTY_LIST;}

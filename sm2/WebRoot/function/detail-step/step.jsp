@@ -414,15 +414,15 @@
 				onclick="switchArticle('${prog.id}');"
 	   			 width="13" height="13" class="mids-img"/>
 	   			 
-	   			<pri:hideWhenMaster>
+	   			<pri:showWithOptExp exp="ctx.selfIsSender" 
+	   			stepId="${id}">
 	   			<img src="${prc }/function/detail-step/images/ico4.png" title="转移步骤" onclick="showStepTrans('${prog.id}');" class="ico8"/><%--转移步骤 --%>
 	   			<c:if test="${sessionScope.sm2_init==prog.createrId}">
 	   				<img src="${prc }/function/detail-step/images/ico5.png" title="删除" class="prog" id="${prog.id}"/><%--删除进展 --%>
 	   				<img src="${prc }/function/function-linshi/images/proUpdate.png" title="修改" onclick="showPro('${prog.id}');"/>
 	   			</c:if>
 	   			<%--<img src="${prc }/function/detail-step/images/ico6.png" class="ico5"/>上传附件 --%>
-	   			</pri:hideWhenMaster>
-	   			
+	   			</pri:showWithOptExp>
 	   			
 	   			<img
 	   			style="height: 20px;
@@ -474,7 +474,8 @@
         <div class="conshen box-down" 
         	name="disc_content_${prog.id }"
            >
-        	<pri:hideWhenMaster>
+        	<pri:showWithOptExp exp="(ctx.selfIsReceiver and (not ctx.selfIsBigBoss) and (not ctx.selfIsMaster)) and (not ctx.sameLv)" 
+	   			stepId="${id}">
         	<form action="${prc}/scMaster2/add_disc.action" method="post"
         	id="disc_form_${prog.id }"
         	 >
@@ -504,7 +505,7 @@
 	          	<input type="hidden" name="stepId" value="${id }"/>
 	          	<input type="hidden" name="disscus.progressId" value="${prog.id }"/>
         	</form>
-        	</pri:hideWhenMaster>
+        	</pri:showWithOptExp>
         	
         	<div style="clear: both;height: 5px;"></div>
         	

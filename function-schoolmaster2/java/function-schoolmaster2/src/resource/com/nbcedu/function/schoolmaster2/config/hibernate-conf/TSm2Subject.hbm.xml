@@ -49,11 +49,11 @@
        <property name="status" type="string">
             <column name="status" length="10" />
         </property>
-        <set name="excuteUsers" lazy="false" table="t_sm2_subject_user" inverse="false" cascade="all">
+        <set name="excuteUsers" lazy="false" table="t_sm2_subject_user" inverse="false" cascade="all" >
     		<key column="subjectId"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser"/>
 		</set>
-		<set name="checkUsers" table="t_sm2_subject_master" inverse="false" cascade="all">
+		<set name="checkUsers" table="t_sm2_subject_master" inverse="false" cascade="all" lazy="false" >
     		<key column="sub_id"/>
     		<one-to-many class="com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster"/>
 		</set>
