@@ -52,11 +52,11 @@
                     findAllResource($("#progId").val(),index);
                 } else if (index == 1) {
                    	$(".resource").attr("class", "resource pic");
-                   	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index},function(data){
+                   	$.post("findPic_resource.action",{progId:$("#progId").val(),type:index,stepId:$('input[name="step_Id"]').val()},function(data){
                    		if(data != ''){
                    			openList(data);
                    		}
-                 	  	});
+                 	 });
                 } else if (index == 2) {
                     $(".resource").attr("class", "resource video");
                     findAllResource($("#progId").val(),index);
@@ -156,7 +156,7 @@
         resizeParent();
     }
     function findAllResource(progId,type){
-    	$.post("findAll_resource.action",{progId : progId ,type:type},function(data){
+    	$.post("findAll_resource.action",{progId : progId ,type:type,stepId:$('input[name="step_Id"]').val()},function(data){
     		if(data != ''){
     			openList(data);
     			//location.href="findAll_resource.action?progId="+progId+"&typestr="+type;

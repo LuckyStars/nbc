@@ -154,6 +154,7 @@ $(function () {
 		if(numFilesUploaded==0){
 			alert("上传文件失败！");
 		}else{
+			$.ajaxSettings.traditional=true;
 	    	$.ajax({
 	    		url:prc+"/scMaster2/add_resource.action",
 	    		type:'post',

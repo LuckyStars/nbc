@@ -15,6 +15,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.util.CollectionUtils;
 
@@ -123,7 +124,7 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 				cri.add(Restrictions.eq("checkUsers.flag", vo.getFlag()));
 			}
 		}
-		
+		cri.addOrder(Order.asc("createTime"));
 		PagerModel pm =  this.sm2SubjectDao.searchPaginated(cri);
 		if(pm!=null&&pm.getDatas()!=null&&pm.getDatas().size()>0){
 			if(!(pm.getDatas().get(0) instanceof TSm2Subject)){
