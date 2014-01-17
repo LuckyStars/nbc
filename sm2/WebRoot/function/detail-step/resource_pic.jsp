@@ -178,14 +178,14 @@ $(function () {
 </script>
 </head>
 <body>
-	<pri:hideWhenMaster>
+	<pri:showWithOptExp exp="ctx.selfIsOperator or ctx.selfIsSender" stepId="${stepId}">
 	 <div class="liuyan">
 	  	<a href="#">
 	  		<img id="spanButtonPlaceHolder"/>
 	  		<span id="upload"></span>
 	  	</a>
      </div>
-     </pri:hideWhenMaster>
+     </pri:showWithOptExp>
 	 <form id="saveForm" method="post">
 	 	<div  style="OVERFLOW-y:auto; height:430px;">
 	 	<input type="hidden" value="${progId }" id="progId"></input>

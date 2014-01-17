@@ -144,7 +144,7 @@ function changepage(page){
 </head>
 <body>
 <!--	<div style="float:right;"><span id="spanButtonPlaceHolder" ></span></div>${progId}-->
-	<pri:hideWhenMaster>
+	<pri:showWithOptExp exp="ctx.selfIsOperator or ctx.selfIsSender" stepId="${stepId}">
 	 <div class="liuyan">
    		  	<a href="#">
    		  		<img id="spanButtonPlaceHolder"/>
@@ -152,7 +152,7 @@ function changepage(page){
    		  		<span id="upload"></span>
    		  	</a>
      </div>
-     </pri:hideWhenMaster>
+     </pri:showWithOptExp>
      <div class="biaoge">
 	 <form id="saveForm" method="post">
 	 	<input type="hidden" value="${progId}" id="progId"></input>
@@ -175,7 +175,7 @@ function changepage(page){
 	           </tr>
             </c:forEach>
         </table>  
-       <c:if test="${pm.total>0}">
+       	<c:if test="${pm.total>0}">
 		<div style="text-align:center;font-size:15px;margin-top:20px;">
 				总计${pm.total}条
 			<c:if test="${pm.pageIndex != 1}">
