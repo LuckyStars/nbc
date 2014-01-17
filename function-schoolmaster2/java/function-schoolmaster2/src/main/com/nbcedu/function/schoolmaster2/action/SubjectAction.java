@@ -100,6 +100,14 @@ public class SubjectAction extends BaseAction{
 			user.setUserName(UCService.findNameByUid(u));
 			users.add(user);
 		}
+		//如果可以关联则新建关联项也有自己的
+		TSm2Module 	module1 = this.moduleBiz.findById(subject.getModuleId());
+		if(module1.getFlag()==TSm2Module.FLAG_YOUGUANLIAN){
+			TSm2SubjectUser user1 =  new TSm2SubjectUser();
+			user1.setUserId(getUserId());
+			user1.setUserName(UCService.findNameByUid(getUserId()));
+			users.add(user1);
+		}
 		
 		Map<String,String> m =  UCService.findDepartmentByUid(this.getUserId());
 		subject.setDepartmentName(m.get("name"));
@@ -126,7 +134,10 @@ public class SubjectAction extends BaseAction{
 		this.sm2SubjectBiz.add(subject);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
-	
+	private <T> get(Class<T> c){
+		
+		return o;
+	}
 	public void update(){
 		String usersId = this.getRequest().getParameter("executeUsersId");
 		TSm2Subject s = this.sm2SubjectBiz.load(subject.getId()); 
