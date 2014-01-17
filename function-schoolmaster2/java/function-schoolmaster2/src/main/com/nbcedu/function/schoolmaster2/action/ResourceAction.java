@@ -16,7 +16,7 @@ public class ResourceAction extends BaseAction{
 	
 	String progId;
 	private int type;
-
+	private String stepId;
 	SM2ResourceBiz resourceBiz;
 
 	public String findAll(){
@@ -72,6 +72,14 @@ public class ResourceAction extends BaseAction{
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public String getStepId() {
+		return stepId;
+	}
+
+	public void setStepId(String stepId) {
+		this.stepId = stepId;
 	}
 	
 }
