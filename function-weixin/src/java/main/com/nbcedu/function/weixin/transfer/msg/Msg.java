@@ -9,14 +9,16 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.junit.Test;
 
 public abstract class Msg {
 	/** 原始数据*/
 	protected String rawXML;
 
-	protected static Map<String, String> contents = new HashMap<String, String>();
+	protected Map<String, String> contents = new HashMap<String, String>();
 	
-	protected static void init(final String rawXml) throws DocumentException{
+	@SuppressWarnings("unchecked")
+	protected void init(final String rawXml) throws DocumentException{
 		Document dom = new SAXReader().read(new StringReader(rawXml));
 		Element root = dom.getRootElement();
 		Iterator<Element> rootIter = root.elementIterator();
@@ -26,22 +28,6 @@ public abstract class Msg {
 				contents.put(child.getName(), child.getTextTrim());
 			}
 		}
-	}
-	
-	
-	public static void main(String[] args) throws DocumentException {
-		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
-				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
-				 "<CreateTime>1348831860</CreateTime>"+
-				 "<MsgType><![CDATA[text]]></MsgType>"+
-				 "<Content><![CDATA[this is a test]]></Content>"+
-				 "<MsgId>1234567890123456</MsgId>"+
-				 "</xml>";
-		init(s);
-		for (Map.Entry<String, String> en : contents.entrySet()) {
-			System.out.println(en.getKey() + "===" + en.getValue());
-		}
-		
 	}
 	
 	public String getRawXml(){
@@ -66,5 +52,23 @@ public abstract class Msg {
 	
 	public String msgType(){
 		return contents.get("MsgType");
+	}
+	
+	
+	@Test
+	public void test() throws DocumentException {
+		Msg m = new Msg() {};
+		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
+				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
+				 "<CreateTime>1348831860</CreateTime>"+
+				 "<MsgType><![CDATA[text]]></MsgType>"+
+				 "<Content><![CDATA[this is a test]]></Content>"+
+				 "<MsgId>1234567890123456</MsgId>"+
+				 "</xml>";
+		m.init(s);
+		for (Map.Entry<String, String> en : m.contents.entrySet()) {
+			System.out.println(en.getKey() + "===" + en.getValue());
+		}
+		
 	}
 }
