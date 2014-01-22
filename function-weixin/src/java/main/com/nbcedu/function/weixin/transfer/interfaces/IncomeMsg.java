@@ -1,9 +1,9 @@
 package com.nbcedu.function.weixin.transfer.interfaces;
 
 /**
- * 
+ * 接收的消息
  * @author xuechong
  */
-public interface IncomeMsg {
-
+public abstract class IncomeMsg {
+	protected String msgId;
 }
