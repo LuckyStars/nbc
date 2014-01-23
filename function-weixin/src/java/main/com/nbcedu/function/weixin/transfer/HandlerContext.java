@@ -1,5 +1,12 @@
 package com.nbcedu.function.weixin.transfer;
 
-public class HandlerContext {
+public interface HandlerContext {
 
+	void invokeNext();
+	
+	void stopChain();
+	
+	void doChain();
+	
+	MsgContext getMsg();
 }
