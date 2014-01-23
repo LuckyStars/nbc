@@ -14,4 +14,14 @@ public class MsgContext {
 	protected HttpServletResponse resp;
 	
 	
+	public Msg getMsg() {
+		return msg;
+	}
+	public HttpServletRequest getReq() {
+		return req;
+	}
+	public HttpServletResponse getResp() {
+		return resp;
+	}
+	
 }
