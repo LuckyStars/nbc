@@ -1,9 +1,10 @@
-package com.nbcedu.function.weixin.transfer;
+package org.luckystars.weixin.transfer;
 
 import java.io.OutputStream;
 
-import com.nbcedu.function.weixin.transfer.msg.Msg;
-import com.nbcedu.function.weixin.transfer.msg.MsgFactory;
+import org.luckystars.weixin.transfer.msg.Msg;
+import org.luckystars.weixin.transfer.msg.MsgFactory;
+
 
 public class HandlerContext {
 	
@@ -25,7 +26,9 @@ public class HandlerContext {
 	public static HandlerContext getContext(){
 		return context.get();
 	}
-	
+	public static void putContext(HandlerContext ctx){
+		context.set(ctx);
+	}
 	public Msg getMsg() {
 		return msg;
 	}

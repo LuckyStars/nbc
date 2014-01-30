@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.transfer.msg;
+package org.luckystars.weixin.transfer.msg;
 
 import java.io.StringReader;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.transfer.msg;
+package org.luckystars.weixin.transfer.msg;
 
 public class MsgFactory {
 

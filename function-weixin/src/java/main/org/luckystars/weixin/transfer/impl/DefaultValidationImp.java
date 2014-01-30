@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.transfer.impl;
+package org.luckystars.weixin.transfer.impl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -8,10 +8,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.nbcedu.function.weixin.transfer.interfaces.Validation;
+import org.apache.log4j.Logger;
+import org.luckystars.weixin.transfer.interfaces.Validation;
+
 
 @Resource(name="WXvali")
 public class DefaultValidationImp implements Validation {
+	
+	private static final Logger logger = Logger.getLogger(DefaultValidationImp.class);
 
 	@Override
 	public boolean validate(String timestamp, String nonce, String signature,
@@ -33,7 +37,8 @@ public class DefaultValidationImp implements Validation {
 		try {
 			md = MessageDigest.getInstance("SHA-1");
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			logger.error(e);
+			System.exit(0);///something is really wrong here... no need to continue 
 		}
 		md.update(joinstr.toString().getBytes());
 		byte[] digest = md.digest();
