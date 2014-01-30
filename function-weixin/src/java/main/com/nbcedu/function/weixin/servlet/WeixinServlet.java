@@ -1,5 +1,6 @@
 package com.nbcedu.function.weixin.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,15 @@ public class WeixinServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		StringBuilder rawXml = new StringBuilder();
+		BufferedReader reader = req.getReader();
+		for (;;) {
+			char[] temp = new char[128];
+			int i = reader.read(temp);
+			rawXml.append(temp);
+			if(i==-1)break;
+		}
+		
+		
 	}
 }

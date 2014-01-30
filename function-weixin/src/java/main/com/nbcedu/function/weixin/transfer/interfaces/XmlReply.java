@@ -1,5 +1,5 @@
 package com.nbcedu.function.weixin.transfer.interfaces;
 
-public interface Reply extends WeixinView{
+public interface XmlReply extends WeixinView{
 	String toXmlString();
 }
