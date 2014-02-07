@@ -15,10 +15,10 @@ public class MsgFactory {
 	
 	private static final Logger logger = Logger.getLogger(MsgFactory.class);
 
-	public static Msg build(String rawContent) {
+	public static IncomeMessage build(String rawContent) {
 		
 		Map<String, String> contents = newContentMap(rawContent);
-		String msgType = contents.get(Msg.MSG_TYPE_KEY);
+		String msgType = contents.get(WeixinMsg.MSG_TYPE_KEY);
 		
 		return null;
 	}

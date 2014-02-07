@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.py;
+package org.luckystars.weixin.utils.py;
 
 import org.apache.log4j.Logger;
 import org.python.core.PyObject;

@@ -10,6 +10,7 @@ import org.luckystars.weixin.transfer.HandlerContext;
 import org.luckystars.weixin.transfer.HandlerInvocation;
 import org.luckystars.weixin.transfer.HandlerWarp;
 import org.luckystars.weixin.transfer.interfaces.Handler;
+import org.luckystars.weixin.transfer.msg.MsgFactory;
 
 public class HttpServletHandlerWarpImpl implements HandlerWarp{
 
@@ -24,18 +25,18 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		
 	}
 	
-	
 	private void createHandlerContext(HttpServletRequest req,
 			HttpServletResponse resp) {
 		try {
 			HandlerContext ctx = 
-				new HandlerContext(getRawStr(req), resp.getOutputStream());
+				new HandlerContext(MsgFactory.build(getRawStr(req)), resp.getOutputStream());
 			HandlerContext.putContext(ctx);
 		} catch (IOException e) {
 			logger.error("获取response输出流出错",e);//well ....╮(╯_╰)╭
 		}
 	}
 
+	
 	private String getRawStr(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		return null;

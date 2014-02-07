@@ -1,9 +1,9 @@
-package com.nbcedu.function.weixin.py;
+package org.luckystars.weixin.utils.py;
 
 
 import org.apache.log4j.Logger;
 
-import static com.nbcedu.function.weixin.py.PyFactoryUtil.*;
+import static org.luckystars.weixin.utils.py.PyFactoryUtil.*;
 
 public class PYObjectFactory {
 

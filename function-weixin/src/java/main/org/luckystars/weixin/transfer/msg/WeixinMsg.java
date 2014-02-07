@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public abstract class Msg {
+public abstract class WeixinMsg implements IncomeMessage{
 	
 	public static final String MSG_TYPE_KEY = "MsgType";
 	
@@ -38,10 +38,14 @@ public abstract class Msg {
 		return contents.get(MSG_TYPE_KEY);
 	}
 	
+	@Override
+	public String get(String attr) {
+		return contents.get(attr);
+	}
 	
 	@Test
 	public void test() {
-		Msg m = new Msg() {};
+		WeixinMsg m = new WeixinMsg() {};
 		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
 				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
 				 "<CreateTime>1348831860</CreateTime>"+

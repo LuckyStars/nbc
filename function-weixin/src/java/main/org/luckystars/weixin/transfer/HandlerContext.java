@@ -6,8 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.transfer.interfaces.WeixinView;
-import org.luckystars.weixin.transfer.msg.Msg;
-import org.luckystars.weixin.transfer.msg.MsgFactory;
+import org.luckystars.weixin.transfer.msg.IncomeMessage;
 
 
 public class HandlerContext {
@@ -16,15 +15,15 @@ public class HandlerContext {
 	
 	private static final ThreadLocal<HandlerContext> context = new ThreadLocal<HandlerContext>();
 	
-	protected Msg msg;
+	protected IncomeMessage msg;
 	
 	/**
 	 * 用于响应消息的流
 	 */
 	protected OutputStream out;
 	
-	public HandlerContext(String rawContent,OutputStream replyStream){
-		this.msg = MsgFactory.build(rawContent);
+	public HandlerContext(IncomeMessage msg,OutputStream replyStream){
+		this.msg = msg;
 		this.out = replyStream;
 	}
 	
@@ -48,7 +47,7 @@ public class HandlerContext {
 		context.set(null);
 	}
 	
-	public Msg getMsg() {
+	public IncomeMessage getMsg() {
 		return msg;
 	}
 

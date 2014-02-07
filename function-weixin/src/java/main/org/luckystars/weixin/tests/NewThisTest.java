@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.tests;
+package org.luckystars.weixin.tests;
 
 import java.util.HashMap;
 import java.util.Map;

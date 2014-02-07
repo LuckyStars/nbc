@@ -1,4 +1,4 @@
-package com.nbcedu.function.weixin.servlet;
+package org.luckystars.weixin.transfer.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
