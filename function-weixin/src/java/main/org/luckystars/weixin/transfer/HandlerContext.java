@@ -22,13 +22,18 @@ public class HandlerContext {
 		this.out = replyStream;
 	}
 	
-	
 	public static HandlerContext getContext(){
 		return context.get();
 	}
+	
 	public static void putContext(HandlerContext ctx){
 		context.set(ctx);
 	}
+	
+	public static void cleanContext(){
+		context.set(null);
+	}
+	
 	public Msg getMsg() {
 		return msg;
 	}
@@ -36,6 +41,8 @@ public class HandlerContext {
 	public OutputStream getReplyStream() {
 		return out;
 	}
+	
+	
 	
 	
 }
