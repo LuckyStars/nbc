@@ -10,8 +10,11 @@ public class NewThisTest {
 			public void run() {
 				while(true){
 					TClass c = map.get("aaa");
-					if(c!=null){System.out.println(c.getName());break;}
-					else{System.out.println("null");}
+					if(c!=null){
+						System.out.println("name:" + c.getName());
+						if(c.getName()!=null){break;}
+					}else{System.out.println("null");}
+					
 					try {
 						Thread.currentThread().sleep(100L);
 					} catch (InterruptedException e) {

@@ -1,12 +1,18 @@
 package org.luckystars.weixin.transfer;
 
+import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
+import org.apache.log4j.Logger;
+import org.luckystars.weixin.transfer.interfaces.WeixinView;
 import org.luckystars.weixin.transfer.msg.Msg;
 import org.luckystars.weixin.transfer.msg.MsgFactory;
 
 
 public class HandlerContext {
+	
+	private static final Logger logger = Logger.getLogger(HandlerContext.class);
 	
 	private static final ThreadLocal<HandlerContext> context = new ThreadLocal<HandlerContext>();
 	
@@ -26,10 +32,18 @@ public class HandlerContext {
 		return context.get();
 	}
 	
+	/**
+	 * 把ctx放入ThreadLocal
+	 * @param ctx
+	 * @author xuechong
+	 */
 	public static void putContext(HandlerContext ctx){
 		context.set(ctx);
 	}
-	
+	/**
+	 * 释放当前ThreadLocal的context
+	 * @author xuechong
+	 */
 	public static void cleanContext(){
 		context.set(null);
 	}
@@ -42,6 +56,15 @@ public class HandlerContext {
 		return out;
 	}
 	
+	public void response(WeixinView view){
+		try {
+			this.getReplyStream().write(view.toWeixinStr().getBytes("utf-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
