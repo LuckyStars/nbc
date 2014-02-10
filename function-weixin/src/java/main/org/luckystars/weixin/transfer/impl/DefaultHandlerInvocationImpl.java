@@ -20,7 +20,12 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 	
 	@Override
 	public HandleResult invokeNext() {
-		return null;
+		HandleResult result = null;
+		while(this.handlers!=null&&this.handlers.hasNext()){
+			result = handlers.next().handle(this);
+			if(result==HandleResult.STOP_CHAIN){break;}
+		}
+		return result;
 	}
 
 	@Override

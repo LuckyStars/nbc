@@ -1,7 +1,9 @@
 package org.luckystars.weixin.transfer.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,8 +12,10 @@ import org.luckystars.weixin.transfer.HandlerContext;
 import org.luckystars.weixin.transfer.HandlerInvocation;
 import org.luckystars.weixin.transfer.HandlerWarp;
 import org.luckystars.weixin.transfer.interfaces.HandleResult;
+import org.luckystars.weixin.transfer.interfaces.InvocationFactoryBean;
 import org.luckystars.weixin.transfer.msg.IncomeMessage;
 import org.luckystars.weixin.transfer.msg.MsgFactory;
+
 
 public class HttpServletHandlerWarpImpl implements HandlerWarp{
 
@@ -19,14 +23,37 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	
 	private HandlerInvocation invocation;
 	
-	public HttpServletHandlerWarpImpl(HttpServletRequest req,HttpServletResponse resp){
+	public HttpServletHandlerWarpImpl(HttpServletRequest req,
+			HttpServletResponse resp,ServletConfig config){
 		
 		HandlerContext ctx = createHandlerContext(req,resp);
 		
-		this.invocation = warpInvocation(ctx);
+		this.invocation = warpInvocation(ctx,config);
 		
 	}
 	
+	private HandlerInvocation warpInvocation(HandlerContext ctx,
+			ServletConfig config) {
+		String invocationFactoryBean = config.getInitParameter("invocationFactoryBean");
+		InvocationFactoryBean fac = loadInvoFacBean(invocationFactoryBean);
+		return fac.buildInvocation(ctx);
+	}
+	
+	private InvocationFactoryBean  loadInvoFacBean(String className){
+		InvocationFactoryBean result = null;
+		try {
+			result = (InvocationFactoryBean) Thread.currentThread().
+				getContextClassLoader().loadClass(className).newInstance();
+		} catch (InstantiationException e) {
+			logger.error(e);
+		} catch (IllegalAccessException e) {
+			logger.error(e);
+		} catch (ClassNotFoundException e) {
+			logger.error("找不到InvocationFactoryBean:" + className,e);
+		}
+		return result;
+	}
+
 	private HandlerContext createHandlerContext(HttpServletRequest req,
 			HttpServletResponse resp) {
 		HandlerContext ctx = null;
@@ -42,14 +69,22 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 
 	
 	private String getRawStr(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder rawXml = new StringBuilder();
+		try {
+			BufferedReader reader = req.getReader();
+			for (;;) {
+				char[] temp = new char[128];
+				int i = reader.read(temp);
+				rawXml.append(temp);
+				if (i == -1)
+					break;
+			}
+		} catch (IOException e) {
+			logger.error("获取请求原始数据出错",e);
+		}
+		return rawXml.toString();
 	}
-
-	private HandlerInvocation warpInvocation(HandlerContext ctx) {
-		
-		return null;
-	}
+	
 
 	@Override
 	public void handle() {
@@ -57,12 +92,15 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			
 			HandleResult result = invocation.invokeNext();
 			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
 			///释放上下文资源
 			HandlerContext.cleanContext();
 		}
+		
 	}
 	
 }
