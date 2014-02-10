@@ -1,11 +1,13 @@
 package org.luckystars.weixin.transfer.impl;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 import org.luckystars.weixin.transfer.HandlerContext;
 import org.luckystars.weixin.transfer.HandlerInvocation;
+import org.luckystars.weixin.transfer.interfaces.HandleResult;
 import org.luckystars.weixin.transfer.interfaces.Handler;
-import org.luckystars.weixin.transfer.interfaces.Handler.HandleResult;
+import org.luckystars.weixin.transfer.msg.IncomeMessage;
 
 public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 
@@ -27,7 +29,15 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 	}
 
 	@Override
+	public IncomeMessage getIncomeMsg() {
+		return HandlerContext.getContext().getMsg();
+	}
+	
+	
+	@Override
+	@SuppressWarnings("unchecked")
 	public void stopChain() {
+		this.handlers = Collections.EMPTY_LIST.iterator();
 	}
 
 }

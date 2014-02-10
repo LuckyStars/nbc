@@ -1,12 +1,15 @@
 package org.luckystars.weixin.transfer;
 
-import org.luckystars.weixin.transfer.interfaces.Handler;
+import org.luckystars.weixin.transfer.interfaces.HandleResult;
+import org.luckystars.weixin.transfer.msg.IncomeMessage;
 
 public interface HandlerInvocation {
 	
-	Handler.HandleResult invokeNext();
+	HandleResult invokeNext();
 	
 	HandlerContext getInvocationContext();
 	
 	void stopChain();
+	
+	IncomeMessage getIncomeMsg();
 }

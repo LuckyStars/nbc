@@ -9,7 +9,8 @@ import org.apache.log4j.Logger;
 import org.luckystars.weixin.transfer.HandlerContext;
 import org.luckystars.weixin.transfer.HandlerInvocation;
 import org.luckystars.weixin.transfer.HandlerWarp;
-import org.luckystars.weixin.transfer.interfaces.Handler;
+import org.luckystars.weixin.transfer.interfaces.HandleResult;
+import org.luckystars.weixin.transfer.msg.IncomeMessage;
 import org.luckystars.weixin.transfer.msg.MsgFactory;
 
 public class HttpServletHandlerWarpImpl implements HandlerWarp{
@@ -20,20 +21,23 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	
 	public HttpServletHandlerWarpImpl(HttpServletRequest req,HttpServletResponse resp){
 		
-		createHandlerContext(req,resp);
-		this.invocation = warpInvocation(req,resp);
+		HandlerContext ctx = createHandlerContext(req,resp);
+		
+		this.invocation = warpInvocation(ctx);
 		
 	}
 	
-	private void createHandlerContext(HttpServletRequest req,
+	private HandlerContext createHandlerContext(HttpServletRequest req,
 			HttpServletResponse resp) {
+		HandlerContext ctx = null;
 		try {
-			HandlerContext ctx = 
-				new HandlerContext(MsgFactory.build(getRawStr(req)), resp.getOutputStream());
+			IncomeMessage msg = MsgFactory.build(getRawStr(req));
+			ctx = new HandlerContext(msg, resp.getOutputStream());
 			HandlerContext.putContext(ctx);
 		} catch (IOException e) {
 			logger.error("获取response输出流出错",e);//well ....╮(╯_╰)╭
 		}
+		return ctx;
 	}
 
 	
@@ -42,8 +46,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		return null;
 	}
 
-	private HandlerInvocation warpInvocation(HttpServletRequest req,
-			HttpServletResponse resp) {
+	private HandlerInvocation warpInvocation(HandlerContext ctx) {
 		
 		return null;
 	}
@@ -52,7 +55,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	public void handle() {
 		try {
 			
-			Handler.HandleResult result = invocation.invokeNext();
+			HandleResult result = invocation.invokeNext();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

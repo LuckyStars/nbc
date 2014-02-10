@@ -3,6 +3,7 @@ package org.luckystars.weixin.transfer.servlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,15 @@ public class WeixinServlet extends HttpServlet {
 			rawXml.append(temp);
 			if(i==-1)break;
 		}
+		
+		
+	}
+	
+	
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
 		
 		
 	}

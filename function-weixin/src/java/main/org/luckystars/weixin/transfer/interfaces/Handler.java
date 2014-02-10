@@ -11,8 +11,4 @@ public interface Handler  {
 	
 	HandleResult handle(HandlerInvocation invocation);
 	
-	public static enum HandleResult{
-		INVOKE_NEXT,SKIP_ALL;
-	}
-	
 }
