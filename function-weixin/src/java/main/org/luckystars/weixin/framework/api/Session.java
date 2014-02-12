@@ -6,13 +6,32 @@ public interface Session extends Serializable {
 	
 	String getSessionId();
 	
-	Object getAttr(Object key);
+	Object getAttr(String key);
 	
-	Object putAttr(Object key,Object value);
+	Object putAttr(String key,Object value);
 	
-	long getTimeOut();
+	long getCreateTime();
 	
-	void setMaxIdleTime(long ms);
+	void setMaxInactiveInterval(long ms);
 	
-	void refreshTime();
+	long getMaxInactiveInterval();
+	
+	/**
+	 * 上次访问时间
+	 * @return
+	 * @author xuechong
+	 */
+	public long getLastAccessedTime();
+	
+	/**
+	 * 使会话失效，同时删除属性对象
+	 * @author xuechong
+	 */
+	void invalidate();
+	
+	/**
+	 * 刷新访问时间
+	 * @author xuechong
+	 */
+	void refreshAccessTime();
 }

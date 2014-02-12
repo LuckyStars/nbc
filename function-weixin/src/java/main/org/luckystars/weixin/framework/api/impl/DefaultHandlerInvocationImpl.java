@@ -42,7 +42,9 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 	@Override
 	@SuppressWarnings("unchecked")
 	public void stopChain() {
-		this.handlers = Collections.EMPTY_LIST.iterator();
+		synchronized (handlers) {
+			this.handlers = Collections.EMPTY_LIST.iterator();
+		}
 	}
 
 }

@@ -14,31 +14,41 @@ public class DefaultSessionManagerImpl implements SessionManager{
 	private Map<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
 	public DefaultSessionManagerImpl (){
-		initClean();
+		initCleanThread();
 	}
-	
 	
 	@Override
 	public Session getSession(String id) {
-		Session result = sessions.get(id);
-		if(result==null){
-			result = createSession(id);
-		}
 		return sessions.get(id);
 	}
 
 	@Override
 	public Session createSession(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		if(id==null){
+			throw new IllegalArgumentException("不可创建id为null的Session");
+		}
+		Session result = null;
+		synchronized (this.sessions) {
+			result = this.sessions.get(id);
+			if(result==null){
+				result = new DefaultSessionImpl(id);
+				this.sessions.put(id, result);
+			}
+		}
+		return result;
 	}
 	
 	@Override
 	public void removeSession(String id){
+		this.sessions.get(id).invalidate();
 		this.sessions.remove(id);//因为使用了ConcurrentHashMap不用同步锁
 	}
 	
-	private final void initClean(){
+	/**
+	 * 初始化管理session失效清理的线程
+	 * @author xuechong
+	 */
+	private final void initCleanThread(){
 		this.cleanThread = new Thread(new SessionKiller(this));
 		this.cleanThread.start();
 	}
@@ -53,7 +63,6 @@ public class DefaultSessionManagerImpl implements SessionManager{
 		
 		private DefaultSessionManagerImpl sessionManager ;
 		
-		
 		public SessionKiller(DefaultSessionManagerImpl sm){
 			this.sessionManager = sm;
 		}
@@ -61,28 +70,40 @@ public class DefaultSessionManagerImpl implements SessionManager{
 		@Override
 		public void run() {
 			for(;;){
-				synchronized (this.sessionManager.sessions) {
-					if(this.sessionManager.sessions!=null
-							&&!this.sessionManager.sessions.isEmpty()){
-						
-						for (Entry<String, Session> entry:
-								this.sessionManager.sessions.entrySet()) {
-							
-							
+				doCleanTimeOut();
+				sleep();
+			}	
+		}
+		
+		private void doCleanTimeOut(){
+			synchronized (this.sessionManager.sessions) {
+				if(notEmptySessions()){
+					for (Entry<String, Session> entry:
+							this.sessionManager.sessions.entrySet()) {
+						if(isTimeOut(entry.getValue())){
+							this.sessionManager.removeSession(entry.getKey());
 						}
-						
-						
 					}
 				}
-				
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-			}	
-			
+			}
+		}
+		
+		private boolean notEmptySessions() {
+			return this.sessionManager.sessions!=null
+					&&!this.sessionManager.sessions.isEmpty();
+		} 
+		
+		private boolean isTimeOut(Session session){
+			long currentTime = System.currentTimeMillis();
+			return currentTime - session.getLastAccessedTime()>session.getMaxInactiveInterval();
+		}
+		
+		private void sleep(){
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}

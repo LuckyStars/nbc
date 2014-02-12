@@ -10,7 +10,7 @@ public interface SessionManager {
 
 	/**
 	 * 此方法的实现应该保证线程安全
-	 * @param id
+	 * @param id 不应该为null
 	 * @return
 	 * @author xuechong
 	 */
