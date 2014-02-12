@@ -1,13 +1,13 @@
-package org.luckystars.weixin.transfer.impl;
+package org.luckystars.weixin.framework.api.impl;
 
 import java.util.Collections;
 import java.util.Iterator;
 
-import org.luckystars.weixin.transfer.HandlerContext;
-import org.luckystars.weixin.transfer.HandlerInvocation;
-import org.luckystars.weixin.transfer.interfaces.HandleResult;
-import org.luckystars.weixin.transfer.interfaces.Handler;
-import org.luckystars.weixin.transfer.msg.IncomeMessage;
+import org.luckystars.weixin.framework.HandlerContext;
+import org.luckystars.weixin.framework.HandlerInvocation;
+import org.luckystars.weixin.framework.api.HandleResult;
+import org.luckystars.weixin.framework.api.Handler;
+import org.luckystars.weixin.framework.api.IncomeMessage;
 
 public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 

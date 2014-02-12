@@ -1,4 +1,4 @@
-package org.luckystars.weixin.transfer.interfaces;
+package org.luckystars.weixin.framework.api;
 
 /**
  * 处理的结果

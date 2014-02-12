@@ -1,11 +1,11 @@
-package org.luckystars.weixin.transfer.impl;
+package org.luckystars.weixin.framework.api.impl;
 
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.luckystars.weixin.transfer.interfaces.Session;
-import org.luckystars.weixin.transfer.interfaces.SessionManager;
+import org.luckystars.weixin.framework.api.Session;
+import org.luckystars.weixin.framework.api.SessionManager;
 
 public class DefaultSessionManagerImpl implements SessionManager{
 	
@@ -49,7 +49,10 @@ public class DefaultSessionManagerImpl implements SessionManager{
 	 */
 	private static class SessionKiller implements Runnable{
 
+		private final Long sleepTime = 1000L*60L*1L;
+		
 		private DefaultSessionManagerImpl sessionManager ;
+		
 		
 		public SessionKiller(DefaultSessionManagerImpl sm){
 			this.sessionManager = sm;
@@ -57,11 +60,29 @@ public class DefaultSessionManagerImpl implements SessionManager{
 		
 		@Override
 		public void run() {
-			synchronized (this.sessionManager.sessions) {
-				for (Entry<String, Session> entry:this.sessionManager.sessions.entrySet()) {
-					
+			for(;;){
+				synchronized (this.sessionManager.sessions) {
+					if(this.sessionManager.sessions!=null
+							&&!this.sessionManager.sessions.isEmpty()){
+						
+						for (Entry<String, Session> entry:
+								this.sessionManager.sessions.entrySet()) {
+							
+							
+						}
+						
+						
+					}
 				}
-			}
+				
+				try {
+					Thread.sleep(sleepTime);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			}	
+			
 		}
 		
 	}

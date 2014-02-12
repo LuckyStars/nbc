@@ -1,7 +1,7 @@
-package org.luckystars.weixin.transfer;
+package org.luckystars.weixin.framework;
 
-import org.luckystars.weixin.transfer.interfaces.HandleResult;
-import org.luckystars.weixin.transfer.msg.IncomeMessage;
+import org.luckystars.weixin.framework.api.HandleResult;
+import org.luckystars.weixin.framework.api.IncomeMessage;
 
 public interface HandlerInvocation {
 	

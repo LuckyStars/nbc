@@ -1,6 +1,6 @@
-package org.luckystars.weixin.transfer.interfaces;
+package org.luckystars.weixin.framework.api;
 
-import org.luckystars.weixin.transfer.HandlerInvocation;
+import org.luckystars.weixin.framework.HandlerInvocation;
 
 /**
  * 消息处理

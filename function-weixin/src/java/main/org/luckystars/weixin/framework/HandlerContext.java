@@ -1,13 +1,12 @@
-package org.luckystars.weixin.transfer;
+package org.luckystars.weixin.framework;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
-import org.luckystars.weixin.transfer.interfaces.WeixinView;
-import org.luckystars.weixin.transfer.msg.IncomeMessage;
-
+import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.framework.api.WeixinView;
 
 public class HandlerContext {
 	
@@ -61,10 +60,8 @@ public class HandlerContext {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error("回复时出现错误", e);
 		}
 	}
-	
-	
 	
 }

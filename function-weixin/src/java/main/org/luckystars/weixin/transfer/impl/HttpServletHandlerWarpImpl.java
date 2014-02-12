@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.luckystars.weixin.transfer.HandlerContext;
-import org.luckystars.weixin.transfer.HandlerInvocation;
-import org.luckystars.weixin.transfer.HandlerWarp;
-import org.luckystars.weixin.transfer.interfaces.HandleResult;
-import org.luckystars.weixin.transfer.interfaces.InvocationFactoryBean;
-import org.luckystars.weixin.transfer.msg.IncomeMessage;
+import org.luckystars.weixin.framework.HandlerContext;
+import org.luckystars.weixin.framework.HandlerInvocation;
+import org.luckystars.weixin.framework.HandlerWarp;
+import org.luckystars.weixin.framework.api.HandleResult;
+import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.framework.api.InvocationFactoryBean;
 import org.luckystars.weixin.transfer.msg.MsgFactory;
 
 

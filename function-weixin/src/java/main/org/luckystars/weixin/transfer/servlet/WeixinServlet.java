@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.luckystars.weixin.transfer.HandlerWarp;
+import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.transfer.impl.DefaultValidationImp;
 import org.luckystars.weixin.transfer.impl.HttpServletHandlerWarpImpl;
 import org.luckystars.weixin.transfer.interfaces.Validation;

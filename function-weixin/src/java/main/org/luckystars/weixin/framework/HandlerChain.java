@@ -1,4 +1,4 @@
-package org.luckystars.weixin.transfer;
+package org.luckystars.weixin.framework;
 
 public interface HandlerChain {
 	
