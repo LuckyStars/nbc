@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.framework.api.Session;
 import org.luckystars.weixin.framework.api.WeixinView;
 
 public class HandlerContext {
@@ -24,6 +25,7 @@ public class HandlerContext {
 	public HandlerContext(IncomeMessage msg,OutputStream replyStream){
 		this.msg = msg;
 		this.out = replyStream;
+		SessionFactory.createSession(this);
 	}
 	
 	public static HandlerContext getContext(){
@@ -62,6 +64,10 @@ public class HandlerContext {
 		} catch (IOException e) {
 			logger.error("回复时出现错误", e);
 		}
+	}
+	
+	public Session getSession(){
+		return SessionFactory.createSession(this);
 	}
 	
 }

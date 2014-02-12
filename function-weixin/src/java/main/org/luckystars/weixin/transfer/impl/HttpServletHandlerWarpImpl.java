@@ -31,7 +31,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		this.invocation = warpInvocation(ctx,config);
 		
 	}
-	
+
 	private HandlerInvocation warpInvocation(HandlerContext ctx,
 			ServletConfig config) {
 		String invocationFactoryBean = config.getInitParameter("invocationFactoryBean");
@@ -92,8 +92,6 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			
 			HandleResult result = invocation.invokeNext();
 			
-			
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -103,4 +101,8 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		
 	}
 	
+	
+	
 }
+
+
