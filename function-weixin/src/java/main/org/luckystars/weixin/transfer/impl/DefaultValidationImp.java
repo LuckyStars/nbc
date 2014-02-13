@@ -6,13 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.transfer.interfaces.Validation;
 
-
-@Resource(name="WXvali")
 public class DefaultValidationImp implements Validation {
 	
 	private static final Logger logger = Logger.getLogger(DefaultValidationImp.class);
@@ -40,6 +36,7 @@ public class DefaultValidationImp implements Validation {
 			logger.error(e);
 			System.exit(0);///something is really wrong here... no need to continue 
 		}
+		
 		md.update(joinstr.toString().getBytes());
 		byte[] digest = md.digest();
 		

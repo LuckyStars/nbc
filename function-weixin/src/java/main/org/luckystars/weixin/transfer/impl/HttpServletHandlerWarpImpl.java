@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.HandlerWarp;
@@ -24,18 +25,21 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	private HandlerInvocation invocation;
 	
 	public HttpServletHandlerWarpImpl(HttpServletRequest req,
-			HttpServletResponse resp,ServletConfig config){
+			HttpServletResponse resp){
 		
 		HandlerContext ctx = createHandlerContext(req,resp);
 		
-		this.invocation = warpInvocation(ctx,config);
+		this.invocation = warpInvocation(ctx);
 		
 	}
 
-	private HandlerInvocation warpInvocation(HandlerContext ctx,
-			ServletConfig config) {
-		String invocationFactoryBean = config.getInitParameter("invocationFactoryBean");
+	private HandlerInvocation warpInvocation(HandlerContext ctx) {
+		
+		String invocationFactoryBean = 
+			AppContext.getContext().get(InvocationFactoryBean.INVOCATION_FACTORY_BEAN).toString();
+		
 		InvocationFactoryBean fac = loadInvoFacBean(invocationFactoryBean);
+		
 		return fac.buildInvocation(ctx);
 	}
 	

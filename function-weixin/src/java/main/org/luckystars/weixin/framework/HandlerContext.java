@@ -2,6 +2,7 @@ package org.luckystars.weixin.framework;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
@@ -9,8 +10,10 @@ import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.Session;
 import org.luckystars.weixin.framework.api.WeixinView;
 
-public class HandlerContext {
+public class HandlerContext implements Serializable{
 	
+	private static final long serialVersionUID = 4159758817849082232L;
+
 	private static final Logger logger = Logger.getLogger(HandlerContext.class);
 	
 	private static final ThreadLocal<HandlerContext> context = new ThreadLocal<HandlerContext>();

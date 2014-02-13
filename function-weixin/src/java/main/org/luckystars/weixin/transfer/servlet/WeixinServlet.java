@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.transfer.impl.DefaultValidationImp;
 import org.luckystars.weixin.transfer.impl.HttpServletHandlerWarpImpl;
@@ -15,12 +16,12 @@ import org.luckystars.weixin.transfer.interfaces.Validation;
 
 @SuppressWarnings("serial")
 public class WeixinServlet extends HttpServlet {
-
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		Validation vali = new DefaultValidationImp();
+		
 		String timestamp = req.getParameter("timestamp");
 		String nonce = req.getParameter("nonce");
 		String signature = req.getParameter("signature");
@@ -36,7 +37,7 @@ public class WeixinServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HandlerWarp handler = 
-			new HttpServletHandlerWarpImpl(req,resp,this.getServletConfig());
+			new HttpServletHandlerWarpImpl(req,resp);
 		
 		handler.handle();
 	}
@@ -44,5 +45,15 @@ public class WeixinServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+		initAppcontext(config);
+	}
+
+	private void initAppcontext(ServletConfig config) {
+		String configLocation = config.getInitParameter("appConfigLocation");
+		if(configLocation!=null&&configLocation.trim().isEmpty()){
+			AppContext.initContext(config.getInitParameter(configLocation));
+		}else{
+			AppContext.initContext();
+		}
 	}
 }

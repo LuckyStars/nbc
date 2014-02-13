@@ -5,12 +5,16 @@ import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.Handler;
 
 
-public class RefreshSessionHandler implements Handler{
+public class ErrorLogHandler implements Handler{
 
+	
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) {
-		invocation.getInvocationContext().getSession().refreshAccessTime();
-		return invocation.invokeNext();
+		
+		HandleResult result = null;
+		
+		result = invocation.invokeNext();
+		return result;
 	}
 
 }

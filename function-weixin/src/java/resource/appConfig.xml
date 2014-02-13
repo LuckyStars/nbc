@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+
+	<configLoaders>org.luckystars.weixin.framework.config.XmlAppConfigLoader</configLoaders>
+
+	<invocationFactoryBean></invocationFactoryBean>
+	
+	<handlerChain type="msgTypeChain" >
+		
+		<defaultChain>
+			<handlerList>
+				<handler></handler>
+			</handlerList>
+		</defaultChain>
+		
+		<chain msgType="">
+			<handlerList>
+				<handler></handler>
+				<handler></handler>
+				<handler></handler>
+			</handlerList>
+		</chain>
+
+		<chain msgType="">
+			<handlerList>
+				<handler></handler>
+				<handler></handler>
+				<handler></handler>
+			</handlerList>
+		</chain>
+		
+	</handlerChain>
+	
+</configs>
