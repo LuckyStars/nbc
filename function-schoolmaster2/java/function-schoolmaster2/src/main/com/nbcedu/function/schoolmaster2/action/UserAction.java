@@ -3,6 +3,8 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.util.struts2.Struts2Utils;
@@ -27,7 +29,7 @@ public class UserAction extends BaseAction{
 		Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
 	
-	public void findAllMaster() {
+	public void findAllMaster1() {
 		Collection<PersonVo> ps = Utils.getAllSchoolMaster();
 		StringBuilder s = new StringBuilder("[");
 		 Object[] p = ps.toArray();
@@ -69,6 +71,62 @@ public class UserAction extends BaseAction{
 		}
 		s.append("]");
 		Struts2Utils.renderJson(s.toString(), "encoding:UTF-8");
+	}
+	public void findAllMaster(){
+		List<PersonVo> ps = Utils.getAllSchoolMaster();
+		List<PersonVo> ps1 = Utils.getAllManager();
+		StringBuilder sb = new StringBuilder("[");
+		sb.append(appendChild("1","校长",ps)).append(",");
+		sb.append(appendChild("2","主任",ps1)).append("]");
+		
+		Struts2Utils.renderJson(sb.toString(), "encoding:UTF-8");
+	}
+	
+	public  String appendChild(final String id,final String text ,final List<PersonVo> ps){
+		class CloumnTree{
+			
+			StringBuffer sb = new StringBuffer();
+			
+			public String getCloumnTreeString(){
+				appendS(id,text,ps);
+				return sb.toString();
+			}
+			private void appendS(String id1 ,String text1,List<PersonVo> ps1){
+				this.sb.append("{");
+				this.sb.append("\"id\":");
+				this.sb.append("\"");
+				this.sb.append(id1);
+				this.sb.append("\"");
+				this.sb.append(",\"text\":");
+				this.sb.append("\"");
+				this.sb.append(text1);
+				this.sb.append("\"");
+				if(ps1!=null && ps1.size()>0){
+					this.sb.append(",\"children\":[");
+					for(int i=0;i<ps1.size();i++){
+						if(!ps1.get(i).getUid().equals(getUserId())){
+							if(ps1.size()-1>i){
+								appendS(ps1.get(i).getUid(),ps1.get(i).getName(),null);
+								sb.append(",");
+							}else if(ps1.size()-1==i){
+								appendS(ps1.get(i).getUid(),ps1.get(i).getName(),null);
+							}
+						}else{
+							if(ps1.size()-1==i){
+								sb.deleteCharAt(sb.length()-1);
+							}
+						}
+					}
+					this.sb.append("]");
+				}
+				this.sb.append("}");
+			}
+		}
+		String userJson = new CloumnTree().getCloumnTreeString();
+		if(userJson!=null){
+			userJson=userJson.replaceAll(",]","]");
+		}
+		return userJson;
 	}
 	/////////////////////////
 	/////getters&setters/////
