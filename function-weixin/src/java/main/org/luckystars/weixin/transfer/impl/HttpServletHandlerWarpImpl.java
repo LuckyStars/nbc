@@ -35,12 +35,11 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 
 	private HandlerInvocation warpInvocation(HandlerContext ctx) {
 		
-		String invocationFactoryBean = 
-			AppContext.getContext().get(InvocationFactoryBean.INVOCATION_FACTORY_BEAN).toString();
+		InvocationFactoryBean invocationFactoryBean = 
+			(InvocationFactoryBean) AppContext.getContext()
+				.get(InvocationFactoryBean.INVOCATION_FACTORY_BEAN);
 		
-		InvocationFactoryBean fac = loadInvoFacBean(invocationFactoryBean);
-		
-		return fac.buildInvocation(ctx);
+		return invocationFactoryBean.buildInvocation(ctx);
 	}
 	
 	private InvocationFactoryBean  loadInvoFacBean(String className){

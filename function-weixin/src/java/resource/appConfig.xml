@@ -3,27 +3,19 @@
 
 	<configLoaders>org.luckystars.weixin.framework.config.XmlAppConfigLoader</configLoaders>
 
-	<invocationFactoryBean></invocationFactoryBean>
+	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.DefaultInvocationFactory</invocationFactoryBean>
 	
-	<handlerChain type="msgTypeChain" >
+	<handlerChain name="" factoryclass="" >
 		
-		<defaultChain>
+		<chain id="" >
 			<handlerList>
-				<handler></handler>
-			</handlerList>
-		</defaultChain>
-		
-		<chain msgType="">
-			<handlerList>
-				<handler></handler>
 				<handler></handler>
 				<handler></handler>
 			</handlerList>
 		</chain>
-
-		<chain msgType="">
+		
+		<chain id="">
 			<handlerList>
-				<handler></handler>
 				<handler></handler>
 				<handler></handler>
 			</handlerList>

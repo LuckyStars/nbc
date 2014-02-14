@@ -20,9 +20,13 @@ public class AppContext implements Serializable{
 	private static AppContext context = new AppContext();
 	
 	private static String DEFAULT_CONFIG_LOCATION = "appConfig.xml";
+	
+	
+	/**全局配置文件地址*/
 	private String configLocation = DEFAULT_CONFIG_LOCATION;
 	
 	private Map<String, Object> ctx = new HashMap<String, Object>();
+	
 	
 	private AppContext(){}
 	

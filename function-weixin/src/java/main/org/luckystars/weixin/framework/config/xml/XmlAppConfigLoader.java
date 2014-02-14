@@ -1,4 +1,4 @@
-package org.luckystars.weixin.framework.config;
+package org.luckystars.weixin.framework.config.xml;
 
 
 import java.io.InputStream;
@@ -19,9 +19,40 @@ public class XmlAppConfigLoader implements AppContextLoader{
 	public void loadIntoContext(AppContext ctx) {
 		String xmlPath = ctx.getConfigLocation();
 		Document document = buildDoument(xmlPath);
-		
+		loadInvocationFactory(ctx,document);
+		loadHandlerChains(ctx, document);
+	}
+	
+	
+	
+	private void loadInvocationFactory(AppContext ctx, Document document) {
+		new InvocationFactoryLoader(document).loadIntoContext(ctx);
 	}
 
+	/****
+	 * 读取handler chain内容
+	 * @param ctx
+	 * @param document
+	 * @author xuechong
+	 */
+	private void loadHandlerChains(AppContext ctx, Document document) {
+		AppContextLoader handlerChainLoader = new ChainConfigLoader(document);
+		handlerChainLoader.loadIntoContext(ctx);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 加载xml
+	 * @param xmlPath
+	 * @return
+	 * @author xuechong
+	 */
 	private Document buildDoument(String xmlPath) {
 		Document result = null;
 		
