@@ -29,22 +29,11 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		new InvocationFactoryLoader(document).loadIntoContext(ctx);
 	}
 
-	/****
-	 * 读取handler chain内容
-	 * @param ctx
-	 * @param document
-	 * @author xuechong
-	 */
 	private void loadHandlerChains(AppContext ctx, Document document) {
 		AppContextLoader handlerChainLoader = new ChainConfigLoader(document);
 		handlerChainLoader.loadIntoContext(ctx);
 	}
 
-	
-	
-	
-	
-	
 	
 	
 	/**

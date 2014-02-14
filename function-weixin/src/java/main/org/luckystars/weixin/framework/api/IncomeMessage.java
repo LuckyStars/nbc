@@ -7,5 +7,8 @@ import java.io.Serializable;
  * @author xuechong
  */
 public interface IncomeMessage extends Serializable{
+	
 	public String get(String attr);
+	
+	public String getMsgType();
 }

@@ -2,8 +2,6 @@ package org.luckystars.weixin.framework.config;
 
 import java.util.List;
 
-import org.springframework.web.servlet.HandlerMapping;
-
 import com.google.common.collect.ImmutableList;
 
 public class ChainMapping {

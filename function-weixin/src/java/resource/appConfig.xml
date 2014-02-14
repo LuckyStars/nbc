@@ -3,9 +3,9 @@
 
 	<configLoaders>org.luckystars.weixin.framework.config.XmlAppConfigLoader</configLoaders>
 
-	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.DefaultInvocationFactory</invocationFactoryBean>
+	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
 	
-	<handlerChain name="" factoryclass="" >
+	<handlerChain name="" handlerFactoryClass="" >
 		
 		<chain id="" >
 			<handlerList>

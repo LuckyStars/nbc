@@ -13,10 +13,6 @@ public class HandlerChainConfig {
 
 	private static final HandlerChainConfig config = new HandlerChainConfig();
 	
-	public static final HandlerChainConfig getConfgi(){
-		return config;
-	}
-	
 	private HandlerChainConfig(){}
 	
 	private String name;
@@ -24,5 +20,18 @@ public class HandlerChainConfig {
 	private String handlerFactoryClass;
 	
 	private Map<String, ChainMapping> allChains ;
+
+	public String getName() {
+		return name;
+	}
+
+	public String getHandlerFactoryClass() {
+		return handlerFactoryClass;
+	}
+	public Map<String, ChainMapping> getAllChains() {
+		return allChains;
+	}
+	
+	
 	
 }

@@ -35,6 +35,10 @@ public class HandlerContext implements Serializable{
 		return context.get();
 	}
 	
+	public AppContext getAppContext(){
+		return AppContext.getContext();
+	}
+	
 	/**
 	 * 把ctx放入ThreadLocal
 	 * @param ctx
