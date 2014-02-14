@@ -20,25 +20,20 @@ public class WeixinServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		Validation vali = new DefaultValidationImp();
-		
-		String timestamp = req.getParameter("timestamp");
-		String nonce = req.getParameter("nonce");
-		String signature = req.getParameter("signature");
-		String token = req.getParameter("token");
-		if (vali.validate(timestamp, nonce, signature, token)){
+		if (valiReq(req)){
 			resp.setCharacterEncoding("utf-8");
 			resp.getWriter().write(req.getParameter("echostr"));
 		}
 	}
 	
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		HandlerWarp handler = 
-			new HttpServletHandlerWarpImpl(req,resp);
+		if(!valiReq(req)){return;}
 		
+		HandlerWarp handler = new HttpServletHandlerWarpImpl(req,resp);
 		handler.handle();
 	}
 	
@@ -48,6 +43,10 @@ public class WeixinServlet extends HttpServlet {
 		initAppcontext(config);
 	}
 
+	/////////////////////
+	/////PRIVATE/////////
+	/////////////////////
+	
 	private void initAppcontext(ServletConfig config) {
 		String configLocation = config.getInitParameter("appConfigLocation");
 		if(configLocation!=null&&configLocation.trim().isEmpty()){
@@ -55,5 +54,14 @@ public class WeixinServlet extends HttpServlet {
 		}else{
 			AppContext.initContext();
 		}
+	}
+	
+	private boolean valiReq(HttpServletRequest req){
+		Validation vali = new DefaultValidationImp();
+		String timestamp = req.getParameter("timestamp");
+		String nonce = req.getParameter("nonce");
+		String signature = req.getParameter("signature");
+		String token = req.getParameter("token");
+		return vali.validate(timestamp, nonce, signature, token);
 	}
 }
