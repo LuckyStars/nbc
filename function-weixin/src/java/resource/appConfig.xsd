@@ -12,10 +12,6 @@
 	</xsd:element>
 
 	<xsd:element name="invocationFactoryBean">
-		<xsd:simpleType>
-			<xsd:restriction>
-			
-			</xsd:restriction>
-		</xsd:simpleType>
 	</xsd:element>
+	
 </xsd:schema>

@@ -27,13 +27,20 @@ class InvocationFactoryLoader implements AppContextLoader{
 	
 	@Override
 	public void loadIntoContext(AppContext ctx) {
-		NodeList nodes = this.doc.getElementsByTagName(xmlTag);
+		NodeList nodes = doc.getDocumentElement().getElementsByTagName(xmlTag);
 		valiExists(nodes);
 		Node node = nodes.item(0);
-		String facClassName = node.getNodeValue();
+		String facClassName = node.getTextContent();
 		InvocationFactoryBean fac = getFactoryBean(facClassName);
 		ctx.put(InvocationFactoryBean.INVOCATION_FACTORY_BEAN, fac);
 	}
+	public static void main(String[] args) {
+		AppContext.initContext("appConfig.xml");
+		XmlAppConfigLoader loader = new XmlAppConfigLoader();
+		loader.loadIntoContext(AppContext.getContext());
+		
+	}
+	
 
 	@SuppressWarnings("rawtypes")
 	private InvocationFactoryBean getFactoryBean(String facClassName) {
@@ -67,5 +74,6 @@ class InvocationFactoryLoader implements AppContextLoader{
 			throw new NullPointerException("没有配置invocationFactoryBean");
 		}
 	}
+	
 	
 }

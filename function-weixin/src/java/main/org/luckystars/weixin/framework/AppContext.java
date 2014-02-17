@@ -53,8 +53,6 @@ public class AppContext implements Serializable{
 	public static AppContext initContext(String cxtConfigLocation){
 		context = new AppContext();
 		context.configLocation = cxtConfigLocation;
-		
-		
 		return context;
 	}
 

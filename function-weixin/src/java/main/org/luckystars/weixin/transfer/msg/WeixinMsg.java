@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 
+@SuppressWarnings("serial")
 public abstract class WeixinMsg implements IncomeMessage{
 	
 	public static final String MSG_TYPE_KEY = "MsgType";
@@ -14,6 +15,15 @@ public abstract class WeixinMsg implements IncomeMessage{
 	protected String rawXML;
 
 	protected Map<String, String> contents = new HashMap<String, String>();
+	
+	@Override
+	public String getMsgType(){
+		return contents.get(MSG_TYPE_KEY);
+	}
+	@Override
+	public String get(String attr) {
+		return contents.get(attr);
+	}
 	
 	public String getRawXml(){
 		return rawXML;
@@ -35,14 +45,7 @@ public abstract class WeixinMsg implements IncomeMessage{
 		return contents.get("CreateTime");
 	}
 	
-	public String msgType(){
-		return contents.get(MSG_TYPE_KEY);
-	}
 	
-	@Override
-	public String get(String attr) {
-		return contents.get(attr);
-	}
 	
 	@Test
 	public void test() {
