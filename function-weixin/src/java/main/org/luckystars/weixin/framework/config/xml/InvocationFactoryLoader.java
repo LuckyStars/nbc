@@ -18,7 +18,6 @@ class InvocationFactoryLoader implements AppContextLoader{
 	
 	private final String xmlTag = "invocationFactoryBean";
 	
-	
 	private Document doc;
 	
 	InvocationFactoryLoader (Document document){
@@ -34,13 +33,6 @@ class InvocationFactoryLoader implements AppContextLoader{
 		InvocationFactoryBean fac = getFactoryBean(facClassName);
 		ctx.put(InvocationFactoryBean.INVOCATION_FACTORY_BEAN, fac);
 	}
-	public static void main(String[] args) {
-		AppContext.initContext("appConfig.xml");
-		XmlAppConfigLoader loader = new XmlAppConfigLoader();
-		loader.loadIntoContext(AppContext.getContext());
-		
-	}
-	
 
 	@SuppressWarnings("rawtypes")
 	private InvocationFactoryBean getFactoryBean(String facClassName) {
