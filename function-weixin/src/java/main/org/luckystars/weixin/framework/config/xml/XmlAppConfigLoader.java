@@ -1,15 +1,11 @@
 package org.luckystars.weixin.framework.config.xml;
 
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.api.AppContextLoader;
@@ -26,8 +22,6 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		loadInvocationFactory(ctx,document);
 		loadHandlerChains(ctx, document);
 	}
-	
-	
 	
 	private void loadInvocationFactory(AppContext ctx, Document document) {
 		new InvocationFactoryLoader(document).loadIntoContext(ctx);
@@ -55,18 +49,12 @@ public class XmlAppConfigLoader implements AppContextLoader{
 			if(in==null){
 				throw new NullPointerException("配置文件:" + xmlPath + "不存在");
 			}
-			debug:{
-				
-				System.out.print(loadFileToString(xmlPath));
-			}
 			
 			DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = fac.newDocumentBuilder();
-//			result = builder.parse(in);
 			
-			result = builder.parse(new File(
-					Thread.currentThread().getContextClassLoader().
-					getResource(xmlPath).toURI()));
+			result = builder.parse(Thread.currentThread().getContextClassLoader().
+					getResourceAsStream(xmlPath));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,19 +64,4 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		return result;
 	}
 	
-	public static String loadFileToString(String filePath){
-		try {
-			return FileUtils.readFileToString(
-					new File(
-							Thread.currentThread().getContextClassLoader().
-							getResource(filePath).toURI()),"UTF-8");
-		} catch (IOException e) {
-			logger.error("读取" + filePath  + "出错", e);
-			return "";
-		} catch (URISyntaxException e) {
-			logger.error("读取" + filePath  + "出错", e);
-			return "";
-		}
-	}
-
 }

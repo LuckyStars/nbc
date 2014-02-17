@@ -18,12 +18,13 @@ import org.luckystars.weixin.framework.util.BeanUtil;
 
 public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 
+	public static final String MSG_TYPE_HANDLERCHAIN = "msgTypeHandlerChain";
 	
 	public HandlerInvocation buildInvocation(HandlerContext ctx) {
 		HandlerInvocation invocation = null;
 		
 		HandlerChainConfig config = 
-			(HandlerChainConfig) ctx.getAppContext().get(INVOCATION_FACTORY_BEAN);
+			(HandlerChainConfig) ctx.getAppContext().get(MSG_TYPE_HANDLERCHAIN);
 		
 		String msgType = ctx.getMsg().getMsgType(); 
 		Map<String, ChainMapping> mappings = config.getAllChains();

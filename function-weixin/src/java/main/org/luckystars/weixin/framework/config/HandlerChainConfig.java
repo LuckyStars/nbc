@@ -1,5 +1,6 @@
 package org.luckystars.weixin.framework.config;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -8,18 +9,11 @@ import java.util.Map;
  */
 public class HandlerChainConfig {
 	
-	/***在全局上下文中的KEY**/
-	public static final String HANDLER_CHAIN_CONFIG = "HANDLER_CHAIN_CONFIG";
-
-	private static final HandlerChainConfig config = new HandlerChainConfig();
+	private String name = "";
 	
-	private HandlerChainConfig(){}
+	private String handlerFactoryClass = "";
 	
-	private String name;
-	
-	private String handlerFactoryClass;
-	
-	private Map<String, ChainMapping> allChains ;
+	private Map<String, ChainMapping> allChains = new HashMap<String, ChainMapping>() ;
 
 	public String getName() {
 		return name;
@@ -30,6 +24,18 @@ public class HandlerChainConfig {
 	}
 	public Map<String, ChainMapping> getAllChains() {
 		return allChains;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setHandlerFactoryClass(String handlerFactoryClass) {
+		this.handlerFactoryClass = handlerFactoryClass;
+	}
+
+	public void setAllChains(Map<String, ChainMapping> allChains) {
+		this.allChains = allChains;
 	}
 	
 	
