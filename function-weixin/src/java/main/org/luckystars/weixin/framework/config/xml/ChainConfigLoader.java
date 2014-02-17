@@ -1,12 +1,14 @@
 package org.luckystars.weixin.framework.config.xml;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.ChainMapping;
 import org.luckystars.weixin.framework.config.HandlerChainConfig;
+import org.luckystars.weixin.framework.config.HandlerMapping;
 import org.python.antlr.PythonParser.lambdef_return;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -32,8 +34,7 @@ class ChainConfigLoader implements AppContextLoader{
 		valiExists(handlerChains);
 		
 		for (int i = 0;i<handlerChains.getLength();i++) {
-			System.out.println(handlerChains.item(i).getAttributes().getNamedItem("id").getNodeValue());
-			HandlerChainConfig config = buildConfig(handlerChains.item(0));
+			HandlerChainConfig config = buildConfig(handlerChains.item(i));
 			ctx.put(config.getName(), config);
 		}
 		
@@ -59,18 +60,26 @@ class ChainConfigLoader implements AppContextLoader{
 		
 		for (int i =0,end = chainsList.getLength();i<end;i++) {
 			Node chainNode = chainsList.item(i);
-			//System.out.println(chain.getNodeType() + chain.getNodeName());
-			if(chainNode.getNodeType()==Node.ELEMENT_NODE
-					&&chainNode.getNodeName().equals("chain")){
-				
+			if(isChainNode(chainNode)){
 				String chainId = chainNode.getAttributes().getNamedItem("id").getNodeValue();
-				System.out.println(chainId);
+				List<HandlerMapping> handlers = buildHandlers(chainNode);
+				ChainMapping chain = new ChainMapping(chainId,handlers);
+				result.put(chainId, chain);
 			}
-			System.out.println("------");
-			
 		}
-		
 		return result;
+	}
+
+	private List<HandlerMapping> buildHandlers(Node chainNode) {
+		
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private boolean isChainNode(Node chainNode) {
+		return chainNode.getNodeType()==Node.ELEMENT_NODE
+				&&chainNode.getNodeName().equals("chain");
 	}
 
 	private void valiExists(NodeList nodes) {
