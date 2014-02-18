@@ -133,7 +133,11 @@ class ChainConfigLoader implements AppContextLoader{
 	 * @author xuechong
 	 */
 	private String loadNodeAttr(String valueKey,Node node){
-		
+		Node attr = node.getAttributes().getNamedItem(valueKey);
+		if(attr==null||attr.getNodeValue()==null||attr.getNodeValue().trim().isEmpty()){
+			throw new NullPointerException("no such value" + valueKey);
+		}
+		return attr.getNodeValue().trim();
 	}
 	
 	public static void main(String[] args) {
