@@ -1,15 +1,15 @@
 package org.luckystars.weixin.framework.config.xml;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.luckystars.weixin.framework.AppContext;
+import org.luckystars.weixin.framework.AppContext; 
 import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.ChainMapping;
 import org.luckystars.weixin.framework.config.HandlerChainConfig;
 import org.luckystars.weixin.framework.config.HandlerMapping;
-import org.python.antlr.PythonParser.lambdef_return;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 /**
  * 读取handler chain内容
  * @author xuechong
- *
  */
 class ChainConfigLoader implements AppContextLoader{
 
@@ -61,9 +60,17 @@ class ChainConfigLoader implements AppContextLoader{
 		for (int i =0,end = chainsList.getLength();i<end;i++) {
 			Node chainNode = chainsList.item(i);
 			if(isChainNode(chainNode)){
-				String chainId = chainNode.getAttributes().getNamedItem("id").getNodeValue();
 				List<HandlerMapping> handlers = buildHandlers(chainNode);
-				ChainMapping chain = new ChainMapping(chainId,handlers);
+				
+				String chainId = chainNode.getAttributes().getNamedItem("id").getNodeValue();
+				Node facNode = chainNode.getAttributes().getNamedItem("handlerFactoryClass");
+				ChainMapping chain = null;
+				if(facNode==null){
+					chain = new ChainMapping(chainId,handlers);
+				}else{
+					chain = new ChainMapping(chainId,facNode.getNodeValue(),handlers);
+				}
+				
 				result.put(chainId, chain);
 			}
 		}
@@ -71,10 +78,29 @@ class ChainConfigLoader implements AppContextLoader{
 	}
 
 	private List<HandlerMapping> buildHandlers(Node chainNode) {
+		List<HandlerMapping> handlerList = 
+			new ArrayList<HandlerMapping>(chainNode.getChildNodes().getLength());
+		NodeList handlerNodeList = chainNode.getChildNodes();
 		
+		for (int i=0,end=handlerNodeList.getLength();i<end;i++) {
+			Node handlerNode = handlerNodeList.item(i);
+			if(isHandlerNode(handlerNode)){
+				String scope = trimNodeAttr("scope",handlerNode);
+				String handlerClass = handlerNode.getTextContent();
+				if(handlerClass==null||handlerClass.isEmpty()){
+					throw new NullPointerException("没有配置handler class");
+				}
+				HandlerMapping handler = new HandlerMapping(handlerClass,scope);
+				handlerList.add(handler);
+			}
+		}
 		
-		// TODO Auto-generated method stub
-		return null;
+		return handlerList;
+	}
+
+	private boolean isHandlerNode(Node handlerNode) {
+		return handlerNode.getNodeType()==Node.ELEMENT_NODE
+		&&handlerNode.getNodeName().equals("handler");
 	}
 
 	private boolean isChainNode(Node chainNode) {
@@ -86,6 +112,28 @@ class ChainConfigLoader implements AppContextLoader{
 		if(nodes==null||nodes.getLength()<=0){
 			throw new NullPointerException("没有配置handlerChain");
 		}
+	}
+	/**
+	 * 没有值时返回空字符
+	 * @param valueKey
+	 * @param node
+	 * @return
+	 * @author xuechong
+	 */
+	private String trimNodeAttr(String valueKey,Node node){
+		Node attr = node.getAttributes().getNamedItem(valueKey);
+		if(attr==null){return "";}
+		return attr.getNodeValue()!=null?attr.getNodeValue():"";
+	}
+	/**
+	 * 加载nodeValue 如果没有此节点抛出异常
+	 * @param valueKey
+	 * @param node
+	 * @return
+	 * @author xuechong
+	 */
+	private String loadNodeAttr(String valueKey,Node node){
+		
 	}
 	
 	public static void main(String[] args) {

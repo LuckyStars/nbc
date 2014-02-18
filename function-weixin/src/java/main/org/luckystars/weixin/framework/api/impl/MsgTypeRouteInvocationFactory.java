@@ -29,21 +29,20 @@ public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 		String msgType = ctx.getMsg().getMsgType(); 
 		Map<String, ChainMapping> mappings = config.getAllChains();
 		ChainMapping chain = mappings.get(msgType);
-		Iterator<Handler> iterator = buildChain(chain,config);
+		Iterator<Handler> iterator = buildChain(chain);
 		
 		invocation = new DefaultHandlerInvocationImpl(iterator);
 		return invocation;
 	}
 
 	@SuppressWarnings("unchecked")
-	private Iterator<Handler> buildChain(ChainMapping chain,
-			HandlerChainConfig config) {
+	private Iterator<Handler> buildChain(ChainMapping chain) {
 		
 		if(chain.getHandlerChain()!=null&&!chain.getHandlerChain().isEmpty()){
 			List<Handler> handlerList = 
 				new ArrayList<Handler>(chain.getHandlerChain().size());
 			
-			HandlerFactory factory = getHandlerFactory(config.getHandlerFactoryClass());
+			HandlerFactory factory = getHandlerFactory(chain.getHandlerFactoryClass());
 			
 			for (HandlerMapping mapping : chain.getHandlerChain()) {
 				Handler handler = factory.build(mapping);

@@ -5,38 +5,30 @@
 
 	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
 	
-	<handlerChain id="msgTypeHandlerChain" handlerFactoryClass="" >
+	<handlerChain id="msgTypeHandlerChain"  >
 		
-		<chain id="111" >
-			<handlerList>
-				<handler></handler>
-				<handler></handler>
-			</handlerList>
+		<chain id="111" handlerFactoryClass="" >
+			<handler></handler>
+			<handler></handler>
 		</chain>
 		
-		<chain id="222">
-			<handlerList>
-				<handler></handler>
-				<handler></handler>
-			</handlerList>
+		<chain id="222" handlerFactoryClass="">
+			<handler scope="prototype"></handler>
+			<handler></handler>
 		</chain>
 		
 	</handlerChain>
 	
-	<handlerChain id="aaaaaaaaaa" handlerFactoryClass="" >
+	<handlerChain id="aaaaaaaaaa" >
 		
-		<chain id="3333" >
-			<handlerList>
-				<handler></handler>
-				<handler></handler>
-			</handlerList>
+		<chain id="3333" handlerFactoryClass="" >
+			<handler></handler>
+			<handler></handler>
 		</chain>
 		
-		<chain id="44444">
-			<handlerList>
-				<handler></handler>
-				<handler></handler>
-			</handlerList>
+		<chain id="44444" handlerFactoryClass="" >
+			<handler></handler>
+			<handler></handler>
 		</chain>
 		
 	</handlerChain>
