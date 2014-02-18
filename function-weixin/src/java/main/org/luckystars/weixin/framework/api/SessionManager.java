@@ -23,5 +23,6 @@ public interface SessionManager {
 	 * @author xuechong
 	 */
 	void removeSession(String id);
+	
 
 }

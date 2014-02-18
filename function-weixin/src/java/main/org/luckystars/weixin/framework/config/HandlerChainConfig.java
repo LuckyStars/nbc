@@ -14,7 +14,6 @@ public class HandlerChainConfig {
 	
 	private String name = "";
 	
-	
 	private Map<String, ChainMapping> allChains = new HashMap<String, ChainMapping>() ;
 
 	public String getName() {

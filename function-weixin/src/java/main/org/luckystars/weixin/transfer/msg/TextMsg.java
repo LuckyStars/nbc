@@ -8,4 +8,9 @@ public class TextMsg extends WeixinMsg{
 		return this.contents.get("Content");
 	}
 	
+	@Override
+	public String getSessionId() {
+		return this.fromUserName();
+	}
+	
 }

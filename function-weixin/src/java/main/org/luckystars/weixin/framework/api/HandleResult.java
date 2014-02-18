@@ -9,14 +9,21 @@ public interface HandleResult {
 	 * stop the rest handlers
 	 * 停止余下的handler继续处理
 	 */
-	public static final HandleResult STOP_CHAIN = new HandleResult() {};
+	public static final HandleResult STOP_CHAIN = new HandleResult() {
+		public WeixinView getView() {return null;}
+		public void setView(WeixinView view) {};
+	};
 	
 	/**
 	 * 继续执行余下的handler
 	 * invoke next handler in the chain
 	 */
-	public static final HandleResult INVOKE_NEXT = new HandleResult() {};
+	public static final HandleResult INVOKE_NEXT = new HandleResult() {
+		public WeixinView getView() {return null;}
+		public void setView(WeixinView view) {}
+	};
 	
+	WeixinView getView();
 	
-	
+	void setView(WeixinView view);
 }

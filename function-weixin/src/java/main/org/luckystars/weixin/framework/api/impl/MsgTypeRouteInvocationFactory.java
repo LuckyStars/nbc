@@ -19,6 +19,7 @@ import org.luckystars.weixin.framework.util.BeanUtil;
 public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 
 	public static final String MSG_TYPE_HANDLERCHAIN = "msgTypeHandlerChain";
+	public static final String DEFAULT_HANDLER_CHAIN = "defaultChain";
 	
 	public HandlerInvocation buildInvocation(HandlerContext ctx) {
 		HandlerInvocation invocation = null;
@@ -29,6 +30,9 @@ public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 		String msgType = ctx.getMsg().getMsgType(); 
 		Map<String, ChainMapping> mappings = config.getAllChains();
 		ChainMapping chain = mappings.get(msgType);
+		if(chain==null){
+			chain = mappings.get(DEFAULT_HANDLER_CHAIN);
+		}
 		Iterator<Handler> iterator = buildChain(chain);
 		
 		invocation = new DefaultHandlerInvocationImpl(iterator);

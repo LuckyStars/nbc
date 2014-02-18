@@ -46,10 +46,13 @@ public abstract class WeixinMsg implements IncomeMessage{
 	}
 	
 	
-	
 	@Test
 	public void test() {
-		WeixinMsg m = new WeixinMsg() {};
+		WeixinMsg m = new WeixinMsg() {
+			@Override
+			public String getSessionId() {
+				return fromUserName();
+			}};
 		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
 				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
 				 "<CreateTime>1348831860</CreateTime>"+

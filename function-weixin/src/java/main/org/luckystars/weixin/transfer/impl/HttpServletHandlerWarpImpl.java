@@ -3,7 +3,6 @@ package org.luckystars.weixin.transfer.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,14 +22,15 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	private static final Logger logger = Logger.getLogger(HttpServletHandlerWarpImpl.class);
 	
 	private HandlerInvocation invocation;
+	HttpServletRequest req ;
+	private HttpServletResponse resp;
 	
 	public HttpServletHandlerWarpImpl(HttpServletRequest req,
 			HttpServletResponse resp){
-		
+		this.req = req;
+		this.resp = resp;
 		HandlerContext ctx = createHandlerContext(req,resp);
-		
 		this.invocation = warpInvocation(ctx);
-		
 	}
 
 	private HandlerInvocation warpInvocation(HandlerContext ctx) {
@@ -42,21 +42,6 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		return invocationFactoryBean.buildInvocation(ctx);
 	}
 	
-	private InvocationFactoryBean  loadInvoFacBean(String className){
-		InvocationFactoryBean result = null;
-		try {
-			result = (InvocationFactoryBean) Thread.currentThread().
-				getContextClassLoader().loadClass(className).newInstance();
-		} catch (InstantiationException e) {
-			logger.error(e);
-		} catch (IllegalAccessException e) {
-			logger.error(e);
-		} catch (ClassNotFoundException e) {
-			logger.error("找不到InvocationFactoryBean:" + className,e);
-		}
-		return result;
-	}
-
 	private HandlerContext createHandlerContext(HttpServletRequest req,
 			HttpServletResponse resp) {
 		HandlerContext ctx = null;
@@ -94,6 +79,9 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		try {
 			
 			HandleResult result = invocation.invokeNext();
+			if(result!=null && result.getView()!=null){
+				writeResp(result);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,6 +90,11 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			HandlerContext.cleanContext();
 		}
 		
+	}
+
+	private void writeResp(HandleResult result) throws IOException {
+		this.resp.setCharacterEncoding("utf-8");
+		this.resp.getWriter().write(result.getView().toWeixinStr());
 	}
 	
 	

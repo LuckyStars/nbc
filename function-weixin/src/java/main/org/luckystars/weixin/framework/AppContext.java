@@ -1,13 +1,9 @@
 package org.luckystars.weixin.framework;
 
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
 
 /**
  * 应用全局上下文
@@ -60,18 +56,4 @@ public class AppContext implements Serializable{
 	///////////////////////
 	////PRIVATE METHODS////
 	///////////////////////
-	private static Document loadConfig(String cxtConfigLocation) {
-		try {
-			Document dom = new SAXReader().read(
-					new InputStreamReader(
-							Thread.currentThread().getContextClassLoader()
-							.getResourceAsStream(cxtConfigLocation)));
-			
-			
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 }

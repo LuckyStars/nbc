@@ -7,30 +7,11 @@
 	
 	<handlerChain id="msgTypeHandlerChain"  >
 		
-		<chain id="111" handlerFactoryClass="" >
-			<handler></handler>
-			<handler></handler>
-		</chain>
-		
-		<chain id="222" handlerFactoryClass="">
-			<handler scope="prototype"></handler>
+		<chain id="defaultChain" >
 			<handler></handler>
 		</chain>
 		
 	</handlerChain>
 	
-	<handlerChain id="aaaaaaaaaa" >
-		
-		<chain id="3333" handlerFactoryClass="" >
-			<handler></handler>
-			<handler></handler>
-		</chain>
-		
-		<chain id="44444" handlerFactoryClass="" >
-			<handler></handler>
-			<handler></handler>
-		</chain>
-		
-	</handlerChain>
 	
 </configs>

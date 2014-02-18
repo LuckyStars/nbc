@@ -177,7 +177,7 @@
 		<dependency>  
 		    <groupId>org.springframework</groupId>  
 		    <artifactId>spring-aspects</artifactId>  
-		    <version>3.2.2.RELEASE</version>  
+		    <version>3.2.0.RELEASE</version>  
 		</dependency>
 		<!-- spring mvc -->
 		<dependency>
@@ -185,16 +185,6 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.0</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>1.5.4</version>
-		</dependency>
-		<dependency>
-			<groupId>aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.5.4</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>

@@ -31,7 +31,7 @@ public class WeixinServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		if(!valiReq(req)){return;}
+		//if(!valiReq(req)){return;}
 		
 		HandlerWarp handler = new HttpServletHandlerWarpImpl(req,resp);
 		handler.handle();

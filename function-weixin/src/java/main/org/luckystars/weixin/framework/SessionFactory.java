@@ -19,8 +19,7 @@ class SessionFactory {
 	
 	
 	private static String getSessionIdByCtx(HandlerContext ctx) {
-		// TODO Auto-generated method stub
-		return null;
+		return ctx.getMsg().getSessionId();
 	}
 
 
