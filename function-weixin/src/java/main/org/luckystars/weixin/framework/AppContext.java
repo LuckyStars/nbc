@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader;
+
 
 /**
  * 应用全局上下文
@@ -49,6 +51,7 @@ public class AppContext implements Serializable{
 	public static AppContext initContext(String cxtConfigLocation){
 		context = new AppContext();
 		context.configLocation = cxtConfigLocation;
+		new XmlAppConfigLoader().loadIntoContext(context);
 		return context;
 	}
 

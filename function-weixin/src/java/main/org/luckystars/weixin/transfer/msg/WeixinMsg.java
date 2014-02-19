@@ -37,14 +37,13 @@ public abstract class WeixinMsg implements IncomeMessage{
 		return contents.get("FromUserName");
 	}
 	
-	public String msgId(){
-		return contents.get("MsgId");
-	}
-	
 	public String createTime(){
 		return contents.get("CreateTime");
 	}
 	
+	public void setProperties(Map<String, String> props){
+		this.contents = props;
+	}
 	
 	@Test
 	public void test() {

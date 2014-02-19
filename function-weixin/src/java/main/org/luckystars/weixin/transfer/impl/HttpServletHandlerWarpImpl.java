@@ -14,7 +14,7 @@ import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.InvocationFactoryBean;
-import org.luckystars.weixin.transfer.msg.MsgFactory;
+import org.luckystars.weixin.transfer.msg.WeixinMsgFactory;
 
 
 public class HttpServletHandlerWarpImpl implements HandlerWarp{
@@ -29,6 +29,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			HttpServletResponse resp){
 		this.req = req;
 		this.resp = resp;
+		this.resp.setCharacterEncoding("utf-8");
 		HandlerContext ctx = createHandlerContext(req,resp);
 		this.invocation = warpInvocation(ctx);
 	}
@@ -46,7 +47,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			HttpServletResponse resp) {
 		HandlerContext ctx = null;
 		try {
-			IncomeMessage msg = MsgFactory.build(getRawStr(req));
+			IncomeMessage msg = WeixinMsgFactory.build(getRawStr(req));
 			ctx = new HandlerContext(msg, resp.getOutputStream());
 			HandlerContext.putContext(ctx);
 		} catch (IOException e) {
@@ -93,8 +94,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	}
 
 	private void writeResp(HandleResult result) throws IOException {
-		this.resp.setCharacterEncoding("utf-8");
-		this.resp.getWriter().write(result.getView().toWeixinStr());
+		HandlerContext.getContext().getReplyStream().write(result.getView().toWeixinStr().getBytes("utf-8"));
 	}
 	
 	

@@ -8,7 +8,7 @@
 	<handlerChain id="msgTypeHandlerChain"  >
 		
 		<chain id="defaultChain" >
-			<handler></handler>
+			<handler>org.luckystars.weixin.framework.handlers.TestHandler</handler>
 		</chain>
 		
 	</handlerChain>
