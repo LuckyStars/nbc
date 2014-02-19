@@ -1,10 +1,21 @@
 package org.luckystars.weixin.framework;
 
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.log4j.Logger;
+import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -15,10 +26,11 @@ public class AppContext implements Serializable{
 
 	private static final long serialVersionUID = -5759981728727750618L;
 	
+	private static final Logger logger = Logger.getLogger(AppContext.class);
+	
 	private static AppContext context = new AppContext();
 	
 	private static String DEFAULT_CONFIG_LOCATION = "appConfig.xml";
-	
 	
 	/**全局配置文件地址*/
 	private String configLocation = DEFAULT_CONFIG_LOCATION;
@@ -52,9 +64,60 @@ public class AppContext implements Serializable{
 		context = new AppContext();
 		context.configLocation = cxtConfigLocation;
 		new XmlAppConfigLoader().loadIntoContext(context);
+		for (AppContextLoader loader : getLoaders(cxtConfigLocation)) {
+			loader.loadIntoContext(context);
+		}
 		return context;
 	}
+	
+	@SuppressWarnings("unchecked")
+	static List<AppContextLoader> getLoaders(String configLocation){
+		List<AppContextLoader> loaderList = Collections.EMPTY_LIST;
+		Document document = buildDoument(configLocation);
+		NodeList nodes = document.getDocumentElement().getElementsByTagName("configLoaders");
+		if(valieConfig(nodes)){
+			loaderList = buildLoaders(nodes);
+		}
+		return loaderList;
+	}
 
+	
+	private static List<AppContextLoader> buildLoaders(NodeList nodes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static boolean valieConfig(NodeList nodes) {
+		if(nodes==null||nodes.getLength()<=0){
+			
+		}
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static Document buildDoument(String xmlPath) {
+		Document result = null;
+		
+		try {
+			InputStream in = Thread.currentThread().
+				getContextClassLoader().getResourceAsStream(xmlPath);
+			if(in==null){
+				throw new NullPointerException("配置文件:" + xmlPath + "不存在");
+			}
+			
+			DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = fac.newDocumentBuilder();
+			
+			result = builder.parse(Thread.currentThread().getContextClassLoader().
+					getResourceAsStream(xmlPath));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+		}
+		
+		return result;
+	}
 	
 	///////////////////////
 	////PRIVATE METHODS////
