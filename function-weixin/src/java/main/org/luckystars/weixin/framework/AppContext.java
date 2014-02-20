@@ -14,7 +14,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader;
+import org.luckystars.weixin.framework.util.BeanUtil;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 
@@ -63,7 +65,7 @@ public class AppContext implements Serializable{
 	public static AppContext initContext(String cxtConfigLocation){
 		context = new AppContext();
 		context.configLocation = cxtConfigLocation;
-		new XmlAppConfigLoader().loadIntoContext(context);
+		//new XmlAppConfigLoader().loadIntoContext(context);
 		for (AppContextLoader loader : getLoaders(cxtConfigLocation)) {
 			loader.loadIntoContext(context);
 		}
@@ -75,7 +77,7 @@ public class AppContext implements Serializable{
 		List<AppContextLoader> loaderList = Collections.EMPTY_LIST;
 		Document document = buildDoument(configLocation);
 		NodeList nodes = document.getDocumentElement().getElementsByTagName("configLoaders");
-		if(valieConfig(nodes)){
+		if(valiConfig(nodes)){
 			loaderList = buildLoaders(nodes);
 		}
 		return loaderList;
@@ -83,16 +85,36 @@ public class AppContext implements Serializable{
 
 	
 	private static List<AppContextLoader> buildLoaders(NodeList nodes) {
-		// TODO Auto-generated method stub
-		return null;
+		List<AppContextLoader> result = new ArrayList<AppContextLoader>();
+		for(int i=0,end = nodes.getLength();i<end;i++){
+			Node loaderNode = nodes.item(i);
+			String loaderClass = loaderNode.getTextContent();
+			if(loaderClass!=null&&!loaderClass.trim().isEmpty()){
+				for(String loaderCla :loaderClass.split(",")){
+					try {
+						AppContextLoader loader = (AppContextLoader) BeanUtil.getBeanByClassName(loaderCla);
+						result.add(loader);
+						if(logger.isInfoEnabled()){
+							logger.info("add ctxloader:" + loaderCla);
+						}
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (InstantiationException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return result;
 	}
 
-	private static boolean valieConfig(NodeList nodes) {
+	private static boolean valiConfig(NodeList nodes) {
 		if(nodes==null||nodes.getLength()<=0){
-			
+			logger.info("没有配置appcontext loader");
 		}
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	private static Document buildDoument(String xmlPath) {

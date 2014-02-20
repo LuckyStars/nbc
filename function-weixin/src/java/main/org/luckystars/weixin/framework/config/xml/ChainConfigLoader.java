@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext; 
 import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.ChainMapping;
@@ -19,6 +20,8 @@ import org.w3c.dom.NodeList;
  * @author xuechong
  */
 class ChainConfigLoader implements AppContextLoader{
+	
+	private static final Logger logger = Logger.getLogger(ChainConfigLoader.class);
 
 	private final String XML_TAG = "handlerChain";
 	private Document doc;
@@ -72,6 +75,9 @@ class ChainConfigLoader implements AppContextLoader{
 				}
 				
 				result.put(chainId, chain);
+				if(logger.isInfoEnabled()){
+					logger.info("handlerChain:" + chainId + " is loaded");
+				}
 			}
 		}
 		return result;
@@ -140,11 +146,4 @@ class ChainConfigLoader implements AppContextLoader{
 		return attr.getNodeValue().trim();
 	}
 	
-	public static void main(String[] args) {
-		String configLocation = "appConfig.xml";
-		AppContext ctx = AppContext.initContext(configLocation);
-		XmlAppConfigLoader loader = new XmlAppConfigLoader();
-		loader.loadIntoContext(ctx);
-	}
-
 }

@@ -17,6 +17,7 @@ import org.luckystars.weixin.transfer.interfaces.Validation;
 @SuppressWarnings("serial")
 public class WeixinServlet extends HttpServlet {
 	
+	private String token = "";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -49,6 +50,11 @@ public class WeixinServlet extends HttpServlet {
 	
 	private void initAppcontext(ServletConfig config) {
 		String configLocation = config.getInitParameter("appConfigLocation");
+		String initToken = config.getInitParameter("token");
+		if(initToken==null||initToken.trim().isEmpty()){
+			throw new NullPointerException("没有配置token");
+		}
+		this.token = initToken;
 		if(configLocation!=null&&configLocation.trim().isEmpty()){
 			AppContext.initContext(config.getInitParameter(configLocation));
 		}else{
@@ -61,7 +67,7 @@ public class WeixinServlet extends HttpServlet {
 		String timestamp = req.getParameter("timestamp");
 		String nonce = req.getParameter("nonce");
 		String signature = req.getParameter("signature");
-		String token = req.getParameter("token");
-		return vali.validate(timestamp, nonce, signature, token);
+		//String token = req.getParameter("token");
+		return vali.validate(timestamp, nonce, signature, this.token);
 	}
 }

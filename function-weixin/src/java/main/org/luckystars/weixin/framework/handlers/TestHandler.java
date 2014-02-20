@@ -7,6 +7,7 @@ import org.luckystars.weixin.framework.api.WeixinView;
 
 public class TestHandler implements Handler{
 	@Override
+	@SuppressWarnings("serial")
 	public HandleResult handle(HandlerInvocation invocation) {
 		System.out.println("test");
 		

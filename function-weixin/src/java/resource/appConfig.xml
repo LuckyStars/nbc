@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
 
-	<configLoaders>org.luckystars.weixin.framework.config.XmlAppConfigLoader</configLoaders>
+	<configLoaders>org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader</configLoaders>
 
 	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
 	

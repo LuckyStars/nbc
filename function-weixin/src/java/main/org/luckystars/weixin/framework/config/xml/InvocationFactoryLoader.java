@@ -44,7 +44,9 @@ class InvocationFactoryLoader implements AppContextLoader{
 		try {
 			Class fac = Thread.currentThread().getContextClassLoader().loadClass(facClassName);
 			result = (InvocationFactoryBean) fac.newInstance();
-			
+			if(logger.isInfoEnabled()){
+				logger.info("InvocationFactoryBean:" + facClassName + "loaded");
+			}
 		} catch (ClassNotFoundException e) {
 			logger.error(e);
 			e.printStackTrace();
