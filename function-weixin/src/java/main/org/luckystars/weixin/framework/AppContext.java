@@ -13,7 +13,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.api.AppContextLoader;
-import org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader;
 import org.luckystars.weixin.framework.util.BeanUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -65,15 +64,20 @@ public class AppContext implements Serializable{
 	public static AppContext initContext(String cxtConfigLocation){
 		context = new AppContext();
 		context.configLocation = cxtConfigLocation;
-		//new XmlAppConfigLoader().loadIntoContext(context);
 		for (AppContextLoader loader : getLoaders(cxtConfigLocation)) {
 			loader.loadIntoContext(context);
 		}
 		return context;
 	}
 	
+	
+	
+	
+	///////////////////////
+	////PRIVATE METHODS////
+	///////////////////////
 	@SuppressWarnings("unchecked")
-	static List<AppContextLoader> getLoaders(String configLocation){
+	private static List<AppContextLoader> getLoaders(String configLocation){
 		List<AppContextLoader> loaderList = Collections.EMPTY_LIST;
 		Document document = buildDoument(configLocation);
 		NodeList nodes = document.getDocumentElement().getElementsByTagName("configLoaders");
@@ -141,7 +145,5 @@ public class AppContext implements Serializable{
 		return result;
 	}
 	
-	///////////////////////
-	////PRIVATE METHODS////
-	///////////////////////
+	
 }

@@ -24,6 +24,7 @@ public class WeixinMsgFactory {
 		msgTypeMappings.put("event", EventMsg.class);
 		msgTypeMappings.put("image", ImageMsg.class);
 		msgTypeMappings.put("location", LocationMsg.class);
+		msgTypeMappings.put("link", LinkMsg.class);
 	}
 
 	public static IncomeMessage build(String rawContent) {

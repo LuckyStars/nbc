@@ -3,7 +3,6 @@ package org.luckystars.weixin.transfer.msg;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 
 @SuppressWarnings("serial")
@@ -50,24 +49,24 @@ public abstract class WeixinMsg implements IncomeMessage{
 		this.contents = props;
 	}
 	
-	@Test
-	public void test() {
-		WeixinMsg m = new WeixinMsg() {
-			@Override
-			public String getSessionId() {
-				return fromUserName();
-			}};
-		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
-				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
-				 "<CreateTime>1348831860</CreateTime>"+
-				 "<MsgType><![CDATA[text]]></MsgType>"+
-				 "<Content><![CDATA[this is a test]]></Content>"+
-				 "<MsgId>1234567890123456</MsgId>"+
-				 "</xml>";
-		
-		for (Map.Entry<String, String> en : m.contents.entrySet()) {
-			System.out.println(en.getKey() + "===" + en.getValue());
-		}
-		
-	}
+//	@Test
+//	public void test() {
+//		WeixinMsg m = new WeixinMsg() {
+//			@Override
+//			public String getSessionId() {
+//				return fromUserName();
+//			}};
+//		String s = " <xml> <ToUserName><![CDATA[toUser]]></ToUserName>"+
+//				 "<FromUserName><![CDATA[fromUser]]></FromUserName> "+
+//				 "<CreateTime>1348831860</CreateTime>"+
+//				 "<MsgType><![CDATA[text]]></MsgType>"+
+//				 "<Content><![CDATA[this is a test]]></Content>"+
+//				 "<MsgId>1234567890123456</MsgId>"+
+//				 "</xml>";
+//		
+//		for (Map.Entry<String, String> en : m.contents.entrySet()) {
+//			System.out.println(en.getKey() + "===" + en.getValue());
+//		}
+//		
+//	}
 }

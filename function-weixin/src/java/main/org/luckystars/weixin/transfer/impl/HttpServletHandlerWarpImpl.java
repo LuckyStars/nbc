@@ -22,7 +22,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	private static final Logger logger = Logger.getLogger(HttpServletHandlerWarpImpl.class);
 	
 	private HandlerInvocation invocation;
-	HttpServletRequest req ;
+	private HttpServletRequest req ;
 	private HttpServletResponse resp;
 	
 	public HttpServletHandlerWarpImpl(HttpServletRequest req,
@@ -30,7 +30,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		this.req = req;
 		this.resp = resp;
 		this.resp.setCharacterEncoding("utf-8");
-		HandlerContext ctx = createHandlerContext(req,resp);
+		HandlerContext ctx = createHandlerContext();
 		this.invocation = warpInvocation(ctx);
 	}
 
@@ -43,12 +43,11 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		return invocationFactoryBean.buildInvocation(ctx);
 	}
 	
-	private HandlerContext createHandlerContext(HttpServletRequest req,
-			HttpServletResponse resp) {
+	private HandlerContext createHandlerContext() {
 		HandlerContext ctx = null;
 		try {
-			IncomeMessage msg = WeixinMsgFactory.build(getRawStr(req));
-			ctx = new HandlerContext(msg, resp.getOutputStream());
+			IncomeMessage msg = WeixinMsgFactory.build(getRawStr(this.req));
+			ctx = new HandlerContext(msg, this.resp.getOutputStream());
 			HandlerContext.putContext(ctx);
 		} catch (IOException e) {
 			logger.error("获取response输出流出错",e);//well ....╮(╯_╰)╭
@@ -85,6 +84,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			}
 			
 		} catch (Exception e) {
+			logger.error(e);
 			e.printStackTrace();
 		}finally{
 			///释放上下文资源
