@@ -22,6 +22,8 @@ public class WeixinMsgFactory {
 	static{
 		msgTypeMappings.put("text", TextMsg.class);
 		msgTypeMappings.put("event", EventMsg.class);
+		msgTypeMappings.put("image", ImageMsg.class);
+		msgTypeMappings.put("location", LocationMsg.class);
 	}
 
 	public static IncomeMessage build(String rawContent) {
@@ -39,7 +41,9 @@ public class WeixinMsgFactory {
 		Class<? extends WeixinMsg> cla = msgTypeMappings.get(msgType);
 		
 		if(cla==null){
-			throw new NullPointerException("没有与" + msgType + "对应的消息类型");
+			result = new DefaultUnknowMsg();
+			return result;
+			//throw new NullPointerException("没有与" + msgType + "对应的消息类型");
 		}
 		try {
 			result = cla.newInstance();
@@ -69,4 +73,9 @@ public class WeixinMsgFactory {
 		}
 		return contentsMap;
 	}
+	
+	@SuppressWarnings("serial")
+	private static class DefaultUnknowMsg extends WeixinMsg{
+	}
+	
 }

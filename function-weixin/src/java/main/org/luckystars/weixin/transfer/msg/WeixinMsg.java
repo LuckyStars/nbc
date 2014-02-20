@@ -17,6 +17,11 @@ public abstract class WeixinMsg implements IncomeMessage{
 	protected Map<String, String> contents = new HashMap<String, String>();
 	
 	@Override
+	public String getSessionId() {
+		return fromUserName();
+	}
+	
+	@Override
 	public String getMsgType(){
 		return contents.get(MSG_TYPE_KEY);
 	}
