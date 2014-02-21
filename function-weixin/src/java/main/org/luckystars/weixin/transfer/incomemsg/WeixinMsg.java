@@ -1,4 +1,4 @@
-package org.luckystars.weixin.transfer.msg;
+package org.luckystars.weixin.transfer.incomemsg;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,6 +3,7 @@ package org.luckystars.weixin.framework.api.impl;
 import java.util.Collections;
 import java.util.Iterator;
 
+
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -17,10 +18,9 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 		this.handlers = handlers;
 	}
 	
-	
 	@Override
 	public HandleResult invokeNext() {
-		HandleResult result = null;
+		HandleResult result = HandleResult.INVOKE_NEXT;
 		while(this.handlers!=null&&this.handlers.hasNext()){
 			result = handlers.next().handle(this);
 			if(result==HandleResult.STOP_CHAIN){break;}

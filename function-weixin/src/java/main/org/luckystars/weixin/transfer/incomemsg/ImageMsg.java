@@ -1,4 +1,4 @@
-package org.luckystars.weixin.transfer.msg;
+package org.luckystars.weixin.transfer.incomemsg;
 
 @SuppressWarnings("serial")
 public class ImageMsg extends WeixinMsg{

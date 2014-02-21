@@ -14,7 +14,7 @@ import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.InvocationFactoryBean;
-import org.luckystars.weixin.transfer.msg.WeixinMsgFactory;
+import org.luckystars.weixin.transfer.incomemsg.WeixinMsgFactory;
 
 
 public class HttpServletHandlerWarpImpl implements HandlerWarp{
