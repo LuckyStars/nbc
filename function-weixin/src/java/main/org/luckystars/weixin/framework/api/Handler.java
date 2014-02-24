@@ -8,6 +8,6 @@ import org.luckystars.weixin.framework.HandlerInvocation;
  */
 public interface Handler  {
 	
-	HandleResult handle(HandlerInvocation invocation);
+	HandleResult handle(HandlerInvocation invocation) throws Exception;
 	
 }

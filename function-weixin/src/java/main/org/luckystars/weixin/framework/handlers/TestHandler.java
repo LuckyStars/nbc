@@ -14,7 +14,7 @@ public class TestHandler implements Handler{
 	
 	private static final Logger logger = Logger.getLogger(TestHandler.class);
 	@Override
-	public HandleResult handle(HandlerInvocation invocation) {
+	public HandleResult handle(HandlerInvocation invocation) throws Exception {
 		System.out.println("test");
 		IncomeMessage msg = invocation.getInvocationContext().getMsg();
 		

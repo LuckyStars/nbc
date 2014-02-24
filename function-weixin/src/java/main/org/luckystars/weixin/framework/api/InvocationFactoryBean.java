@@ -9,7 +9,7 @@ public interface InvocationFactoryBean {
 	/**
 	 * 保存在APPCONTEXT中的InvocationFactoryBean对象
 	 */
-	public static final String INVOCATION_FACTORY_BEAN = "INVOCATION_FACTORY_BEAN";
+	public static final String INVOCATION_FACTORY_BEAN = "org.luckystars.weixin.framework.api.InvocationFactoryBean.INVOCATION_FACTORY_BEAN";
 	
 	HandlerInvocation buildInvocation(HandlerContext ctx);
 	

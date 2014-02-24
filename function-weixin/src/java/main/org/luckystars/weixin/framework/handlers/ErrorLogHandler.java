@@ -9,7 +9,7 @@ public class ErrorLogHandler implements Handler{
 
 	
 	@Override
-	public HandleResult handle(HandlerInvocation invocation){
+	public HandleResult handle(HandlerInvocation invocation) throws Exception{
 		
 		HandleResult result = null;
 		

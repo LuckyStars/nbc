@@ -5,7 +5,7 @@ import org.luckystars.weixin.framework.api.IncomeMessage;
 
 public interface HandlerInvocation {
 	
-	HandleResult invokeNext();
+	HandleResult invokeNext() throws Exception;
 	
 	HandlerContext getInvocationContext();
 	

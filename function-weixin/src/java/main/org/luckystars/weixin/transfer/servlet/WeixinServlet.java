@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.transfer.impl.DefaultValidationImp;
@@ -17,10 +18,12 @@ import org.luckystars.weixin.transfer.interfaces.Validation;
 @SuppressWarnings("serial")
 public class WeixinServlet extends HttpServlet {
 	
+	private static final Logger logger = Logger.getLogger(WeixinServlet.class);
 	private String token = "";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		logger.info("vali:" + req.getRemoteAddr());
 		if (valiReq(req)){
 			resp.setCharacterEncoding("utf-8");
 			resp.getWriter().write(req.getParameter("echostr"));
@@ -64,6 +67,7 @@ public class WeixinServlet extends HttpServlet {
 	
 	private boolean valiReq(HttpServletRequest req){
 		Validation vali = new DefaultValidationImp();
+		
 		String timestamp = req.getParameter("timestamp");
 		String nonce = req.getParameter("nonce");
 		String signature = req.getParameter("signature");

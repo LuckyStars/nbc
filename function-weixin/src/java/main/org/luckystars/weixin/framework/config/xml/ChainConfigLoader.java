@@ -119,6 +119,7 @@ class ChainConfigLoader implements AppContextLoader{
 			throw new NullPointerException("没有配置handlerChain");
 		}
 	}
+	
 	/**
 	 * 没有值时返回空字符
 	 * @param valueKey
@@ -131,6 +132,7 @@ class ChainConfigLoader implements AppContextLoader{
 		if(attr==null){return "";}
 		return attr.getNodeValue()!=null?attr.getNodeValue():"";
 	}
+	
 	/**
 	 * 加载nodeValue 如果没有此节点抛出异常
 	 * @param valueKey
