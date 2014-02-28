@@ -1,5 +1,6 @@
 package org.luckystars.weixin.framework.handlers;
 
+
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -21,9 +22,11 @@ public class TestHandler implements Handler{
 		if(msg instanceof WeixinMsg){
 			WeixinMsg m = (WeixinMsg)msg;
 			logger.info("\n\n" + m.getRawXml() + "\n\n");
-			String toUsr = m.fromUserName();
-			String serverName = m.toUserName();
-			final WeixinView view = new TextView("这只是个测试", toUsr, serverName);
+			String toUsr = m.getFromUserName();
+			String serverName = m.getToUserName();
+			
+			final WeixinView view = new TextView("这只是个测试\n你发送的数据是\n" + m.toString(), toUsr, serverName);
+			
 			return new HandleResult() {
 				public void setView(WeixinView view) {
 				}

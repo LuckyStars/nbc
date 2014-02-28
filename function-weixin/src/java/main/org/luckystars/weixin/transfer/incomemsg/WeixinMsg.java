@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.utils.json.GsonUtil;
+
+import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public abstract class WeixinMsg implements IncomeMessage{
 	
 	public static final String MSG_TYPE_KEY = "MsgType";
-	
-	
 	
 	public static final String MSG_TYPE_EVENT = "event";
 	
@@ -31,13 +32,14 @@ public abstract class WeixinMsg implements IncomeMessage{
 	
 	@Override
 	public String getSessionId() {
-		return fromUserName();
+		return getFromUserName();
 	}
 	
 	@Override
 	public String getMsgType(){
 		return contents.get(MSG_TYPE_KEY);
 	}
+	
 	@Override
 	public String get(String attr) {
 		return contents.get(attr);
@@ -47,21 +49,26 @@ public abstract class WeixinMsg implements IncomeMessage{
 		return rawXML;
 	}
 	
-	public String toUserName (){
+	public void setRawXml(String rawXml){
+		this.rawXML = rawXml;
+	}
+	
+	public String getToUserName (){
 		return contents.get("ToUserName");
 	}
 	
-	public String fromUserName(){
+	public String getFromUserName(){
 		return contents.get("FromUserName");
 	}
 	
-	public String createTime(){
+	public String getCreateTime(){
 		return contents.get("CreateTime");
 	}
 	
 	public void setProperties(Map<String, String> props){
 		this.contents = props;
 	}
+	
 	
 //	@Test
 //	public void test() {

@@ -32,6 +32,7 @@ public class WeixinMsgFactory {
 		Map<String, String> contents = newContentMap(rawContent);
 		String msgType = contents.get(WeixinMsg.MSG_TYPE_KEY);
 		result = createMsg(msgType);
+		result.setRawXml(rawContent);
 		result.setProperties(contents);
 		return result;
 	}

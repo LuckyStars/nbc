@@ -88,8 +88,8 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 
 	private NewsView buildView(List<? extends Serializable> contents,WeixinMsg incomeMsg){
 		NewsView view = new NewsView();
-		view.setFromUserName(incomeMsg.toUserName());
-		view.setToUserName(incomeMsg.fromUserName());
+		view.setFromUserName(incomeMsg.getToUserName());
+		view.setToUserName(incomeMsg.getFromUserName());
 		view.setCreateTime(String.valueOf(System.currentTimeMillis()));
 		view.setItems(buildItems(contents));
 		return view;

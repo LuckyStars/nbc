@@ -5,7 +5,4 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
     ">
 
-	<bean id="pyTopicService" 
-		class="com.xuechong.bootstraptests.py.factory.PYObjectFactory"
-		factory-method="getTopicService"></bean>
 </beans>

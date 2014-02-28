@@ -8,7 +8,7 @@ public class LinkMsg extends WeixinMsg{
 	 * @return
 	 * @author xuechong
 	 */
-	public String description(){
+	public String getDescription(){
 		return this.contents.get("Description");
 	}
 	
@@ -17,8 +17,20 @@ public class LinkMsg extends WeixinMsg{
 	 * @return
 	 * @author xuechong
 	 */
-	public String url(){
+	public String getUrl(){
 		return this.contents.get("Url");
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("");
+		sb.append("fromUser:" + this.getFromUserName() + "\n");
+		sb.append("toUser:" + this.getToUserName() + "\n");
+		sb.append("sessionId:" + this.getSessionId() + "\n");
+		sb.append("createTime:" + this.getCreateTime() + "\n");
+		sb.append("msgType:" + this.getMsgType() + "\n");
+		sb.append("url:" + this.getUrl() + "\n");
+		sb.append("description:" + this.getDescription() + "\n");
+		return sb.toString();
+	}
 }
