@@ -30,6 +30,8 @@ class ChainConfigLoader implements AppContextLoader{
 		this.doc = document;
 	}
 	
+	
+	
 	@Override
 	public void loadIntoContext(AppContext ctx) {
 		NodeList handlerChains = doc.getDocumentElement().getElementsByTagName(XML_TAG);
@@ -106,12 +108,12 @@ class ChainConfigLoader implements AppContextLoader{
 
 	private boolean isHandlerNode(Node handlerNode) {
 		return handlerNode.getNodeType()==Node.ELEMENT_NODE
-		&&handlerNode.getNodeName().equals("handler");
+			&& handlerNode.getNodeName().equals("handler");
 	}
 
 	private boolean isChainNode(Node chainNode) {
 		return chainNode.getNodeType()==Node.ELEMENT_NODE
-				&&chainNode.getNodeName().equals("chain");
+			&& chainNode.getNodeName().equals("chain");
 	}
 
 	private void valiExists(NodeList nodes) {

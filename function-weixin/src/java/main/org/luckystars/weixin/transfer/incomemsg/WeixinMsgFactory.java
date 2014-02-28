@@ -20,11 +20,11 @@ public class WeixinMsgFactory {
 		new HashMap<String, Class<? extends WeixinMsg>>();
 	
 	static{
-		msgTypeMappings.put("text", TextMsg.class);
-		msgTypeMappings.put("event", EventMsg.class);
-		msgTypeMappings.put("image", ImageMsg.class);
-		msgTypeMappings.put("location", LocationMsg.class);
-		msgTypeMappings.put("link", LinkMsg.class);
+		msgTypeMappings.put(WeixinMsg.MSG_TYPE_TEXT, TextMsg.class);
+		msgTypeMappings.put(WeixinMsg.MSG_TYPE_EVENT, EventMsg.class);
+		msgTypeMappings.put(WeixinMsg.MSG_TYPE_IMAGE, ImageMsg.class);
+		msgTypeMappings.put(WeixinMsg.MSG_TYPE_LOCATION, LocationMsg.class);
+		msgTypeMappings.put(WeixinMsg.MSG_TYPE_LINK, LinkMsg.class);
 	}
 
 	public static IncomeMessage build(String rawContent) {
@@ -77,6 +77,10 @@ public class WeixinMsgFactory {
 	
 	@SuppressWarnings("serial")
 	private static class DefaultUnknowMsg extends WeixinMsg{
+		@Override
+		public String getMsgType() {
+			return WeixinMsg.MSG_TYPE_UNKNOWN;
+		}
 	}
 	
 }

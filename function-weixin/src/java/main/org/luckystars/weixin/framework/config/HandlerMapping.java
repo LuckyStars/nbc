@@ -9,11 +9,7 @@ public class HandlerMapping {
 	private final String scope;
 	private final String className;
 	
-	/**
-	 * 
-	 * @param className
-	 * @param scope
-	 */
+
 	public HandlerMapping( String className,String scope) {
 		super();
 		this.scope = scope;

@@ -10,6 +10,20 @@ public abstract class WeixinMsg implements IncomeMessage{
 	
 	public static final String MSG_TYPE_KEY = "MsgType";
 	
+	
+	
+	public static final String MSG_TYPE_EVENT = "event";
+	
+	public static final String MSG_TYPE_IMAGE = "image";
+	
+	public static final String MSG_TYPE_LINK = "link";
+	
+	public static final String MSG_TYPE_LOCATION = "location";
+	
+	public static final String MSG_TYPE_TEXT ="text";
+		
+	public static final String MSG_TYPE_UNKNOWN ="unknown";
+	
 	/** 原始数据*/
 	protected String rawXML;
 
