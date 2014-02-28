@@ -16,9 +16,11 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 		}
 		Class<?> cla = contents.get(0).getClass();
 
-		valiAnnotations(cla);
+		boolean valied = valiAnnotations(cla);
 		
-		
+		if(valied){
+			buildView(contents);
+		}
 		
 		return null;
 	}
@@ -78,5 +80,17 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 		}
 		return false;
 	}
+
+
+	private NewsView buildView(List<? extends Serializable> contents){
+		NewsView view = new NewsView();
+		
+		
+		
+		
+		return view;
+
+	}
+
 
 }

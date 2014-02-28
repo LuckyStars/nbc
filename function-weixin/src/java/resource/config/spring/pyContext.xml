@@ -4,7 +4,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
     ">
-    <!-- <bean id="" 
-    	class="com.nbcedu.function.weixin.py.PYObjectFactory" 
-    	factory-method=""></bean> -->
+
+	<bean id="pyTopicService" 
+		class="com.xuechong.bootstraptests.py.factory.PYObjectFactory"
+		factory-method="getTopicService"></bean>
 </beans>

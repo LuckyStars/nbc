@@ -22,7 +22,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 			<list>
-	    		<value>com.nbcedu.function.weixin.model</value>
+	    		<value>com.xuechong.bootstraptests.model</value>
 	    	</list>
 		</property>
 		<property name="hibernateProperties">

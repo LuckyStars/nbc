@@ -18,7 +18,7 @@
             http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 	
 	<!--自动扫描的包名 -->
-	<context:component-scan base-package="com.nbcedu.function.weixin">
+	<context:component-scan base-package="com.xuechong.bootstraptests,org.luckystars.weixin">
 	</context:component-scan>
 	<!-- 注解 -->
 	<mvc:annotation-driven />
