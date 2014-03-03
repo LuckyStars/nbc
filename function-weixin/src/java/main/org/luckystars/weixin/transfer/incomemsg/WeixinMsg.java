@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.luckystars.weixin.framework.api.IncomeMessage;
-import org.luckystars.weixin.utils.json.GsonUtil;
-
-import com.google.gson.Gson;
 
 @SuppressWarnings("serial")
 public abstract class WeixinMsg implements IncomeMessage{
