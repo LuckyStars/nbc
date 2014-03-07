@@ -21,5 +21,9 @@ public abstract class JsonOutputMsg implements OutputMsg{
 		return toJsonString();
 	}
 	
-	abstract String toJsonString();
+	public abstract String toJsonString();
+	
+	public abstract String getTouser();
+	
+	public abstract void setTouser(String touser);
 }

@@ -6,7 +6,7 @@ import org.luckystars.weixin.utils.json.GsonUtil;
 public class TextMsg extends JsonOutputMsg{
 
 	private String touser;
-	private String msgtype = MSG_TYPE_TEXT;
+	private String msgtype = JsonOutputMsg.MSG_TYPE_TEXT;
 	private Text text;
 	
 	@Override
@@ -14,15 +14,18 @@ public class TextMsg extends JsonOutputMsg{
 		return msgtype;
 	}
 	@Override
-	String toJsonString() {
+	public String toJsonString() {
 		return GsonUtil.gson.toJson(this);
 	}
+	@Override
 	public String getTouser() {
-		return touser;
+		return this.touser;
 	}
+	@Override
 	public void setTouser(String touser) {
 		this.touser = touser;
 	}
+	
 	public Text getText() {
 		return text;
 	}
@@ -54,5 +57,7 @@ public class TextMsg extends JsonOutputMsg{
 		t.setTouser("touserId11234");
 		System.out.println(t.toJsonString());
 	}
+
+	
 }
 
