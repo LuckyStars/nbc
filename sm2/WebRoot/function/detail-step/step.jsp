@@ -544,7 +544,7 @@
 	</div>
 	</div>
 	<!-- 评论 END -->
-	
+	${fn:replace(prog.content,"'","\"") }
     <div class="article" 
     style="height:inherit;<c:if test="${not  progStatus.first}">display:none;</c:if>" 
     id="art_${prog.id }"
@@ -558,7 +558,6 @@
 	        	editor${prog.id}.readonly(true);
 	        });
         </script>
-    
     	<!-- 增加批示 -->    
         <div class="conshen" style="border:0px;">
         	<pri:showWithOptExp exp="ctx.selfIsReceiver and ctx.selfIsMaster and (not ctx.sameLv)" stepId="${id}">
