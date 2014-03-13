@@ -20,8 +20,7 @@ public class NewsView implements XmlReply{
 	
 	@Override
 	public String toWeixinStr() {
-		// TODO Auto-generated method stub
-		return null;
+		return toXmlString();
 	}
 
 	@Override
