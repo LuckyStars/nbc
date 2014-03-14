@@ -29,7 +29,6 @@ function commit(){
 	document.forms[0].submit();
 }
 function aaa(){
-	
 	var begin = $("#begin").val();
 	var end = $("#end").val();
 	var matcher =  $("#matcher").val();
@@ -67,7 +66,7 @@ $(function() {
           <p style="display:block;"><span style="float:left;margin-top:20px;">分析：</span><textarea name="data.content" class="down"></textarea>
          </p>
       </div>
-      <a href="javascript:commit();" class="have">生成</a>
+      <a href="javascript:commit();" class="have" style=" margin-top: 216px;">生成</a>
   </div>
   </form>
 </div>

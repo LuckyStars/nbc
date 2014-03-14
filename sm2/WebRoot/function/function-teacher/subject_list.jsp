@@ -245,11 +245,11 @@
       function doValid(){
 		 if($("#addSubjectInput").val()==''){
 			 alert("请添加主题！");
-				return false;
+			 return false;
 		 }
 		 if($("#cc").combotree('getValues')==''){
 			 alert("请选择执行人！");
-				return false;
+			 return false;
 		 }
 		 if($("#master").combotree('getValues')==''){
 			 alert("请选择审批人！");

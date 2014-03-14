@@ -3,7 +3,6 @@ package com.nbcedu.function.schoolmaster2.action;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
@@ -15,18 +14,17 @@ import com.nbcedu.function.schoolmaster2.utils.Utils;
 @SuppressWarnings("serial")
 public class UserAction extends BaseAction{
 	/**
-	 * 查询教师树过滤掉校长与主管
+	 * 查询教师树过滤掉校长与自己
 	 */
 	public void tree() {
-		 Collection<PersonVo> p = Utils.getAllManager();
-		 Collection<PersonVo> p1 = Utils.getAllSchoolMaster();
-		 p.addAll(p1);
-		 Collection<String> checkedUids = new ArrayList<String>();
+		 List<PersonVo> p = Utils.getAllSchoolMaster();
+		 List<String> checkedUids = new ArrayList<String>();
 		 for(PersonVo person : p){
 			 checkedUids.add(person.getUid());
 		 }
-		String result = UCService.getPersonJson(checkedUids,true);
-		Struts2Utils.renderText(result, "encoding:UTF-8");
+		 checkedUids.add(getUserId());
+		 String result = UCService.getPersonJson(checkedUids,true);
+		 Struts2Utils.renderText(result, "encoding:UTF-8");
 	}
 	
 	public void findAllMaster1() {
@@ -39,10 +37,6 @@ public class UserAction extends BaseAction{
 			 s.append(pp.getUid());
 			 s.append("\",\"text\":\"");
 			 s.append(pp.getName());
-//			 if(!StringUtil.isEmpty(pp.getChecked())){
-//				 s.append("\",\"checked\":\"");
-//				 s.append(pp.getChecked());
-//			 }
 			 if(i==p.length-1){
 				 s.append("\"}"); 
 			 }else{
@@ -78,7 +72,6 @@ public class UserAction extends BaseAction{
 		StringBuilder sb = new StringBuilder("[");
 		sb.append(appendChild("1","校长",ps)).append(",");
 		sb.append(appendChild("2","主任",ps1)).append("]");
-		
 		Struts2Utils.renderJson(sb.toString(), "encoding:UTF-8");
 	}
 	

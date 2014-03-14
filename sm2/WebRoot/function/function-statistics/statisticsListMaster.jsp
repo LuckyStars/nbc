@@ -52,7 +52,7 @@ $(function(){
 			     <c:forEach items="${pm.datas}" varStatus="status" var="data">
 			      <tr>
 			        <td class="lan" >${status.index+1}</td>
-					 <td>
+					 <td style=" text-align: left;">
 			        	<a href="${prc}/scMaster2/toMasterChart_data.action?id=${data.id}&start=${data.startDate}&end=${data.endDate}&matcher=${data.matcher}">
 							<c:out value="${data.title}"/>
 						</a>
