@@ -49,6 +49,11 @@ public class UCService {
 					jsonString.append("\"");
 					jsonString.append(treeNode.getId().replace("u|", ""));
 					jsonString.append("\"");
+					
+					//关闭
+					jsonString.append(",\"state\":");
+					jsonString.append("\"close\"");
+					
 					jsonString.append(",\"text\":");
 					jsonString.append("\"");
 					jsonString.append(treeNode.getTitle());
@@ -117,8 +122,25 @@ public class UCService {
 		return m;
 	}
 	public static List<DepartmentVo> findDepartment(){
+		class Depart{
+			List<DepartmentVo> list = new ArrayList<DepartmentVo>();
+			private List<DepartmentVo> getDepart(){
+				List<NbcUcTreeNode> l = client.queryDepartTree("root", 1);
+				for(NbcUcTreeNode nt : l){
+					addDepart(nt);
+				}
+				return list;
+			}
+			private void addDepart(NbcUcTreeNode n){
+				DepartmentVo d = new DepartmentVo();
+				d.setId(n.getId().replace("ne|", ""));
+				d.setName(n.getTitle());
+				list.add(d);
+			}
+			
+		}
 		List<NbcUcTreeNode> l = client.queryDepartTree("root", 1);
-		List<DepartmentVo> list = new ArrayList<DepartmentVo>();
+		List<DepartmentVo> list = new Depart().getDepart();
 		DepartmentVo d;
 		for(NbcUcTreeNode n : l){
 			d = new DepartmentVo();

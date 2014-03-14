@@ -333,8 +333,6 @@
 					</span>
 					
 					
-						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
-						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
 						<pri:showWithOptExp subjectId="${subject.id }"
 							exp="ctx.selfIsBigBoss or (ctx.selfIsMaster and ctx.selfIsReceiver)">
 						<img style="float:right;cursor: pointer;height: 20px;margin: 2px;" title="随笔记" 

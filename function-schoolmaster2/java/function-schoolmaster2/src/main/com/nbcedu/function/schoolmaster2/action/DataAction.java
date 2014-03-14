@@ -37,7 +37,6 @@ public class DataAction extends BaseAction{
 		this.data.setStartDate(start);
 		this.data.setEndDate(end);
 		this.data.setMatcher(matcher);
-		this.data.setCreatorUid(this.getUserId());
 		this.pm=this.sm2DataBiz.findPageByModel(data);
 		return "listMasterStatistics";
 	}
