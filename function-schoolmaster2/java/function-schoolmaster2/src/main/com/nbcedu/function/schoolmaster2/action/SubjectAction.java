@@ -134,10 +134,6 @@ public class SubjectAction extends BaseAction{
 		this.sm2SubjectBiz.add(subject);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
-	private <T> get(Class<T> c){
-		
-		return o;
-	}
 	public void update(){
 		String usersId = this.getRequest().getParameter("executeUsersId");
 		TSm2Subject s = this.sm2SubjectBiz.load(subject.getId()); 
