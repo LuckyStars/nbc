@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@page import="com.nbcedu.function.schoolmaster2.data.model.TSm2Progress"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -544,7 +545,6 @@
 	</div>
 	</div>
 	<!-- 评论 END -->
-	
     <div class="article" 
     style="height:inherit;<c:if test="${not  progStatus.first}">display:none;</c:if>" 
     id="art_${prog.id }"
@@ -554,11 +554,10 @@
 	        KindEditor.ready(function(K) {
 	        	var options = {items : []};
 	        	var editor${prog.id} = K.create('#content_${prog.id}',options);
-	       		editor${prog.id}.html('${prog.content}');
+	       		editor${prog.id}.html('<%=((TSm2Progress)pageContext.getAttribute("prog")).getContent().replace("\n","").replace("\r","").replace("'","\"")%>');
 	        	editor${prog.id}.readonly(true);
 	        });
         </script>
-    
     	<!-- 增加批示 -->    
         <div class="conshen" style="border:0px;">
         	<pri:showWithOptExp exp="ctx.selfIsReceiver and ctx.selfIsMaster and (not ctx.sameLv)" stepId="${id}">
