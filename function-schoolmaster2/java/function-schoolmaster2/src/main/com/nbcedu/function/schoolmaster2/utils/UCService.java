@@ -52,7 +52,7 @@ public class UCService {
 					
 					//关闭
 					jsonString.append(",\"state\":");
-					jsonString.append("\"close\"");
+					jsonString.append("\"closed\"");
 					
 					jsonString.append(",\"text\":");
 					jsonString.append("\"");

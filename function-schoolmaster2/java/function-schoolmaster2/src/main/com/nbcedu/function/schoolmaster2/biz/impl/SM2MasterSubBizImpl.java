@@ -511,6 +511,13 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 	private String trim(Object str){
 		return str==null?"":str.toString();
 	}
+
+	@Override
+	public void deleteBySubId(String Id) {
+		String hql = "delete from SM2SubjectMaster where subId =?";
+		this.sm2SubjectDao.createQuery(hql, Id).executeUpdate();
+		
+	}
 	
 	
 }
