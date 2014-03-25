@@ -11,6 +11,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.google.common.reflect.TypeToken;
+import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2ModuleBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2TypeBiz;
@@ -32,6 +33,7 @@ public class SubjectAction extends BaseAction{
 	
 	private static final Logger logger = Logger.getLogger(SubjectAction.class);
 	
+	private SM2MasterSubBiz subBiz;
 	private TSm2Subject subject = new TSm2Subject(); 
 	private SubjectVo subjectVo = new SubjectVo();
 	private TSm2Module module = new TSm2Module();
@@ -193,6 +195,7 @@ public class SubjectAction extends BaseAction{
 	}
 	
 	public void delete(){
+		this.subBiz.deleteBySubId(id);
 		this.sm2SubjectBiz.removeById(id);
 		Struts2Util.renderText("0", "encoding:UTF-8");
 	}
@@ -295,6 +298,10 @@ public class SubjectAction extends BaseAction{
 
 	public void setTypeId(String typeId) {
 		this.typeId = typeId;
+	}
+
+	public void setSubBiz(SM2MasterSubBiz subBiz) {
+		this.subBiz = subBiz;
 	}
 	
 }

@@ -100,4 +100,5 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 */
 	void updateMasterUserStatus(String userId,String subjectId)  throws DBException;
 	
+	public void deleteBySubId(String Id);
 }
