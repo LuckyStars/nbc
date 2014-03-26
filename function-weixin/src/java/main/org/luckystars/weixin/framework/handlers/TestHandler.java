@@ -34,7 +34,8 @@ public class TestHandler implements Handler{
 			String toUsr = m.getFromUserName();
 			String serverName = m.getToUserName();
 			
-			final WeixinView view = new TextView("这只是个测试\n你发送的数据是\n" + m.toString(), toUsr, serverName);
+			final WeixinView view = new TextView("这只是个测试\n你发送的数据是\n" 
+					+ m.toString(), toUsr, serverName);
 			
 			return new HandleResult() {
 				public void setView(WeixinView view) {
@@ -55,9 +56,9 @@ public class TestHandler implements Handler{
 	@Item
 	private static class TestList implements Serializable {
 		@PicUrl
-		private String picurl="bbbb.bbbbb";
+		private String picurl="picUrl";
 		@Url
-		private String url="aaaa.aaaaa";
+		private String url="url";
 		@Title
 		private String title = "title";
 		@Description

@@ -113,22 +113,28 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 		AccessibleObject[] members = getMembers(obj.getClass());
 		NewsView.Item item = new NewsView.Item();
 		for (AccessibleObject mem : members) {
+			mem.setAccessible(Boolean.TRUE);
+			
 			String desc = getAnnoValue(obj,mem,Description.class);
 			if(notEmpty(desc)){
 				item.setDescription(desc);
 			}
+			
 			String picurl = getAnnoValue(obj,mem,PicUrl.class);
 			if(notEmpty(picurl)){
 				item.setPicUrl(picurl);
 			}
+			
 			String tit = getAnnoValue(obj,mem,Title.class);
 			if(notEmpty(tit)){
 				item.setTitle(tit);
 			}
+			
 			String url = getAnnoValue(obj,mem,Url.class);
 			if(notEmpty(url)){
 				item.setUrl(url);
 			}
+			
 		}
 		
 		return item;
@@ -138,6 +144,7 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 	private String getAnnoValue(Serializable obj,AccessibleObject mem, Class anno) {
 		String result = "";
 		if(mem.getAnnotation(anno)!=null){
+			
 			if(mem instanceof Method){
 				Method method = (Method)mem;
 				try {
@@ -146,13 +153,20 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 					e.printStackTrace();
 				}
 			}
+			
 			if(mem instanceof Field){
-				result = mem.toString();
+				try {
+					result = ((Field) mem).get(obj).toString();
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
 			}
+			
 		}
 		return result;
 	}
-
 
 	private boolean notEmpty(String str){
 		return str!=null && !str.trim().isEmpty();

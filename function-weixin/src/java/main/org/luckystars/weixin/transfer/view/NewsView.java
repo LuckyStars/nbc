@@ -2,6 +2,7 @@ package org.luckystars.weixin.transfer.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.luckystars.weixin.transfer.interfaces.XmlReply;
@@ -62,28 +63,79 @@ public class NewsView implements XmlReply{
 
 	@Override
 	public String toXmlString() {
-		// TODO Auto-generated method stub
 		StringBuilder result = new StringBuilder();
 		result.append("<xml>");
+		
 		result.append("<ToUserName><![CDATA[");
-		result.append(this.toUserName);
+		result.append(this.getToUserName());
 		result.append("]]></ToUserName>");
+		
 		result.append("<FromUserName><![CDATA[");
-		result.append(this.fromUserName);
+		result.append(this.getFromUserName());
 		result.append("]]></FromUserName>");
 		
+		result.append("<CreateTime>");
+		result.append(new Date().getTime());
+		result.append("</CreateTime>");
 		
+		result.append("<MsgType><![CDATA[news]]></MsgType>");
 		
+		result.append("<ArticleCount>");
+		result.append(this.getArticleCount());
+		result.append("</ArticleCount>");
 		
-		return null;
+		result.append("<Articles>");
+		result.append(buildItemsXml());
+		result.append("</Articles>");
+		
+		result.append("</xml>");
+		return result.toString();
 	}
 	
-	
+	/***
+		<Title><![CDATA[title]]></Title>
+		<Description><![CDATA[description]]></Description>
+		<PicUrl><![CDATA[picurl]]></PicUrl>
+		<Url><![CDATA[url]]></Url>
+	 * @return
+	 * @author xuechong
+	 */
+	private String buildItemsXml() {
+		if(this.items==null||this.items.size()<=0){throw new NullPointerException("没有数据");}
+		StringBuilder result = new StringBuilder();
+
+		for (Item item : this.items) {
+			result.append("<item>");
+			
+			result.append("<Title><![CDATA[");
+			result.append(item.getTitle());
+			result.append("]]></Title>");
+			
+			result.append("<Description><![CDATA[");
+			result.append(item.getDescription());
+			result.append("]]></Description>");
+			
+			result.append("<PicUrl><![CDATA[");
+			result.append(item.getPicUrl());
+			result.append("]]></PicUrl>");
+			
+			result.append("<Url><![");
+			result.append(item.getUrl());
+			result.append("]]></Url>");
+			
+			result.append("</item>");
+		}
+		
+		return result.toString();
+	}
+
+
 	public static class Item implements Serializable{
-		private String title;
-		private String description;
-		private String picUrl;
-		private String url;
+		private String title="";
+		private String description="";
+		private String picUrl="";
+		private String url="";
+		
 		public String getTitle() {
 			return title;
 		}
@@ -109,8 +161,9 @@ public class NewsView implements XmlReply{
 			this.url = url;
 		}
 	}
-	//////////////////
-	
+	///////////////////////////
+	//////GETTERS&SETTERS//////
+	////////////////////////////
 	public String getFromUserName() {
 		return fromUserName;
 	}
