@@ -195,7 +195,7 @@ public class NewsView implements XmlReply{
 		this.items = items;
 	}
 	public String getArticleCount() {
-		return articleCount;
+		return String.valueOf(items.size());
 	}
 }
 

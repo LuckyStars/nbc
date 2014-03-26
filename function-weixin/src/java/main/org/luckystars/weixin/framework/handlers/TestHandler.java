@@ -37,32 +37,39 @@ public class TestHandler implements Handler{
 			final WeixinView view = new TextView("这只是个测试\n你发送的数据是\n" 
 					+ m.toString(), toUsr, serverName);
 			
-			return new HandleResult() {
+			HandleResult result =  new HandleResult() {
 				public void setView(WeixinView view) {
 				}
 				public WeixinView getView() {
 					return new AnnotationNewsViewBuilder().build(new ArrayList<TestList>(){{
+						TestList t1 = new TestList();
+						t1.picurl = "http:///weixin/tit.png";
+						add(t1);
 						add(new TestList());
-						add(new TestList());
-						add(new TestList());
+//						add(new TestList());
+//						add(new TestList());
 					}}, m);
 				}
 			};
+			logger.info("resp is : \n");
+			logger.info(result.getView().toWeixinStr());
 			
+			return result;
 		}
+		
 		return invocation.invokeNext();
 	}
 	
 	@Item
 	private static class TestList implements Serializable {
 		@PicUrl
-		private String picurl="picUrl";
+		private String picurl="";
 		@Url
-		private String url="url";
+		private String url="http:///weixin/weixin/1.html";
 		@Title
 		private String title = "title";
 		@Description
-		private String desc = "desc";
+		private String desc = "";
 	}
 	
 	public static void main(String[] args) {

@@ -16,8 +16,11 @@ public class DefaultValidationImp implements Validation {
 	@Override
 	public boolean validate(String timestamp, String nonce, String signature,
 			String token) {
-		List<String> list = new ArrayList<String>();
+		if(isBlank(timestamp)||isBlank(nonce)||isBlank(signature)||isBlank(token)){
+			return false;
+		}
 		
+		List<String> list = new ArrayList<String>();
 		list.add(token);
 		list.add(timestamp);
 		list.add(nonce);
@@ -52,4 +55,7 @@ public class DefaultValidationImp implements Validation {
 		return signature.equals(sha.toString());
 	}
 
+	private boolean isBlank(String str){
+		return str==null||str.trim().isEmpty();
+	}
 }

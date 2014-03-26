@@ -26,7 +26,6 @@ public class AnnotationNewsViewBuilder implements NewsViewBuilder{
 		if(valied){
 			result = buildView(contents,incomeMsg);
 		}
-		
 		return result;
 	}
 
