@@ -119,7 +119,7 @@ public class NewsView implements XmlReply{
 			result.append(item.getPicUrl());
 			result.append("]]></PicUrl>");
 			
-			result.append("<Url><![");
+			result.append("<Url><![CDATA[");
 			result.append(item.getUrl());
 			result.append("]]></Url>");
 			

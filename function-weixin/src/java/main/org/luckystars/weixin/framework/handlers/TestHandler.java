@@ -43,7 +43,7 @@ public class TestHandler implements Handler{
 				public WeixinView getView() {
 					return new AnnotationNewsViewBuilder().build(new ArrayList<TestList>(){{
 						TestList t1 = new TestList();
-						t1.picurl = "http:///weixin/tit.png";
+						t1.picurl = "http://www.china-nbc.com/weixin/tit.png";
 						add(t1);
 						add(new TestList());
 //						add(new TestList());
@@ -65,7 +65,7 @@ public class TestHandler implements Handler{
 		@PicUrl
 		private String picurl="";
 		@Url
-		private String url="http:///weixin/weixin/1.html";
+		private String url="www.china-nbc.com/weixin/1.html";
 		@Title
 		private String title = "title";
 		@Description
