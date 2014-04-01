@@ -5,6 +5,7 @@ package org.luckystars.weixin.framework.api;
  * @author xuechong
  */
 public interface HandleResult {
+	
 	/**
 	 * stop the rest handlers
 	 * 停止余下的handler继续处理
@@ -20,6 +21,22 @@ public interface HandleResult {
 	 */
 	public static final HandleResult INVOKE_NEXT = new HandleResult() {
 		public WeixinView getView() {return null;}
+		public void setView(WeixinView view) {}
+	};
+	
+	/**
+	 * 返回空串
+	 */
+	public static final HandleResult EMPTY_RESULT = new HandleResult() {
+		@SuppressWarnings("serial")
+		public WeixinView getView() {
+			return new WeixinView() {
+				@Override
+				public String toWeixinStr() {
+					return "";
+				}
+			};
+		};
 		public void setView(WeixinView view) {}
 	};
 	

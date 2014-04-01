@@ -65,7 +65,7 @@ public class TestHandler implements Handler{
 		@PicUrl
 		private String picurl="";
 		@Url
-		private String url="www.china-nbc.com/weixin/1.html";
+		private String url="http://www.china-nbc.com/weixin/1.html";
 		@Title
 		private String title = "title";
 		@Description

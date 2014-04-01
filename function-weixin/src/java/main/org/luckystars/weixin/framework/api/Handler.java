@@ -8,6 +8,13 @@ import org.luckystars.weixin.framework.HandlerInvocation;
  */
 public interface Handler  {
 	
+	/**
+	 * 不可返回null
+	 * @param invocation
+	 * @return
+	 * @throws Exception 
+	 * @author xuechong
+	 */
 	HandleResult handle(HandlerInvocation invocation) throws Exception;
 	
 }

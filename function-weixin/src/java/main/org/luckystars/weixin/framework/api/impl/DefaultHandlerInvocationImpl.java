@@ -23,7 +23,11 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 		HandleResult result = HandleResult.INVOKE_NEXT;
 		while(this.handlers!=null&&this.handlers.hasNext()){
 			result = handlers.next().handle(this);
-			if(result==HandleResult.STOP_CHAIN){break;}
+			if(result==null){
+				throw new NullPointerException("不可返回 null HandleResult");
+			}else{
+				if(result==HandleResult.STOP_CHAIN){break;}
+			}
 		}
 		return result;
 	}
