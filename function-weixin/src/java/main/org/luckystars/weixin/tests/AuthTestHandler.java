@@ -8,9 +8,6 @@ public class AuthTestHandler implements Handler {
 
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
-		if(invocation){
-			
-		}
 		
 		// TODO Auto-generated method stub
 		return null;

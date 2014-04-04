@@ -5,6 +5,7 @@ import static org.luckystars.weixin.framework.config.xml.XmlConfigUtils.*;
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.api.AppContextLoader;
+import org.luckystars.weixin.transfer.auth.LoadAppIdSecret;
 import org.w3c.dom.Document;
 
 public class XmlAppConfigLoader implements AppContextLoader{
@@ -17,8 +18,13 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		Document document = buildDoument(xmlPath);
 		loadInvocationFactory(ctx,document);
 		loadHandlerChains(ctx, document);
+		loadAppIdSecret(ctx,document);
 	}
 	
+	private void loadAppIdSecret(AppContext ctx, Document document) {
+		new LoadAppIdSecret(document).loadIntoContext(ctx);
+	}
+
 	private void loadInvocationFactory(AppContext ctx, Document document) {
 		new InvocationFactoryLoader(document).loadIntoContext(ctx);
 	}
@@ -27,4 +33,5 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		new ChainConfigLoader(document).loadIntoContext(ctx);
 	}
 
+	
 }

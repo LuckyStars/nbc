@@ -51,8 +51,6 @@ public class NewsView implements XmlReply{
 	private String toUserName;
 	private String createTime;
 	private String msgType = "news";
-	/**图文消息个数，限制为10条以内***/
-	private String articleCount;
 	
 	private List<NewsView.Item> items = new ArrayList<NewsView.Item>(10);
 	

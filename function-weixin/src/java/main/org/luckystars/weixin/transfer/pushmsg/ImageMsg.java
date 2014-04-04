@@ -1,14 +1,13 @@
 package org.luckystars.weixin.transfer.pushmsg;
 
-import org.junit.Test;
 import org.luckystars.weixin.utils.json.GsonUtil;
 
 @SuppressWarnings("serial")
 public class ImageMsg extends JsonOutputMsg{
 
 	private String touser;
-	private String msgtype = JsonOutputMsg.MSG_TYPE_TEXT;
-	private Image media_id;
+	private String msgtype = JsonOutputMsg.MSG_TYPE_IMAGE;
+	private Image media_id;//为了gson转化方便
 	
 	
 	@Override
@@ -50,10 +49,4 @@ public class ImageMsg extends JsonOutputMsg{
 		}
 	}
 	
-	public static void main(String[] args) {
-		ImageMsg m = new ImageMsg();
-		m.setTouser("touser123");
-		m.putMedia_id("m12345687");
-		System.out.println(m.toJsonString());
-	}
 }
