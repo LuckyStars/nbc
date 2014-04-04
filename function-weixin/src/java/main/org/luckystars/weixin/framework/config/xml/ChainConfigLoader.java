@@ -1,5 +1,7 @@
 package org.luckystars.weixin.framework.config.xml;
 
+import static org.luckystars.weixin.framework.config.xml.XmlConfigUtils.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
 /**
  * 读取handler chain内容
  * @author xuechong
@@ -26,15 +29,23 @@ class ChainConfigLoader implements AppContextLoader{
 	private final String XML_TAG = "handlerChain";
 	private Document doc;
 	
+	public ChainConfigLoader(){
+	}
+	
 	ChainConfigLoader (Document document){
 		this.doc = document;
 	}
 	
-	
-	
 	@Override
 	public void loadIntoContext(AppContext ctx) {
-		NodeList handlerChains = doc.getDocumentElement().getElementsByTagName(XML_TAG);
+		if(this.doc==null){
+			String xmlPath = ctx.getConfigLocation();
+			this.doc = buildDoument(xmlPath);
+		}
+		
+		NodeList handlerChains = 
+			doc.getDocumentElement().getElementsByTagName(XML_TAG);
+		
 		valiExists(handlerChains);
 		
 		for (int i = 0;i<handlerChains.getLength();i++) {
@@ -122,32 +133,5 @@ class ChainConfigLoader implements AppContextLoader{
 		}
 	}
 	
-	/**
-	 * 没有值时返回空字符
-	 * @param valueKey
-	 * @param node
-	 * @return
-	 * @author xuechong
-	 */
-	private String trimNodeAttr(String valueKey,Node node){
-		Node attr = node.getAttributes().getNamedItem(valueKey);
-		if(attr==null){return "";}
-		return attr.getNodeValue()!=null?attr.getNodeValue():"";
-	}
-	
-	/**
-	 * 加载nodeValue 如果没有此节点抛出异常
-	 * @param valueKey
-	 * @param node
-	 * @return
-	 * @author xuechong
-	 */
-	private String loadNodeAttr(String valueKey,Node node){
-		Node attr = node.getAttributes().getNamedItem(valueKey);
-		if(attr==null||attr.getNodeValue()==null||attr.getNodeValue().trim().isEmpty()){
-			throw new NullPointerException("no such value" + valueKey);
-		}
-		return attr.getNodeValue().trim();
-	}
 	
 }

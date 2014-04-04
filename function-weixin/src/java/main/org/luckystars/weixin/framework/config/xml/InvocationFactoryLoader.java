@@ -20,12 +20,18 @@ class InvocationFactoryLoader implements AppContextLoader{
 	
 	private Document doc;
 	
+	public InvocationFactoryLoader(){}
+	
 	InvocationFactoryLoader (Document document){
 		this.doc = document;
 	}
 	
 	@Override
 	public void loadIntoContext(AppContext ctx) {
+		if(this.doc==null){
+			String xmlPath = ctx.getConfigLocation();
+			this.doc = XmlConfigUtils.buildDoument(xmlPath);
+		}
 		NodeList nodes = doc.getDocumentElement().getElementsByTagName(xmlTag);
 		valiExists(nodes);
 		Node node = nodes.item(0);

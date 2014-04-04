@@ -21,12 +21,26 @@ public abstract class AbstractEventHandler implements Handler{
 		}
 	}
 
+	/**
+	 * 处理请求
+	 * @param invocation
+	 * @return
+	 * @author xuechong
+	 */
 	protected abstract HandleResult doHandle(HandlerInvocation invocation) ;
 	
+	/**
+	 * 检查是否需要处理请求
+	 * @param invocation
+	 * @return
+	 * @author xuechong
+	 */
 	protected boolean check(HandlerInvocation invocation) {
 		if(!(invocation.getIncomeMsg() instanceof EventMsg)){return false;}
 		EventMsg msg = (EventMsg) invocation.getIncomeMsg();
-		return msg.getEventKey()!=null && getEventKey()!=null && msg.getEventKey().equals(getEventKey());
+		return msg.getEventKey()!=null 
+			&& getEventKey()!=null 
+			&& msg.getEventKey().equals(getEventKey());
 	}
 	
 	/**
