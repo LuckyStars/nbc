@@ -72,7 +72,6 @@ public class AppContext implements Serializable{
 	
 	
 	
-	
 	///////////////////////
 	////PRIVATE METHODS////
 	///////////////////////
@@ -118,6 +117,7 @@ public class AppContext implements Serializable{
 		if(nodes==null||nodes.getLength()<=0){
 			logger.info("没有配置appcontext loader");
 		}
+		//TODO
 		return true;
 	}
 

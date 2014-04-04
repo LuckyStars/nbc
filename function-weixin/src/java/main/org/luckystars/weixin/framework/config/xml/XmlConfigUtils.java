@@ -18,7 +18,7 @@ public class XmlConfigUtils {
 	 * @return
 	 * @author xuechong
 	 */
-	static Document buildDoument(String xmlPath) {
+	public static Document buildDoument(String xmlPath) {
 		Document result = null;
 		
 		try {
@@ -49,7 +49,7 @@ public class XmlConfigUtils {
 	 * @return
 	 * @author xuechong
 	 */
-	static String trimNodeAttr(String valueKey,Node node){
+	public static String trimNodeAttr(String valueKey,Node node){
 		Node attr = node.getAttributes().getNamedItem(valueKey);
 		if(attr==null){return "";}
 		return attr.getNodeValue()!=null?attr.getNodeValue():"";
@@ -62,7 +62,7 @@ public class XmlConfigUtils {
 	 * @return
 	 * @author xuechong
 	 */
-	static String loadNodeAttr(String valueKey,Node node){
+	public static String loadNodeAttr(String valueKey,Node node){
 		Node attr = node.getAttributes().getNamedItem(valueKey);
 		if(attr==null||attr.getNodeValue()==null||attr.getNodeValue().trim().isEmpty()){
 			throw new NullPointerException("no such value" + valueKey);

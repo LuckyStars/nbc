@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 public class XmlAppConfigLoader implements AppContextLoader{
 
 	private static final Logger logger = Logger.getLogger(XmlAppConfigLoader.class);
+	
 	@Override
 	public void loadIntoContext(AppContext ctx) {
 		String xmlPath = ctx.getConfigLocation();
@@ -26,7 +27,4 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		new ChainConfigLoader(document).loadIntoContext(ctx);
 	}
 
-	
-	
-	
 }

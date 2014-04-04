@@ -2,7 +2,6 @@ package org.luckystars.weixin.framework.config.xml;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
-import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.api.InvocationFactoryBean;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -12,13 +11,12 @@ import org.w3c.dom.NodeList;
  * 将InvocationFactoryBean 加载到 appContext中
  * @author xuechong
  */
-class InvocationFactoryLoader implements AppContextLoader{
+class InvocationFactoryLoader extends AbstractXmlContextLoader{
 
 	private static final Logger logger = Logger.getLogger(InvocationFactoryLoader.class);
 	
 	private final String xmlTag = "invocationFactoryBean";
 	
-	private Document doc;
 	
 	public InvocationFactoryLoader(){}
 	
@@ -27,11 +25,7 @@ class InvocationFactoryLoader implements AppContextLoader{
 	}
 	
 	@Override
-	public void loadIntoContext(AppContext ctx) {
-		if(this.doc==null){
-			String xmlPath = ctx.getConfigLocation();
-			this.doc = XmlConfigUtils.buildDoument(xmlPath);
-		}
+	public void doLoadIntoContext(AppContext ctx) {
 		NodeList nodes = doc.getDocumentElement().getElementsByTagName(xmlTag);
 		valiExists(nodes);
 		Node node = nodes.item(0);

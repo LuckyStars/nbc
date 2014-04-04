@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configs[
-	<!ELEMENT configs (configLoaders?,invocationFactoryBean?,handlerChain+)>
+	<!ELEMENT configs (configLoaders?,invocationFactoryBean?,appId,appSecret,handlerChain+)>
 	<!ELEMENT configLoaders (#PCDATA)>
+	<!ELEMENT appId (#PCDATA)>
+	<!ELEMENT appSecret (#PCDATA)>
 	<!ELEMENT invocationFactoryBean (#PCDATA)>
 	<!ELEMENT handlerChain (chain+)>
 	<!ELEMENT chain (handler+)>
@@ -13,10 +15,14 @@
 	
 ]>
 <configs>
-
+	
 	<configLoaders>org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader</configLoaders>
-
+	
 	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
+	
+	<appId></appId>
+	
+	<appSecret></appSecret>
 	
 	<handlerChain id="msgTypeHandlerChain"  >
 		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.framework.api.impl.DefaultHandlerFactory" >

@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext; 
-import org.luckystars.weixin.framework.api.AppContextLoader;
 import org.luckystars.weixin.framework.config.ChainMapping;
 import org.luckystars.weixin.framework.config.HandlerChainConfig;
 import org.luckystars.weixin.framework.config.HandlerMapping;
@@ -22,26 +21,20 @@ import org.w3c.dom.NodeList;
  * 读取handler chain内容
  * @author xuechong
  */
-class ChainConfigLoader implements AppContextLoader{
+class ChainConfigLoader extends AbstractXmlContextLoader{
 	
 	private static final Logger logger = Logger.getLogger(ChainConfigLoader.class);
 
 	private final String XML_TAG = "handlerChain";
-	private Document doc;
 	
-	public ChainConfigLoader(){
-	}
+	public ChainConfigLoader(){}
 	
 	ChainConfigLoader (Document document){
 		this.doc = document;
 	}
 	
 	@Override
-	public void loadIntoContext(AppContext ctx) {
-		if(this.doc==null){
-			String xmlPath = ctx.getConfigLocation();
-			this.doc = buildDoument(xmlPath);
-		}
+	public void doLoadIntoContext(AppContext ctx) {
 		
 		NodeList handlerChains = 
 			doc.getDocumentElement().getElementsByTagName(XML_TAG);
