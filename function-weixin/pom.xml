@@ -5,6 +5,15 @@
 	<artifactId>function-weixin</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0-SNAPSHOT</version>
+	
+	<repositories>
+		<repository>
+		    <id>repository.springsource.milestone</id>
+		    <name>SpringSource Milestone Repository</name>
+		    <url>http://repo.springsource.org/milestone</url>
+		</repository>
+	</repositories>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -233,5 +242,6 @@
 			<version>4.8</version>
 			<scope>test</scope>
 		</dependency>
+		
 	</dependencies>
 </project>

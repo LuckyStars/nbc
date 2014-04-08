@@ -1,0 +1,26 @@
+@font-face {
+	font-family: fzclock;
+	src: url(fzlth/fzlth-LockClock.ttf);
+}
+@font-face {
+	font-family: fzlight;
+	src: url(fzlth/fzlth-STHeiti-Light.ttf);
+}
+@font-face {
+	font-family: fzmedium;
+	src: url(fzlth/fzlth-STHeiti-Medium.ttf);
+}
+
+@font-face {
+	font-family: dsf;
+	src: url(droid/Droid Sans Fallback.ttf);
+}
+@font-face {
+	font-family: fzmedium;
+	src: url(fzlth-STHeiti-Medium.ttf);
+}
+@font-face {
+	font-family: fzmedium;
+	src: url(fzlth-STHeiti-Medium.ttf);
+}
+
