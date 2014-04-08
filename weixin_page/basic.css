@@ -23,4 +23,25 @@
 	font-family: fzmedium;
 	src: url(fzlth-STHeiti-Medium.ttf);
 }
+html{
+	font-family: dsf;
+}
+body{
+	font-family: dsf;
+}
 
+div{
+	font-family: dsf;
+}
+h1{
+	font-family: dsf;
+}
+p{
+	font-family: dsf;
+}
+pre{
+	font-family: dsf;
+}
+span{
+	font-family: dsf;
+}
