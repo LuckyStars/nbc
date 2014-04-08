@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.Handler;
@@ -18,6 +19,8 @@ import org.luckystars.weixin.framework.util.BeanUtil;
 
 public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 
+	private static final Logger logger = Logger.getLogger(MsgTypeRouteInvocationFactory.class);
+	
 	public static final String MSG_TYPE_HANDLERCHAIN = "msgTypeHandlerChain";
 	public static final String DEFAULT_HANDLER_CHAIN = "defaultChain";
 	
@@ -65,11 +68,11 @@ public class MsgTypeRouteInvocationFactory implements InvocationFactoryBean {
 		try {
 			fac = (HandlerFactory) BeanUtil.getBeanByClassName(handlerFactoryClass);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		return fac;
