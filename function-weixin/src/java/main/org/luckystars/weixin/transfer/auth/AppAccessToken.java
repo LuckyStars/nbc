@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -13,7 +12,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
-import org.luckystars.weixin.utils.json.GsonUtil;
 
 import com.google.gson.JsonObject;
 
@@ -27,6 +25,8 @@ public class AppAccessToken {
 	
 	private static volatile String accessToken = null;
 	
+	private static final long EXPIRE_TIME = 1000L*7100L;
+	
 	public static String getAccessToken(){
 		if(accessToken==null){
 			refreshToken();
@@ -37,7 +37,7 @@ public class AppAccessToken {
 	private static void refreshToken() {
 		fetchAccessToken();
 		Timer timer = new Timer();
-		timer.schedule(new RefreshTimer(), 1000L*7100L);//7200s 过期
+		timer.schedule(new RefreshTimer(), EXPIRE_TIME);//7200s 过期
 	}
 	
 

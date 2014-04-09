@@ -38,7 +38,6 @@ public class AppContext implements Serializable{
 	
 	private Map<String, Object> ctx = new HashMap<String, Object>();
 	
-	
 	private AppContext(){}
 	
 	public static AppContext getContext(){
@@ -101,11 +100,11 @@ public class AppContext implements Serializable{
 							logger.info("add ctxloader:" + loaderCla);
 						}
 					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
+						logger.error(e);
 					} catch (InstantiationException e) {
-						e.printStackTrace();
+						logger.error(e);
 					} catch (IllegalAccessException e) {
-						e.printStackTrace();
+						logger.error(e);
 					}
 				}
 			}
@@ -138,7 +137,6 @@ public class AppContext implements Serializable{
 					getResourceAsStream(xmlPath));
 			
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error(e);
 		}
 		
