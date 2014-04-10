@@ -15,14 +15,7 @@
 	font-family: dsf;
 	src: url(droid/Droid Sans Fallback.ttf);
 }
-@font-face {
-	font-family: fzmedium;
-	src: url(fzlth-STHeiti-Medium.ttf);
-}
-@font-face {
-	font-family: fzmedium;
-	src: url(fzlth-STHeiti-Medium.ttf);
-}
+
 html{
 	font-family: dsf;
 }
