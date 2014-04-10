@@ -14,17 +14,18 @@
 	   	<script type="text/javascript">
 	   		var showNav = function(){
 	   			var _pageCon = $("#page_container");
-	   			var nav = $("#navga");
-	   			nav.animate({
-	   				right:nav.css("right")=="0px"?"-200px":"0px"
+	   			var _nav = $("#navga");
+	   			_nav.animate({
+	   				right:_nav.css("right")=="0px"?"-200px":"0px"
 	   			},"fast");
-	   			console.log(_pageCon.css("width"));
 	   			if(_pageCon.css("right")=="0px"){
 	   				_pageCon.css("width",_pageCon.css("width"));
 	   				_pageCon.css("position","fixed");
 	   				_pageCon.animate({
 	   					right:"200px"
 	   				},"fast");
+	   				_pageCon.css("width","100%");
+	   				_pageCon.css("position","absolute");
 	   			}else{
 	   				_pageCon.css("width","100%");
 	   				_pageCon.css("position","absolute");
@@ -40,34 +41,16 @@
 		<div id="page_container" style="right:0px;" >
 		<div class="jumbotron">
 		  	<div class="container">
-		  		<h1>关于第99届三中全会ASDasd</h1>
+		  		<h1 onclick="showNav();">关于第99届三中全会ASDasd</h1>
 		  		<div>人民币国际化有一个机遇，这个机遇就是国际金融危机的发生，使得大家对于现有的国际货币体系有某种程度的不满意，或者信心不足，所以，他们也开始愿意更多地使用人民币。应该说，人民币如果真是走向国际化，还有很多家庭作业没有做好，所以，我们这些年主要注重于解除对于使用人民币的不必要的限制，包括一些法律法规、业务的条例，应该取消对人民币歧视，可以用硬通货的地方也可以用人民币，这些工作都没有完全做完。因此，从这个角度来看，总体来讲，人民币要实现国际化，特别是在贸易和投资中的跨境使用的比重如果明显提高的话，还有一个相对比较漫长的过程。在这个过程中，从人民银行的角度来讲，不是过多地推行人民币的使用，而是创造条件，从政策上、从实力上、从信心上逐渐创造条件，使人民币可以被大家选择使用，而用不用还要尊重市场参与者的选择，你愿意选择哪个货币就可以去选择哪个货币，你要是愿意选择人民币，慢慢地，一些障碍也都取消掉了。其中一个重要的问题，这个家庭作业里还有稳步推进和逐步实现人民币的资本项目可兑换，这样能够在国际使用的便利程度上，在对人民币的信心方面，有更实质性的提高。因此，从这个角度来讲，我们是说把自己的家庭作业做好了，对于推广人民币使用方面我们并不事先安排速度、节奏、时点。</div>
-		  		<input type="button"
-					    	onclick="showNav();" 
-					  		style="width:100%;"
-					  		class="btn btn-info" value="点击" />
+		  	
 		  	</div>
 
 		</div>
 
 		<div class="container" >
 			<div class="row" >
-				<ul class="nav nav-tabs">
-				  	<li class="active"><a href="#home" data-toggle="tab">大练钢铁</a></li>
-				  	<li><a href="#profile" data-toggle="tab">唱红打黑</a></li>
-				  	<li><a href="#messages" data-toggle="tab">造反到底</a></li>
-				  	<li><a href="#settings" data-toggle="tab">坑爹呢?</a></li>
-				  	<li class="dropdown">
-				    	<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-					      Dropdown <span class="caret"></span>
-					    </a>
-					    <ul class="dropdown-menu">
-					    	<li><a href="#">Something else here1</a></li>
-					    	<li><a href="#">Something else here2</a></li>
-					    	<li><a href="#">Something else here3</a></li>
-					    </ul>
-				  	</li>
-				</ul>
+				
 
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -91,8 +74,52 @@
 		</div>
 
 
-		<div id="navga" style="position:fixed;top:0px;right:-200px;width:200px;height:100%;border:1px solid black;">
-			asdasdsadsadadasdsadsads
+		<div id="navga" style="position:fixed;top:0px;right:-200px;width:200px;height:100%;background-color: white;border-left:1px solid #DDDDDD;">
+
+				<div class="panel-group" id="accordion">
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+				          Collapsible Group Item #1
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseOne" class="panel-collapse collapse in">
+				      <div class="panel-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+				          Collapsible Group Item #2
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseTwo" class="panel-collapse collapse">
+				      <div class="panel-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				      </div>
+				    </div>
+				  </div>
+				  <div class="panel panel-default">
+				    <div class="panel-heading">
+				      <h4 class="panel-title">
+				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+				          Collapsible Group Item #3
+				        </a>
+				      </h4>
+				    </div>
+				    <div id="collapseThree" class="panel-collapse collapse">
+				      <div class="panel-body">
+				        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				      </div>
+				    </div>
+				  </div>
+				</div>
 
 		</div>
 	</body>
