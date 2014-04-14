@@ -16,20 +16,9 @@
 	   			var _pageCon = $("#page_container");
 	   			var _nav = $("#navga");
 
-	   			if(_nav.hasClass("fadeOut")){
-	   				_nav.show().removeClass("fadeOut").addClass("fadeIn");
-	   			}else{
-	   				_nav.hide();
-	   				_nav.removeClass("fadeIn");
-	   				_nav.addClass("fadeOut");
-	   			}
-
-
-	   			return;
 	   			_nav.animate({
 	   				left:_nav.css("left")=="0px"?"-200px":"0px"
 	   			},"fast");
-
 
 	   			return;
 	   			if(_pageCon.css("left")=="0px"){
@@ -136,7 +125,7 @@
 		</div>
 
 
-		<div id="navga" style="position:fixed;top:0px;width:200px;height:100%;background-color: white;border-right:1px solid #DDDDDD;" class="fadeOut">
+		<div id="navga" style="left:-200px;position:fixed;top:0px;width:200px;height:100%;background-color: white;border-right:1px solid #DDDDDD;" class="fadeOut">
 
 				<div class="panel-group" id="accordion">
 				  <div class="panel panel-default">

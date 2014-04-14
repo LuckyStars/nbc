@@ -10,6 +10,10 @@ import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.Session;
 import org.luckystars.weixin.framework.api.WeixinView;
 
+/**
+ * 每次请求响应的上下文
+ * @author xuechong
+ */
 public class HandlerContext implements Serializable{
 	
 	private static final long serialVersionUID = 4159758817849082232L;
