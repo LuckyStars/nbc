@@ -190,5 +190,10 @@
 		    <artifactId>gson</artifactId>  
 		    <version>2.2.2</version>  
 		</dependency>
+		<dependency>
+			<groupId>com.nbcedu.bizplatform</groupId>
+			<artifactId>function-weixin</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
