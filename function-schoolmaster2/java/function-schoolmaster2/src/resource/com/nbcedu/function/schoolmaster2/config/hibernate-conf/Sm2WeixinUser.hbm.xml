@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nbcedu.function.schoolmaster2.weixin.model.Sm2WeixinUser" table="t_sm2_weixin_user">
+		
+		<id name="id" column="ID" type="string" length="32">
+			<generator class="com.nbcedu.common.uuid.UIDGenerator" />
+		</id>
+		
+		<property name="weixinId" column="weixin_id" type="string" length="64" not-null="true" />
+		
+		<property name="uid" column="uid" type="string" length="32" not-null="true" />
+		
+		<property name="status" column="status" type="string" length="10" not-null="true" />
+		
+		<property name="lastLoginTime" type="java.sql.Timestamp" >
+            <column name="last_login_time" />
+        </property>
+        
+		<property name="createTime" type="java.sql.Timestamp" not-null="true">
+            <column name="create_time" />
+        </property>
+        
+	</class>
+</hibernate-mapping>
