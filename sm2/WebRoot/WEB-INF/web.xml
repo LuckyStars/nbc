@@ -63,7 +63,7 @@
 		</init-param>
 		<init-param>
 			<param-name>exclusiveURI</param-name>
-			<param-value>index.jsp,/sm2/scMaster2/resourceUpload</param-value>
+			<param-value>index.jsp,/sm2/scMaster2/resourceUpload,/weixin</param-value>
 		</init-param>
 		<init-param>
 			<param-name>exclusiveExtendURI</param-name>
@@ -151,6 +151,16 @@
 		<servlet-name>weatherServlet</servlet-name>
 		<url-pattern>/weather.service</url-pattern>
 	</servlet-mapping>
+	
+	<servlet id="weixinServler">
+		<servlet-name>weixinServler</servlet-name>
+		<servlet-class>org.luckystars.weixin.transfer.servlet.WeixinServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>weixinServler</servlet-name>
+		<url-pattern>/weixin</url-pattern>
+	</servlet-mapping>
+	
 	<!--<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/WEB-INF/common/500.jsp</location>

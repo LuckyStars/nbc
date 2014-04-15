@@ -263,5 +263,6 @@
 			<artifactId>function-schoolmaster2</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		
 	</dependencies>
 </project>
