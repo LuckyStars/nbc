@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configs[
+	<!ELEMENT configs (configLoaders?,invocationFactoryBean?,appId,appSecret,handlerChain+)>
+	<!ELEMENT configLoaders (#PCDATA)>
+	<!ELEMENT appId (#PCDATA)>
+	<!ELEMENT appSecret (#PCDATA)>
+	<!ELEMENT invocationFactoryBean (#PCDATA)>
+	<!ELEMENT handlerChain (chain+)>
+	<!ELEMENT chain (handler+)>
+	
+	<!ATTLIST handlerChain id ID #REQUIRED >
+	<!ATTLIST chain id ID #REQUIRED >
+	<!ATTLIST chain handlerFactoryClass CDATA  "org.luckystars.weixin.framework.api.impl.DefaultHandlerFactory">
+	<!ATTLIST handler scope (prototype|singleton) "prototype" >
+	
+]>
+<configs>
+	
+	<configLoaders>org.luckystars.weixin.framework.config.xml.XmlAppConfigLoader</configLoaders>
+	
+	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
+	
+	<appId></appId>
+	
+	<appSecret></appSecret>
+	
+	<handlerChain id="msgTypeHandlerChain"  >
+		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.framework.api.impl.DefaultHandlerFactory" >
+			<handler scope="prototype">org.luckystars.weixin.framework.handlers.TestHandler</handler>
+		</chain>
+	</handlerChain>
+	
+</configs>

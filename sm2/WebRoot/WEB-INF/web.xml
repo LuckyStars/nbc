@@ -155,6 +155,15 @@
 	<servlet id="weixinServler">
 		<servlet-name>weixinServler</servlet-name>
 		<servlet-class>org.luckystars.weixin.transfer.servlet.WeixinServlet</servlet-class>
+		<init-param>
+	    	<param-name>appConfigLocation</param-name>
+	    	<param-value>appConfig.xml</param-value>
+	    </init-param>
+	    <init-param>
+	    	<param-name>token</param-name>
+	    	<param-value>token</param-value>
+	    </init-param>
+	    <load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>weixinServler</servlet-name>
