@@ -14,7 +14,7 @@ public class SpringHandlerFactory implements HandlerFactory{
 
 	@Override
 	public Handler build(HandlerMapping mapping) {
-		return this.getContext().getBean(mapping.getClassName(),Handler.class);
+		return (Handler) this.getContext().getBean(mapping.getClassName(),Handler.class);
 	}
 	
 	private ApplicationContext getContext(){
