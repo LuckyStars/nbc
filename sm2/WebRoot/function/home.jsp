@@ -199,7 +199,7 @@
 	           		</a>
 				</li>
 				<li>
-					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan" 
+					<a href="${prc}/scMaster2/list_master.action?moduleId=nianduzhongxin&search.typeId=jiaoyujiaoyan-ndzx" 
 					target="fm_right">教育教研工作</a>
 				</li>
 				<li>
