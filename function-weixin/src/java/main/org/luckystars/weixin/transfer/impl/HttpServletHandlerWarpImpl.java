@@ -16,7 +16,6 @@ import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.InvocationFactoryBean;
 import org.luckystars.weixin.framework.api.JSPView;
-import org.luckystars.weixin.framework.api.WeixinView;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsgFactory;
 
 
@@ -63,12 +62,12 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		StringBuilder rawXml = new StringBuilder();
 		try {
 			BufferedReader reader = req.getReader();
+			char[] temp = null;
 			for (;;) {
-				char[] temp = new char[128];
+				temp = new char[128];
 				int i = reader.read(temp);
 				rawXml.append(temp);
-				if (i == -1)
-					break;
+				if (i == -1){break;}
 			}
 		} catch (IOException e) {
 			logger.error("获取请求原始数据出错",e);
@@ -80,7 +79,6 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	@Override
 	public void handle() {
 		try {
-			
 			HandleResult result = invocation.invokeNext();
 			if(result!=null && result.getView()!=null){
 				renderResult(result);
@@ -125,7 +123,8 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 	}
 
 	private void writeWeixinResp(HandleResult result) throws IOException {
-		HandlerContext.getContext().getReplyStream().write(result.getView().toViewString().getBytes("utf-8"));
+		HandlerContext.getContext().getReplyStream()
+		.write(result.getView().toViewString().getBytes("utf-8"));
 	}
 	
 	

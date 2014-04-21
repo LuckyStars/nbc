@@ -13,7 +13,7 @@ public class EventMsg extends WeixinMsg{
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("");
+		StringBuilder sb = new StringBuilder();
 		sb.append("fromUser:" + this.getFromUserName() + "\n");
 		sb.append("toUser:" + this.getToUserName() + "\n");
 		sb.append("sessionId:" + this.getSessionId() + "\n");
