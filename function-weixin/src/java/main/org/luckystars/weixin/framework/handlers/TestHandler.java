@@ -9,6 +9,7 @@ import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.Handler;
 import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.framework.api.View;
 import org.luckystars.weixin.framework.api.WeixinView;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 import org.luckystars.weixin.transfer.view.TextView;
@@ -38,7 +39,7 @@ public class TestHandler implements Handler{
 					+ m.toString(), toUsr, serverName);
 			
 			HandleResult result =  new HandleResult() {
-				public void setView(WeixinView view) {
+				public void setView(View view) {
 				}
 				public WeixinView getView() {
 					return new AnnotationNewsViewBuilder().build(new ArrayList<TestList>(){{
@@ -52,7 +53,7 @@ public class TestHandler implements Handler{
 				}
 			};
 			logger.info("resp is : \n");
-			logger.info(result.getView().toWeixinStr());
+			logger.info(result.getView().toViewString());
 			
 			return result;
 		}

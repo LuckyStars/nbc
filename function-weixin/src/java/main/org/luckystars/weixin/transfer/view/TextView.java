@@ -25,7 +25,7 @@ private static final String xml = "<xml>"+
 					"<FuncFlag>0</FuncFlag>"+
 					"</xml>";
 */
-public class TextView implements XmlReply {
+public class TextView extends XmlReply {
 	
 	private String toUserName;
 	private String fromUserName;

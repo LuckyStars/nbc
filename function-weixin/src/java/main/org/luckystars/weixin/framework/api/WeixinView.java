@@ -1,10 +1,21 @@
 package org.luckystars.weixin.framework.api;
 
-import java.io.Serializable;
 
 /**
  * @author xuechong
  */
-public interface WeixinView extends Serializable {
-	String toWeixinStr();
+@SuppressWarnings("serial")
+public abstract class WeixinView implements View {
+	
+	@Override
+	public ViewType getViewType() {
+		return View.ViewType.WeixinView;
+	}
+	
+	@Override
+	public String toViewString() {
+		return toWeixinStr();
+	}
+	
+	public abstract String toWeixinStr();
 }

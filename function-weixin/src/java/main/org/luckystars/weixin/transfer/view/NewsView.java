@@ -45,7 +45,7 @@ Url	                                 否	              点击图文消息跳转�
  * @author xuechong;
  */
 @SuppressWarnings("serial")
-public class NewsView implements XmlReply{
+public class NewsView extends XmlReply{
 
 	private String fromUserName;
 	private String toUserName;

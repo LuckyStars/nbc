@@ -11,8 +11,8 @@ public interface HandleResult {
 	 * 停止余下的handler继续处理
 	 */
 	public static final HandleResult STOP_CHAIN = new HandleResult() {
-		public WeixinView getView() {return null;}
-		public void setView(WeixinView view) {};
+		public View getView() {return null;}
+		public void setView(View view) {};
 	};
 	
 	/**
@@ -21,7 +21,8 @@ public interface HandleResult {
 	 */
 	public static final HandleResult INVOKE_NEXT = new HandleResult() {
 		public WeixinView getView() {return null;}
-		public void setView(WeixinView view) {}
+		@Override
+		public void setView(View view) {}
 	};
 	
 	/**
@@ -29,7 +30,7 @@ public interface HandleResult {
 	 */
 	public static final HandleResult EMPTY_RESULT = new HandleResult() {
 		@SuppressWarnings("serial")
-		public WeixinView getView() {
+		public View getView() {
 			return new WeixinView() {
 				@Override
 				public String toWeixinStr() {
@@ -37,10 +38,10 @@ public interface HandleResult {
 				}
 			};
 		};
-		public void setView(WeixinView view) {}
+		public void setView(View view) {}
 	};
 	
-	WeixinView getView();
+	View getView();
 	
-	void setView(WeixinView view);
+	void setView(View view);
 }

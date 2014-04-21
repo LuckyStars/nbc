@@ -3,6 +3,7 @@ package org.luckystars.weixin.transfer.impl;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +15,8 @@ import org.luckystars.weixin.framework.HandlerWarp;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.InvocationFactoryBean;
+import org.luckystars.weixin.framework.api.JSPView;
+import org.luckystars.weixin.framework.api.WeixinView;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsgFactory;
 
 
@@ -80,7 +83,7 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			
 			HandleResult result = invocation.invokeNext();
 			if(result!=null && result.getView()!=null){
-				writeResp(result);
+				renderResult(result);
 			}
 			
 		} catch (Exception e) {
@@ -93,8 +96,36 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 		
 	}
 
-	private void writeResp(HandleResult result) throws IOException {
-		HandlerContext.getContext().getReplyStream().write(result.getView().toWeixinStr().getBytes("utf-8"));
+	private void renderResult(HandleResult result) throws IOException {
+		switch (result.getView().getViewType()) {
+			case WeixinView:
+				writeWeixinResp(result);
+				break;
+			case JSP:
+				jumpJsp(result);
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void jumpJsp(HandleResult result) {
+		JSPView view = (JSPView) result.getView();
+		try {
+			if(view.getRedirect()){
+				this.resp.sendRedirect(view.getUrl());
+			}else{
+				this.req.getRequestDispatcher(view.getUrl()).forward(req, resp);
+			}
+		} catch (IOException e) {
+			logger.error(e);
+		} catch (ServletException e) {
+			logger.error(e);
+		}
+	}
+
+	private void writeWeixinResp(HandleResult result) throws IOException {
+		HandlerContext.getContext().getReplyStream().write(result.getView().toViewString().getBytes("utf-8"));
 	}
 	
 	

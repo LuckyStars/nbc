@@ -2,20 +2,21 @@ package org.luckystars.weixin.framework.api.impl;
 
 
 import org.luckystars.weixin.framework.api.HandleResult;
-import org.luckystars.weixin.framework.api.WeixinView;
+import org.luckystars.weixin.framework.api.View;
 
 public class DefaultHandleResult implements HandleResult {
 
-	private WeixinView view ;
+	private View view ;
 	
 	@Override
-	public WeixinView getView() {
+	public View getView() {
 		return view;
 	}
 
 	@Override
-	public void setView(WeixinView view) {
+	public void setView(View view) {
 		this.view = view;
 	}
+
 
 }
