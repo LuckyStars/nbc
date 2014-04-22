@@ -1,5 +1,8 @@
 package com.nbcedu.function.schoolmaster2.weixin.biz.impl;
 
+import org.apache.commons.lang.xwork.StringUtils;
+import org.hibernate.Query;
+
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
@@ -60,6 +63,15 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 	 */
 	public Sm2WeixinUser findWeixinUser(String weixinId){
 		return this.weixinUserDao.findUniqueBy("weixinId", weixinId);
+	}
+
+	@Override
+	public String findLoginUidByOpenId(String openId) {
+		String hql = "SELECT t.uid FROM Sm2WeixinUser t WHERE t.weixinId=? AND t.status=?";
+		Query q = this.weixinUserDao.createQuery(hql, new Object[]{openId,Sm2WeixinUser.STATUS_LOGIN});
+		Object[] result = (Object[]) q.uniqueResult();
+		if(result==null){return "";}
+		return StringUtils.trimToEmpty((String)result[0]);
 	}
 	
 }
