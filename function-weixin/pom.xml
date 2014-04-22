@@ -39,17 +39,9 @@
 		<directory>build</directory>
 		<resources>
 			<resource>
-				<directory>src/java/resource</directory>
-			</resource>
-			<resource>
 				<directory>src/py</directory>
 			</resource>
 		</resources>
-		<testResources>
-			<testResource>
-				<directory>src/java/resource</directory>
-			</testResource>
-		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

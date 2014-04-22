@@ -157,7 +157,7 @@
 		<servlet-class>org.luckystars.weixin.transfer.servlet.WeixinServlet</servlet-class>
 		<init-param>
 	    	<param-name>appConfigLocation</param-name>
-	    	<param-value>appConfig.xml</param-value>
+	    	<param-value>classpath:appConfig.xml</param-value>
 	    </init-param>
 	    <init-param>
 	    	<param-name>token</param-name>

@@ -20,9 +20,9 @@
 	
 	<invocationFactoryBean>org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory</invocationFactoryBean>
 	
-	<appId></appId>
+	<appId>appId</appId>
 	
-	<appSecret></appSecret>
+	<appSecret>appSecret</appSecret>
 	
 	<handlerChain id="msgTypeHandlerChain"  >
 		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.framework.api.impl.DefaultHandlerFactory" >

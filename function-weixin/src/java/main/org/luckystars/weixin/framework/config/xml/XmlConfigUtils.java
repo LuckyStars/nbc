@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class XmlConfigUtils {
 	
@@ -68,5 +69,28 @@ public class XmlConfigUtils {
 			throw new NullPointerException("no such value" + valueKey);
 		}
 		return attr.getNodeValue().trim();
+	}
+	
+	/**
+	 * 根据tagname获取节点内容只允许唯一值
+	 * @param tagName
+	 * @param doc
+	 * @return
+	 * @author xuechong
+	 */
+	public static String loadValueByTagName(String tagName,Document doc){
+		NodeList nodes = doc.getDocumentElement().getElementsByTagName(tagName);
+		if(nodes==null||nodes.getLength()<=0){
+			throw new NullPointerException("no such tag :" + tagName );
+		}else if(nodes.getLength()>1){
+			throw new IllegalArgumentException("too many tag named :" + tagName);
+		}else{
+			String result = null;
+			result = nodes.item(0).getTextContent();
+			if(result==null||result.trim().isEmpty()){
+				throw new NullPointerException("no value for tag :" + tagName);
+			}
+			return result.trim();
+		}
 	}
 }
