@@ -47,7 +47,7 @@ public class LoginHandler implements Handler{
 	private boolean checkLoginStat(){
 		String openId = 
 			HandlerContext.getContext().getSession().getSessionId();
-		String uid = this.wuBiz.findLoginUidByOpenId(openId);
+		String uid = this.wxUserBiz.findLoginUidByOpenId(openId);
 		
 		boolean result = uid!=null && !uid.trim().isEmpty();
 		if(result){
