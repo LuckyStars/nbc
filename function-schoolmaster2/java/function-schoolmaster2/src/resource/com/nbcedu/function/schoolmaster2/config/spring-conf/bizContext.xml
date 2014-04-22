@@ -76,7 +76,7 @@
 	<bean id="sm2NotesBiz" class="com.nbcedu.function.schoolmaster2.biz.impl.Sm2NotesBizImpl">
 		<property name="notesDao" ref="sm2NotesDao"></property>
 	</bean>
-	<bean id="weixinUserBiz" class="com.nbcedu.function.schoolmaster2.weixin.biz.impl.Sm2WeixinUserBizImpl">
+	<bean id="wxUserBiz" class="com.nbcedu.function.schoolmaster2.weixin.biz.impl.Sm2WeixinUserBizImpl">
 		<property name="weixinUserDao" ref="sm2WeixinUserDao"></property>
 	</bean>
 </beans>

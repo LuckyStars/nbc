@@ -20,7 +20,7 @@ public class LoginHandler implements Handler{
 	
 	private String sessionLoginUid = "com.nbcedu.function.schoolmaster2.weixin.handler.sessionLoginKey";
 	
-	private Sm2WeixinUserBiz wuBiz ;
+	private Sm2WeixinUserBiz wxUserBiz ;
 	
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
@@ -53,8 +53,8 @@ public class LoginHandler implements Handler{
 	///////////////////////////
 	//////GETTERS&SETTERS//////
 	//////////////////////////
-	public void setWuBiz(Sm2WeixinUserBiz wuBiz) {
-		this.wuBiz = wuBiz;
+	public void setWxUserBiz(Sm2WeixinUserBiz wxUserBiz) {
+		this.wxUserBiz = wxUserBiz;
 	}
 	
 	
