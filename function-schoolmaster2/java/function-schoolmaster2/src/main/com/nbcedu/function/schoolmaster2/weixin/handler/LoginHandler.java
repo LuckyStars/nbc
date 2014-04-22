@@ -36,9 +36,9 @@ public class LoginHandler implements Handler{
 		View view  = null;
 		
 		if(checkLoginStat()){
-			view = new JSPView("", false);//跳转到欢迎界面 TODO
+			view = new JSPView("/function/function-weixin/", false);//跳转到欢迎界面 TODO
 		}else{
-			view = new JSPView("", false);//跳转到登陆 TODO
+			view = new JSPView("/function/function-weixin/index.html", false);//跳转到登陆 TODO
 		}
 		
 		return invocation.createResult(view);
