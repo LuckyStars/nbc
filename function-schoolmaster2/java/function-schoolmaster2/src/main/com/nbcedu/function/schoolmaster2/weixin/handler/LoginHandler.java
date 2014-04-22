@@ -1,13 +1,15 @@
 package com.nbcedu.function.schoolmaster2.weixin.handler;
 
+import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.Handler;
-import org.luckystars.weixin.framework.api.impl.MsgTypeRouteInvocationFactory;
+import org.luckystars.weixin.framework.api.JSPView;
+import org.luckystars.weixin.framework.api.View;
 import org.luckystars.weixin.transfer.incomemsg.EventMsg;
-import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
+import com.nbcedu.function.schoolmaster2.weixin.constants.Constants;
 
 
 /**
@@ -16,9 +18,7 @@ import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
  */
 public class LoginHandler implements Handler{
 	
-	private String loginEventKey = "";
-	
-	private String sessionLoginUid = "com.nbcedu.function.schoolmaster2.weixin.handler.sessionLoginKey";
+	private String loginEventKey = "";//TODO
 	
 	private Sm2WeixinUserBiz wuBiz ;
 	
@@ -33,10 +33,29 @@ public class LoginHandler implements Handler{
 
 	
 	private HandleResult doHandle(HandlerInvocation invocation) {
-		// TODO Auto-generated method stub
-		return null;
+		View view  = null;
+		
+		if(checkLoginStat()){
+			view = new JSPView("", false);//跳转到欢迎界面 TODO
+		}else{
+			view = new JSPView("", false);//跳转到登陆 TODO
+		}
+		
+		return invocation.createResult(view);
 	}
 
+	private boolean checkLoginStat(){
+		String openId = 
+			HandlerContext.getContext().getSession().getSessionId();
+		String uid = this.wuBiz.findLoginUidByOpenId(openId);
+		
+		boolean result = uid!=null && !uid.trim().isEmpty();
+		if(result){
+			HandlerContext.getContext().getSession()
+				.putAttr(Constants.SESSION_LOGIN_UID, uid);
+		}
+		return result;
+	}
 
 	private boolean matchLogin(HandlerInvocation invocation) {
 		if(invocation.getIncomeMsg() instanceof EventMsg){

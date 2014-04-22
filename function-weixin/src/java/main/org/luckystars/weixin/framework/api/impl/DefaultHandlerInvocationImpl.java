@@ -9,6 +9,7 @@ import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.framework.api.Handler;
 import org.luckystars.weixin.framework.api.IncomeMessage;
+import org.luckystars.weixin.framework.api.View;
 
 public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 
@@ -49,6 +50,13 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 		synchronized (handlers) {
 			this.handlers = Collections.EMPTY_LIST.iterator();
 		}
+	}
+
+	@Override
+	public HandleResult createResult(View view) {
+		HandleResult result = new DefaultHandleResult();
+		result.setView(view);
+		return result;
 	}
 
 }
