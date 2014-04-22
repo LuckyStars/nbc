@@ -9,16 +9,6 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 * @param user
 	 */
 	public void addUpdateWeixinUser(Sm2WeixinUser user);
-	/**
-	 * 根据id逻辑删除用户
-	 * @param id
-	 */
-	public void modifyWeixinUserById(String id);
-	/**
-	 * 根据openId逻辑删除用户
-	 * @param openId
-	 */
-	public void modifyWeixinUserByOpenId(String openId);
 
 	/**
 	 * 根据openid查找用户uid
