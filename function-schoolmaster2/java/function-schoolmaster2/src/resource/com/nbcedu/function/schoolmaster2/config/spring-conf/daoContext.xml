@@ -64,4 +64,7 @@
 	<bean id="sm2NotesDao" class="com.nbcedu.function.schoolmaster2.dao.impl.Sm2NotesDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="sm2WeixinUserDao" class="com.nbcedu.function.schoolmaster2.weixin.dao.impl.Sm2WeixinUserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 </beans>

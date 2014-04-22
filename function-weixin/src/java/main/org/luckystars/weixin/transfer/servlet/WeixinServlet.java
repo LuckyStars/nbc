@@ -44,20 +44,23 @@ public class WeixinServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+		loadToken(config);
 		initAppcontext(config);
 	}
 
 	/////////////////////
 	/////PRIVATE/////////
 	/////////////////////
-	
-	private void initAppcontext(ServletConfig config) {
-		String configLocation = config.getInitParameter("appConfigLocation");
+	private void loadToken(ServletConfig config) {
 		String initToken = config.getInitParameter("token");
 		if(initToken==null||initToken.trim().isEmpty()){
 			throw new NullPointerException("没有配置token");
 		}
 		this.token = initToken;
+	}
+	
+	private void initAppcontext(ServletConfig config) {
+		String configLocation = config.getInitParameter("appConfigLocation");
 		if(configLocation!=null&&configLocation.trim().isEmpty()){
 			AppContext.initContext(config.getInitParameter(configLocation));
 		}else{

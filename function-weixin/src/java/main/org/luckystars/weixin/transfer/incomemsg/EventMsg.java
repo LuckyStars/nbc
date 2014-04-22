@@ -2,6 +2,11 @@ package org.luckystars.weixin.transfer.incomemsg;
 
 @SuppressWarnings("serial")
 public class EventMsg extends WeixinMsg{
+	
+	public static final String EVENT_TYPE_VIEW="view";
+	
+	public static final String EVENT_TYPE_ClICK="click";
+	
 
 	public String getEventKey(){
 		return this.contents.get("EventKey");
