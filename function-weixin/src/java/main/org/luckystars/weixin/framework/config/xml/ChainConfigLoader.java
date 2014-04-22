@@ -16,7 +16,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
 /**
  * 读取handler chain内容
  * @author xuechong
@@ -52,7 +51,8 @@ class ChainConfigLoader extends AbstractXmlContextLoader{
 	private HandlerChainConfig buildConfig(Node handlerChain) {
 		HandlerChainConfig config = new HandlerChainConfig();
 		
-		String chainName = handlerChain.getAttributes().getNamedItem("id").getNodeValue();
+		String chainName = 
+			handlerChain.getAttributes().getNamedItem("id").getNodeValue();
 		config.setName(chainName);
 		
 		Map<String, ChainMapping> chains = buildChainMappings(handlerChain);
@@ -71,8 +71,11 @@ class ChainConfigLoader extends AbstractXmlContextLoader{
 			if(isChainNode(chainNode)){
 				List<HandlerMapping> handlers = buildHandlers(chainNode);
 				
-				String chainId = chainNode.getAttributes().getNamedItem("id").getNodeValue();
-				Node facNode = chainNode.getAttributes().getNamedItem("handlerFactoryClass");
+				String chainId = 
+					chainNode.getAttributes().getNamedItem("id").getNodeValue();
+				Node facNode = 
+					chainNode.getAttributes().getNamedItem("handlerFactoryClass");
+				
 				ChainMapping chain = null;
 				if(facNode==null){
 					chain = new ChainMapping(chainId,handlers);
@@ -82,7 +85,7 @@ class ChainConfigLoader extends AbstractXmlContextLoader{
 				
 				result.put(chainId, chain);
 				if(logger.isInfoEnabled()){
-					logger.info("handlerChain:" + chainId + " is loaded");
+					logger.info("handlerChain:" + chainId + " is loaded \n");
 				}
 			}
 		}

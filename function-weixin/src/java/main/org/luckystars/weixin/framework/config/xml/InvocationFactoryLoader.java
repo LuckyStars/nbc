@@ -45,7 +45,7 @@ class InvocationFactoryLoader extends AbstractXmlContextLoader{
 			Class fac = Thread.currentThread().getContextClassLoader().loadClass(facClassName);
 			result = (InvocationFactoryBean) fac.newInstance();
 			if(logger.isInfoEnabled()){
-				logger.info("InvocationFactoryBean:" + facClassName + "loaded");
+				logger.info("InvocationFactoryBean: " + facClassName + " loaded ");
 			}
 		} catch (ClassNotFoundException e) {
 			logger.error(e);

@@ -19,6 +19,7 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		loadInvocationFactory(ctx,document);
 		loadHandlerChains(ctx, document);
 		loadAppIdSecret(ctx,document);
+		logger.info("XmlAppConfigLoader load finished");
 	}
 	
 	private void loadAppIdSecret(AppContext ctx, Document document) {
