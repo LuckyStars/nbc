@@ -53,5 +53,12 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		if(result==null){return "";}
 		return StringUtils.trimToEmpty((String)result[0]);
 	}
+	@Override
+	public void logOut(String openId) {
+		this.weixinUserDao.createQuery(
+				"UPDATE Sm2WeixinUser t SET t.status='" 
+				+ Sm2WeixinUser.STATUS_DEPRECATED 
+				+ "' WHERE t.weixinId=?", openId).executeUpdate();
+	}
 	
 }

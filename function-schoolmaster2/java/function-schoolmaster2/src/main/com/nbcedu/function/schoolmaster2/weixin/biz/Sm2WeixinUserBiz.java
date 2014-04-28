@@ -17,4 +17,11 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 * @author xuechong
 	 */
 	public String findLoginUidByOpenId(String openId);
+	
+	/**
+	 * 注销登陆
+	 * @param openId
+	 * @author xuechong
+	 */
+	public void logOut(String openId);
 }

@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.weixin.handler;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.transfer.handler.AbstractEventHandler;
+import org.luckystars.weixin.transfer.view.TextView;
 
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
 
@@ -18,8 +19,9 @@ public class LogoutHandler extends AbstractEventHandler{
 	
 	@Override
 	protected HandleResult doHandle(HandlerInvocation invocation) {
-		
-		return null;
+		String openId = invocation.getInvocationContext().getSession().getSessionId();
+		this.wxUserBiz.logOut(openId);
+		return invocation.createResult(new TextView("注销成功", toUserName, serverName));
 	}
 
 	@Override
