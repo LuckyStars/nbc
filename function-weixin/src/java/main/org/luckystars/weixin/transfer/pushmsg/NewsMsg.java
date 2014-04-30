@@ -2,6 +2,7 @@ package org.luckystars.weixin.transfer.pushmsg;
 
 import org.luckystars.weixin.utils.json.GsonUtil;
 
+@SuppressWarnings("serial")
 public class NewsMsg extends JsonOutputMsg{
 
 	private String touser;

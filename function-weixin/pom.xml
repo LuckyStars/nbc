@@ -11,6 +11,8 @@
 		    <name>SpringSource Milestone Repository</name>
 		    <url>http://repo.springsource.org/milestone</url>
 		</repository>
+	
+	
 	</repositories>
 	
 	<properties>
@@ -171,5 +173,12 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+			<version>5.9.0</version>
+		</dependency>
+		
 	</dependencies>
 </project>
