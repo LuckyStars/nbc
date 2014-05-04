@@ -15,7 +15,6 @@ public abstract class JsonOutputMsg implements OutputMsg{
 	public static final String MSG_TYPE_MUSIC = "music";
 	/**图文消息**/
 	public static final String MSG_TYPE_NEWS = "news";
-	/**接收人openid**/
 	
 	@Override
 	public String toMsgString() {
