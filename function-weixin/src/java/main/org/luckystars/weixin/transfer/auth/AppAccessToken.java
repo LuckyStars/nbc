@@ -12,8 +12,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
+import org.luckystars.weixin.utils.json.GsonUtil;
 
-import com.google.gson.JsonObject;
 
 /**
  * 获取应用的access_token
@@ -26,6 +26,10 @@ public class AppAccessToken {
 	private static volatile String accessToken = null;
 	
 	private static final long EXPIRE_TIME = 1000L*7100L;
+	
+	private static final String ACCESS_TOKEN_JSON_KEY = "access_token";
+	
+	private AppAccessToken(){}
 	
 	public static String getAccessToken(){
 		if(accessToken==null){
@@ -90,8 +94,7 @@ public class AppAccessToken {
 	}
 	
 	private static String getResultFromJson(String fetchResult) {
-		JsonObject obj = new JsonObject();
-		return null;
+		return GsonUtil.fromJson(fetchResult).get(ACCESS_TOKEN_JSON_KEY);
 	}
 
 

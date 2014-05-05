@@ -40,8 +40,9 @@ public class SchoolMasterFilter implements Filter{
 		//logger.info("getAttributeName = :"  + getAttributeName(serviceName));
 		
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
-			final String uid = (String) 
-				req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+//			final String uid = (String) 
+//				req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+			
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
 //			uid = (String) attributes.get("exuserid");
@@ -55,7 +56,7 @@ public class SchoolMasterFilter implements Filter{
 //				}
 //			}
 			
-			
+			final String uid="J201108251334440044953";
 			if ((uid == null) || ("".equals(uid))) {
 				logger.info("===单点登录中获取的UID为null，无法载入loader...");
 				resp.sendRedirect(req.getContextPath() + "/teacherIndex.jsp");

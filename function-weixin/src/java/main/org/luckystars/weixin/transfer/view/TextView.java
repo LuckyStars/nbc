@@ -1,5 +1,6 @@
 package org.luckystars.weixin.transfer.view;
 
+import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 import org.luckystars.weixin.transfer.interfaces.XmlReply;
 
 /**
@@ -40,6 +41,10 @@ public class TextView extends XmlReply {
 		this.toUserName = toUserName;
 		this.fromUserName = serverName;
 		this.createTime = String.valueOf(System.currentTimeMillis());
+	}
+	
+	public TextView(String content,WeixinMsg incomeMsg){
+		this(content,incomeMsg.getFromUserName(),incomeMsg.getToUserName());
 	}
 	
 	@Override
