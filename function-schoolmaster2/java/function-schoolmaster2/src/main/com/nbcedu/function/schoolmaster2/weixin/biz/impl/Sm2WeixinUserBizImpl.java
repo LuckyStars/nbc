@@ -54,6 +54,7 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		if(result==null){return "";}
 		return StringUtils.trimToEmpty((String)result[0]);
 	}
+<<<<<<< HEAD
 
 	@Override
 	public boolean findLoginByPassUserName(String username, String password) {
@@ -63,6 +64,8 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		if(result==null){return false;}
 		return true;
 	}
+=======
+>>>>>>> b5709f8a2a3d89cdba1d97974eb153ed7fee2549
 	@Override
 	public void logOut(String openId) {
 		this.weixinUserDao.createQuery(
