@@ -45,7 +45,7 @@ public class MasterIndexAction extends BaseAction{
 			public String search() {
 				
 				List<TSm2Subject> subList=
-					masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,6);
+					masterSubBiz.findByMasterAndCount(LINSHI_MODULEID, uid,0,6);
 				
 				return Utils.gson.toJson(
 						Lists.transform(subList, new Function<TSm2Subject, Linshi>() {
@@ -130,7 +130,7 @@ public class MasterIndexAction extends BaseAction{
 			public String search() {
 				
 				List<TSm2Subject> subList=
-					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,4);
+					masterSubBiz.findByMasterAndCount(TONGJI_MODULEID, uid,0,4);
 				
 //				test:{
 //					subList = new ArrayList<TSm2Subject>();

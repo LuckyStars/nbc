@@ -51,11 +51,12 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 
 	@Override
 	public List<TSm2Subject> findByMasterAndCount(String modId,
-			String masterUid, Integer size) {
+			String masterUid, Integer firstResult,Integer size) {
 		SQLQuery query = (SQLQuery)this.sm2SubjectDao.createSqlQuery(
 				this.sm2SubjectDao.getNamedQuery("index_find_sub_by_module").getQueryString());
 		query.setString("uid", masterUid);
 		query.setString("moduleId", modId);
+		query.setFirstResult(firstResult);
 		query.setMaxResults(size);
 		return sqlResult(query);
 	}

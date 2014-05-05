@@ -2,33 +2,24 @@
 <html lang="en">
 	<head>
 		<title>index</title>
+		<meta charset="utf-8">
 	   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	   	<meta charset="utf-8">
-	   	<link href="/bs3/css/bootstrap.css" rel="stylesheet" media="screen">
-	   	<link href="/bs3/css/bootstrap-theme.css" rel="stylesheet" media="screen">
-	   	<link href="basic.css" rel="stylesheet" media="screen">
-	   	<script src="/bs3/js/jquery.min.js"></script>
+	   	<link href="./bs3/css/bootstrap.css" rel="stylesheet" media="screen"/>
+	   	<link href="./bs3/css/bootstrap-theme.css" rel="stylesheet" media="screen"/>
+	   	<link href="./signin.css" rel="stylesheet" media="screen"/>
+	   	<script src="./bs3/js/jquery.min.js"></script>
 	   	<script type="text/javascript" src="/bs3/js/bootstrap.js" ></script>
-
-	   	<style type="text/css">
-			.input-group{
-				width: 100%;
-			}
-	   	</style>
 	   	<script type="text/javascript">
 	  
 	   	</script>
 	</head>
 	<body >
 		<div class="container">
-	      <form class="form-signin" role="form" >
-	        <h2 class="form-signin-heading">Please sign in</h2>
-	        <input type="text" class="form-control" placeholder="Email address" required="" autofocus="">
-	        <input type="password" class="form-control" placeholder="Password" required="">
-	        <label class="checkbox">
-	          <input type="checkbox" value="remember-me"> Remember me
-	        </label>
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	      <form class="form-signin" role="form" action="http://localhost:8080/sm2/scMaster2/login_weixin.action" method="post" >
+	        <h2 class="form-signin-heading">请登录</h2>
+	        <input type="text" class="form-control" placeholder="Email address" name="username" required="" autofocus="">
+	        <input type="password" class="form-control" placeholder="Password" name="password"  required="">
+	        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
 	      </form>
 		</div>
 	</body>

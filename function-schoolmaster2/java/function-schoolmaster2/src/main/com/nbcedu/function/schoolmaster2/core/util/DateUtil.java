@@ -30,7 +30,10 @@ public class DateUtil {
 
 	private DateUtil() {
 	}
-
+public static Date getCurrentDate(){
+	  Calendar c=Calendar.getInstance();//获得系统当前日期
+	  return c.getTime();
+}
 	public static DateFormat getFormat(String pattern) {
 		DateFormat format = DFS.get(pattern);
 		if (format == null) {

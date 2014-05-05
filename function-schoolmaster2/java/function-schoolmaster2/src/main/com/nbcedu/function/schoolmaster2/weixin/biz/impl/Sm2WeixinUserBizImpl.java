@@ -25,6 +25,7 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 			if(u!=null){
 				updateWeixinUser(user.STATUS_LOGIN,user.getWeixinId());
 			}else{
+				user.setStatus(user.STATUS_LOGIN);
 				this.add(user);
 			}
 		}
@@ -52,6 +53,15 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		Object[] result = (Object[]) q.uniqueResult();
 		if(result==null){return "";}
 		return StringUtils.trimToEmpty((String)result[0]);
+	}
+
+	@Override
+	public boolean findLoginByPassUserName(String username, String password) {
+		String sql = "select uid from t_shijia_sso_account where username = ? and password = ? ";
+		Query q = this.weixinUserDao.createSqlQuery(sql, username, password);
+		Object result = q.uniqueResult();
+		if(result==null){return false;}
+		return true;
 	}
 	
 }

@@ -109,5 +109,9 @@
 		
 		<action name="*_note" method="{1}" class="sm2NotesAction" >
 		</action>
+		<action name="*_weixin" method="{1}" class="wxLogin" >
+			<result name="list" >/function/function-weixin/list.jsp</result>	
+			<result name="subjectDetail" >/function/function-weixin/subjectDetail.jsp</result>		
+		</action>
 	</package>
 </struts>

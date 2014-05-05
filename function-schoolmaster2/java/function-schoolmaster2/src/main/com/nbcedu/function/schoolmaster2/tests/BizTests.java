@@ -104,7 +104,7 @@ public class BizTests {
 	@Test
 	public void findByMasterAndCountTest(){
 		SM2MasterSubBiz biz = (SM2MasterSubBiz) context.getBean("masterSubBiz");
-		biz.findByMasterAndCount("linshi", "1", 6);
+		biz.findByMasterAndCount("linshi", "1",0, 6);
 	}
 }
 
