@@ -40,7 +40,7 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @return
 	 * @author xuechong
 	 */
-	public List<TSm2Subject> findByMasterAndCount(String modId,String masterUid,Integer size);
+	public List<TSm2Subject> findByMasterAndCount(String modId,String masterUid,Integer first,Integer size);
 	
 	/**
 	 * 按subjectId查找所有步骤

@@ -84,4 +84,9 @@
 	<bean id="sm2NotesAction" class="com.nbcedu.function.schoolmaster2.action.NotesAction">
 		<property name="notesBiz" ref="sm2NotesBiz"></property>
 	</bean>
+	<bean id="wxLogin" class="com.nbcedu.function.schoolmaster2.action.WeixinAction">
+		<property name="wxUserBiz" ref="wxUserBiz"></property>
+			<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
+			<property name="subBiz" ref="masterSubBiz" />
+	</bean>
 </beans>

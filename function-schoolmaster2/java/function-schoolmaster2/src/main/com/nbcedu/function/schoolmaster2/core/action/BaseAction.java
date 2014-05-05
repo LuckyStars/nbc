@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
+import org.luckystars.weixin.framework.HandlerContext;
 
 import com.nbcedu.function.schoolmaster2.core.pager.Pager;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
@@ -61,6 +62,9 @@ public class BaseAction extends ActionSupport {
 		return ActionContext.getContext().getSession().get(key);
 	}
 	
+	protected String getWxOpenId(){
+		return	HandlerContext.getContext().getSession().getSessionId();
+	}
 	/**
 	 * 进行增删改操作后,以redirect方式重新打开action默认页的result名
 	 */

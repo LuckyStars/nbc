@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link href="./bs3/css/bootstrap.css" rel="stylesheet" media="screen"/>
+	<link href="./bs3/css/bootstrap-theme.css" rel="stylesheet" media="screen"/>
+	<link href="./bs3/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="./bs3/css/charisma-app.css" rel="stylesheet">
+	<script src="./bs3/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./bs3/js/bootstrap.js" ></script>
+	<title>无标题文档</title>
+	<style>
+	#ul1 {margin-top: 100px;}
+	li {width: 200px; height: 120px; padding: 5px; border: 1px solid #000; float: left; list-style: none; margin: 10px 0 0 10px;}
+	img {width: 200px; height: 120px;}
+	</style>
+<script>
+$(function () {
+	var clientHeight = document.documentElement.scrollTop || document.body.scrollTop;
+	var h = clientHeight + document.documentElement.clientHeight;
+	//alert(h);
+	window.onscroll=function(){
+		var a = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight;
+		var b = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop;
+		var c = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+
+		if(a+b==c){
+			loadDate();
+		}
+	}
+	loadData(){
+		$.get('http://localhost:8080/sm2/scMaster2/findLinshi_weixin.action', function(data) {
+			<li>
+					<img class="dashboard-avatar" alt="Usman" src="http://www.gravatar.com/avatar/f0ea51fa1e4fae92608d8affee12f67b.png?s=50">
+					<strong>Name:</strong>Usman
+					<br>
+					<strong>Since:</strong> 17/05/2012<br>
+					<strong>Status:</strong> <span class="label label-success">Approved</span>                                  
+				</li>
+			alert(data);
+		}
+	}
+});
+</script>
+</head>
+
+<body>
+	<ul id="ul1">
+    	<li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/1.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/2.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/3.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/4.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/5.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/6.jpg" /></li>
+        <li><img src="images/white.JPG" _src="images/7.jpg" /></li>
+    </ul>
+</body>
+</html>
