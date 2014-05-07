@@ -108,6 +108,7 @@
     	classpath*:com/nbcedu/function/**/config/spring-conf/*Context.xml
     	classpath*:com/nbcedu/core/privilege/config/spring-conf/*Context.xml
     	classpath*:com/nbcedu/integration/**/config/spring-conf/*Context.xml 
+    	classpath*:*Context.xml
     	classpath*:applicationContext.xml
     	</param-value>
 	</context-param>
