@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.jms.Connection;
 import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
 
+import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerPlugin;
 import org.apache.activemq.broker.BrokerService;
-import org.apache.activemq.network.jms.JmsConnector;
 import org.apache.activemq.security.AuthenticationUser;
 import org.apache.activemq.security.SimpleAuthenticationPlugin;
 
@@ -21,7 +24,8 @@ public class Test {
 		Function startCallBack1 = new Function() {
 			@Override
 			void execute() {
-				System.out.println("server started");
+				
+				setUpConsumer();
 			}
 		};
 		
@@ -30,7 +34,26 @@ public class Test {
 		serverThread.start();
 	}
 	
+	
+	
+	
 	private static void setUpConsumer(){
+		ActiveMQConnectionFactory fac = new ActiveMQConnectionFactory(brokerUrl);
+		Connection conn = null;
+		try {
+			conn = fac.createConnection();
+			conn.start();
+			Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			
+			Destination dest = session.createQueue("testqueue");
+			
+			MessageProducer pro = session.createProducer(null);
+			
+			
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -40,6 +63,9 @@ public class Test {
 	public static abstract class Function{
 		abstract void execute();
 	}
+	
+	
+	
 	
 	
 	public static class StartServer implements Runnable{
