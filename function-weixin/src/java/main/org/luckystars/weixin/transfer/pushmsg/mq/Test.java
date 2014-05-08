@@ -2,12 +2,18 @@ package org.luckystars.weixin.transfer.pushmsg.mq;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.jms.Connection;
+import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
+import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerPlugin;
@@ -41,13 +47,41 @@ public class Test {
 		ActiveMQConnectionFactory fac = new ActiveMQConnectionFactory(brokerUrl);
 		Connection conn = null;
 		try {
-			conn = fac.createConnection();
+			conn = fac.createConnection("user1","pwd1");
 			conn.start();
 			Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			
-			Destination dest = session.createQueue("testqueue");
+			Destination destination = session.createQueue("testqueue");
 			
-			MessageProducer pro = session.createProducer(null);
+			MessageProducer producer = session.createProducer(null);
+			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+			
+			MessageConsumer consumer = session.createConsumer(destination);
+			
+
+			consumer.setMessageListener(new MessageListener() {
+				
+				@Override
+				public void onMessage(Message message) {
+					System.out.print("\n\nonmessage:");
+					try {
+						System.out.println(message.getJMSType());
+						System.out.println(message.toString() + "\n");
+					} catch (JMSException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+			
+			
+			
+			for (int i = 0; i < 10; i++) {
+				TextMessage msg = session.createTextMessage();
+				msg.setText("NO:" + i);
+				msg.setJMSCorrelationID(UUID.randomUUID().toString());
+				
+				producer.send(destination,msg);
+			}
 			
 			
 		} catch (JMSException e) {
