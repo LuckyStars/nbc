@@ -52,7 +52,7 @@ public class LoginHandler implements Handler{
 	
 	
 	
-	private View createLoginView(WeixinMsg msg) {
+	private View createLoginView(WeixinMsg msg) {//TODO
 		View view = new  TextView("",msg);
 		return view;
 	}
