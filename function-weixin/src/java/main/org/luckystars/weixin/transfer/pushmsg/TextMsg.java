@@ -57,10 +57,10 @@ public class TextMsg extends JsonOutputMsg{
 	}
 	
 	public static void main(String[] args) {
-		TextMsg t = new TextMsg();
-		t.setText(new Text("aasdsadasd"));
-		t.setTouser("touserId11234");
-		System.out.println(t.toJsonString());
+//		TextMsg t = new TextMsg();
+//		t.setText(new Text("aasdsadasd"));
+//		t.setTouser("touserId11234");
+//		System.out.println(t.toJsonString());
 	}
 
 	
