@@ -13,4 +13,5 @@ public interface IncomeMessage extends Serializable{
 	public String getMsgType();
 	
 	public String getSessionId();
+	
 }
