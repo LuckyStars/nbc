@@ -88,5 +88,6 @@
 		<property name="wxUserBiz" ref="wxUserBiz"></property>
 			<property name="sm2SubjectBiz" ref="sm2SubjectBiz"></property>
 			<property name="subBiz" ref="masterSubBiz" />
+			<property name="progressBiz" ref="sm2ProgressBiz" />
 	</bean>
 </beans>

@@ -11,8 +11,84 @@
 	   	<link href="${prc }/function/function-weixin/basic.css" rel="stylesheet" media="screen">
 	   	<script src="${prc }/function/function-weixin/bs3/js/jquery.min.js"></script>
 	   	<script type="text/javascript" src="${prc }/function/function-weixin/bs3/js/bootstrap.js" ></script>
-
 	   	<script type="text/javascript">
+	  	 	var pageSize = 1; var _progressId;
+			window.onscroll=function(){
+				//网页可见区域高
+				var a = document.documentElement.scrollTop==0? document.body.clientHeight : document.documentElement.clientHeight;
+				//网页被卷去的高
+				var b = document.documentElement.scrollTop==0? document.body.scrollTop : document.documentElement.scrollTop;
+				var c = document.documentElement.scrollTop==0? document.body.scrollHeight : document.documentElement.scrollHeight;
+				if((b+372)>=c){
+					loadData(pageSize);
+				}
+			};
+
+			//下拉加载
+			function loadData(pageS){
+				$.get('${prc}/scMaster2/findDiss_weixin.action?pageSize='+pageS+"&progressId="+_progressId, function(data) {
+					if(data!=''){
+						var datastr =  eval(data);
+						var _html="";
+						$.each(datastr,function(i,n){
+							_html+='评论人:'+n.userName+"&nbsp;&nbsp;评论内容"+n.content;
+						});
+						pageSize++;
+					}
+				});
+			};
+	   	
+			//获取步骤
+			function appendSub(stepId,subjectId){
+				if(typeof(stepId)!= "undefined" && stepId!=""){
+					$.ajax({
+						url:'${prc}/scMaster2/findProgress_weixin.action?&stepId='+stepId,
+						type:'post',
+						dataType:'json',
+						success:function(data){
+							if(data){
+								var _html = "";
+								$.each(data,function(i,n){
+									_html+='<li class="active"><a href="javascript:;" onclick=\'findDisByProId("'+subjectId+'","'+stepId+'","'+n.id+'","'+n.content+'")\'>'+n.name+'</a></li>';
+								});
+								if(_html !=""){
+									$("#"+stepId).html(_html);
+								}
+							}
+						}
+					});
+				}
+			}
+
+			
+	   		//获取评论
+	   		function findDisByProId(subjectId,stepsId,proId,content){
+	   			$("#home").html(content);
+	   			_progressId = "";
+	   			if(typeof(proId)!= "undefined" && proId!=""){
+	   				_progressId = proId;
+	   				$.ajax({
+	   					url:'${prc}/scMaster2/findDiss_weixin.action?progressId='+proId,
+		   				type:'post',
+						dataType:'json',
+						success:function(data){
+		   					if(data){
+								var _html="";
+								$.each(data,function(i,n){
+									_html+='评论人:'+n.userName+"&nbsp;&nbsp;评论内容"+n.content;
+								});
+								if(_html!=""){
+									$("#profile").html(_html);
+								}else{
+									$("#profile").html("");
+								}
+							}
+						}
+		   			});
+				}
+	   		}
+
+		   	//效果
 	   		var showNav = function(){
 	   			var _pageCon = $("#page_container");
 	   			var _nav = $("#navga");
@@ -38,9 +114,6 @@
 	   				},"fast");
 	   			}
 	   		};
-		function apendSub(stepId){
-			
-		}
 	   	</script>
 	   	<style type="text/css">
 
@@ -104,16 +177,16 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 				  	<div class="tab-pane fade in active" id="home">
-				  		大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁大练钢铁
+				  	
 				  	</div>
-				  	<div class="tab-pane fade" id="profile">
-				  	唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑唱红打黑</div>
+				  	<div class="" id="profile"></div>
+				  	<!-- 
 				  	<div class="tab-pane fade" id="messages">
 				  		造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底造反到底
 				  	</div>
 				  	<div class="tab-pane fade" id="settings">
 				  		坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?坑爹呢?
-				  	</div>
+				  	</div> -->
 				</div>
 				
 			</div>
@@ -123,22 +196,17 @@
 		<div id="navga" style="left:-200px;position:fixed;top:0px;width:200px;height:100%;background-color: white;border-right:1px solid #DDDDDD;" class="fadeOut">
 			<c:forEach items="${steps }" var="step" varStatus="i">
 				<div class="panel-group" id="accordion">
-				  <div class="panel panel-default" id="${step.id}">
+				  <div class="panel panel-default">
 				    <div class="panel-heading">
 				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="appendSub('${step.id}')">
-				          ${step.name }
+				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" onclick="appendSub('${step.id}','${subject.id}')">
+				          ${step.name}
 				        </a>
 				      </h4>
 				    </div>
-				    <div id="${step.id}" class="panel-collapse collapse">
+				    <div class="panel-collapse">
 				      <div class="panel-body">
-				        <ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="#">中文连接1</a></li>
-							<li><a href="#">中文连接2</a></li>
-							<li><a href="#">中文连接3</a></li>
-							<li><a href="#">中文连接4</a></li>
-							<li><a href="#">中文连接5</a></li>
+				        <ul class="nav nav-pills nav-stacked" id="${step.id}">
 						</ul>
 				      </div>
 				    </div>

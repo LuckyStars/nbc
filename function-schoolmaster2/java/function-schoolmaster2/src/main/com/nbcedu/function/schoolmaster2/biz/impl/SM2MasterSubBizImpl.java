@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.biz.impl;
 
 import static org.apache.commons.lang.xwork.StringUtils.isNotBlank;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,10 +22,13 @@ import org.springframework.util.CollectionUtils;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.ibm.icu.text.SimpleDateFormat;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
@@ -90,6 +94,64 @@ public class SM2MasterSubBizImpl extends SM2SubjectBizImpl implements SM2MasterS
 			}
 		});
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TSm2Disscus> findDisscusByProgressId(String progressId,Integer firstResult,Integer size){
+		String hql = "SELECT td.id,td.createrId,td.createTime,td.lastUpdateTime,td.progressId,td.userName,td.content From TSm2Disscus td where td.progressId =:progressId";
+		Query resultSet = this.sm2SubjectDao.createQuery(hql);
+		resultSet.setString("progressId",progressId);
+		resultSet.setFirstResult(firstResult);
+		resultSet.setMaxResults(size);
+		List<Object[]> rs  = (List<Object[]>) resultSet.list();
+		return Lists.transform(rs, new Function<Object[], TSm2Disscus>() {
+			@Override
+			public TSm2Disscus apply(Object[] input) {
+				// TODO Auto-generated method stub
+				TSm2Disscus disscus = new TSm2Disscus();
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				disscus.setId(input[0].toString());
+				disscus.setCreaterId(input[1].toString());
+				if(null != input[2]){
+					try {
+						disscus.setCreateTime(format.parse(input[2].toString()));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				if(null != input[3]){
+					try {
+						disscus.setLastUpdateTime(format.parse(input[3].toString()));
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				disscus.setProgressId(input[4].toString());
+				disscus.setUserName(input[5].toString());
+				disscus.setContent(input[6].toString());
+				return disscus;
+			}
+		});
+	}
+	
+	@Override
+	public List<TSm2Progress> findProgressByStepId(String stepId){
+		String hql = "SELECT tp.id,tp.name ,tp.content From TSm2Progress tp where tp.stepId = ?";
+		List<Object[]> resultSet = this.sm2SubjectDao.findByHQL(hql,new Object[]{stepId});
+		
+		return Lists.transform(resultSet, new Function<Object[], TSm2Progress>() {
+			@Override
+			public TSm2Progress apply(Object[] input) {
+				TSm2Progress progress = new TSm2Progress();
+				progress.setId(input[0].toString());
+				progress.setName(input[1].toString());
+				progress.setContent(input[2].toString());
+				return progress;
+			}
+		});
 	}
 	
 	@Override

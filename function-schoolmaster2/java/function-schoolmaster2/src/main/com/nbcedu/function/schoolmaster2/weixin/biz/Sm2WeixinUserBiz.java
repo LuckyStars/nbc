@@ -9,7 +9,7 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 * @param user
 	 */
 	public void addUpdateWeixinUser(Sm2WeixinUser user);
-
+	
 	/**
 	 * 根据openid查找用户uid
 	 * @param openId
