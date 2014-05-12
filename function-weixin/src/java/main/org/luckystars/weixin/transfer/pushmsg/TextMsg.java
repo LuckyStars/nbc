@@ -9,6 +9,10 @@ public class TextMsg extends JsonOutputMsg{
 	private String msgtype = JsonOutputMsg.MSG_TYPE_TEXT;
 	private Text text;
 	
+	public TextMsg(){
+		super();
+	} 
+	
 	public TextMsg(String content,String toUser){
 		this.text = new Text(content);
 		this.touser = toUser;

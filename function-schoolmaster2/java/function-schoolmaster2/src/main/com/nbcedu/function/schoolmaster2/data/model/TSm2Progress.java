@@ -19,6 +19,7 @@ public class TSm2Progress implements java.io.Serializable {
 
 	/** default constructor */
 	public TSm2Progress() {
+		super();
 	}
 
 	/** full constructor */

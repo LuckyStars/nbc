@@ -6,6 +6,8 @@ import java.util.Map;
 
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.PagerModel;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.vo.MasterSubSearchVO;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
@@ -49,6 +51,18 @@ public interface SM2MasterSubBiz extends SM2SubjectBiz {
 	 * @author xuechong
 	 */
 	public List<StepVo> findAllSteps(String subId);
+	
+	/**
+	 * 根据步骤获取下面所有的评论
+	 * @param stepId
+	 */
+	public List<TSm2Disscus> findDisscusByProgressId(String progressId,Integer firstResult,Integer size);
+	
+	/**
+	 * 获取进展下的所有步骤
+	 * @param stepId
+	 */
+	public List<TSm2Progress> findProgressByStepId(String stepId);
 	
 	/**
 	 * 按条件分页

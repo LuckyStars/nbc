@@ -9,7 +9,7 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 * @param user
 	 */
 	public void addUpdateWeixinUser(Sm2WeixinUser user);
-
+	
 	/**
 	 * 根据openid查找用户uid
 	 * @param openId
@@ -18,10 +18,7 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 */
 	public String findLoginUidByOpenId(String openId);
 	
-<<<<<<< HEAD
 	public boolean findLoginByPassUserName(String username, String password);
-=======
->>>>>>> b5709f8a2a3d89cdba1d97974eb153ed7fee2549
 	/**
 	 * 注销登陆
 	 * @param openId

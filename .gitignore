@@ -15,4 +15,9 @@ jdbc.properties
 sm2/src/resource/jdbc.properties 
 *.log
 *.log.*
+#py 
 *.pyc
+
+#mq
+*.data
+*.redo

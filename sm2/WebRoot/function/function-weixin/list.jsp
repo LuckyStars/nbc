@@ -43,7 +43,6 @@
 	   			};
 	   			loadData(pageSize);
 	   			function look(id){
-	   				alert(11);
 			    	document.location.href="${prc}/scMaster2/detail_weixin.action?id="+id;
 			    }
 	   	</script>

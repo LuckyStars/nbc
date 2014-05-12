@@ -1,16 +1,27 @@
 package com.nbcedu.function.schoolmaster2.action;
+import static org.apache.taglibs.standard.tag.common.core.Util.escapeXml;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.taglibs.standard.tag.common.core.Util;
+
 import com.google.common.reflect.TypeToken;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
+import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.SystemContext;
 import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
+import com.nbcedu.function.schoolmaster2.core.util.jsons.JSONArray;
 import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
+import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
@@ -30,6 +41,8 @@ public class WeixinAction extends BaseAction{
 	private SM2MasterSubBiz subBiz;
 	private SM2SubjectBiz sm2SubjectBiz;
 	private String pageSize;
+	private String stepId;
+	private Sm2ProgressBiz progressBiz;
 	
 	private static final String LINSHI_MODULEID = "linshishixiang";
 	
@@ -72,11 +85,51 @@ public class WeixinAction extends BaseAction{
 	 * @return
 	 */
 	public String detail(){
+		//获取主题
 		this.subject = this.subBiz.findById(this.id);
-		
+		//根据主题获取所有的进展
 		List<StepVo> steps = this.subBiz.findAllSteps(this.id);
 		this.getRequestMap().put("steps", steps);
 		return "subjectDetail";
+	}
+	
+	public void findProgress(){
+		if(StringUtils.isNotBlank(stepId)){
+			List<TSm2Progress> progressList = this.subBiz.findProgressByStepId(stepId);
+			Struts2Util.renderJson(Utils.gson.toJson(progressList, new TypeToken<List<TSm2Progress>>(){}.getType()),"encoding:UTF-8");
+		}
+	}
+	
+	public void findDiss(){
+		//根据进展获取进展下所有的步骤
+		String proId = this.getRequest().getParameter("progressId");
+		if(StringUtils.isNotBlank(proId)){
+			int size = Integer.parseInt(pageSize);
+			List<TSm2Disscus> disList = this.subBiz.findDisscusByProgressId(proId, getMin(size),getMax(size));
+			List<TSm2Disscus> newList = new ArrayList<TSm2Disscus>();
+			for(TSm2Disscus value : disList){
+				TSm2Disscus disscus = new TSm2Disscus();
+				disscus.setId(value.getId());
+				disscus.setCreaterId(value.getCreaterId());
+				disscus.setCreateTime(value.getCreateTime());
+				disscus.setLastUpdateTime(value.getLastUpdateTime());
+				disscus.setProgressId(value.getProgressId());
+				disscus.setUserName(value.getUserName());
+				disscus.setContent(Util.escapeXml(value.getContent()));
+				newList.add(disscus);
+			}
+//			if(StringUtils.isNotBlank(stepId)){
+//				TSm2Progress progress = this.progressBiz.findById(proId);
+//			}
+			Struts2Util.renderJson(Utils.gson.toJson(newList, new TypeToken<List<TSm2Disscus>>(){}.getType()),"encoding:UTF-8");
+			this.getRequestMap().put("disList", disList);
+		}
+	}
+	public Sm2ProgressBiz getProgressBiz() {
+		return progressBiz;
+	}
+	public void setProgressBiz(Sm2ProgressBiz progressBiz) {
+		this.progressBiz = progressBiz;
 	}
 	private int getMax(int page){
 		return page*10;
@@ -141,5 +194,10 @@ public class WeixinAction extends BaseAction{
 	public void setSubject(TSm2Subject subject) {
 		this.subject = subject;
 	}
-
+	public String getStepId() {
+		return stepId;
+	}
+	public void setStepId(String stepId) {
+		this.stepId = stepId;
+	}
 }
