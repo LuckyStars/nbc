@@ -53,9 +53,6 @@ public class Test {
 			
 			Destination destination = session.createQueue("testqueue");
 			
-			MessageProducer producer = session.createProducer(null);
-			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-			
 			MessageConsumer consumer = session.createConsumer(destination);
 			
 
@@ -73,7 +70,8 @@ public class Test {
 				}
 			});
 			
-			
+			MessageProducer producer = session.createProducer(null);
+			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 			
 			for (int i = 0; i < 10; i++) {
 				TextMessage msg = session.createTextMessage();
@@ -82,6 +80,7 @@ public class Test {
 				
 				producer.send(destination,msg);
 			}
+			
 			
 			
 		} catch (JMSException e) {
