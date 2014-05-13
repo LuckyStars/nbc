@@ -1,5 +1,4 @@
 package com.nbcedu.function.schoolmaster2.action;
-import static org.apache.taglibs.standard.tag.common.core.Util.escapeXml;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,22 +7,16 @@ import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.taglibs.standard.tag.common.core.Util;
 
 import com.google.common.reflect.TypeToken;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
 import com.nbcedu.function.schoolmaster2.biz.SM2SubjectBiz;
 import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
-import com.nbcedu.function.schoolmaster2.core.exception.DBException;
 import com.nbcedu.function.schoolmaster2.core.pager.SystemContext;
 import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
-import com.nbcedu.function.schoolmaster2.core.util.jsons.JSONArray;
-import com.nbcedu.function.schoolmaster2.data.model.SM2SubjectMaster;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Subject;
-import com.nbcedu.function.schoolmaster2.data.model.TSm2SubjectUser;
 import com.nbcedu.function.schoolmaster2.utils.Utils;
 import com.nbcedu.function.schoolmaster2.vo.StepVo;
 import com.nbcedu.function.schoolmaster2.vo.SubjectVo;
@@ -38,6 +31,7 @@ public class WeixinAction extends BaseAction{
 	private Sm2WeixinUserBiz wxUserBiz ;
 	private String username;
 	private String password;
+	private String openId;
 	private SM2MasterSubBiz subBiz;
 	private SM2SubjectBiz sm2SubjectBiz;
 	private String pageSize;
@@ -49,11 +43,10 @@ public class WeixinAction extends BaseAction{
 	public String login(){
 		boolean b = this.wxUserBiz.findLoginByPassUserName(username.trim(), password);
 		if(b){
-			double d  = Math.random();
 			wxuser.setCreateTime(DateUtil.getCurrentDate());
 			wxuser.setUid(this.getUserId());
 			wxuser.setLastLoginTime(DateUtil.getCurrentDate());
-			wxuser.setWeixinId(String.valueOf(d));//getWxOpenId());
+			wxuser.setWeixinId(openId);//getWxOpenId());
 			this.wxUserBiz.addUpdateWeixinUser(wxuser);
 		}
 		return "list";
@@ -200,4 +193,11 @@ public class WeixinAction extends BaseAction{
 	public void setStepId(String stepId) {
 		this.stepId = stepId;
 	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+	
 }
