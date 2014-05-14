@@ -1,6 +1,7 @@
 package com.nbcedu.function.schoolmaster2.weixin.handler;
 
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -21,9 +22,11 @@ import com.nbcedu.function.schoolmaster2.weixin.constants.Constants;
  */
 public class LoginHandler implements Handler{
 	
+	private static final Logger logger = Logger.getLogger(LoginHandler.class);
+	
 	private Sm2WeixinUserBiz wxUserBiz ;
 	
-	private String loginUrl = "/function/function-weixin/index.jsp";
+	private final String loginUrl = "/function/function-weixin/index.jsp";
 	
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
@@ -67,8 +70,6 @@ public class LoginHandler implements Handler{
 	}
 
 
-
-
 	/**
 	 * 判断是否已经登陆过
 	 * @param invocation
@@ -92,6 +93,7 @@ public class LoginHandler implements Handler{
 	//////GETTERS&SETTERS//////
 	//////////////////////////
 	public void setWxUserBiz(Sm2WeixinUserBiz wxUserBiz) {
+		logger.info("wxUserBiz injected");
 		this.wxUserBiz = wxUserBiz;
 	}
 	

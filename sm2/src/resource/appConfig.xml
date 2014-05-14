@@ -25,8 +25,9 @@
 	<appSecret>appSecret</appSecret>
 	
 	<handlerChain id="msgTypeHandlerChain"  >
-		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.framework.api.impl.DefaultHandlerFactory" >
-			<handler scope="prototype">org.luckystars.weixin.framework.handlers.TestHandler</handler>
+		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.plugins.spring.SpringHandlerFactory" >
+			<handler>sm2WxLoginHandler</handler>
+			<handler>sm2WxLogoutHandler</handler>
 		</chain>
 	</handlerChain>
 	

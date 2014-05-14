@@ -99,8 +99,6 @@ public class Test {
 	
 	
 	
-	
-	
 	public static class StartServer implements Runnable{
 		private Function callBack;
 		StartServer(Function startCallBack){
