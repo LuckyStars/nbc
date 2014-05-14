@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.weixin.handler;
 
 
 import org.apache.log4j.Logger;
+import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -33,7 +34,7 @@ public class LoginHandler implements Handler{
 		
 		
 		if(!checkLoginStat()){
-			
+			String ctxPath = AppContext.getContext().get("").toString();
 			IncomeMessage msg = invocation.getIncomeMsg();
 			
 			if(msg instanceof WeixinMsg ){
