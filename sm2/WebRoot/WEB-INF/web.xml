@@ -144,6 +144,7 @@
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	
+	<!-- 天气插件 -->
 	<servlet id="weatherServlet">
 		<servlet-name>weatherServlet</servlet-name>
 		<servlet-class>com.nbcedu.function.schoolmaster2.servlet.WeatherServlet</servlet-class>
@@ -152,9 +153,11 @@
 		<servlet-name>weatherServlet</servlet-name>
 		<url-pattern>/weather.service</url-pattern>
 	</servlet-mapping>
+	<!-- 天气插件  END-->
 	
-	<servlet id="weixinServler">
-		<servlet-name>weixinServler</servlet-name>
+	<!-- 微信  -->
+	<servlet id="weixinServlet">
+		<servlet-name>weixinServlet</servlet-name>
 		<servlet-class>org.luckystars.weixin.transfer.servlet.WeixinServlet</servlet-class>
 		<init-param>
 	    	<param-name>appConfigLocation</param-name>
@@ -167,9 +170,10 @@
 	    <load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>weixinServler</servlet-name>
+		<servlet-name>weixinServlet</servlet-name>
 		<url-pattern>/weixin</url-pattern>
 	</servlet-mapping>
+	<!-- 微信 END -->
 	
 	<!--<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

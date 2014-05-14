@@ -136,6 +136,16 @@
 			<groupId>com.nbcedu.bizplatform</groupId>
 			<artifactId>bizplatform-integration</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.nbcedu.niep</groupId>
+					<artifactId>niep-client-java</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.nbcedu.niep</groupId>
+					<artifactId>niep-activeMQ-client</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.nbcedu.bizplatform</groupId>

@@ -1,7 +1,7 @@
 package com.nbcedu.function.schoolmaster2.weixin.handler;
 
-import java.util.HashMap;
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -22,12 +22,15 @@ import com.nbcedu.function.schoolmaster2.weixin.constants.Constants;
  */
 public class LoginHandler implements Handler{
 	
+	private static final Logger logger = Logger.getLogger(LoginHandler.class);
+	
 	private Sm2WeixinUserBiz wxUserBiz ;
+	
+	private final String loginUrl = "/function/function-weixin/index.jsp";
 	
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
 		
-		String userOpenId = invocation.getInvocationContext().getSession().getSessionId();
 		
 		if(!checkLoginStat()){
 			
@@ -35,29 +38,36 @@ public class LoginHandler implements Handler{
 			
 			if(msg instanceof WeixinMsg ){
 				View view =null;
+				
 				WeixinMsg wmsg = (WeixinMsg)msg;
 				if(msg instanceof EventMsg){
 					EventMsg emsg = (EventMsg)msg;
 					if(emsg.getEvent().equals(EventMsg.EVENT_TYPE_VIEW)){
-						view = new JSPView("/function/function-weixin/index.jsp?openId="+userOpenId, false);//跳转到登陆 TODO
+						view = new JSPView(getUserLoginUrl(), false);//跳转到登陆 TODO
 					}
 				}
 				
 				view = createLoginView(wmsg);
 				return invocation.createResult(view);
 			}
+			
 		}
 		return invocation.invokeNext();
 	}
 	
+	private String getUserOpenId(){
+		return HandlerContext.getContext().getSession().getSessionId();
+	}
 	
+	private String getUserLoginUrl(){
+		return loginUrl + "?openId="+getUserOpenId();
+	}
 	
-	private View createLoginView(WeixinMsg msg) {//TODO
-		View view = new  TextView("",msg);
+	private View createLoginView(WeixinMsg msg) {
+		View view = new TextView("您尚未登录系统\n<a href=\"" 
+				+ getUserLoginUrl() + "\">点此登录</a>",msg);
 		return view;
 	}
-
-
 
 
 	/**
@@ -83,6 +93,7 @@ public class LoginHandler implements Handler{
 	//////GETTERS&SETTERS//////
 	//////////////////////////
 	public void setWxUserBiz(Sm2WeixinUserBiz wxUserBiz) {
+		logger.info("wxUserBiz injected");
 		this.wxUserBiz = wxUserBiz;
 	}
 	

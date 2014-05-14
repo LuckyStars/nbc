@@ -27,7 +27,7 @@ public class DefaultHandlerInvocationImpl implements HandlerInvocation {
 			if(result==null){
 				throw new NullPointerException("不可返回 null HandleResult");
 			}else{
-				if(result==HandleResult.STOP_CHAIN){break;}
+				if(result!=HandleResult.INVOKE_NEXT){break;}
 			}
 		}
 		return result;

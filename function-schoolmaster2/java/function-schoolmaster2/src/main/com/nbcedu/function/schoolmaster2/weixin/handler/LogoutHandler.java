@@ -1,5 +1,6 @@
 package com.nbcedu.function.schoolmaster2.weixin.handler;
 
+import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
 import org.luckystars.weixin.transfer.handler.AbstractEventHandler;
@@ -13,6 +14,8 @@ import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
  * @author xuechong
  */
 public class LogoutHandler extends AbstractEventHandler{
+	
+	private static final Logger logger = Logger.getLogger(LogoutHandler.class);
 
 	public static final String LOGOUT_EVENT_KEY = "EVENT_LOGOUT";
 	
@@ -35,6 +38,7 @@ public class LogoutHandler extends AbstractEventHandler{
 	//////GETTERS&SETTERS//////
 	//////////////////////////
 	public void setWxUserBiz(Sm2WeixinUserBiz wxUserBiz) {
+		logger.info("wxUserBiz injected");
 		this.wxUserBiz = wxUserBiz;
 	}
 

@@ -23,10 +23,14 @@ public class WeixinServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		
 		logger.info("vali:" + req.getRemoteAddr());
+		
 		if (valiReq(req)){
 			resp.setCharacterEncoding("utf-8");
 			resp.getWriter().write(req.getParameter("echostr"));
+		}else{
+			logger.info(req.getRemoteAddr() + " access denied");
 		}
 	}
 	
@@ -74,7 +78,6 @@ public class WeixinServlet extends HttpServlet {
 		String timestamp = req.getParameter("timestamp");
 		String nonce = req.getParameter("nonce");
 		String signature = req.getParameter("signature");
-		//String token = req.getParameter("token");
 		return vali.validate(timestamp, nonce, signature, this.token);
 	}
 }
