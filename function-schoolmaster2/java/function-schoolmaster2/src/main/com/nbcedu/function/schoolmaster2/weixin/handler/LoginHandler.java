@@ -1,6 +1,5 @@
 package com.nbcedu.function.schoolmaster2.weixin.handler;
 
-
 import org.apache.log4j.Logger;
 import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerContext;
@@ -75,17 +74,13 @@ public class LoginHandler implements Handler{
 	}
 	
 	private View createLoginView(WeixinMsg msg) {
-//		View view = new TextView("您尚未登录系统\n<a href=\"" 
-//				+ getUserLoginUrl() + "\">点此登录</a>",msg);
-		
 		NewsView.Item item = new NewsView.Item();
 		item.setPicUrl(getLoginPicUrl());
-		item.setDescription(getUserLoginUrl());
+		item.setUrl(getUserLoginUrl());
+		item.setDescription("请先登陆系统");
 		NewsView view = new NewsView(msg, item);
-		
 		return view;
 	}
-
 
 	/**
 	 * 判断是否已经登陆过
