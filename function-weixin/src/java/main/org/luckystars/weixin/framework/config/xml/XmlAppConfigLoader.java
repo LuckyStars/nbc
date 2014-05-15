@@ -19,6 +19,7 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		loadInvocationFactory(ctx,document);
 		loadHandlerChains(ctx, document);
 		loadAppIdSecret(ctx,document);
+		loadAppUrl(ctx,document);
 		logger.info("XmlAppConfigLoader load finished");
 	}
 	
@@ -34,5 +35,8 @@ public class XmlAppConfigLoader implements AppContextLoader{
 		new ChainConfigLoader(document).loadIntoContext(ctx);
 	}
 
+	private void loadAppUrl(AppContext ctx, Document document){
+		new AppUrlLoader(document).loadIntoContext(ctx);
+	}
 	
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configs[
-	<!ELEMENT configs (configLoaders?,invocationFactoryBean?,appId,appSecret,handlerChain+)>
+	<!ELEMENT configs (configLoaders?,invocationFactoryBean?,appId,appSecret,appUrl,handlerChain+)>
 	<!ELEMENT configLoaders (#PCDATA)>
 	<!ELEMENT appId (#PCDATA)>
 	<!ELEMENT appSecret (#PCDATA)>
+	<!ELEMENT appUrl (#PCDATA)>
 	<!ELEMENT invocationFactoryBean (#PCDATA)>
 	<!ELEMENT handlerChain (chain+)>
 	<!ELEMENT chain (handler+)>
@@ -23,6 +24,8 @@
 	<appId>appId</appId>
 	
 	<appSecret>appSecret</appSecret>
+
+	<appUrl>http://www.china-nbc.com/sm2</appUrl>
 	
 	<handlerChain id="msgTypeHandlerChain"  >
 		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.plugins.spring.SpringHandlerFactory" >

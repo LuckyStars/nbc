@@ -2,6 +2,7 @@ package com.nbcedu.function.schoolmaster2.weixin.handler;
 
 
 import org.apache.log4j.Logger;
+import org.luckystars.weixin.framework.AppContext;
 import org.luckystars.weixin.framework.HandlerContext;
 import org.luckystars.weixin.framework.HandlerInvocation;
 import org.luckystars.weixin.framework.api.HandleResult;
@@ -9,6 +10,7 @@ import org.luckystars.weixin.framework.api.Handler;
 import org.luckystars.weixin.framework.api.IncomeMessage;
 import org.luckystars.weixin.framework.api.JSPView;
 import org.luckystars.weixin.framework.api.View;
+import org.luckystars.weixin.framework.config.xml.AppUrlLoader;
 import org.luckystars.weixin.transfer.incomemsg.EventMsg;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 import org.luckystars.weixin.transfer.view.TextView;
@@ -33,7 +35,6 @@ public class LoginHandler implements Handler{
 		
 		
 		if(!checkLoginStat()){
-			
 			IncomeMessage msg = invocation.getIncomeMsg();
 			
 			if(msg instanceof WeixinMsg ){
@@ -60,7 +61,8 @@ public class LoginHandler implements Handler{
 	}
 	
 	private String getUserLoginUrl(){
-		return loginUrl + "?openId="+getUserOpenId();
+		String ctxPath = AppContext.getContext().get(AppUrlLoader.APP_URL_KEY).toString();
+		return ctxPath + loginUrl + "?openId="+getUserOpenId() + "&timestamp=" + System.currentTimeMillis();
 	}
 	
 	private View createLoginView(WeixinMsg msg) {
