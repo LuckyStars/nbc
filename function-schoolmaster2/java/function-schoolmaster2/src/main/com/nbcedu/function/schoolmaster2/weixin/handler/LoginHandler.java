@@ -14,7 +14,6 @@ import org.luckystars.weixin.framework.config.xml.AppUrlLoader;
 import org.luckystars.weixin.transfer.incomemsg.EventMsg;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 import org.luckystars.weixin.transfer.view.NewsView;
-import org.luckystars.weixin.transfer.view.TextView;
 
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
 import com.nbcedu.function.schoolmaster2.weixin.constants.Constants;
@@ -62,7 +61,7 @@ public class LoginHandler implements Handler{
 		return AppContext.getContext().get(AppUrlLoader.APP_URL_KEY).toString();
 	}
 	
-	private String getLoginPidUrl(){
+	private String getLoginPicUrl(){
 		return getCtxPath() + loginPicUrl;
 	}
 	
@@ -71,14 +70,19 @@ public class LoginHandler implements Handler{
 	}
 	
 	private String getUserLoginUrl(){
-		return getCtxPath() + loginUrl + "?openId="+getUserOpenId() + "&timestamp=" + System.currentTimeMillis();
+		return getCtxPath() + loginUrl 
+			+ "?openId="+getUserOpenId() 
+			+ "&timestamp=" + System.currentTimeMillis();
 	}
 	
 	private View createLoginView(WeixinMsg msg) {
-		View view = new TextView("您尚未登录系统\n<a href=\"" 
-				+ getUserLoginUrl() + "\">点此登录</a>",msg);
+//		View view = new TextView("您尚未登录系统\n<a href=\"" 
+//				+ getUserLoginUrl() + "\">点此登录</a>",msg);
 		
-		NewsView nview = new NewsView();
+		NewsView.Item item = new NewsView.Item();
+		item.setPicUrl(getLoginPicUrl());
+		item.setDescription(getUserLoginUrl());
+		NewsView view = new NewsView(msg, item);
 		
 		return view;
 	}
