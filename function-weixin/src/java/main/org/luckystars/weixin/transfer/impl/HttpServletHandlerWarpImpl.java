@@ -85,7 +85,8 @@ public class HttpServletHandlerWarpImpl implements HandlerWarp{
 			}
 			
 		} catch (Exception e) {
-			logger.error(e);
+			e.printStackTrace();
+			logger.error(e.toString());
 		}finally{
 			///释放上下文资源
 			HandlerContext.cleanContext();

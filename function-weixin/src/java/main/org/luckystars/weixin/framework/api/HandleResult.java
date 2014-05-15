@@ -20,7 +20,13 @@ public interface HandleResult {
 	 * invoke next handler in the chain
 	 */
 	public static final HandleResult INVOKE_NEXT = new HandleResult() {
-		public WeixinView getView() {return null;}
+		public WeixinView getView() {	
+			return new WeixinView() {
+			@Override
+			public String toWeixinStr() {
+				return "";
+			}
+		};}
 		@Override
 		public void setView(View view) {}
 	};

@@ -52,14 +52,14 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 	public String findLoginUidByOpenId(String openId) {
 		String hql = "SELECT t.uid FROM Sm2WeixinUser t WHERE t.weixinId=? AND t.status=?";
 		Query q = this.weixinUserDao.createQuery(hql, new Object[]{openId,Sm2WeixinUser.STATUS_LOGIN});
-		Object[] result = (Object[]) q.uniqueResult();
+		Object result =  q.uniqueResult();
 		if(result==null){return "";}
-		return StringUtils.trimToEmpty((String)result[0]);
+		return StringUtils.trimToEmpty((String)result);
 	}
 
 	@Override
 	public String findLoginByPassUserName(String username, String password) {
-		String sql = "select uid from t_shijia_sso_account where username = ? and password = ? ";
+		String sql = "select uid from t_shijia_sso_account where username = ? and password = ? and enable = '1'";
 		Query q = this.weixinUserDao.createSqlQuery(sql, username, password);
 		Object result = q.uniqueResult();
 		return  StringUtils.trimToEmpty((String)result);

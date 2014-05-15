@@ -34,7 +34,6 @@ public class LoginHandler implements Handler{
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
 		
-		
 		if(!checkLoginStat()){
 			IncomeMessage msg = invocation.getIncomeMsg();
 			
@@ -95,10 +94,10 @@ public class LoginHandler implements Handler{
 	 * @author xuechong
 	 */
 	private boolean checkLoginStat(){
+	
 		String openId = 
 			HandlerContext.getContext().getSession().getSessionId();
 		String uid = this.wxUserBiz.findLoginUidByOpenId(openId);
-		
 		boolean result = uid!=null && !uid.trim().isEmpty();
 		if(result){
 			HandlerContext.getContext().getSession()
