@@ -2,9 +2,11 @@ package org.luckystars.weixin.transfer.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
 import org.luckystars.weixin.transfer.interfaces.XmlReply;
 
 
@@ -54,6 +56,21 @@ public class NewsView extends XmlReply{
 	
 	private List<NewsView.Item> items = new ArrayList<NewsView.Item>(10);
 	
+	public NewsView(){super();}
+	
+	
+	public NewsView(WeixinMsg msg, NewsView.Item ...items){
+		this(msg,Arrays.asList(items));
+	}
+	
+	public NewsView(WeixinMsg msg,List<NewsView.Item> items){
+		this.fromUserName = msg.getToUserName();
+		this.toUserName = msg.getFromUserName();
+		this.createTime = String.valueOf(System.currentTimeMillis());
+		checkItems(items);
+		this.items = items;
+	}
+	
 	@Override
 	public String toWeixinStr() {
 		return toXmlString();
@@ -99,7 +116,7 @@ public class NewsView extends XmlReply{
 	 * @author xuechong
 	 */
 	private String buildItemsXml() {
-		if(this.items==null||this.items.size()<=0){throw new NullPointerException("没有数据");}
+		checkItems(getItems());
 		StringBuilder result = new StringBuilder();
 
 		for (Item item : this.items) {
@@ -125,6 +142,11 @@ public class NewsView extends XmlReply{
 		}
 		
 		return result.toString();
+	}
+	
+	private void checkItems(List<Item> items){
+		if(items==null||items.size()<=0){throw new NullPointerException("没有数据");}
+		if(items.size()>10){throw new IllegalArgumentException("内容不能超过10条");}
 	}
 
 

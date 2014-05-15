@@ -13,7 +13,7 @@ import org.luckystars.weixin.framework.api.View;
 import org.luckystars.weixin.framework.config.xml.AppUrlLoader;
 import org.luckystars.weixin.transfer.incomemsg.EventMsg;
 import org.luckystars.weixin.transfer.incomemsg.WeixinMsg;
-import org.luckystars.weixin.transfer.view.TextView;
+import org.luckystars.weixin.transfer.view.NewsView;
 
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
 import com.nbcedu.function.schoolmaster2.weixin.constants.Constants;
@@ -29,6 +29,7 @@ public class LoginHandler implements Handler{
 	private Sm2WeixinUserBiz wxUserBiz ;
 	
 	private final String loginUrl = "/function/function-weixin/index.jsp";
+	private final String loginPicUrl = "/function/function-weixin/images/login.jpg";
 	
 	@Override
 	public HandleResult handle(HandlerInvocation invocation) throws Exception {
@@ -56,18 +57,33 @@ public class LoginHandler implements Handler{
 		return invocation.invokeNext();
 	}
 	
+	private String getCtxPath(){
+		return AppContext.getContext().get(AppUrlLoader.APP_URL_KEY).toString();
+	}
+	
+	private String getLoginPicUrl(){
+		return getCtxPath() + loginPicUrl;
+	}
+	
 	private String getUserOpenId(){
 		return HandlerContext.getContext().getSession().getSessionId();
 	}
 	
 	private String getUserLoginUrl(){
-		String ctxPath = AppContext.getContext().get(AppUrlLoader.APP_URL_KEY).toString();
-		return ctxPath + loginUrl + "?openId="+getUserOpenId() + "&timestamp=" + System.currentTimeMillis();
+		return getCtxPath() + loginUrl 
+			+ "?openId="+getUserOpenId() 
+			+ "&timestamp=" + System.currentTimeMillis();
 	}
 	
 	private View createLoginView(WeixinMsg msg) {
-		View view = new TextView("您尚未登录系统\n<a href=\"" 
-				+ getUserLoginUrl() + "\">点此登录</a>",msg);
+//		View view = new TextView("您尚未登录系统\n<a href=\"" 
+//				+ getUserLoginUrl() + "\">点此登录</a>",msg);
+		
+		NewsView.Item item = new NewsView.Item();
+		item.setPicUrl(getLoginPicUrl());
+		item.setDescription(getUserLoginUrl());
+		NewsView view = new NewsView(msg, item);
+		
 		return view;
 	}
 
