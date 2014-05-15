@@ -13,6 +13,7 @@ import com.nbcedu.function.schoolmaster2.biz.Sm2ProgressBiz;
 import com.nbcedu.function.schoolmaster2.core.action.BaseAction;
 import com.nbcedu.function.schoolmaster2.core.pager.SystemContext;
 import com.nbcedu.function.schoolmaster2.core.util.DateUtil;
+import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.core.util.Struts2Util;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Disscus;
 import com.nbcedu.function.schoolmaster2.data.model.TSm2Progress;
@@ -37,17 +38,23 @@ public class WeixinAction extends BaseAction{
 	private String pageSize;
 	private String stepId;
 	private Sm2ProgressBiz progressBiz;
+	private  static final String SERVICENAME = "sm2_init";
 	
 	private static final String LINSHI_MODULEID = "linshishixiang";
 	
 	public String login(){
-		boolean b = this.wxUserBiz.findLoginByPassUserName(username.trim(), password);
-		if(b){
+		//首先查找uid放入session
+		String uid = this.wxUserBiz.findLoginByPassUserName(username.trim(), password);
+		if(!StringUtil.isEmpty(uid)){
+			this.getRequest().getSession().setAttribute(SERVICENAME, uid);
+			
 			wxuser.setCreateTime(DateUtil.getCurrentDate());
 			wxuser.setUid(this.getUserId());
 			wxuser.setLastLoginTime(DateUtil.getCurrentDate());
 			wxuser.setWeixinId(openId);//getWxOpenId());
 			this.wxUserBiz.addUpdateWeixinUser(wxuser);
+		}else{
+			return "";
 		}
 		return "list";
 	}
