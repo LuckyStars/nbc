@@ -18,7 +18,13 @@ public interface Sm2WeixinUserBiz extends BaseBiz<Sm2WeixinUser> {
 	 */
 	public String findLoginUidByOpenId(String openId);
 	
-	public boolean findLoginByPassUserName(String username, String password);
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public String findLoginByPassUserName(String username, String password);
 	/**
 	 * 注销登陆
 	 * @param openId
