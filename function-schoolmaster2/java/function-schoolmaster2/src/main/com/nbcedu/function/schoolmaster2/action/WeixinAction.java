@@ -41,6 +41,10 @@ public class WeixinAction extends BaseAction{
 	private static final String LINSHI_MODULEID = "linshishixiang";
 	
 	public String login(){
+		System.out.println("name="+username.trim());
+		System.out.println("password="+password);
+		System.out.println("openid="+openId);
+		
 		boolean b = this.wxUserBiz.findLoginByPassUserName(username.trim(), password);
 		if(b){
 			wxuser.setCreateTime(DateUtil.getCurrentDate());
@@ -48,6 +52,8 @@ public class WeixinAction extends BaseAction{
 			wxuser.setLastLoginTime(DateUtil.getCurrentDate());
 			wxuser.setWeixinId(openId);//getWxOpenId());
 			this.wxUserBiz.addUpdateWeixinUser(wxuser);
+		}else{
+			return "";
 		}
 		return "list";
 	}

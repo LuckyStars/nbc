@@ -23,6 +23,7 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		if(!StringUtil.isEmpty(user.getWeixinId())){
 			Sm2WeixinUser u = this.findWeixinUser(user.getWeixinId());
 			if(u!=null){
+				if(!u.getStatus().equals(Sm2WeixinUser.STATUS_LOGIN))
 				updateWeixinUser(Sm2WeixinUser.STATUS_LOGIN,user.getWeixinId());
 			}else{
 				user.setStatus(user.STATUS_LOGIN);
