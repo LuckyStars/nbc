@@ -18,7 +18,7 @@
 	</head>
 	<body >
 		<div class="container">
-	      <form class="form-signin" role="form" action="${prc}/scMaster2/login_weixin.action" method="post" >
+	      <form class="form-signin" role="form" action="${prc}/weixin/login_weixin.action" method="post" >
 	      	<input type="hidden" name="openId" value="${openId}">
 	        <h2 class="form-signin-heading">请登录</h2>
 	        <input type="text" class="form-control" placeholder="用户名" name="username" required="" >

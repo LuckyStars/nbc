@@ -27,7 +27,7 @@
 	   				}
 	   			};
 	   			function loadData(pageS){
-	   				$.get('${prc}/scMaster2/findLinshi_weixin.action?pageSize='+pageS, function(data) {
+	   				$.get('${prc}/weixin/findLinshi_weixin.action?pageSize='+pageS, function(data) {
 	   					if(data!=''){
 	   						var datastr =  eval(data);
 	   						var s = $(".dashboard-list");
@@ -43,7 +43,7 @@
 	   			};
 	   			loadData(pageSize);
 	   			function look(id){
-			    	document.location.href="${prc}/scMaster2/detail_weixin.action?id="+id;
+			    	document.location.href="${prc}/weixin/detail_weixin.action?id="+id;
 			    }
 	   	</script>
 	</head>
