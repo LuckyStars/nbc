@@ -9,6 +9,7 @@
 	   	<link href="${prc }/function/function-weixin/bs3/css/bootstrap.css" rel="stylesheet" media="screen">
 	   	<link href="${prc }/function/function-weixin/bs3/css/bootstrap-theme.css" rel="stylesheet" media="screen">
 	   	<link href="${prc }/function/function-weixin/basic.css" rel="stylesheet" media="screen">
+	   	<link href="${prc}/function/function-weixin/lazyimg/bs3/css/pic.css" rel="stylesheet" media="screen">
 	   	<script src="${prc }/function/function-weixin/bs3/js/jquery.min.js"></script>
 	   	<script type="text/javascript" src="${prc }/function/function-weixin/bs3/js/bootstrap.js" ></script>
 	   	<script type="text/javascript">
@@ -39,7 +40,7 @@
 			};
 	   	
 			//获取步骤
-			function appendSub(stepId,subjectId){
+			function appendSub(stepId,subjectId,target){
 				if(typeof(stepId)!= "undefined" && stepId!=""){
 					$.ajax({
 						url:'${prc}/scMaster2/findProgress_weixin.action?&stepId='+stepId,
@@ -54,6 +55,7 @@
 								if(_html !=""){
 									$("#"+stepId).html(_html);
 								}
+								$(target)[0].onclick = function(){};
 							}
 						}
 					});
@@ -92,11 +94,9 @@
 	   		var showNav = function(){
 	   			var _pageCon = $("#page_container");
 	   			var _nav = $("#navga");
-
 	   			_nav.animate({
 	   				left:_nav.css("left")=="0px"?"-200px":"0px"
 	   			},"fast");
-
 	   			return;
 	   			if(_pageCon.css("left")=="0px"){
 	   				_pageCon.css("width",_pageCon.css("width"));
@@ -193,20 +193,22 @@
 
 		</div>
 		</div>
-		<div id="navga" style="left:-200px;position:fixed;top:0px;width:200px;height:100%;background-color: white;border-right:1px solid #DDDDDD;" class="fadeOut">
+		<div id="navga" style="left:-200px;position:fixed;top:0px;width:200px;height:100%;background-color: white;border-right:1px solid #DDDDDD; 
+" class="fadeOut">
+			<div id="parent">
 			<c:forEach items="${steps }" var="step" varStatus="i">
 				<div class="panel-group" id="accordion">
 				  <div class="panel panel-default">
 				    <div class="panel-heading">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" onclick="appendSub('${step.id}','${subject.id}')">
+				      <h4 class="panel-title" onclick="appendSub('${step.id}','${subject.id}',this)">
+				        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#contentTitle${step.id}">
 				          ${step.name}
 				        </a>
 				      </h4>
 				    </div>
-				    <div class="panel-collapse">
-				      <div class="panel-body">
-				        <ul class="nav nav-pills nav-stacked" id="${step.id}">
+				    <div class="panel-collapse" id="contentTitle">
+				      <div class="panel-body" id="contentTitle${step.id}">
+				        <ul class="nav nav-pills nav-stacked" id="${step.id}" >
 						</ul>
 				      </div>
 				    </div>
@@ -214,5 +216,8 @@
 				</div>
 			</c:forEach>
 		</div>
+			<img onclick="showNav();" src="${prc}/function/function-weixin/img/2.png"/>
+		</div>
+		
 	</body>
 </html>
