@@ -63,7 +63,7 @@
 		</init-param>
 		<init-param>
 			<param-name>exclusiveURI</param-name>
-			<param-value>index.jsp,/sm2/scMaster2/resourceUpload,/sm2/weixin,/weixin</param-value>
+			<param-value>index.jsp,/sm2/scMaster2/resourceUpload,/sm2/weixin,/weixin,/sm2/function/function-weixin</param-value>
 		</init-param>
 		<init-param>
 			<param-name>exclusiveExtendURI</param-name>

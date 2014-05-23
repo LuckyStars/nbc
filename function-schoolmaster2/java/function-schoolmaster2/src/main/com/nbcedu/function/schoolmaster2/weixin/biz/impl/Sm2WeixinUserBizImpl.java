@@ -3,7 +3,6 @@ package com.nbcedu.function.schoolmaster2.weixin.biz.impl;
 import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Query;
 
-import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;

@@ -88,7 +88,7 @@ public class SchoolMasterFilter implements Filter{
 			if(request.getRequestURI().contains("Upload")){
 				return "exclusive";
 			}
-			if(request.getRequestURI().contains("/sm2/weixin")){
+			if(request.getRequestURI().contains("/weixin")){
 				return "exclusive";
 			}
 			return ctxName;
