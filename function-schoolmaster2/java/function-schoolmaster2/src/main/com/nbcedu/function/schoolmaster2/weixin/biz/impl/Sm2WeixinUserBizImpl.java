@@ -3,6 +3,7 @@ package com.nbcedu.function.schoolmaster2.weixin.biz.impl;
 import org.apache.commons.lang.xwork.StringUtils;
 import org.hibernate.Query;
 
+import com.google.common.collect.Lists;
 import com.nbcedu.function.schoolmaster2.core.biz.impl.BaseBizImpl;
 import com.nbcedu.function.schoolmaster2.core.util.StringUtil;
 import com.nbcedu.function.schoolmaster2.weixin.biz.Sm2WeixinUserBiz;
@@ -23,6 +24,7 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 		if(!StringUtil.isEmpty(user.getWeixinId())){
 			Sm2WeixinUser u = this.findWeixinUser(user.getWeixinId());
 			if(u!=null){
+				if(!u.getStatus().equals(Sm2WeixinUser.STATUS_LOGIN))
 				updateWeixinUser(Sm2WeixinUser.STATUS_LOGIN,user.getWeixinId());
 			}else{
 				user.setStatus(user.STATUS_LOGIN);
@@ -50,18 +52,17 @@ public class Sm2WeixinUserBizImpl extends BaseBizImpl<Sm2WeixinUser> implements 
 	public String findLoginUidByOpenId(String openId) {
 		String hql = "SELECT t.uid FROM Sm2WeixinUser t WHERE t.weixinId=? AND t.status=?";
 		Query q = this.weixinUserDao.createQuery(hql, new Object[]{openId,Sm2WeixinUser.STATUS_LOGIN});
-		Object[] result = (Object[]) q.uniqueResult();
+		Object result =  q.uniqueResult();
 		if(result==null){return "";}
-		return StringUtils.trimToEmpty((String)result[0]);
+		return StringUtils.trimToEmpty((String)result);
 	}
 
 	@Override
-	public boolean findLoginByPassUserName(String username, String password) {
-		String sql = "select uid from t_shijia_sso_account where username = ? and password = ? ";
+	public String findLoginByPassUserName(String username, String password) {
+		String sql = "select uid from t_shijia_sso_account where username = ? and password = ? and enable = '1'";
 		Query q = this.weixinUserDao.createSqlQuery(sql, username, password);
 		Object result = q.uniqueResult();
-		if(result==null){return false;}
-		return true;
+		return  StringUtils.trimToEmpty((String)result);
 	}
 	@Override
 	public void logOut(String openId) {

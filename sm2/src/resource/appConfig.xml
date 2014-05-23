@@ -29,6 +29,7 @@
 	
 	<handlerChain id="msgTypeHandlerChain"  >
 		<chain id="defaultChain" handlerFactoryClass="org.luckystars.weixin.plugins.spring.SpringHandlerFactory" >
+			<handler>sm2WxMsgLogHandler</handler>
 			<handler>sm2WxLoginHandler</handler>
 			<handler>sm2WxLogoutHandler</handler>
 		</chain>

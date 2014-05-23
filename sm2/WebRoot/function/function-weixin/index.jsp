@@ -18,11 +18,11 @@
 	</head>
 	<body >
 		<div class="container">
-	      <form class="form-signin" role="form" action="${prc}/scMaster2/login_weixin.action" method="post" >
+	      <form class="form-signin" role="form" action="${prc}/weixin/login_weixin.action" method="post" >
 	      	<input type="hidden" name="openId" value="${openId}">
 	        <h2 class="form-signin-heading">请登录</h2>
-	        <input type="text" class="form-control" placeholder="Email address" name="username" required="" autofocus="">
-	        <input type="password" class="form-control" placeholder="Password" name="password"  required="">
+	        <input type="text" class="form-control" placeholder="用户名" name="username" required="" >
+	        <input type="password" class="form-control" placeholder="密 码" name="password"  required="">
 	        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
 	      </form>
 		</div>

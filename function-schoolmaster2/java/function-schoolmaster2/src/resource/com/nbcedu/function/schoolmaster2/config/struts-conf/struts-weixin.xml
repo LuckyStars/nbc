@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="weixin" namespace="/weixin" extends="struts-default">
+		<action name="*_weixin" method="{1}" class="wxLogin" >
+			<result name="list" >/function/function-weixin/list.jsp</result>	
+			<result name="subjectDetail" >/function/function-weixin/subjectDetail.jsp</result>		
+		</action>
+	</package>
+</struts>
