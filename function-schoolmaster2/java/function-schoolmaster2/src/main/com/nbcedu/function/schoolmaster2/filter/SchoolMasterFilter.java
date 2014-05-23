@@ -20,7 +20,6 @@ import com.nbcedu.core.framework.filter.ServiceInfoLoader;
 import com.nbcedu.function.functionsupport.util.PropertiesUtil;
 
 public class SchoolMasterFilter implements Filter{
-	 
 	private static Logger logger = Logger.getLogger(SchoolMasterFilter.class);
 
 	@SuppressWarnings("serial")
@@ -40,8 +39,8 @@ public class SchoolMasterFilter implements Filter{
 		//logger.info("getAttributeName = :"  + getAttributeName(serviceName));
 		
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
-			final String uid = (String) 
-				req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+			final String uid = "J201108251334440044953";
+				//(String)req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
 			
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
@@ -65,7 +64,7 @@ public class SchoolMasterFilter implements Filter{
 				load(new HashMap<String, String>(){{
 					put("uid", uid);
 				}});
-			
+			req.getSession().setAttribute("edu.yale.its.tp.cas.client.filter.user",uid);
 			req.getSession().setAttribute(getAttributeName(serviceName), obj);
 //			放入角色
 			
