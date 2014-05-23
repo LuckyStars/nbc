@@ -32,7 +32,7 @@
 	   						var datastr =  eval(data);
 	   						var s = $(".dashboard-list");
 	   						for(var i=0;i<datastr.length;i++){
-	   							s.append("<li onclick=\"look(\'"+datastr[i].id+"\');\"><img class='dashboard-avatar' alt='Usman' src='${prc}//function/images/percent2/" + datastr[i].progress+".png'>"+
+	   							s.append("<li onclick=\"look(\'"+datastr[i].id+"\');\"><img class='dashboard-avatar' style='height:58px;width:70px;' alt='Usman' src='${prc}//function/images/percent2/" + datastr[i].progress+".png'>"+
 	   									"<strong>标题:</strong> "+datastr[i].title+"<br><strong>日期:</strong> "+datastr[i].createTime+"<br>"+
 										"<strong>创建人:</strong> <span class='label label-success'>"+datastr[i].createrName+"</span>");
 	   						}
@@ -55,7 +55,7 @@
 			</div>
 			<div class="box-content">
 				<div class="box-content">
-					<ul class="dashboard-list">
+					<ul class="dashboard-list" style="padding-left: 0;">
 						
 					</ul>
 				</div>

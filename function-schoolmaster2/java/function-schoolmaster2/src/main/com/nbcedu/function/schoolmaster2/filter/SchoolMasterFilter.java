@@ -39,8 +39,8 @@ public class SchoolMasterFilter implements Filter{
 		//logger.info("getAttributeName = :"  + getAttributeName(serviceName));
 		
 		if (req.getSession().getAttribute(getAttributeName(serviceName)) == null) {
-			final String uid = "J201108251334440044953";
-				//(String)req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
+			final String uid =
+				(String)req.getSession().getAttribute("edu.yale.its.tp.cas.client.filter.user");
 			
 //			String uid = null;
 //			Map attributes = (Map) req.getSession().getAttribute("client.user.attributes");
