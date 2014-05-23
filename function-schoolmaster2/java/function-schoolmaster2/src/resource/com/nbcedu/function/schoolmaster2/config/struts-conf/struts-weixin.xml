@@ -4,7 +4,8 @@
 	<package name="weixin" namespace="/weixin" extends="struts-default">
 		<action name="*_weixin" method="{1}" class="wxLogin" >
 			<result name="list" >/function/function-weixin/list.jsp</result>	
-			<result name="subjectDetail" >/function/function-weixin/subjectDetail.jsp</result>		
+			<result name="subjectDetail" >/function/function-weixin/subjectDetail.jsp</result>
+			<result name="welcome">/function/function-weixin/welcome.jsp</result>	
 		</action>
 	</package>
 </struts>
