@@ -232,6 +232,9 @@ public class TSActivityAction extends BaseAction{
 			}
 		}
 		result.put("subs", subjects);
+		result.put("openDate", act.getOpenDate());
+		result.put("endDate",act.getEndDate());
+		result.put("comment", act.getComment());
 		Struts2Utils.renderText(result.toJSONString());
 	}
 	

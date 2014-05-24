@@ -23,7 +23,6 @@
 	        <h2 class="form-signin-heading">请登录</h2>
 	        <input type="text" class="form-control" placeholder="用户名" name="username" required="" >
 	        <input type="password" class="form-control" placeholder="密 码" name="password"  required="">
-	        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
 	      </form>
 		</div>
 	</body>
