@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.xwork.StringUtils;
 import org.apache.taglibs.standard.tag.common.core.Util;
+import org.junit.runner.Request;
 
 import com.google.common.reflect.TypeToken;
 import com.nbcedu.function.schoolmaster2.biz.SM2MasterSubBiz;
@@ -45,16 +46,23 @@ public class WeixinAction extends BaseAction{
 	public String login(){
 		//首先查找uid放入session
 		String uid = this.wxUserBiz.findLoginByPassUserName(username.trim(), password);
+		String type = this.getRequest().getParameter("type");
 		if(!StringUtil.isEmpty(uid)){
-			this.getRequest().getSession().setAttribute(SERVICENAME, uid);
-			
-			wxuser.setCreateTime(DateUtil.getCurrentDate());
-			wxuser.setUid(this.getUserId());
-			wxuser.setLastLoginTime(DateUtil.getCurrentDate());
-			wxuser.setWeixinId(openId);//getWxOpenId());
-			this.wxUserBiz.addUpdateWeixinUser(wxuser);
-		}else{
-			return "";
+			if("list".equals(type)){
+				this.getRequest().getSession().setAttribute(SERVICENAME, uid);
+				wxuser.setCreateTime(DateUtil.getCurrentDate());
+				wxuser.setUid(this.getUserId());
+				wxuser.setLastLoginTime(DateUtil.getCurrentDate());
+				wxuser.setWeixinId(openId);//getWxOpenId());
+				this.wxUserBiz.addUpdateWeixinUser(wxuser);
+			}
+			if("welcome".equals(type)){
+				this.getRequest().setAttribute("username", username);
+				this.getRequest().setAttribute("password",password);
+				return "welcome";
+			}else{
+				return "list";
+			}
 		}
 		return "list";
 	}

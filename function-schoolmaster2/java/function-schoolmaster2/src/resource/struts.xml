@@ -20,5 +20,4 @@
 	<include file="com/nbcedu/function/schoolmaster2/config/struts-conf/struts-documentFlow.xml"/>
 	<include file="com/nbcedu/function/schoolmaster2/config/struts-conf/struts-schoolmaster2.xml"/>
 	<include file="com/nbcedu/function/schoolmaster2/config/struts-conf/struts-masterSub.xml"/>
-	
 </struts>
