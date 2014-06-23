@@ -44,6 +44,7 @@ public class LoginHandler implements Handler{
 					EventMsg emsg = (EventMsg)msg;
 					if(emsg.getEvent().equals(EventMsg.EVENT_TYPE_VIEW)){
 						view = new JSPView(getUserLoginUrl(), false);//跳转到登陆 TODO
+						return invocation.createResult(view);
 					}
 				}
 				
