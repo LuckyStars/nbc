@@ -346,13 +346,7 @@
 							style="float:right;height:20px;margin: 2px;"
 							 src="${prc}/function/img/qi1.png" />
 						</c:if>
-						<c:if test="${master==false}">
-							<img id="${subject.id}" onclick="javascript:stick('${subject.id }',1,'qi');"
-							style="float:right;height:20px;margin: 2px;"
-							src="${prc}/function/img/qi3.png" />
-						</c:if>
-					
-					
+						
 					<pri:showWhenManager>
 						<img style="float:right;cursor: pointer;height:20px;margin: 2px;" title="转发" 
 						src="${prc}/function/function-linshi/images/fenxiang.jpg" class="ico7 cpoint" /><%--转发 --%>
